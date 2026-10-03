@@ -1,2 +1,24 @@
 % Copyright 2026 The terCAD team. All rights reserved.
 % Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsection{Configuring Linters}
+
+For Kotlin the \q{ktlint}-tool is used to help developers write clean and consistent code. It checks the code style and 
+formatting according to a standard or custom rule set, and can automatically fix any issues. The simplest way of using 
+it is to download a released version, and register in globals:
+
+\begin{lstlisting}[language=terminal]
+## Linux and macOS:
+# Download linter
+$ curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint
+# Make it executable
+$ chmod a+x ktlint 
+# Enable global visibility
+$ sudo mv ktlint /usr/local/bin/
+
+## Windows (via powershell)
+# Download linter
+Invoke-WebRequest -Uri https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint -OutFile ktlint
+# Enable global visibility
+Move-Item -Path .\ktlint -Destination C:\Windows\System32 -Force
+\end{lstlisting}
