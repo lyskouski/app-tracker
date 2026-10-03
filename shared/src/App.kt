@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.resources.app_name
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.compose_multiplatform
 
@@ -34,7 +36,7 @@ fun App() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+                Text(stringResource(Res.string.app_name))
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
