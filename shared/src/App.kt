@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -22,9 +23,10 @@ import org.jetbrains.compose.resources.stringResource
 import com.tercad.zwyka.defines.ColorSchemeLight
 import com.tercad.zwyka.defines.ColorSchemeDark
 import com.tercad.zwyka.defines.ThemeMode
-import com.tercad.zwyka.resources.app_name
-import com.tercad.zwyka.resources.Res
-import com.tercad.zwyka.resources.compose_multiplatform
+import com.tercad.zwyka.pages.HomePage
+// import com.tercad.zwyka.resources.app_name
+// import com.tercad.zwyka.resources.Res
+// import com.tercad.zwyka.resources.compose_multiplatform
 
 @Composable
 @Preview
@@ -41,27 +43,8 @@ fun App(
             ThemeMode.SYSTEM -> if (systemDark) ColorSchemeDark else ColorSchemeLight
         },
     ) {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text(stringResource(Res.string.app_name))
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
+        Navigator(
+            screen = HomePage()
+        )
     }
 }

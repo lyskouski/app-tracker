@@ -12,6 +12,9 @@ dependencies:
   - $compose.hotReload.runtimeApi
   - $libs.androidx.lifecycle.viewmodel.compose
   - $libs.androidx.lifecycle.runtime.compose
+  - $libs.voyager.navigator
+  - $libs.voyager.tab.navigator
+  - $libs.voyager.transitions
 
 dependencies@android:
   - $compose.uiTooling
