@@ -25,32 +25,41 @@ fun main() {
 }
 \end{lstlisting}
 
-\noindent A core entry point is \q{composeApp/src/commonMain/kotlin/App.kt}-file for our application:
+\noindent A core entry point is \q{shared/src/App.kt}-file for our application:
 
 \begin{lstlisting}
+@Composable
+@Preview
+@DevelopmentEntryPoint
 fun App() {
   // Set the look of the application
-  MaterialTheme {
-    // To manage state (mutable -- change can be observed)
-    var greetingText by remember { mutableStateOf("Hello World!") }
-    var showImage by remember { mutableStateOf(false) }
-    // Control the layout
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-      Button(onClick = {
-        greetingText = "Compose: ${Greeting().greet()}"
-        showImage = !showImage // invert state
-      }) {
-        Text(greetingText)
-      }
-      // Show or hide nested objects with an animation
-      AnimatedVisibility(showImage) {
-        Image(
-          painterResource("compose-multiplatform.xml"),
-          null
-        )
-      }
+    MaterialTheme {
+        // To manage state (mutable -- change can be observed)
+        var showContent by remember { mutableStateOf(false) }
+        // Control the layout
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .safeContentPadding()
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            // Show or hide nested objects with an animation
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
     }
-  }
 }
 \end{lstlisting}
 
@@ -60,28 +69,12 @@ It might be used \q{voyager}-router by adding its libraries into the project by 
 A Kotlin Multiplatform project can depend on multiplatform libraries that work for all target platforms:
 
 \begin{lstlisting}
-// ./composeApp/build.gradle.kts
-kotlin {
-    sourceSets {
-+        val voyagerVersion = "1.0.0"
+// ./libs.versions.toml
+[versions]
+voyager = "1.1.0-beta02"
 
-        commonMain.dependencies {
-+            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
-+            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
-+            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
-        }
-    }
-}
-\end{lstlisting}
-
-\noindent Regrettably, an error is raised due to the fact that WebAssembly (WASM) is currently in an unstable state
-and not supported by that library:
-
-\begin{lstlisting}
-> Could not resolve all dependencies
-  Incompatible because this component declares a component for use 
-  during compile-time, as well as attribute 'org.jetbrains.kotlin.platform.type' 
-  with value 'androidJvm' and the consumer needed a component for use during 
-  'kotlin-runtime', as well as attribute 'org.jetbrains.kotlin.platform.type' 
-  with value 'wasm'
+[libraries]
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 \end{lstlisting}
