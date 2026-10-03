@@ -1,0 +1,87 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsection{Emerging Design}
+
+An entry point differs per each system:
+
+\begin{lstlisting}
+// Android, composeApp/src/androidMain/kotlin:
+class MainActivity : ComponentActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContent { App() }
+  }
+}
+// iOS, composeApp/src/iosMain/kotlin:
+fun MainViewController() = ComposeUIViewController { App() }
+// Desktop, composeApp/src/desktopMain/kotlin:
+fun main() = application {
+  Window(onCloseRequest = ::exitApplication) { App() }
+}
+// Web, composeApp/src/wasmJsMain/kotlin/main.kt:
+fun main() {
+  CanvasBasedWindow(canvasElementId = "ComposeTarget") { App() }
+}
+\end{lstlisting}
+
+\noindent A core entry point is \q{composeApp/src/commonMain/kotlin/App.kt}-file for our application:
+
+\begin{lstlisting}
+fun App() {
+  // Set the look of the application
+  MaterialTheme {
+    // To manage state (mutable -- change can be observed)
+    var greetingText by remember { mutableStateOf("Hello World!") }
+    var showImage by remember { mutableStateOf(false) }
+    // Control the layout
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+      Button(onClick = {
+        greetingText = "Compose: ${Greeting().greet()}"
+        showImage = !showImage // invert state
+      }) {
+        Text(greetingText)
+      }
+      // Show or hide nested objects with an animation
+      AnimatedVisibility(showImage) {
+        Image(
+          painterResource("compose-multiplatform.xml"),
+          null
+        )
+      }
+    }
+  }
+}
+\end{lstlisting}
+
+It might be used \q{voyager}-router by adding its libraries into the project by updating 
+\q{gradle/libs.versions.toml}-file in accordance with instructions from 
+\href{https://voyager.adriel.cafe/setup}{https://voyager.adriel.cafe/setup}-page.
+A Kotlin Multiplatform project can depend on multiplatform libraries that work for all target platforms:
+
+\begin{lstlisting}
+// ./composeApp/build.gradle.kts
+kotlin {
+    sourceSets {
++        val voyagerVersion = "1.0.0"
+
+        commonMain.dependencies {
++            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
++            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
++            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+        }
+    }
+}
+\end{lstlisting}
+
+\noindent Regrettably, an error is raised due to the fact that WebAssembly (WASM) is currently in an unstable state
+and not supported by that library:
+
+\begin{lstlisting}
+> Could not resolve all dependencies
+  Incompatible because this component declares a component for use 
+  during compile-time, as well as attribute 'org.jetbrains.kotlin.platform.type' 
+  with value 'androidJvm' and the consumer needed a component for use during 
+  'kotlin-runtime', as well as attribute 'org.jetbrains.kotlin.platform.type' 
+  with value 'wasm'
+\end{lstlisting}

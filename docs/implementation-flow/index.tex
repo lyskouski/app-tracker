@@ -1,0 +1,167 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\documentclass[12pt, a4paper, twoside]{extreport}
+\setlength{\headheight}{17.0pt}
+% Notes: Level of content
+% -1 	\part{part}
+% 0 	\chapter{chapter}
+% 1 	\section{section}
+% 2 	\subsection{subsection}
+% 3 	\subsubsection{subsubsection}
+% 4 	\paragraph{paragraph}
+% 5 	\subparagraph{subparagraph}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\usepackage[OT1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\usepackage{watermark}
+\usepackage{titling}
+\usepackage[fencedCode,hashEnumerators,smartEllipses]{markdown}
+\usepackage{lipsum}
+\usepackage{tocloft}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{0pt}
+\cftsetindents{paragraph}{0em}{5em}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{listing}{Listing}{Listings}
+\crefname{section}{Section}{Sections}
+\usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{tabularx}
+\usepackage{dirtree}
+\renewcommand\DTstyle{\rmfamily}
+\usepackage{wallpaper}
+\usepackage[export]{adjustbox}
+
+\usepackage{_lib/customization}
+\usepackage{_lib/code-style}
+%% Conversion to eBook
+%\usepackage{ebook}
+
+\sloppy
+
+% Creating headers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{}
+\makeatletter
+\renewcommand{\chaptermark}[2]{\markboth{\tiny #1}{\tiny #2}}
+\makeatother
+
+\fancyhead[LE]{\thepage}
+\fancyhead[RE]{\itshape\nouppercase  \rightmark}
+\fancyhead[LO]{\itshape\nouppercase \leftmark}
+\fancyhead[RO]{\thepage}
+
+\author{Viachaslau Lyskouski}
+\title{From Zero to Market with Kotlin Multiplatform}
+%\subtitle{Desktop, Mobile, and Web Distribution}
+\date{2024}
+
+% Reverse margins for the print version
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+
+\begin{document}
+%% Conversion to eBook
+%\ebook 
+
+\maketitle
+%\thispagestyle{empty}
+%\ThisCenterWallPaper{1}{_cover/main.png}
+%~
+%\newpage
+
+\include{info}
+
+\tableofcontents
+
+\newpage
+\section*{[TBD] Introducing}
+\addcontentsline{toc}{section}{Introducing}
+\markboth{Introducing}{Introducing}
+~ %\input{ch00-intro}
+
+\newpage
+\section{[TBD] Bootcamping}
+\input{ch01-s01-kotlin}
+\include{ch01-s02-kmp}
+\include{ch01-s03-cmui}
+
+\newpage
+\section{[TBD] Conceptualizing}
+\input{ch02-concept}
+
+\newpage
+\section{[WIP] Prototyping}
+\input{ch03-s01-init}
+\input{ch03-s02-design}
+
+\newpage
+\section{[TBD] Gating}
+\input{ch04-test}
+
+\newpage
+\section{[TBD] Unleashing}
+\input{ch05-feature}
+
+\newpage
+\section{[TBD] Optimizing}
+\input{ch06-interface}
+
+\newpage
+\section{[TBD] Productionizing}
+\input{ch07-production}
+
+\newpage
+\section{[TBD] Distributing}
+\input{ch08-release}
+
+\newpage
+\section*{[TBD] Continuing}
+\addcontentsline{toc}{section}{Continuing}
+\markboth{Continuing}{Continuing}
+\input{ch99-close}
+
+\newpage
+\section*{References}
+\addcontentsline{toc}{section}{References}
+\markboth{References}{References}
+\input{links}
+\newpage
+\listoffigures
+\listoftables
+
+\newpage
+\addcontentsline{toc}{section}{Bibliography}
+\markboth{Bibliography}{Bibliography}
+\input{references}
+
+\thispagestyle{empty}
+
+%\newpage
+%\thispagestyle{empty}
+
+%\thiswatermark{\centering%
+%\put(-50,-560){\includegraphics[scale=1.55]{./img/book_end.jpg}}%
+%}
+
+~
+
+\end{document}

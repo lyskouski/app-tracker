@@ -1,0 +1,142 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsection{Instantiating the Project}
+
+Kotlin Multiplatform (KMP) enables code sharing across various platforms, including Android, iOS, web, desktop, and 
+others. It's supposed to be used IntelliJ IDEA (\href{https://www.jetbrains.com/idea/}{https://www.jetbrains.com/idea/}) 
+or Android Studio (\href{https://developer.android.com/studio}{https://developer.android.com/studio}). Both of them 
+support creation of a Kotlin Multiplatform App project. For Android Studio it would be needed to install Kotlin plugin
+(\cref{img:i-plugin}):
+
+\img{init/install-plugin}{Android Studio: Installing a Plugin for Kotlin}{img:i-plugin}
+
+\noindent Creation the KMP project is followed by filling an application name and sub folders binding (\cref{img:i-config}).
+
+\img{init/configure}{Android Studio: Creating Kotlin Multiplatform App}{img:i-config}
+
+\noindent After the project is created \issue{1}{}, it comprises the following modules: shared, androidApp, iosApp. The 
+\q{androidApp}-module is a Kotlin module designed to compile into an Android application, it depends on and utilizes the 
+shared module as a standard Android library. The \q{iosApp}-module is an Xcode project configured to compile into an iOS 
+application. It relies on and incorporates the shared module as an iOS framework. The shared module can function as 
+either a conventional framework or as a CocoaPods dependency, depending on the distribution choice made earlier in the 
+iOS framework distribution process. The \q{shared}-module is a Kotlin module containing logic shared between Android and 
+iOS applications. This codebase is common to both platforms. It is organized into three distinct source sets: androidMain, 
+commonMain, and iosMain. In the Gradle context, a source set is a logical grouping of files, each with its dependencies. 
+In Kotlin Multiplatform, various source sets within the shared module can target different platforms.
+
+The primary challenge with this approach lies in its omission of desktop and web components. This method seems to rely 
+on a "know-how" approach, demanding substantial efforts to comprehend the intricate details of integrating these missing 
+components. 
+
+As an example, by registering those components at the end of \q{shared/build.gradle.kts}-file, an error appears:
+
+\begin{lstlisting}[language=terminal]
+> Configure project :shared
+e: file:///.../shared/build.gradle.kts:36:30: Unresolved reference: outputKinds
+w: Missing 'androidTarget()' Kotlin target in multiplatform project 'shared (:shared)'.
+The Android Gradle plugin was applied without creating a corresponding 'android()' Kotlin Target:
+
+  kotlin {
+    androidTarget() // < -- please register this Android target
+  }
+\end{lstlisting}
+
+\noindent The issue was relevant to the incorrect order of instructions in \q{shared/build.gradle.kts}. By moving 
+\q{linuxX64} to the top, the initial error is replaced by:
+
+\begin{lstlisting}[language=terminal]
+> Task :shared:compileKotlinLinuxX64 FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':shared:compileKotlinLinuxX64'.
+\end{lstlisting}
+
+\noindent Each system would require own folder with a registry definitions \cite{Resa22} (\cref{img:i-desktop}).
+
+\img{init/enable-desktop}{Extend Kotlin Multiplatform App for Desktop}{img:i-desktop}
+
+\noindent That approach is not ideal and requires the initial background in Kotlin and Gradle to understand made changes. 
+Furthermore, Kotlin Multiplatform (KMP) offers Kotlin as the programming language but doesn't inherently provide a user 
+interface (UI). When crafting a UI for Android within the KMP framework, we might either write it in native code. For 
+iOS, the options include using UIKit or the modern SwiftUI framework with Swift. In the context of desktop applications, 
+we might use Java Swing. Such a variability might slow down our immersion in cross-platform development with Kotlin.
+
+\img{init/wizard}{Kotlin Multiplatform Web Wizard}{img:i-wizard}
+
+\noindent The \q{Compose Multiplatform UI}-framework \cite{JetB23} extends the code-sharing capabilities of KMP beyond 
+application logic. With this framework, we can implement the user interface once and seamlessly utilize it across all 
+targeted platforms, including iOS, Android, desktop, and web. This approach enhances efficiency by centralizing UI 
+development, ensuring a consistent and coherent user experience across diverse platforms without the need for redundant, 
+platform-specific implementations. The project initialization involves the Kotlin Multiplatform web wizard
+(\href{https://kmp.jetbrains.com}{https://kmp.jetbrains.com}, \cref{img:i-wizard}). Afterwards, we may build and run 
+our sample project (\cref{img:i-webrun}):
+
+
+\begin{lstlisting}[language=terminal]
+$ ./gradlew build
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+...
+BUILD SUCCESSFUL in 22s
+114 actionable tasks: 4 executed, 110 up-to-date
+
+## Run web version (or, 'gradlew run' for desktop)
+$ ./gradlew wasmJsBrowserRun
+
+Type-safe project accessors is an incubating feature.
+...
+<===========--> 90% EXECUTING [2m 13s]
+> :composeApp:wasmJsBrowserDevelopmentRun > webpack 5.82.0 compiled successfully in 1498 ms
+\end{lstlisting}
+
+\img{init/web-run}{WebAssembly (WASM) build run}{img:i-webrun}
+
+\noindent As a remark, in case of failure "Build failed with an exception":
+\begin{lstlisting}[language=terminal]
+Could not determine the dependencies of task ':composeApp:compileDebugJavaWithJavac'.
+> Could not determine the dependencies of null.
+  > Failed to install the following Android SDK packages as some licences have not been accepted.
+  platforms;android-34 Android SDK Platform 34
+  build-tools;34.0.0 Android SDK Build-Tools 34
+\end{lstlisting}
+
+\noindent To install missing Android SDK packages from the console, we need to use the \q{sdkmanager}-tool 
+provided with the Android SDK:
+
+\begin{lstlisting}[language=terminal]
+## Install Android SDK Manager
+$ sudo apt install sdkmanager
+
+## Install dependencies
+$ sudo sdkmanager --install "platforms;android-34" "build-tools;34.0.0"
+
+## Agree on conditions
+$ yes | sudo sdkmanager --licenses
+\end{lstlisting}
+
+
+\subsection{Configuring Linters}
+
+For Kotlin the \q{ktlint}-tool is used to help developers write clean and consistent code. It checks the code style and 
+formatting according to a standard or custom rule set, and can automatically fix any issues. The simplest way of using 
+it is to download a released version, and register in globals:
+
+\begin{lstlisting}[language=terminal]
+## Linux and macOS:
+# Download linter
+$ curl -sSLO https://github.com/pinterest/ktlint/releases/download/1.1.0/ktlint
+# Make it executable
+$ chmod a+x ktlint 
+# Enable global visibility
+$ sudo mv ktlint /usr/local/bin/
+
+## Windows (via powershell)
+# Download linter
+Invoke-WebRequest -Uri https://github.com/pinterest/ktlint/releases/download/1.1.0/ktlint -OutFile ktlint
+# Enable global visibility
+Move-Item -Path .\ktlint -Destination C:\Windows\System32 -Force
+\end{lstlisting}
+

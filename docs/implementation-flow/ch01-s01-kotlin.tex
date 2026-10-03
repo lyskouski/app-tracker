@@ -1,0 +1,343 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsection{Kotlin}
+
+Kotlin, a versatile and multiparadigm programming language, places a strong emphasis on safety, conciseness, and 
+interoperability. Originally conceived to provide a more advanced alternative to Java, Kotlin has evolved far beyond 
+its initial purpose. It has seamlessly expanded to cater diverse platforms, including the Java Virtual Machine (JVM), 
+Android, JavaScript, and native applications. This evolution positions Kotlin as a dynamic language that not only 
+prioritizes developer-friendly features but also effortlessly adapts to the demands of various programming environments.
+
+
+\subsubsection{Supporting Multiparadigm}
+
+At its inception, Kotlin's commitment to multiparadigmality went beyond the confines of traditional object-oriented 
+programming, extending its support to functional programming as well. This dual-paradigm approach empowers developers 
+with enhanced programming flexibility and the ability to seamlessly blend object-oriented and functional programming 
+concepts. Developers can leverage the strengths of object-oriented programming for modeling and organizing code 
+hierarchies, while simultaneously harnessing the power of functional programming for tasks such as handling collections, 
+immutability, and higher-order functions.
+
+
+\subsubsection{Unlocking Multiplatform}
+
+While Kotlin continues to be extensively used for JVM and \q{Android} development, its adaptability has given rise to 
+extensive multiplatform capabilities, reaching across various environments. The code compiles directly to native machine 
+code, eliminating the need for a virtual machine. This native compilation makes Kotlin well-suited for \q{iOS} 
+development, aligning with the typical use of native binaries in this ecosystem.
+
+Kotlin supports the development of browser-based applications and Node.js applications using a unified language and 
+codebase. Additionally, it facilitates the creation of \q{JavaScript} libraries, enabling seamless code sharing between 
+Kotlin and JavaScript projects. Furthermore, Kotlin can be compiled to \q{WebAssembly}, allowing developers to harness 
+its features for building web applications that achieve near-native performance in the browser.
+
+In the realm of native applications, Kotlin offers support for developing applications and libraries on \q{macOS}, 
+\q{Linux}, and \q{Windows} platforms.
+
+
+\newpage
+\subsubsection{Defining Safety}
+
+Kotlin leverages a powerful type inference system, meaning that the compiler can automatically infer the type of a 
+variable based on its initialization, reducing verbosity in the code.
+
+\begin{lstlisting}
+// Explicit type declaration
+val name: String = "John"
+// Type inference
+val age = 25 // infers the type as Int
+\end{lstlisting}
+
+\noindent By default, variables in Kotlin are non-nullable, meaning they cannot hold a \q{null}-value. Nullable type 
+should be explicitly marked with a nullable type modifier, denoted by the \q{?}-symbol:
+
+\begin{lstlisting}
+val nullableName: String? = null
+val length: Int? = someNullableString?.length
+\end{lstlisting}
+
+\noindent When the compiler detects a certain type check, it automatically casts the variable to that type within the 
+corresponding code block. This eliminates the need for explicit casting and enhances type safety:
+
+\begin{lstlisting}
+fun printLength(text: Any) {
+  if (text is String) {
+    // Within this block, 'text' is automatically cast to String
+    println("Length: ${text.length}")
+  }
+}
+\end{lstlisting}
+
+\noindent Kotlin restricts programmers from defining custom operators, emphasizing clarity. Instead, it places a 
+deliberate focus on readability and maintainability by allowing the redefinition of existing operators within specific 
+contexts:
+
+\begin{lstlisting}
+// Custom class representing a point in 2D space
+data class Point(val x: Int, val y: Int)
+
+// Operator overloading for the plus operator (+)
+operator fun Point.plus(other: Point): Point {
+  return Point(this.x + other.x, this.y + other.y)
+}
+
+fun main() {
+  // Creating instances of the Point class
+  val point1 = Point(1, 2)
+  val point2 = Point(3, 4)
+  val sumPoint = point1 + point2
+
+  // Displaying the result
+  println("Sum of Points: $sumPoint")
+}
+\end{lstlisting}
+
+
+\newpage
+\subsubsection{Revising Conciseness Notation}
+
+Conciseness refers to the language's ability to express functionality in a clear and compact manner, reducing 
+unnecessary boilerplate code without sacrificing readability:
+
+\begin{lstlisting}
+// Using the Elvis operator
+val result = nullableValue ?: "Default Value"
+
+// Single-expression function
+fun square(number: Int): Int = number * number
+
+// Function with default parameter
+fun greet(name: String, greeting: String = "Hello") {
+  println("$greeting, $name!")
+}
+
+// Extension function to capitalize a string
+fun String.capitalize(): String {
+  return this.substring(0, 1).toUpperCase() + this.substring(1)
+} // println("hello".capitalize()) // 'Hello'
+
+val numbers = listOf(1, 2, 3, 4, 5) /* or */ val numbers = 1..5
+// Using a lambda expression for filtering
+val evenNumbers = numbers.filter { it % 2 == 0 }.sum()
+
+// Data class definition
+data class Person(val name: String, val age: Int)
+val person1 = Person("John", 30)
+val person2 = Person("John", 30)
+// Automatically generated toString(), equals(), and hashCode()
+println(person1) // 'Person(name=John, age=30)'
+println(person1 == person2) // 'true'
+// Destructuring declaration
+val (name, age) = person1
+
+// Lazy Initialization
+val lazyValue: String by lazy {
+  println("Initializing lazy value")
+  "Lazy Initializer Result"
+}
+
+// Conditional statements
+val result = when (score) {
+  in 90..100 -> "A"
+  in 80 until 90 -> "B"
+  else -> "C"
+}
+\end{lstlisting}
+
+
+\subsubsection{Following Interoperability}
+
+Kotlin is designed to coexist within the broader Java ecosystem. Its interoperability is bidirectional, meaning that 
+not only can Kotlin effortlessly leverage existing Java libraries and code, but Kotlin code itself can seamlessly 
+integrate into Java projects. Kotlin supports Java annotations, and Kotlin's own annotations can be easily processed by 
+Java tools. Finally, the Kotlin compiler generates bytecode that is fully compatible with the Java Virtual Machine (JVM), 
+enabling Java projects to effortlessly incorporate Kotlin modules. 
+
+\begin{lstlisting}
+// src/main/java/com/example/JavaClass.java
+package com.example
+
+public class JavaClass {
+  public void greetFromJava() {
+    System.out.println("Hello from Java!");
+  }(*@ \stopnumber @*)
+} 
+
+// src/main/kotlin/com/example/KotlinClass.kt 
+package com.example
+
+class KotlinClass {
+  fun greetFromKotlin() {
+    println("Hello from Kotlin!")
+  }(*@ \stopnumber @*)
+}
+
+// src/main/kotlin/com/example/MixedUsageExample.kt
+package com.example
+
+fun main() {
+  val javaClass = JavaClass()
+  val kotlinClass = KotlinClass()
+
+  javaClass.greetFromJava()
+  kotlinClass.greetFromKotlin()
+}
+\end{lstlisting}
+
+\noindent As Kotlin evolved and expanded its reach beyond the Java Virtual Machine (JVM) to include various platforms, 
+the scope of interoperability guarantees was broadened. These guarantees now encompass not only interaction with Java 
+code on the JVM but also extend to seamlessly integrate with JavaScript (JS) code for the JS-based platform. 
+Additionally, Kotlin ensures robust interoperability with native applications written in languages such as C, C++, 
+Objective-C, and Swift.
+
+
+\subsubsection{Exploring Object-Oriented Programming}
+
+Kotlin, as an object-oriented programming language \cite{Khan18}, embraces fundamental OOP principles. The available 
+visibility modifiers are \q{public}, \q{protected} (visible within the class and its subclasses), \q{internal} (visible 
+within the same module [a set of files compiled together]), and \q{private} (visible within the class in which they are 
+declared). The visibility modifiers can be applied not only to methods but also to properties, classes, and other 
+declarations. 
+
+\begin{lstlisting}
+// Encapsulation
+class Person(private var name: String, private var age: Int) {
+  fun getName(): String {
+    return name
+  }
+  protected fun setName(newName: String) {
+    name = newName
+  }
+}
+
+// Abstraction
+abstract class Shape {
+  abstract fun area(): Double
+}
+// Concrete class extending the abstract class
+class Circle(private val radius: Double) : Shape() {
+  override fun area(): Double {
+    return Math.PI * radius * radius
+  }
+}
+
+// Inheritance
+open class Animal(val name: String)
+// Derived class inheriting from Animal
+class Dog(name: String, val breed: String) : Animal(name)
+
+// Polymorphism
+open class Drawable {
+  open fun draw() {
+    println("Drawing a shape")
+  }
+}
+// Derived classes with overridden draw methods
+class DrawableCircle : Drawable() {
+  override fun draw() {
+    println("Drawing a circle")
+  }
+}
+\end{lstlisting}
+
+
+\subsubsection{Checking Functional Programming}
+
+Functional Programming (FP) is a programming paradigm that treats computation as the evaluation of mathematical 
+functions and avoids changing state and mutable data. Kotlin, being a modern programming language, supports functional 
+programming \cite{Carl22} features:
+
+\begin{lstlisting}
+val numbers = 1..5
+// Using map to square each element
+val squaredNumbers = numbers.map { it * it }
+
+// Modify an immutable data class results in a new instance
+val person = Person(name = "John", age = 30)
+val updatedPerson = person.copy(age = 31)
+
+// Lambda expression
+val add: (Int, Int) -> Int = { a, b -> a + b }
+val result = add(3, 5)
+
+// Higher-order function that takes a lambda as a parameter
+fun performOperation(number: Int, operation: (Int) -> Int): Int {
+  return operation(number)
+}
+fun main() {
+  val result = performOperation(5) { it * it }
+}
+
+// Function composition using extension functions
+fun square(x: Int) = x * x
+fun double(x: Int) = x * 2
+infix fun ((Int) -> Int).compose(g: (Int) -> Int): 
+    (Int) -> Int = { x -> this(g(x)) }
+fun main() {
+  val squareAndDouble = ::square compose ::double
+  val result = squareAndDouble(4)
+  println("Result of composition: $result")
+}
+
+// Pattern matching
+sealed class Result
+data class Success(val value: Int) : Result()
+object Failure : Result()
+fun getResultMessage(result: Result): String {
+    return when (result) {
+        is Success -> "Success: ${result.value}"
+        is Failure -> "Failure"
+    }
+}
+\end{lstlisting}
+
+
+\subsubsection{Observing Concurrency (Coroutines)}
+
+Kotlin leverages the concept of suspendable computations, enabling the support for concurrency-related programming 
+patterns like async/await, futures, promises, and actors. The Coroutines framework \cite{Babi22} offers a robust, 
+elegant, and highly scalable solution for handling concurrency challenges:
+
+\begin{lstlisting}
+import kotlinx.coroutines.*
+
+// Example of a coroutine
+suspend fun doAsyncTask() { /* ... asynchronous logic */ }
+// Flexible Thread Dispatching Mechanism
+suspend fun performOperation() {
+  withContext(Dispatchers.IO) { /* ... perform I/O operation */ }
+}
+// Suspendable Sequences and Iterators
+suspend fun generateSequence(): Sequence<Int> = sequence {
+  // ... yield values asynchronously
+}
+// Sharing Memory via Channels
+fun channelCommunicationExample() = runBlocking {
+  val channel = Channel<String>()
+  launch { channel.send("Message from coroutine") }
+  val receivedMessage = channel.receive()
+  println("Received: $receivedMessage")
+}
+// Using Actors to Share Mutable State via Message Sending
+class CounterActor {
+  private var count = 0
+  suspend fun increment() = count++
+  suspend fun getCount(): Int = count
+}
+
+// Main coroutine context
+fun main() = runBlocking {
+    val task1 = async { doAsyncTask() }
+    val task2 = async { performOperation() }
+    val sequence = async { generateSequence().toList() }
+    val task3 = async { channelCommunicationExample() }
+    val counterActor = CounterActor()
+    val task4 = async {
+        counterActor.increment()
+        println("Current Count: ${counterActor.getCount()}")
+    }
+    // Await for all tasks to complete
+    awaitAll(task1, task2, task3, task4)
+}
+\end{lstlisting}
