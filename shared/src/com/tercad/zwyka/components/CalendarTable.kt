@@ -9,9 +9,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,11 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.platform.LocalDensity
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.max
@@ -48,17 +47,15 @@ fun CalendarTable(
     modifier: Modifier = Modifier,
 ) {
     /*
-     * Sparse representation:
+     * Sparse representation of the table.
      *
-     * We don't create objects for all possible cells.
+     * There is no object for every possible cell.
      *
-     * For example:
+     * A cell is identified by:
      *
-     * 10,000 habits × 10,000 dates
+     *     habitId + date
      *
-     * means 100,000,000 possible cells,
-     * but only entries existing in dayState
-     * are stored here.
+     * Missing cells are rendered as "|".
      */
     val marks = remember(dayState) {
         dayState.associate { state ->
@@ -71,9 +68,12 @@ fun CalendarTable(
 
     val density = LocalDensity.current
 
-    val firstColumnWidth = 180.dp
+    /*
+     * Fixed dimensions make the 2D virtualization very cheap.
+     */
+    val firstColumnWidth = 100.dp
     val headerHeight = 56.dp
-    val cellWidth = 72.dp
+    val cellWidth = 120.dp
     val cellHeight = 48.dp
 
     val firstColumnWidthPx =
@@ -97,9 +97,10 @@ fun CalendarTable(
         }
 
     /*
-     * Scroll position in pixels.
+     * Current scroll position.
      *
-     * 0,0 = top-left.
+     * X = habits
+     * Y = dates
      */
     var scrollOffset by remember {
         mutableStateOf(Offset.Zero)
@@ -120,7 +121,7 @@ fun CalendarTable(
             }
 
         /*
-         * Area occupied by the scrollable body.
+         * Size of the actual scrollable body.
          */
         val bodyWidthPx =
             max(
@@ -137,17 +138,17 @@ fun CalendarTable(
             )
 
         /*
-         * Total scrollable content dimensions.
+         * IMPORTANT:
+         *
+         * Horizontal content = habits.
+         * Vertical content = dates.
          */
         val contentWidthPx =
-            dates.size * cellWidthPx
+            habits.size * cellWidthPx
 
         val contentHeightPx =
-            habits.size * cellHeightPx
+            dates.size * cellHeightPx
 
-        /*
-         * Maximum scroll positions.
-         */
         val maxScrollX =
             max(
                 0f,
@@ -163,8 +164,11 @@ fun CalendarTable(
             )
 
         /*
-         * If the window is resized, or the number of rows/
-         * columns changes, keep the current position valid.
+         * Keep the current position valid after:
+         *
+         * - resize
+         * - adding/removing habits
+         * - adding/removing dates
          */
         LaunchedEffect(
             maxScrollX,
@@ -189,10 +193,7 @@ fun CalendarTable(
         /*
          * Horizontal scrolling.
          *
-         * Modifier.scrollable reports the physical gesture
-         * delta. We use that delta directly as the scroll
-         * position, exactly as Compose's custom scroll examples
-         * do.
+         * Horizontal axis = habits.
          */
         val horizontalScrollState =
             rememberScrollableState { delta ->
@@ -211,14 +212,13 @@ fun CalendarTable(
                     y = scrollOffset.y,
                 )
 
-                /*
-                 * Return the amount actually consumed.
-                 */
                 newX - oldX
             }
 
         /*
          * Vertical scrolling.
+         *
+         * Vertical axis = dates.
          */
         val verticalScrollState =
             rememberScrollableState { delta ->
@@ -237,20 +237,13 @@ fun CalendarTable(
                     y = newY,
                 )
 
-                /*
-                 * Return the amount actually consumed.
-                 */
                 newY - oldY
             }
 
         /*
-         * The outer container receives both horizontal and
-         * vertical gestures.
+         * One logical scrolling surface.
          *
-         * We don't use horizontalScroll()/verticalScroll()
-         * because those would require a conventional scrollable
-         * content hierarchy. Here the content is virtualized
-         * manually.
+         * The actual content is split into four layers below.
          */
         Box(
             modifier = Modifier
@@ -266,11 +259,14 @@ fun CalendarTable(
         ) {
 
             /*
-             * -------------------------------------------------
-             * 1. BODY
+             * =====================================================
+             * BODY
              *
-             * Scrolls in BOTH directions.
-             * -------------------------------------------------
+             * Both axes scroll.
+             *
+             * X = habits
+             * Y = dates
+             * =====================================================
              */
             Box(
                 modifier = Modifier
@@ -306,12 +302,14 @@ fun CalendarTable(
             }
 
             /*
-             * -------------------------------------------------
-             * 2. HEADER
+             * =====================================================
+             * HEADER
+             *
+             * Contains HABITS.
              *
              * Scrolls horizontally.
              * Stays pinned vertically.
-             * -------------------------------------------------
+             * =====================================================
              */
             Box(
                 modifier = Modifier
@@ -330,7 +328,7 @@ fun CalendarTable(
                     .clipToBounds(),
             ) {
                 CalendarHeaderViewport(
-                    dates = dates,
+                    habits = habits,
                     scrollX = scrollOffset.x,
                     viewportWidthPx = bodyWidthPx,
                     cellWidthPx = cellWidthPx,
@@ -340,12 +338,14 @@ fun CalendarTable(
             }
 
             /*
-             * -------------------------------------------------
-             * 3. FIRST COLUMN
+             * =====================================================
+             * FIRST COLUMN
+             *
+             * Contains DATES.
              *
              * Scrolls vertically.
              * Stays pinned horizontally.
-             * -------------------------------------------------
+             * =====================================================
              */
             Box(
                 modifier = Modifier
@@ -364,7 +364,7 @@ fun CalendarTable(
                     .clipToBounds(),
             ) {
                 CalendarFirstColumnViewport(
-                    habits = habits,
+                    dates = dates,
                     scrollY = scrollOffset.y,
                     viewportHeightPx = bodyHeightPx,
                     firstColumnWidth = firstColumnWidth,
@@ -374,11 +374,11 @@ fun CalendarTable(
             }
 
             /*
-             * -------------------------------------------------
-             * 4. TOP-LEFT CORNER
+             * =====================================================
+             * TOP-LEFT CORNER
              *
-             * Never scrolls.
-             * -------------------------------------------------
+             * Fixed in both directions.
+             * =====================================================
              */
             CalendarTableCell(
                 text = "",
@@ -386,7 +386,6 @@ fun CalendarTable(
                 height = headerHeight,
                 background =
                     MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier,
             )
         }
     }
@@ -396,12 +395,17 @@ fun CalendarTable(
 /*
  * ============================================================
  * HEADER
+ *
+ * Horizontal:
+ *
+ *     Sample 1 | Sample 2 | Sample 3 | Sample 4
+ *
  * ============================================================
  */
 
 @Composable
 private fun CalendarHeaderViewport(
-    dates: List<String>,
+    habits: List<Habit>,
     scrollX: Float,
     viewportWidthPx: Float,
     cellWidthPx: Float,
@@ -421,10 +425,10 @@ private fun CalendarHeaderViewport(
                 cellWidthPx,
         )
             .toInt()
-            .coerceAtMost(dates.size)
+            .coerceAtMost(habits.size)
 
     /*
-     * Compose a few cells outside the viewport.
+     * Overscan.
      */
     val startColumn =
         (firstVisibleColumn - 2)
@@ -432,7 +436,7 @@ private fun CalendarHeaderViewport(
 
     val endColumn =
         (lastVisibleColumn + 2)
-            .coerceAtMost(dates.size)
+            .coerceAtMost(habits.size)
 
     Layout(
         content = {
@@ -441,7 +445,7 @@ private fun CalendarHeaderViewport(
                 column in startColumn until endColumn
             ) {
                 CalendarTableCell(
-                    text = dates[column],
+                    text = habits[column].title,
                     width = with(LocalDensity.current) {
                         cellWidthPx.toDp()
                     },
@@ -473,7 +477,6 @@ private fun CalendarHeaderViewport(
             width = constraints.maxWidth,
             height = constraints.maxHeight,
         ) {
-
             placeables.forEachIndexed { index, placeable ->
 
                 val column =
@@ -496,12 +499,20 @@ private fun CalendarHeaderViewport(
 /*
  * ============================================================
  * FIRST COLUMN
+ *
+ * Vertical:
+ *
+ *     2026-10-01
+ *     2026-10-02
+ *     2026-10-03
+ *     2026-10-04
+ *
  * ============================================================
  */
 
 @Composable
 private fun CalendarFirstColumnViewport(
-    habits: List<Habit>,
+    dates: List<String>,
     scrollY: Float,
     viewportHeightPx: Float,
     firstColumnWidth: Dp,
@@ -521,15 +532,18 @@ private fun CalendarFirstColumnViewport(
                 cellHeightPx,
         )
             .toInt()
-            .coerceAtMost(habits.size)
+            .coerceAtMost(dates.size)
 
+    /*
+     * Overscan.
+     */
     val startRow =
         (firstVisibleRow - 2)
             .coerceAtLeast(0)
 
     val endRow =
         (lastVisibleRow + 2)
-            .coerceAtMost(habits.size)
+            .coerceAtMost(dates.size)
 
     Layout(
         content = {
@@ -538,7 +552,7 @@ private fun CalendarFirstColumnViewport(
                 row in startRow until endRow
             ) {
                 CalendarTableCell(
-                    text = habits[row].title,
+                    text = dates[row],
                     width = firstColumnWidth,
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()
@@ -570,7 +584,6 @@ private fun CalendarFirstColumnViewport(
             width = constraints.maxWidth,
             height = constraints.maxHeight,
         ) {
-
             placeables.forEachIndexed { index, placeable ->
 
                 val row =
@@ -593,6 +606,16 @@ private fun CalendarFirstColumnViewport(
 /*
  * ============================================================
  * BODY
+ *
+ * Example:
+ *
+ *                 Sample 1  Sample 2  Sample 3  Sample 4
+ *
+ * 2026-10-01          X         |         |         |
+ * 2026-10-02          |         X         X         |
+ * 2026-10-03          /         X         X         |
+ * 2026-10-04          |         |         |         |
+ *
  * ============================================================
  */
 
@@ -608,6 +631,9 @@ private fun CalendarBodyViewport(
     cellWidthPx: Float,
     cellHeightPx: Float,
 ) {
+    /*
+     * X = habits / columns.
+     */
     val firstVisibleColumn =
         floor(
             scrollX / cellWidthPx,
@@ -621,8 +647,11 @@ private fun CalendarBodyViewport(
                 cellWidthPx,
         )
             .toInt()
-            .coerceAtMost(dates.size)
+            .coerceAtMost(habits.size)
 
+    /*
+     * Y = dates / rows.
+     */
     val firstVisibleRow =
         floor(
             scrollY / cellHeightPx,
@@ -636,7 +665,7 @@ private fun CalendarBodyViewport(
                 cellHeightPx,
         )
             .toInt()
-            .coerceAtMost(habits.size)
+            .coerceAtMost(dates.size)
 
     /*
      * Overscan.
@@ -647,7 +676,7 @@ private fun CalendarBodyViewport(
 
     val endColumn =
         (lastVisibleColumn + 2)
-            .coerceAtMost(dates.size)
+            .coerceAtMost(habits.size)
 
     val startRow =
         (firstVisibleRow - 2)
@@ -655,7 +684,7 @@ private fun CalendarBodyViewport(
 
     val endRow =
         (lastVisibleRow + 2)
-            .coerceAtMost(habits.size)
+            .coerceAtMost(dates.size)
 
     val columnCount =
         endColumn - startColumn
@@ -664,11 +693,7 @@ private fun CalendarBodyViewport(
         endRow - startRow
 
     /*
-     * Compose ONLY:
-     *
-     * visible rows × visible columns
-     *
-     * plus the small overscan area.
+     * Only visible dates × visible habits are composed.
      */
     Layout(
         content = {
@@ -676,18 +701,15 @@ private fun CalendarBodyViewport(
             for (
                 row in startRow until endRow
             ) {
-                val habit =
-                    habits[row]
+                val date =
+                    dates[row]
 
                 for (
                     column in startColumn until endColumn
                 ) {
-                    val date =
-                        dates[column]
+                    val habit =
+                        habits[column]
 
-                    /*
-                     * Missing cells are represented by "|".
-                     */
                     val value =
                         marks[
                             CellKey(
