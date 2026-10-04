@@ -78,3 +78,13 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
 \end{lstlisting}
+
+\noindent And:
+
+\begin{lstlisting}[language=yaml]
+// ./shared/module.yaml
+dependencies:
+  - $libs.voyager.navigator
+  - $libs.voyager.tab.navigator
+  - $libs.voyager.transitions
+\end{lstlisting}
