@@ -2,9 +2,7 @@ package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Constraints
@@ -191,71 +190,58 @@ fun CalendarTable(
         }
 
         /*
-         * Horizontal scrolling.
+         * ============================================================
+         * 2D TOUCH SCROLLING
+         * ============================================================
          *
-         * Horizontal axis = habits.
-         */
-        val horizontalScrollState =
-            rememberScrollableState { delta ->
-
-                val oldX = scrollOffset.x
-
-                val newX =
-                    (oldX + delta)
-                        .coerceIn(
-                            0f,
-                            maxScrollX,
-                        )
-
-                scrollOffset = Offset(
-                    x = newX,
-                    y = scrollOffset.y,
-                )
-
-                newX - oldX
-            }
-
-        /*
-         * Vertical scrolling.
+         * Do NOT use two independent `scrollable` modifiers here.
          *
-         * Vertical axis = dates.
-         */
-        val verticalScrollState =
-            rememberScrollableState { delta ->
-
-                val oldY = scrollOffset.y
-
-                val newY =
-                    (oldY + delta)
-                        .coerceIn(
-                            0f,
-                            maxScrollY,
-                        )
-
-                scrollOffset = Offset(
-                    x = scrollOffset.x,
-                    y = newY,
-                )
-
-                newY - oldY
-            }
-
-        /*
-         * One logical scrolling surface.
+         * On a touchscreen, both horizontal and vertical gestures
+         * originate from the same finger drag. A single 2D drag
+         * handler allows us to update both axes simultaneously.
          *
-         * The actual content is split into four layers below.
+         * dragAmount:
+         *
+         *     +X -> finger moves right
+         *     -X -> finger moves left
+         *     +Y -> finger moves down
+         *     -Y -> finger moves up
+         *
+         * Content moves in the opposite direction, therefore:
+         *
+         *     scrollX -= dragAmount.x
+         *     scrollY -= dragAmount.y
          */
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .scrollable(
-                    state = horizontalScrollState,
-                    orientation = Orientation.Horizontal,
-                )
-                .scrollable(
-                    state = verticalScrollState,
-                    orientation = Orientation.Vertical,
-                ),
+                .pointerInput(
+                    maxScrollX,
+                    maxScrollY,
+                ) {
+                    detectDragGestures(
+                        onDrag = { change, dragAmount ->
+                            change.consume()
+
+                            scrollOffset = Offset(
+                                x = (
+                                    scrollOffset.x -
+                                        dragAmount.x
+                                    ).coerceIn(
+                                        0f,
+                                        maxScrollX,
+                                    ),
+                                y = (
+                                    scrollOffset.y -
+                                        dragAmount.y
+                                    ).coerceIn(
+                                        0f,
+                                        maxScrollY,
+                                    ),
+                            )
+                        },
+                    )
+                },
         ) {
 
             /*
@@ -272,8 +258,10 @@ fun CalendarTable(
                 modifier = Modifier
                     .offset {
                         IntOffset(
-                            x = firstColumnWidthPx.roundToInt(),
-                            y = headerHeightPx.roundToInt(),
+                            x = firstColumnWidthPx
+                                .roundToInt(),
+                            y = headerHeightPx
+                                .roundToInt(),
                         )
                     }
                     .width(
@@ -315,7 +303,8 @@ fun CalendarTable(
                 modifier = Modifier
                     .offset {
                         IntOffset(
-                            x = firstColumnWidthPx.roundToInt(),
+                            x = firstColumnWidthPx
+                                .roundToInt(),
                             y = 0,
                         )
                     }
@@ -352,7 +341,8 @@ fun CalendarTable(
                     .offset {
                         IntOffset(
                             x = 0,
-                            y = headerHeightPx.roundToInt(),
+                            y = headerHeightPx
+                                .roundToInt(),
                         )
                     }
                     .width(firstColumnWidth)
@@ -440,7 +430,6 @@ private fun CalendarHeaderViewport(
 
     Layout(
         content = {
-
             for (
                 column in startColumn until endColumn
             ) {
@@ -547,7 +536,6 @@ private fun CalendarFirstColumnViewport(
 
     Layout(
         content = {
-
             for (
                 row in startRow until endRow
             ) {
@@ -809,14 +797,18 @@ private fun CalendarTableCell(
             .background(background)
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant,
+                color =
+                    MaterialTheme.colorScheme
+                        .outlineVariant,
             ),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            style =
+                MaterialTheme.typography.bodyMedium,
+            color =
+                MaterialTheme.colorScheme.onSurface,
         )
     }
 }
