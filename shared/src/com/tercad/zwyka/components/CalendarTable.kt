@@ -704,7 +704,7 @@ private fun CalendarBodyViewport(
                                 habitId = habit.id,
                                 date = date,
                             )
-                        ] ?: "|"
+                        ] ?: " "
 
                     CalendarTableCell(
                         text = value,
