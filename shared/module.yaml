@@ -16,6 +16,9 @@ dependencies:
   - $libs.voyager.tab.navigator
   - $libs.voyager.transitions
   - $libs.sqldelight.runtime
+  - $libs.sqldelight.async.extensions
+  - $libs.kotlinx.datetime
+  - $libs.kotlinx.coroutines.core
 
 dependencies@android:
   - $compose.uiTooling

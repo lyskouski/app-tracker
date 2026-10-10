@@ -132,11 +132,61 @@ dependencies@wasmJs:
   - $libs.sqldelight.web.worker.driver
 \end{lstlisting}
 
-The Kotlin Toolchain build does not apply third-party Gradle plugins, so this setup provides the
-SQLDelight runtime and drivers but does not generate database APIs from `.sq` files. Code generation
-requires applying the SQLDelight Gradle plugin in a Gradle-based build. The web-worker driver is
-published for Kotlin/Wasm; a worker implementation must still be supplied by the application.
+\paragraph{Gradle build.}
+The Kotlin Toolchain (\texttt{./kotlin}) cannot apply the SQLDelight Gradle plugin, so it never
+generates the \texttt{Database} class, and it cannot declare the npm dependencies the web
+worker needs. A parallel Gradle build was therefore added (\texttt{settings.gradle.kts},
+\texttt{build.gradle.kts}, \texttt{gradle.properties}, the Gradle wrapper 9.3.1 with AGP 9.1.0,
+and a \texttt{build.gradle.kts} in each of \texttt{shared}, \texttt{androidApp},
+\texttt{desktopApp}, \texttt{iosApp}, \texttt{webApp}). It reuses the same
+\texttt{libs.versions.toml} (extended with \texttt{kotlinx-datetime},
+\texttt{kotlinx-coroutines-core}, \texttt{sqldelight-async-extensions} and a \texttt{[plugins]}
+section) and maps the existing source layout (\texttt{src}, \texttt{src@jvm}, \ldots).
+The Toolchain files are kept; \texttt{shared/module.yaml} additionally declares
+\texttt{sqldelight.async.extensions}, \texttt{kotlinx.datetime} and \texttt{kotlinx.coroutines.core}.
+Applications that use the generated database must be built and run with Gradle:
 
-Keep SQLDelight schema files in `shared/src/commonMain/sqldelight`, for example
-`shared/src/commonMain/sqldelight/com/tercad/zwyka/infrastructures/Database.sq`. This is the
-conventional common-source schema location for SQLDelight code generation.
+\begin{lstlisting}[language=bash]
+./gradlew :desktopApp:run
+./gradlew :androidApp:assembleDebug
+./gradlew :webApp:wasmJsBrowserDevelopmentRun
+\end{lstlisting}
+
+\paragraph{Schema and code generation.}
+The SQLDelight plugin is configured in \texttt{shared/build.gradle.kts}:
+
+\begin{lstlisting}
+sqldelight {
+    databases {
+        create("Database") {
+            packageName = "com.tercad.zwyka.infrastructures"
+            generateAsync = true
+        }
+    }
+}
+\end{lstlisting}
+
+\noindent The schema lives in
+\texttt{shared/src/commonMain/sqldelight/com/tercad/zwyka/infrastructures/Database.sq}:
+tables \texttt{Habit(id, title)} and \texttt{DayState(habitId, date, mark)}, queries
+\texttt{selectAllHabits}, \texttt{insertHabit}, \texttt{selectAllDayStates},
+\texttt{insertDayState}, and seed \texttt{INSERT}s replacing the former hardcoded values.
+Asynchronous generation is required by the Web Worker driver; synchronous drivers wrap the
+schema with \texttt{Database.Schema.synchronous()}. Identifiers in \texttt{Habit},
+\texttt{DayState} and \texttt{CellKey} are \texttt{Long}, matching SQLDelight's INTEGER mapping.
+
+\paragraph{Drivers per platform.}
+Android uses \texttt{AndroidSqliteDriver}, desktop \texttt{JdbcSqliteDriver} (file
+\texttt{\textasciitilde/.zwyka.db}), iOS \texttt{NativeSqliteDriver}, and the web app
+\texttt{WebWorkerDriver}. The web worker (\texttt{webApp/sqljs/sqljs.worker.js}) runs SQL.js
+and persists the database in IndexedDB; \texttt{webApp/webpack.config.d/sqljs.js} copies
+\texttt{sql-wasm.wasm} to the output. The web entry point creates the worker in a top-level
+function (Kotlin/Wasm requires \texttt{js()} in that position) and initializes the schema via
+\texttt{PRAGMA user_version}.
+
+\paragraph{UI wiring.}
+\texttt{App} accepts an optional \texttt{Database} and an \texttt{initializeDatabase} callback
+and passes them to \texttt{HomePage}. \texttt{HomePageContent} initializes the database in a
+\texttt{LaunchedEffect}, loads habits and day states with \texttt{awaitAsList()}, and renders
+the states Loading, Loaded and Failed. Dates are computed from \texttt{kotlin.time.Clock}
+(today$-66$ \ldots today$+5$).

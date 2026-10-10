@@ -1,5 +1,7 @@
 *.iml
 .kotlin
+/.gradle/
+**/node_modules/
 build/
 .DS_Store
 captures

@@ -1,0 +1,8 @@
+{
+  "name": "@cashapp/zwyka-sqljs-worker",
+  "version": "1.0.0",
+  "main": "sqljs.worker.js",
+  "files": [
+    "sqljs.worker.js"
+  ]
+}

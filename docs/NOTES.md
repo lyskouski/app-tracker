@@ -1,25 +1,30 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM), iOS, Web, built with the [Kotlin Toolchain](https://kotlin-toolchain.org/dev/).
+This is a Kotlin Multiplatform project targeting Android, Desktop (JVM), iOS, and Kotlin/Wasm, built with Gradle and Compose Multiplatform.
 
 - [/androidApp](./androidApp) contains the Android application.
 - [/desktopApp](./desktopApp) contains the desktop (JVM) application.
 - [/iosApp](./iosApp) contains the iOS application.
-- [/shared](./shared) holds the code shared across your applications — Compose UI, business logic, and platform-specific implementations. [src](./shared/src) is for common code; the sibling `src@<platform>` folders (for example `src@android`) hold code compiled only for the platform named in the folder.
+- [/shared](./shared) holds shared Compose UI, business logic, SQLDelight queries, and platform-specific implementations. [src](./shared/src) is common code; sibling `src@<platform>` folders hold platform-specific code.
 - [/webApp](./webApp) contains the web application, compiled to WebAssembly with Kotlin/Wasm.
 
-The `kotlin` (macOS/Linux) and `kotlin.bat` (Windows) scripts in the project root are self-bootstrapping wrappers for the Kotlin Toolchain: they download the pinned toolchain version on first use, so no separate installation is required. Build the whole project with `./kotlin build`.
+The Gradle wrapper downloads the pinned Gradle version on first use. Build the project with `./gradlew build`. The `project.yaml` and `module.yaml` files are retained for the earlier Kotlin Toolchain setup; use Gradle for SQLDelight code generation.
 
 ### Running
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also run each module from the command line:
+Run individual applications from the command line:
 
-- Android app: `./kotlin run -m androidApp`
-- Desktop app: `./kotlin run -m desktopApp`
-- iOS app: `./kotlin run -m iosApp`
-- Web app: `./kotlin run -m webApp`
+- Android app: `./gradlew :androidApp:installDebug`
+- Desktop app: `./gradlew :desktopApp:run`
+- iOS framework (macOS): `./gradlew :iosApp:linkDebugFrameworkIosSimulatorArm64`
+- Web app: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
 
 ### Testing
 
-Run the project's tests with `./kotlin test`, or `./kotlin test -m <module>` for a single module.
+Run the project's tests with `./gradlew test`, or target a module, for example `./gradlew :shared:allTests`.
+
+SQLDelight generates the shared database API from
+[`Database.sq`](../shared/src/commonMain/sqldelight/com/tercad/zwyka/infrastructures/Database.sq).
+Android, desktop, and iOS use their platform drivers. The WASM app uses a SQL.js Web Worker and
+persists its database in IndexedDB.
 
 ---
 
