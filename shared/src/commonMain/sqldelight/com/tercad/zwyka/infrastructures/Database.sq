@@ -28,3 +28,15 @@ ORDER BY habitId, date;
 insertDayState:
 INSERT INTO DayState(habitId, date, mark)
 VALUES (?, ?, ?);
+
+INSERT INTO Habit(id, title) VALUES (1, 'Sample 1');
+INSERT INTO Habit(id, title) VALUES (2, 'Sample 2');
+INSERT INTO Habit(id, title) VALUES (3, 'Sample 3');
+INSERT INTO Habit(id, title) VALUES (4, 'Sample 4');
+
+INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-01', 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-02', ' ');
+INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-03', '/');
+INSERT INTO DayState(habitId, date, mark) VALUES (2, '2026-10-02', 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (2, '2026-10-03', 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (3, '2026-10-03', 'X');
