@@ -15,9 +15,20 @@ dependencies:
   - $libs.voyager.navigator
   - $libs.voyager.tab.navigator
   - $libs.voyager.transitions
+  - $libs.sqldelight.runtime
 
 dependencies@android:
   - $compose.uiTooling
+  - $libs.sqldelight.android.driver
+
+dependencies@jvm:
+  - $libs.sqldelight.jdbc.driver
+
+dependencies@native:
+  - $libs.sqldelight.native.driver
+
+dependencies@wasmJs:
+  - $libs.sqldelight.web.worker.driver
 
 settings:
   compose:

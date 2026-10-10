@@ -88,3 +88,51 @@ dependencies:
   - $libs.voyager.tab.navigator
   - $libs.voyager.transitions
 \end{lstlisting}
+
+% TBD: usage of voyager router in the application
+% ...
+
+\noindent SQLDelight provides a shared Kotlin database API with platform-specific drivers.
+The shared module can use the runtime across Android, iOS, desktop, and Kotlin/Wasm; the web app
+gets its Web Worker driver transitively from shared. The Web Worker driver requires a worker
+implementation before it can open a database.
+ 
+In our version catalog, libs.versions.toml, add:
+
+\begin{lstlisting}
+// ./libs.versions.toml
+[versions]
+sqldelight = "2.3.2"
+
+[libraries]
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-jdbc-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+sqldelight-web-worker-driver = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqldelight" }
+\end{lstlisting}
+
+Add the shared runtime and platform-specific drivers to the module:
+
+\begin{lstlisting}[language=yaml]
+# ./shared/module.yaml
+dependencies:
+  - $libs.sqldelight.runtime
+
+dependencies@android:
+  - $libs.sqldelight.android.driver
+
+dependencies@jvm:
+  - $libs.sqldelight.jdbc.driver
+
+dependencies@native:
+  - $libs.sqldelight.native.driver
+
+dependencies@wasmJs:
+  - $libs.sqldelight.web.worker.driver
+\end{lstlisting}
+
+The Kotlin Toolchain build does not apply third-party Gradle plugins, so this setup provides the
+SQLDelight runtime and drivers but does not generate database APIs from `.sq` files. Code generation
+requires applying the SQLDelight Gradle plugin in a Gradle-based build. The web-worker driver is
+published for Kotlin/Wasm; a worker implementation must still be supplied by the application.
