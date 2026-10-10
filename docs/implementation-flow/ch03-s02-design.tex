@@ -136,3 +136,7 @@ The Kotlin Toolchain build does not apply third-party Gradle plugins, so this se
 SQLDelight runtime and drivers but does not generate database APIs from `.sq` files. Code generation
 requires applying the SQLDelight Gradle plugin in a Gradle-based build. The web-worker driver is
 published for Kotlin/Wasm; a worker implementation must still be supplied by the application.
+
+Keep SQLDelight schema files in `shared/src/commonMain/sqldelight`, for example
+`shared/src/commonMain/sqldelight/com/tercad/zwyka/infrastructures/Database.sq`. This is the
+conventional common-source schema location for SQLDelight code generation.

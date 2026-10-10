@@ -1,0 +1,30 @@
+CREATE TABLE Habit (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL
+);
+
+CREATE TABLE DayState (
+    habitId INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    mark TEXT NOT NULL,
+    PRIMARY KEY (habitId, date),
+    FOREIGN KEY (habitId) REFERENCES Habit(id)
+);
+
+selectAllHabits:
+SELECT *
+FROM Habit
+ORDER BY id;
+
+insertHabit:
+INSERT INTO Habit(title)
+VALUES (?);
+
+selectAllDayStates:
+SELECT *
+FROM DayState
+ORDER BY habitId, date;
+
+insertDayState:
+INSERT INTO DayState(habitId, date, mark)
+VALUES (?, ?, ?);
