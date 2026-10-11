@@ -45,7 +45,8 @@ import kotlin.math.roundToInt
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.components.habitColor
+import com.tercad.zwyka.defines.applicationColor
+import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 
 
@@ -546,9 +547,9 @@ private fun CalendarHeaderViewport(
                 column in startColumn until endColumn
             ) {
                 val habit = habits[column]
-                val icon = habitIcon(habit.icon)
+                val icon = applicationIcon(habit.icon)
                 val iconTint =
-                    habitColor(habit.color) ?: currentColorScheme().onSurface
+                    applicationColor(habit.color) ?: currentColorScheme().onSurface
 
                 CalendarTableCell(
                     text = if (icon == null) "?" else "",
@@ -818,7 +819,7 @@ private fun CalendarBodyViewport(
                     val habit =
                         habits[column]
                     val backgroundColor =
-                        habitColor(habit.color)?.copy(alpha = 0.05f)
+                        applicationColor(habit.color)?.copy(alpha = 0.05f)
                             ?: currentColorScheme().surface
 
                     val value =

@@ -50,14 +50,14 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
-import com.tercad.zwyka.components.habitColor
-import com.tercad.zwyka.components.habitColorOptions
-import com.tercad.zwyka.components.habitIcon
-import com.tercad.zwyka.components.habitIconOption
-import com.tercad.zwyka.components.habitIconOptions
-import com.tercad.zwyka.components.normalizeHabitColor
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.applicationColor
+import com.tercad.zwyka.defines.applicationColorOptions
+import com.tercad.zwyka.defines.applicationIcon
+import com.tercad.zwyka.defines.applicationIconOption
+import com.tercad.zwyka.defines.applicationIconOptions
+import com.tercad.zwyka.defines.normalizeApplicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
@@ -233,7 +233,7 @@ private fun HomePageContent(
                                     Text("?  $noIconDescription")
                                 }
                                 val matchingIcons = remember(iconSearchQuery) {
-                                    habitIconOptions.filter { option ->
+                                    applicationIconOptions.filter { option ->
                                         option.title.contains(iconSearchQuery, ignoreCase = true)
                                     }
                                 }
@@ -265,7 +265,7 @@ private fun HomePageContent(
                                 }
                             }
                         } else if (showColorPicker) {
-                            val normalizedColor = normalizeHabitColor(colorInput)
+                            val normalizedColor = normalizeApplicationColor(colorInput)
                             Column {
                                 OutlinedTextField(
                                     value = colorInput,
@@ -279,7 +279,7 @@ private fun HomePageContent(
                                                 .padding(end = 8.dp)
                                                 .size(28.dp)
                                                 .background(
-                                                    habitColor(normalizedColor)
+                                                    applicationColor(normalizedColor)
                                                         ?: currentColorScheme().surfaceVariant,
                                                     CircleShape,
                                                 ),
@@ -293,7 +293,7 @@ private fun HomePageContent(
                                         .height(192.dp),
                                 ) {
                                     items(
-                                        items = habitColorOptions,
+                                        items = applicationColorOptions,
                                         key = { it },
                                     ) { color ->
                                         IconButton(
@@ -306,7 +306,7 @@ private fun HomePageContent(
                                                 contentDescription = color
                                             },
                                         ) {
-                                            habitColor(color)?.let { colorValue ->
+                                            applicationColor(color)?.let { colorValue ->
                                                 Box(
                                                     modifier = Modifier
                                                         .size(28.dp)
@@ -343,7 +343,7 @@ private fun HomePageContent(
                                     iconSearchQuery = ""
                                     showIconPicker = true
                                 }) {
-                                    val selectedIcon = habitIcon(newHabitIcon)
+                                    val selectedIcon = applicationIcon(newHabitIcon)
                                     if (selectedIcon != null) {
                                         Icon(
                                             imageVector = selectedIcon,
@@ -353,7 +353,7 @@ private fun HomePageContent(
                                         Text("?")
                                     }
                                     Text(
-                                        habitIconOption(newHabitIcon)?.title
+                                        applicationIconOption(newHabitIcon)?.title
                                             ?: stringResource(Res.string.no_icon),
                                     )
                                 }
@@ -367,7 +367,7 @@ private fun HomePageContent(
                                             .padding(end = 8.dp)
                                             .size(20.dp)
                                             .background(
-                                                habitColor(newHabitColor)
+                                                applicationColor(newHabitColor)
                                                     ?: currentColorScheme().surfaceVariant,
                                                 CircleShape,
                                             ),
@@ -383,7 +383,7 @@ private fun HomePageContent(
                     confirmButton = {
                         TextButton(
                             enabled = showIconPicker ||
-                                (showColorPicker && normalizeHabitColor(colorInput) != null) ||
+                                (showColorPicker && normalizeApplicationColor(colorInput) != null) ||
                                 (!showIconPicker && !showColorPicker && newHabitTitle.isNotBlank()),
                             onClick = {
                                 if (showIconPicker) {
@@ -391,7 +391,7 @@ private fun HomePageContent(
                                     return@TextButton
                                 }
                                 if (showColorPicker) {
-                                    newHabitColor = normalizeHabitColor(colorInput)
+                                    newHabitColor = normalizeApplicationColor(colorInput)
                                     showColorPicker = false
                                     return@TextButton
                                 }
