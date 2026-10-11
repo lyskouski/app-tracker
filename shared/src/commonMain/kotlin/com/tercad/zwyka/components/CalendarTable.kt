@@ -408,7 +408,7 @@ fun CalendarTable(
             )
 
             if (maxScrollY > 0f && bodyHeightPx > 0f) {
-                val scrollbarWidth = 6.dp
+                val scrollbarWidth = 2.dp
                 val minimumThumbHeightPx = with(density) {
                     24.dp.toPx()
                 }
@@ -452,7 +452,7 @@ fun CalendarTable(
             }
 
             if (maxScrollX > 0f && bodyWidthPx > 0f) {
-                val scrollbarHeight = 6.dp
+                val scrollbarHeight = 2.dp
                 val minimumThumbWidthPx = with(density) {
                     24.dp.toPx()
                 }
