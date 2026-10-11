@@ -18,4 +18,7 @@
     <string name="back">Zurück</string>
     <string name="habit_color">Gewohnheitsfarbe</string>
     <string name="default_color">Standard</string>
+    <string name="select_color">Farbe auswählen</string>
+    <string name="color_value">Hex-Farbwert (#RRGGBB)</string>
+    <string name="invalid_color">Geben Sie einen gültigen sechsstelligen Hex-Farbwert ein.</string>
 </resources>

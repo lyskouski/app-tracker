@@ -18,4 +18,7 @@
     <string name="back">Back</string>
     <string name="habit_color">Habit color</string>
     <string name="default_color">Default</string>
+    <string name="select_color">Select color</string>
+    <string name="color_value">Hex color value (#RRGGBB)</string>
+    <string name="invalid_color">Enter a valid six-digit hex color.</string>
 </resources>

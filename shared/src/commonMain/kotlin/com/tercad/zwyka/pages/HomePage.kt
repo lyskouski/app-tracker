@@ -4,16 +4,13 @@
 package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -38,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
@@ -54,10 +50,10 @@ import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.habitColor
-import com.tercad.zwyka.components.habitColors
 import com.tercad.zwyka.components.habitIcon
 import com.tercad.zwyka.components.habitIconOption
 import com.tercad.zwyka.components.habitIconOptions
+import com.tercad.zwyka.components.normalizeHabitColor
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.infrastructures.Database
@@ -74,8 +70,11 @@ import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habit_icon
 import com.tercad.zwyka.resources.habit_color
+import com.tercad.zwyka.resources.color_value
+import com.tercad.zwyka.resources.invalid_color
 import com.tercad.zwyka.resources.default_color
 import com.tercad.zwyka.resources.no_icon
+import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
 import com.tercad.zwyka.resources.search_icons
 
@@ -115,10 +114,12 @@ private fun HomePageContent(
     }
     var showAddHabitDialog by remember { mutableStateOf(false) }
     var showIconPicker by remember { mutableStateOf(false) }
+    var showColorPicker by remember { mutableStateOf(false) }
     var newHabitTitle by remember { mutableStateOf("") }
     var newHabitIcon by remember { mutableStateOf<String?>(null) }
     var newHabitColor by remember { mutableStateOf<String?>(null) }
     var iconSearchQuery by remember { mutableStateOf("") }
+    var colorInput by remember { mutableStateOf("") }
     var addHabitError by remember { mutableStateOf<String?>(null) }
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
@@ -165,6 +166,7 @@ private fun HomePageContent(
                                     newHabitColor = null
                                     iconSearchQuery = ""
                                     showIconPicker = false
+                                    showColorPicker = false
                                     addHabitError = null
                                     showAddHabitDialog = true
                                 },
@@ -194,11 +196,16 @@ private fun HomePageContent(
                     onDismissRequest = {
                         showAddHabitDialog = false
                         showIconPicker = false
+                        showColorPicker = false
                     },
                     title = {
                         Text(
                             stringResource(
-                                if (showIconPicker) Res.string.select_icon else Res.string.add_habit,
+                                when {
+                                    showIconPicker -> Res.string.select_icon
+                                    showColorPicker -> Res.string.select_color
+                                    else -> Res.string.add_habit
+                                },
                             ),
                         )
                     },
@@ -254,6 +261,39 @@ private fun HomePageContent(
                                     }
                                 }
                             }
+                        } else if (showColorPicker) {
+                            val normalizedColor = normalizeHabitColor(colorInput)
+                            Column {
+                                OutlinedTextField(
+                                    value = colorInput,
+                                    onValueChange = { colorInput = it },
+                                    label = { Text(stringResource(Res.string.color_value)) },
+                                    singleLine = true,
+                                    isError = colorInput.isNotBlank() && normalizedColor == null,
+                                    trailingIcon = {
+                                        Box(
+                                            modifier = Modifier
+                                                .padding(end = 8.dp)
+                                                .size(28.dp)
+                                                .background(
+                                                    habitColor(normalizedColor)
+                                                        ?: androidx.compose.material3.MaterialTheme
+                                                            .colorScheme.surfaceVariant,
+                                                    androidx.compose.foundation.shape.CircleShape,
+                                                ),
+                                        )
+                                    },
+                                )
+                                if (colorInput.isNotBlank() && normalizedColor == null) {
+                                    Text(stringResource(Res.string.invalid_color))
+                                }
+                                TextButton(onClick = {
+                                    newHabitColor = null
+                                    showColorPicker = false
+                                }) {
+                                    Text(stringResource(Res.string.default_color))
+                                }
+                            }
                         } else {
                             Column {
                                 OutlinedTextField(
@@ -283,43 +323,22 @@ private fun HomePageContent(
                                     )
                                 }
                                 Text(stringResource(Res.string.habit_color))
-                                Column {
-                                    habitColors.chunked(4).forEach { rowColors ->
-                                        Row {
-                                            rowColors.forEach { color ->
-                                                IconButton(
-                                                    onClick = { newHabitColor = color },
-                                                    modifier = Modifier.semantics {
-                                                        contentDescription = color
-                                                    },
-                                                ) {
-                                                    Box(
-                                                        modifier = Modifier
-                                                            .size(24.dp)
-                                                            .background(
-                                                                habitColor(color) ?: Color.Transparent,
-                                                                CircleShape,
-                                                            )
-                                                            .then(
-                                                                if (newHabitColor == color) {
-                                                                    Modifier.border(
-                                                                        2.dp,
-                                                                        androidx.compose.material3.MaterialTheme
-                                                                            .colorScheme.onSurface,
-                                                                        CircleShape,
-                                                                    )
-                                                                } else {
-                                                                    Modifier
-                                                                },
-                                                            ),
-                                                    )
-                                                }
-                                            }
-                                        }
-                                    }
-                                    TextButton(onClick = { newHabitColor = null }) {
-                                        Text(stringResource(Res.string.default_color))
-                                    }
+                                OutlinedButton(onClick = {
+                                    colorInput = newHabitColor.orEmpty()
+                                    showColorPicker = true
+                                }) {
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(end = 8.dp)
+                                            .size(20.dp)
+                                            .background(
+                                                habitColor(newHabitColor)
+                                                    ?: androidx.compose.material3.MaterialTheme
+                                                        .colorScheme.surfaceVariant,
+                                                androidx.compose.foundation.shape.CircleShape,
+                                            ),
+                                    )
+                                    Text(newHabitColor ?: stringResource(Res.string.default_color))
                                 }
                                 addHabitError?.let { error ->
                                     Text(stringResource(Res.string.add_habit_failed, error))
@@ -329,10 +348,17 @@ private fun HomePageContent(
                     },
                     confirmButton = {
                         TextButton(
-                            enabled = showIconPicker || newHabitTitle.isNotBlank(),
+                            enabled = showIconPicker ||
+                                (showColorPicker && normalizeHabitColor(colorInput) != null) ||
+                                (!showIconPicker && !showColorPicker && newHabitTitle.isNotBlank()),
                             onClick = {
                                 if (showIconPicker) {
                                     showIconPicker = false
+                                    return@TextButton
+                                }
+                                if (showColorPicker) {
+                                    newHabitColor = normalizeHabitColor(colorInput)
+                                    showColorPicker = false
                                     return@TextButton
                                 }
                                 coroutineScope.launch {
@@ -365,6 +391,7 @@ private fun HomePageContent(
                             onClick = {
                                 showAddHabitDialog = false
                                 showIconPicker = false
+                                showColorPicker = false
                             },
                         ) {
                             Text(stringResource(Res.string.cancel))
