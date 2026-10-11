@@ -135,6 +135,7 @@ private fun HomePageContent(
                 bottomBar = {
                     BottomAppBar(
                         actions = {},
+                        containerColor = currentColorScheme().primary,
                         floatingActionButton = {
                             FloatingActionButton(
                                 onClick = {
@@ -142,6 +143,8 @@ private fun HomePageContent(
                                     habitError = null
                                     showHabitDialog = true
                                 },
+                                containerColor = currentColorScheme().inversePrimary,
+                                contentColor = currentColorScheme().secondary,
                             ) {
                                 Icon(
                                     imageVector = Icons.Filled.Add,
