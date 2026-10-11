@@ -2,14 +2,19 @@
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.sqldelight)
 }
 
 kotlin {
-    androidTarget()
+    android {
+        namespace = "com.tercad.zwyka.shared"
+        compileSdk = 37
+        minSdk = 24
+        withHostTest {}
+    }
     jvm()
     iosArm64()
     iosSimulatorArm64()
@@ -21,7 +26,6 @@ kotlin {
 
     sourceSets {
         commonMain {
-            kotlin.srcDir("src")
             dependencies {
                 implementation("org.jetbrains.compose.runtime:runtime:1.11.1")
                 implementation("org.jetbrains.compose.foundation:foundation:1.11.1")
@@ -49,7 +53,6 @@ kotlin {
         }
 
         androidMain {
-            kotlin.srcDir("src@android")
             dependencies {
                 implementation(libs.sqldelight.android.driver)
             }
@@ -79,8 +82,10 @@ kotlin {
             }
         }
 
-        androidUnitTest {
-            kotlin.srcDir("test@android")
+        getByName("androidHostTest") {
+            dependencies {
+                implementation(kotlin("test"))
+            }
         }
 
         jvmTest {
@@ -94,14 +99,6 @@ kotlin {
         wasmJsTest {
             kotlin.srcDir("test@wasmJs")
         }
-    }
-}
-
-android {
-    namespace = "com.tercad.zwyka.shared"
-    compileSdk = 37
-    defaultConfig {
-        minSdk = 24
     }
 }
 
