@@ -6,27 +6,35 @@ package com.tercad.zwyka.pages
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -38,6 +46,7 @@ import com.tercad.zwyka.defines.weekStartOptions
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.language
+import com.tercad.zwyka.resources.search_languages
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.start_of_week
 import kotlinx.coroutines.launch
@@ -52,85 +61,142 @@ class SettingsPage(
         val scope = rememberCoroutineScope()
         val settings = settingsStore.current
 
+        Scaffold(
+            containerColor = currentColorScheme().surface,
+            bottomBar = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp)
+                        .background(currentColorScheme().primary),
+                ) {
+                    TextButton(
+                        onClick = { navigator.pop() },
+                        modifier = Modifier.align(Alignment.CenterStart),
+                        colors = ButtonDefaults.textButtonColors(
+                            contentColor = currentColorScheme().onPrimary,
+                        ),
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = null,
+                        )
+                        Text(
+                            text = stringResource(Res.string.back),
+                            modifier = Modifier.padding(start = 8.dp),
+                        )
+                    }
+                }
+            },
+        ) { contentPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(currentColorScheme().surface)
+                .padding(contentPadding)
                 .statusBarsPadding()
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { navigator.pop() }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(Res.string.back),
-                        tint = currentColorScheme().onSurface,
-                    )
-                }
-                Text(
-                    text = stringResource(Res.string.settings),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = currentColorScheme().onSurface,
-                )
-            }
-
             Text(
-                text = stringResource(Res.string.language),
-                style = MaterialTheme.typography.titleMedium,
+                text = stringResource(Res.string.settings),
+                style = MaterialTheme.typography.titleLarge,
                 color = currentColorScheme().onSurface,
             )
-            Column(Modifier.selectableGroup()) {
-                applicationLanguages.forEach { option ->
-                    OptionRow(
-                        text = option.nativeName ?: option.label?.let { stringResource(it) }.orEmpty(),
-                        selected = settings.language == option.tag,
-                        onSelect = {
-                            scope.launch {
-                                settingsStore.reopenSettings = true
-                                settingsStore.update(settings.copy(language = option.tag))
-                            }
-                        },
-                    )
-                }
-            }
 
-            Text(
-                text = stringResource(Res.string.start_of_week),
-                style = MaterialTheme.typography.titleMedium,
-                color = currentColorScheme().onSurface,
-            )
-            Column(Modifier.selectableGroup()) {
-                weekStartOptions.forEach { option ->
-                    OptionRow(
-                        text = stringResource(option.label),
-                        selected = settings.weekStart == option,
-                        onSelect = {
-                            scope.launch {
-                                settingsStore.update(settings.copy(weekStart = option))
-                            }
-                        },
-                    )
-                }
+            val languageLabels = applicationLanguages.map { option ->
+                option.nativeName ?: option.label?.let { stringResource(it) }.orEmpty()
             }
+            DropdownField(
+                label = stringResource(Res.string.language),
+                options = languageLabels,
+                searchable = true,
+                selectedIndex = applicationLanguages
+                    .indexOfFirst { it.tag == settings.language }
+                    .coerceAtLeast(0),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.reopenSettings = true
+                        settingsStore.update(
+                            settings.copy(language = applicationLanguages[index].tag),
+                        )
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.start_of_week),
+                options = weekStartOptions.map { stringResource(it.label) },
+                selectedIndex = weekStartOptions.indexOf(settings.weekStart),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(weekStart = weekStartOptions[index]))
+                    }
+                },
+            )
+        }
         }
     }
 }
 
 @Composable
-private fun OptionRow(
-    text: String,
-    selected: Boolean,
-    onSelect: () -> Unit,
+private fun DropdownField(
+    label: String,
+    options: List<String>,
+    selectedIndex: Int,
+    onSelect: (Int) -> Unit,
+    searchable: Boolean = false,
 ) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .selectable(selected = selected, onClick = onSelect, role = Role.RadioButton),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        RadioButton(selected = selected, onClick = null, modifier = Modifier.padding(12.dp))
-        Text(text = text, color = currentColorScheme().onSurface)
+    var expanded by remember { mutableStateOf(false) }
+    var query by remember { mutableStateOf("") }
+    Box(Modifier.fillMaxWidth()) {
+        OutlinedTextField(
+            value = options.getOrElse(selectedIndex) { "" },
+            onValueChange = {},
+            readOnly = true,
+            label = { Text(label) },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Filled.ArrowDropDown,
+                    contentDescription = null,
+                )
+            },
+            modifier = Modifier.fillMaxWidth(),
+        )
+        // Transparent overlay: a read-only text field does not forward clicks.
+        Box(
+            Modifier
+                .matchParentSize()
+                .clickable {
+                    query = ""
+                    expanded = true
+                },
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            if (searchable) {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    label = { Text(stringResource(Res.string.search_languages)) },
+                    singleLine = true,
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp)
+                        .fillMaxWidth(),
+                )
+            }
+            options.forEachIndexed { index, text ->
+                if (searchable && !text.contains(query.trim(), ignoreCase = true)) return@forEachIndexed
+                DropdownMenuItem(
+                    text = { Text(text) },
+                    onClick = {
+                        expanded = false
+                        onSelect(index)
+                    },
+                )
+            }
+        }
     }
 }

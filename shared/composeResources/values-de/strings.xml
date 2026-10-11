@@ -44,4 +44,5 @@
     <string name="saturday">Samstag</string>
     <string name="sunday">Sonntag</string>
     <string name="monday">Montag</string>
+    <string name="search_languages">Sprachen suchen</string>
 </resources>
