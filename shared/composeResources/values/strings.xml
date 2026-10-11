@@ -16,4 +16,6 @@
     <string name="select_icon">Select icon</string>
     <string name="search_icons">Search icons</string>
     <string name="back">Back</string>
+    <string name="habit_color">Habit color</string>
+    <string name="default_color">Default</string>
 </resources>

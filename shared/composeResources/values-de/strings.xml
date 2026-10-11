@@ -16,4 +16,6 @@
     <string name="select_icon">Symbol auswählen</string>
     <string name="search_icons">Symbole suchen</string>
     <string name="back">Zurück</string>
+    <string name="habit_color">Gewohnheitsfarbe</string>
+    <string name="default_color">Standard</string>
 </resources>

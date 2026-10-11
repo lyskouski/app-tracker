@@ -1,7 +1,8 @@
 CREATE TABLE Habit (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    icon TEXT
+    icon TEXT,
+    color TEXT
 );
 
 CREATE TABLE DayState (
@@ -18,8 +19,8 @@ FROM Habit
 ORDER BY id;
 
 insertHabit:
-INSERT INTO Habit(title, icon)
-VALUES (?, ?);
+INSERT INTO Habit(title, icon, color)
+VALUES (?, ?, ?);
 
 selectDayStatesForDateRange:
 SELECT *

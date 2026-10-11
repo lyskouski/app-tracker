@@ -4,12 +4,16 @@
 package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -34,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
@@ -48,6 +53,8 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
+import com.tercad.zwyka.components.habitColor
+import com.tercad.zwyka.components.habitColors
 import com.tercad.zwyka.components.habitIcon
 import com.tercad.zwyka.components.habitIconOption
 import com.tercad.zwyka.components.habitIconOptions
@@ -66,6 +73,8 @@ import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habit_icon
+import com.tercad.zwyka.resources.habit_color
+import com.tercad.zwyka.resources.default_color
 import com.tercad.zwyka.resources.no_icon
 import com.tercad.zwyka.resources.select_icon
 import com.tercad.zwyka.resources.search_icons
@@ -108,6 +117,7 @@ private fun HomePageContent(
     var showIconPicker by remember { mutableStateOf(false) }
     var newHabitTitle by remember { mutableStateOf("") }
     var newHabitIcon by remember { mutableStateOf<String?>(null) }
+    var newHabitColor by remember { mutableStateOf<String?>(null) }
     var iconSearchQuery by remember { mutableStateOf("") }
     var addHabitError by remember { mutableStateOf<String?>(null) }
     val coroutineScope = rememberCoroutineScope()
@@ -119,7 +129,7 @@ private fun HomePageContent(
             initializeDatabase()
             val habits = database.databaseQueries.selectAllHabits()
                 .awaitAsList()
-                .map { Habit(it.id, it.title, it.icon) }
+                .map { Habit(it.id, it.title, it.icon, it.color) }
             val dayStates = database.databaseQueries.selectDayStatesForDateRange(
                 dates.first(),
                 dates.last(),
@@ -152,6 +162,7 @@ private fun HomePageContent(
                                 onClick = {
                                     newHabitTitle = ""
                                     newHabitIcon = null
+                                    newHabitColor = null
                                     iconSearchQuery = ""
                                     showIconPicker = false
                                     addHabitError = null
@@ -271,6 +282,45 @@ private fun HomePageContent(
                                             ?: stringResource(Res.string.no_icon),
                                     )
                                 }
+                                Text(stringResource(Res.string.habit_color))
+                                Column {
+                                    habitColors.chunked(4).forEach { rowColors ->
+                                        Row {
+                                            rowColors.forEach { color ->
+                                                IconButton(
+                                                    onClick = { newHabitColor = color },
+                                                    modifier = Modifier.semantics {
+                                                        contentDescription = color
+                                                    },
+                                                ) {
+                                                    Box(
+                                                        modifier = Modifier
+                                                            .size(24.dp)
+                                                            .background(
+                                                                habitColor(color) ?: Color.Transparent,
+                                                                CircleShape,
+                                                            )
+                                                            .then(
+                                                                if (newHabitColor == color) {
+                                                                    Modifier.border(
+                                                                        2.dp,
+                                                                        androidx.compose.material3.MaterialTheme
+                                                                            .colorScheme.onSurface,
+                                                                        CircleShape,
+                                                                    )
+                                                                } else {
+                                                                    Modifier
+                                                                },
+                                                            ),
+                                                    )
+                                                }
+                                            }
+                                        }
+                                    }
+                                    TextButton(onClick = { newHabitColor = null }) {
+                                        Text(stringResource(Res.string.default_color))
+                                    }
+                                }
                                 addHabitError?.let { error ->
                                     Text(stringResource(Res.string.add_habit_failed, error))
                                 }
@@ -291,6 +341,7 @@ private fun HomePageContent(
                                             database = database,
                                             title = newHabitTitle.trim(),
                                             icon = newHabitIcon,
+                                            color = newHabitColor,
                                         )
                                         state = current.copy(habits = habits)
                                         showAddHabitDialog = false
@@ -329,11 +380,12 @@ private suspend fun addHabit(
     database: Database,
     title: String,
     icon: String?,
+    color: String?,
 ): List<Habit> {
-    database.databaseQueries.insertHabit(title, icon)
+    database.databaseQueries.insertHabit(title, icon, color)
     return database.databaseQueries.selectAllHabits()
         .awaitAsList()
-        .map { Habit(it.id, it.title, it.icon) }
+        .map { Habit(it.id, it.title, it.icon, it.color) }
 }
 
 private sealed interface HomePageState {

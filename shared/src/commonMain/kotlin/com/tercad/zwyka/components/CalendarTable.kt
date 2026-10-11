@@ -45,6 +45,7 @@ import kotlin.math.roundToInt
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.components.habitColor
 
 
 @Composable
@@ -545,6 +546,8 @@ private fun CalendarHeaderViewport(
             ) {
                 val habit = habits[column]
                 val icon = habitIcon(habit.icon)
+                val iconTint =
+                    habitColor(habit.color) ?: MaterialTheme.colorScheme.onSurface
 
                 CalendarTableCell(
                     text = if (icon == null) "?" else "",
@@ -555,6 +558,8 @@ private fun CalendarHeaderViewport(
                     background =
                         MaterialTheme.colorScheme.surfaceVariant,
                     icon = icon,
+                    iconTint = iconTint,
+                    textColor = iconTint,
                     contentDescription = habit.title,
                 )
             }
@@ -660,8 +665,7 @@ private fun CalendarFirstColumnViewport(
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()
                     },
-                    background =
-                        MaterialTheme.colorScheme.surface,
+                    background = MaterialTheme.colorScheme.surface,
                 )
             }
         },
@@ -812,6 +816,9 @@ private fun CalendarBodyViewport(
                 ) {
                     val habit =
                         habits[column]
+                    val backgroundColor =
+                        habitColor(habit.color)?.copy(alpha = 0.05f)
+                            ?: MaterialTheme.colorScheme.surface
 
                     val value =
                         marks[
@@ -829,8 +836,7 @@ private fun CalendarBodyViewport(
                         height = with(LocalDensity.current) {
                             cellHeightPx.toDp()
                         },
-                        background =
-                            MaterialTheme.colorScheme.surface,
+                        background = backgroundColor,
                     )
                 }
             }
@@ -904,6 +910,8 @@ private fun CalendarTableCell(
     height: Dp,
     background: androidx.compose.ui.graphics.Color,
     icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
+    iconTint: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    textColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
     modifier: Modifier = Modifier,
 ) {
@@ -924,7 +932,7 @@ private fun CalendarTableCell(
             Icon(
                 imageVector = icon,
                 contentDescription = contentDescription,
-                tint = MaterialTheme.colorScheme.onSurface,
+                tint = iconTint,
             )
         } else {
             Text(
@@ -937,7 +945,7 @@ private fun CalendarTableCell(
                     }
                 },
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = textColor,
             )
         }
     }

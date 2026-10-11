@@ -7,4 +7,5 @@ data class Habit(
     val id: Long,
     val title: String,
     val icon: String? = null,
+    val color: String? = null,
 )
