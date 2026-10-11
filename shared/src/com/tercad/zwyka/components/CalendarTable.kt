@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -434,6 +435,56 @@ fun CalendarTable(
                                 IntOffset(
                                     x = 0,
                                     y = thumbOffsetPx.roundToInt(),
+                                )
+                            }
+                            .background(MaterialTheme.colorScheme.primary),
+                    )
+                }
+            }
+
+            if (maxScrollX > 0f && bodyWidthPx > 0f) {
+                val scrollbarHeight = 6.dp
+                val scrollbarPadding = 4.dp
+                val minimumThumbWidthPx = with(density) {
+                    24.dp.toPx()
+                }
+                val thumbWidthPx = min(
+                    bodyWidthPx,
+                    max(
+                        minimumThumbWidthPx,
+                        bodyWidthPx * bodyWidthPx / contentWidthPx,
+                    ),
+                )
+                val scrollProgress =
+                    (currentScrollOffset.x / maxScrollX).coerceIn(0f, 1f)
+                val thumbOffsetPx =
+                    (bodyWidthPx - thumbWidthPx) * scrollProgress
+
+                Box(
+                    modifier = Modifier
+                        .offset {
+                            IntOffset(
+                                x = firstColumnWidthPx.roundToInt(),
+                                y = (
+                                    viewportHeightPx -
+                                        with(density) {
+                                            (scrollbarHeight + scrollbarPadding).toPx()
+                                        }
+                                    ).roundToInt(),
+                            )
+                        }
+                        .width(with(density) { bodyWidthPx.toDp() })
+                        .height(scrollbarHeight)
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(with(density) { thumbWidthPx.toDp() })
+                            .offset {
+                                IntOffset(
+                                    x = thumbOffsetPx.roundToInt(),
+                                    y = 0,
                                 )
                             }
                             .background(MaterialTheme.colorScheme.primary),
