@@ -5,6 +5,15 @@ package com.tercad.zwyka.components
 
 import androidx.compose.ui.graphics.Color
 
+val habitColorOptions = listOf(
+    "#EF5350", "#F44336", "#E53935", "#C62828",
+    "#FF7043", "#FF5722", "#F4511E", "#D84315",
+    "#FFA726", "#FF9800", "#FB8C00", "#EF6C00",
+    "#FFEE58", "#FFEB3B", "#FDD835", "#F9A825",
+    "#9CCC65", "#8BC34A", "#7CB342", "#558B2F",
+    "#26A69A", "#009688", "#00897B", "#00695C",
+)
+
 fun normalizeHabitColor(value: String): String? {
     val hex = value.trim().removePrefix("#")
     if (hex.length != 6 || hex.any { it.digitToIntOrNull(16) == null }) return null

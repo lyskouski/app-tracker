@@ -50,6 +50,7 @@ import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.habitColor
+import com.tercad.zwyka.components.habitColorOptions
 import com.tercad.zwyka.components.habitIcon
 import com.tercad.zwyka.components.habitIconOption
 import com.tercad.zwyka.components.habitIconOptions
@@ -284,6 +285,39 @@ private fun HomePageContent(
                                         )
                                     },
                                 )
+                                LazyVerticalGrid(
+                                    columns = GridCells.Fixed(6),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(192.dp),
+                                ) {
+                                    items(
+                                        items = habitColorOptions,
+                                        key = { it },
+                                    ) { color ->
+                                        IconButton(
+                                            onClick = {
+                                                newHabitColor = color
+                                                colorInput = color
+                                                showColorPicker = false
+                                            },
+                                            modifier = Modifier.semantics {
+                                                contentDescription = color
+                                            },
+                                        ) {
+                                            habitColor(color)?.let { colorValue ->
+                                                Box(
+                                                    modifier = Modifier
+                                                        .size(28.dp)
+                                                        .background(
+                                                            colorValue,
+                                                            androidx.compose.foundation.shape.CircleShape,
+                                                        ),
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
                                 if (colorInput.isNotBlank() && normalizedColor == null) {
                                     Text(stringResource(Res.string.invalid_color))
                                 }
