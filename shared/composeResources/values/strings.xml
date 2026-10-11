@@ -6,4 +6,9 @@
     <string name="habits_loading">Loading habits...</string>
     <string name="habits_load_failed">Unable to load habits: %s</string>
     <string name="database_error_unknown">Unknown database error</string>
+    <string name="add_habit">Add habit</string>
+    <string name="add_habit_failed">Unable to add habit: %s</string>
+    <string name="habit_name">Habit name</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>
