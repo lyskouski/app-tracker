@@ -6,6 +6,8 @@ package com.tercad.zwyka.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -233,6 +236,7 @@ fun HabitEditorDialog(
                             singleLine = true,
                             isError = error != null,
                             enabled = !isSaving,
+                            modifier = Modifier.fillMaxWidth(),
                         )
                         Text(stringResource(Res.string.habit_icon))
                         OutlinedButton(
@@ -287,28 +291,11 @@ fun HabitEditorDialog(
             }
         },
         confirmButton = {
-            TextButton(
-                onClick = {
-                    when {
-                        selectingIcon -> selectingIcon = false
-                        selectingColor -> {
-                            color = normalizedColor
-                            selectingColor = false
-                        }
-                        else -> onSave(title.trim(), icon, color)
-                    }
-                },
-                enabled = canSave,
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
-                    stringResource(
-                        if (selectingIcon) Res.string.back else Res.string.save,
-                    ),
-                )
-            }
-        },
-        dismissButton = {
-            Row {
                 if (habit != null && onDelete != null && !selectingIcon && !selectingColor) {
                     TextButton(
                         onClick = { confirmingDelete = true },
@@ -319,12 +306,35 @@ fun HabitEditorDialog(
                     ) {
                         Text(stringResource(Res.string.delete_habit))
                     }
+                } else {
+                    Spacer(Modifier)
                 }
-                TextButton(
-                    onClick = onDismiss,
-                    enabled = !isSaving,
-                ) {
-                    Text(stringResource(Res.string.cancel))
+                Row {
+                    TextButton(
+                        onClick = onDismiss,
+                        enabled = !isSaving,
+                    ) {
+                        Text(stringResource(Res.string.cancel))
+                    }
+                    TextButton(
+                        onClick = {
+                            when {
+                                selectingIcon -> selectingIcon = false
+                                selectingColor -> {
+                                    color = normalizedColor
+                                    selectingColor = false
+                                }
+                                else -> onSave(title.trim(), icon, color)
+                            }
+                        },
+                        enabled = canSave,
+                    ) {
+                        Text(
+                            stringResource(
+                                if (selectingIcon) Res.string.back else Res.string.save,
+                            ),
+                        )
+                    }
                 }
             }
         },
