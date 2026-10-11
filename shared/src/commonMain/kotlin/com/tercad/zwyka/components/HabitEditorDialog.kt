@@ -13,6 +13,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.ui.graphics.Color
+import kotlin.math.roundToInt
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -171,6 +176,7 @@ fun HabitEditorDialog(
                             label = { Text(stringResource(Res.string.color_value)) },
                             singleLine = true,
                             isError = colorInput.isNotBlank() && normalizedColor == null,
+                            modifier = Modifier.fillMaxWidth(),
                             trailingIcon = {
                                 Box(
                                     modifier = Modifier
@@ -184,6 +190,36 @@ fun HabitEditorDialog(
                                 )
                             },
                         )
+                        val rgb = (normalizedColor ?: "#000000").substring(1).toInt(16)
+                        listOf(
+                            Triple("R", 16, Color.Red),
+                            Triple("G", 8, Color.Green),
+                            Triple("B", 0, Color.Blue),
+                        ).forEach { (name, shift, tint) ->
+                            val channel = (rgb shr shift) and 0xFF
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(name, modifier = Modifier.width(16.dp))
+                                Slider(
+                                    value = channel.toFloat(),
+                                    onValueChange = {
+                                        val updated = (rgb and (0xFF shl shift).inv()) or
+                                            (it.roundToInt().coerceIn(0, 255) shl shift)
+                                        colorInput = "#" + updated.toString(16)
+                                            .padStart(6, '0').uppercase()
+                                    },
+                                    valueRange = 0f..255f,
+                                    colors = SliderDefaults.colors(
+                                        thumbColor = tint,
+                                        activeTrackColor = tint,
+                                    ),
+                                    modifier = Modifier.weight(1f),
+                                )
+                                Text(
+                                    channel.toString(),
+                                    modifier = Modifier.width(32.dp),
+                                )
+                            }
+                        }
                         LazyVerticalGrid(
                             columns = GridCells.Fixed(6),
                             modifier = Modifier
