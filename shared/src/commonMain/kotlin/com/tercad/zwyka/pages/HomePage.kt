@@ -13,8 +13,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -133,26 +136,31 @@ private fun HomePageContent(
         is HomePageState.Loaded -> {
             Scaffold(
                 bottomBar = {
-                    BottomAppBar(
-                        actions = {},
-                        containerColor = currentColorScheme().primary,
-                        floatingActionButton = {
-                            FloatingActionButton(
-                                onClick = {
-                                    editingHabit = null
-                                    habitError = null
-                                    showHabitDialog = true
-                                },
-                                containerColor = currentColorScheme().inversePrimary,
-                                contentColor = currentColorScheme().secondary,
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Add,
-                                    contentDescription = stringResource(Res.string.add_habit),
-                                )
-                            }
-                        },
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(46.dp)
+                            .background(currentColorScheme().primary),
                     )
+                },
+                floatingActionButtonPosition = FabPosition.Center,
+                floatingActionButton = {
+                    // Scaffold lifts the FAB 16.dp above the bar; shift it so it protrudes 12.dp.
+                    FloatingActionButton(
+                        onClick = {
+                            editingHabit = null
+                            habitError = null
+                            showHabitDialog = true
+                        },
+                        modifier = Modifier.offset(y = 52.dp),
+                        containerColor = currentColorScheme().inversePrimary,
+                        contentColor = currentColorScheme().secondary,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = stringResource(Res.string.add_habit),
+                        )
+                    }
                 },
             ) { contentPadding ->
                 CalendarTable(
