@@ -13,4 +13,7 @@
     <string name="cancel">Abbrechen</string>
     <string name="habit_icon">Symbol der Gewohnheit</string>
     <string name="no_icon">Kein Symbol</string>
+    <string name="select_icon">Symbol auswählen</string>
+    <string name="search_icons">Symbole suchen</string>
+    <string name="back">Zurück</string>
 </resources>

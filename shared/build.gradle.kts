@@ -30,6 +30,7 @@ kotlin {
                 implementation("org.jetbrains.compose.runtime:runtime:1.11.1")
                 implementation("org.jetbrains.compose.foundation:foundation:1.11.1")
                 implementation("org.jetbrains.compose.material:material-icons-core:1.7.3")
+                implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
                 implementation("org.jetbrains.compose.material3:material3:1.11.0-alpha07")
                 implementation("org.jetbrains.compose.ui:ui:1.11.1")
                 implementation("org.jetbrains.compose.components:components-resources:1.11.1")

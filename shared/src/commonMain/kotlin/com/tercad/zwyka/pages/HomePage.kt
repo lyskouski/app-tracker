@@ -6,11 +6,14 @@ package com.tercad.zwyka.pages
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
@@ -18,11 +21,11 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
@@ -46,6 +48,8 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
+import com.tercad.zwyka.components.habitIcon
+import com.tercad.zwyka.components.habitIconOption
 import com.tercad.zwyka.components.habitIconOptions
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
@@ -53,6 +57,7 @@ import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.add_habit_failed
+import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habit_name
@@ -62,6 +67,8 @@ import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habit_icon
 import com.tercad.zwyka.resources.no_icon
+import com.tercad.zwyka.resources.select_icon
+import com.tercad.zwyka.resources.search_icons
 
 class HomePage(
     private val database: Database?,
@@ -98,8 +105,10 @@ private fun HomePageContent(
         mutableStateOf<HomePageState>(HomePageState.Loading)
     }
     var showAddHabitDialog by remember { mutableStateOf(false) }
+    var showIconPicker by remember { mutableStateOf(false) }
     var newHabitTitle by remember { mutableStateOf("") }
     var newHabitIcon by remember { mutableStateOf<String?>(null) }
+    var iconSearchQuery by remember { mutableStateOf("") }
     var addHabitError by remember { mutableStateOf<String?>(null) }
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
@@ -143,6 +152,8 @@ private fun HomePageContent(
                                 onClick = {
                                     newHabitTitle = ""
                                     newHabitIcon = null
+                                    iconSearchQuery = ""
+                                    showIconPicker = false
                                     addHabitError = null
                                     showAddHabitDialog = true
                                 },
@@ -167,81 +178,113 @@ private fun HomePageContent(
             }
 
             if (showAddHabitDialog) {
+                val noIconDescription = stringResource(Res.string.no_icon)
                 AlertDialog(
-                    onDismissRequest = { showAddHabitDialog = false },
-                    title = { Text(stringResource(Res.string.add_habit)) },
+                    onDismissRequest = {
+                        showAddHabitDialog = false
+                        showIconPicker = false
+                    },
+                    title = {
+                        Text(
+                            stringResource(
+                                if (showIconPicker) Res.string.select_icon else Res.string.add_habit,
+                            ),
+                        )
+                    },
                     text = {
-                        val noIconDescription = stringResource(Res.string.no_icon)
-                        Column {
-                            OutlinedTextField(
-                                value = newHabitTitle,
-                                onValueChange = { newHabitTitle = it },
-                                label = { Text(stringResource(Res.string.habit_name)) },
-                                singleLine = true,
-                                isError = addHabitError != null,
-                            )
-                            Text(stringResource(Res.string.habit_icon))
+                        if (showIconPicker) {
                             Column {
-                                habitIconOptions.chunked(4).forEachIndexed { rowIndex, rowOptions ->
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                        rowOptions.forEach { option ->
-                                            IconButton(
-                                                onClick = { newHabitIcon = option.id },
-                                                modifier = Modifier
-                                                    .background(
-                                                        if (newHabitIcon == option.id) {
-                                                            androidx.compose.material3.MaterialTheme
-                                                                .colorScheme
-                                                                .secondaryContainer
-                                                        } else {
-                                                            Color.Transparent
-                                                        },
-                                                        CircleShape,
-                                                    ),
-                                            ) {
-                                                Icon(
-                                                    imageVector = option.imageVector,
-                                                    contentDescription = option.id,
-                                                )
-                                            }
-                                        }
-                                        if (rowIndex == 1) {
-                                            IconButton(
-                                                onClick = { newHabitIcon = null },
-                                                modifier = Modifier.background(
-                                                    if (newHabitIcon == null) {
-                                                        androidx.compose.material3.MaterialTheme
-                                                            .colorScheme
-                                                            .secondaryContainer
-                                                    } else {
-                                                        Color.Transparent
-                                                    },
-                                                    CircleShape,
-                                                ),
-                                            ) {
-                                                Text(
-                                                    text = "?",
-                                                    modifier = Modifier.semantics {
-                                                        contentDescription = noIconDescription
-                                                    },
-                                                )
-                                            }
+                                OutlinedTextField(
+                                    value = iconSearchQuery,
+                                    onValueChange = { iconSearchQuery = it },
+                                    label = { Text(stringResource(Res.string.search_icons)) },
+                                    singleLine = true,
+                                )
+                                TextButton(
+                                    onClick = {
+                                        newHabitIcon = null
+                                        showIconPicker = false
+                                    },
+                                    modifier = Modifier.semantics {
+                                        contentDescription = noIconDescription
+                                    },
+                                ) {
+                                    Text("?  $noIconDescription")
+                                }
+                                val matchingIcons = remember(iconSearchQuery) {
+                                    habitIconOptions.filter { option ->
+                                        option.title.contains(iconSearchQuery, ignoreCase = true)
+                                    }
+                                }
+                                LazyVerticalGrid(
+                                    columns = GridCells.Adaptive(48.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(360.dp),
+                                ) {
+                                    items(
+                                        items = matchingIcons,
+                                        key = { it.id },
+                                    ) { option ->
+                                        IconButton(
+                                            onClick = {
+                                                newHabitIcon = option.id
+                                                showIconPicker = false
+                                            },
+                                            modifier = Modifier.semantics {
+                                                contentDescription = option.title
+                                            },
+                                        ) {
+                                            Icon(
+                                                imageVector = option.imageVector(),
+                                                contentDescription = null,
+                                            )
                                         }
                                     }
                                 }
                             }
-                            addHabitError?.let { error ->
-                                Text(stringResource(Res.string.add_habit_failed, error))
+                        } else {
+                            Column {
+                                OutlinedTextField(
+                                    value = newHabitTitle,
+                                    onValueChange = { newHabitTitle = it },
+                                    label = { Text(stringResource(Res.string.habit_name)) },
+                                    singleLine = true,
+                                    isError = addHabitError != null,
+                                )
+                                Text(stringResource(Res.string.habit_icon))
+                                OutlinedButton(onClick = {
+                                    iconSearchQuery = ""
+                                    showIconPicker = true
+                                }) {
+                                    val selectedIcon = habitIcon(newHabitIcon)
+                                    if (selectedIcon != null) {
+                                        Icon(
+                                            imageVector = selectedIcon,
+                                            contentDescription = null,
+                                        )
+                                    } else {
+                                        Text("?")
+                                    }
+                                    Text(
+                                        habitIconOption(newHabitIcon)?.title
+                                            ?: stringResource(Res.string.no_icon),
+                                    )
+                                }
+                                addHabitError?.let { error ->
+                                    Text(stringResource(Res.string.add_habit_failed, error))
+                                }
                             }
                         }
                     },
                     confirmButton = {
                         TextButton(
-                            enabled = newHabitTitle.isNotBlank(),
+                            enabled = showIconPicker || newHabitTitle.isNotBlank(),
                             onClick = {
+                                if (showIconPicker) {
+                                    showIconPicker = false
+                                    return@TextButton
+                                }
                                 coroutineScope.launch {
                                     try {
                                         val habits = addHabit(
@@ -259,11 +302,20 @@ private fun HomePageContent(
                                 }
                             },
                         ) {
-                            Text(stringResource(Res.string.save))
+                            Text(
+                                stringResource(
+                                    if (showIconPicker) Res.string.back else Res.string.save,
+                                ),
+                            )
                         }
                     },
                     dismissButton = {
-                        TextButton(onClick = { showAddHabitDialog = false }) {
+                        TextButton(
+                            onClick = {
+                                showAddHabitDialog = false
+                                showIconPicker = false
+                            },
+                        ) {
                             Text(stringResource(Res.string.cancel))
                         }
                     },

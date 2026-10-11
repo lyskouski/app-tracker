@@ -13,4 +13,7 @@
     <string name="cancel">Cancel</string>
     <string name="habit_icon">Habit icon</string>
     <string name="no_icon">No icon</string>
+    <string name="select_icon">Select icon</string>
+    <string name="search_icons">Search icons</string>
+    <string name="back">Back</string>
 </resources>
