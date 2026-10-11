@@ -1,6 +1,7 @@
 package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
@@ -147,7 +148,7 @@ private fun HomePageContent(
                     onDismissRequest = { showAddHabitDialog = false },
                     title = { Text(stringResource(Res.string.add_habit)) },
                     text = {
-                        androidx.compose.foundation.layout.Column {
+                        Column {
                             OutlinedTextField(
                                 value = newHabitTitle,
                                 onValueChange = { newHabitTitle = it },
