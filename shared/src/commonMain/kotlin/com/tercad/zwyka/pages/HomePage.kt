@@ -58,6 +58,7 @@ import com.tercad.zwyka.components.habitIconOptions
 import com.tercad.zwyka.components.normalizeHabitColor
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
@@ -279,8 +280,7 @@ private fun HomePageContent(
                                                 .size(28.dp)
                                                 .background(
                                                     habitColor(normalizedColor)
-                                                        ?: androidx.compose.material3.MaterialTheme
-                                                            .colorScheme.surfaceVariant,
+                                                        ?: currentColorScheme().surfaceVariant,
                                                     CircleShape,
                                                 ),
                                         )
@@ -368,8 +368,7 @@ private fun HomePageContent(
                                             .size(20.dp)
                                             .background(
                                                 habitColor(newHabitColor)
-                                                    ?: androidx.compose.material3.MaterialTheme
-                                                        .colorScheme.surfaceVariant,
+                                                    ?: currentColorScheme().surfaceVariant,
                                                 CircleShape,
                                             ),
                                     )

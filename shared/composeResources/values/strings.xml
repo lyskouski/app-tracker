@@ -21,4 +21,5 @@
     <string name="select_color">Select color</string>
     <string name="color_value">Hex color value (#RRGGBB)</string>
     <string name="invalid_color">Enter a valid six-digit hex color.</string>
+    <string name="color_scheme_not_provided">Color scheme was not provided.</string>
 </resources>

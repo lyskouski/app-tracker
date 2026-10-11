@@ -46,6 +46,7 @@ import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.components.habitColor
+import com.tercad.zwyka.defines.currentColorScheme
 
 
 @Composable
@@ -396,7 +397,7 @@ fun CalendarTable(
                 width = firstColumnWidth,
                 height = headerHeight,
                 background =
-                    MaterialTheme.colorScheme.surfaceVariant,
+                    currentColorScheme().surfaceVariant,
             )
 
             if (maxScrollY > 0f && bodyHeightPx > 0f) {
@@ -426,7 +427,7 @@ fun CalendarTable(
                         }
                         .width(scrollbarWidth)
                         .height(with(density) { bodyHeightPx.toDp() })
-                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                        .background(currentColorScheme().surfaceVariant),
                 ) {
                     Box(
                         modifier = Modifier
@@ -438,7 +439,7 @@ fun CalendarTable(
                                     y = thumbOffsetPx.roundToInt(),
                                 )
                             }
-                            .background(MaterialTheme.colorScheme.primary),
+                            .background(currentColorScheme().primary),
                     )
                 }
             }
@@ -472,7 +473,7 @@ fun CalendarTable(
                         }
                         .width(with(density) { bodyWidthPx.toDp() })
                         .height(scrollbarHeight)
-                        .background(MaterialTheme.colorScheme.surfaceVariant),
+                        .background(currentColorScheme().surfaceVariant),
                 ) {
                     Box(
                         modifier = Modifier
@@ -484,7 +485,7 @@ fun CalendarTable(
                                     y = 0,
                                 )
                             }
-                            .background(MaterialTheme.colorScheme.primary),
+                            .background(currentColorScheme().primary),
                     )
                 }
             }
@@ -547,7 +548,7 @@ private fun CalendarHeaderViewport(
                 val habit = habits[column]
                 val icon = habitIcon(habit.icon)
                 val iconTint =
-                    habitColor(habit.color) ?: MaterialTheme.colorScheme.onSurface
+                    habitColor(habit.color) ?: currentColorScheme().onSurface
 
                 CalendarTableCell(
                     text = if (icon == null) "?" else "",
@@ -556,7 +557,7 @@ private fun CalendarHeaderViewport(
                     },
                     height = headerHeight,
                     background =
-                        MaterialTheme.colorScheme.surfaceVariant,
+                        currentColorScheme().surfaceVariant,
                     icon = icon,
                     iconTint = iconTint,
                     textColor = iconTint,
@@ -665,7 +666,7 @@ private fun CalendarFirstColumnViewport(
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()
                     },
-                    background = MaterialTheme.colorScheme.surface,
+                    background = currentColorScheme().surface,
                 )
             }
         },
@@ -818,7 +819,7 @@ private fun CalendarBodyViewport(
                         habits[column]
                     val backgroundColor =
                         habitColor(habit.color)?.copy(alpha = 0.05f)
-                            ?: MaterialTheme.colorScheme.surface
+                            ?: currentColorScheme().surface
 
                     val value =
                         marks[
@@ -910,8 +911,8 @@ private fun CalendarTableCell(
     height: Dp,
     background: androidx.compose.ui.graphics.Color,
     icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
-    iconTint: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
-    textColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    iconTint: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
+    textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     contentDescription: String? = null,
     modifier: Modifier = Modifier,
 ) {
@@ -923,8 +924,7 @@ private fun CalendarTableCell(
             .border(
                 width = 1.dp,
                 color =
-                    MaterialTheme.colorScheme
-                        .outlineVariant,
+                    currentColorScheme().outlineVariant,
             ),
         contentAlignment = Alignment.Center,
     ) {

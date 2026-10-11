@@ -6,10 +6,12 @@ package com.tercad.zwyka
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import cafe.adriel.voyager.navigator.Navigator
 
 import com.tercad.zwyka.defines.ColorSchemeLight
 import com.tercad.zwyka.defines.ColorSchemeDark
+import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.pages.HomePage
@@ -22,13 +24,15 @@ fun App(
 ) {
     val systemDark = isSystemInDarkTheme()
 
-    MaterialTheme(
-        colorScheme = when (themeMode) {
-            ThemeMode.LIGHT -> ColorSchemeLight
-            ThemeMode.DARK -> ColorSchemeDark
-            ThemeMode.SYSTEM -> if (systemDark) ColorSchemeDark else ColorSchemeLight
-        },
-    ) {
-        Navigator(screen = HomePage(database, initializeDatabase))
+    val colorScheme = when (themeMode) {
+        ThemeMode.LIGHT -> ColorSchemeLight
+        ThemeMode.DARK -> ColorSchemeDark
+        ThemeMode.SYSTEM -> if (systemDark) ColorSchemeDark else ColorSchemeLight
+    }
+
+    CompositionLocalProvider(LocalColorScheme provides colorScheme) {
+        MaterialTheme(colorScheme = colorScheme) {
+            Navigator(screen = HomePage(database, initializeDatabase))
+        }
     }
 }
