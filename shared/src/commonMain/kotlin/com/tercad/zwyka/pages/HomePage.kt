@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
@@ -280,7 +281,7 @@ private fun HomePageContent(
                                                     habitColor(normalizedColor)
                                                         ?: androidx.compose.material3.MaterialTheme
                                                             .colorScheme.surfaceVariant,
-                                                    androidx.compose.foundation.shape.CircleShape,
+                                                    CircleShape,
                                                 ),
                                         )
                                     },
@@ -311,7 +312,7 @@ private fun HomePageContent(
                                                         .size(28.dp)
                                                         .background(
                                                             colorValue,
-                                                            androidx.compose.foundation.shape.CircleShape,
+                                                            CircleShape,
                                                         ),
                                                 )
                                             }
@@ -369,7 +370,7 @@ private fun HomePageContent(
                                                 habitColor(newHabitColor)
                                                     ?: androidx.compose.material3.MaterialTheme
                                                         .colorScheme.surfaceVariant,
-                                                androidx.compose.foundation.shape.CircleShape,
+                                                CircleShape,
                                             ),
                                     )
                                     Text(newHabitColor ?: stringResource(Res.string.default_color))
