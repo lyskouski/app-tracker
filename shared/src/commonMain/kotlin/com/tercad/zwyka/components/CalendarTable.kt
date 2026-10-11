@@ -88,7 +88,7 @@ fun CalendarTable(
      */
     val firstColumnWidth = 100.dp
     val headerHeight = 56.dp
-    val cellWidth = 120.dp
+    val cellWidth = 48.dp
     val cellHeight = 48.dp
 
     val firstColumnWidthPx =
