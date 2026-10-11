@@ -394,7 +394,6 @@ fun CalendarTable(
 
             if (maxScrollY > 0f && bodyHeightPx > 0f) {
                 val scrollbarWidth = 6.dp
-                val scrollbarPadding = 4.dp
                 val minimumThumbHeightPx = with(density) {
                     24.dp.toPx()
                 }
@@ -414,12 +413,7 @@ fun CalendarTable(
                     modifier = Modifier
                         .offset {
                             IntOffset(
-                                x = (
-                                    viewportWidthPx -
-                                        with(density) {
-                                            (scrollbarWidth + scrollbarPadding).toPx()
-                                        }
-                                    ).roundToInt(),
+                                x = 0,
                                 y = headerHeightPx.roundToInt(),
                             )
                         }
