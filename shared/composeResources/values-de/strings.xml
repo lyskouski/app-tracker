@@ -45,4 +45,8 @@
     <string name="sunday">Sonntag</string>
     <string name="monday">Montag</string>
     <string name="search_languages">Sprachen suchen</string>
+    <string name="theme_mode">Design</string>
+    <string name="theme_system">Systemstandard</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
 </resources>

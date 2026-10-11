@@ -7,16 +7,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.cash.sqldelight.async.coroutines.awaitAsList
+import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.infrastructures.Database
 
 data class AppSettings(
     val language: String? = null,
     val weekStart: WeekStart = WeekStart.MONDAY,
+    val themeMode: ThemeMode = ThemeMode.SYSTEM,
 )
 
 private const val LANGUAGE_KEY = "language"
 private const val WEEK_START_KEY = "week_start"
+private const val THEME_MODE_KEY = "theme_mode"
 
 /** Holds the current settings and persists every change to the database. */
 class AppSettingsStore(private val database: Database?) {
@@ -36,6 +39,9 @@ class AppSettingsStore(private val database: Database?) {
             weekStart = values[WEEK_START_KEY]
                 ?.let { name -> WeekStart.entries.firstOrNull { it.name == name } }
                 ?: WeekStart.MONDAY,
+            themeMode = values[THEME_MODE_KEY]
+                ?.let { name -> ThemeMode.entries.firstOrNull { it.name == name } }
+                ?: ThemeMode.SYSTEM,
         )
     }
 
@@ -48,5 +54,6 @@ class AppSettingsStore(private val database: Database?) {
             queries.upsertSetting(LANGUAGE_KEY, settings.language)
         }
         queries.upsertSetting(WEEK_START_KEY, settings.weekStart.name)
+        queries.upsertSetting(THEME_MODE_KEY, settings.themeMode.name)
     }
 }

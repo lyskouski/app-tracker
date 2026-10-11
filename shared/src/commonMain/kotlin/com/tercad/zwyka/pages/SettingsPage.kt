@@ -42,6 +42,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.defines.applicationLanguages
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.themeModeOptions
 import com.tercad.zwyka.defines.weekStartOptions
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
@@ -49,6 +50,7 @@ import com.tercad.zwyka.resources.language
 import com.tercad.zwyka.resources.search_languages
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.start_of_week
+import com.tercad.zwyka.resources.theme_mode
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
@@ -120,6 +122,17 @@ class SettingsPage(
                         settingsStore.update(
                             settings.copy(language = applicationLanguages[index].tag),
                         )
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.theme_mode),
+                options = themeModeOptions.map { stringResource(it.label) },
+                selectedIndex = themeModeOptions.indexOf(settings.themeMode),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(themeMode = themeModeOptions[index]))
                     }
                 },
             )

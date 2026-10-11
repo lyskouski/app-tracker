@@ -5,12 +5,12 @@ package com.tercad.zwyka.defines
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.compositionLocalOf
 import org.jetbrains.compose.resources.stringResource
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.color_scheme_not_provided
 
-val LocalColorScheme = staticCompositionLocalOf<ColorScheme?> {
+val LocalColorScheme = compositionLocalOf<ColorScheme?> {
     null
 }
 

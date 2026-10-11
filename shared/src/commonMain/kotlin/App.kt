@@ -28,19 +28,17 @@ import com.tercad.zwyka.pages.SettingsPage
 
 @Composable
 fun App(
-    themeMode: ThemeMode = ThemeMode.SYSTEM,
     database: Database? = null,
     initializeDatabase: suspend () -> Unit = {},
 ) {
     val systemDark = isSystemInDarkTheme()
 
-    val colorScheme = when (themeMode) {
+    val settingsStore = remember(database) { AppSettingsStore(database) }
+    val colorScheme = when (settingsStore.current.themeMode) {
         ThemeMode.LIGHT -> ColorSchemeLight
         ThemeMode.DARK -> ColorSchemeDark
         ThemeMode.SYSTEM -> if (systemDark) ColorSchemeDark else ColorSchemeLight
     }
-
-    val settingsStore = remember(database) { AppSettingsStore(database) }
     var settingsLoaded by remember(database) { mutableStateOf(false) }
 
     LaunchedEffect(settingsStore) {
