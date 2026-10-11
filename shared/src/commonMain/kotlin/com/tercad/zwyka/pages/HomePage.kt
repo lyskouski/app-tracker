@@ -6,16 +6,13 @@ package com.tercad.zwyka.pages
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -46,31 +43,19 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
+import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
 import com.tercad.zwyka.data.DayState
-import com.tercad.zwyka.data.dayStateMarks
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
-import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habit_database_unavailable
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
-import com.tercad.zwyka.resources.edit_day_state
-import com.tercad.zwyka.resources.habit_name
-import com.tercad.zwyka.resources.date
-import com.tercad.zwyka.resources.status
-import com.tercad.zwyka.resources.status_start
-import com.tercad.zwyka.resources.status_25_percent
-import com.tercad.zwyka.resources.status_50_percent
-import com.tercad.zwyka.resources.status_75_percent
-import com.tercad.zwyka.resources.status_100_percent
-import com.tercad.zwyka.resources.status_over_100_percent
-import com.tercad.zwyka.resources.day_state_save_failed
 
 class HomePage(
     private val database: Database?,
@@ -290,112 +275,6 @@ private fun HomePageContent(
             }
         }
     }
-}
-
-@Composable
-private fun DayStateDialog(
-    dayState: DayState,
-    habit: Habit,
-    saveError: String?,
-    isSaving: Boolean,
-    onStatusChange: (String) -> Unit,
-    onDismiss: () -> Unit,
-) {
-    val statusOptions = dayStateMarks.zip(
-        listOf(
-            stringResource(Res.string.status_start),
-            stringResource(Res.string.status_25_percent),
-            stringResource(Res.string.status_50_percent),
-            stringResource(Res.string.status_75_percent),
-            stringResource(Res.string.status_100_percent),
-            stringResource(Res.string.status_over_100_percent),
-        ),
-    )
-
-    AlertDialog(
-        onDismissRequest = {
-            if (!isSaving) onDismiss()
-        },
-        title = { Text(stringResource(Res.string.edit_day_state)) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                OutlinedTextField(
-                    value = habit.title,
-                    onValueChange = {},
-                    readOnly = true,
-                    singleLine = true,
-                    label = { Text(stringResource(Res.string.habit_name)) },
-                    leadingIcon = {
-                        val icon = applicationIcon(habit.icon)
-                        if (icon == null) {
-                            Text("?")
-                        } else {
-                            Icon(
-                                imageVector = icon,
-                                contentDescription = null,
-                            )
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                OutlinedTextField(
-                    value = dayState.date,
-                    onValueChange = {},
-                    readOnly = true,
-                    singleLine = true,
-                    label = { Text(stringResource(Res.string.date)) },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Text(stringResource(Res.string.status))
-                statusOptions.chunked(3).forEach { rowOptions ->
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        rowOptions.forEach { (mark, label) ->
-                            val onClick = { onStatusChange(mark) }
-                            val buttonModifier = Modifier.weight(1f)
-                            if (dayState.mark == mark) {
-                                Button(
-                                    onClick = onClick,
-                                    modifier = buttonModifier,
-                                    enabled = !isSaving,
-                                ) {
-                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text(mark)
-                                        Text(label)
-                                    }
-                                }
-                            } else {
-                                OutlinedButton(
-                                    onClick = onClick,
-                                    modifier = buttonModifier,
-                                    enabled = !isSaving,
-                                ) {
-                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text(mark)
-                                        Text(label)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                saveError?.let { error ->
-                    Text(stringResource(Res.string.day_state_save_failed, error))
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = {
-            TextButton(
-                onClick = onDismiss,
-                enabled = !isSaving,
-            ) {
-                Text(stringResource(Res.string.cancel))
-            }
-        },
-    )
 }
 
 private suspend fun saveHabit(

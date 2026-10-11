@@ -45,11 +45,11 @@ import kotlin.math.roundToInt
 
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
-import com.tercad.zwyka.data.dayStateMarks
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.statusOptions
 
 
 @Composable
@@ -837,7 +837,7 @@ private fun CalendarBodyViewport(
                         )
                     val value = marks[key] ?: " "
                     val status = marks[key]
-                        ?.takeIf { mark -> mark in dayStateMarks }
+                        ?.takeIf { mark -> statusOptions.any { it.mark == mark } }
                         ?: "·"
 
                     CalendarTableCell(

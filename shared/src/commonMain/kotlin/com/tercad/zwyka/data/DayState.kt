@@ -8,5 +8,3 @@ data class DayState(
     val date: String,
     val mark: String
 )
-
-val dayStateMarks = listOf("·", "\\", "|", "/", "X", "▣")
