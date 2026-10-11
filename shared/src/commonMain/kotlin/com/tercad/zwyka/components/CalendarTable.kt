@@ -47,6 +47,8 @@ import kotlin.math.roundToInt
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.WeekStart
+import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
@@ -61,8 +63,12 @@ fun CalendarTable(
     onDayStateClick: (DayState) -> Unit,
     onHabitClick: (Habit) -> Unit,
     today: String? = null,
+    weekStart: WeekStart = WeekStart.MONDAY,
     modifier: Modifier = Modifier,
 ) {
+    val weekStartDates = remember(dates, weekStart) {
+        dates.filterTo(HashSet()) { LocalDate.parse(it).dayOfWeek == weekStart.dayOfWeek }
+    }
     /*
      * Sparse representation of the table.
      *
@@ -317,6 +323,7 @@ fun CalendarTable(
                     cellHeightPx = cellHeightPx,
                     onDayStateClick = onDayStateClick,
                     today = today,
+                    weekStartDates = weekStartDates,
                 )
             }
 
@@ -394,6 +401,7 @@ fun CalendarTable(
                     cellHeightPx = cellHeightPx,
                     today = today,
                     habits = habits,
+                    weekStartDates = weekStartDates,
                 )
             }
 
@@ -644,6 +652,7 @@ private fun CalendarFirstColumnViewport(
     cellHeightPx: Float,
     today: String?,
     habits: List<Habit>,
+    weekStartDates: Set<String>,
 ) {
     val firstVisibleRow =
         floor(
@@ -687,7 +696,7 @@ private fun CalendarFirstColumnViewport(
                         isToday = dates[row] == today,
                         left = true,
                         right = habits.isEmpty(),
-                    ),
+                    ).then(weekStartLine(dates[row] in weekStartDates)),
                 )
             }
         },
@@ -761,6 +770,7 @@ private fun CalendarBodyViewport(
     cellHeightPx: Float,
     onDayStateClick: (DayState) -> Unit,
     today: String?,
+    weekStartDates: Set<String>,
 ) {
     /*
      * X = habits / columns.
@@ -866,7 +876,7 @@ private fun CalendarBodyViewport(
                             isToday = date == today,
                             left = false,
                             right = column == habits.lastIndex,
-                        ),
+                        ).then(weekStartLine(date in weekStartDates)),
                         modifier = Modifier
                             .clickable {
                                 onDayStateClick(
@@ -1025,5 +1035,19 @@ private fun todayHighlight(
                 stroke,
             )
         }
+    }
+}
+
+/*
+ * Thick separator above the first day of a week.
+ */
+@Composable
+private fun weekStartLine(isWeekStart: Boolean): Modifier {
+    if (!isWeekStart) return Modifier
+    val color = currentColorScheme().onSurface
+    return Modifier.drawWithContent {
+        drawContent()
+        val stroke = 3.dp.toPx()
+        drawLine(color, Offset(0f, stroke / 2), Offset(size.width, stroke / 2), stroke)
     }
 }

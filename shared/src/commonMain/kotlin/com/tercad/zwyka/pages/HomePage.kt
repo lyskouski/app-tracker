@@ -194,6 +194,7 @@ private fun HomePageContent(
                     habits = current.habits,
                     dates = dates,
                     today = today.toString(),
+                    weekStart = settingsStore.current.weekStart,
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
                     onHabitClick = {
