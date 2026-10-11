@@ -11,4 +11,6 @@
     <string name="habit_name">Name der Gewohnheit</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
+    <string name="habit_icon">Symbol der Gewohnheit</string>
+    <string name="no_icon">Kein Symbol</string>
 </resources>

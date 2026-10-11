@@ -3,20 +3,26 @@
 
 package com.tercad.zwyka.pages
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.ui.Alignment
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,6 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
 import cafe.adriel.voyager.core.screen.Screen
 import app.cash.sqldelight.async.coroutines.awaitAsList
@@ -37,6 +46,7 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
+import com.tercad.zwyka.components.habitIconOptions
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.infrastructures.Database
@@ -50,6 +60,8 @@ import com.tercad.zwyka.resources.habit_database_unavailable
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
+import com.tercad.zwyka.resources.habit_icon
+import com.tercad.zwyka.resources.no_icon
 
 class HomePage(
     private val database: Database?,
@@ -87,6 +99,7 @@ private fun HomePageContent(
     }
     var showAddHabitDialog by remember { mutableStateOf(false) }
     var newHabitTitle by remember { mutableStateOf("") }
+    var newHabitIcon by remember { mutableStateOf<String?>(null) }
     var addHabitError by remember { mutableStateOf<String?>(null) }
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
@@ -97,7 +110,7 @@ private fun HomePageContent(
             initializeDatabase()
             val habits = database.databaseQueries.selectAllHabits()
                 .awaitAsList()
-                .map { Habit(it.id, it.title) }
+                .map { Habit(it.id, it.title, it.icon) }
             val dayStates = database.databaseQueries.selectDayStatesForDateRange(
                 dates.first(),
                 dates.last(),
@@ -129,6 +142,7 @@ private fun HomePageContent(
                             FloatingActionButton(
                                 onClick = {
                                     newHabitTitle = ""
+                                    newHabitIcon = null
                                     addHabitError = null
                                     showAddHabitDialog = true
                                 },
@@ -157,6 +171,7 @@ private fun HomePageContent(
                     onDismissRequest = { showAddHabitDialog = false },
                     title = { Text(stringResource(Res.string.add_habit)) },
                     text = {
+                        val noIconDescription = stringResource(Res.string.no_icon)
                         Column {
                             OutlinedTextField(
                                 value = newHabitTitle,
@@ -165,6 +180,59 @@ private fun HomePageContent(
                                 singleLine = true,
                                 isError = addHabitError != null,
                             )
+                            Text(stringResource(Res.string.habit_icon))
+                            Column {
+                                habitIconOptions.chunked(4).forEachIndexed { rowIndex, rowOptions ->
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                    ) {
+                                        rowOptions.forEach { option ->
+                                            IconButton(
+                                                onClick = { newHabitIcon = option.id },
+                                                modifier = Modifier
+                                                    .background(
+                                                        if (newHabitIcon == option.id) {
+                                                            androidx.compose.material3.MaterialTheme
+                                                                .colorScheme
+                                                                .secondaryContainer
+                                                        } else {
+                                                            Color.Transparent
+                                                        },
+                                                        CircleShape,
+                                                    ),
+                                            ) {
+                                                Icon(
+                                                    imageVector = option.imageVector,
+                                                    contentDescription = option.id,
+                                                )
+                                            }
+                                        }
+                                        if (rowIndex == 1) {
+                                            IconButton(
+                                                onClick = { newHabitIcon = null },
+                                                modifier = Modifier.background(
+                                                    if (newHabitIcon == null) {
+                                                        androidx.compose.material3.MaterialTheme
+                                                            .colorScheme
+                                                            .secondaryContainer
+                                                    } else {
+                                                        Color.Transparent
+                                                    },
+                                                    CircleShape,
+                                                ),
+                                            ) {
+                                                Text(
+                                                    text = "?",
+                                                    modifier = Modifier.semantics {
+                                                        contentDescription = noIconDescription
+                                                    },
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             addHabitError?.let { error ->
                                 Text(stringResource(Res.string.add_habit_failed, error))
                             }
@@ -179,6 +247,7 @@ private fun HomePageContent(
                                         val habits = addHabit(
                                             database = database,
                                             title = newHabitTitle.trim(),
+                                            icon = newHabitIcon,
                                         )
                                         state = current.copy(habits = habits)
                                         showAddHabitDialog = false
@@ -207,11 +276,12 @@ private fun HomePageContent(
 private suspend fun addHabit(
     database: Database,
     title: String,
+    icon: String?,
 ): List<Habit> {
-    database.databaseQueries.insertHabit(title)
+    database.databaseQueries.insertHabit(title, icon)
     return database.databaseQueries.selectAllHabits()
         .awaitAsList()
-        .map { Habit(it.id, it.title) }
+        .map { Habit(it.id, it.title, it.icon) }
 }
 
 private sealed interface HomePageState {

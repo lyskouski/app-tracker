@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,6 +30,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -540,14 +543,19 @@ private fun CalendarHeaderViewport(
             for (
                 column in startColumn until endColumn
             ) {
+                val habit = habits[column]
+                val icon = habitIcon(habit.icon)
+
                 CalendarTableCell(
-                    text = habits[column].title,
+                    text = if (icon == null) "?" else "",
                     width = with(LocalDensity.current) {
                         cellWidthPx.toDp()
                     },
                     height = headerHeight,
                     background =
                         MaterialTheme.colorScheme.surfaceVariant,
+                    icon = icon,
+                    contentDescription = habit.title,
                 )
             }
         },
@@ -895,6 +903,8 @@ private fun CalendarTableCell(
     width: Dp,
     height: Dp,
     background: androidx.compose.ui.graphics.Color,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
+    contentDescription: String? = null,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -910,12 +920,25 @@ private fun CalendarTableCell(
             ),
         contentAlignment = Alignment.Center,
     ) {
-        Text(
-            text = text,
-            style =
-                MaterialTheme.typography.bodyMedium,
-            color =
-                MaterialTheme.colorScheme.onSurface,
-        )
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = contentDescription,
+                tint = MaterialTheme.colorScheme.onSurface,
+            )
+        } else {
+            Text(
+                text = text,
+                modifier = if (contentDescription == null) {
+                    Modifier
+                } else {
+                    Modifier.semantics {
+                        this.contentDescription = contentDescription
+                    }
+                },
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
     }
 }
