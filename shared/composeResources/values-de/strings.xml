@@ -2,4 +2,8 @@
     <string name="app_name">Meine Anwendung</string>
     <string name="greeting">Hallo, Welt!</string>
     <string name="welcome_message">Willkommen, %s!</string>
+    <string name="habit_database_unavailable">Die Habit-Datenbank ist nicht verfügbar.</string>
+    <string name="habits_loading">Gewohnheiten werden geladen...</string>
+    <string name="habits_load_failed">Gewohnheiten konnten nicht geladen werden: %s</string>
+    <string name="database_error_unknown">Unbekannter Datenbankfehler</string>
 </resources>

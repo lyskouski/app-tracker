@@ -105,6 +105,8 @@ android {
 }
 
 compose.resources {
+    packageOfResClass = "com.tercad.zwyka.resources"
+    publicResClass = true
     customDirectory(
         "commonMain",
         providers.provider { layout.projectDirectory.dir("composeResources") },

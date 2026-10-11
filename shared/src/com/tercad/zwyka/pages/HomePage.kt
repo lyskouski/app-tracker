@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import org.jetbrains.compose.resources.stringResource
 import cafe.adriel.voyager.core.screen.Screen
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import kotlinx.coroutines.CancellationException
@@ -23,6 +24,11 @@ import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.database_error_unknown
+import com.tercad.zwyka.resources.habit_database_unavailable
+import com.tercad.zwyka.resources.habits_loading
+import com.tercad.zwyka.resources.habits_load_failed
 
 class HomePage(
     private val database: Database?,
@@ -41,7 +47,7 @@ private fun HomePageContent(
 ) {
     if (database == null) {
         Box(Modifier.fillMaxSize()) {
-            Text("Habit database is unavailable.")
+            Text(stringResource(Res.string.habit_database_unavailable))
         }
         return
     }
@@ -64,13 +70,18 @@ private fun HomePageContent(
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
-            state = HomePageState.Failed(error.message ?: "Unknown database error")
+            state = HomePageState.Failed(error.message)
         }
     }
 
     when (val current = state) {
-        HomePageState.Loading -> Text("Loading habits...")
-        is HomePageState.Failed -> Text("Unable to load habits: ${current.message}")
+        HomePageState.Loading -> Text(stringResource(Res.string.habits_loading))
+        is HomePageState.Failed -> Text(
+            stringResource(
+                Res.string.habits_load_failed,
+                current.message ?: stringResource(Res.string.database_error_unknown),
+            ),
+        )
         is HomePageState.Loaded -> {
             val today = Clock.System.now()
                 .toLocalDateTime(TimeZone.currentSystemDefault())
@@ -97,5 +108,5 @@ private sealed interface HomePageState {
         val habits: List<Habit>,
         val dayStates: List<DayState>,
     ) : HomePageState
-    data class Failed(val message: String) : HomePageState
+    data class Failed(val message: String?) : HomePageState
 }
