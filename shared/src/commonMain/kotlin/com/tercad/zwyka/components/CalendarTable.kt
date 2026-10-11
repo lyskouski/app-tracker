@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
@@ -59,6 +60,7 @@ fun CalendarTable(
     dayState: List<DayState>,
     onDayStateClick: (DayState) -> Unit,
     onHabitClick: (Habit) -> Unit,
+    today: String? = null,
     modifier: Modifier = Modifier,
 ) {
     /*
@@ -314,6 +316,7 @@ fun CalendarTable(
                     cellWidthPx = cellWidthPx,
                     cellHeightPx = cellHeightPx,
                     onDayStateClick = onDayStateClick,
+                    today = today,
                 )
             }
 
@@ -389,6 +392,8 @@ fun CalendarTable(
                     firstColumnWidth = firstColumnWidth,
                     firstColumnWidthPx = firstColumnWidthPx,
                     cellHeightPx = cellHeightPx,
+                    today = today,
+                    habits = habits,
                 )
             }
 
@@ -637,6 +642,8 @@ private fun CalendarFirstColumnViewport(
     firstColumnWidth: Dp,
     firstColumnWidthPx: Float,
     cellHeightPx: Float,
+    today: String?,
+    habits: List<Habit>,
 ) {
     val firstVisibleRow =
         floor(
@@ -676,6 +683,11 @@ private fun CalendarFirstColumnViewport(
                         cellHeightPx.toDp()
                     },
                     background = currentColorScheme().surface,
+                    highlight = todayHighlight(
+                        isToday = dates[row] == today,
+                        left = true,
+                        right = habits.isEmpty(),
+                    ),
                 )
             }
         },
@@ -748,6 +760,7 @@ private fun CalendarBodyViewport(
     cellWidthPx: Float,
     cellHeightPx: Float,
     onDayStateClick: (DayState) -> Unit,
+    today: String?,
 ) {
     /*
      * X = habits / columns.
@@ -849,6 +862,11 @@ private fun CalendarBodyViewport(
                             cellHeightPx.toDp()
                         },
                         background = backgroundColor,
+                        highlight = todayHighlight(
+                            isToday = date == today,
+                            left = false,
+                            right = column == habits.lastIndex,
+                        ),
                         modifier = Modifier
                             .clickable {
                                 onDayStateClick(
@@ -937,6 +955,7 @@ private fun CalendarTableCell(
     iconTint: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     contentDescription: String? = null,
+    highlight: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -948,7 +967,8 @@ private fun CalendarTableCell(
                 width = 1.dp,
                 color =
                     currentColorScheme().outlineVariant,
-            ),
+            )
+            .then(highlight),
         contentAlignment = Alignment.Center,
     ) {
         if (icon != null) {
@@ -969,6 +989,40 @@ private fun CalendarTableCell(
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 color = textColor,
+            )
+        }
+    }
+}
+
+/*
+ * Draws one continuous outline around the current day's row.
+ */
+@Composable
+private fun todayHighlight(
+    isToday: Boolean,
+    left: Boolean,
+    right: Boolean,
+): Modifier {
+    if (!isToday) return Modifier
+    val color = currentColorScheme().primary
+    return Modifier.drawWithContent {
+        drawContent()
+        val stroke = 2.dp.toPx()
+        val half = stroke / 2
+        drawLine(color, Offset(0f, half), Offset(size.width, half), stroke)
+        drawLine(
+            color,
+            Offset(0f, size.height - half),
+            Offset(size.width, size.height - half),
+            stroke,
+        )
+        if (left) drawLine(color, Offset(half, 0f), Offset(half, size.height), stroke)
+        if (right) {
+            drawLine(
+                color,
+                Offset(size.width - half, 0f),
+                Offset(size.width - half, size.height),
+                stroke,
             )
         }
     }

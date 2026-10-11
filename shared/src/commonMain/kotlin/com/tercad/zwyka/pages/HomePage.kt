@@ -155,6 +155,7 @@ private fun HomePageContent(
                 CalendarTable(
                     habits = current.habits,
                     dates = dates,
+                    today = today.toString(),
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
                     onHabitClick = {
