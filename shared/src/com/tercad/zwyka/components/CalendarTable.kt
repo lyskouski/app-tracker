@@ -101,8 +101,8 @@ fun CalendarTable(
      * X = habits
      * Y = dates
      */
-    var scrollOffset by remember {
-        mutableStateOf(Offset.Zero)
+    var scrollOffset by remember(dates) {
+        mutableStateOf<Offset?>(null)
     }
 
     BoxWithConstraints(
@@ -162,6 +162,12 @@ fun CalendarTable(
                     bodyHeightPx,
             )
 
+        val currentScrollOffset =
+            scrollOffset ?: Offset(
+                x = 0f,
+                y = maxScrollY,
+            )
+
         /*
          * Keep the current position valid after:
          *
@@ -174,11 +180,11 @@ fun CalendarTable(
             maxScrollY,
         ) {
             val clamped = Offset(
-                x = scrollOffset.x.coerceIn(
+                x = currentScrollOffset.x.coerceIn(
                     0f,
                     maxScrollX,
                 ),
-                y = scrollOffset.y.coerceIn(
+                y = currentScrollOffset.y.coerceIn(
                     0f,
                     maxScrollY,
                 ),
@@ -223,16 +229,21 @@ fun CalendarTable(
                         onDrag = { change, dragAmount ->
                             change.consume()
 
+                            val currentOffset = scrollOffset ?: Offset(
+                                x = 0f,
+                                y = maxScrollY,
+                            )
+
                             scrollOffset = Offset(
                                 x = (
-                                    scrollOffset.x -
+                                    currentOffset.x -
                                         dragAmount.x
                                     ).coerceIn(
                                         0f,
                                         maxScrollX,
                                     ),
                                 y = (
-                                    scrollOffset.y -
+                                    currentOffset.y -
                                         dragAmount.y
                                     ).coerceIn(
                                         0f,
@@ -280,8 +291,8 @@ fun CalendarTable(
                     habits = habits,
                     dates = dates,
                     marks = marks,
-                    scrollX = scrollOffset.x,
-                    scrollY = scrollOffset.y,
+                    scrollX = currentScrollOffset.x,
+                    scrollY = currentScrollOffset.y,
                     viewportWidthPx = bodyWidthPx,
                     viewportHeightPx = bodyHeightPx,
                     cellWidthPx = cellWidthPx,
@@ -318,7 +329,7 @@ fun CalendarTable(
             ) {
                 CalendarHeaderViewport(
                     habits = habits,
-                    scrollX = scrollOffset.x,
+                    scrollX = currentScrollOffset.x,
                     viewportWidthPx = bodyWidthPx,
                     cellWidthPx = cellWidthPx,
                     headerHeight = headerHeight,
@@ -355,7 +366,7 @@ fun CalendarTable(
             ) {
                 CalendarFirstColumnViewport(
                     dates = dates,
-                    scrollY = scrollOffset.y,
+                    scrollY = currentScrollOffset.y,
                     viewportHeightPx = bodyHeightPx,
                     firstColumnWidth = firstColumnWidth,
                     firstColumnWidthPx = firstColumnWidthPx,
