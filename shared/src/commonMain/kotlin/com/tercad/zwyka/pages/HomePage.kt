@@ -52,6 +52,13 @@ import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.ui.Alignment
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.tercad.zwyka.data.AppSettingsStore
+import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
@@ -63,10 +70,11 @@ import com.tercad.zwyka.resources.habits_load_failed
 class HomePage(
     private val database: Database?,
     private val initializeDatabase: suspend () -> Unit,
+    private val settingsStore: AppSettingsStore,
 ) : Screen {
     @Composable
     override fun Content() {
-        HomePageContent(database, initializeDatabase)
+        HomePageContent(database, initializeDatabase, settingsStore)
     }
 }
 
@@ -74,7 +82,9 @@ class HomePage(
 private fun HomePageContent(
     database: Database?,
     initializeDatabase: suspend () -> Unit,
+    settingsStore: AppSettingsStore,
 ) {
+    val navigator = LocalNavigator.currentOrThrow
     if (database == null) {
         Box(Modifier.fillMaxSize()) {
             Text(stringResource(Res.string.habit_database_unavailable))
@@ -141,7 +151,24 @@ private fun HomePageContent(
                             .fillMaxWidth()
                             .height(46.dp)
                             .background(currentColorScheme().primary),
-                    )
+                    ) {
+                        TextButton(
+                            onClick = { navigator.push(SettingsPage(settingsStore)) },
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = currentColorScheme().onPrimary,
+                            ),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Settings,
+                                contentDescription = null,
+                            )
+                            Text(
+                                text = stringResource(Res.string.settings),
+                                modifier = Modifier.padding(start = 8.dp),
+                            )
+                        }
+                    }
                 },
                 floatingActionButtonPosition = FabPosition.Center,
                 floatingActionButton = {

@@ -13,6 +13,23 @@ CREATE TABLE DayState (
     FOREIGN KEY (habitId) REFERENCES Habit(id)
 );
 
+CREATE TABLE Setting (
+    key TEXT NOT NULL PRIMARY KEY,
+    value TEXT NOT NULL
+);
+
+selectAllSettings:
+SELECT *
+FROM Setting;
+
+upsertSetting:
+INSERT OR REPLACE INTO Setting(key, value)
+VALUES (?, ?);
+
+deleteSetting:
+DELETE FROM Setting
+WHERE key = ?;
+
 selectAllHabits:
 SELECT *
 FROM Habit
