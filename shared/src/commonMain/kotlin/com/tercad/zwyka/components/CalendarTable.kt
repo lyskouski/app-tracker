@@ -58,6 +58,7 @@ fun CalendarTable(
     dates: List<String>,
     dayState: List<DayState>,
     onDayStateClick: (DayState) -> Unit,
+    onHabitClick: (Habit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     /*
@@ -350,6 +351,7 @@ fun CalendarTable(
                     cellWidthPx = cellWidthPx,
                     headerHeight = headerHeight,
                     headerHeightPx = headerHeightPx,
+                    onHabitClick = onHabitClick,
                 )
             }
 
@@ -518,6 +520,7 @@ private fun CalendarHeaderViewport(
     cellWidthPx: Float,
     headerHeight: Dp,
     headerHeightPx: Float,
+    onHabitClick: (Habit) -> Unit,
 ) {
     val firstVisibleColumn =
         floor(
@@ -567,6 +570,7 @@ private fun CalendarHeaderViewport(
                     iconTint = iconTint,
                     textColor = iconTint,
                     contentDescription = habit.title,
+                    modifier = Modifier.clickable { onHabitClick(habit) },
                 )
             }
         },

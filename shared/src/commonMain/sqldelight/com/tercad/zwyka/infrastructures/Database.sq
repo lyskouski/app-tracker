@@ -22,6 +22,19 @@ insertHabit:
 INSERT INTO Habit(title, icon, color)
 VALUES (?, ?, ?);
 
+updateHabit:
+UPDATE Habit
+SET title = ?, icon = ?, color = ?
+WHERE id = ?;
+
+deleteDayStatesForHabit:
+DELETE FROM DayState
+WHERE habitId = ?;
+
+deleteHabit:
+DELETE FROM Habit
+WHERE id = ?;
+
 selectDayStatesForDateRange:
 SELECT *
 FROM DayState
