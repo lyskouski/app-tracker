@@ -52,6 +52,15 @@ private fun HomePageContent(
         return
     }
 
+    val today = Clock.System.now()
+        .toLocalDateTime(TimeZone.currentSystemDefault())
+        .date
+    val dates = remember(today) {
+        (-66..5).map { dayOffset ->
+            today.plus(dayOffset, DateTimeUnit.DAY).toString()
+        }
+    }
+
     var state by remember(database) {
         mutableStateOf<HomePageState>(HomePageState.Loading)
     }
@@ -63,7 +72,10 @@ private fun HomePageContent(
             val habits = database.databaseQueries.selectAllHabits()
                 .awaitAsList()
                 .map { Habit(it.id, it.title) }
-            val dayStates = database.databaseQueries.selectAllDayStates()
+            val dayStates = database.databaseQueries.selectDayStatesForDateRange(
+                dates.first(),
+                dates.last(),
+            )
                 .awaitAsList()
                 .map { DayState(it.habitId, it.date, it.mark) }
             state = HomePageState.Loaded(habits, dayStates)
@@ -83,15 +95,6 @@ private fun HomePageContent(
             ),
         )
         is HomePageState.Loaded -> {
-            val today = Clock.System.now()
-                .toLocalDateTime(TimeZone.currentSystemDefault())
-                .date
-            val dates = remember(today) {
-                (-66..5).map { dayOffset ->
-                    today.plus(dayOffset, DateTimeUnit.DAY).toString()
-                }
-            }
-
             CalendarTable(
                 habits = current.habits,
                 dates = dates,

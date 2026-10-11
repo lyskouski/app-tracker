@@ -20,9 +20,10 @@ insertHabit:
 INSERT INTO Habit(title)
 VALUES (?);
 
-selectAllDayStates:
+selectDayStatesForDateRange:
 SELECT *
 FROM DayState
+WHERE date BETWEEN ? AND ?
 ORDER BY habitId, date;
 
 insertDayState:
