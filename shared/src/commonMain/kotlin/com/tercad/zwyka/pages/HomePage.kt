@@ -4,13 +4,16 @@
 package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -51,6 +55,7 @@ import kotlin.time.Clock
 
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.data.DayState
+import com.tercad.zwyka.data.dayStateMarks
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationColorOptions
@@ -80,6 +85,16 @@ import com.tercad.zwyka.resources.no_icon
 import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
 import com.tercad.zwyka.resources.search_icons
+import com.tercad.zwyka.resources.edit_day_state
+import com.tercad.zwyka.resources.date
+import com.tercad.zwyka.resources.status
+import com.tercad.zwyka.resources.status_start
+import com.tercad.zwyka.resources.status_25_percent
+import com.tercad.zwyka.resources.status_50_percent
+import com.tercad.zwyka.resources.status_75_percent
+import com.tercad.zwyka.resources.status_100_percent
+import com.tercad.zwyka.resources.status_over_100_percent
+import com.tercad.zwyka.resources.day_state_save_failed
 
 class HomePage(
     private val database: Database?,
@@ -124,6 +139,9 @@ private fun HomePageContent(
     var iconSearchQuery by remember { mutableStateOf("") }
     var colorInput by remember { mutableStateOf("") }
     var addHabitError by remember { mutableStateOf<String?>(null) }
+    var selectedDayState by remember { mutableStateOf<DayState?>(null) }
+    var dayStateSaveError by remember { mutableStateOf<String?>(null) }
+    var isDayStateSaving by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
 
@@ -187,6 +205,7 @@ private fun HomePageContent(
                     habits = current.habits,
                     dates = dates,
                     dayState = current.dayStates,
+                    onDayStateClick = { selectedDayState = it },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(contentPadding),
@@ -261,6 +280,7 @@ private fun HomePageContent(
                                                 contentDescription = null,
                                             )
                                         }
+
                                     }
                                 }
                             }
@@ -433,8 +453,158 @@ private fun HomePageContent(
                     },
                 )
             }
+
+            selectedDayState?.let { selected ->
+                current.habits.firstOrNull { it.id == selected.habitId }?.let { habit ->
+                    DayStateDialog(
+                        dayState = selected,
+                        habit = habit,
+                        saveError = dayStateSaveError,
+                        isSaving = isDayStateSaving,
+                        onStatusChange = { mark ->
+                            val updated = selected.copy(mark = mark)
+                            selectedDayState = updated
+                            dayStateSaveError = null
+                            isDayStateSaving = true
+                            coroutineScope.launch {
+                                try {
+                                    database.databaseQueries.upsertDayState(
+                                        updated.habitId,
+                                        updated.date,
+                                        updated.mark,
+                                    )
+                                    val updatedDayStates = current.dayStates
+                                        .filterNot {
+                                            it.habitId == updated.habitId &&
+                                                it.date == updated.date
+                                        } + updated
+                                    state = current.copy(dayStates = updatedDayStates)
+                                    selectedDayState = null
+                                } catch (error: CancellationException) {
+                                    throw error
+                                } catch (error: Exception) {
+                                    dayStateSaveError =
+                                        error.message ?: unknownDatabaseError
+                                } finally {
+                                    isDayStateSaving = false
+                                }
+                            }
+                        },
+                        onDismiss = {
+                            selectedDayState = null
+                            dayStateSaveError = null
+                        },
+                    )
+                }
+            }
         }
     }
+}
+
+@Composable
+private fun DayStateDialog(
+    dayState: DayState,
+    habit: Habit,
+    saveError: String?,
+    isSaving: Boolean,
+    onStatusChange: (String) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val statusOptions = dayStateMarks.zip(
+        listOf(
+            stringResource(Res.string.status_start),
+            stringResource(Res.string.status_25_percent),
+            stringResource(Res.string.status_50_percent),
+            stringResource(Res.string.status_75_percent),
+            stringResource(Res.string.status_100_percent),
+            stringResource(Res.string.status_over_100_percent),
+        ),
+    )
+
+    AlertDialog(
+        onDismissRequest = {
+            if (!isSaving) onDismiss()
+        },
+        title = { Text(stringResource(Res.string.edit_day_state)) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                OutlinedTextField(
+                    value = habit.title,
+                    onValueChange = {},
+                    readOnly = true,
+                    singleLine = true,
+                    label = { Text(stringResource(Res.string.habit_name)) },
+                    leadingIcon = {
+                        val icon = applicationIcon(habit.icon)
+                        if (icon == null) {
+                            Text("?")
+                        } else {
+                            Icon(
+                                imageVector = icon,
+                                contentDescription = null,
+                            )
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = dayState.date,
+                    onValueChange = {},
+                    readOnly = true,
+                    singleLine = true,
+                    label = { Text(stringResource(Res.string.date)) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Text(stringResource(Res.string.status))
+                statusOptions.chunked(3).forEach { rowOptions ->
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        rowOptions.forEach { (mark, label) ->
+                            val onClick = { onStatusChange(mark) }
+                            val buttonModifier = Modifier.weight(1f)
+                            if (dayState.mark == mark) {
+                                Button(
+                                    onClick = onClick,
+                                    modifier = buttonModifier,
+                                    enabled = !isSaving,
+                                ) {
+                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                        Text(mark)
+                                        Text(label)
+                                    }
+                                }
+                            } else {
+                                OutlinedButton(
+                                    onClick = onClick,
+                                    modifier = buttonModifier,
+                                    enabled = !isSaving,
+                                ) {
+                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                        Text(mark)
+                                        Text(label)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                saveError?.let { error ->
+                    Text(stringResource(Res.string.day_state_save_failed, error))
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(
+                onClick = onDismiss,
+                enabled = !isSaving,
+            ) {
+                Text(stringResource(Res.string.cancel))
+            }
+        },
+    )
 }
 
 private suspend fun addHabit(

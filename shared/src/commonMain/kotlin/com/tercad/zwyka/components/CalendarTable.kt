@@ -5,6 +5,7 @@ package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -44,6 +45,7 @@ import kotlin.math.roundToInt
 
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
+import com.tercad.zwyka.data.dayStateMarks
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
@@ -55,6 +57,7 @@ fun CalendarTable(
     habits: List<Habit>,
     dates: List<String>,
     dayState: List<DayState>,
+    onDayStateClick: (DayState) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     /*
@@ -309,6 +312,7 @@ fun CalendarTable(
                     viewportHeightPx = bodyHeightPx,
                     cellWidthPx = cellWidthPx,
                     cellHeightPx = cellHeightPx,
+                    onDayStateClick = onDayStateClick,
                 )
             }
 
@@ -739,6 +743,7 @@ private fun CalendarBodyViewport(
     viewportHeightPx: Float,
     cellWidthPx: Float,
     cellHeightPx: Float,
+    onDayStateClick: (DayState) -> Unit,
 ) {
     /*
      * X = habits / columns.
@@ -822,13 +827,14 @@ private fun CalendarBodyViewport(
                         applicationColor(habit.color)?.copy(alpha = 0.05f)
                             ?: currentColorScheme().surface
 
-                    val value =
-                        marks[
-                            CellKey(
-                                habitId = habit.id,
-                                date = date,
-                            )
-                        ] ?: " "
+                    val key = CellKey(
+                            habitId = habit.id,
+                            date = date,
+                        )
+                    val value = marks[key] ?: " "
+                    val status = marks[key]
+                        ?.takeIf { mark -> mark in dayStateMarks }
+                        ?: "·"
 
                     CalendarTableCell(
                         text = value,
@@ -839,6 +845,19 @@ private fun CalendarBodyViewport(
                             cellHeightPx.toDp()
                         },
                         background = backgroundColor,
+                        modifier = Modifier
+                            .clickable {
+                                onDayStateClick(
+                                    DayState(
+                                        habitId = habit.id,
+                                        date = date,
+                                        mark = status,
+                                    ),
+                                )
+                            }
+                            .semantics {
+                                contentDescription = "${habit.title}, $date, $value"
+                            },
                     )
                 }
             }
@@ -897,7 +916,6 @@ private fun CalendarBodyViewport(
         }
     }
 }
-
 
 /*
  * ============================================================

@@ -28,8 +28,8 @@ FROM DayState
 WHERE date BETWEEN ? AND ?
 ORDER BY habitId, date;
 
-insertDayState:
-INSERT INTO DayState(habitId, date, mark)
+upsertDayState:
+INSERT OR REPLACE INTO DayState(habitId, date, mark)
 VALUES (?, ?, ?);
 
 INSERT INTO Habit(id, title) VALUES (1, 'Sample 1');
