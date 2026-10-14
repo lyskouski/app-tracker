@@ -42,7 +42,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.defines.applicationLanguages
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.dateFormatOptions
 import com.tercad.zwyka.defines.themeModeOptions
+import com.tercad.zwyka.resources.date_format
 import com.tercad.zwyka.defines.weekStartOptions
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
@@ -144,6 +146,17 @@ class SettingsPage(
                 onSelect = { index ->
                     scope.launch {
                         settingsStore.update(settings.copy(weekStart = weekStartOptions[index]))
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.date_format),
+                options = dateFormatOptions.map { it.label },
+                selectedIndex = dateFormatOptions.indexOf(settings.dateFormat),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(dateFormat = dateFormatOptions[index]))
                     }
                 },
             )

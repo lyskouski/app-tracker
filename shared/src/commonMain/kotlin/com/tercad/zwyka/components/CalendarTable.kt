@@ -47,6 +47,7 @@ import kotlin.math.roundToInt
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.WeekStart
 import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.defines.applicationColor
@@ -64,6 +65,7 @@ fun CalendarTable(
     onHabitClick: (Habit) -> Unit,
     today: String? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
+    dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
     modifier: Modifier = Modifier,
 ) {
     val weekStartDates = remember(dates, weekStart) {
@@ -402,6 +404,7 @@ fun CalendarTable(
                     today = today,
                     habits = habits,
                     weekStartDates = weekStartDates,
+                    dateFormat = dateFormat,
                 )
             }
 
@@ -653,6 +656,7 @@ private fun CalendarFirstColumnViewport(
     today: String?,
     habits: List<Habit>,
     weekStartDates: Set<String>,
+    dateFormat: DateFormat,
 ) {
     val firstVisibleRow =
         floor(
@@ -686,7 +690,7 @@ private fun CalendarFirstColumnViewport(
                 row in startRow until endRow
             ) {
                 CalendarTableCell(
-                    text = dates[row],
+                    text = dateFormat.format(dates[row]),
                     width = firstColumnWidth,
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()

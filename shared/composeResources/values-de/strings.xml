@@ -41,6 +41,7 @@
     <string name="language">Sprache</string>
     <string name="language_system">Systemstandard</string>
     <string name="start_of_week">Wochenbeginn</string>
+    <string name="date_format">Datumsformat</string>
     <string name="saturday">Samstag</string>
     <string name="sunday">Sonntag</string>
     <string name="monday">Montag</string>
