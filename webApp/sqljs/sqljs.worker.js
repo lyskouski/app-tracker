@@ -55,7 +55,10 @@ async function saveDatabase() {
 }
 
 async function createDatabase() {
-  const SQL = await initSqlJs({ locateFile: () => "/sql-wasm.wasm" });
+  // Resolve next to the worker chunk so sub-path hosting (GitHub Pages) works.
+  const SQL = await initSqlJs({
+    locateFile: (file) => new URL(file, self.location.href).href,
+  });
   database = new SQL.Database(await loadDatabase());
 }
 
