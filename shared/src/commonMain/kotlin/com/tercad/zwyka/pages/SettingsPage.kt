@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -35,6 +36,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -175,7 +178,9 @@ private fun DropdownField(
 ) {
     var expanded by remember { mutableStateOf(false) }
     var query by remember { mutableStateOf("") }
-    Box(Modifier.fillMaxWidth()) {
+    var fieldWidthPx by remember { mutableStateOf(0) }
+    val fieldWidth = with(LocalDensity.current) { fieldWidthPx.toDp() }
+    Box(Modifier.fillMaxWidth().onSizeChanged { fieldWidthPx = it.width }) {
         OutlinedTextField(
             value = options.getOrElse(selectedIndex) { "" },
             onValueChange = {},
@@ -201,6 +206,7 @@ private fun DropdownField(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
+            modifier = Modifier.width(fieldWidth),
         ) {
             if (searchable) {
                 OutlinedTextField(

@@ -5,6 +5,17 @@ package com.tercad.zwyka.defines
 
 import kotlinx.datetime.LocalDate
 
+/* Country	        Common Format
+United States	    MM/DD/YYYY (12/31/2026)
+United Kingdom	    DD/MM/YYYY (31/12/2026)
+Germany	            DD.MM.YYYY or YYYY-MM-DD (31.12.2026)
+France	            DD/MM/YYYY (31/12/2026)
+Poland	            DD.MM.YYYY or YYYY-MM-DD (31.12.2026)
+Japan	            YYYY/MM/DD (2026/12/31)
+China	            YYYY-MM-DD (2026-12-31)
+Canada	            Mixed (YYYY-MM-DD, DD/MM/YYYY, or MM/DD/YYYY)
+*/
+
 enum class DateFormat(val label: String) {
     YYYY_MM_DD("YYYY-MM-DD"),
     MM_DD_YYYY_DASH("MM-DD-YYYY"),
