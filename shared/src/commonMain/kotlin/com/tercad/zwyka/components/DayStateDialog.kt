@@ -91,7 +91,7 @@ fun DayStateDialog(
                                     enabled = !isSaving,
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text(option.mark)
+                                        StatusMark(option.mark)
                                         Text(stringResource(option.label))
                                     }
                                 }
@@ -102,7 +102,7 @@ fun DayStateDialog(
                                     enabled = !isSaving,
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        Text(option.mark)
+                                        StatusMark(option.mark)
                                         Text(stringResource(option.label))
                                     }
                                 }

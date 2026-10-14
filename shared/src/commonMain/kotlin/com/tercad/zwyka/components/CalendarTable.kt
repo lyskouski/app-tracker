@@ -996,8 +996,8 @@ private fun CalendarTableCell(
                 tint = iconTint,
             )
         } else {
-            Text(
-                text = text,
+            StatusMark(
+                mark = text,
                 modifier = if (contentDescription == null) {
                     Modifier
                 } else {
@@ -1005,7 +1005,6 @@ private fun CalendarTableCell(
                         this.contentDescription = contentDescription
                     }
                 },
-                style = MaterialTheme.typography.bodyMedium,
                 color = textColor,
             )
         }
