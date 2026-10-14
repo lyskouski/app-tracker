@@ -48,6 +48,7 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
 import com.tercad.zwyka.defines.themeModeOptions
 import com.tercad.zwyka.resources.date_format
+import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.defines.weekStartOptions
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
@@ -57,6 +58,10 @@ import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.start_of_week
 import com.tercad.zwyka.resources.theme_mode
 import kotlinx.coroutines.launch
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 class SettingsPage(
@@ -153,9 +158,13 @@ class SettingsPage(
                 },
             )
 
+            val today = remember {
+                Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()
+            }
+            val monthNames = stringArrayResource(Res.array.months_short)
             DropdownField(
                 label = stringResource(Res.string.date_format),
-                options = dateFormatOptions.map { it.label },
+                options = dateFormatOptions.map { it.format(today, monthNames) },
                 selectedIndex = dateFormatOptions.indexOf(settings.dateFormat),
                 onSelect = { index ->
                     scope.launch {
