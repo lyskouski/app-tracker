@@ -19,6 +19,7 @@ kotlin {
     sourceSets {
         val wasmJsMain by getting {
             kotlin.srcDir("src")
+            resources.srcDir("resources")
             dependencies {
                 implementation(project(":shared"))
                 implementation("org.jetbrains.compose.ui:ui:1.11.1")
