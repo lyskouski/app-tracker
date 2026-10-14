@@ -5,11 +5,6 @@ package com.tercad.zwyka.defines
 
 import kotlinx.datetime.LocalDate
 
-private val monthNames = listOf(
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-)
-
 enum class DateFormat(val label: String) {
     YYYY_MM_DD("YYYY-MM-DD"),
     MM_DD_YYYY_DASH("MM-DD-YYYY"),
@@ -19,7 +14,8 @@ enum class DateFormat(val label: String) {
     YYYY_MM_DD_SLASH("YYYY/MM/DD"),
     DD_MMM("DD MMM");
 
-    fun format(isoDate: String): String {
+    /** [monthNames] holds the 12 localized short month names, January first. */
+    fun format(isoDate: String, monthNames: List<String>): String {
         val date = LocalDate.parse(isoDate)
         val year = date.year.toString().padStart(4, '0')
         val month = date.monthNumber.toString().padStart(2, '0')

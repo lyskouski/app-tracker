@@ -48,6 +48,9 @@ import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.months_short
+import org.jetbrains.compose.resources.stringArrayResource
 import com.tercad.zwyka.defines.WeekStart
 import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.defines.applicationColor
@@ -658,6 +661,7 @@ private fun CalendarFirstColumnViewport(
     weekStartDates: Set<String>,
     dateFormat: DateFormat,
 ) {
+    val monthNames = stringArrayResource(Res.array.months_short)
     val firstVisibleRow =
         floor(
             scrollY / cellHeightPx,
@@ -690,7 +694,7 @@ private fun CalendarFirstColumnViewport(
                 row in startRow until endRow
             ) {
                 CalendarTableCell(
-                    text = dateFormat.format(dates[row]),
+                    text = dateFormat.format(dates[row], monthNames),
                     width = firstColumnWidth,
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()
