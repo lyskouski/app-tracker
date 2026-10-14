@@ -38,7 +38,8 @@ enum class DateFormat(val label: String) {
             DD_MM_YYYY_DOT -> "$day.$month.$year"
             MM_DD_YYYY_SLASH -> "$month/$day/$year"
             YYYY_MM_DD_SLASH -> "$year/$month/$day"
-            DD_MMM -> "${date.dayOfMonth} ${monthNames[date.monthNumber - 1]}"
+            // The web build returns an empty array until resources finish loading.
+            DD_MMM -> "${date.dayOfMonth} ${monthNames.getOrElse(date.monthNumber - 1) { month }}"
         }
     }
 }
