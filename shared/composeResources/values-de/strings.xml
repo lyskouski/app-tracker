@@ -43,6 +43,13 @@
     <string name="language_system">Systemstandard</string>
     <string name="start_of_week">Wochenbeginn</string>
     <string name="date_format">Datumsformat</string>
+    <string name="habit_order_by">Gewohnheiten sortieren nach</string>
+    <string name="sort_direction">Sortierrichtung</string>
+    <string name="order_created_at">Erstellt am</string>
+    <string name="order_updated_at">Aktualisiert am</string>
+    <string name="order_title">Titel</string>
+    <string name="sort_ascending">Aufsteigend</string>
+    <string name="sort_descending">Absteigend</string>
     <string-array name="months_short">
         <item>Jan</item>
         <item>Feb</item>

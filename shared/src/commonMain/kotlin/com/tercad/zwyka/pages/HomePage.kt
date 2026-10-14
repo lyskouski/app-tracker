@@ -52,6 +52,7 @@ import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.sortedBy
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.Alignment
@@ -120,7 +121,7 @@ private fun HomePageContent(
             initializeDatabase()
             val habits = database.databaseQueries.selectAllHabits()
                 .awaitAsList()
-                .map { Habit(it.id, it.title, it.icon, it.color, it.remarks) }
+                .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt) }
             val dayStates = database.databaseQueries.selectDayStatesForDateRange(
                 dates.first(),
                 dates.last(),
@@ -191,7 +192,10 @@ private fun HomePageContent(
                 },
             ) { contentPadding ->
                 CalendarTable(
-                    habits = current.habits,
+                    habits = current.habits.sortedBy(
+                        settingsStore.current.habitOrderBy,
+                        settingsStore.current.sortDirection,
+                    ),
                     dates = dates,
                     today = today.toString(),
                     weekStart = settingsStore.current.weekStart,
@@ -336,7 +340,7 @@ private suspend fun saveHabit(
     }
     return database.databaseQueries.selectAllHabits()
         .awaitAsList()
-        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks) }
+        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt) }
 }
 
 private suspend fun deleteHabit(database: Database, habitId: Long) {

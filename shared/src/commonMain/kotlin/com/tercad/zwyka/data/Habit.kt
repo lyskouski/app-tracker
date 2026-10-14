@@ -9,4 +9,6 @@ data class Habit(
     val icon: String? = null,
     val color: String? = null,
     val remarks: String? = null,
+    val createdAt: Long = 0,
+    val updatedAt: Long = 0,
 )

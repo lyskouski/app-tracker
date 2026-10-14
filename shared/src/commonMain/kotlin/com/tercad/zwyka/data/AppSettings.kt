@@ -8,6 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import app.cash.sqldelight.async.coroutines.awaitAsList
 import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.defines.HabitOrderBy
+import com.tercad.zwyka.defines.SortDirection
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.infrastructures.Database
@@ -17,12 +19,16 @@ data class AppSettings(
     val weekStart: WeekStart = WeekStart.MONDAY,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
+    val habitOrderBy: HabitOrderBy = HabitOrderBy.CREATED_AT,
+    val sortDirection: SortDirection = SortDirection.DESC,
 )
 
 private const val LANGUAGE_KEY = "language"
 private const val WEEK_START_KEY = "week_start"
 private const val THEME_MODE_KEY = "theme_mode"
 private const val DATE_FORMAT_KEY = "date_format"
+private const val HABIT_ORDER_BY_KEY = "habit_order_by"
+private const val SORT_DIRECTION_KEY = "sort_direction"
 
 /** Holds the current settings and persists every change to the database. */
 class AppSettingsStore(private val database: Database?) {
@@ -48,6 +54,12 @@ class AppSettingsStore(private val database: Database?) {
             dateFormat = values[DATE_FORMAT_KEY]
                 ?.let { name -> DateFormat.entries.firstOrNull { it.name == name } }
                 ?: DateFormat.YYYY_MM_DD,
+            habitOrderBy = values[HABIT_ORDER_BY_KEY]
+                ?.let { name -> HabitOrderBy.entries.firstOrNull { it.name == name } }
+                ?: HabitOrderBy.CREATED_AT,
+            sortDirection = values[SORT_DIRECTION_KEY]
+                ?.let { name -> SortDirection.entries.firstOrNull { it.name == name } }
+                ?: SortDirection.DESC,
         )
     }
 
@@ -62,5 +74,7 @@ class AppSettingsStore(private val database: Database?) {
         queries.upsertSetting(WEEK_START_KEY, settings.weekStart.name)
         queries.upsertSetting(THEME_MODE_KEY, settings.themeMode.name)
         queries.upsertSetting(DATE_FORMAT_KEY, settings.dateFormat.name)
+        queries.upsertSetting(HABIT_ORDER_BY_KEY, settings.habitOrderBy.name)
+        queries.upsertSetting(SORT_DIRECTION_KEY, settings.sortDirection.name)
     }
 }

@@ -46,6 +46,10 @@ import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.defines.applicationLanguages
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
+import com.tercad.zwyka.defines.habitOrderByOptions
+import com.tercad.zwyka.defines.sortDirectionOptions
+import com.tercad.zwyka.resources.habit_order_by
+import com.tercad.zwyka.resources.sort_direction
 import com.tercad.zwyka.defines.themeModeOptions
 import com.tercad.zwyka.resources.date_format
 import com.tercad.zwyka.resources.months_short
@@ -169,6 +173,28 @@ class SettingsPage(
                 onSelect = { index ->
                     scope.launch {
                         settingsStore.update(settings.copy(dateFormat = dateFormatOptions[index]))
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.habit_order_by),
+                options = habitOrderByOptions.map { stringResource(it.label) },
+                selectedIndex = habitOrderByOptions.indexOf(settings.habitOrderBy),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(habitOrderBy = habitOrderByOptions[index]))
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.sort_direction),
+                options = sortDirectionOptions.map { stringResource(it.label) },
+                selectedIndex = sortDirectionOptions.indexOf(settings.sortDirection),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(sortDirection = sortDirectionOptions[index]))
                     }
                 },
             )
