@@ -120,7 +120,7 @@ private fun HomePageContent(
             initializeDatabase()
             val habits = database.databaseQueries.selectAllHabits()
                 .awaitAsList()
-                .map { Habit(it.id, it.title, it.icon, it.color) }
+                .map { Habit(it.id, it.title, it.icon, it.color, it.remarks) }
             val dayStates = database.databaseQueries.selectDayStatesForDateRange(
                 dates.first(),
                 dates.last(),
@@ -219,7 +219,7 @@ private fun HomePageContent(
                         showHabitDialog = false
                         editingHabit = null
                     },
-                    onSave = { title, icon, color ->
+                    onSave = { title, icon, color, remarks ->
                         isHabitSaving = true
                         habitError = null
                         coroutineScope.launch {
@@ -230,6 +230,7 @@ private fun HomePageContent(
                                     title = title,
                                     icon = icon,
                                     color = color,
+                                    remarks = remarks,
                                 )
                                 state = current.copy(habits = habits)
                                 showHabitDialog = false
@@ -324,17 +325,18 @@ private suspend fun saveHabit(
     title: String,
     icon: String?,
     color: String?,
+    remarks: String?,
 ): List<Habit> {
     database.transaction {
         if (habitId == null) {
-            database.databaseQueries.insertHabit(title, icon, color)
+            database.databaseQueries.insertHabit(title, icon, color, remarks)
         } else {
-            database.databaseQueries.updateHabit(title, icon, color, habitId)
+            database.databaseQueries.updateHabit(title, icon, color, remarks, habitId)
         }
     }
     return database.databaseQueries.selectAllHabits()
         .awaitAsList()
-        .map { Habit(it.id, it.title, it.icon, it.color) }
+        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks) }
 }
 
 private suspend fun deleteHabit(database: Database, habitId: Long) {

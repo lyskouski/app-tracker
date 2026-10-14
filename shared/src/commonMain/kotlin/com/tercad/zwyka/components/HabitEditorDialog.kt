@@ -64,6 +64,7 @@ import com.tercad.zwyka.resources.edit_habit
 import com.tercad.zwyka.resources.habit_color
 import com.tercad.zwyka.resources.habit_icon
 import com.tercad.zwyka.resources.habit_name
+import com.tercad.zwyka.resources.habit_remarks
 import com.tercad.zwyka.resources.habit_update_failed
 import com.tercad.zwyka.resources.invalid_color
 import com.tercad.zwyka.resources.no_icon
@@ -78,12 +79,13 @@ fun HabitEditorDialog(
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (title: String, icon: String?, color: String?) -> Unit,
+    onSave: (title: String, icon: String?, color: String?, remarks: String?) -> Unit,
     onDelete: (() -> Unit)? = null,
 ) {
     var title by remember(habit?.id) { mutableStateOf(habit?.title.orEmpty()) }
     var icon by remember(habit?.id) { mutableStateOf(habit?.icon) }
     var color by remember(habit?.id) { mutableStateOf(habit?.color) }
+    var remarks by remember(habit?.id) { mutableStateOf(habit?.remarks.orEmpty()) }
     var iconSearch by remember(habit?.id) { mutableStateOf("") }
     var colorInput by remember(habit?.id) { mutableStateOf(habit?.color.orEmpty()) }
     var selectingIcon by remember(habit?.id) { mutableStateOf(false) }
@@ -310,6 +312,17 @@ fun HabitEditorDialog(
                             )
                             Text(color ?: stringResource(Res.string.default_color))
                         }
+                        OutlinedTextField(
+                            value = remarks,
+                            onValueChange = { remarks = it },
+                            label = { Text(stringResource(Res.string.habit_remarks)) },
+                            minLines = 3,
+                            maxLines = 6,
+                            enabled = !isSaving,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp),
+                        )
                         error?.let {
                             Text(
                                 stringResource(
@@ -360,7 +373,7 @@ fun HabitEditorDialog(
                                     color = normalizedColor
                                     selectingColor = false
                                 }
-                                else -> onSave(title.trim(), icon, color)
+                                else -> onSave(title.trim(), icon, color, remarks.trim().ifEmpty { null })
                             }
                         },
                         enabled = canSave,

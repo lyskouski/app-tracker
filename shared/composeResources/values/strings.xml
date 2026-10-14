@@ -9,6 +9,7 @@
     <string name="add_habit">Add habit</string>
     <string name="add_habit_failed">Unable to add habit: %s</string>
     <string name="habit_name">Habit name</string>
+    <string name="habit_remarks">Remarks</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="habit_icon">Habit icon</string>

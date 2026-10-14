@@ -8,4 +8,5 @@ data class Habit(
     val title: String,
     val icon: String? = null,
     val color: String? = null,
+    val remarks: String? = null,
 )

@@ -9,6 +9,7 @@
     <string name="add_habit">Gewohnheit hinzufügen</string>
     <string name="add_habit_failed">Gewohnheit konnte nicht hinzugefügt werden: %s</string>
     <string name="habit_name">Name der Gewohnheit</string>
+    <string name="habit_remarks">Anmerkungen</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="habit_icon">Symbol der Gewohnheit</string>
