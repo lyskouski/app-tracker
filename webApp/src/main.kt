@@ -35,19 +35,22 @@ private suspend fun initializeDatabase(driver: SqlDriver) {
         parameters = 0,
     ).await()
 
-    when {
-        currentVersion == 0L -> Database.Schema.create(driver).await()
-        currentVersion < Database.Schema.version ->
-            Database.Schema.migrate(driver, currentVersion, Database.Schema.version).await()
-        currentVersion > Database.Schema.version ->
-            error("Database schema $currentVersion is newer than this app supports.")
-    }
+    // One transaction so a failed migration cannot leave a half-migrated schema in IndexedDB.
+    Database(driver).transaction {
+        when {
+            currentVersion == 0L -> Database.Schema.create(driver).await()
+            currentVersion < Database.Schema.version ->
+                Database.Schema.migrate(driver, currentVersion, Database.Schema.version).await()
+            currentVersion > Database.Schema.version ->
+                error("Database schema $currentVersion is newer than this app supports.")
+        }
 
-    if (currentVersion < Database.Schema.version) {
-        driver.execute(
-            identifier = null,
-            sql = "PRAGMA user_version = ${Database.Schema.version}",
-            parameters = 0,
-        ).await()
+        if (currentVersion < Database.Schema.version) {
+            driver.execute(
+                identifier = null,
+                sql = "PRAGMA user_version = ${Database.Schema.version}",
+                parameters = 0,
+            ).await()
+        }
     }
 }
