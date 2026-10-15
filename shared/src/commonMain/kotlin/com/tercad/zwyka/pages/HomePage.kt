@@ -281,6 +281,7 @@ private fun HomePageContent(
                     DayStateDialog(
                         dayState = selected,
                         habit = habit,
+                        dateFormat = settingsStore.current.dateFormat,
                         saveError = dayStateSaveError,
                         isSaving = isDayStateSaving,
                         onStatusChange = { mark ->

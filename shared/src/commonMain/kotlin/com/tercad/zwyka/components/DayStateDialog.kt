@@ -22,6 +22,7 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.statusOptions
 import com.tercad.zwyka.resources.Res
@@ -30,17 +31,22 @@ import com.tercad.zwyka.resources.date
 import com.tercad.zwyka.resources.day_state_save_failed
 import com.tercad.zwyka.resources.edit_day_state
 import com.tercad.zwyka.resources.habit_name
+import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.status
+import org.jetbrains.compose.resources.stringArrayResource
 
 @Composable
 fun DayStateDialog(
     dayState: DayState,
     habit: Habit,
+    dateFormat: DateFormat,
     saveError: String?,
     isSaving: Boolean,
     onStatusChange: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {
+    val monthNames = stringArrayResource(Res.array.months_short)
+
     AlertDialog(
         onDismissRequest = {
             if (!isSaving) onDismiss()
@@ -68,7 +74,7 @@ fun DayStateDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 OutlinedTextField(
-                    value = dayState.date,
+                    value = dateFormat.format(dayState.date, monthNames),
                     onValueChange = {},
                     readOnly = true,
                     singleLine = true,
