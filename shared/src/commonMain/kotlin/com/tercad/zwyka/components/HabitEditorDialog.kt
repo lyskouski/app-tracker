@@ -4,6 +4,10 @@
 package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +28,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
@@ -314,29 +316,39 @@ fun HabitEditorDialog(
                             stringResource(Res.string.active_days),
                             modifier = Modifier.padding(top = 8.dp),
                         )
-                        Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(1.dp)) {
                             val first = weekStart.dayOfWeek.ordinal
                             List(7) { (first + it) % 7 }.forEach { index ->
                                 val label = dayLabels[index]
-                                FilterChip(
-                                    selected = activeDays and (1 shl index) != 0,
-                                    onClick = { activeDays = activeDays xor (1 shl index) },
-                                    label = {
-                                        Text(
-                                            stringResource(label),
-                                            style = MaterialTheme.typography.labelSmall,
-                                            maxLines = 1,
-                                            softWrap = false,
+                                val selected = activeDays and (1 shl index) != 0
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(32.dp)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(
+                                            if (selected) currentColorScheme().primary
+                                            else Color.Transparent,
                                         )
-                                    },
-                                    enabled = !isSaving,
-                                    colors = FilterChipDefaults.filterChipColors(
-                                        labelColor = currentColorScheme().onSurface,
-                                        selectedContainerColor = currentColorScheme().primary,
-                                        selectedLabelColor = currentColorScheme().onPrimary,
-                                    ),
-                                    modifier = Modifier.weight(1f),
-                                )
+                                        .border(
+                                            1.dp,
+                                            currentColorScheme().outline,
+                                            RoundedCornerShape(8.dp),
+                                        )
+                                        .clickable(enabled = !isSaving) {
+                                            activeDays = activeDays xor (1 shl index)
+                                        },
+                                ) {
+                                    Text(
+                                        stringResource(label),
+                                        color = if (selected) currentColorScheme().onPrimary
+                                        else currentColorScheme().onSurface,
+                                        style = MaterialTheme.typography.labelSmall,
+                                        maxLines = 1,
+                                        softWrap = false,
+                                    )
+                                }
                             }
                         }
                         OutlinedButton(
