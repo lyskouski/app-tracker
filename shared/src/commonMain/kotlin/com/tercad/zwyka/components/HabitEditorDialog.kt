@@ -326,7 +326,7 @@ fun HabitEditorDialog(
                                         },
                                 ) {
                                     Text(
-                                        dayNames[index],
+                                        dayNames.getOrElse(index) { "" },
                                         color = if (selected) currentColorScheme().onPrimary
                                         else currentColorScheme().onSurface,
                                         style = MaterialTheme.typography.labelSmall,
