@@ -1,0 +1,64 @@
+name: Project Release Artifacts
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    uses: ./.github/workflows/create_release_page.yml
+    secrets: inherit
+    permissions:
+      contents: write
+    with:
+      draft: false
+
+  build:
+    name: Create ${{ matrix.target }} build
+    permissions:
+      contents: write
+    runs-on: ${{ matrix.os }}
+    needs: release
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [Web]
+        include:
+          - os: ubuntu-latest
+            target: Web
+            build_path: webApp/build/dist/wasmJs/productionExecutable/
+            asset_extension: .tar.gz
+            asset_content_type: application/gzip
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+# Web
+      - name: Build Web (Kotlin/Wasm) distribution
+        if: matrix.target == 'Web'
+        run: ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon
+
+      - name: Compress Web Package
+        if: matrix.target == 'Web'
+        run: tar czf zwyka_${{ matrix.target }}${{ matrix.asset_extension }} *
+        working-directory: ${{ matrix.build_path }}
+
+
+      - name: Upload ${{ matrix.target }} Artifact
+        id: upload_release_asset
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+          asset_name: zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+          asset_content_type: ${{ matrix.asset_content_type }}
