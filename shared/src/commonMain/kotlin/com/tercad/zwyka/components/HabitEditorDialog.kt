@@ -45,6 +45,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.data.ALL_DAYS
@@ -64,13 +65,7 @@ import com.tercad.zwyka.resources.add_habit_failed
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.color_value
-import com.tercad.zwyka.resources.day_short_1
-import com.tercad.zwyka.resources.day_short_2
-import com.tercad.zwyka.resources.day_short_3
-import com.tercad.zwyka.resources.day_short_4
-import com.tercad.zwyka.resources.day_short_5
-import com.tercad.zwyka.resources.day_short_6
-import com.tercad.zwyka.resources.day_short_7
+import com.tercad.zwyka.resources.days_short
 import com.tercad.zwyka.resources.default_color
 import com.tercad.zwyka.resources.delete_habit
 import com.tercad.zwyka.resources.delete_habit_confirmation
@@ -85,16 +80,6 @@ import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.search_icons
 import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
-
-private val dayLabels = listOf(
-    Res.string.day_short_1,
-    Res.string.day_short_2,
-    Res.string.day_short_3,
-    Res.string.day_short_4,
-    Res.string.day_short_5,
-    Res.string.day_short_6,
-    Res.string.day_short_7,
-)
 
 @Composable
 fun HabitEditorDialog(
@@ -123,6 +108,7 @@ fun HabitEditorDialog(
         selectingColor -> normalizedColor != null
         else -> title.isNotBlank()
     }
+    val dayNames = stringArrayResource(Res.array.days_short)
     val noIconDescription = stringResource(Res.string.no_icon)
 
     AlertDialog(
@@ -319,7 +305,6 @@ fun HabitEditorDialog(
                         Row(horizontalArrangement = Arrangement.spacedBy(1.dp)) {
                             val first = weekStart.dayOfWeek.ordinal
                             List(7) { (first + it) % 7 }.forEach { index ->
-                                val label = dayLabels[index]
                                 val selected = activeDays and (1 shl index) != 0
                                 Box(
                                     contentAlignment = Alignment.Center,
@@ -341,7 +326,7 @@ fun HabitEditorDialog(
                                         },
                                 ) {
                                     Text(
-                                        stringResource(label),
+                                        dayNames[index],
                                         color = if (selected) currentColorScheme().onPrimary
                                         else currentColorScheme().onSurface,
                                         style = MaterialTheme.typography.labelSmall,

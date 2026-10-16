@@ -11,13 +11,6 @@
     <string name="habit_name">Name der Gewohnheit</string>
     <string name="habit_remarks">Anmerkungen</string>
     <string name="active_days">Aktive Tage</string>
-    <string name="day_short_1">Mo</string>
-    <string name="day_short_2">Di</string>
-    <string name="day_short_3">Mi</string>
-    <string name="day_short_4">Do</string>
-    <string name="day_short_5">Fr</string>
-    <string name="day_short_6">Sa</string>
-    <string name="day_short_7">So</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="no_icon">Kein Symbol</string>
@@ -56,6 +49,15 @@
     <string name="order_title">Titel</string>
     <string name="sort_ascending">Aufsteigend</string>
     <string name="sort_descending">Absteigend</string>
+    <string-array name="days_short">
+        <item>Mo</item>
+        <item>Di</item>
+        <item>Mi</item>
+        <item>Do</item>
+        <item>Fr</item>
+        <item>Sa</item>
+        <item>So</item>
+    </string-array>
     <string-array name="months_short">
         <item>Jan</item>
         <item>Feb</item>

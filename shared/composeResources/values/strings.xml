@@ -11,13 +11,6 @@
     <string name="habit_name">Habit name</string>
     <string name="habit_remarks">Remarks</string>
     <string name="active_days">Active days</string>
-    <string name="day_short_1">Mon</string>
-    <string name="day_short_2">Tue</string>
-    <string name="day_short_3">Wed</string>
-    <string name="day_short_4">Thu</string>
-    <string name="day_short_5">Fri</string>
-    <string name="day_short_6">Sat</string>
-    <string name="day_short_7">Sun</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="no_icon">No icon</string>
@@ -56,6 +49,15 @@
     <string name="order_title">Title</string>
     <string name="sort_ascending">Ascending</string>
     <string name="sort_descending">Descending</string>
+    <string-array name="days_short">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+        <item>Sun</item>
+    </string-array>
     <string-array name="months_short">
         <item>Jan</item>
         <item>Feb</item>
