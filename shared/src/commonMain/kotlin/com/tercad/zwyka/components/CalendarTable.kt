@@ -55,6 +55,9 @@ import com.tercad.zwyka.resources.months_short
 import org.jetbrains.compose.resources.stringArrayResource
 import com.tercad.zwyka.defines.WeekStart
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Instant
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
@@ -860,14 +863,20 @@ private fun CalendarBodyViewport(
                 ) {
                     val habit =
                         habits[column]
-                    val backgroundColor =
-                        applicationColor(habit.color)?.copy(alpha = 0.05f)
-                            ?: currentColorScheme().surface
-
                     val key = CellKey(
                             habitId = habit.id,
                             date = date,
                         )
+                    val beforeCreation = habit.createdAt > 0 &&
+                        key !in marks &&
+                        date < Instant.fromEpochMilliseconds(habit.createdAt)
+                            .toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()
+                    val backgroundColor = if (beforeCreation) {
+                        currentColorScheme().background
+                    } else {
+                        applicationColor(habit.color)?.copy(alpha = 0.05f)
+                            ?: currentColorScheme().surface
+                    }
                     val value = marks[key]
                         ?: if (
                             today != null && date > today &&
