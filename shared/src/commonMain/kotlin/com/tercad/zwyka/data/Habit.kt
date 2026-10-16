@@ -11,4 +11,12 @@ data class Habit(
     val remarks: String? = null,
     val createdAt: Long = 0,
     val updatedAt: Long = 0,
+    val activeDays: Int = ALL_DAYS,
 )
+
+/** Bitmask of active weekdays: bit 0 is Monday ... bit 6 is Sunday. */
+const val ALL_DAYS = 0x7F
+const val INACTIVE_MARK = "—"
+
+fun Habit.isActiveOn(dayOfWeek: kotlinx.datetime.DayOfWeek): Boolean =
+    activeDays and (1 shl dayOfWeek.ordinal) != 0

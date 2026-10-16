@@ -10,6 +10,14 @@
     <string name="add_habit_failed">Gewohnheit konnte nicht hinzugefügt werden: %s</string>
     <string name="habit_name">Name der Gewohnheit</string>
     <string name="habit_remarks">Anmerkungen</string>
+    <string name="active_days">Aktive Tage</string>
+    <string name="day_short_1">Mo</string>
+    <string name="day_short_2">Di</string>
+    <string name="day_short_3">Mi</string>
+    <string name="day_short_4">Do</string>
+    <string name="day_short_5">Fr</string>
+    <string name="day_short_6">Sa</string>
+    <string name="day_short_7">So</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="no_icon">Kein Symbol</string>

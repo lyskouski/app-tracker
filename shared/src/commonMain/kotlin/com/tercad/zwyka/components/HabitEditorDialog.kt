@@ -24,7 +24,10 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -42,7 +45,9 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.data.ALL_DAYS
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationColorOptions
 import com.tercad.zwyka.defines.applicationIcon
@@ -51,11 +56,19 @@ import com.tercad.zwyka.defines.applicationIconOptions
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.normalizeApplicationColor
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.active_days
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.add_habit_failed
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.color_value
+import com.tercad.zwyka.resources.day_short_1
+import com.tercad.zwyka.resources.day_short_2
+import com.tercad.zwyka.resources.day_short_3
+import com.tercad.zwyka.resources.day_short_4
+import com.tercad.zwyka.resources.day_short_5
+import com.tercad.zwyka.resources.day_short_6
+import com.tercad.zwyka.resources.day_short_7
 import com.tercad.zwyka.resources.default_color
 import com.tercad.zwyka.resources.delete_habit
 import com.tercad.zwyka.resources.delete_habit_confirmation
@@ -71,19 +84,31 @@ import com.tercad.zwyka.resources.search_icons
 import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
 
+private val dayLabels = listOf(
+    Res.string.day_short_1,
+    Res.string.day_short_2,
+    Res.string.day_short_3,
+    Res.string.day_short_4,
+    Res.string.day_short_5,
+    Res.string.day_short_6,
+    Res.string.day_short_7,
+)
+
 @Composable
 fun HabitEditorDialog(
     habit: Habit?,
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (title: String, icon: String?, color: String?, remarks: String?) -> Unit,
+    onSave: (title: String, icon: String?, color: String?, remarks: String?, activeDays: Int) -> Unit,
     onDelete: (() -> Unit)? = null,
+    weekStart: WeekStart = WeekStart.MONDAY,
 ) {
     var title by remember(habit?.id) { mutableStateOf(habit?.title.orEmpty()) }
     var icon by remember(habit?.id) { mutableStateOf(habit?.icon) }
     var color by remember(habit?.id) { mutableStateOf(habit?.color) }
     var remarks by remember(habit?.id) { mutableStateOf(habit?.remarks.orEmpty()) }
+    var activeDays by remember(habit?.id) { mutableStateOf(habit?.activeDays ?: ALL_DAYS) }
     var iconSearch by remember(habit?.id) { mutableStateOf("") }
     var colorInput by remember(habit?.id) { mutableStateOf(habit?.color.orEmpty()) }
     var selectingIcon by remember(habit?.id) { mutableStateOf(false) }
@@ -285,6 +310,35 @@ fun HabitEditorDialog(
                                 .fillMaxWidth()
                                 .padding(top = 8.dp),
                         )
+                        Text(
+                            stringResource(Res.string.active_days),
+                            modifier = Modifier.padding(top = 8.dp),
+                        )
+                        Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                            val first = weekStart.dayOfWeek.ordinal
+                            List(7) { (first + it) % 7 }.forEach { index ->
+                                val label = dayLabels[index]
+                                FilterChip(
+                                    selected = activeDays and (1 shl index) != 0,
+                                    onClick = { activeDays = activeDays xor (1 shl index) },
+                                    label = {
+                                        Text(
+                                            stringResource(label),
+                                            style = MaterialTheme.typography.labelSmall,
+                                            maxLines = 1,
+                                            softWrap = false,
+                                        )
+                                    },
+                                    enabled = !isSaving,
+                                    colors = FilterChipDefaults.filterChipColors(
+                                        labelColor = currentColorScheme().onSurface,
+                                        selectedContainerColor = currentColorScheme().primary,
+                                        selectedLabelColor = currentColorScheme().onPrimary,
+                                    ),
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                        }
                         OutlinedButton(
                             onClick = {
                                 colorInput = color.orEmpty()
@@ -369,7 +423,7 @@ fun HabitEditorDialog(
                                     color = normalizedColor
                                     selectingColor = false
                                 }
-                                else -> onSave(title.trim(), icon, color, remarks.trim().ifEmpty { null })
+                                else -> onSave(title.trim(), icon, color, remarks.trim().ifEmpty { null }, activeDays)
                             }
                         },
                         enabled = canSave,

@@ -5,7 +5,8 @@ CREATE TABLE Habit (
     color TEXT,
     remarks TEXT,
     createdAt INTEGER NOT NULL DEFAULT 0,
-    updatedAt INTEGER NOT NULL DEFAULT 0
+    updatedAt INTEGER NOT NULL DEFAULT 0,
+    activeDays INTEGER NOT NULL DEFAULT 127
 );
 
 CREATE TABLE DayState (
@@ -39,12 +40,12 @@ FROM Habit
 ORDER BY id;
 
 insertHabit:
-INSERT INTO Habit(title, icon, color, remarks, createdAt, updatedAt)
-VALUES (?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
+INSERT INTO Habit(title, icon, color, remarks, activeDays, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
 
 updateHabit:
 UPDATE Habit
-SET title = ?, icon = ?, color = ?, remarks = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+SET title = ?, icon = ?, color = ?, remarks = ?, activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
 WHERE id = ?;
 
 deleteDayStatesForHabit:
@@ -60,6 +61,10 @@ SELECT *
 FROM DayState
 WHERE date BETWEEN ? AND ?
 ORDER BY habitId, date;
+
+deleteDayState:
+DELETE FROM DayState
+WHERE habitId = ? AND date = ?;
 
 upsertDayState:
 INSERT OR REPLACE INTO DayState(habitId, date, mark)

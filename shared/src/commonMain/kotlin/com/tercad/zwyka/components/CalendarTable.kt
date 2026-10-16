@@ -47,6 +47,8 @@ import kotlin.math.roundToInt
 import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
+import com.tercad.zwyka.data.INACTIVE_MARK
+import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.months_short
@@ -866,7 +868,11 @@ private fun CalendarBodyViewport(
                             habitId = habit.id,
                             date = date,
                         )
-                    val value = marks[key] ?: " "
+                    val value = marks[key]
+                        ?: if (
+                            today != null && date > today &&
+                            !habit.isActiveOn(LocalDate.parse(date).dayOfWeek)
+                        ) INACTIVE_MARK else " "
                     val status = marks[key]
                         ?.takeIf { mark -> statusOptions.any { it.mark == mark } }
                         ?: "·"
