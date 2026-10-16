@@ -12,12 +12,10 @@
     <string name="habit_remarks">Anmerkungen</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
-    <string name="habit_icon">Symbol der Gewohnheit</string>
     <string name="no_icon">Kein Symbol</string>
     <string name="select_icon">Symbol auswählen</string>
     <string name="search_icons">Symbole suchen</string>
     <string name="back">Zurück</string>
-    <string name="habit_color">Gewohnheitsfarbe</string>
     <string name="default_color">Standard</string>
     <string name="select_color">Farbe auswählen</string>
     <string name="color_value">Hex-Farbwert (#RRGGBB)</string>

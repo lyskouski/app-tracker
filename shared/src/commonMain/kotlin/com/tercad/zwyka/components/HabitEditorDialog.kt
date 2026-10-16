@@ -61,8 +61,6 @@ import com.tercad.zwyka.resources.delete_habit
 import com.tercad.zwyka.resources.delete_habit_confirmation
 import com.tercad.zwyka.resources.delete_habit_confirmation_message
 import com.tercad.zwyka.resources.edit_habit
-import com.tercad.zwyka.resources.habit_color
-import com.tercad.zwyka.resources.habit_icon
 import com.tercad.zwyka.resources.habit_name
 import com.tercad.zwyka.resources.habit_remarks
 import com.tercad.zwyka.resources.habit_update_failed
@@ -276,23 +274,17 @@ fun HabitEditorDialog(
                             enabled = !isSaving,
                             modifier = Modifier.fillMaxWidth(),
                         )
-                        Text(stringResource(Res.string.habit_icon))
-                        OutlinedButton(
-                            onClick = {
-                                iconSearch = ""
-                                selectingIcon = true
-                            },
+                        OutlinedTextField(
+                            value = remarks,
+                            onValueChange = { remarks = it },
+                            label = { Text(stringResource(Res.string.habit_remarks)) },
+                            minLines = 3,
+                            maxLines = 6,
                             enabled = !isSaving,
-                        ) {
-                            applicationIcon(icon)?.let { image ->
-                                Icon(imageVector = image, contentDescription = null)
-                            } ?: Text("?")
-                            Text(
-                                applicationIconOption(icon)?.title
-                                    ?: stringResource(Res.string.no_icon),
-                            )
-                        }
-                        Text(stringResource(Res.string.habit_color))
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp),
+                        )
                         OutlinedButton(
                             onClick = {
                                 colorInput = color.orEmpty()
@@ -312,17 +304,21 @@ fun HabitEditorDialog(
                             )
                             Text(color ?: stringResource(Res.string.default_color))
                         }
-                        OutlinedTextField(
-                            value = remarks,
-                            onValueChange = { remarks = it },
-                            label = { Text(stringResource(Res.string.habit_remarks)) },
-                            minLines = 3,
-                            maxLines = 6,
+                        OutlinedButton(
+                            onClick = {
+                                iconSearch = ""
+                                selectingIcon = true
+                            },
                             enabled = !isSaving,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp),
-                        )
+                        ) {
+                            applicationIcon(icon)?.let { image ->
+                                Icon(imageVector = image, contentDescription = null)
+                            } ?: Text("?")
+                            Text(
+                                applicationIconOption(icon)?.title
+                                    ?: stringResource(Res.string.no_icon),
+                            )
+                        }
                         error?.let {
                             Text(
                                 stringResource(
