@@ -99,6 +99,13 @@ fun CalendarTable(
         }
     }
 
+    /*
+     * Day Streak per habit, keyed by the free cell right after the streak.
+     */
+    val streaks = remember(habits, dates, marks, today) {
+        calculateStreaks(habits, dates, marks, today)
+    }
+
     val density = LocalDensity.current
 
     /*
@@ -325,6 +332,7 @@ fun CalendarTable(
                     habits = habits,
                     dates = dates,
                     marks = marks,
+                    streaks = streaks,
                     scrollX = currentScrollOffset.x,
                     scrollY = currentScrollOffset.y,
                     viewportWidthPx = bodyWidthPx,
@@ -775,6 +783,7 @@ private fun CalendarBodyViewport(
     habits: List<Habit>,
     dates: List<String>,
     marks: Map<CellKey, String>,
+    streaks: Map<CellKey, Int>,
     scrollX: Float,
     scrollY: Float,
     viewportWidthPx: Float,
@@ -877,11 +886,8 @@ private fun CalendarBodyViewport(
                         applicationColor(habit.color)?.copy(alpha = 0.05f)
                             ?: currentColorScheme().surface
                     }
-                    val value = marks[key]
-                        ?: if (
-                            today != null && date > today &&
-                            !habit.isActiveOn(LocalDate.parse(date).dayOfWeek)
-                        ) INACTIVE_MARK else " "
+                    val value = cellMark(habit, date, marks, today)
+                    val streak = streaks[key]
                     val status = marks[key]
                         ?.takeIf { mark -> statusOptions.any { it.mark == mark } }
                         ?: "·"
@@ -895,6 +901,7 @@ private fun CalendarBodyViewport(
                             cellHeightPx.toDp()
                         },
                         background = backgroundColor,
+                        topLabel = streak?.toString(),
                         highlight = todayHighlight(
                             isToday = date == today,
                             left = false,
@@ -911,7 +918,8 @@ private fun CalendarBodyViewport(
                                 )
                             }
                             .semantics {
-                                contentDescription = "${habit.title}, $date, $value"
+                                contentDescription = "${habit.title}, $date, $value" +
+                                    (streak?.let { ", $it" } ?: "")
                             },
                     )
                 }
@@ -973,6 +981,54 @@ private fun CalendarBodyViewport(
 }
 
 /*
+ * Mark shown in the cell: stored one, or "—" for future inactive days.
+ */
+private fun cellMark(
+    habit: Habit,
+    date: String,
+    marks: Map<CellKey, String>,
+    today: String?,
+): String =
+    marks[CellKey(habitId = habit.id, date = date)]
+        ?: if (
+            today != null && date > today &&
+            !habit.isActiveOn(LocalDate.parse(date).dayOfWeek)
+        ) INACTIVE_MARK else " "
+
+/*
+ * Day Streak = sequential days with a status mark.
+ *
+ * "—" is not counted but keeps the streak going.
+ * The result is attached to the first free cell after the streak.
+ */
+private fun calculateStreaks(
+    habits: List<Habit>,
+    dates: List<String>,
+    marks: Map<CellKey, String>,
+    today: String?,
+): Map<CellKey, Int> {
+    val statusMarks = statusOptions.mapTo(HashSet()) { it.mark }
+    val result = HashMap<CellKey, Int>()
+    for (habit in habits) {
+        var streak = 0
+        for (date in dates) {
+            val mark = cellMark(habit, date, marks, today)
+            when {
+                mark in statusMarks -> streak++
+                mark == INACTIVE_MARK -> Unit
+                else -> {
+                    if (streak > 0 && mark.isBlank()) {
+                        result[CellKey(habitId = habit.id, date = date)] = streak
+                    }
+                    streak = 0
+                }
+            }
+        }
+    }
+    return result
+}
+
+/*
  * ============================================================
  * CELL
  * ============================================================
@@ -988,6 +1044,7 @@ private fun CalendarTableCell(
     iconTint: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     contentDescription: String? = null,
+    topLabel: String? = null,
     highlight: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
@@ -1021,6 +1078,14 @@ private fun CalendarTableCell(
                     }
                 },
                 color = textColor,
+            )
+        }
+        if (topLabel != null) {
+            Text(
+                text = topLabel,
+                modifier = Modifier.align(Alignment.TopCenter),
+                color = currentColorScheme().onSurfaceVariant,
+                style = MaterialTheme.typography.labelSmall,
             )
         }
     }
