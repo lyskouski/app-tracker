@@ -93,7 +93,6 @@ fun CalendarTable(
      *
      *     habitId + date
      *
-     * Missing cells are rendered as "|".
      */
     val marks = remember(dayState) {
         dayState.associate { state ->
@@ -700,7 +699,7 @@ private fun CalendarFirstColumnViewport(
             .coerceAtMost(dates.size)
 
     /*
-     * Overscan.
+     * Overscan
      */
     val startRow =
         (firstVisibleRow - 2)
@@ -840,7 +839,7 @@ private fun CalendarBodyViewport(
             .coerceAtMost(dates.size)
 
     /*
-     * Overscan.
+     * Overscan
      */
     val startColumn =
         (firstVisibleColumn - 2)
