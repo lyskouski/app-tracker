@@ -1,0 +1,9 @@
+CREATE TABLE HabitTime (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    habitId INTEGER NOT NULL,
+    timeStart INTEGER NOT NULL,
+    timeEnd INTEGER NOT NULL,
+    note TEXT,
+    activeDays INTEGER NOT NULL DEFAULT 127,
+    FOREIGN KEY (habitId) REFERENCES Habit(id)
+);

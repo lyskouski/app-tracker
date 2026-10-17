@@ -57,6 +57,7 @@ import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.sortedBy
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.Alignment
@@ -67,6 +68,7 @@ import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
+import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habit_database_unavailable
 import com.tercad.zwyka.resources.habits_loading
@@ -157,6 +159,22 @@ private fun HomePageContent(
                             .height(46.dp)
                             .background(currentColorScheme().primary),
                     ) {
+                        TextButton(
+                            onClick = { navigator.push(CalendarPage(database, settingsStore)) },
+                            modifier = Modifier.align(Alignment.CenterStart),
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = currentColorScheme().onPrimary,
+                            ),
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.CalendarMonth,
+                                contentDescription = null,
+                            )
+                            Text(
+                                text = stringResource(Res.string.calendar),
+                                modifier = Modifier.padding(start = 8.dp),
+                            )
+                        }
                         TextButton(
                             onClick = { navigator.push(SettingsPage(settingsStore)) },
                             modifier = Modifier.align(Alignment.CenterEnd),
@@ -384,6 +402,7 @@ private suspend fun saveHabit(
 private suspend fun deleteHabit(database: Database, habitId: Long) {
     database.transaction {
         database.databaseQueries.deleteDayStatesForHabit(habitId)
+        database.databaseQueries.deleteHabitTimesForHabit(habitId)
         database.databaseQueries.deleteHabit(habitId)
     }
 }

@@ -83,4 +83,23 @@
     <string name="metrics">Metrics</string>
     <string name="metrics_days">Days</string>
     <string name="metrics_completion">Completion, %</string>
+    <string name="calendar">Calendar</string>
+    <string name="today">Today</string>
+    <string name="previous_day">Previous day</string>
+    <string name="next_day">Next day</string>
+    <string name="add_habit_time">Schedule habit</string>
+    <string name="edit_habit_time">Edit schedule</string>
+    <string name="habit">Habit</string>
+    <string name="interval">Interval</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 hour</string>
+    <string name="interval_2_hours">2 hours</string>
+    <string name="interval_custom">Custom</string>
+    <string name="time_start">Start (HH:MM)</string>
+    <string name="time_end">End (HH:MM)</string>
+    <string name="habit_time_note">Note</string>
+    <string name="delete">Delete</string>
+    <string name="invalid_time_range">End time must be after start time</string>
+    <string name="habit_time_save_failed">Unable to save schedule: %s</string>
+    <string name="no_habits_to_schedule">Add a habit first</string>
 </resources>

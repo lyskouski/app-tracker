@@ -83,4 +83,23 @@
     <string name="metrics">Kennzahlen</string>
     <string name="metrics_days">Tage</string>
     <string name="metrics_completion">Erfüllung, %</string>
+    <string name="calendar">Kalender</string>
+    <string name="today">Heute</string>
+    <string name="previous_day">Vorheriger Tag</string>
+    <string name="next_day">Nächster Tag</string>
+    <string name="add_habit_time">Gewohnheit planen</string>
+    <string name="edit_habit_time">Planung bearbeiten</string>
+    <string name="habit">Gewohnheit</string>
+    <string name="interval">Intervall</string>
+    <string name="interval_30_min">30 Min.</string>
+    <string name="interval_1_hour">1 Std.</string>
+    <string name="interval_2_hours">2 Std.</string>
+    <string name="interval_custom">Eigene</string>
+    <string name="time_start">Beginn (HH:MM)</string>
+    <string name="time_end">Ende (HH:MM)</string>
+    <string name="habit_time_note">Notiz</string>
+    <string name="delete">Löschen</string>
+    <string name="invalid_time_range">Endzeit muss nach der Startzeit liegen</string>
+    <string name="habit_time_save_failed">Planung konnte nicht gespeichert werden: %s</string>
+    <string name="no_habits_to_schedule">Füge zuerst eine Gewohnheit hinzu</string>
 </resources>
