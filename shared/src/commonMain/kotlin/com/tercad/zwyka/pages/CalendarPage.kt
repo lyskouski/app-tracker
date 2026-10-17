@@ -5,6 +5,7 @@ package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -216,7 +217,11 @@ private fun CalendarPageContent(
                 },
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(contentPadding),
+                    .padding(contentPadding)
+                    .swipeDays(
+                        onPrevious = { selectedDate = selectedDate.minus(1, DateTimeUnit.DAY) },
+                        onNext = { selectedDate = selectedDate.plus(1, DateTimeUnit.DAY) },
+                    ),
             )
         }
     }
@@ -309,6 +314,30 @@ private fun CalendarPageContent(
                 { persist { database.databaseQueries.deleteHabitTime(habitTime.id) } }
             },
         )
+    }
+}
+
+/*
+ * Swipe right shows the previous day, swipe left the next one.
+ * Horizontal drags only, so the vertical scroll of hours keeps working.
+ */
+private fun Modifier.swipeDays(
+    onPrevious: () -> Unit,
+    onNext: () -> Unit,
+): Modifier = pointerInput(Unit) {
+    val threshold = 64.dp.toPx()
+    var total = 0f
+    detectHorizontalDragGestures(
+        onDragStart = { total = 0f },
+        onDragEnd = {
+            when {
+                total > threshold -> onPrevious()
+                total < -threshold -> onNext()
+            }
+        },
+    ) { change, dragAmount ->
+        change.consume()
+        total += dragAmount
     }
 }
 
