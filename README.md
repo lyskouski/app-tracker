@@ -1,3 +1,7 @@
+# <img title="Zwyka Logo" src="./docs/design-flow/logo.svg" width="32" /> Zwyka: Habits Tracking Application
+
+
+
 ## Support (Sponsorship)
 
 As an open-source project, subscribing will not unlock any additional features in the app. However, it would serve as
