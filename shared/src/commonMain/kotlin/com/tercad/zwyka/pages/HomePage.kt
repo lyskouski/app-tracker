@@ -36,64 +36,59 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import org.jetbrains.compose.resources.stringResource
 import cafe.adriel.voyager.core.screen.Screen
-import app.cash.sqldelight.async.coroutines.awaitAsList
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.datetime.DateTimeUnit
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
+import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.sortedBy
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
-import com.tercad.zwyka.data.DayState
-import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.data.applyHabitActiveDays
-import com.tercad.zwyka.data.currentWeekDates
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
-import com.tercad.zwyka.defines.sortedBy
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.Alignment
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.tercad.zwyka.data.AppSettingsStore
-import com.tercad.zwyka.resources.settings
-import com.tercad.zwyka.infrastructures.Database
-import com.tercad.zwyka.notifications.LocalReminderScheduler
-import com.tercad.zwyka.notifications.syncReminders
+import com.tercad.zwyka.core.Services
+import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habit_database_unavailable
-import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.habits_load_failed
+import com.tercad.zwyka.resources.habits_loading
+import com.tercad.zwyka.resources.settings
+import com.tercad.zwyka.state.AppSettingsStore
 
 class HomePage(
-    private val database: Database?,
+    private val services: Services?,
     private val initializeDatabase: suspend () -> Unit,
     private val settingsStore: AppSettingsStore,
 ) : Screen {
     @Composable
     override fun Content() {
-        HomePageContent(database, initializeDatabase, settingsStore)
+        HomePageContent(services, initializeDatabase, settingsStore)
     }
 }
 
 @Composable
 private fun HomePageContent(
-    database: Database?,
+    services: Services?,
     initializeDatabase: suspend () -> Unit,
     settingsStore: AppSettingsStore,
 ) {
     val navigator = LocalNavigator.currentOrThrow
-    if (database == null) {
+    if (services == null) {
         Box(Modifier.fillMaxSize()) {
             Text(stringResource(Res.string.habit_database_unavailable))
         }
@@ -109,7 +104,7 @@ private fun HomePageContent(
         }
     }
 
-    var state by remember(database) {
+    var state by remember(services) {
         mutableStateOf<HomePageState>(HomePageState.Loading)
     }
     var showHabitDialog by remember { mutableStateOf(false) }
@@ -120,22 +115,14 @@ private fun HomePageContent(
     var dayStateSaveError by remember { mutableStateOf<String?>(null) }
     var isDayStateSaving by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    val reminderScheduler = LocalReminderScheduler.current
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
 
-    LaunchedEffect(database) {
+    LaunchedEffect(services) {
         state = HomePageState.Loading
         try {
             initializeDatabase()
-            val habits = database.databaseQueries.selectAllHabits()
-                .awaitAsList()
-                .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
-            val dayStates = database.databaseQueries.selectDayStatesForDateRange(
-                dates.first(),
-                dates.last(),
-            )
-                .awaitAsList()
-                .map { DayState(it.habitId, it.date, it.mark) }
+            val habits = services.habits.getAll()
+            val dayStates = services.dayStates.getRange(dates.first(), dates.last())
             state = HomePageState.Loaded(habits, dayStates)
         } catch (error: CancellationException) {
             throw error
@@ -162,7 +149,7 @@ private fun HomePageContent(
                             .background(currentColorScheme().primary),
                     ) {
                         TextButton(
-                            onClick = { navigator.push(CalendarPage(database, settingsStore)) },
+                            onClick = { navigator.push(CalendarPage(services, settingsStore)) },
                             modifier = Modifier.align(Alignment.CenterStart),
                             colors = ButtonDefaults.textButtonColors(
                                 contentColor = currentColorScheme().onPrimary,
@@ -256,26 +243,13 @@ private fun HomePageContent(
                         habitError = null
                         coroutineScope.launch {
                             try {
-                                val habits = saveHabit(
-                                    database = database,
-                                    habitId = habitToEdit?.id,
-                                    title = title,
-                                    icon = icon,
-                                    color = color,
-                                    remarks = remarks,
-                                    activeDays = activeDays,
-                                    weekDates = currentWeekDates(
-                                        today,
-                                        settingsStore.current.weekStart,
-                                    ),
+                                val habits = services.habits.save(
+                                    id = habitToEdit?.id,
+                                    draft = HabitDraft(title, icon, color, remarks, activeDays),
+                                    weekStart = settingsStore.current.weekStart,
                                 )
-                                val dayStates = database.databaseQueries
-                                    .selectDayStatesForDateRange(dates.first(), dates.last())
-                                    .awaitAsList()
-                                    .map { DayState(it.habitId, it.date, it.mark) }
+                                val dayStates = services.dayStates.getRange(dates.first(), dates.last())
                                 state = current.copy(habits = habits, dayStates = dayStates)
-                                // Habit title is shown in its reminders.
-                                syncReminders(database, reminderScheduler)
                                 showHabitDialog = false
                                 editingHabit = null
                             } catch (error: CancellationException) {
@@ -293,8 +267,7 @@ private fun HomePageContent(
                             habitError = null
                             coroutineScope.launch {
                                 try {
-                                    deleteHabit(database, habit.id)
-                                    syncReminders(database, reminderScheduler)
+                                    services.habits.delete(habit.id)
                                     state = current.copy(
                                         habits = current.habits.filterNot { it.id == habit.id },
                                         dayStates = current.dayStates.filterNot {
@@ -331,11 +304,7 @@ private fun HomePageContent(
                             isDayStateSaving = true
                             coroutineScope.launch {
                                 try {
-                                    database.databaseQueries.upsertDayState(
-                                        updated.habitId,
-                                        updated.date,
-                                        updated.mark,
-                                    )
+                                    services.dayStates.setMark(updated)
                                     val updatedDayStates = current.dayStates
                                         .filterNot {
                                             it.habitId == updated.habitId &&
@@ -361,38 +330,6 @@ private fun HomePageContent(
                 }
             }
         }
-    }
-}
-
-private suspend fun saveHabit(
-    database: Database,
-    habitId: Long?,
-    title: String,
-    icon: String?,
-    color: String?,
-    remarks: String?,
-    activeDays: Int,
-    weekDates: List<LocalDate>,
-): List<Habit> {
-    database.transaction {
-        if (habitId == null) {
-            database.databaseQueries.insertHabit(title, icon, color, remarks, activeDays.toLong())
-        } else {
-            database.databaseQueries.updateHabit(title, icon, color, remarks, activeDays.toLong(), habitId)
-        }
-    }
-    val saved = database.databaseQueries.selectAllHabits().awaitAsList()
-    val savedId = habitId ?: saved.maxOf { it.id }
-    applyHabitActiveDays(database, savedId, activeDays, weekDates)
-    return saved
-        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
-}
-
-private suspend fun deleteHabit(database: Database, habitId: Long) {
-    database.transaction {
-        database.databaseQueries.deleteDayStatesForHabit(habitId)
-        database.databaseQueries.deleteHabitTimesForHabit(habitId)
-        database.databaseQueries.deleteHabit(habitId)
     }
 }
 

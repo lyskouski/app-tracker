@@ -38,15 +38,16 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
-import com.tercad.zwyka.data.ALL_DAYS
-import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.data.HabitTime
-import com.tercad.zwyka.data.Intent
-import com.tercad.zwyka.data.MINUTES_PER_DAY
-import com.tercad.zwyka.data.formatTime
-import com.tercad.zwyka.data.parseTime
-import com.tercad.zwyka.defines.WeekStart
-import com.tercad.zwyka.notifications.LocalReminderScheduler
+import com.tercad.zwyka.core.model.ALL_DAYS
+import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.HabitTime
+import com.tercad.zwyka.core.model.HabitTimeDraft
+import com.tercad.zwyka.core.model.HabitTimeOwner
+import com.tercad.zwyka.core.model.Intent
+import com.tercad.zwyka.core.model.MINUTES_PER_DAY
+import com.tercad.zwyka.core.model.WeekStart
+import com.tercad.zwyka.core.time.formatTime
+import com.tercad.zwyka.core.time.parseTime
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
@@ -59,13 +60,13 @@ import com.tercad.zwyka.resources.edit_habit_time
 import com.tercad.zwyka.resources.habit_or_intent
 import com.tercad.zwyka.resources.habit_time_note
 import com.tercad.zwyka.resources.habit_time_save_failed
+import com.tercad.zwyka.resources.intent_title
 import com.tercad.zwyka.resources.interval
 import com.tercad.zwyka.resources.interval_1_hour
 import com.tercad.zwyka.resources.interval_2_hours
 import com.tercad.zwyka.resources.interval_30_min
 import com.tercad.zwyka.resources.interval_custom
 import com.tercad.zwyka.resources.invalid_time_range
-import com.tercad.zwyka.resources.intent_title
 import com.tercad.zwyka.resources.new_intent
 import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.save
@@ -77,16 +78,6 @@ private enum class HabitTimeInterval(val minutes: Int?, val label: StringResourc
     HOUR_1(60, Res.string.interval_1_hour),
     HOUR_2(120, Res.string.interval_2_hours),
     CUSTOM(null, Res.string.interval_custom),
-}
-
-/*
- * Owner of a scheduled time range chosen in [HabitTimeDialog].
- */
-sealed interface HabitTimeOwner {
-    data class OfHabit(val habitId: Long) : HabitTimeOwner
-
-    /** [intentId] is null for a new intent. */
-    data class OfIntent(val intentId: Long?, val title: String) : HabitTimeOwner
 }
 
 /*
@@ -105,15 +96,10 @@ fun HabitTimeDialog(
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (
-        owner: HabitTimeOwner,
-        timeStart: Int,
-        timeEnd: Int,
-        note: String?,
-        activeDays: Int,
-        notify: Boolean,
-    ) -> Unit,
+    onSave: (HabitTimeDraft) -> Unit,
     onDelete: (() -> Unit)? = null,
+    /** Called when notification gets enabled, e.g. to ask for the permission. */
+    onNotifyEnabled: () -> Unit = {},
     weekStart: WeekStart = WeekStart.MONDAY,
 ) {
     val start0 = habitTime?.timeStart ?: initialStart
@@ -136,7 +122,6 @@ fun HabitTimeDialog(
     var endInput by remember(habitTime?.id) { mutableStateOf(formatTime(end0)) }
     var note by remember(habitTime?.id) { mutableStateOf(habitTime?.note.orEmpty()) }
     var notify by remember(habitTime?.id) { mutableStateOf(habitTime?.notify ?: false) }
-    val reminderScheduler = LocalReminderScheduler.current
     // Own days of the edited range; otherwise the days of the selected habit / intent.
     var activeDays by remember(habitTime?.id, habitId, intentId) {
         mutableStateOf(
@@ -290,7 +275,7 @@ fun HabitTimeDialog(
                     Switch(
                         checked = notify,
                         onCheckedChange = { checked ->
-                            if (checked) reminderScheduler.requestPermission()
+                            if (checked) onNotifyEnabled()
                             notify = checked
                         },
                         enabled = !isSaving,
@@ -355,7 +340,16 @@ fun HabitTimeDialog(
                                 HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
                             }
                             if (timeStart != null && timeEnd != null) {
-                                onSave(owner, timeStart, timeEnd, note.trim().ifEmpty { null }, activeDays, notify)
+                                onSave(
+                                    HabitTimeDraft(
+                                        owner = owner,
+                                        timeStart = timeStart,
+                                        timeEnd = timeEnd,
+                                        note = note.trim().ifEmpty { null },
+                                        activeDays = activeDays,
+                                        notify = notify,
+                                    ),
+                                )
                             }
                         },
                         enabled = canSave,

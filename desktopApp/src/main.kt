@@ -13,7 +13,7 @@ import androidx.compose.ui.window.rememberTrayState
 import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.tercad.zwyka.infrastructures.Database
-import com.tercad.zwyka.notifications.InProcessReminderScheduler
+import com.tercad.zwyka.core.notifications.InProcessReminderScheduler
 import java.io.File
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

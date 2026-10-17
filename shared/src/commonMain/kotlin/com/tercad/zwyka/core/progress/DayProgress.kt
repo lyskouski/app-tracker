@@ -1,14 +1,16 @@
 // Copyright 2026 The terCAD team. All rights reserved.
 // Use of this source code is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
 
-package com.tercad.zwyka.data
+package com.tercad.zwyka.core.progress
 
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Instant
 
-import com.tercad.zwyka.defines.statusOptions
+import com.tercad.zwyka.core.model.CellKey
+import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.INACTIVE_MARK
+import com.tercad.zwyka.core.model.StatusMarks
+import com.tercad.zwyka.core.model.isActiveOn
+import com.tercad.zwyka.core.model.isBeforeCreation
 
 /*
  * Progress of all habits applicable on [date], 0..1, or null if none applies.
@@ -29,21 +31,17 @@ fun calculateDayProgress(
         when {
             mark == INACTIVE_MARK -> null
             mark == null && !habit.isActiveOn(dayOfWeek) -> null
-            mark == null && date < habit.createdDate() -> null
-            else -> {
-                val index = statusOptions.indexOfFirst { it.mark == mark }
-                (index.coerceAtLeast(0) * 0.25f).coerceAtMost(1f)
-            }
+            habit.isBeforeCreation(date, mark) -> null
+            else -> StatusMarks.progress(mark)
         }
     }
     if (values.isEmpty()) return null
     return values.average().toFloat()
 }
 
-private fun Habit.createdDate(): String =
-    if (createdAt <= 0) {
-        ""
-    } else {
-        Instant.fromEpochMilliseconds(createdAt)
-            .toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()
-    }
+/** Daily progress of [dates], see [calculateDayProgress]. */
+fun calculateProgressHistory(
+    habits: List<Habit>,
+    marks: Map<CellKey, String>,
+    dates: List<String>,
+): List<Float?> = dates.map { calculateDayProgress(habits, marks, it) }

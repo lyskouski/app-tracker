@@ -1,7 +1,7 @@
 package com.tercad.zwyka
 
-import com.tercad.zwyka.notifications.Reminder
-import com.tercad.zwyka.notifications.ReminderScheduler
+import com.tercad.zwyka.core.notifications.Reminder
+import com.tercad.zwyka.core.notifications.ReminderScheduler
 import kotlinx.cinterop.ObjCSignatureOverride
 import platform.Foundation.NSDateComponents
 import platform.UserNotifications.UNAuthorizationOptionAlert

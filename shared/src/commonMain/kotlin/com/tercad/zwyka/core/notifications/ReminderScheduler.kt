@@ -1,10 +1,8 @@
 // Copyright 2026 The terCAD team. All rights reserved.
 // Use of this source code is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
 
-package com.tercad.zwyka.notifications
+package com.tercad.zwyka.core.notifications
 
-import androidx.compose.runtime.staticCompositionLocalOf
-import app.cash.sqldelight.async.coroutines.awaitAsList
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
@@ -22,9 +20,7 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
 
-import com.tercad.zwyka.data.ALL_DAYS
-import com.tercad.zwyka.data.formatTime
-import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.core.model.ALL_DAYS
 
 /*
  * Weekly reminder: shown at [minuteOfDay] on every day of [activeDays]
@@ -49,11 +45,21 @@ interface ReminderScheduler {
     fun requestPermission() {}
 }
 
+/*
+ * Scheduler that delivers reminders only while the application runs:
+ * reminders missed meanwhile are shown when it is opened again.
+ */
+interface CatchUpReminderScheduler : ReminderScheduler {
+    /** Shows [reminders] at once. */
+    fun showNow(reminders: List<Reminder>)
+
+    /** Called with the moment of each reminder shown on time. */
+    var onShown: suspend (Instant) -> Unit
+}
+
 object NoReminderScheduler : ReminderScheduler {
     override fun schedule(reminders: List<Reminder>) = Unit
 }
-
-val LocalReminderScheduler = staticCompositionLocalOf<ReminderScheduler> { NoReminderScheduler }
 
 /** Next moment (strictly after [now]) the reminder is due, or null without active days. */
 fun Reminder.nextTrigger(
@@ -88,26 +94,16 @@ fun Reminder.lastTriggerBetween(since: Instant, now: Instant): Instant? {
 
 /*
  * Reminders kept by the running application (Desktop, Web).
- *
- * Nothing can be shown while the application is closed, so reminders missed
- * meanwhile are shown once it is opened again (see [syncReminders]).
  */
 class InProcessReminderScheduler(
     private val scope: CoroutineScope,
     private val show: (Reminder) -> Unit,
-) : ReminderScheduler {
+) : CatchUpReminderScheduler {
     private var job: Job? = null
 
-    /** Missed reminders are shown once per application run. */
-    internal var missedShown = false
+    override var onShown: suspend (Instant) -> Unit = {}
 
-    /** Called with the moment of each shown reminder. */
-    internal var onShown: suspend (Instant) -> Unit = {}
-
-    /** Shows every reminder with an occurrence within (since, now], once. */
-    internal fun showMissed(reminders: List<Reminder>, since: Instant, now: Instant) {
-        reminders.filter { it.lastTriggerBetween(since, now) != null }.forEach(show)
-    }
+    override fun showNow(reminders: List<Reminder>) = reminders.forEach(show)
 
     override fun schedule(reminders: List<Reminder>) {
         job?.cancel()
@@ -129,61 +125,4 @@ class InProcessReminderScheduler(
             }
         }
     }
-}
-
-/*
- * Rebuilds reminders of all HabitTime with enabled notification.
- */
-suspend fun syncReminders(database: Database?, scheduler: ReminderScheduler) {
-    if (database == null || scheduler === NoReminderScheduler) return
-    val queries = database.databaseQueries
-    val habits = queries.selectAllHabits().awaitAsList().associate { it.id to it.title }
-    val intents = queries.selectAllIntents().awaitAsList().associate { it.id to it.title }
-    val reminders = queries.selectAllHabitTimes().awaitAsList()
-        .filter { it.notify != 0L }
-        .mapNotNull { habitTime ->
-            val title = habitTime.habitId?.let { habits[it] }
-                ?: habitTime.intentId?.let { intents[it] }
-                ?: return@mapNotNull null
-            val range = "${formatTime(habitTime.timeStart.toInt())} – ${formatTime(habitTime.timeEnd.toInt())}"
-            Reminder(
-                id = habitTime.id,
-                title = title,
-                text = listOfNotNull(range, habitTime.note).joinToString("\n"),
-                minuteOfDay = habitTime.timeStart.toInt(),
-                activeDays = habitTime.activeDays.toInt(),
-            )
-        }
-    if (scheduler is InProcessReminderScheduler) {
-        catchUpMissedReminders(database, scheduler, reminders)
-    }
-    scheduler.schedule(reminders)
-}
-
-private const val REMINDERS_SHOWN_KEY = "remindersShownAt"
-
-/*
- * Every reminder due while the application was running has been shown, so
- * the moment of the last shown one (or of the application start) bounds
- * the reminders missed while it was closed.
- */
-private suspend fun catchUpMissedReminders(
-    database: Database,
-    scheduler: InProcessReminderScheduler,
-    reminders: List<Reminder>,
-) {
-    if (scheduler.missedShown) return
-    scheduler.missedShown = true
-    val queries = database.databaseQueries
-    suspend fun markShown(moment: Instant) {
-        queries.upsertSetting(REMINDERS_SHOWN_KEY, moment.toEpochMilliseconds().toString())
-    }
-    val now = Clock.System.now()
-    val since = queries.selectAllSettings().awaitAsList()
-        .firstOrNull { it.key == REMINDERS_SHOWN_KEY }
-        ?.value_?.toLongOrNull()
-        ?.let(Instant::fromEpochMilliseconds)
-    if (since != null) scheduler.showMissed(reminders, since, now)
-    markShown(now)
-    scheduler.onShown = ::markShown
 }

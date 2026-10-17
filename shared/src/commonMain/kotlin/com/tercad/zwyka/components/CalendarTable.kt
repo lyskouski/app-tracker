@@ -47,25 +47,24 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-import com.tercad.zwyka.data.CellKey
-import com.tercad.zwyka.data.DayState
-import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.data.INACTIVE_MARK
-import com.tercad.zwyka.data.calculateDayProgress
-import com.tercad.zwyka.data.isActiveOn
-import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.core.model.CellKey
+import com.tercad.zwyka.core.model.DateFormat
+import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.StatusMarks
+import com.tercad.zwyka.core.model.isBeforeCreation
+import com.tercad.zwyka.core.progress.calculateDayProgress
+import com.tercad.zwyka.core.progress.calculateStreaks
+import com.tercad.zwyka.core.progress.displayedMark
+import com.tercad.zwyka.core.progress.toMarks
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.months_short
 import org.jetbrains.compose.resources.stringArrayResource
-import com.tercad.zwyka.defines.WeekStart
+import com.tercad.zwyka.core.model.WeekStart
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Instant
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
-import com.tercad.zwyka.defines.statusOptions
 
 
 @Composable
@@ -94,14 +93,7 @@ fun CalendarTable(
      *     habitId + date
      *
      */
-    val marks = remember(dayState) {
-        dayState.associate { state ->
-            CellKey(
-                habitId = state.habitId,
-                date = state.date,
-            ) to state.mark
-        }
-    }
+    val marks = remember(dayState) { dayState.toMarks() }
 
     /*
      * Day Streak per habit, keyed by the free cell right after the streak.
@@ -884,20 +876,17 @@ private fun CalendarBodyViewport(
                             habitId = habit.id,
                             date = date,
                         )
-                    val beforeCreation = habit.createdAt > 0 &&
-                        key !in marks &&
-                        date < Instant.fromEpochMilliseconds(habit.createdAt)
-                            .toLocalDateTime(TimeZone.currentSystemDefault()).date.toString()
+                    val beforeCreation = habit.isBeforeCreation(date, marks[key])
                     val backgroundColor = if (beforeCreation) {
                         currentColorScheme().background
                     } else {
                         applicationColor(habit.color)?.copy(alpha = 0.05f)
                             ?: currentColorScheme().surface
                     }
-                    val value = cellMark(habit, date, marks, today)
+                    val value = displayedMark(habit, date, marks, today)
                     val streak = streaks[key]
                     val status = marks[key]
-                        ?.takeIf { mark -> statusOptions.any { it.mark == mark } }
+                        ?.takeIf { mark -> StatusMarks.isStatus(mark) }
                         ?: "·"
 
                     CalendarTableCell(
@@ -986,54 +975,6 @@ private fun CalendarBodyViewport(
             }
         }
     }
-}
-
-/*
- * Mark shown in the cell: stored one, or "—" for future inactive days.
- */
-private fun cellMark(
-    habit: Habit,
-    date: String,
-    marks: Map<CellKey, String>,
-    today: String?,
-): String =
-    marks[CellKey(habitId = habit.id, date = date)]
-        ?: if (
-            today != null && date > today &&
-            !habit.isActiveOn(LocalDate.parse(date).dayOfWeek)
-        ) INACTIVE_MARK else " "
-
-/*
- * Day Streak = sequential days with a status mark.
- *
- * "—" is not counted but keeps the streak going.
- * The result is attached to the first free cell after the streak.
- */
-private fun calculateStreaks(
-    habits: List<Habit>,
-    dates: List<String>,
-    marks: Map<CellKey, String>,
-    today: String?,
-): Map<CellKey, Int> {
-    val statusMarks = statusOptions.mapTo(HashSet()) { it.mark }
-    val result = HashMap<CellKey, Int>()
-    for (habit in habits) {
-        var streak = 0
-        for (date in dates) {
-            val mark = cellMark(habit, date, marks, today)
-            when {
-                mark in statusMarks -> streak++
-                mark == INACTIVE_MARK -> Unit
-                else -> {
-                    if (streak > 0 && mark.isBlank()) {
-                        result[CellKey(habitId = habit.id, date = date)] = streak
-                    }
-                    streak = 0
-                }
-            }
-        }
-    }
-    return result
 }
 
 /*

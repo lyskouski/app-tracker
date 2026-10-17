@@ -20,9 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
-import com.tercad.zwyka.data.DayState
-import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.core.model.DateFormat
+import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.statusOptions
 import com.tercad.zwyka.resources.Res

@@ -54,8 +54,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import app.cash.sqldelight.async.coroutines.awaitAsList
-import app.cash.sqldelight.async.coroutines.awaitAsOne
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -72,22 +70,17 @@ import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.core.Services
+import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.HabitTime
+import com.tercad.zwyka.core.model.Intent
+import com.tercad.zwyka.core.model.MINUTES_PER_DAY
+import com.tercad.zwyka.core.model.isActiveOn
+import com.tercad.zwyka.core.service.Schedule
+import com.tercad.zwyka.core.time.formatTime
 import com.tercad.zwyka.components.HabitTimeDialog
-import com.tercad.zwyka.components.HabitTimeOwner
-import com.tercad.zwyka.data.AppSettingsStore
-import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.data.HabitTime
-import com.tercad.zwyka.data.Intent
-import com.tercad.zwyka.data.MINUTES_PER_DAY
-import com.tercad.zwyka.data.applyHabitActiveDays
-import com.tercad.zwyka.data.currentWeekDates
-import com.tercad.zwyka.data.formatTime
-import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
-import com.tercad.zwyka.infrastructures.Database
-import com.tercad.zwyka.notifications.LocalReminderScheduler
-import com.tercad.zwyka.notifications.syncReminders
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
@@ -99,17 +92,18 @@ import com.tercad.zwyka.resources.next_day
 import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.previous_day
 import com.tercad.zwyka.resources.today
+import com.tercad.zwyka.state.AppSettingsStore
 
 /** Snap of a click on an empty slot, minutes. */
 private const val SLOT_MINUTES = 30
 
 class CalendarPage(
-    private val database: Database,
+    private val services: Services,
     private val settingsStore: AppSettingsStore,
 ) : Screen {
     @Composable
     override fun Content() {
-        CalendarPageContent(database, settingsStore)
+        CalendarPageContent(services, settingsStore)
     }
 }
 
@@ -123,31 +117,26 @@ private data class HabitTimeEditing(
 
 @Composable
 private fun CalendarPageContent(
-    database: Database,
+    services: Services,
     settingsStore: AppSettingsStore,
 ) {
     val navigator = LocalNavigator.currentOrThrow
     val coroutineScope = rememberCoroutineScope()
-    val reminderScheduler = LocalReminderScheduler.current
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
     val today = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault())
         .date
 
     var selectedDate by remember { mutableStateOf(today) }
-    var habits by remember { mutableStateOf<List<Habit>?>(null) }
-    var intents by remember { mutableStateOf<List<Intent>>(emptyList()) }
-    var habitTimes by remember { mutableStateOf<List<HabitTime>>(emptyList()) }
+    var schedule by remember { mutableStateOf<Schedule?>(null) }
     var loadError by remember { mutableStateOf<String?>(null) }
     var editing by remember { mutableStateOf<HabitTimeEditing?>(null) }
     var isSaving by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf<String?>(null) }
 
-    LaunchedEffect(database) {
+    LaunchedEffect(services) {
         try {
-            habits = loadHabits(database)
-            intents = loadIntents(database)
-            habitTimes = loadHabitTimes(database)
+            schedule = services.schedule.load()
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
@@ -192,22 +181,22 @@ private fun CalendarPageContent(
             }
         },
     ) { contentPadding ->
-        val loadedHabits = habits
+        val loaded = schedule
         when {
             loadError != null -> Text(
                 stringResource(Res.string.habits_load_failed, loadError.orEmpty()),
                 modifier = Modifier.padding(contentPadding),
             )
-            loadedHabits == null -> Text(
+            loaded == null -> Text(
                 stringResource(Res.string.habits_loading),
                 modifier = Modifier.padding(contentPadding),
             )
             else -> DayTimeline(
                 date = selectedDate,
                 isToday = selectedDate == today,
-                habits = loadedHabits,
-                intents = intents,
-                habitTimes = habitTimes.filter { it.isActiveOn(selectedDate.dayOfWeek) },
+                habits = loaded.habits,
+                intents = loaded.intents,
+                habitTimes = loaded.habitTimes.filter { it.isActiveOn(selectedDate.dayOfWeek) },
                 onSlotClick = { start ->
                     saveError = null
                     editing = HabitTimeEditing(null, start)
@@ -228,18 +217,12 @@ private fun CalendarPageContent(
     }
 
     editing?.let { current ->
-        fun persist(action: suspend () -> Unit) {
+        fun persist(action: suspend () -> Schedule) {
             isSaving = true
             saveError = null
             coroutineScope.launch {
                 try {
-                    action()
-                    // Drop intents left without scheduled times.
-                    database.databaseQueries.deleteUnusedIntents()
-                    habits = loadHabits(database)
-                    intents = loadIntents(database)
-                    habitTimes = loadHabitTimes(database)
-                    syncReminders(database, reminderScheduler)
+                    schedule = action()
                     editing = null
                 } catch (error: CancellationException) {
                     throw error
@@ -253,107 +236,27 @@ private fun CalendarPageContent(
 
         HabitTimeDialog(
             habitTime = current.habitTime,
-            habits = habits.orEmpty(),
-            intents = intents,
+            habits = schedule?.habits.orEmpty(),
+            intents = schedule?.intents.orEmpty(),
             initialStart = current.start,
             isSaving = isSaving,
             error = saveError,
             weekStart = settingsStore.current.weekStart,
             onDismiss = { editing = null },
-            onSave = { owner, timeStart, timeEnd, note, activeDays, notify ->
+            onSave = { draft ->
                 persist {
-                    val habitTimeId = current.habitTime?.id
-                    var habitId: Long? = null
-                    var intentId: Long? = null
-                    when (owner) {
-                        is HabitTimeOwner.OfHabit -> habitId = owner.habitId
-                        is HabitTimeOwner.OfIntent -> {
-                            intentId = owner.intentId
-                            if (intentId == null) {
-                                database.databaseQueries.insertIntent(owner.title, activeDays.toLong())
-                                intentId = database.databaseQueries.selectLastIntentId()
-                                    .awaitAsOne().max ?: error("Intent was not created")
-                            } else {
-                                val intentDays = intents.firstOrNull { it.id == intentId }?.activeDays ?: activeDays
-                                database.databaseQueries.updateIntent(owner.title, intentDays.toLong(), intentId)
-                            }
-                        }
-                    }
-                    if (habitTimeId == null) {
-                        database.databaseQueries.insertHabitTime(
-                            habitId,
-                            intentId,
-                            timeStart.toLong(),
-                            timeEnd.toLong(),
-                            note,
-                            activeDays.toLong(),
-                            if (notify) 1L else 0L,
-                        )
-                    } else {
-                        database.databaseQueries.updateHabitTime(
-                            habitId,
-                            intentId,
-                            timeStart.toLong(),
-                            timeEnd.toLong(),
-                            note,
-                            activeDays.toLong(),
-                            if (notify) 1L else 0L,
-                            habitTimeId,
-                        )
-                    }
-                    accumulateActiveDays(
-                        database = database,
-                        habitIds = setOfNotNull(habitId, current.habitTime?.habitId),
-                        intentIds = setOfNotNull(intentId, current.habitTime?.intentId),
-                        habits = habits.orEmpty(),
-                        weekDates = currentWeekDates(today, settingsStore.current.weekStart),
-                    )
+                    services.schedule.save(current.habitTime, draft, settingsStore.current.weekStart)
                 }
             },
             onDelete = current.habitTime?.let { habitTime ->
                 {
                     persist {
-                        database.databaseQueries.deleteHabitTime(habitTime.id)
-                        accumulateActiveDays(
-                            database = database,
-                            habitIds = setOfNotNull(habitTime.habitId),
-                            intentIds = setOfNotNull(habitTime.intentId),
-                            habits = habits.orEmpty(),
-                            weekDates = currentWeekDates(today, settingsStore.current.weekStart),
-                        )
+                        services.schedule.delete(habitTime, settingsStore.current.weekStart)
                     }
                 }
             },
+            onNotifyEnabled = services.reminders::requestPermission,
         )
-    }
-}
-
-/*
- * Week days of a habit / intent = union of the days of all its time ranges.
- *
- * Owners without time ranges keep their days. Changed habit days are
- * propagated to the day marks of [weekDates].
- */
-private suspend fun accumulateActiveDays(
-    database: Database,
-    habitIds: Set<Long>,
-    intentIds: Set<Long>,
-    habits: List<Habit>,
-    weekDates: List<LocalDate>,
-) {
-    val habitTimes = loadHabitTimes(database)
-    habitIds.forEach { habitId ->
-        val days = habitTimes.filter { it.habitId == habitId }.fold(0) { acc, it -> acc or it.activeDays }
-        if (days != 0 && days != habits.firstOrNull { it.id == habitId }?.activeDays) {
-            database.databaseQueries.updateHabitActiveDays(days.toLong(), habitId)
-            applyHabitActiveDays(database, habitId, days, weekDates)
-        }
-    }
-    intentIds.forEach { intentId ->
-        val days = habitTimes.filter { it.intentId == intentId }.fold(0) { acc, it -> acc or it.activeDays }
-        if (days != 0) {
-            database.databaseQueries.updateIntentActiveDays(days.toLong(), intentId)
-        }
     }
 }
 
@@ -380,32 +283,6 @@ private fun Modifier.swipeDays(
         total += dragAmount
     }
 }
-
-private suspend fun loadHabits(database: Database): List<Habit> =
-    database.databaseQueries.selectAllHabits()
-        .awaitAsList()
-        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
-
-private suspend fun loadIntents(database: Database): List<Intent> =
-    database.databaseQueries.selectAllIntents()
-        .awaitAsList()
-        .map { Intent(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
-
-private suspend fun loadHabitTimes(database: Database): List<HabitTime> =
-    database.databaseQueries.selectAllHabitTimes()
-        .awaitAsList()
-        .map {
-            HabitTime(
-                id = it.id,
-                habitId = it.habitId,
-                intentId = it.intentId,
-                timeStart = it.timeStart.toInt(),
-                timeEnd = it.timeEnd.toInt(),
-                note = it.note,
-                activeDays = it.activeDays.toInt(),
-                notify = it.notify != 0L,
-            )
-        }
 
 /*
  * [<] [Today] [>]  Mon, 2026-10-17

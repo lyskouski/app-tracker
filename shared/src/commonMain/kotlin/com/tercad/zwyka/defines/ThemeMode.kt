@@ -4,15 +4,18 @@
 package com.tercad.zwyka.defines
 
 import org.jetbrains.compose.resources.StringResource
+
+import com.tercad.zwyka.core.model.ThemeMode
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.theme_dark
 import com.tercad.zwyka.resources.theme_light
 import com.tercad.zwyka.resources.theme_system
 
-enum class ThemeMode(val label: StringResource) {
-    SYSTEM(Res.string.theme_system),
-    LIGHT(Res.string.theme_light),
-    DARK(Res.string.theme_dark),
-}
+val ThemeMode.label: StringResource
+    get() = when (this) {
+        ThemeMode.SYSTEM -> Res.string.theme_system
+        ThemeMode.LIGHT -> Res.string.theme_light
+        ThemeMode.DARK -> Res.string.theme_dark
+    }
 
 val themeModeOptions = ThemeMode.entries

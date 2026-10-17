@@ -7,9 +7,9 @@ import app.cash.sqldelight.db.SqlDriver
 import org.w3c.dom.Worker
 import app.cash.sqldelight.driver.worker.WebWorkerDriver
 import com.tercad.zwyka.infrastructures.Database
-import com.tercad.zwyka.notifications.InProcessReminderScheduler
-import com.tercad.zwyka.notifications.Reminder
-import com.tercad.zwyka.notifications.ReminderScheduler
+import com.tercad.zwyka.core.notifications.InProcessReminderScheduler
+import com.tercad.zwyka.core.notifications.Reminder
+import com.tercad.zwyka.core.notifications.ReminderScheduler
 import kotlinx.coroutines.MainScope
 
 @OptIn(ExperimentalComposeUiApi::class)

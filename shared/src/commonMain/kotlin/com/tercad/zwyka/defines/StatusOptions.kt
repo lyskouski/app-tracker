@@ -5,6 +5,7 @@ package com.tercad.zwyka.defines
 
 import org.jetbrains.compose.resources.StringResource
 
+import com.tercad.zwyka.core.model.StatusMarks
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.status_100_percent
 import com.tercad.zwyka.resources.status_25_percent
@@ -19,10 +20,10 @@ data class StatusOption(
 )
 
 val statusOptions = listOf(
-    StatusOption("·", Res.string.status_start),
-    StatusOption("\\", Res.string.status_25_percent),
-    StatusOption("|", Res.string.status_50_percent),
-    StatusOption("/", Res.string.status_75_percent),
-    StatusOption("X", Res.string.status_100_percent),
-    StatusOption("▣", Res.string.status_over_100_percent),
+    StatusOption(StatusMarks.START, Res.string.status_start),
+    StatusOption(StatusMarks.PERCENT_25, Res.string.status_25_percent),
+    StatusOption(StatusMarks.PERCENT_50, Res.string.status_50_percent),
+    StatusOption(StatusMarks.PERCENT_75, Res.string.status_75_percent),
+    StatusOption(StatusMarks.PERCENT_100, Res.string.status_100_percent),
+    StatusOption(StatusMarks.OVER_100, Res.string.status_over_100_percent),
 )

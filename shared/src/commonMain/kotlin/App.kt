@@ -15,18 +15,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.navigator.Navigator
 import kotlinx.coroutines.CancellationException
-import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.defines.LocalAppLocale
+import com.tercad.zwyka.state.AppSettingsStore
 
-import com.tercad.zwyka.defines.ColorSchemeLight
-import com.tercad.zwyka.defines.ColorSchemeDark
-import com.tercad.zwyka.defines.LocalColorScheme
-import com.tercad.zwyka.defines.ThemeMode
+import com.tercad.zwyka.core.model.ThemeMode
+import com.tercad.zwyka.core.notifications.NoReminderScheduler
+import com.tercad.zwyka.core.notifications.ReminderScheduler
 import com.tercad.zwyka.infrastructures.Database
-import com.tercad.zwyka.notifications.LocalReminderScheduler
-import com.tercad.zwyka.notifications.NoReminderScheduler
-import com.tercad.zwyka.notifications.ReminderScheduler
-import com.tercad.zwyka.notifications.syncReminders
+import com.tercad.zwyka.infrastructures.createServices
+import com.tercad.zwyka.defines.ColorSchemeDark
+import com.tercad.zwyka.defines.ColorSchemeLight
+import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 
@@ -38,19 +37,22 @@ fun App(
 ) {
     val systemDark = isSystemInDarkTheme()
 
-    val settingsStore = remember(database) { AppSettingsStore(database) }
+    val services = remember(database, reminderScheduler) {
+        database?.createServices(reminderScheduler)
+    }
+    val settingsStore = remember(services) { AppSettingsStore(services?.settings) }
     val colorScheme = when (settingsStore.current.themeMode) {
         ThemeMode.LIGHT -> ColorSchemeLight
         ThemeMode.DARK -> ColorSchemeDark
         ThemeMode.SYSTEM -> if (systemDark) ColorSchemeDark else ColorSchemeLight
     }
-    var settingsLoaded by remember(database) { mutableStateOf(false) }
+    var settingsLoaded by remember(services) { mutableStateOf(false) }
 
     LaunchedEffect(settingsStore) {
         try {
             initializeDatabase()
             settingsStore.load()
-            syncReminders(database, reminderScheduler)
+            services?.reminders?.sync()
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
@@ -64,12 +66,11 @@ fun App(
     CompositionLocalProvider(
         LocalColorScheme provides colorScheme,
         LocalAppLocale provides settingsStore.current.language,
-        LocalReminderScheduler provides reminderScheduler,
     ) {
         key(settingsStore.current.language) {
             MaterialTheme(colorScheme = colorScheme) {
                 val screens = remember {
-                    val home = HomePage(database, initializeDatabase, settingsStore)
+                    val home = HomePage(services, initializeDatabase, settingsStore)
                     if (settingsStore.reopenSettings) {
                         listOf(home, SettingsPage(settingsStore))
                     } else {

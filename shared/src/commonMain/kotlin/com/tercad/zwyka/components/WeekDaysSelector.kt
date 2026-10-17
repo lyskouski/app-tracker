@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringArrayResource
 
-import com.tercad.zwyka.defines.WeekStart
+import com.tercad.zwyka.core.model.WeekStart
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.days_short

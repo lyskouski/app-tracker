@@ -71,6 +71,10 @@ insertHabit:
 INSERT INTO Habit(title, icon, color, remarks, activeDays, createdAt, updatedAt)
 VALUES (?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
 
+selectLastHabitId:
+SELECT max(id)
+FROM Habit;
+
 updateHabit:
 UPDATE Habit
 SET title = ?, icon = ?, color = ?, remarks = ?, activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
@@ -135,9 +139,9 @@ insertIntent:
 INSERT INTO Intent(title, activeDays, createdAt, updatedAt)
 VALUES (?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
 
-updateIntent:
+updateIntentTitle:
 UPDATE Intent
-SET title = ?, activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+SET title = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
 WHERE id = ?;
 
 -- Intents exist only while they are scheduled.

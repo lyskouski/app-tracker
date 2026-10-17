@@ -1,7 +1,7 @@
 // Copyright 2026 The terCAD team. All rights reserved.
 // Use of this source code is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
 
-package com.tercad.zwyka.data
+package com.tercad.zwyka.core.model
 
 /** Like [Habit], but used only for scheduling in the calendar (not shown in the habits table). */
 data class Intent(

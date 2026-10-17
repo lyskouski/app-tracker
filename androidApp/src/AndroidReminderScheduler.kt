@@ -12,9 +12,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import com.tercad.zwyka.notifications.Reminder
-import com.tercad.zwyka.notifications.ReminderScheduler
-import com.tercad.zwyka.notifications.nextTrigger
+import com.tercad.zwyka.core.notifications.Reminder
+import com.tercad.zwyka.core.notifications.ReminderScheduler
+import com.tercad.zwyka.core.notifications.nextTrigger
 import kotlin.time.Clock
 import org.json.JSONArray
 import org.json.JSONObject
