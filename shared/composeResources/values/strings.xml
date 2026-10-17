@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="greeting">Hello, world!</string>
-    <string name="welcome_message">Welcome, %s!</string>
+    <string name="app_name">Zwyka</string>
     <string name="habit_database_unavailable">Habit database is unavailable.</string>
     <string name="habits_loading">Loading habits...</string>
     <string name="habits_load_failed">Unable to load habits: %s</string>
