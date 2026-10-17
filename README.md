@@ -48,6 +48,12 @@ one is left behind.
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending).
 
+<img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_1.jpg" width="240" /> . 
+<img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_2.jpg" width="240" /> . 
+<img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/calendar.jpg" width="240" /> . 
+<img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/metrics.jpg" width="240" /> .  
+<img title="Zwyka: Settings" src="./docs/design-flow/screenshots/settings.jpg" width="240" /> . 
+
 
 ## Support (Sponsorship)
 
