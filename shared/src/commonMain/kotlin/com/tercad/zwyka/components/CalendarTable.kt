@@ -29,6 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathMeasure
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
@@ -104,6 +107,10 @@ fun CalendarTable(
      */
     val streaks = remember(habits, dates, marks, today) {
         calculateStreaks(habits, dates, marks, today)
+    }
+
+    val todayProgress = remember(habits, marks, today) {
+        calculateDayProgress(habits, marks, today)
     }
 
     val density = LocalDensity.current
@@ -429,14 +436,13 @@ fun CalendarTable(
              * TOP-LEFT CORNER
              *
              * Fixed in both directions.
+             * Shows the progress of all habits within the current day.
              * =====================================================
              */
-            CalendarTableCell(
-                text = "",
+            DayProgressCell(
+                progress = todayProgress,
                 width = firstColumnWidth,
                 height = headerHeight,
-                background =
-                    currentColorScheme().surfaceVariant,
             )
 
             if (maxScrollY > 0f && bodyHeightPx > 0f) {
@@ -1026,6 +1032,96 @@ private fun calculateStreaks(
         }
     }
     return result
+}
+
+/*
+ * Progress of all habits active on the current day, 0..1.
+ *
+ * Each status mark contributes by its percentage ("·" = 0%, "X" = 100%),
+ * values over 100% are capped. Habits marked with "—" are skipped.
+ */
+private fun calculateDayProgress(
+    habits: List<Habit>,
+    marks: Map<CellKey, String>,
+    today: String?,
+): Float? {
+    if (today == null) return null
+    val dayOfWeek = LocalDate.parse(today).dayOfWeek
+    val values = habits.mapNotNull { habit ->
+        val mark = marks[CellKey(habitId = habit.id, date = today)]
+        when {
+            mark == INACTIVE_MARK -> null
+            mark == null && !habit.isActiveOn(dayOfWeek) -> null
+            else -> {
+                val index = statusOptions.indexOfFirst { it.mark == mark }
+                (index.coerceAtLeast(0) * 0.25f).coerceAtMost(1f)
+            }
+        }
+    }
+    if (values.isEmpty()) return null
+    return values.average().toFloat()
+}
+
+/*
+ * Progress bar wrapping around the cell edge (clockwise from the top center)
+ * with the percentage in the middle.
+ */
+@Composable
+private fun DayProgressCell(
+    progress: Float?,
+    width: Dp,
+    height: Dp,
+) {
+    val colorScheme = currentColorScheme()
+    val trackColor = colorScheme.outlineVariant
+    val progressColor = colorScheme.primary
+    val percent = progress?.let { (it * 100).roundToInt() }
+    Box(
+        modifier = Modifier
+            .width(width)
+            .height(height)
+            .background(colorScheme.surfaceVariant)
+            .drawWithContent {
+                drawContent()
+                val stroke = 4.dp.toPx()
+                val half = stroke / 2
+                val left = half
+                val top = half
+                val right = size.width - half
+                val bottom = size.height - half
+                val border = Path().apply {
+                    moveTo(size.width / 2, top)
+                    lineTo(right, top)
+                    lineTo(right, bottom)
+                    lineTo(left, bottom)
+                    lineTo(left, top)
+                    close()
+                }
+                val style = Stroke(width = stroke)
+                drawPath(border, trackColor, style = style)
+                if (progress != null && progress > 0f) {
+                    val measure = PathMeasure().apply { setPath(border, false) }
+                    val segment = Path()
+                    measure.getSegment(
+                        startDistance = 0f,
+                        stopDistance = measure.length * progress.coerceIn(0f, 1f),
+                        destination = segment,
+                        startWithMoveTo = true,
+                    )
+                    drawPath(segment, progressColor, style = style)
+                }
+            }
+            .semantics {
+                contentDescription = percent?.let { "$it%" } ?: ""
+            },
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = percent?.let { "$it%" } ?: "",
+            color = progressColor,
+            style = MaterialTheme.typography.titleMedium,
+        )
+    }
 }
 
 /*
