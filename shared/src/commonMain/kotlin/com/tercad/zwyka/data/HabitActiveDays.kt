@@ -23,7 +23,7 @@ fun currentWeekDates(today: LocalDate, weekStart: WeekStart): List<LocalDate> {
  * Propagates the habit's [activeDays] (already stored in Habit):
  *
  * - scheduled times of the habit get the same week days;
- * - inactive days of [weekDates] are marked with "—", reactivated ones are cleared.
+ * - inactive days of [weekDates] without a mark get "—", reactivated "—" days are cleared.
  */
 suspend fun applyHabitActiveDays(
     database: Database,
@@ -42,7 +42,8 @@ suspend fun applyHabitActiveDays(
         database.databaseQueries.updateHabitTimesActiveDays(activeDays.toLong(), habitId)
         weekDates.forEach { date ->
             val isActive = activeDays and (1 shl date.dayOfWeek.ordinal) != 0
-            if (!isActive) {
+            // Keep actual marks: "—" only fills days without a DayState.
+            if (!isActive && existingMarks[date] == null) {
                 database.databaseQueries.upsertDayState(habitId, date.toString(), INACTIVE_MARK)
             } else if (existingMarks[date] == INACTIVE_MARK) {
                 database.databaseQueries.deleteDayState(habitId, date.toString())
