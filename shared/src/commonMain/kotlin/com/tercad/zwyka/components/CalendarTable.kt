@@ -51,6 +51,7 @@ import com.tercad.zwyka.data.CellKey
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.data.INACTIVE_MARK
+import com.tercad.zwyka.data.calculateDayProgress
 import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.resources.Res
@@ -74,6 +75,7 @@ fun CalendarTable(
     dayState: List<DayState>,
     onDayStateClick: (DayState) -> Unit,
     onHabitClick: (Habit) -> Unit,
+    onProgressClick: () -> Unit = {},
     today: String? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
     dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
@@ -441,6 +443,7 @@ fun CalendarTable(
              */
             DayProgressCell(
                 progress = todayProgress,
+                onClick = onProgressClick,
                 width = firstColumnWidth,
                 height = headerHeight,
             )
@@ -1035,34 +1038,6 @@ private fun calculateStreaks(
 }
 
 /*
- * Progress of all habits active on the current day, 0..1.
- *
- * Each status mark contributes by its percentage ("·" = 0%, "X" = 100%),
- * values over 100% are capped. Habits marked with "—" are skipped.
- */
-private fun calculateDayProgress(
-    habits: List<Habit>,
-    marks: Map<CellKey, String>,
-    today: String?,
-): Float? {
-    if (today == null) return null
-    val dayOfWeek = LocalDate.parse(today).dayOfWeek
-    val values = habits.mapNotNull { habit ->
-        val mark = marks[CellKey(habitId = habit.id, date = today)]
-        when {
-            mark == INACTIVE_MARK -> null
-            mark == null && !habit.isActiveOn(dayOfWeek) -> null
-            else -> {
-                val index = statusOptions.indexOfFirst { it.mark == mark }
-                (index.coerceAtLeast(0) * 0.25f).coerceAtMost(1f)
-            }
-        }
-    }
-    if (values.isEmpty()) return null
-    return values.average().toFloat()
-}
-
-/*
  * Progress bar wrapping around the cell edge (clockwise from the top center)
  * with the percentage in the middle.
  */
@@ -1071,6 +1046,7 @@ private fun DayProgressCell(
     progress: Float?,
     width: Dp,
     height: Dp,
+    onClick: () -> Unit,
 ) {
     val colorScheme = currentColorScheme()
     val trackColor = colorScheme.outlineVariant
@@ -1081,6 +1057,7 @@ private fun DayProgressCell(
             .width(width)
             .height(height)
             .background(colorScheme.surfaceVariant)
+            .clickable(onClick = onClick)
             .drawWithContent {
                 drawContent()
                 val stroke = 4.dp.toPx()

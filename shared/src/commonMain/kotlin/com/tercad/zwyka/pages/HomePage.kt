@@ -206,6 +206,9 @@ private fun HomePageContent(
                     dateFormat = settingsStore.current.dateFormat,
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
+                    onProgressClick = {
+                        navigator.push(MetricsPage(current.habits, current.dayStates, today))
+                    },
                     onHabitClick = {
                         editingHabit = it
                         habitError = null

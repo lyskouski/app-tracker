@@ -80,4 +80,7 @@
     <string name="theme_system">Systemstandard</string>
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
+    <string name="metrics">Kennzahlen</string>
+    <string name="metrics_days">Tage</string>
+    <string name="metrics_completion">Erfüllung, %</string>
 </resources>
