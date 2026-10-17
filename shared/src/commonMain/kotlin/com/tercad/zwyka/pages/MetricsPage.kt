@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import kotlin.math.ceil
 import kotlin.math.roundToInt
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
@@ -61,9 +62,6 @@ import com.tercad.zwyka.resources.months_short
 
 /** Number of days (including today) shown on the progress graph. */
 private const val METRICS_DAYS = 66
-
-/** Every N-th day gets a label on the days axis, counting back from today. */
-private const val DAY_LABEL_STEP = 7
 
 class MetricsPage(
     private val habits: List<Habit>,
@@ -216,18 +214,22 @@ private fun ProgressGraph(
             )
         }
 
-        // Day ticks with labels, counting back from the last day.
-        for (index in dates.indices.reversed() step DAY_LABEL_STEP) {
+        // Day ticks with labels, counting back from the last day: every N-th day,
+        // where N is the fewest days whose spacing fits the widest label.
+        val measuredDays = dayLabels.map { textMeasurer.measure(it, labelStyle) }
+        val labelSlot = measuredDays.maxOf { it.size.width } + gap * 2
+        val daySpacing = if (dates.size > 1) (plotRight - plotLeft) / (dates.size - 1) else labelSlot
+        val labelStep = ceil(labelSlot / daySpacing).toInt().coerceAtLeast(1)
+        var freeRight = size.width
+        for (index in dates.indices.reversed() step labelStep) {
             val x = xOf(index)
             drawLine(axisColor, Offset(x, originY), Offset(x, originY + tickSize), 1.dp.toPx())
-            val label = textMeasurer.measure(dayLabels[index], labelStyle)
-            drawText(
-                label,
-                topLeft = Offset(
-                    (x - label.size.width / 2).coerceIn(0f, size.width - label.size.width),
-                    originY + tickSize + gap,
-                ),
-            )
+            val label = measuredDays[index]
+            val left = (x - label.size.width / 2).coerceIn(0f, size.width - label.size.width)
+            // Edge labels are shifted inwards: skip one that would still overlap its neighbour.
+            if (left + label.size.width > freeRight) continue
+            drawText(label, topLeft = Offset(left, originY + tickSize + gap))
+            freeRight = left - gap
         }
 
         // Axes with arrows.
