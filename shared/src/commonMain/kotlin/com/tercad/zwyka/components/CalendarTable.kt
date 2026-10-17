@@ -1084,11 +1084,11 @@ private fun DayProgressCell(
             .drawWithContent {
                 drawContent()
                 val stroke = 4.dp.toPx()
-                val half = stroke / 2
-                val left = half
-                val top = half
-                val right = size.width - half
-                val bottom = size.height - half
+                val inset = 6.dp.toPx() + stroke / 2
+                val left = inset
+                val top = inset
+                val right = size.width - inset
+                val bottom = size.height - inset
                 val border = Path().apply {
                     moveTo(size.width / 2, top)
                     lineTo(right, top)
