@@ -86,6 +86,8 @@ class ScheduleService(
         weekStart: WeekStart,
     ): Schedule {
         accumulateActiveDays(habitIds, intentIds, weekStart)
+        // Scheduled times belong to the habit: it counts as updated.
+        habitIds.forEach { habitService.touch(it) }
         // Intents exist only while they are scheduled.
         intents.deleteUnused()
         reminders.sync()

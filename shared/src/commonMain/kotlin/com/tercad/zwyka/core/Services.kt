@@ -47,7 +47,7 @@ fun createServices(
     val habits = HabitService(habitRepository, dayStateRepository, reminders)
     return Services(
         habits = habits,
-        dayStates = DayStateService(dayStateRepository),
+        dayStates = DayStateService(dayStateRepository, habitRepository),
         schedule = ScheduleService(habitTimeRepository, intentRepository, habits, reminders),
         reminders = reminders,
         settings = SettingsService(settingsRepository),

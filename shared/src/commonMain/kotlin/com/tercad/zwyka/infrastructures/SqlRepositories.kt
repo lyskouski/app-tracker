@@ -45,6 +45,10 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
         queries.updateHabitActiveDays(activeDays.toLong(), id)
     }
 
+    override suspend fun touch(id: Long) {
+        queries.touchHabit(id)
+    }
+
     override suspend fun delete(id: Long) {
         database.transaction {
             queries.deleteDayStatesForHabit(id)

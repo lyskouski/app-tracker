@@ -85,6 +85,11 @@ UPDATE Habit
 SET activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
 WHERE id = ?;
 
+touchHabit:
+UPDATE Habit
+SET updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+WHERE id = ?;
+
 deleteDayStatesForHabit:
 DELETE FROM DayState
 WHERE habitId = ?;

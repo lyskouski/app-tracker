@@ -23,6 +23,9 @@ interface HabitRepository {
 
     suspend fun updateActiveDays(id: Long, activeDays: Int)
 
+    /** Sets `updatedAt` to now, for changes of data belonging to the habit (marks, scheduled times). */
+    suspend fun touch(id: Long)
+
     /** Deletes the habit together with its day states and scheduled times. */
     suspend fun delete(id: Long)
 }

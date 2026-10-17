@@ -46,6 +46,9 @@ class HabitService(
         reminders.sync()
     }
 
+    /** Marks the habit as updated (its marks or scheduled times changed). */
+    suspend fun touch(id: Long) = habits.touch(id)
+
     /** Changes only the week days of a habit. */
     suspend fun updateActiveDays(id: Long, activeDays: Int, weekStart: WeekStart) {
         habits.updateActiveDays(id, activeDays)

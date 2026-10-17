@@ -5,12 +5,18 @@ package com.tercad.zwyka.core.service
 
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.repository.DayStateRepository
+import com.tercad.zwyka.core.repository.HabitRepository
 
 class DayStateService(
     private val dayStates: DayStateRepository,
+    private val habits: HabitRepository,
 ) {
     /** Day states within [from]..[to] (ISO dates, inclusive). */
     suspend fun getRange(from: String, to: String): List<DayState> = dayStates.getRange(from, to)
 
-    suspend fun setMark(state: DayState) = dayStates.upsert(state)
+    /** Stores the mark; the habit counts as updated. */
+    suspend fun setMark(state: DayState) {
+        dayStates.upsert(state)
+        habits.touch(state.habitId)
+    }
 }

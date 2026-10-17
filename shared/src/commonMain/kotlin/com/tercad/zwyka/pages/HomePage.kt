@@ -310,7 +310,11 @@ private fun HomePageContent(
                                             it.habitId == updated.habitId &&
                                                 it.date == updated.date
                                         } + updated
-                                    state = current.copy(dayStates = updatedDayStates)
+                                    state = current.copy(
+                                        // Reloaded: `updatedAt` of the habit has changed.
+                                        habits = services.habits.getAll(),
+                                        dayStates = updatedDayStates,
+                                    )
                                     selectedDayState = null
                                 } catch (error: CancellationException) {
                                     throw error
