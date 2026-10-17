@@ -80,6 +80,7 @@ import com.tercad.zwyka.data.MINUTES_PER_DAY
 import com.tercad.zwyka.data.applyHabitActiveDays
 import com.tercad.zwyka.data.currentWeekDates
 import com.tercad.zwyka.data.formatTime
+import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
@@ -200,13 +201,7 @@ private fun CalendarPageContent(
                 isToday = selectedDate == today,
                 habits = loadedHabits,
                 intents = intents,
-                // Week days of the habit / intent are the source of truth for its scheduled times.
-                habitTimes = habitTimes.filter { habitTime ->
-                    val activeDays = loadedHabits.firstOrNull { it.id == habitTime.habitId }?.activeDays
-                        ?: intents.firstOrNull { it.id == habitTime.intentId }?.activeDays
-                        ?: habitTime.activeDays
-                    activeDays and (1 shl selectedDate.dayOfWeek.ordinal) != 0
-                },
+                habitTimes = habitTimes.filter { it.isActiveOn(selectedDate.dayOfWeek) },
                 onSlotClick = { start ->
                     saveError = null
                     editing = HabitTimeEditing(null, start)
@@ -264,18 +259,7 @@ private fun CalendarPageContent(
                     var habitId: Long? = null
                     var intentId: Long? = null
                     when (owner) {
-                        is HabitTimeOwner.OfHabit -> {
-                            habitId = owner.habitId
-                            if (habits.orEmpty().firstOrNull { it.id == owner.habitId }?.activeDays != activeDays) {
-                                database.databaseQueries.updateHabitActiveDays(activeDays.toLong(), owner.habitId)
-                                applyHabitActiveDays(
-                                    database,
-                                    owner.habitId,
-                                    activeDays,
-                                    currentWeekDates(today, settingsStore.current.weekStart),
-                                )
-                            }
-                        }
+                        is HabitTimeOwner.OfHabit -> habitId = owner.habitId
                         is HabitTimeOwner.OfIntent -> {
                             intentId = owner.intentId
                             if (intentId == null) {
@@ -283,8 +267,8 @@ private fun CalendarPageContent(
                                 intentId = database.databaseQueries.selectLastIntentId()
                                     .awaitAsOne().max ?: error("Intent was not created")
                             } else {
-                                database.databaseQueries.updateIntent(owner.title, activeDays.toLong(), intentId)
-                                database.databaseQueries.updateIntentTimesActiveDays(activeDays.toLong(), intentId)
+                                val intentDays = intents.firstOrNull { it.id == intentId }?.activeDays ?: activeDays
+                                database.databaseQueries.updateIntent(owner.title, intentDays.toLong(), intentId)
                             }
                         }
                     }
@@ -308,12 +292,59 @@ private fun CalendarPageContent(
                             habitTimeId,
                         )
                     }
+                    accumulateActiveDays(
+                        database = database,
+                        habitIds = setOfNotNull(habitId, current.habitTime?.habitId),
+                        intentIds = setOfNotNull(intentId, current.habitTime?.intentId),
+                        habits = habits.orEmpty(),
+                        weekDates = currentWeekDates(today, settingsStore.current.weekStart),
+                    )
                 }
             },
             onDelete = current.habitTime?.let { habitTime ->
-                { persist { database.databaseQueries.deleteHabitTime(habitTime.id) } }
+                {
+                    persist {
+                        database.databaseQueries.deleteHabitTime(habitTime.id)
+                        accumulateActiveDays(
+                            database = database,
+                            habitIds = setOfNotNull(habitTime.habitId),
+                            intentIds = setOfNotNull(habitTime.intentId),
+                            habits = habits.orEmpty(),
+                            weekDates = currentWeekDates(today, settingsStore.current.weekStart),
+                        )
+                    }
+                }
             },
         )
+    }
+}
+
+/*
+ * Week days of a habit / intent = union of the days of all its time ranges.
+ *
+ * Owners without time ranges keep their days. Changed habit days are
+ * propagated to the day marks of [weekDates].
+ */
+private suspend fun accumulateActiveDays(
+    database: Database,
+    habitIds: Set<Long>,
+    intentIds: Set<Long>,
+    habits: List<Habit>,
+    weekDates: List<LocalDate>,
+) {
+    val habitTimes = loadHabitTimes(database)
+    habitIds.forEach { habitId ->
+        val days = habitTimes.filter { it.habitId == habitId }.fold(0) { acc, it -> acc or it.activeDays }
+        if (days != 0 && days != habits.firstOrNull { it.id == habitId }?.activeDays) {
+            database.databaseQueries.updateHabitActiveDays(days.toLong(), habitId)
+            applyHabitActiveDays(database, habitId, days, weekDates)
+        }
+    }
+    intentIds.forEach { intentId ->
+        val days = habitTimes.filter { it.intentId == intentId }.fold(0) { acc, it -> acc or it.activeDays }
+        if (days != 0) {
+            database.databaseQueries.updateIntentActiveDays(days.toLong(), intentId)
+        }
     }
 }
 

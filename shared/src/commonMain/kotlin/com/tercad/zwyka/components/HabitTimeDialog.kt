@@ -90,8 +90,8 @@ sealed interface HabitTimeOwner {
  * Creates ([habitTime] is null) or edits a scheduled time range of a habit,
  * or of an intent when no habit is selected.
  *
- * Week days are taken from the selected habit / intent; saving passes them back
- * so that the owner gets updated as well.
+ * Week days are set per time range; a new one starts from the days of the selected
+ * habit / intent (whose own days accumulate all of its time ranges).
  */
 @Composable
 fun HabitTimeDialog(
@@ -125,10 +125,11 @@ fun HabitTimeDialog(
     var startInput by remember(habitTime?.id) { mutableStateOf(formatTime(start0)) }
     var endInput by remember(habitTime?.id) { mutableStateOf(formatTime(end0)) }
     var note by remember(habitTime?.id) { mutableStateOf(habitTime?.note.orEmpty()) }
-    // Week days belong to the habit / intent: switching it shows its own days.
+    // Own days of the edited range; otherwise the days of the selected habit / intent.
     var activeDays by remember(habitTime?.id, habitId, intentId) {
         mutableStateOf(
-            habits.firstOrNull { it.id == habitId }?.activeDays
+            habitTime?.takeIf { it.habitId == habitId && it.intentId == intentId }?.activeDays
+                ?: habits.firstOrNull { it.id == habitId }?.activeDays
                 ?: intents.firstOrNull { it.id == intentId }?.activeDays
                 ?: ALL_DAYS,
         )

@@ -115,10 +115,10 @@ UPDATE HabitTime
 SET habitId = ?, intentId = ?, timeStart = ?, timeEnd = ?, note = ?, activeDays = ?
 WHERE id = ?;
 
-updateIntentTimesActiveDays:
-UPDATE HabitTime
-SET activeDays = ?
-WHERE intentId = ?;
+updateIntentActiveDays:
+UPDATE Intent
+SET activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+WHERE id = ?;
 
 selectAllIntents:
 SELECT *
@@ -142,11 +142,6 @@ WHERE id = ?;
 deleteUnusedIntents:
 DELETE FROM Intent
 WHERE id NOT IN (SELECT intentId FROM HabitTime WHERE intentId IS NOT NULL);
-
-updateHabitTimesActiveDays:
-UPDATE HabitTime
-SET activeDays = ?
-WHERE habitId = ?;
 
 deleteHabitTime:
 DELETE FROM HabitTime
