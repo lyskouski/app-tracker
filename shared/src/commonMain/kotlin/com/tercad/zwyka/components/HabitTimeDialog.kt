@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.data.ALL_DAYS
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.data.HabitTime
 import com.tercad.zwyka.data.MINUTES_PER_DAY
@@ -72,13 +73,15 @@ private enum class HabitTimeInterval(val minutes: Int?, val label: StringResourc
 
 /*
  * Creates ([habitTime] is null) or edits a scheduled time range of a habit.
+ *
+ * Week days are taken from the selected habit; saving passes them back
+ * so that the habit gets updated as well.
  */
 @Composable
 fun HabitTimeDialog(
     habitTime: HabitTime?,
     habits: List<Habit>,
     initialStart: Int,
-    initialActiveDays: Int,
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
@@ -100,8 +103,9 @@ fun HabitTimeDialog(
     var startInput by remember(habitTime?.id) { mutableStateOf(formatTime(start0)) }
     var endInput by remember(habitTime?.id) { mutableStateOf(formatTime(end0)) }
     var note by remember(habitTime?.id) { mutableStateOf(habitTime?.note.orEmpty()) }
-    var activeDays by remember(habitTime?.id) {
-        mutableStateOf(habitTime?.activeDays ?: initialActiveDays)
+    // Week days belong to the habit: switching the habit shows its own days.
+    var activeDays by remember(habitTime?.id, habitId) {
+        mutableStateOf(habits.firstOrNull { it.id == habitId }?.activeDays ?: ALL_DAYS)
     }
     var selectingHabit by remember { mutableStateOf(false) }
 

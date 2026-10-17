@@ -59,6 +59,11 @@ UPDATE Habit
 SET title = ?, icon = ?, color = ?, remarks = ?, activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
 WHERE id = ?;
 
+updateHabitActiveDays:
+UPDATE Habit
+SET activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+WHERE id = ?;
+
 deleteDayStatesForHabit:
 DELETE FROM DayState
 WHERE habitId = ?;
@@ -94,6 +99,11 @@ updateHabitTime:
 UPDATE HabitTime
 SET habitId = ?, timeStart = ?, timeEnd = ?, note = ?, activeDays = ?
 WHERE id = ?;
+
+updateHabitTimesActiveDays:
+UPDATE HabitTime
+SET activeDays = ?
+WHERE habitId = ?;
 
 deleteHabitTime:
 DELETE FROM HabitTime

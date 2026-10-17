@@ -73,6 +73,8 @@ import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.data.HabitTime
 import com.tercad.zwyka.data.MINUTES_PER_DAY
+import com.tercad.zwyka.data.applyHabitActiveDays
+import com.tercad.zwyka.data.currentWeekDates
 import com.tercad.zwyka.data.formatTime
 import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.applicationColor
@@ -132,9 +134,7 @@ private fun CalendarPageContent(
 
     LaunchedEffect(database) {
         try {
-            habits = database.databaseQueries.selectAllHabits()
-                .awaitAsList()
-                .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
+            habits = loadHabits(database)
             habitTimes = loadHabitTimes(database)
         } catch (error: CancellationException) {
             throw error
@@ -194,7 +194,12 @@ private fun CalendarPageContent(
                 date = selectedDate,
                 isToday = selectedDate == today,
                 habits = loadedHabits,
-                habitTimes = habitTimes.filter { it.isActiveOn(selectedDate.dayOfWeek) },
+                // Week days of the habit are the source of truth for its scheduled times.
+                habitTimes = habitTimes.filter { habitTime ->
+                    loadedHabits.firstOrNull { it.id == habitTime.habitId }
+                        ?.isActiveOn(selectedDate.dayOfWeek)
+                        ?: habitTime.isActiveOn(selectedDate.dayOfWeek)
+                },
                 onSlotClick = { start ->
                     saveError = null
                     editing = HabitTimeEditing(null, start)
@@ -217,6 +222,7 @@ private fun CalendarPageContent(
             coroutineScope.launch {
                 try {
                     action()
+                    habits = loadHabits(database)
                     habitTimes = loadHabitTimes(database)
                     editing = null
                 } catch (error: CancellationException) {
@@ -233,7 +239,6 @@ private fun CalendarPageContent(
             habitTime = current.habitTime,
             habits = habits.orEmpty(),
             initialStart = current.start,
-            initialActiveDays = 1 shl selectedDate.dayOfWeek.ordinal,
             isSaving = isSaving,
             error = saveError,
             weekStart = settingsStore.current.weekStart,
@@ -241,6 +246,15 @@ private fun CalendarPageContent(
             onSave = { habitId, timeStart, timeEnd, note, activeDays ->
                 persist {
                     val habitTimeId = current.habitTime?.id
+                    if (habits.orEmpty().firstOrNull { it.id == habitId }?.activeDays != activeDays) {
+                        database.databaseQueries.updateHabitActiveDays(activeDays.toLong(), habitId)
+                        applyHabitActiveDays(
+                            database,
+                            habitId,
+                            activeDays,
+                            currentWeekDates(today, settingsStore.current.weekStart),
+                        )
+                    }
                     if (habitTimeId == null) {
                         database.databaseQueries.insertHabitTime(
                             habitId,
@@ -267,6 +281,11 @@ private fun CalendarPageContent(
         )
     }
 }
+
+private suspend fun loadHabits(database: Database): List<Habit> =
+    database.databaseQueries.selectAllHabits()
+        .awaitAsList()
+        .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
 
 private suspend fun loadHabitTimes(database: Database): List<HabitTime> =
     database.databaseQueries.selectAllHabitTimes()

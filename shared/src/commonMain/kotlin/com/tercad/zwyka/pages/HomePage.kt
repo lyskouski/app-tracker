@@ -41,7 +41,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.minus
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
@@ -52,8 +51,8 @@ import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
 import com.tercad.zwyka.data.DayState
 import com.tercad.zwyka.data.Habit
-import com.tercad.zwyka.data.INACTIVE_MARK
-import com.tercad.zwyka.defines.WeekStart
+import com.tercad.zwyka.data.applyHabitActiveDays
+import com.tercad.zwyka.data.currentWeekDates
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.sortedBy
@@ -378,23 +377,7 @@ private suspend fun saveHabit(
     }
     val saved = database.databaseQueries.selectAllHabits().awaitAsList()
     val savedId = habitId ?: saved.maxOf { it.id }
-    val existingMarks = weekDates.associateWith { date ->
-        database.databaseQueries
-            .selectDayStatesForDateRange(date.toString(), date.toString())
-            .awaitAsList()
-            .firstOrNull { it.habitId == savedId }
-            ?.mark
-    }
-    database.transaction {
-        weekDates.forEach { date ->
-            val isActive = activeDays and (1 shl date.dayOfWeek.ordinal) != 0
-            if (!isActive) {
-                database.databaseQueries.upsertDayState(savedId, date.toString(), INACTIVE_MARK)
-            } else if (existingMarks[date] == INACTIVE_MARK) {
-                database.databaseQueries.deleteDayState(savedId, date.toString())
-            }
-        }
-    }
+    applyHabitActiveDays(database, savedId, activeDays, weekDates)
     return saved
         .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
 }
@@ -405,13 +388,6 @@ private suspend fun deleteHabit(database: Database, habitId: Long) {
         database.databaseQueries.deleteHabitTimesForHabit(habitId)
         database.databaseQueries.deleteHabit(habitId)
     }
-}
-
-/** Seven dates of the week (per the configured week start) that contains [today]. */
-private fun currentWeekDates(today: LocalDate, weekStart: WeekStart): List<LocalDate> {
-    val offset = (today.dayOfWeek.ordinal - weekStart.dayOfWeek.ordinal + 7) % 7
-    val first = today.minus(offset, DateTimeUnit.DAY)
-    return (0..6).map { first.plus(it, DateTimeUnit.DAY) }
 }
 
 private sealed interface HomePageState {
