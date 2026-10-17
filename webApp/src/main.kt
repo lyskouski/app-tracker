@@ -32,7 +32,7 @@ fun main() {
  */
 private class WebReminderScheduler : ReminderScheduler {
     private val scheduler = InProcessReminderScheduler(MainScope()) { reminder ->
-        showNotification(reminder.title, reminder.text)
+        showNotification(reminder.title, reminder.text, "zwyka-reminder-${reminder.id}")
     }
 
     override fun schedule(reminders: List<Reminder>) = scheduler.schedule(reminders)
@@ -49,10 +49,11 @@ private fun requestNotificationPermission(): Unit = js(
 )
 
 // Mobile browsers allow notifications only through the service worker.
-private fun showNotification(title: String, body: String): Unit = js(
+// `renotify` alerts again even when a previous notification with the same tag is still listed.
+private fun showNotification(title: String, body: String, tag: String): Unit = js(
     """{
         if (typeof Notification === "undefined" || Notification.permission !== "granted") return;
-        const options = { body: body, icon: "favicon.ico", tag: "zwyka-" + title };
+        const options = { body: body, icon: "favicon.ico", tag: tag, renotify: true };
         const fallback = () => new Notification(title, options);
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.getRegistration()
