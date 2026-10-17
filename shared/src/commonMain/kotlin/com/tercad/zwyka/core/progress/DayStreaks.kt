@@ -9,8 +9,9 @@ import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
-import com.tercad.zwyka.core.model.StatusMarks
 import com.tercad.zwyka.core.model.isActiveOn
+import com.tercad.zwyka.defines.isStatusMark
+import com.tercad.zwyka.defines.statusProgress
 
 /** Sparse marks of the table, keyed by habit and date. */
 fun List<DayState>.toMarks(): Map<CellKey, String> =
@@ -49,7 +50,7 @@ fun calculateStreaks(
         for (date in dates) {
             val mark = displayedMark(habit, date, marks, today)
             when {
-                StatusMarks.isStatus(mark) -> streak++
+                isStatusMark(mark) -> streak++
                 mark == INACTIVE_MARK -> Unit
                 else -> {
                     if (streak > 0 && mark.isBlank()) {

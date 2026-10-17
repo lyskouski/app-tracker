@@ -48,19 +48,20 @@ import kotlin.math.min
 import kotlin.math.roundToInt
 
 import com.tercad.zwyka.core.model.CellKey
-import com.tercad.zwyka.core.model.DateFormat
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
-import com.tercad.zwyka.core.model.StatusMarks
 import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.core.progress.calculateDayProgress
 import com.tercad.zwyka.core.progress.calculateStreaks
 import com.tercad.zwyka.core.progress.displayedMark
 import com.tercad.zwyka.core.progress.toMarks
+import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.defines.isStatusMark
+import com.tercad.zwyka.defines.statusProgress
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.months_short
 import org.jetbrains.compose.resources.stringArrayResource
-import com.tercad.zwyka.core.model.WeekStart
+import com.tercad.zwyka.defines.WeekStart
 import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
@@ -886,7 +887,7 @@ private fun CalendarBodyViewport(
                     val value = displayedMark(habit, date, marks, today)
                     val streak = streaks[key]
                     val status = marks[key]
-                        ?.takeIf { mark -> StatusMarks.isStatus(mark) }
+                        ?.takeIf { mark -> isStatusMark(mark) }
                         ?: "·"
 
                     CalendarTableCell(

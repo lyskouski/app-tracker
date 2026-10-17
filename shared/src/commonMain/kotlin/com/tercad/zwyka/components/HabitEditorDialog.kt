@@ -46,7 +46,7 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.Habit
-import com.tercad.zwyka.core.model.WeekStart
+import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationColorOptions
 import com.tercad.zwyka.defines.applicationIcon

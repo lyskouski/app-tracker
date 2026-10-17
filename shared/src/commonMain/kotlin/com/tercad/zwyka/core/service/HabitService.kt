@@ -11,10 +11,10 @@ import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.INACTIVE_MARK
-import com.tercad.zwyka.core.model.WeekStart
 import com.tercad.zwyka.core.repository.DayStateRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 import com.tercad.zwyka.core.time.currentWeekDates
+import com.tercad.zwyka.defines.WeekStart
 
 class HabitService(
     private val habits: HabitRepository,

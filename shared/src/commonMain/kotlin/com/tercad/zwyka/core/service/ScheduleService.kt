@@ -8,9 +8,9 @@ import com.tercad.zwyka.core.model.HabitTime
 import com.tercad.zwyka.core.model.HabitTimeDraft
 import com.tercad.zwyka.core.model.HabitTimeOwner
 import com.tercad.zwyka.core.model.Intent
-import com.tercad.zwyka.core.model.WeekStart
 import com.tercad.zwyka.core.repository.HabitTimeRepository
 import com.tercad.zwyka.core.repository.IntentRepository
+import com.tercad.zwyka.defines.WeekStart
 
 /** Everything shown by the calendar. */
 data class Schedule(

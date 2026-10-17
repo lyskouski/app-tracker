@@ -3,6 +3,12 @@
 
 package com.tercad.zwyka.core.model
 
+import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.defines.HabitOrderBy
+import com.tercad.zwyka.defines.SortDirection
+import com.tercad.zwyka.defines.ThemeMode
+import com.tercad.zwyka.defines.WeekStart
+
 data class AppSettings(
     val language: String? = null,
     val weekStart: WeekStart = WeekStart.MONDAY,

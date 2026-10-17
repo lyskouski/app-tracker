@@ -46,12 +46,12 @@ import kotlin.time.Clock
 
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
-import com.tercad.zwyka.core.model.sortedBy
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.sortedBy
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ButtonDefaults

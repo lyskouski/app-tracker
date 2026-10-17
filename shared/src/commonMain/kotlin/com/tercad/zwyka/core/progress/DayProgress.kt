@@ -8,9 +8,10 @@ import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
-import com.tercad.zwyka.core.model.StatusMarks
 import com.tercad.zwyka.core.model.isActiveOn
 import com.tercad.zwyka.core.model.isBeforeCreation
+import com.tercad.zwyka.defines.isStatusMark
+import com.tercad.zwyka.defines.statusProgress
 
 /*
  * Progress of all habits applicable on [date], 0..1, or null if none applies.
@@ -32,7 +33,7 @@ fun calculateDayProgress(
             mark == INACTIVE_MARK -> null
             mark == null && !habit.isActiveOn(dayOfWeek) -> null
             habit.isBeforeCreation(date, mark) -> null
-            else -> StatusMarks.progress(mark)
+            else -> statusProgress(mark)
         }
     }
     if (values.isEmpty()) return null

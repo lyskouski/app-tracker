@@ -17,8 +17,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
-import com.tercad.zwyka.core.model.StatusMarks
-
+private const val OVER_100_MARK = "▣"
 
 /** Renders a status mark; "▣" is drawn because the web build has no font glyph for it. */
 @Composable
@@ -28,7 +27,7 @@ fun StatusMark(
     color: Color = LocalContentColor.current,
     style: TextStyle = MaterialTheme.typography.bodyMedium,
 ) {
-    if (mark != StatusMarks.OVER_100) {
+    if (mark != OVER_100_MARK) {
         Text(text = mark, modifier = modifier, color = color, style = style)
         return
     }

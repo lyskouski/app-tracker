@@ -47,11 +47,11 @@ import kotlinx.datetime.minus
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
-import com.tercad.zwyka.core.model.DateFormat
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.progress.calculateProgressHistory
 import com.tercad.zwyka.core.progress.toMarks
+import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back

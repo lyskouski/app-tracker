@@ -8,7 +8,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
-import com.tercad.zwyka.core.model.WeekStart
+import com.tercad.zwyka.defines.WeekStart
 
 /** Seven dates of the week (per the configured week start) that contains [today]. */
 fun currentWeekDates(today: LocalDate, weekStart: WeekStart): List<LocalDate> {

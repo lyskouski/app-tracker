@@ -18,7 +18,6 @@ import kotlinx.coroutines.CancellationException
 import com.tercad.zwyka.defines.LocalAppLocale
 import com.tercad.zwyka.state.AppSettingsStore
 
-import com.tercad.zwyka.core.model.ThemeMode
 import com.tercad.zwyka.core.notifications.NoReminderScheduler
 import com.tercad.zwyka.core.notifications.ReminderScheduler
 import com.tercad.zwyka.infrastructures.Database
@@ -26,6 +25,7 @@ import com.tercad.zwyka.infrastructures.createServices
 import com.tercad.zwyka.defines.ColorSchemeDark
 import com.tercad.zwyka.defines.ColorSchemeLight
 import com.tercad.zwyka.defines.LocalColorScheme
+import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 

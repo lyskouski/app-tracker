@@ -46,7 +46,6 @@ import com.tercad.zwyka.defines.applicationLanguages
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
 import com.tercad.zwyka.defines.habitOrderByOptions
-import com.tercad.zwyka.defines.label
 import com.tercad.zwyka.defines.sortDirectionOptions
 import com.tercad.zwyka.defines.themeModeOptions
 import com.tercad.zwyka.defines.weekStartOptions

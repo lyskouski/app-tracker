@@ -45,9 +45,9 @@ import com.tercad.zwyka.core.model.HabitTimeDraft
 import com.tercad.zwyka.core.model.HabitTimeOwner
 import com.tercad.zwyka.core.model.Intent
 import com.tercad.zwyka.core.model.MINUTES_PER_DAY
-import com.tercad.zwyka.core.model.WeekStart
 import com.tercad.zwyka.core.time.formatTime
 import com.tercad.zwyka.core.time.parseTime
+import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
