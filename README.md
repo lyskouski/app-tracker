@@ -1,5 +1,50 @@
 # <img title="Zwyka Logo" src="./docs/design-flow/logo.svg" width="32" /> Zwyka: Habits Tracking Application
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
+Zwyka -- open source code platform-agnostic habits tracker application. The goal of the 
+solution is to create a habits tracking application that is intuitive, efficient, and 
+inclusive. That empowers users to effortlessly manage their habits while ensuring that no 
+one is left behind.
+
+| Type                     | Alpha Version         | Pre-Release                   | Release                       |
+| ------------------------ | ----------------------| ----------------------------- | ----------------------------- |
+| ![Web Browsers](./docs/design-flow/icons/web.png) Web                      | [zwyka_Web.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | [GitHub Pages: Zwyka](https://lyskouski.github.io/app-tracker/) | [terCAD: Zwyka](https://tercad.com/app/tracker/index.html) |
+
+
+## Functionality
+
+**Habits**
+- Create, edit and delete habits with a title, remarks, an icon (2,000+ Material icons), 
+  and a color (palette or custom RGB / HEX).
+- Set the active days of the week for each habit; inactive days are marked with "—" in 
+  the calendar.
+
+**Habits Calendar (home screen)**
+- Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
+  in both directions with pinned habit headers and dates.
+- Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
+  `▣` over 100%.
+- Today's row is highlighted, and a separator marks the start of each week.
+- **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" days don't break it).
+- **Today's progress**: the top-left corner shows the overall completion of today's habits 
+  as a progress bar around the cell, with the percentage in the middle.
+
+**Metrics**
+- Open by tapping today's progress: a graph of daily completion (%) over the last 66 days.
+
+**Schedule (Calendar)**
+- Day view with hours, like Google or Outlook Calendar: move between days with `<` / `>` 
+  or jump back to `Today`.
+- Tap a time slot to schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom start 
+  and end time, repeated on the selected days of the week, with an optional note.
+- Overlapping time ranges are shown side by side; tap a range to edit or delete it.
+
+**Settings**
+- Language: system default, English, Deutsch.
+- Theme: system default, light, dark.
+- Start of the week
+- Dates format
+- Habits order (by creation date, last update, or title; ascending or descending).
 
 
 ## Support (Sponsorship)
