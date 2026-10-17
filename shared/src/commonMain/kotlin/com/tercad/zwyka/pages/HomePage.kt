@@ -65,6 +65,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.notifications.LocalReminderScheduler
+import com.tercad.zwyka.notifications.syncReminders
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.calendar
@@ -118,6 +120,7 @@ private fun HomePageContent(
     var dayStateSaveError by remember { mutableStateOf<String?>(null) }
     var isDayStateSaving by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    val reminderScheduler = LocalReminderScheduler.current
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
 
     LaunchedEffect(database) {
@@ -271,6 +274,8 @@ private fun HomePageContent(
                                     .awaitAsList()
                                     .map { DayState(it.habitId, it.date, it.mark) }
                                 state = current.copy(habits = habits, dayStates = dayStates)
+                                // Habit title is shown in its reminders.
+                                syncReminders(database, reminderScheduler)
                                 showHabitDialog = false
                                 editingHabit = null
                             } catch (error: CancellationException) {
@@ -289,6 +294,7 @@ private fun HomePageContent(
                             coroutineScope.launch {
                                 try {
                                     deleteHabit(database, habit.id)
+                                    syncReminders(database, reminderScheduler)
                                     state = current.copy(
                                         habits = current.habits.filterNot { it.id == habit.id },
                                         dayStates = current.dayStates.filterNot {

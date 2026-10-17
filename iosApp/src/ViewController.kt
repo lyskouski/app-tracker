@@ -9,6 +9,8 @@ private val database by lazy {
     Database(NativeSqliteDriver(Database.Schema.synchronous(), "zwyka.db"))
 }
 
+private val reminderScheduler by lazy { IosReminderScheduler() }
+
 fun ViewController() = ComposeUIViewController {
-    App(database = database)
+    App(database = database, reminderScheduler = reminderScheduler)
 }

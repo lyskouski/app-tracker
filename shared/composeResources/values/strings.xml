@@ -102,4 +102,5 @@
     <string name="habit_or_intent">Habit / Intent</string>
     <string name="intent_title">Intent</string>
     <string name="new_intent">New intent</string>
+    <string name="notify">Notify</string>
 </resources>

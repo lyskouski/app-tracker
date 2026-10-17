@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -25,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -84,6 +86,8 @@ import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.notifications.LocalReminderScheduler
+import com.tercad.zwyka.notifications.syncReminders
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
@@ -92,6 +96,7 @@ import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.next_day
+import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.previous_day
 import com.tercad.zwyka.resources.today
 
@@ -123,6 +128,7 @@ private fun CalendarPageContent(
 ) {
     val navigator = LocalNavigator.currentOrThrow
     val coroutineScope = rememberCoroutineScope()
+    val reminderScheduler = LocalReminderScheduler.current
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
     val today = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault())
@@ -233,6 +239,7 @@ private fun CalendarPageContent(
                     habits = loadHabits(database)
                     intents = loadIntents(database)
                     habitTimes = loadHabitTimes(database)
+                    syncReminders(database, reminderScheduler)
                     editing = null
                 } catch (error: CancellationException) {
                     throw error
@@ -253,7 +260,7 @@ private fun CalendarPageContent(
             error = saveError,
             weekStart = settingsStore.current.weekStart,
             onDismiss = { editing = null },
-            onSave = { owner, timeStart, timeEnd, note, activeDays ->
+            onSave = { owner, timeStart, timeEnd, note, activeDays, notify ->
                 persist {
                     val habitTimeId = current.habitTime?.id
                     var habitId: Long? = null
@@ -280,6 +287,7 @@ private fun CalendarPageContent(
                             timeEnd.toLong(),
                             note,
                             activeDays.toLong(),
+                            if (notify) 1L else 0L,
                         )
                     } else {
                         database.databaseQueries.updateHabitTime(
@@ -289,6 +297,7 @@ private fun CalendarPageContent(
                             timeEnd.toLong(),
                             note,
                             activeDays.toLong(),
+                            if (notify) 1L else 0L,
                             habitTimeId,
                         )
                     }
@@ -394,6 +403,7 @@ private suspend fun loadHabitTimes(database: Database): List<HabitTime> =
                 timeEnd = it.timeEnd.toInt(),
                 note = it.note,
                 activeDays = it.activeDays.toInt(),
+                notify = it.notify != 0L,
             )
         }
 
@@ -591,7 +601,17 @@ private fun HabitTimeBlock(
             .semantics { contentDescription = "$title, $range" }
             .padding(start = 6.dp, end = 4.dp, top = 2.dp),
     ) {
-        Column {
+        if (habitTime.notify) {
+            Icon(
+                imageVector = Icons.Filled.NotificationsActive,
+                contentDescription = stringResource(Res.string.notify),
+                tint = color,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .size(14.dp),
+            )
+        }
+        Column(modifier = Modifier.padding(end = if (habitTime.notify) 14.dp else 0.dp)) {
             Text(
                 text = if (isShort) "$title, ${formatTime(habitTime.timeStart)}" else title,
                 style = MaterialTheme.typography.labelMedium,

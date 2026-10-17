@@ -1,6 +1,6 @@
 [ English | [Deutsch](./CONTRIBUTING_de.md) | [简体中文](./CONTRIBUTING_zh-CN.md) ]
 
-# Contributing to ______ (app-tracker)
+# Contributing to "Zwyka" (app-tracker)
 
 Any help is always welcome!
 

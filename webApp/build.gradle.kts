@@ -24,6 +24,7 @@ kotlin {
                 implementation(project(":shared"))
                 implementation("org.jetbrains.compose.ui:ui:1.11.1")
                 implementation(libs.sqldelight.web.worker.driver)
+                implementation(libs.kotlinx.coroutines.core)
                 implementation(npm("sql.js", "1.6.2"))
                 implementation(npm("@cashapp/zwyka-sqljs-worker", file("sqljs")))
                 implementation(devNpm("copy-webpack-plugin", "9.1.0"))

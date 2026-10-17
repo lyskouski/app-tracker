@@ -23,6 +23,10 @@ import com.tercad.zwyka.defines.ColorSchemeDark
 import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.notifications.LocalReminderScheduler
+import com.tercad.zwyka.notifications.NoReminderScheduler
+import com.tercad.zwyka.notifications.ReminderScheduler
+import com.tercad.zwyka.notifications.syncReminders
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 
@@ -30,6 +34,7 @@ import com.tercad.zwyka.pages.SettingsPage
 fun App(
     database: Database? = null,
     initializeDatabase: suspend () -> Unit = {},
+    reminderScheduler: ReminderScheduler = NoReminderScheduler,
 ) {
     val systemDark = isSystemInDarkTheme()
 
@@ -45,6 +50,7 @@ fun App(
         try {
             initializeDatabase()
             settingsStore.load()
+            syncReminders(database, reminderScheduler)
         } catch (error: CancellationException) {
             throw error
         } catch (error: Exception) {
@@ -58,6 +64,7 @@ fun App(
     CompositionLocalProvider(
         LocalColorScheme provides colorScheme,
         LocalAppLocale provides settingsStore.current.language,
+        LocalReminderScheduler provides reminderScheduler,
     ) {
         key(settingsStore.current.language) {
             MaterialTheme(colorScheme = colorScheme) {

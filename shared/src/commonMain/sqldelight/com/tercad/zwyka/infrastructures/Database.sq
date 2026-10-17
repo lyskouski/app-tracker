@@ -39,6 +39,8 @@ CREATE TABLE HabitTime (
     timeEnd INTEGER NOT NULL,
     note TEXT,
     activeDays INTEGER NOT NULL DEFAULT 127,
+    -- 1: notify the user at timeStart.
+    notify INTEGER NOT NULL DEFAULT 0,
     FOREIGN KEY (habitId) REFERENCES Habit(id),
     FOREIGN KEY (intentId) REFERENCES Intent(id)
 );
@@ -107,12 +109,12 @@ FROM HabitTime
 ORDER BY timeStart, timeEnd;
 
 insertHabitTime:
-INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays)
-VALUES (?, ?, ?, ?, ?, ?);
+INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays, notify)
+VALUES (?, ?, ?, ?, ?, ?, ?);
 
 updateHabitTime:
 UPDATE HabitTime
-SET habitId = ?, intentId = ?, timeStart = ?, timeEnd = ?, note = ?, activeDays = ?
+SET habitId = ?, intentId = ?, timeStart = ?, timeEnd = ?, note = ?, activeDays = ?, notify = ?
 WHERE id = ?;
 
 updateIntentActiveDays:

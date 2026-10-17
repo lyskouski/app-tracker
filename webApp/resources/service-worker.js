@@ -31,3 +31,14 @@ self.addEventListener("fetch", (event) => {
       .catch(() => caches.match(request)),
   );
 });
+
+// Clicking a reminder brings the application back.
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windows) => {
+      const client = windows.find((w) => w.url.startsWith(self.registration.scope));
+      return client ? client.focus() : self.clients.openWindow(self.registration.scope);
+    }),
+  );
+});

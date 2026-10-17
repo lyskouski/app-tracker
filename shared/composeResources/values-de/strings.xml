@@ -102,4 +102,5 @@
     <string name="habit_or_intent">Gewohnheit / Vorhaben</string>
     <string name="intent_title">Vorhaben</string>
     <string name="new_intent">Neues Vorhaben</string>
+    <string name="notify">Benachrichtigen</string>
 </resources>

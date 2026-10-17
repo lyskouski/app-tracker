@@ -19,8 +19,9 @@ class MainActivity : ComponentActivity() {
                 "zwyka.db",
             ),
         )
+        val reminderScheduler = AndroidReminderScheduler(this)
         setContent {
-            App(database = database)
+            App(database = database, reminderScheduler = reminderScheduler)
         }
     }
 }

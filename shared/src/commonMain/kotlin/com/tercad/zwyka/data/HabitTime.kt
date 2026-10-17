@@ -17,6 +17,8 @@ data class HabitTime(
     val timeEnd: Int,
     val note: String? = null,
     val activeDays: Int = ALL_DAYS,
+    /** Notify the user at [timeStart]. */
+    val notify: Boolean = false,
 )
 
 const val MINUTES_PER_DAY = 24 * 60

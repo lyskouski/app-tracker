@@ -23,6 +23,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -45,6 +46,7 @@ import com.tercad.zwyka.data.MINUTES_PER_DAY
 import com.tercad.zwyka.data.formatTime
 import com.tercad.zwyka.data.parseTime
 import com.tercad.zwyka.defines.WeekStart
+import com.tercad.zwyka.notifications.LocalReminderScheduler
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
@@ -65,6 +67,7 @@ import com.tercad.zwyka.resources.interval_custom
 import com.tercad.zwyka.resources.invalid_time_range
 import com.tercad.zwyka.resources.intent_title
 import com.tercad.zwyka.resources.new_intent
+import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.time_end
 import com.tercad.zwyka.resources.time_start
@@ -102,7 +105,14 @@ fun HabitTimeDialog(
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (owner: HabitTimeOwner, timeStart: Int, timeEnd: Int, note: String?, activeDays: Int) -> Unit,
+    onSave: (
+        owner: HabitTimeOwner,
+        timeStart: Int,
+        timeEnd: Int,
+        note: String?,
+        activeDays: Int,
+        notify: Boolean,
+    ) -> Unit,
     onDelete: (() -> Unit)? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
 ) {
@@ -125,6 +135,8 @@ fun HabitTimeDialog(
     var startInput by remember(habitTime?.id) { mutableStateOf(formatTime(start0)) }
     var endInput by remember(habitTime?.id) { mutableStateOf(formatTime(end0)) }
     var note by remember(habitTime?.id) { mutableStateOf(habitTime?.note.orEmpty()) }
+    var notify by remember(habitTime?.id) { mutableStateOf(habitTime?.notify ?: false) }
+    val reminderScheduler = LocalReminderScheduler.current
     // Own days of the edited range; otherwise the days of the selected habit / intent.
     var activeDays by remember(habitTime?.id, habitId, intentId) {
         mutableStateOf(
@@ -270,6 +282,21 @@ fun HabitTimeDialog(
                     )
                 }
 
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(stringResource(Res.string.notify), modifier = Modifier.weight(1f))
+                    Switch(
+                        checked = notify,
+                        onCheckedChange = { checked ->
+                            if (checked) reminderScheduler.requestPermission()
+                            notify = checked
+                        },
+                        enabled = !isSaving,
+                    )
+                }
+
                 Text(stringResource(Res.string.active_days))
                 WeekDaysSelector(
                     activeDays = activeDays,
@@ -328,7 +355,7 @@ fun HabitTimeDialog(
                                 HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
                             }
                             if (timeStart != null && timeEnd != null) {
-                                onSave(owner, timeStart, timeEnd, note.trim().ifEmpty { null }, activeDays)
+                                onSave(owner, timeStart, timeEnd, note.trim().ifEmpty { null }, activeDays, notify)
                             }
                         },
                         enabled = canSave,

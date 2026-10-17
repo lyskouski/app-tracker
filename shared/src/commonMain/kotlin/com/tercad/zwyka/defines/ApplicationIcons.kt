@@ -95,7 +95,7 @@ val applicationIconOptions = listOf(
     ApplicationIconOption("AddBox") { Icons.Filled.AddBox },
     ApplicationIconOption("AddBusiness") { Icons.Filled.AddBusiness },
     ApplicationIconOption("AddCard") { Icons.Filled.AddCard },
-    ApplicationIconOption("Addchart") { Icons.Filled.Addchart },
+    // ApplicationIconOption("Addchart") { Icons.Filled.Addchart },
     ApplicationIconOption("AddChart") { Icons.Filled.AddChart },
     ApplicationIconOption("AddCircleOutline") { Icons.Filled.AddCircleOutline },
     ApplicationIconOption("AddComment") { Icons.Filled.AddComment },

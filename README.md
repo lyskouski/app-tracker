@@ -38,6 +38,8 @@ one is left behind.
 - Tap a time slot to schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom start 
   and end time, repeated on the selected days of the week, with an optional note.
 - Overlapping time ranges are shown side by side; tap a range to edit or delete it.
+- Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
+  `iOS` allows max 9 daily reminders per day)
 
 **Settings**
 - Language: system default, English, Deutsch.

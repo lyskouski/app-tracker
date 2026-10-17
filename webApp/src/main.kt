@@ -7,19 +7,62 @@ import app.cash.sqldelight.db.SqlDriver
 import org.w3c.dom.Worker
 import app.cash.sqldelight.driver.worker.WebWorkerDriver
 import com.tercad.zwyka.infrastructures.Database
+import com.tercad.zwyka.notifications.InProcessReminderScheduler
+import com.tercad.zwyka.notifications.Reminder
+import com.tercad.zwyka.notifications.ReminderScheduler
+import kotlinx.coroutines.MainScope
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     val driver = WebWorkerDriver(createSqlJsWorker())
     val database = Database(driver)
+    val reminderScheduler = WebReminderScheduler()
 
     ComposeViewport {
         App(
             database = database,
             initializeDatabase = { initializeDatabase(driver) },
+            reminderScheduler = reminderScheduler,
         )
     }
 }
+
+/*
+ * Browser notifications, shown while the application is open in a tab.
+ */
+private class WebReminderScheduler : ReminderScheduler {
+    private val scheduler = InProcessReminderScheduler(MainScope()) { reminder ->
+        showNotification(reminder.title, reminder.text)
+    }
+
+    override fun schedule(reminders: List<Reminder>) = scheduler.schedule(reminders)
+
+    override fun requestPermission() = requestNotificationPermission()
+}
+
+private fun requestNotificationPermission(): Unit = js(
+    """{
+        if (typeof Notification !== "undefined" && Notification.permission === "default") {
+            Notification.requestPermission();
+        }
+    }""",
+)
+
+// Mobile browsers allow notifications only through the service worker.
+private fun showNotification(title: String, body: String): Unit = js(
+    """{
+        if (typeof Notification === "undefined" || Notification.permission !== "granted") return;
+        const options = { body: body, icon: "favicon.ico", tag: "zwyka-" + title };
+        const fallback = () => new Notification(title, options);
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistration()
+                .then((registration) => registration ? registration.showNotification(title, options) : fallback())
+                .catch(fallback);
+        } else {
+            fallback();
+        }
+    }""",
+)
 
 private fun createSqlJsWorker(): Worker =
     js("""new Worker(new URL("@cashapp/zwyka-sqljs-worker/sqljs.worker.js", import.meta.url))""")
