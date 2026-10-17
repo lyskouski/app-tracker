@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -30,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -37,6 +40,7 @@ import org.jetbrains.compose.resources.stringResource
 import com.tercad.zwyka.data.ALL_DAYS
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.data.HabitTime
+import com.tercad.zwyka.data.Intent
 import com.tercad.zwyka.data.MINUTES_PER_DAY
 import com.tercad.zwyka.data.formatTime
 import com.tercad.zwyka.data.parseTime
@@ -50,7 +54,7 @@ import com.tercad.zwyka.resources.add_habit_time
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.delete
 import com.tercad.zwyka.resources.edit_habit_time
-import com.tercad.zwyka.resources.habit
+import com.tercad.zwyka.resources.habit_or_intent
 import com.tercad.zwyka.resources.habit_time_note
 import com.tercad.zwyka.resources.habit_time_save_failed
 import com.tercad.zwyka.resources.interval
@@ -59,7 +63,8 @@ import com.tercad.zwyka.resources.interval_2_hours
 import com.tercad.zwyka.resources.interval_30_min
 import com.tercad.zwyka.resources.interval_custom
 import com.tercad.zwyka.resources.invalid_time_range
-import com.tercad.zwyka.resources.no_habits_to_schedule
+import com.tercad.zwyka.resources.intent_title
+import com.tercad.zwyka.resources.new_intent
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.time_end
 import com.tercad.zwyka.resources.time_start
@@ -72,27 +77,44 @@ private enum class HabitTimeInterval(val minutes: Int?, val label: StringResourc
 }
 
 /*
- * Creates ([habitTime] is null) or edits a scheduled time range of a habit.
+ * Owner of a scheduled time range chosen in [HabitTimeDialog].
+ */
+sealed interface HabitTimeOwner {
+    data class OfHabit(val habitId: Long) : HabitTimeOwner
+
+    /** [intentId] is null for a new intent. */
+    data class OfIntent(val intentId: Long?, val title: String) : HabitTimeOwner
+}
+
+/*
+ * Creates ([habitTime] is null) or edits a scheduled time range of a habit,
+ * or of an intent when no habit is selected.
  *
- * Week days are taken from the selected habit; saving passes them back
- * so that the habit gets updated as well.
+ * Week days are taken from the selected habit / intent; saving passes them back
+ * so that the owner gets updated as well.
  */
 @Composable
 fun HabitTimeDialog(
     habitTime: HabitTime?,
     habits: List<Habit>,
+    intents: List<Intent>,
     initialStart: Int,
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (habitId: Long, timeStart: Int, timeEnd: Int, note: String?, activeDays: Int) -> Unit,
+    onSave: (owner: HabitTimeOwner, timeStart: Int, timeEnd: Int, note: String?, activeDays: Int) -> Unit,
     onDelete: (() -> Unit)? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
 ) {
     val start0 = habitTime?.timeStart ?: initialStart
     val end0 = habitTime?.timeEnd ?: (start0 + 60).coerceAtMost(MINUTES_PER_DAY)
+    // No habit selected: the time range belongs to an intent (existing or new).
     var habitId by remember(habitTime?.id) {
-        mutableStateOf(habitTime?.habitId ?: habits.firstOrNull()?.id)
+        mutableStateOf(if (habitTime == null) habits.firstOrNull()?.id else habitTime.habitId)
+    }
+    var intentId by remember(habitTime?.id) { mutableStateOf(habitTime?.intentId) }
+    var intentTitle by remember(habitTime?.id, intentId) {
+        mutableStateOf(intents.firstOrNull { it.id == intentId }?.title.orEmpty())
     }
     var interval by remember(habitTime?.id) {
         mutableStateOf(
@@ -103,9 +125,13 @@ fun HabitTimeDialog(
     var startInput by remember(habitTime?.id) { mutableStateOf(formatTime(start0)) }
     var endInput by remember(habitTime?.id) { mutableStateOf(formatTime(end0)) }
     var note by remember(habitTime?.id) { mutableStateOf(habitTime?.note.orEmpty()) }
-    // Week days belong to the habit: switching the habit shows its own days.
-    var activeDays by remember(habitTime?.id, habitId) {
-        mutableStateOf(habits.firstOrNull { it.id == habitId }?.activeDays ?: ALL_DAYS)
+    // Week days belong to the habit / intent: switching it shows its own days.
+    var activeDays by remember(habitTime?.id, habitId, intentId) {
+        mutableStateOf(
+            habits.firstOrNull { it.id == habitId }?.activeDays
+                ?: intents.firstOrNull { it.id == intentId }?.activeDays
+                ?: ALL_DAYS,
+        )
     }
     var selectingHabit by remember { mutableStateOf(false) }
 
@@ -114,7 +140,8 @@ fun HabitTimeDialog(
         ?.let { minutes -> timeStart?.let { (it + minutes).coerceAtMost(MINUTES_PER_DAY) } }
         ?: parseTime(endInput)
     val isRangeValid = timeStart != null && timeEnd != null && timeEnd > timeStart
-    val canSave = !isSaving && habitId != null && isRangeValid && activeDays != 0
+    val canSave = !isSaving && (habitId != null || intentTitle.isNotBlank()) &&
+        isRangeValid && activeDays != 0
 
     AlertDialog(
         onDismissRequest = { if (!isSaving) onDismiss() },
@@ -130,20 +157,21 @@ fun HabitTimeDialog(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                if (habits.isEmpty()) {
-                    Text(stringResource(Res.string.no_habits_to_schedule))
-                    return@Column
-                }
-
-                Text(stringResource(Res.string.habit))
+                Text(stringResource(Res.string.habit_or_intent))
                 Box {
-                    val selected = habits.firstOrNull { it.id == habitId }
+                    val newIntent = stringResource(Res.string.new_intent)
+                    val selectedHabit = habits.firstOrNull { it.id == habitId }
+                    val selectedIntent = intents.firstOrNull { it.id == intentId }
                     OutlinedButton(
                         onClick = { selectingHabit = true },
                         enabled = !isSaving,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        HabitLabel(selected)
+                        when {
+                            selectedHabit != null -> OwnerLabel(selectedHabit.title, selectedHabit.icon, selectedHabit.color)
+                            selectedIntent != null -> OwnerLabel(selectedIntent.title, selectedIntent.icon, selectedIntent.color)
+                            else -> OwnerLabel(newIntent, null, null, Icons.Filled.Add)
+                        }
                         Spacer(Modifier.weight(1f))
                         Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
                     }
@@ -153,14 +181,45 @@ fun HabitTimeDialog(
                     ) {
                         habits.forEach { habit ->
                             DropdownMenuItem(
-                                text = { HabitLabel(habit) },
+                                text = { OwnerLabel(habit.title, habit.icon, habit.color) },
                                 onClick = {
                                     habitId = habit.id
+                                    intentId = null
                                     selectingHabit = false
                                 },
                             )
                         }
+                        if (habits.isNotEmpty()) HorizontalDivider()
+                        intents.forEach { intent ->
+                            DropdownMenuItem(
+                                text = { OwnerLabel(intent.title, intent.icon, intent.color) },
+                                onClick = {
+                                    habitId = null
+                                    intentId = intent.id
+                                    selectingHabit = false
+                                },
+                            )
+                        }
+                        DropdownMenuItem(
+                            text = { OwnerLabel(newIntent, null, null, Icons.Filled.Add) },
+                            onClick = {
+                                habitId = null
+                                intentId = null
+                                selectingHabit = false
+                            },
+                        )
                     }
+                }
+                if (habitId == null) {
+                    OutlinedTextField(
+                        value = intentTitle,
+                        onValueChange = { intentTitle = it },
+                        label = { Text(stringResource(Res.string.intent_title)) },
+                        singleLine = true,
+                        isError = intentTitle.isBlank(),
+                        enabled = !isSaving,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
                 }
 
                 Text(stringResource(Res.string.interval))
@@ -262,8 +321,13 @@ fun HabitTimeDialog(
                     TextButton(
                         onClick = {
                             val id = habitId
-                            if (id != null && timeStart != null && timeEnd != null) {
-                                onSave(id, timeStart, timeEnd, note.trim().ifEmpty { null }, activeDays)
+                            val owner = if (id != null) {
+                                HabitTimeOwner.OfHabit(id)
+                            } else {
+                                HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
+                            }
+                            if (timeStart != null && timeEnd != null) {
+                                onSave(owner, timeStart, timeEnd, note.trim().ifEmpty { null }, activeDays)
                             }
                         },
                         enabled = canSave,
@@ -277,13 +341,18 @@ fun HabitTimeDialog(
 }
 
 @Composable
-private fun HabitLabel(habit: Habit?) {
+private fun OwnerLabel(
+    title: String,
+    icon: String?,
+    color: String?,
+    fallbackIcon: ImageVector? = null,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        val tint = applicationColor(habit?.color) ?: currentColorScheme().onSurface
-        applicationIcon(habit?.icon)?.let { Icon(it, contentDescription = null, tint = tint) }
-        Text(habit?.title.orEmpty(), maxLines = 1, modifier = Modifier.padding(end = 4.dp))
+        val tint = applicationColor(color) ?: currentColorScheme().onSurface
+        (applicationIcon(icon) ?: fallbackIcon)?.let { Icon(it, contentDescription = null, tint = tint) }
+        Text(title, maxLines = 1, modifier = Modifier.padding(end = 4.dp))
     }
 }

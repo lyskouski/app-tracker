@@ -1,0 +1,31 @@
+CREATE TABLE Intent (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    icon TEXT,
+    color TEXT,
+    remarks TEXT,
+    createdAt INTEGER NOT NULL DEFAULT 0,
+    updatedAt INTEGER NOT NULL DEFAULT 0,
+    activeDays INTEGER NOT NULL DEFAULT 127
+);
+
+-- HabitTime belongs either to a Habit or to an Intent: habitId becomes nullable.
+CREATE TABLE HabitTime_new (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    habitId INTEGER,
+    intentId INTEGER,
+    timeStart INTEGER NOT NULL,
+    timeEnd INTEGER NOT NULL,
+    note TEXT,
+    activeDays INTEGER NOT NULL DEFAULT 127,
+    FOREIGN KEY (habitId) REFERENCES Habit(id),
+    FOREIGN KEY (intentId) REFERENCES Intent(id)
+);
+
+INSERT INTO HabitTime_new(id, habitId, timeStart, timeEnd, note, activeDays)
+SELECT id, habitId, timeStart, timeEnd, note, activeDays
+FROM HabitTime;
+
+DROP TABLE HabitTime;
+
+ALTER TABLE HabitTime_new RENAME TO HabitTime;

@@ -101,5 +101,7 @@
     <string name="delete">Löschen</string>
     <string name="invalid_time_range">Endzeit muss nach der Startzeit liegen</string>
     <string name="habit_time_save_failed">Planung konnte nicht gespeichert werden: %s</string>
-    <string name="no_habits_to_schedule">Füge zuerst eine Gewohnheit hinzu</string>
+    <string name="habit_or_intent">Gewohnheit / Vorhaben</string>
+    <string name="intent_title">Vorhaben</string>
+    <string name="new_intent">Neues Vorhaben</string>
 </resources>

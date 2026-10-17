@@ -3,10 +3,14 @@
 
 package com.tercad.zwyka.data
 
-/** Scheduled time range of a habit, repeated on [activeDays] (same bitmask as [Habit.activeDays]). */
+/**
+ * Scheduled time range of a habit or of an intent (exactly one of [habitId] / [intentId] is set),
+ * repeated on [activeDays] (same bitmask as [Habit.activeDays]).
+ */
 data class HabitTime(
     val id: Long,
-    val habitId: Long,
+    val habitId: Long?,
+    val intentId: Long? = null,
     /** Minutes since midnight. */
     val timeStart: Int,
     /** Minutes since midnight, up to [MINUTES_PER_DAY]. */

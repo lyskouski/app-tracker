@@ -52,6 +52,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import app.cash.sqldelight.async.coroutines.awaitAsList
+import app.cash.sqldelight.async.coroutines.awaitAsOne
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -69,14 +70,15 @@ import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.components.HabitTimeDialog
+import com.tercad.zwyka.components.HabitTimeOwner
 import com.tercad.zwyka.data.AppSettingsStore
 import com.tercad.zwyka.data.Habit
 import com.tercad.zwyka.data.HabitTime
+import com.tercad.zwyka.data.Intent
 import com.tercad.zwyka.data.MINUTES_PER_DAY
 import com.tercad.zwyka.data.applyHabitActiveDays
 import com.tercad.zwyka.data.currentWeekDates
 import com.tercad.zwyka.data.formatTime
-import com.tercad.zwyka.data.isActiveOn
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.infrastructures.Database
@@ -126,6 +128,7 @@ private fun CalendarPageContent(
 
     var selectedDate by remember { mutableStateOf(today) }
     var habits by remember { mutableStateOf<List<Habit>?>(null) }
+    var intents by remember { mutableStateOf<List<Intent>>(emptyList()) }
     var habitTimes by remember { mutableStateOf<List<HabitTime>>(emptyList()) }
     var loadError by remember { mutableStateOf<String?>(null) }
     var editing by remember { mutableStateOf<HabitTimeEditing?>(null) }
@@ -135,6 +138,7 @@ private fun CalendarPageContent(
     LaunchedEffect(database) {
         try {
             habits = loadHabits(database)
+            intents = loadIntents(database)
             habitTimes = loadHabitTimes(database)
         } catch (error: CancellationException) {
             throw error
@@ -194,11 +198,13 @@ private fun CalendarPageContent(
                 date = selectedDate,
                 isToday = selectedDate == today,
                 habits = loadedHabits,
-                // Week days of the habit are the source of truth for its scheduled times.
+                intents = intents,
+                // Week days of the habit / intent are the source of truth for its scheduled times.
                 habitTimes = habitTimes.filter { habitTime ->
-                    loadedHabits.firstOrNull { it.id == habitTime.habitId }
-                        ?.isActiveOn(selectedDate.dayOfWeek)
-                        ?: habitTime.isActiveOn(selectedDate.dayOfWeek)
+                    val activeDays = loadedHabits.firstOrNull { it.id == habitTime.habitId }?.activeDays
+                        ?: intents.firstOrNull { it.id == habitTime.intentId }?.activeDays
+                        ?: habitTime.activeDays
+                    activeDays and (1 shl selectedDate.dayOfWeek.ordinal) != 0
                 },
                 onSlotClick = { start ->
                     saveError = null
@@ -222,7 +228,10 @@ private fun CalendarPageContent(
             coroutineScope.launch {
                 try {
                     action()
+                    // Drop intents left without scheduled times.
+                    database.databaseQueries.deleteUnusedIntents()
                     habits = loadHabits(database)
+                    intents = loadIntents(database)
                     habitTimes = loadHabitTimes(database)
                     editing = null
                 } catch (error: CancellationException) {
@@ -238,26 +247,46 @@ private fun CalendarPageContent(
         HabitTimeDialog(
             habitTime = current.habitTime,
             habits = habits.orEmpty(),
+            intents = intents,
             initialStart = current.start,
             isSaving = isSaving,
             error = saveError,
             weekStart = settingsStore.current.weekStart,
             onDismiss = { editing = null },
-            onSave = { habitId, timeStart, timeEnd, note, activeDays ->
+            onSave = { owner, timeStart, timeEnd, note, activeDays ->
                 persist {
                     val habitTimeId = current.habitTime?.id
-                    if (habits.orEmpty().firstOrNull { it.id == habitId }?.activeDays != activeDays) {
-                        database.databaseQueries.updateHabitActiveDays(activeDays.toLong(), habitId)
-                        applyHabitActiveDays(
-                            database,
-                            habitId,
-                            activeDays,
-                            currentWeekDates(today, settingsStore.current.weekStart),
-                        )
+                    var habitId: Long? = null
+                    var intentId: Long? = null
+                    when (owner) {
+                        is HabitTimeOwner.OfHabit -> {
+                            habitId = owner.habitId
+                            if (habits.orEmpty().firstOrNull { it.id == owner.habitId }?.activeDays != activeDays) {
+                                database.databaseQueries.updateHabitActiveDays(activeDays.toLong(), owner.habitId)
+                                applyHabitActiveDays(
+                                    database,
+                                    owner.habitId,
+                                    activeDays,
+                                    currentWeekDates(today, settingsStore.current.weekStart),
+                                )
+                            }
+                        }
+                        is HabitTimeOwner.OfIntent -> {
+                            intentId = owner.intentId
+                            if (intentId == null) {
+                                database.databaseQueries.insertIntent(owner.title, activeDays.toLong())
+                                intentId = database.databaseQueries.selectLastIntentId()
+                                    .awaitAsOne().max ?: error("Intent was not created")
+                            } else {
+                                database.databaseQueries.updateIntent(owner.title, activeDays.toLong(), intentId)
+                                database.databaseQueries.updateIntentTimesActiveDays(activeDays.toLong(), intentId)
+                            }
+                        }
                     }
                     if (habitTimeId == null) {
                         database.databaseQueries.insertHabitTime(
                             habitId,
+                            intentId,
                             timeStart.toLong(),
                             timeEnd.toLong(),
                             note,
@@ -266,6 +295,7 @@ private fun CalendarPageContent(
                     } else {
                         database.databaseQueries.updateHabitTime(
                             habitId,
+                            intentId,
                             timeStart.toLong(),
                             timeEnd.toLong(),
                             note,
@@ -287,6 +317,11 @@ private suspend fun loadHabits(database: Database): List<Habit> =
         .awaitAsList()
         .map { Habit(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
 
+private suspend fun loadIntents(database: Database): List<Intent> =
+    database.databaseQueries.selectAllIntents()
+        .awaitAsList()
+        .map { Intent(it.id, it.title, it.icon, it.color, it.remarks, it.createdAt, it.updatedAt, it.activeDays.toInt()) }
+
 private suspend fun loadHabitTimes(database: Database): List<HabitTime> =
     database.databaseQueries.selectAllHabitTimes()
         .awaitAsList()
@@ -294,6 +329,7 @@ private suspend fun loadHabitTimes(database: Database): List<HabitTime> =
             HabitTime(
                 id = it.id,
                 habitId = it.habitId,
+                intentId = it.intentId,
                 timeStart = it.timeStart.toInt(),
                 timeEnd = it.timeEnd.toInt(),
                 note = it.note,
@@ -357,6 +393,7 @@ private fun DayTimeline(
     date: LocalDate,
     isToday: Boolean,
     habits: List<Habit>,
+    intents: List<Intent>,
     habitTimes: List<HabitTime>,
     onSlotClick: (Int) -> Unit,
     onHabitTimeClick: (HabitTime) -> Unit,
@@ -368,6 +405,7 @@ private fun DayTimeline(
     val hourHeightPx = with(density) { hourHeight.toPx() }
     val scrollState = rememberScrollState()
     val habitsById = remember(habits) { habits.associateBy { it.id } }
+    val intentsById = remember(intents) { intents.associateBy { it.id } }
     val placed = remember(habitTimes) { layoutHabitTimes(habitTimes) }
     val gridColor = currentColorScheme().outlineVariant
     val nowColor = currentColorScheme().error
@@ -439,9 +477,11 @@ private fun DayTimeline(
 
             placed.forEach { item ->
                 val habit = habitsById[item.habitTime.habitId]
+                val intent = intentsById[item.habitTime.intentId]
                 HabitTimeBlock(
                     habitTime = item.habitTime,
-                    habit = habit,
+                    title = habit?.title ?: intent?.title.orEmpty(),
+                    color = habit?.color ?: intent?.color,
                     modifier = Modifier
                         .offset(
                             x = columnWidth * item.column / item.columns,
@@ -471,14 +511,14 @@ private fun DayTimeline(
 @Composable
 private fun HabitTimeBlock(
     habitTime: HabitTime,
-    habit: Habit?,
+    title: String,
+    color: String?,
     hourHeight: Dp,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val color = applicationColor(habit?.color) ?: currentColorScheme().primary
+    val color = applicationColor(color) ?: currentColorScheme().primary
     val range = "${formatTime(habitTime.timeStart)} – ${formatTime(habitTime.timeEnd)}"
-    val title = habit?.title.orEmpty()
     val isShort = hourHeight * (habitTime.timeEnd - habitTime.timeStart) / 60 < hourHeight * 0.75f
     Box(
         modifier = modifier

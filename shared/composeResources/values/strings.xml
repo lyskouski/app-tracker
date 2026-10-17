@@ -101,5 +101,7 @@
     <string name="delete">Delete</string>
     <string name="invalid_time_range">End time must be after start time</string>
     <string name="habit_time_save_failed">Unable to save schedule: %s</string>
-    <string name="no_habits_to_schedule">Add a habit first</string>
+    <string name="habit_or_intent">Habit / Intent</string>
+    <string name="intent_title">Intent</string>
+    <string name="new_intent">New intent</string>
 </resources>
