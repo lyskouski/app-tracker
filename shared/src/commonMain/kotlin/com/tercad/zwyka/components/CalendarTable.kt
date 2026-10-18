@@ -885,7 +885,8 @@ private fun CalendarBodyViewport(
                             ?: currentColorScheme().surface
                     }
                     val value = displayedMark(habit, date, marks, today)
-                    val streak = streaks[key]
+                    // A single day is not a streak yet.
+                    val streak = streaks[key]?.takeIf { it > 1 }
                     val status = marks[key]
                         ?.takeIf { mark -> isStatusMark(mark) }
                         ?: "·"
