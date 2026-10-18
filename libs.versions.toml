@@ -9,6 +9,7 @@ kotlinx-coroutines = "1.11.0"
 kotlinx-datetime = "0.7.1"
 voyager = "1.1.0-beta02"
 sqldelight = "2.3.2"
+screenshot-generator = "1.0.0"
 
 [libraries]
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
@@ -27,6 +28,7 @@ sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", ver
 sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqldelight-jdbc-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqldelight-web-worker-driver = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqldelight" }
+screenshot-generator = { module = "io.github.lyskouski:compose-screenshot-generator", version.ref = "screenshot-generator" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

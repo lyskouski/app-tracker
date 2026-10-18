@@ -29,3 +29,15 @@ persists its database in IndexedDB.
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html), [Kotlin Toolchain](https://kotlin-toolchain.org/dev/), [Compose Multiplatform](https://kotlinlang.org/compose-multiplatform/), [Kotlin/Wasm](https://kotl.in/wasm/).
+
+
+## Screenshots
+
+Store screenshots for all devices and languages are generated headlessly by
+[compose-screenshot-generator](./screenshot-generator/README.md) from
+[CaptureTest](./shared/test@jvm/com/tercad/zwyka/screenshots/CaptureTest.kt) into `./screenshots`:
+
+```
+./gradlew :shared:jvmScreenshots
+./gradlew :shared:jvmScreenshots -PSCREENSHOT_DEVICES="iPhone 15 Pro" -PSCREENSHOT_LOCALES=de -PSCREENSHOT_STEPS=1_home
+```

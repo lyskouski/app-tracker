@@ -91,6 +91,10 @@ kotlin {
 
         jvmTest {
             kotlin.srcDir("test@jvm")
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.screenshot.generator)
+            }
         }
 
         iosTest {
@@ -110,6 +114,34 @@ compose.resources {
         "commonMain",
         providers.provider { layout.projectDirectory.dir("composeResources") },
     )
+}
+
+val screenshotTests = "com.tercad.zwyka.screenshots.*"
+
+tasks.named<Test>("jvmTest") {
+    filter.excludeTestsMatching(screenshotTests)
+    filter.isFailOnNoMatchingTests = false
+}
+
+// ./gradlew :shared:jvmScreenshots -PSCREENSHOT_DEVICES="iPhone 15 Pro" -PSCREENSHOT_LOCALES=en
+tasks.register<Test>("jvmScreenshots") {
+    description = "Generates application screenshots across devices and locales into ./screenshots."
+    group = "verification"
+    val jvmTest = tasks.named<Test>("jvmTest").get()
+    testClassesDirs = jvmTest.testClassesDirs
+    classpath = jvmTest.classpath
+    filter.includeTestsMatching(screenshotTests)
+    // Environment variables reach the tests as is; -P properties are forwarded.
+    listOf("SCREENSHOT_DEVICES", "SCREENSHOT_LOCALES", "SCREENSHOT_STEPS", "SKIP_EXISTANT")
+        .forEach { name -> providers.gradleProperty(name).orNull?.let { systemProperty(name, it) } }
+    systemProperty(
+        "SCREENSHOT_OUTPUT",
+        providers.gradleProperty("SCREENSHOT_OUTPUT")
+            .orElse(providers.environmentVariable("SCREENSHOT_OUTPUT"))
+            .getOrElse(rootProject.layout.projectDirectory.dir("screenshots").asFile.path),
+    )
+    outputs.upToDateWhen { false }
+    testLogging.showStandardStreams = true
 }
 
 sqldelight {
