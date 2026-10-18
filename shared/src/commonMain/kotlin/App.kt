@@ -4,7 +4,9 @@
 package com.tercad.zwyka
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -13,6 +15,7 @@ import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
 import kotlinx.coroutines.CancellationException
 import com.tercad.zwyka.defines.LocalAppLocale
@@ -73,7 +76,7 @@ fun App(
         LocalFileTransfer provides fileTransfer,
     ) {
         key(settingsStore.current.language) {
-            MaterialTheme(colorScheme = colorScheme) {
+            MaterialTheme(colorScheme = colorScheme, shapes = AppShapes) {
                 val screens = remember {
                     val home = HomePage(services, initializeDatabase, settingsStore)
                     if (settingsStore.reopenSettings) {
@@ -87,3 +90,6 @@ fun App(
         }
     }
 }
+
+// Popups (dialogs) are less rounded than the Material default of 28.dp.
+private val AppShapes = Shapes(extraLarge = RoundedCornerShape(12.dp))
