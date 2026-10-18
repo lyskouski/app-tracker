@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Event
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -30,14 +31,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import kotlin.time.Clock
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.core.calendar.CalendarEvent
+import com.tercad.zwyka.core.calendar.googleCalendarUrl
+import com.tercad.zwyka.core.calendar.icsContent
+import com.tercad.zwyka.core.calendar.icsFileName
+import com.tercad.zwyka.core.calendar.outlookCalendarUrl
+import com.tercad.zwyka.core.files.LocalFileTransfer
 import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitTime
@@ -54,9 +67,14 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.active_days
 import com.tercad.zwyka.resources.add_habit_time
+import com.tercad.zwyka.resources.add_to_calendar
+import com.tercad.zwyka.resources.apple_calendar
+import com.tercad.zwyka.resources.calendar_export_failed
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.edit_habit_time
+import com.tercad.zwyka.resources.google_calendar
 import com.tercad.zwyka.resources.habit_or_intent
 import com.tercad.zwyka.resources.habit_time_note
 import com.tercad.zwyka.resources.habit_time_save_failed
@@ -67,6 +85,7 @@ import com.tercad.zwyka.resources.interval_2_hours
 import com.tercad.zwyka.resources.interval_30_min
 import com.tercad.zwyka.resources.interval_custom
 import com.tercad.zwyka.resources.invalid_time_range
+import com.tercad.zwyka.resources.microsoft_calendar
 import com.tercad.zwyka.resources.new_intent
 import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.save
@@ -86,6 +105,9 @@ private enum class HabitTimeInterval(val minutes: Int?, val label: StringResourc
  *
  * Week days are set per time range; a new one starts from the days of the selected
  * habit / intent (whose own days accumulate all of its time ranges).
+ *
+ * The entered range can be added to Google, Apple or Microsoft calendar,
+ * starting on the first active day from [date] on.
  */
 @Composable
 fun HabitTimeDialog(
@@ -93,6 +115,7 @@ fun HabitTimeDialog(
     habits: List<Habit>,
     intents: List<Intent>,
     initialStart: Int,
+    date: LocalDate,
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
@@ -138,6 +161,19 @@ fun HabitTimeDialog(
         ?.let { minutes -> timeStart?.let { (it + minutes).coerceAtMost(MINUTES_PER_DAY) } }
         ?: parseTime(endInput)
     val isRangeValid = timeStart != null && timeEnd != null && timeEnd > timeStart
+    val ownerTitle = habits.firstOrNull { it.id == habitId }?.title ?: intentTitle.trim()
+    val calendarEvent = if (timeStart != null && timeEnd != null && isRangeValid && activeDays != 0 && ownerTitle.isNotBlank()) {
+        CalendarEvent(
+            title = ownerTitle,
+            details = note.trim().ifEmpty { null },
+            from = date,
+            timeStart = timeStart,
+            timeEnd = timeEnd,
+            activeDays = activeDays,
+        )
+    } else {
+        null
+    }
     val canSave = !isSaving && (habitId != null || intentTitle.isNotBlank()) &&
         isRangeValid && activeDays != 0
 
@@ -300,6 +336,8 @@ fun HabitTimeDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
 
+                CalendarExport(calendarEvent, enabled = !isSaving)
+
                 error?.let {
                     Text(
                         stringResource(Res.string.habit_time_save_failed, it),
@@ -376,5 +414,75 @@ private fun OwnerLabel(
         val tint = applicationColor(color) ?: currentColorScheme().onSurface
         (applicationIcon(icon) ?: fallbackIcon)?.let { Icon(it, contentDescription = null, tint = tint) }
         Text(title, maxLines = 1, modifier = Modifier.padding(end = 4.dp))
+    }
+}
+
+private enum class ExternalCalendar(val label: StringResource) {
+    GOOGLE(Res.string.google_calendar),
+    APPLE(Res.string.apple_calendar),
+    MICROSOFT(Res.string.microsoft_calendar),
+}
+
+/*
+ * [Add to calendar v] -> Google: web template, Apple: .ics file, Microsoft: Outlook web compose.
+ */
+@Composable
+private fun CalendarExport(event: CalendarEvent?, enabled: Boolean) {
+    val uriHandler = LocalUriHandler.current
+    val fileTransfer = LocalFileTransfer.current
+    val scope = rememberCoroutineScope()
+    var selecting by remember { mutableStateOf(false) }
+    var failure by remember { mutableStateOf<String?>(null) }
+    val unknownError = stringResource(Res.string.database_error_unknown)
+
+    fun export(calendar: ExternalCalendar, event: CalendarEvent) {
+        failure = null
+        scope.launch {
+            try {
+                when (calendar) {
+                    ExternalCalendar.GOOGLE -> uriHandler.openUri(event.googleCalendarUrl())
+                    ExternalCalendar.MICROSOFT -> uriHandler.openUri(event.outlookCalendarUrl())
+                    ExternalCalendar.APPLE ->
+                        fileTransfer.save(event.icsFileName(), event.icsContent(Clock.System.now()))
+                }
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                failure = error.message ?: unknownError
+            }
+        }
+    }
+
+    Box {
+        OutlinedButton(
+            onClick = { selecting = true },
+            enabled = enabled && event != null,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Icon(Icons.Filled.Event, contentDescription = null)
+            Text(stringResource(Res.string.add_to_calendar), modifier = Modifier.padding(start = 8.dp))
+            Spacer(Modifier.weight(1f))
+            Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
+        }
+        DropdownMenu(
+            expanded = selecting,
+            onDismissRequest = { selecting = false },
+        ) {
+            ExternalCalendar.entries.forEach { calendar ->
+                DropdownMenuItem(
+                    text = { Text(stringResource(calendar.label)) },
+                    onClick = {
+                        selecting = false
+                        event?.let { export(calendar, it) }
+                    },
+                )
+            }
+        }
+    }
+    failure?.let {
+        Text(
+            stringResource(Res.string.calendar_export_failed, it),
+            color = currentColorScheme().error,
+        )
     }
 }

@@ -108,4 +108,9 @@
     <string name="intent_title">Vorhaben</string>
     <string name="new_intent">Neues Vorhaben</string>
     <string name="notify">Benachrichtigen</string>
+    <string name="add_to_calendar">Zum Kalender hinzufügen</string>
+    <string name="google_calendar">Google Kalender</string>
+    <string name="apple_calendar">Apple Kalender</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Hinzufügen zum Kalender fehlgeschlagen: %1$s</string>
 </resources>

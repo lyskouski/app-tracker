@@ -40,6 +40,7 @@ one is left behind.
 - Overlapping time ranges are shown side by side; tap a range to edit or delete it.
 - Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
   `iOS` allows max 9 daily reminders per day)
+- Add to external calendar (Apple, Google, Microsoft)
 
 **Settings**
 - Language: system default, English, Deutsch.
@@ -47,6 +48,7 @@ one is left behind.
 - Start of the week
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending).
+- Import / Export data
 
 <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_1.jpg" width="240" /> . <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_2.jpg" width="240" /> . <img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/calendar.jpg" width="240" />
 

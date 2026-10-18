@@ -108,4 +108,9 @@
     <string name="intent_title">Intent</string>
     <string name="new_intent">New intent</string>
     <string name="notify">Notify</string>
+    <string name="add_to_calendar">Add to calendar</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Apple Calendar</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Unable to add to calendar: %1$s</string>
 </resources>

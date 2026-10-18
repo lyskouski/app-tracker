@@ -239,6 +239,7 @@ private fun CalendarPageContent(
             habits = schedule?.habits.orEmpty(),
             intents = schedule?.intents.orEmpty(),
             initialStart = current.start,
+            date = selectedDate,
             isSaving = isSaving,
             error = saveError,
             weekStart = settingsStore.current.weekStart,
