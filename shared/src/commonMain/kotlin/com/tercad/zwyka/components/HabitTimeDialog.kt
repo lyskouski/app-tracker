@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -36,6 +37,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import kotlin.time.Clock
@@ -155,6 +158,8 @@ fun HabitTimeDialog(
         )
     }
     var selectingHabit by remember { mutableStateOf(false) }
+    var ownerWidthPx by remember { mutableStateOf(0) }
+    val ownerWidth = with(LocalDensity.current) { ownerWidthPx.toDp() }
 
     val timeStart = parseTime(startInput)
     val timeEnd = interval.minutes
@@ -192,7 +197,7 @@ fun HabitTimeDialog(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Text(stringResource(Res.string.habit_or_intent))
-                Box {
+                Box(Modifier.fillMaxWidth().onSizeChanged { ownerWidthPx = it.width }) {
                     val newIntent = stringResource(Res.string.new_intent)
                     val selectedHabit = habits.firstOrNull { it.id == habitId }
                     val selectedIntent = intents.firstOrNull { it.id == intentId }
@@ -212,6 +217,7 @@ fun HabitTimeDialog(
                     DropdownMenu(
                         expanded = selectingHabit,
                         onDismissRequest = { selectingHabit = false },
+                        modifier = Modifier.width(ownerWidth),
                     ) {
                         habits.forEach { habit ->
                             DropdownMenuItem(
@@ -433,6 +439,8 @@ private fun CalendarExport(event: CalendarEvent?, enabled: Boolean) {
     val scope = rememberCoroutineScope()
     var selecting by remember { mutableStateOf(false) }
     var failure by remember { mutableStateOf<String?>(null) }
+    var fieldWidthPx by remember { mutableStateOf(0) }
+    val fieldWidth = with(LocalDensity.current) { fieldWidthPx.toDp() }
     val unknownError = stringResource(Res.string.database_error_unknown)
 
     fun export(calendar: ExternalCalendar, event: CalendarEvent) {
@@ -453,7 +461,7 @@ private fun CalendarExport(event: CalendarEvent?, enabled: Boolean) {
         }
     }
 
-    Box {
+    Box(Modifier.fillMaxWidth().onSizeChanged { fieldWidthPx = it.width }) {
         OutlinedButton(
             onClick = { selecting = true },
             enabled = enabled && event != null,
@@ -467,6 +475,7 @@ private fun CalendarExport(event: CalendarEvent?, enabled: Boolean) {
         DropdownMenu(
             expanded = selecting,
             onDismissRequest = { selecting = false },
+            modifier = Modifier.width(fieldWidth),
         ) {
             ExternalCalendar.entries.forEach { calendar ->
                 DropdownMenuItem(
