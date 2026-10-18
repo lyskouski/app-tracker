@@ -47,6 +47,7 @@ fun main() = application {
     }
     Tray(state = trayState, icon = TrayIcon, tooltip = "Zwyka")
     Window(onCloseRequest = ::exitApplication, title = "Zwyka") {
-        App(database = database, reminderScheduler = reminderScheduler)
+        val fileTransfer = remember(window) { DesktopFileTransfer(window) }
+        App(database = database, reminderScheduler = reminderScheduler, fileTransfer = fileTransfer)
     }
 }

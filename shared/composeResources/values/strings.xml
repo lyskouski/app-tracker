@@ -2,10 +2,10 @@
     <string name="app_name">Zwyka</string>
     <string name="habit_database_unavailable">Habit database is unavailable.</string>
     <string name="habits_loading">Loading habits...</string>
-    <string name="habits_load_failed">Unable to load habits: %s</string>
+    <string name="habits_load_failed">Unable to load habits: %1$s</string>
     <string name="database_error_unknown">Unknown database error</string>
     <string name="add_habit">Add Habit</string>
-    <string name="add_habit_failed">Unable to add habit: %s</string>
+    <string name="add_habit_failed">Unable to add habit: %1$s</string>
     <string name="habit_name">Habit name</string>
     <string name="habit_remarks">Remarks</string>
     <string name="active_days">Active days</string>
@@ -29,12 +29,12 @@
     <string name="status_75_percent">75%</string>
     <string name="status_100_percent">100%</string>
     <string name="status_over_100_percent">100+%</string>
-    <string name="day_state_save_failed">Unable to update day state: %s</string>
+    <string name="day_state_save_failed">Unable to update day state: %1$s</string>
     <string name="edit_habit">Edit habit</string>
     <string name="delete_habit">Delete</string>
     <string name="delete_habit_confirmation">Delete habit?</string>
     <string name="delete_habit_confirmation_message">Delete “%1$s” and all its recorded day states?</string>
-    <string name="habit_update_failed">Unable to update habit: %s</string>
+    <string name="habit_update_failed">Unable to update habit: %1$s</string>
     <string name="settings">Settings</string>
     <string name="language">Language</string>
     <string name="language_system">System default</string>
@@ -47,6 +47,11 @@
     <string name="order_title">Title</string>
     <string name="sort_ascending">Ascending</string>
     <string name="sort_descending">Descending</string>
+    <string name="import_data">Import</string>
+    <string name="export_data">Export</string>
+    <string name="data_exported">Data exported.</string>
+    <string name="data_imported">Imported records: %1$s</string>
+    <string name="data_transfer_failed">Unable to transfer data: %1$s</string>
     <string-array name="days_short">
         <item>Mon</item>
         <item>Tue</item>
@@ -98,7 +103,7 @@
     <string name="habit_time_note">Note</string>
     <string name="delete">Delete</string>
     <string name="invalid_time_range">End time must be after start time</string>
-    <string name="habit_time_save_failed">Unable to save schedule: %s</string>
+    <string name="habit_time_save_failed">Unable to save schedule: %1$s</string>
     <string name="habit_or_intent">Habit / Intent</string>
     <string name="intent_title">Intent</string>
     <string name="new_intent">New intent</string>

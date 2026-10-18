@@ -165,7 +165,7 @@ private fun HomePageContent(
                             )
                         }
                         TextButton(
-                            onClick = { navigator.push(SettingsPage(settingsStore)) },
+                            onClick = { navigator.push(SettingsPage(settingsStore, services)) },
                             modifier = Modifier.align(Alignment.CenterEnd),
                             colors = ButtonDefaults.textButtonColors(
                                 contentColor = currentColorScheme().onPrimary,

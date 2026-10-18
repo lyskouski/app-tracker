@@ -11,6 +11,8 @@ private val database by lazy {
 
 private val reminderScheduler by lazy { IosReminderScheduler() }
 
+private val fileTransfer by lazy { IosFileTransfer() }
+
 fun ViewController() = ComposeUIViewController {
-    App(database = database, reminderScheduler = reminderScheduler)
+    App(database = database, reminderScheduler = reminderScheduler, fileTransfer = fileTransfer)
 }

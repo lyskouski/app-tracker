@@ -20,8 +20,9 @@ class MainActivity : ComponentActivity() {
             ),
         )
         val reminderScheduler = AndroidReminderScheduler(this)
+        val fileTransfer = AndroidFileTransfer(this)
         setContent {
-            App(database = database, reminderScheduler = reminderScheduler)
+            App(database = database, reminderScheduler = reminderScheduler, fileTransfer = fileTransfer)
         }
     }
 }

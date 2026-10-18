@@ -61,15 +61,32 @@ import com.tercad.zwyka.resources.sort_direction
 import com.tercad.zwyka.resources.start_of_week
 import com.tercad.zwyka.resources.theme_mode
 import com.tercad.zwyka.state.AppSettingsStore
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.filled.FileDownload
+import androidx.compose.material.icons.filled.FileUpload
+import androidx.compose.material3.OutlinedButton
+import com.tercad.zwyka.core.Services
+import com.tercad.zwyka.core.files.LocalFileTransfer
+import com.tercad.zwyka.core.service.BACKUP_EXTENSION
+import com.tercad.zwyka.core.service.BackupService
+import com.tercad.zwyka.resources.data_exported
+import com.tercad.zwyka.resources.data_imported
+import com.tercad.zwyka.resources.data_transfer_failed
+import com.tercad.zwyka.resources.database_error_unknown
+import com.tercad.zwyka.resources.export_data
+import com.tercad.zwyka.resources.import_data
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
 class SettingsPage(
     private val settingsStore: AppSettingsStore,
+    private val services: Services? = null,
 ) : Screen {
     @Composable
     override fun Content() {
@@ -198,6 +215,8 @@ class SettingsPage(
                     }
                 },
             )
+
+            services?.let { BackupButtons(it.backup, settingsStore) }
         }
         }
     }
@@ -264,6 +283,69 @@ private fun DropdownField(
                     },
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun BackupButtons(backup: BackupService, settingsStore: AppSettingsStore) {
+    val fileTransfer = LocalFileTransfer.current
+    val scope = rememberCoroutineScope()
+    // Outcome of the last action: a message with its argument.
+    var message by remember { mutableStateOf<Pair<StringResource, String>?>(null) }
+    val unknownError = stringResource(Res.string.database_error_unknown)
+
+    fun transfer(action: suspend () -> Pair<StringResource, String>?) {
+        scope.launch {
+            message = try {
+                action()
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                Res.string.data_transfer_failed to (error.message ?: unknownError)
+            }
+        }
+    }
+
+    message?.let { (text, argument) ->
+        Text(
+            text = stringResource(text, argument),
+            style = MaterialTheme.typography.bodyMedium,
+            color = currentColorScheme().onSurface,
+        )
+    }
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        OutlinedButton(
+            onClick = {
+                transfer {
+                    val sql = fileTransfer.open(BACKUP_EXTENSION) ?: return@transfer null
+                    val added = backup.import(sql)
+                    // Imported settings may change the language, which rebuilds the navigation.
+                    settingsStore.reopenSettings = true
+                    settingsStore.load()
+                    Res.string.data_imported to added.toString()
+                }
+            },
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(imageVector = Icons.Filled.FileDownload, contentDescription = null)
+            Text(text = stringResource(Res.string.import_data), modifier = Modifier.padding(start = 8.dp))
+        }
+        OutlinedButton(
+            onClick = {
+                transfer {
+                    val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+                    val saved = fileTransfer.save(backup.fileName(today), backup.export())
+                    if (saved) Res.string.data_exported to "" else null
+                }
+            },
+            modifier = Modifier.weight(1f),
+        ) {
+            Icon(imageVector = Icons.Filled.FileUpload, contentDescription = null)
+            Text(text = stringResource(Res.string.export_data), modifier = Modifier.padding(start = 8.dp))
         }
     }
 }

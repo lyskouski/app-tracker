@@ -162,6 +162,37 @@ deleteHabitTimesForHabit:
 DELETE FROM HabitTime
 WHERE habitId = ?;
 
+-- Backup: every stored row, and inserts keeping the ids that skip existing rows.
+selectAllDayStates:
+SELECT *
+FROM DayState
+ORDER BY habitId, date;
+
+selectAllHabitTimesById:
+SELECT *
+FROM HabitTime
+ORDER BY id;
+
+importHabit:
+INSERT OR IGNORE INTO Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+importIntent:
+INSERT OR IGNORE INTO Intent(id, title, icon, color, remarks, createdAt, updatedAt, activeDays)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+importHabitTime:
+INSERT OR IGNORE INTO HabitTime(id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+importDayState:
+INSERT OR IGNORE INTO DayState(habitId, date, mark)
+VALUES (?, ?, ?);
+
+importSetting:
+INSERT OR IGNORE INTO Setting(key, value)
+VALUES (?, ?);
+
 INSERT INTO Habit(id, title) VALUES (1, 'Sample 1');
 INSERT INTO Habit(id, title) VALUES (2, 'Sample 2');
 INSERT INTO Habit(id, title) VALUES (3, 'Sample 3');

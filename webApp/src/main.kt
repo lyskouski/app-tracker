@@ -23,6 +23,7 @@ fun main() {
             database = database,
             initializeDatabase = { initializeDatabase(driver) },
             reminderScheduler = reminderScheduler,
+            fileTransfer = WebFileTransfer(),
         )
     }
 }

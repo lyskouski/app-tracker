@@ -8,12 +8,14 @@ import app.cash.sqldelight.async.coroutines.awaitAsOne
 
 import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.createServices
+import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.HabitTime
 import com.tercad.zwyka.core.model.Intent
 import com.tercad.zwyka.core.notifications.ReminderScheduler
+import com.tercad.zwyka.core.repository.BackupRepository
 import com.tercad.zwyka.core.repository.DayStateRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 import com.tercad.zwyka.core.repository.HabitTimeRepository
@@ -167,6 +169,100 @@ class SqlSettingsRepository(private val database: Database) : SettingsRepository
     }
 }
 
+class SqlBackupRepository(private val database: Database) : BackupRepository {
+    private val queries get() = database.databaseQueries
+
+    // Parents go first, so the imported rows refer to existing ones.
+    override suspend fun export(): String = buildList {
+        queries.selectAllHabits().awaitAsList().forEach {
+            add(
+                sqlInsert(
+                    "Habit",
+                    listOf(
+                        "id" to it.id, "title" to it.title, "icon" to it.icon, "color" to it.color,
+                        "remarks" to it.remarks, "createdAt" to it.createdAt, "updatedAt" to it.updatedAt,
+                        "activeDays" to it.activeDays,
+                    ),
+                ),
+            )
+        }
+        queries.selectAllIntents().awaitAsList().forEach {
+            add(
+                sqlInsert(
+                    "Intent",
+                    listOf(
+                        "id" to it.id, "title" to it.title, "icon" to it.icon, "color" to it.color,
+                        "remarks" to it.remarks, "createdAt" to it.createdAt, "updatedAt" to it.updatedAt,
+                        "activeDays" to it.activeDays,
+                    ),
+                ),
+            )
+        }
+        queries.selectAllHabitTimesById().awaitAsList().forEach {
+            add(
+                sqlInsert(
+                    "HabitTime",
+                    listOf(
+                        "id" to it.id, "habitId" to it.habitId, "intentId" to it.intentId,
+                        "timeStart" to it.timeStart, "timeEnd" to it.timeEnd, "note" to it.note,
+                        "activeDays" to it.activeDays, "notify" to it.notify,
+                    ),
+                ),
+            )
+        }
+        queries.selectAllDayStates().awaitAsList().forEach {
+            add(sqlInsert("DayState", listOf("habitId" to it.habitId, "date" to it.date, "mark" to it.mark)))
+        }
+        queries.selectAllSettings().awaitAsList().forEach {
+            add(sqlInsert("Setting", listOf("key" to it.key, "value" to it.value_)))
+        }
+    }.joinToString(separator = "\n", postfix = "\n")
+
+    override suspend fun import(sql: String): Int {
+        // Parsed in full first: a broken file adds nothing.
+        val inserts = parseSqlDump(sql)
+        var added = 0L
+        database.transaction {
+            inserts.forEach { insert ->
+                added += insert.execute()
+            }
+        }
+        return added.toInt()
+    }
+
+    private suspend fun SqlInsert.execute(): Long = when (table) {
+        "Habit" -> queries.importHabit(
+            long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
+            long("createdAt", 0), long("updatedAt", 0), long("activeDays", ALL_DAYS.toLong()),
+        )
+        "Intent" -> queries.importIntent(
+            long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
+            long("createdAt", 0), long("updatedAt", 0), long("activeDays", ALL_DAYS.toLong()),
+        )
+        "HabitTime" -> queries.importHabitTime(
+            long("id"), longOrNull("habitId"), longOrNull("intentId"), long("timeStart"), long("timeEnd"),
+            stringOrNull("note"), long("activeDays", ALL_DAYS.toLong()), long("notify", 0),
+        )
+        "DayState" -> queries.importDayState(long("habitId"), string("date"), string("mark"))
+        "Setting" -> queries.importSetting(string("key"), string("value"))
+        else -> throw IllegalArgumentException("Unknown table: $table")
+    }
+
+    private fun SqlInsert.longOrNull(column: String): Long? = values[column]?.let {
+        it as? Long ?: throw IllegalArgumentException("$table.$column is not a number")
+    }
+
+    private fun SqlInsert.long(column: String, default: Long? = null): Long =
+        longOrNull(column) ?: default ?: throw IllegalArgumentException("$table.$column is missing")
+
+    private fun SqlInsert.stringOrNull(column: String): String? = values[column]?.let {
+        it as? String ?: throw IllegalArgumentException("$table.$column is not a text")
+    }
+
+    private fun SqlInsert.string(column: String): String =
+        stringOrNull(column) ?: throw IllegalArgumentException("$table.$column is missing")
+}
+
 /** Composition root: business services stored in [Database]. */
 fun Database.createServices(reminderScheduler: ReminderScheduler): Services =
     createServices(
@@ -175,5 +271,6 @@ fun Database.createServices(reminderScheduler: ReminderScheduler): Services =
         habitTimeRepository = SqlHabitTimeRepository(this),
         intentRepository = SqlIntentRepository(this),
         settingsRepository = SqlSettingsRepository(this),
+        backupRepository = SqlBackupRepository(this),
         reminderScheduler = reminderScheduler,
     )

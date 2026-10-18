@@ -18,6 +18,9 @@ import kotlinx.coroutines.CancellationException
 import com.tercad.zwyka.defines.LocalAppLocale
 import com.tercad.zwyka.state.AppSettingsStore
 
+import com.tercad.zwyka.core.files.FileTransfer
+import com.tercad.zwyka.core.files.LocalFileTransfer
+import com.tercad.zwyka.core.files.NoFileTransfer
 import com.tercad.zwyka.core.notifications.NoReminderScheduler
 import com.tercad.zwyka.core.notifications.ReminderScheduler
 import com.tercad.zwyka.infrastructures.Database
@@ -34,6 +37,7 @@ fun App(
     database: Database? = null,
     initializeDatabase: suspend () -> Unit = {},
     reminderScheduler: ReminderScheduler = NoReminderScheduler,
+    fileTransfer: FileTransfer = NoFileTransfer,
 ) {
     val systemDark = isSystemInDarkTheme()
 
@@ -66,13 +70,14 @@ fun App(
     CompositionLocalProvider(
         LocalColorScheme provides colorScheme,
         LocalAppLocale provides settingsStore.current.language,
+        LocalFileTransfer provides fileTransfer,
     ) {
         key(settingsStore.current.language) {
             MaterialTheme(colorScheme = colorScheme) {
                 val screens = remember {
                     val home = HomePage(services, initializeDatabase, settingsStore)
                     if (settingsStore.reopenSettings) {
-                        listOf(home, SettingsPage(settingsStore))
+                        listOf(home, SettingsPage(settingsStore, services))
                     } else {
                         listOf(home)
                     }

@@ -71,3 +71,14 @@ interface SettingsRepository {
 
     suspend fun remove(key: String)
 }
+
+interface BackupRepository {
+    /** All stored data as SQL: one `INSERT IGNORE` statement per line. */
+    suspend fun export(): String
+
+    /**
+     * Adds the rows of [sql] (as made by [export]); rows with existing keys are skipped.
+     * @return number of added rows.
+     */
+    suspend fun import(sql: String): Int
+}
