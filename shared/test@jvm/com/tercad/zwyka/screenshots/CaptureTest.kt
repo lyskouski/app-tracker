@@ -3,19 +3,29 @@
 
 package com.tercad.zwyka.screenshots
 
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.test.click
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.dp
 import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.tercad.zwyka.App
 import com.tercad.zwyka.core.notifications.NoReminderScheduler
+import com.tercad.zwyka.core.time.formatTime
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.infrastructures.createServices
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
+import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.settings
 import io.github.lyskouski.screenshot.ScreenshotGenerator
+import io.github.lyskouski.screenshot.ScreenshotScope
 import io.github.lyskouski.screenshot.ScreenshotTarget
 import org.jetbrains.compose.resources.getString
 import java.io.File
@@ -44,7 +54,24 @@ class CaptureTest {
         gen.inject("3_settings") {
             onNodeWithText(getString(Res.string.settings)).performClick()
         }
+        gen.inject("4_calendar") {
+            openCalendar()
+        }
+        gen.inject("5_calendar_add") {
+            openCalendar()
+            // Empty slot: the sample schedules nothing before 06:00.
+            val hour = onNodeWithText(formatTime(5 * 60)).performScrollTo()
+            val y = hour.fetchSemanticsNode().boundsInRoot.center.y
+            onRoot().performTouchInput { click(Offset(right - 32.dp.toPx(), y)) }
+            waitForIdle()
+        }
         gen.run()
+    }
+
+    private suspend fun ScreenshotScope.openCalendar() {
+        onNodeWithText(getString(Res.string.calendar)).performClick()
+        // The schedule loads after the page is shown.
+        waitUntil { onAllNodesWithText(formatTime(0)).fetchSemanticsNodes().isNotEmpty() }
     }
 
     private suspend fun sampleDatabase(target: ScreenshotTarget): Database {
