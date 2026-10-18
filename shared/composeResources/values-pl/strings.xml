@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Baza nawyków jest niedostępna.</string>
+    <string name="habits_loading">Ładowanie nawyków...</string>
+    <string name="habits_load_failed">Nie udało się załadować nawyków: %1$s</string>
+    <string name="database_error_unknown">Nieznany błąd bazy danych</string>
+    <string name="add_habit">Dodaj nawyk</string>
+    <string name="add_habit_failed">Nie udało się dodać nawyku: %1$s</string>
+    <string name="habit_name">Nazwa nawyku</string>
+    <string name="habit_remarks">Uwagi</string>
+    <string name="active_days">Aktywne dni</string>
+    <string name="save">Zapisz</string>
+    <string name="cancel">Anuluj</string>
+    <string name="no_icon">Brak ikony</string>
+    <string name="select_icon">Wybierz ikonę</string>
+    <string name="search_icons">Szukaj ikon</string>
+    <string name="back">Wstecz</string>
+    <string name="default_color">Domyślny</string>
+    <string name="select_color">Wybierz kolor</string>
+    <string name="color_value">Szesnastkowy kod koloru (#RRGGBB)</string>
+    <string name="invalid_color">Wprowadź prawidłowy sześciocyfrowy kod koloru w formacie szesnastkowym.</string>
+    <string name="color_scheme_not_provided">Nie przekazano schematu kolorów.</string>
+    <string name="edit_day_state">Zaktualizuj stan dnia</string>
+    <string name="date">Data</string>
+    <string name="status">Status</string>
+    <string name="status_start">0% Start</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Nie udało się zaktualizować stanu dnia: %1$s</string>
+    <string name="edit_habit">Edytuj nawyk</string>
+    <string name="delete_habit">Usuń</string>
+    <string name="delete_habit_confirmation">Usunąć nawyk?</string>
+    <string name="delete_habit_confirmation_message">Usunąć „%1$s” i wszystkie zapisane stany dni?</string>
+    <string name="habit_update_failed">Nie udało się zaktualizować nawyku: %1$s</string>
+    <string name="settings">Ustawienia</string>
+    <string name="language">Język</string>
+    <string name="language_system">Domyślny systemowy</string>
+    <string name="start_of_week">Początek tygodnia</string>
+    <string name="date_format">Format daty</string>
+    <string name="habit_order_by">Sortuj nawyki według</string>
+    <string name="sort_direction">Kierunek sortowania</string>
+    <string name="order_created_at">Daty utworzenia</string>
+    <string name="order_updated_at">Daty aktualizacji</string>
+    <string name="order_title">Nazwy</string>
+    <string name="sort_ascending">Rosnąco</string>
+    <string name="sort_descending">Malejąco</string>
+    <string name="import_data">Import</string>
+    <string name="export_data">Eksport</string>
+    <string name="data_exported">Dane wyeksportowane.</string>
+    <string name="data_imported">Zaimportowane rekordy: %1$s</string>
+    <string name="data_transfer_failed">Nie udało się przenieść danych: %1$s</string>
+    <string-array name="days_short">
+        <item>Pon</item>
+        <item>Wt</item>
+        <item>Śr</item>
+        <item>Czw</item>
+        <item>Pt</item>
+        <item>Sob</item>
+        <item>Nd</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Sty</item>
+        <item>Lut</item>
+        <item>Mar</item>
+        <item>Kwi</item>
+        <item>Maj</item>
+        <item>Cze</item>
+        <item>Lip</item>
+        <item>Sie</item>
+        <item>Wrz</item>
+        <item>Paź</item>
+        <item>Lis</item>
+        <item>Gru</item>
+    </string-array>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Niedziela</string>
+    <string name="monday">Poniedziałek</string>
+    <string name="search_languages">Szukaj języków</string>
+    <string name="theme_mode">Motyw</string>
+    <string name="theme_system">Domyślny systemowy</string>
+    <string name="theme_light">Jasny</string>
+    <string name="theme_dark">Ciemny</string>
+    <string name="metrics">Statystyki</string>
+    <string name="metrics_days">Dni</string>
+    <string name="metrics_completion">Realizacja, %</string>
+    <string name="calendar">Kalendarz</string>
+    <string name="today">Dziś</string>
+    <string name="previous_day">Poprzedni dzień</string>
+    <string name="next_day">Następny dzień</string>
+    <string name="add_habit_time">Zaplanuj nawyk</string>
+    <string name="edit_habit_time">Edytuj harmonogram</string>
+    <string name="habit">Nawyk</string>
+    <string name="interval">Interwał</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 godzina</string>
+    <string name="interval_2_hours">2 godziny</string>
+    <string name="interval_custom">Własny</string>
+    <string name="time_start">Początek (HH:MM)</string>
+    <string name="time_end">Koniec (HH:MM)</string>
+    <string name="habit_time_note">Notatka</string>
+    <string name="delete">Usuń</string>
+    <string name="invalid_time_range">Czas zakończenia musi być późniejszy niż czas rozpoczęcia</string>
+    <string name="habit_time_save_failed">Nie udało się zapisać harmonogramu: %1$s</string>
+    <string name="habit_or_intent">Nawyk / Zamiar</string>
+    <string name="intent_title">Zamiar</string>
+    <string name="new_intent">Nowy zamiar</string>
+    <string name="notify">Powiadamiaj</string>
+    <string name="add_to_calendar">Dodaj do kalendarza</string>
+    <string name="google_calendar">Kalendarz Google</string>
+    <string name="apple_calendar">Kalendarz Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Nie udało się dodać do kalendarza: %1$s</string>
+</resources>

@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Databáze návyků není dostupná.</string>
+    <string name="habits_loading">Načítání návyků...</string>
+    <string name="habits_load_failed">Návyky se nepodařilo načíst: %1$s</string>
+    <string name="database_error_unknown">Neznámá chyba databáze</string>
+    <string name="add_habit">Přidat návyk</string>
+    <string name="add_habit_failed">Návyk se nepodařilo přidat: %1$s</string>
+    <string name="habit_name">Název návyku</string>
+    <string name="habit_remarks">Poznámky</string>
+    <string name="active_days">Aktivní dny</string>
+    <string name="save">Uložit</string>
+    <string name="cancel">Zrušit</string>
+    <string name="no_icon">Bez ikony</string>
+    <string name="select_icon">Vybrat ikonu</string>
+    <string name="search_icons">Hledat ikony</string>
+    <string name="back">Zpět</string>
+    <string name="default_color">Výchozí</string>
+    <string name="select_color">Vybrat barvu</string>
+    <string name="color_value">Hexadecimální kód barvy (#RRGGBB)</string>
+    <string name="invalid_color">Zadejte platný šestimístný hexadecimální kód barvy.</string>
+    <string name="color_scheme_not_provided">Barevné schéma nebylo předáno.</string>
+    <string name="edit_day_state">Aktualizovat stav dne</string>
+    <string name="date">Datum</string>
+    <string name="status">Stav</string>
+    <string name="status_start">0% Začátek</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Stav dne se nepodařilo aktualizovat: %1$s</string>
+    <string name="edit_habit">Upravit návyk</string>
+    <string name="delete_habit">Smazat</string>
+    <string name="delete_habit_confirmation">Smazat návyk?</string>
+    <string name="delete_habit_confirmation_message">Smazat „%1$s“ a všechny zaznamenané stavy dnů?</string>
+    <string name="habit_update_failed">Návyk se nepodařilo aktualizovat: %1$s</string>
+    <string name="settings">Nastavení</string>
+    <string name="language">Jazyk</string>
+    <string name="language_system">Podle systému</string>
+    <string name="start_of_week">Začátek týdne</string>
+    <string name="date_format">Formát data</string>
+    <string name="habit_order_by">Řadit návyky podle</string>
+    <string name="sort_direction">Směr řazení</string>
+    <string name="order_created_at">Data vytvoření</string>
+    <string name="order_updated_at">Data aktualizace</string>
+    <string name="order_title">Názvu</string>
+    <string name="sort_ascending">Vzestupně</string>
+    <string name="sort_descending">Sestupně</string>
+    <string name="import_data">Import</string>
+    <string name="export_data">Export</string>
+    <string name="data_exported">Data byla exportována.</string>
+    <string name="data_imported">Importované záznamy: %1$s</string>
+    <string name="data_transfer_failed">Data se nepodařilo přenést: %1$s</string>
+    <string-array name="days_short">
+        <item>Po</item>
+        <item>Út</item>
+        <item>St</item>
+        <item>Čt</item>
+        <item>Pá</item>
+        <item>So</item>
+        <item>Ne</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Led</item>
+        <item>Úno</item>
+        <item>Bře</item>
+        <item>Dub</item>
+        <item>Kvě</item>
+        <item>Čvn</item>
+        <item>Čvc</item>
+        <item>Srp</item>
+        <item>Zář</item>
+        <item>Říj</item>
+        <item>Lis</item>
+        <item>Pro</item>
+    </string-array>
+    <string name="saturday">Sobota</string>
+    <string name="sunday">Neděle</string>
+    <string name="monday">Pondělí</string>
+    <string name="search_languages">Hledat jazyky</string>
+    <string name="theme_mode">Motiv</string>
+    <string name="theme_system">Podle systému</string>
+    <string name="theme_light">Světlý</string>
+    <string name="theme_dark">Tmavý</string>
+    <string name="metrics">Statistiky</string>
+    <string name="metrics_days">Dny</string>
+    <string name="metrics_completion">Plnění, %</string>
+    <string name="calendar">Kalendář</string>
+    <string name="today">Dnes</string>
+    <string name="previous_day">Předchozí den</string>
+    <string name="next_day">Následující den</string>
+    <string name="add_habit_time">Naplánovat návyk</string>
+    <string name="edit_habit_time">Upravit plán</string>
+    <string name="habit">Návyk</string>
+    <string name="interval">Interval</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 hodina</string>
+    <string name="interval_2_hours">2 hodiny</string>
+    <string name="interval_custom">Vlastní</string>
+    <string name="time_start">Začátek (HH:MM)</string>
+    <string name="time_end">Konec (HH:MM)</string>
+    <string name="habit_time_note">Poznámka</string>
+    <string name="delete">Smazat</string>
+    <string name="invalid_time_range">Čas konce musí být po čase začátku</string>
+    <string name="habit_time_save_failed">Plán se nepodařilo uložit: %1$s</string>
+    <string name="habit_or_intent">Návyk / Záměr</string>
+    <string name="intent_title">Záměr</string>
+    <string name="new_intent">Nový záměr</string>
+    <string name="notify">Upozornit</string>
+    <string name="add_to_calendar">Přidat do kalendáře</string>
+    <string name="google_calendar">Kalendář Google</string>
+    <string name="apple_calendar">Kalendář Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Nepodařilo se přidat do kalendáře: %1$s</string>
+</resources>

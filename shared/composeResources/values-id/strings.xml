@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Basis data kebiasaan tidak tersedia.</string>
+    <string name="habits_loading">Memuat kebiasaan...</string>
+    <string name="habits_load_failed">Tidak dapat memuat kebiasaan: %1$s</string>
+    <string name="database_error_unknown">Kesalahan basis data tidak diketahui</string>
+    <string name="add_habit">Tambah kebiasaan</string>
+    <string name="add_habit_failed">Tidak dapat menambahkan kebiasaan: %1$s</string>
+    <string name="habit_name">Nama kebiasaan</string>
+    <string name="habit_remarks">Catatan</string>
+    <string name="active_days">Hari aktif</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="no_icon">Tanpa ikon</string>
+    <string name="select_icon">Pilih ikon</string>
+    <string name="search_icons">Cari ikon</string>
+    <string name="back">Kembali</string>
+    <string name="default_color">Bawaan</string>
+    <string name="select_color">Pilih warna</string>
+    <string name="color_value">Nilai warna heksadesimal (#RRGGBB)</string>
+    <string name="invalid_color">Masukkan warna heksadesimal enam digit yang valid.</string>
+    <string name="color_scheme_not_provided">Skema warna tidak diberikan.</string>
+    <string name="edit_day_state">Perbarui status hari</string>
+    <string name="date">Tanggal</string>
+    <string name="status">Status</string>
+    <string name="status_start">0% Mulai</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Tidak dapat memperbarui status hari: %1$s</string>
+    <string name="edit_habit">Edit kebiasaan</string>
+    <string name="delete_habit">Hapus</string>
+    <string name="delete_habit_confirmation">Hapus kebiasaan?</string>
+    <string name="delete_habit_confirmation_message">Hapus “%1$s” dan semua status hari yang tercatat?</string>
+    <string name="habit_update_failed">Tidak dapat memperbarui kebiasaan: %1$s</string>
+    <string name="settings">Pengaturan</string>
+    <string name="language">Bahasa</string>
+    <string name="language_system">Bawaan sistem</string>
+    <string name="start_of_week">Awal minggu</string>
+    <string name="date_format">Format tanggal</string>
+    <string name="habit_order_by">Urutkan kebiasaan menurut</string>
+    <string name="sort_direction">Arah urutan</string>
+    <string name="order_created_at">Tanggal dibuat</string>
+    <string name="order_updated_at">Tanggal diperbarui</string>
+    <string name="order_title">Judul</string>
+    <string name="sort_ascending">Naik</string>
+    <string name="sort_descending">Turun</string>
+    <string name="import_data">Impor</string>
+    <string name="export_data">Ekspor</string>
+    <string name="data_exported">Data diekspor.</string>
+    <string name="data_imported">Catatan diimpor: %1$s</string>
+    <string name="data_transfer_failed">Tidak dapat mentransfer data: %1$s</string>
+    <string-array name="days_short">
+        <item>Sen</item>
+        <item>Sel</item>
+        <item>Rab</item>
+        <item>Kam</item>
+        <item>Jum</item>
+        <item>Sab</item>
+        <item>Min</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>Mei</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Agu</item>
+        <item>Sep</item>
+        <item>Okt</item>
+        <item>Nov</item>
+        <item>Des</item>
+    </string-array>
+    <string name="saturday">Sabtu</string>
+    <string name="sunday">Minggu</string>
+    <string name="monday">Senin</string>
+    <string name="search_languages">Cari bahasa</string>
+    <string name="theme_mode">Tema</string>
+    <string name="theme_system">Bawaan sistem</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="metrics">Statistik</string>
+    <string name="metrics_days">Hari</string>
+    <string name="metrics_completion">Penyelesaian, %</string>
+    <string name="calendar">Kalender</string>
+    <string name="today">Hari ini</string>
+    <string name="previous_day">Hari sebelumnya</string>
+    <string name="next_day">Hari berikutnya</string>
+    <string name="add_habit_time">Jadwalkan kebiasaan</string>
+    <string name="edit_habit_time">Edit jadwal</string>
+    <string name="habit">Kebiasaan</string>
+    <string name="interval">Interval</string>
+    <string name="interval_30_min">30 mnt</string>
+    <string name="interval_1_hour">1 jam</string>
+    <string name="interval_2_hours">2 jam</string>
+    <string name="interval_custom">Kustom</string>
+    <string name="time_start">Mulai (HH:MM)</string>
+    <string name="time_end">Selesai (HH:MM)</string>
+    <string name="habit_time_note">Catatan</string>
+    <string name="delete">Hapus</string>
+    <string name="invalid_time_range">Waktu selesai harus setelah waktu mulai</string>
+    <string name="habit_time_save_failed">Tidak dapat menyimpan jadwal: %1$s</string>
+    <string name="habit_or_intent">Kebiasaan / Niat</string>
+    <string name="intent_title">Niat</string>
+    <string name="new_intent">Niat baru</string>
+    <string name="notify">Beri tahu</string>
+    <string name="add_to_calendar">Tambahkan ke kalender</string>
+    <string name="google_calendar">Google Kalender</string>
+    <string name="apple_calendar">Kalender Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Tidak dapat menambahkan ke kalender: %1$s</string>
+</resources>

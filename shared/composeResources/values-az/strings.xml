@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Vərdiş verilənlər bazası əlçatan deyil.</string>
+    <string name="habits_loading">Vərdişlər yüklənir...</string>
+    <string name="habits_load_failed">Vərdişləri yükləmək mümkün olmadı: %1$s</string>
+    <string name="database_error_unknown">Naməlum verilənlər bazası xətası</string>
+    <string name="add_habit">Vərdiş əlavə et</string>
+    <string name="add_habit_failed">Vərdişi əlavə etmək mümkün olmadı: %1$s</string>
+    <string name="habit_name">Vərdişin adı</string>
+    <string name="habit_remarks">Qeydlər</string>
+    <string name="active_days">Aktiv günlər</string>
+    <string name="save">Yadda saxla</string>
+    <string name="cancel">Ləğv et</string>
+    <string name="no_icon">İkon yoxdur</string>
+    <string name="select_icon">İkon seç</string>
+    <string name="search_icons">İkon axtar</string>
+    <string name="back">Geri</string>
+    <string name="default_color">Standart</string>
+    <string name="select_color">Rəng seç</string>
+    <string name="color_value">On altılıq rəng dəyəri (#RRGGBB)</string>
+    <string name="invalid_color">Düzgün altırəqəmli on altılıq rəng daxil edin.</string>
+    <string name="color_scheme_not_provided">Rəng sxemi təqdim edilməyib.</string>
+    <string name="edit_day_state">Günün vəziyyətini yenilə</string>
+    <string name="date">Tarix</string>
+    <string name="status">Status</string>
+    <string name="status_start">0% Başlanğıc</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Günün vəziyyətini yeniləmək mümkün olmadı: %1$s</string>
+    <string name="edit_habit">Vərdişi redaktə et</string>
+    <string name="delete_habit">Sil</string>
+    <string name="delete_habit_confirmation">Vərdiş silinsin?</string>
+    <string name="delete_habit_confirmation_message">“%1$s” və onun bütün qeydə alınmış gün vəziyyətləri silinsin?</string>
+    <string name="habit_update_failed">Vərdişi yeniləmək mümkün olmadı: %1$s</string>
+    <string name="settings">Ayarlar</string>
+    <string name="language">Dil</string>
+    <string name="language_system">Sistem standartı</string>
+    <string name="start_of_week">Həftənin başlanğıcı</string>
+    <string name="date_format">Tarix formatı</string>
+    <string name="habit_order_by">Vərdişləri sırala</string>
+    <string name="sort_direction">Sıralama istiqaməti</string>
+    <string name="order_created_at">Yaradılma tarixi</string>
+    <string name="order_updated_at">Yenilənmə tarixi</string>
+    <string name="order_title">Ad</string>
+    <string name="sort_ascending">Artan</string>
+    <string name="sort_descending">Azalan</string>
+    <string name="import_data">İdxal</string>
+    <string name="export_data">İxrac</string>
+    <string name="data_exported">Məlumatlar ixrac edildi.</string>
+    <string name="data_imported">İdxal edilmiş qeydlər: %1$s</string>
+    <string name="data_transfer_failed">Məlumatları ötürmək mümkün olmadı: %1$s</string>
+    <string-array name="days_short">
+        <item>B.e.</item>
+        <item>Ç.a.</item>
+        <item>Ç.</item>
+        <item>C.a.</item>
+        <item>C.</item>
+        <item>Ş.</item>
+        <item>B.</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Yan</item>
+        <item>Fev</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>İyn</item>
+        <item>İyl</item>
+        <item>Avq</item>
+        <item>Sen</item>
+        <item>Okt</item>
+        <item>Noy</item>
+        <item>Dek</item>
+    </string-array>
+    <string name="saturday">Şənbə</string>
+    <string name="sunday">Bazar</string>
+    <string name="monday">Bazar ertəsi</string>
+    <string name="search_languages">Dil axtar</string>
+    <string name="theme_mode">Mövzu</string>
+    <string name="theme_system">Sistem standartı</string>
+    <string name="theme_light">Açıq</string>
+    <string name="theme_dark">Tünd</string>
+    <string name="metrics">Statistika</string>
+    <string name="metrics_days">Günlər</string>
+    <string name="metrics_completion">İcra, %</string>
+    <string name="calendar">Təqvim</string>
+    <string name="today">Bu gün</string>
+    <string name="previous_day">Əvvəlki gün</string>
+    <string name="next_day">Növbəti gün</string>
+    <string name="add_habit_time">Vərdişi planlaşdır</string>
+    <string name="edit_habit_time">Cədvəli redaktə et</string>
+    <string name="habit">Vərdiş</string>
+    <string name="interval">İnterval</string>
+    <string name="interval_30_min">30 dəq</string>
+    <string name="interval_1_hour">1 saat</string>
+    <string name="interval_2_hours">2 saat</string>
+    <string name="interval_custom">Fərdi</string>
+    <string name="time_start">Başlanğıc (HH:MM)</string>
+    <string name="time_end">Son (HH:MM)</string>
+    <string name="habit_time_note">Qeyd</string>
+    <string name="delete">Sil</string>
+    <string name="invalid_time_range">Bitmə vaxtı başlama vaxtından sonra olmalıdır</string>
+    <string name="habit_time_save_failed">Cədvəli yadda saxlamaq mümkün olmadı: %1$s</string>
+    <string name="habit_or_intent">Vərdiş / Niyyət</string>
+    <string name="intent_title">Niyyət</string>
+    <string name="new_intent">Yeni niyyət</string>
+    <string name="notify">Bildir</string>
+    <string name="add_to_calendar">Təqvimə əlavə et</string>
+    <string name="google_calendar">Google Təqvim</string>
+    <string name="apple_calendar">Apple Təqvim</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Təqvimə əlavə etmək mümkün olmadı: %1$s</string>
+</resources>

@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Il database delle abitudini non è disponibile.</string>
+    <string name="habits_loading">Caricamento abitudini...</string>
+    <string name="habits_load_failed">Impossibile caricare le abitudini: %1$s</string>
+    <string name="database_error_unknown">Errore sconosciuto del database</string>
+    <string name="add_habit">Aggiungi abitudine</string>
+    <string name="add_habit_failed">Impossibile aggiungere l’abitudine: %1$s</string>
+    <string name="habit_name">Nome dell’abitudine</string>
+    <string name="habit_remarks">Note</string>
+    <string name="active_days">Giorni attivi</string>
+    <string name="save">Salva</string>
+    <string name="cancel">Annulla</string>
+    <string name="no_icon">Nessuna icona</string>
+    <string name="select_icon">Seleziona icona</string>
+    <string name="search_icons">Cerca icone</string>
+    <string name="back">Indietro</string>
+    <string name="default_color">Predefinito</string>
+    <string name="select_color">Seleziona colore</string>
+    <string name="color_value">Valore esadecimale del colore (#RRGGBB)</string>
+    <string name="invalid_color">Inserisci un colore esadecimale valido di sei cifre.</string>
+    <string name="color_scheme_not_provided">Lo schema di colori non è stato fornito.</string>
+    <string name="edit_day_state">Aggiorna stato del giorno</string>
+    <string name="date">Data</string>
+    <string name="status">Stato</string>
+    <string name="status_start">0% Inizio</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Impossibile aggiornare lo stato del giorno: %1$s</string>
+    <string name="edit_habit">Modifica abitudine</string>
+    <string name="delete_habit">Elimina</string>
+    <string name="delete_habit_confirmation">Eliminare l’abitudine?</string>
+    <string name="delete_habit_confirmation_message">Eliminare «%1$s» e tutti gli stati dei giorni registrati?</string>
+    <string name="habit_update_failed">Impossibile aggiornare l’abitudine: %1$s</string>
+    <string name="settings">Impostazioni</string>
+    <string name="language">Lingua</string>
+    <string name="language_system">Predefinita di sistema</string>
+    <string name="start_of_week">Inizio della settimana</string>
+    <string name="date_format">Formato data</string>
+    <string name="habit_order_by">Ordina abitudini per</string>
+    <string name="sort_direction">Direzione ordinamento</string>
+    <string name="order_created_at">Data di creazione</string>
+    <string name="order_updated_at">Data di aggiornamento</string>
+    <string name="order_title">Titolo</string>
+    <string name="sort_ascending">Crescente</string>
+    <string name="sort_descending">Decrescente</string>
+    <string name="import_data">Importa</string>
+    <string name="export_data">Esporta</string>
+    <string name="data_exported">Dati esportati.</string>
+    <string name="data_imported">Record importati: %1$s</string>
+    <string name="data_transfer_failed">Impossibile trasferire i dati: %1$s</string>
+    <string-array name="days_short">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mer</item>
+        <item>Gio</item>
+        <item>Ven</item>
+        <item>Sab</item>
+        <item>Dom</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Gen</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>Mag</item>
+        <item>Giu</item>
+        <item>Lug</item>
+        <item>Ago</item>
+        <item>Set</item>
+        <item>Ott</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
+    <string name="saturday">Sabato</string>
+    <string name="sunday">Domenica</string>
+    <string name="monday">Lunedì</string>
+    <string name="search_languages">Cerca lingue</string>
+    <string name="theme_mode">Tema</string>
+    <string name="theme_system">Predefinito di sistema</string>
+    <string name="theme_light">Chiaro</string>
+    <string name="theme_dark">Scuro</string>
+    <string name="metrics">Statistiche</string>
+    <string name="metrics_days">Giorni</string>
+    <string name="metrics_completion">Completamento, %</string>
+    <string name="calendar">Calendario</string>
+    <string name="today">Oggi</string>
+    <string name="previous_day">Giorno precedente</string>
+    <string name="next_day">Giorno successivo</string>
+    <string name="add_habit_time">Pianifica abitudine</string>
+    <string name="edit_habit_time">Modifica pianificazione</string>
+    <string name="habit">Abitudine</string>
+    <string name="interval">Intervallo</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 ora</string>
+    <string name="interval_2_hours">2 ore</string>
+    <string name="interval_custom">Personalizzato</string>
+    <string name="time_start">Inizio (HH:MM)</string>
+    <string name="time_end">Fine (HH:MM)</string>
+    <string name="habit_time_note">Nota</string>
+    <string name="delete">Elimina</string>
+    <string name="invalid_time_range">L’ora di fine deve essere successiva all’ora di inizio</string>
+    <string name="habit_time_save_failed">Impossibile salvare la pianificazione: %1$s</string>
+    <string name="habit_or_intent">Abitudine / Intenzione</string>
+    <string name="intent_title">Intenzione</string>
+    <string name="new_intent">Nuova intenzione</string>
+    <string name="notify">Notifica</string>
+    <string name="add_to_calendar">Aggiungi al calendario</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Calendario Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Impossibile aggiungere al calendario: %1$s</string>
+</resources>

@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">आदत डेटाबेस उपलब्ध नहीं है।</string>
+    <string name="habits_loading">आदतें लोड हो रही हैं...</string>
+    <string name="habits_load_failed">आदतें लोड नहीं हो सकीं: %1$s</string>
+    <string name="database_error_unknown">अज्ञात डेटाबेस त्रुटि</string>
+    <string name="add_habit">आदत जोड़ें</string>
+    <string name="add_habit_failed">आदत नहीं जोड़ी जा सकी: %1$s</string>
+    <string name="habit_name">आदत का नाम</string>
+    <string name="habit_remarks">टिप्पणियाँ</string>
+    <string name="active_days">सक्रिय दिन</string>
+    <string name="save">सहेजें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="no_icon">कोई आइकन नहीं</string>
+    <string name="select_icon">आइकन चुनें</string>
+    <string name="search_icons">आइकन खोजें</string>
+    <string name="back">वापस</string>
+    <string name="default_color">डिफ़ॉल्ट</string>
+    <string name="select_color">रंग चुनें</string>
+    <string name="color_value">हेक्स रंग मान (#RRGGBB)</string>
+    <string name="invalid_color">छह अंकों का मान्य हेक्स रंग दर्ज करें।</string>
+    <string name="color_scheme_not_provided">रंग योजना प्रदान नहीं की गई।</string>
+    <string name="edit_day_state">दिन की स्थिति अपडेट करें</string>
+    <string name="date">तारीख</string>
+    <string name="status">स्थिति</string>
+    <string name="status_start">0% शुरुआत</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">दिन की स्थिति अपडेट नहीं हो सकी: %1$s</string>
+    <string name="edit_habit">आदत संपादित करें</string>
+    <string name="delete_habit">हटाएँ</string>
+    <string name="delete_habit_confirmation">आदत हटाएँ?</string>
+    <string name="delete_habit_confirmation_message">“%1$s” और उसकी सभी दर्ज दिन स्थितियाँ हटाएँ?</string>
+    <string name="habit_update_failed">आदत अपडेट नहीं हो सकी: %1$s</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="language">भाषा</string>
+    <string name="language_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="start_of_week">सप्ताह की शुरुआत</string>
+    <string name="date_format">तारीख का प्रारूप</string>
+    <string name="habit_order_by">आदतों को क्रमबद्ध करें</string>
+    <string name="sort_direction">क्रम की दिशा</string>
+    <string name="order_created_at">बनाने की तारीख</string>
+    <string name="order_updated_at">अपडेट की तारीख</string>
+    <string name="order_title">शीर्षक</string>
+    <string name="sort_ascending">आरोही</string>
+    <string name="sort_descending">अवरोही</string>
+    <string name="import_data">आयात करें</string>
+    <string name="export_data">निर्यात करें</string>
+    <string name="data_exported">डेटा निर्यात किया गया।</string>
+    <string name="data_imported">आयात किए गए रिकॉर्ड: %1$s</string>
+    <string name="data_transfer_failed">डेटा स्थानांतरित नहीं हो सका: %1$s</string>
+    <string-array name="days_short">
+        <item>सोम</item>
+        <item>मंगल</item>
+        <item>बुध</item>
+        <item>गुरु</item>
+        <item>शुक्र</item>
+        <item>शनि</item>
+        <item>रवि</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>जन</item>
+        <item>फ़र</item>
+        <item>मार्च</item>
+        <item>अप्रै</item>
+        <item>मई</item>
+        <item>जून</item>
+        <item>जुल</item>
+        <item>अग</item>
+        <item>सित</item>
+        <item>अक्टू</item>
+        <item>नव</item>
+        <item>दिस</item>
+    </string-array>
+    <string name="saturday">शनिवार</string>
+    <string name="sunday">रविवार</string>
+    <string name="monday">सोमवार</string>
+    <string name="search_languages">भाषाएँ खोजें</string>
+    <string name="theme_mode">थीम</string>
+    <string name="theme_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="theme_light">लाइट</string>
+    <string name="theme_dark">डार्क</string>
+    <string name="metrics">आँकड़े</string>
+    <string name="metrics_days">दिन</string>
+    <string name="metrics_completion">पूर्णता, %</string>
+    <string name="calendar">कैलेंडर</string>
+    <string name="today">आज</string>
+    <string name="previous_day">पिछला दिन</string>
+    <string name="next_day">अगला दिन</string>
+    <string name="add_habit_time">आदत शेड्यूल करें</string>
+    <string name="edit_habit_time">शेड्यूल संपादित करें</string>
+    <string name="habit">आदत</string>
+    <string name="interval">अंतराल</string>
+    <string name="interval_30_min">30 मिनट</string>
+    <string name="interval_1_hour">1 घंटा</string>
+    <string name="interval_2_hours">2 घंटे</string>
+    <string name="interval_custom">कस्टम</string>
+    <string name="time_start">शुरुआत (HH:MM)</string>
+    <string name="time_end">समाप्ति (HH:MM)</string>
+    <string name="habit_time_note">नोट</string>
+    <string name="delete">हटाएँ</string>
+    <string name="invalid_time_range">समाप्ति समय शुरुआत समय के बाद होना चाहिए</string>
+    <string name="habit_time_save_failed">शेड्यूल सहेजा नहीं जा सका: %1$s</string>
+    <string name="habit_or_intent">आदत / इरादा</string>
+    <string name="intent_title">इरादा</string>
+    <string name="new_intent">नया इरादा</string>
+    <string name="notify">सूचित करें</string>
+    <string name="add_to_calendar">कैलेंडर में जोड़ें</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Apple Calendar</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">कैलेंडर में नहीं जोड़ा जा सका: %1$s</string>
+</resources>

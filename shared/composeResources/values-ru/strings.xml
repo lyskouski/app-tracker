@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">База привычек недоступна.</string>
+    <string name="habits_loading">Загрузка привычек...</string>
+    <string name="habits_load_failed">Не удалось загрузить привычки: %1$s</string>
+    <string name="database_error_unknown">Неизвестная ошибка базы данных</string>
+    <string name="add_habit">Добавить привычку</string>
+    <string name="add_habit_failed">Не удалось добавить привычку: %1$s</string>
+    <string name="habit_name">Название привычки</string>
+    <string name="habit_remarks">Примечания</string>
+    <string name="active_days">Активные дни</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="no_icon">Без значка</string>
+    <string name="select_icon">Выбрать значок</string>
+    <string name="search_icons">Поиск значков</string>
+    <string name="back">Назад</string>
+    <string name="default_color">По умолчанию</string>
+    <string name="select_color">Выбрать цвет</string>
+    <string name="color_value">Шестнадцатеричный код цвета (#RRGGBB)</string>
+    <string name="invalid_color">Введите корректный шестизначный шестнадцатеричный код цвета.</string>
+    <string name="color_scheme_not_provided">Цветовая схема не передана.</string>
+    <string name="edit_day_state">Обновить состояние дня</string>
+    <string name="date">Дата</string>
+    <string name="status">Статус</string>
+    <string name="status_start">0% Начало</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Не удалось обновить состояние дня: %1$s</string>
+    <string name="edit_habit">Изменить привычку</string>
+    <string name="delete_habit">Удалить</string>
+    <string name="delete_habit_confirmation">Удалить привычку?</string>
+    <string name="delete_habit_confirmation_message">Удалить «%1$s» и все записанные состояния дней?</string>
+    <string name="habit_update_failed">Не удалось обновить привычку: %1$s</string>
+    <string name="settings">Настройки</string>
+    <string name="language">Язык</string>
+    <string name="language_system">Системный</string>
+    <string name="start_of_week">Начало недели</string>
+    <string name="date_format">Формат даты</string>
+    <string name="habit_order_by">Сортировать привычки по</string>
+    <string name="sort_direction">Направление сортировки</string>
+    <string name="order_created_at">Дате создания</string>
+    <string name="order_updated_at">Дате изменения</string>
+    <string name="order_title">Названию</string>
+    <string name="sort_ascending">По возрастанию</string>
+    <string name="sort_descending">По убыванию</string>
+    <string name="import_data">Импорт</string>
+    <string name="export_data">Экспорт</string>
+    <string name="data_exported">Данные экспортированы.</string>
+    <string name="data_imported">Импортировано записей: %1$s</string>
+    <string name="data_transfer_failed">Не удалось перенести данные: %1$s</string>
+    <string-array name="days_short">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Янв</item>
+        <item>Фев</item>
+        <item>Мар</item>
+        <item>Апр</item>
+        <item>Май</item>
+        <item>Июн</item>
+        <item>Июл</item>
+        <item>Авг</item>
+        <item>Сен</item>
+        <item>Окт</item>
+        <item>Ноя</item>
+        <item>Дек</item>
+    </string-array>
+    <string name="saturday">Суббота</string>
+    <string name="sunday">Воскресенье</string>
+    <string name="monday">Понедельник</string>
+    <string name="search_languages">Поиск языков</string>
+    <string name="theme_mode">Тема</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="metrics">Метрики</string>
+    <string name="metrics_days">Дни</string>
+    <string name="metrics_completion">Выполнение, %</string>
+    <string name="calendar">Календарь</string>
+    <string name="today">Сегодня</string>
+    <string name="previous_day">Предыдущий день</string>
+    <string name="next_day">Следующий день</string>
+    <string name="add_habit_time">Запланировать привычку</string>
+    <string name="edit_habit_time">Изменить расписание</string>
+    <string name="habit">Привычка</string>
+    <string name="interval">Интервал</string>
+    <string name="interval_30_min">30 мин</string>
+    <string name="interval_1_hour">1 час</string>
+    <string name="interval_2_hours">2 часа</string>
+    <string name="interval_custom">Свой</string>
+    <string name="time_start">Начало (HH:MM)</string>
+    <string name="time_end">Конец (HH:MM)</string>
+    <string name="habit_time_note">Заметка</string>
+    <string name="delete">Удалить</string>
+    <string name="invalid_time_range">Время окончания должно быть позже времени начала</string>
+    <string name="habit_time_save_failed">Не удалось сохранить расписание: %1$s</string>
+    <string name="habit_or_intent">Привычка / Намерение</string>
+    <string name="intent_title">Намерение</string>
+    <string name="new_intent">Новое намерение</string>
+    <string name="notify">Уведомлять</string>
+    <string name="add_to_calendar">Добавить в календарь</string>
+    <string name="google_calendar">Google Календарь</string>
+    <string name="apple_calendar">Календарь Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Не удалось добавить в календарь: %1$s</string>
+</resources>

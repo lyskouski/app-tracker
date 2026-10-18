@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">습관 데이터베이스를 사용할 수 없습니다.</string>
+    <string name="habits_loading">습관을 불러오는 중...</string>
+    <string name="habits_load_failed">습관을 불러올 수 없습니다: %1$s</string>
+    <string name="database_error_unknown">알 수 없는 데이터베이스 오류</string>
+    <string name="add_habit">습관 추가</string>
+    <string name="add_habit_failed">습관을 추가할 수 없습니다: %1$s</string>
+    <string name="habit_name">습관 이름</string>
+    <string name="habit_remarks">메모</string>
+    <string name="active_days">활성 요일</string>
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+    <string name="no_icon">아이콘 없음</string>
+    <string name="select_icon">아이콘 선택</string>
+    <string name="search_icons">아이콘 검색</string>
+    <string name="back">뒤로</string>
+    <string name="default_color">기본값</string>
+    <string name="select_color">색상 선택</string>
+    <string name="color_value">16진수 색상 값 (#RRGGBB)</string>
+    <string name="invalid_color">올바른 6자리 16진수 색상을 입력하세요.</string>
+    <string name="color_scheme_not_provided">색 구성표가 제공되지 않았습니다.</string>
+    <string name="edit_day_state">날짜 상태 업데이트</string>
+    <string name="date">날짜</string>
+    <string name="status">상태</string>
+    <string name="status_start">0% 시작</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">날짜 상태를 업데이트할 수 없습니다: %1$s</string>
+    <string name="edit_habit">습관 편집</string>
+    <string name="delete_habit">삭제</string>
+    <string name="delete_habit_confirmation">습관을 삭제할까요?</string>
+    <string name="delete_habit_confirmation_message">“%1$s” 및 기록된 모든 날짜 상태를 삭제할까요?</string>
+    <string name="habit_update_failed">습관을 업데이트할 수 없습니다: %1$s</string>
+    <string name="settings">설정</string>
+    <string name="language">언어</string>
+    <string name="language_system">시스템 기본값</string>
+    <string name="start_of_week">주 시작 요일</string>
+    <string name="date_format">날짜 형식</string>
+    <string name="habit_order_by">습관 정렬 기준</string>
+    <string name="sort_direction">정렬 방향</string>
+    <string name="order_created_at">생성일</string>
+    <string name="order_updated_at">수정일</string>
+    <string name="order_title">제목</string>
+    <string name="sort_ascending">오름차순</string>
+    <string name="sort_descending">내림차순</string>
+    <string name="import_data">가져오기</string>
+    <string name="export_data">내보내기</string>
+    <string name="data_exported">데이터를 내보냈습니다.</string>
+    <string name="data_imported">가져온 기록: %1$s</string>
+    <string name="data_transfer_failed">데이터를 전송할 수 없습니다: %1$s</string>
+    <string-array name="days_short">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+        <item>일</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+    </string-array>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
+    <string name="monday">월요일</string>
+    <string name="search_languages">언어 검색</string>
+    <string name="theme_mode">테마</string>
+    <string name="theme_system">시스템 기본값</string>
+    <string name="theme_light">라이트</string>
+    <string name="theme_dark">다크</string>
+    <string name="metrics">통계</string>
+    <string name="metrics_days">일수</string>
+    <string name="metrics_completion">달성률, %</string>
+    <string name="calendar">캘린더</string>
+    <string name="today">오늘</string>
+    <string name="previous_day">이전 날</string>
+    <string name="next_day">다음 날</string>
+    <string name="add_habit_time">습관 일정 추가</string>
+    <string name="edit_habit_time">일정 편집</string>
+    <string name="habit">습관</string>
+    <string name="interval">간격</string>
+    <string name="interval_30_min">30분</string>
+    <string name="interval_1_hour">1시간</string>
+    <string name="interval_2_hours">2시간</string>
+    <string name="interval_custom">사용자 지정</string>
+    <string name="time_start">시작 (HH:MM)</string>
+    <string name="time_end">종료 (HH:MM)</string>
+    <string name="habit_time_note">메모</string>
+    <string name="delete">삭제</string>
+    <string name="invalid_time_range">종료 시간은 시작 시간 이후여야 합니다</string>
+    <string name="habit_time_save_failed">일정을 저장할 수 없습니다: %1$s</string>
+    <string name="habit_or_intent">습관 / 의도</string>
+    <string name="intent_title">의도</string>
+    <string name="new_intent">새 의도</string>
+    <string name="notify">알림</string>
+    <string name="add_to_calendar">캘린더에 추가</string>
+    <string name="google_calendar">Google 캘린더</string>
+    <string name="apple_calendar">Apple 캘린더</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">캘린더에 추가할 수 없습니다: %1$s</string>
+</resources>

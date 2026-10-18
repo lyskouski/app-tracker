@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Baza de date a obiceiurilor nu este disponibilă.</string>
+    <string name="habits_loading">Se încarcă obiceiurile...</string>
+    <string name="habits_load_failed">Obiceiurile nu au putut fi încărcate: %1$s</string>
+    <string name="database_error_unknown">Eroare necunoscută a bazei de date</string>
+    <string name="add_habit">Adaugă obicei</string>
+    <string name="add_habit_failed">Obiceiul nu a putut fi adăugat: %1$s</string>
+    <string name="habit_name">Numele obiceiului</string>
+    <string name="habit_remarks">Observații</string>
+    <string name="active_days">Zile active</string>
+    <string name="save">Salvează</string>
+    <string name="cancel">Anulează</string>
+    <string name="no_icon">Fără pictogramă</string>
+    <string name="select_icon">Alege pictograma</string>
+    <string name="search_icons">Caută pictograme</string>
+    <string name="back">Înapoi</string>
+    <string name="default_color">Implicit</string>
+    <string name="select_color">Alege culoarea</string>
+    <string name="color_value">Valoare hexazecimală a culorii (#RRGGBB)</string>
+    <string name="invalid_color">Introdu o culoare hexazecimală validă din șase cifre.</string>
+    <string name="color_scheme_not_provided">Schema de culori nu a fost furnizată.</string>
+    <string name="edit_day_state">Actualizează starea zilei</string>
+    <string name="date">Dată</string>
+    <string name="status">Stare</string>
+    <string name="status_start">0% Început</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Starea zilei nu a putut fi actualizată: %1$s</string>
+    <string name="edit_habit">Editează obiceiul</string>
+    <string name="delete_habit">Șterge</string>
+    <string name="delete_habit_confirmation">Ștergi obiceiul?</string>
+    <string name="delete_habit_confirmation_message">Ștergi „%1$s” și toate stările zilelor înregistrate?</string>
+    <string name="habit_update_failed">Obiceiul nu a putut fi actualizat: %1$s</string>
+    <string name="settings">Setări</string>
+    <string name="language">Limbă</string>
+    <string name="language_system">Implicită a sistemului</string>
+    <string name="start_of_week">Începutul săptămânii</string>
+    <string name="date_format">Format dată</string>
+    <string name="habit_order_by">Sortează obiceiurile după</string>
+    <string name="sort_direction">Direcția sortării</string>
+    <string name="order_created_at">Data creării</string>
+    <string name="order_updated_at">Data actualizării</string>
+    <string name="order_title">Titlu</string>
+    <string name="sort_ascending">Crescător</string>
+    <string name="sort_descending">Descrescător</string>
+    <string name="import_data">Importă</string>
+    <string name="export_data">Exportă</string>
+    <string name="data_exported">Datele au fost exportate.</string>
+    <string name="data_imported">Înregistrări importate: %1$s</string>
+    <string name="data_transfer_failed">Datele nu au putut fi transferate: %1$s</string>
+    <string-array name="days_short">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mie</item>
+        <item>Joi</item>
+        <item>Vin</item>
+        <item>Sâm</item>
+        <item>Dum</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Ian</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>Mai</item>
+        <item>Iun</item>
+        <item>Iul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Noi</item>
+        <item>Dec</item>
+    </string-array>
+    <string name="saturday">Sâmbătă</string>
+    <string name="sunday">Duminică</string>
+    <string name="monday">Luni</string>
+    <string name="search_languages">Caută limbi</string>
+    <string name="theme_mode">Temă</string>
+    <string name="theme_system">Implicită a sistemului</string>
+    <string name="theme_light">Luminoasă</string>
+    <string name="theme_dark">Întunecată</string>
+    <string name="metrics">Statistici</string>
+    <string name="metrics_days">Zile</string>
+    <string name="metrics_completion">Realizare, %</string>
+    <string name="calendar">Calendar</string>
+    <string name="today">Astăzi</string>
+    <string name="previous_day">Ziua anterioară</string>
+    <string name="next_day">Ziua următoare</string>
+    <string name="add_habit_time">Programează obiceiul</string>
+    <string name="edit_habit_time">Editează programul</string>
+    <string name="habit">Obicei</string>
+    <string name="interval">Interval</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 oră</string>
+    <string name="interval_2_hours">2 ore</string>
+    <string name="interval_custom">Personalizat</string>
+    <string name="time_start">Început (HH:MM)</string>
+    <string name="time_end">Sfârșit (HH:MM)</string>
+    <string name="habit_time_note">Notă</string>
+    <string name="delete">Șterge</string>
+    <string name="invalid_time_range">Ora de sfârșit trebuie să fie după ora de început</string>
+    <string name="habit_time_save_failed">Programul nu a putut fi salvat: %1$s</string>
+    <string name="habit_or_intent">Obicei / Intenție</string>
+    <string name="intent_title">Intenție</string>
+    <string name="new_intent">Intenție nouă</string>
+    <string name="notify">Notifică</string>
+    <string name="add_to_calendar">Adaugă în calendar</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Calendar Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Nu s-a putut adăuga în calendar: %1$s</string>
+</resources>

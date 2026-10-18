@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">習慣データベースを利用できません。</string>
+    <string name="habits_loading">習慣を読み込み中...</string>
+    <string name="habits_load_failed">習慣を読み込めませんでした：%1$s</string>
+    <string name="database_error_unknown">不明なデータベースエラー</string>
+    <string name="add_habit">習慣を追加</string>
+    <string name="add_habit_failed">習慣を追加できませんでした：%1$s</string>
+    <string name="habit_name">習慣の名前</string>
+    <string name="habit_remarks">メモ</string>
+    <string name="active_days">実施日</string>
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="no_icon">アイコンなし</string>
+    <string name="select_icon">アイコンを選択</string>
+    <string name="search_icons">アイコンを検索</string>
+    <string name="back">戻る</string>
+    <string name="default_color">デフォルト</string>
+    <string name="select_color">色を選択</string>
+    <string name="color_value">16進数のカラー値 (#RRGGBB)</string>
+    <string name="invalid_color">有効な6桁の16進数カラーを入力してください。</string>
+    <string name="color_scheme_not_provided">カラースキームが指定されていません。</string>
+    <string name="edit_day_state">日の状態を更新</string>
+    <string name="date">日付</string>
+    <string name="status">ステータス</string>
+    <string name="status_start">0% 開始</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">日の状態を更新できませんでした：%1$s</string>
+    <string name="edit_habit">習慣を編集</string>
+    <string name="delete_habit">削除</string>
+    <string name="delete_habit_confirmation">習慣を削除しますか？</string>
+    <string name="delete_habit_confirmation_message">「%1$s」と記録されたすべての日の状態を削除しますか？</string>
+    <string name="habit_update_failed">習慣を更新できませんでした：%1$s</string>
+    <string name="settings">設定</string>
+    <string name="language">言語</string>
+    <string name="language_system">システムのデフォルト</string>
+    <string name="start_of_week">週の始まり</string>
+    <string name="date_format">日付の形式</string>
+    <string name="habit_order_by">習慣の並べ替え</string>
+    <string name="sort_direction">並び順</string>
+    <string name="order_created_at">作成日時</string>
+    <string name="order_updated_at">更新日時</string>
+    <string name="order_title">タイトル</string>
+    <string name="sort_ascending">昇順</string>
+    <string name="sort_descending">降順</string>
+    <string name="import_data">インポート</string>
+    <string name="export_data">エクスポート</string>
+    <string name="data_exported">データをエクスポートしました。</string>
+    <string name="data_imported">インポートしたレコード：%1$s</string>
+    <string name="data_transfer_failed">データを転送できませんでした：%1$s</string>
+    <string-array name="days_short">
+        <item>月</item>
+        <item>火</item>
+        <item>水</item>
+        <item>木</item>
+        <item>金</item>
+        <item>土</item>
+        <item>日</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
+    </string-array>
+    <string name="saturday">土曜日</string>
+    <string name="sunday">日曜日</string>
+    <string name="monday">月曜日</string>
+    <string name="search_languages">言語を検索</string>
+    <string name="theme_mode">テーマ</string>
+    <string name="theme_system">システムのデフォルト</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="metrics">統計</string>
+    <string name="metrics_days">日数</string>
+    <string name="metrics_completion">達成率、%</string>
+    <string name="calendar">カレンダー</string>
+    <string name="today">今日</string>
+    <string name="previous_day">前日</string>
+    <string name="next_day">翌日</string>
+    <string name="add_habit_time">習慣を予定に追加</string>
+    <string name="edit_habit_time">予定を編集</string>
+    <string name="habit">習慣</string>
+    <string name="interval">間隔</string>
+    <string name="interval_30_min">30分</string>
+    <string name="interval_1_hour">1時間</string>
+    <string name="interval_2_hours">2時間</string>
+    <string name="interval_custom">カスタム</string>
+    <string name="time_start">開始 (HH:MM)</string>
+    <string name="time_end">終了 (HH:MM)</string>
+    <string name="habit_time_note">メモ</string>
+    <string name="delete">削除</string>
+    <string name="invalid_time_range">終了時刻は開始時刻より後にしてください</string>
+    <string name="habit_time_save_failed">予定を保存できませんでした：%1$s</string>
+    <string name="habit_or_intent">習慣 / 意図</string>
+    <string name="intent_title">意図</string>
+    <string name="new_intent">新しい意図</string>
+    <string name="notify">通知</string>
+    <string name="add_to_calendar">カレンダーに追加</string>
+    <string name="google_calendar">Google カレンダー</string>
+    <string name="apple_calendar">Apple カレンダー</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">カレンダーに追加できませんでした：%1$s</string>
+</resources>

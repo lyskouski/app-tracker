@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Odatlar ma’lumotlar bazasi mavjud emas.</string>
+    <string name="habits_loading">Odatlar yuklanmoqda...</string>
+    <string name="habits_load_failed">Odatlarni yuklab bo‘lmadi: %1$s</string>
+    <string name="database_error_unknown">Noma’lum ma’lumotlar bazasi xatosi</string>
+    <string name="add_habit">Odat qo‘shish</string>
+    <string name="add_habit_failed">Odatni qo‘shib bo‘lmadi: %1$s</string>
+    <string name="habit_name">Odat nomi</string>
+    <string name="habit_remarks">Izohlar</string>
+    <string name="active_days">Faol kunlar</string>
+    <string name="save">Saqlash</string>
+    <string name="cancel">Bekor qilish</string>
+    <string name="no_icon">Belgisiz</string>
+    <string name="select_icon">Belgi tanlash</string>
+    <string name="search_icons">Belgilarni qidirish</string>
+    <string name="back">Orqaga</string>
+    <string name="default_color">Standart</string>
+    <string name="select_color">Rang tanlash</string>
+    <string name="color_value">O‘n oltilik rang qiymati (#RRGGBB)</string>
+    <string name="invalid_color">To‘g‘ri olti xonali o‘n oltilik rang kiriting.</string>
+    <string name="color_scheme_not_provided">Rang sxemasi berilmagan.</string>
+    <string name="edit_day_state">Kun holatini yangilash</string>
+    <string name="date">Sana</string>
+    <string name="status">Holat</string>
+    <string name="status_start">0% Boshlanish</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Kun holatini yangilab bo‘lmadi: %1$s</string>
+    <string name="edit_habit">Odatni tahrirlash</string>
+    <string name="delete_habit">O‘chirish</string>
+    <string name="delete_habit_confirmation">Odat o‘chirilsinmi?</string>
+    <string name="delete_habit_confirmation_message">“%1$s” va uning barcha qayd etilgan kun holatlari o‘chirilsinmi?</string>
+    <string name="habit_update_failed">Odatni yangilab bo‘lmadi: %1$s</string>
+    <string name="settings">Sozlamalar</string>
+    <string name="language">Til</string>
+    <string name="language_system">Tizim standarti</string>
+    <string name="start_of_week">Hafta boshi</string>
+    <string name="date_format">Sana formati</string>
+    <string name="habit_order_by">Odatlarni saralash</string>
+    <string name="sort_direction">Saralash yo‘nalishi</string>
+    <string name="order_created_at">Yaratilgan sana</string>
+    <string name="order_updated_at">Yangilangan sana</string>
+    <string name="order_title">Nomi</string>
+    <string name="sort_ascending">O‘sish bo‘yicha</string>
+    <string name="sort_descending">Kamayish bo‘yicha</string>
+    <string name="import_data">Import</string>
+    <string name="export_data">Eksport</string>
+    <string name="data_exported">Ma’lumotlar eksport qilindi.</string>
+    <string name="data_imported">Import qilingan yozuvlar: %1$s</string>
+    <string name="data_transfer_failed">Ma’lumotlarni ko‘chirib bo‘lmadi: %1$s</string>
+    <string-array name="days_short">
+        <item>Du</item>
+        <item>Se</item>
+        <item>Ch</item>
+        <item>Pa</item>
+        <item>Ju</item>
+        <item>Sh</item>
+        <item>Ya</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Yan</item>
+        <item>Fev</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Iyn</item>
+        <item>Iyl</item>
+        <item>Avg</item>
+        <item>Sen</item>
+        <item>Okt</item>
+        <item>Noy</item>
+        <item>Dek</item>
+    </string-array>
+    <string name="saturday">Shanba</string>
+    <string name="sunday">Yakshanba</string>
+    <string name="monday">Dushanba</string>
+    <string name="search_languages">Tillarni qidirish</string>
+    <string name="theme_mode">Mavzu</string>
+    <string name="theme_system">Tizim standarti</string>
+    <string name="theme_light">Yorug‘</string>
+    <string name="theme_dark">Qorong‘i</string>
+    <string name="metrics">Statistika</string>
+    <string name="metrics_days">Kunlar</string>
+    <string name="metrics_completion">Bajarilish, %</string>
+    <string name="calendar">Taqvim</string>
+    <string name="today">Bugun</string>
+    <string name="previous_day">Oldingi kun</string>
+    <string name="next_day">Keyingi kun</string>
+    <string name="add_habit_time">Odatni rejalashtirish</string>
+    <string name="edit_habit_time">Jadvalni tahrirlash</string>
+    <string name="habit">Odat</string>
+    <string name="interval">Interval</string>
+    <string name="interval_30_min">30 daq</string>
+    <string name="interval_1_hour">1 soat</string>
+    <string name="interval_2_hours">2 soat</string>
+    <string name="interval_custom">Maxsus</string>
+    <string name="time_start">Boshlanish (HH:MM)</string>
+    <string name="time_end">Tugash (HH:MM)</string>
+    <string name="habit_time_note">Eslatma</string>
+    <string name="delete">O‘chirish</string>
+    <string name="invalid_time_range">Tugash vaqti boshlanish vaqtidan keyin bo‘lishi kerak</string>
+    <string name="habit_time_save_failed">Jadvalni saqlab bo‘lmadi: %1$s</string>
+    <string name="habit_or_intent">Odat / Niyat</string>
+    <string name="intent_title">Niyat</string>
+    <string name="new_intent">Yangi niyat</string>
+    <string name="notify">Xabar berish</string>
+    <string name="add_to_calendar">Taqvimga qo‘shish</string>
+    <string name="google_calendar">Google Taqvim</string>
+    <string name="apple_calendar">Apple Taqvim</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Taqvimga qo‘shib bo‘lmadi: %1$s</string>
+</resources>

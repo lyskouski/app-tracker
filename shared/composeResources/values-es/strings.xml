@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">La base de datos de hábitos no está disponible.</string>
+    <string name="habits_loading">Cargando hábitos...</string>
+    <string name="habits_load_failed">No se pudieron cargar los hábitos: %1$s</string>
+    <string name="database_error_unknown">Error desconocido de la base de datos</string>
+    <string name="add_habit">Añadir hábito</string>
+    <string name="add_habit_failed">No se pudo añadir el hábito: %1$s</string>
+    <string name="habit_name">Nombre del hábito</string>
+    <string name="habit_remarks">Observaciones</string>
+    <string name="active_days">Días activos</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="no_icon">Sin icono</string>
+    <string name="select_icon">Seleccionar icono</string>
+    <string name="search_icons">Buscar iconos</string>
+    <string name="back">Atrás</string>
+    <string name="default_color">Predeterminado</string>
+    <string name="select_color">Seleccionar color</string>
+    <string name="color_value">Valor de color hexadecimal (#RRGGBB)</string>
+    <string name="invalid_color">Introduce un color hexadecimal válido de seis dígitos.</string>
+    <string name="color_scheme_not_provided">No se proporcionó el esquema de colores.</string>
+    <string name="edit_day_state">Actualizar estado del día</string>
+    <string name="date">Fecha</string>
+    <string name="status">Estado</string>
+    <string name="status_start">0 % Inicio</string>
+    <string name="status_25_percent">25 %</string>
+    <string name="status_50_percent">50 %</string>
+    <string name="status_75_percent">75 %</string>
+    <string name="status_100_percent">100 %</string>
+    <string name="status_over_100_percent">100+ %</string>
+    <string name="day_state_save_failed">No se pudo actualizar el estado del día: %1$s</string>
+    <string name="edit_habit">Editar hábito</string>
+    <string name="delete_habit">Eliminar</string>
+    <string name="delete_habit_confirmation">¿Eliminar hábito?</string>
+    <string name="delete_habit_confirmation_message">¿Eliminar «%1$s» y todos sus estados de días registrados?</string>
+    <string name="habit_update_failed">No se pudo actualizar el hábito: %1$s</string>
+    <string name="settings">Ajustes</string>
+    <string name="language">Idioma</string>
+    <string name="language_system">Predeterminado del sistema</string>
+    <string name="start_of_week">Inicio de la semana</string>
+    <string name="date_format">Formato de fecha</string>
+    <string name="habit_order_by">Ordenar hábitos por</string>
+    <string name="sort_direction">Dirección del orden</string>
+    <string name="order_created_at">Fecha de creación</string>
+    <string name="order_updated_at">Fecha de actualización</string>
+    <string name="order_title">Título</string>
+    <string name="sort_ascending">Ascendente</string>
+    <string name="sort_descending">Descendente</string>
+    <string name="import_data">Importar</string>
+    <string name="export_data">Exportar</string>
+    <string name="data_exported">Datos exportados.</string>
+    <string name="data_imported">Registros importados: %1$s</string>
+    <string name="data_transfer_failed">No se pudieron transferir los datos: %1$s</string>
+    <string-array name="days_short">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mié</item>
+        <item>Jue</item>
+        <item>Vie</item>
+        <item>Sáb</item>
+        <item>Dom</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Ene</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Abr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Ago</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dic</item>
+    </string-array>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+    <string name="monday">Lunes</string>
+    <string name="search_languages">Buscar idiomas</string>
+    <string name="theme_mode">Tema</string>
+    <string name="theme_system">Predeterminado del sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="metrics">Métricas</string>
+    <string name="metrics_days">Días</string>
+    <string name="metrics_completion">Cumplimiento, %</string>
+    <string name="calendar">Calendario</string>
+    <string name="today">Hoy</string>
+    <string name="previous_day">Día anterior</string>
+    <string name="next_day">Día siguiente</string>
+    <string name="add_habit_time">Programar hábito</string>
+    <string name="edit_habit_time">Editar horario</string>
+    <string name="habit">Hábito</string>
+    <string name="interval">Intervalo</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 hora</string>
+    <string name="interval_2_hours">2 horas</string>
+    <string name="interval_custom">Personalizado</string>
+    <string name="time_start">Inicio (HH:MM)</string>
+    <string name="time_end">Fin (HH:MM)</string>
+    <string name="habit_time_note">Nota</string>
+    <string name="delete">Eliminar</string>
+    <string name="invalid_time_range">La hora de fin debe ser posterior a la hora de inicio</string>
+    <string name="habit_time_save_failed">No se pudo guardar el horario: %1$s</string>
+    <string name="habit_or_intent">Hábito / Intención</string>
+    <string name="intent_title">Intención</string>
+    <string name="new_intent">Nueva intención</string>
+    <string name="notify">Notificar</string>
+    <string name="add_to_calendar">Añadir al calendario</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Calendario de Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">No se pudo añadir al calendario: %1$s</string>
+</resources>

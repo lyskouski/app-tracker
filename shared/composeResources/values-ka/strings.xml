@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">ჩვევების მონაცემთა ბაზა მიუწვდომელია.</string>
+    <string name="habits_loading">ჩვევები იტვირთება...</string>
+    <string name="habits_load_failed">ჩვევების ჩატვირთვა ვერ მოხერხდა: %1$s</string>
+    <string name="database_error_unknown">მონაცემთა ბაზის უცნობი შეცდომა</string>
+    <string name="add_habit">ჩვევის დამატება</string>
+    <string name="add_habit_failed">ჩვევის დამატება ვერ მოხერხდა: %1$s</string>
+    <string name="habit_name">ჩვევის სახელი</string>
+    <string name="habit_remarks">შენიშვნები</string>
+    <string name="active_days">აქტიური დღეები</string>
+    <string name="save">შენახვა</string>
+    <string name="cancel">გაუქმება</string>
+    <string name="no_icon">ხატულის გარეშე</string>
+    <string name="select_icon">ხატულის არჩევა</string>
+    <string name="search_icons">ხატულების ძიება</string>
+    <string name="back">უკან</string>
+    <string name="default_color">ნაგულისხმევი</string>
+    <string name="select_color">ფერის არჩევა</string>
+    <string name="color_value">ფერის თექვსმეტობითი მნიშვნელობა (#RRGGBB)</string>
+    <string name="invalid_color">შეიყვანეთ სწორი ექვსნიშნა თექვსმეტობითი ფერი.</string>
+    <string name="color_scheme_not_provided">ფერთა სქემა არ არის მითითებული.</string>
+    <string name="edit_day_state">დღის მდგომარეობის განახლება</string>
+    <string name="date">თარიღი</string>
+    <string name="status">სტატუსი</string>
+    <string name="status_start">0% დაწყება</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">დღის მდგომარეობის განახლება ვერ მოხერხდა: %1$s</string>
+    <string name="edit_habit">ჩვევის რედაქტირება</string>
+    <string name="delete_habit">წაშლა</string>
+    <string name="delete_habit_confirmation">წაიშალოს ჩვევა?</string>
+    <string name="delete_habit_confirmation_message">წაიშალოს „%1$s“ და მისი ყველა ჩაწერილი დღის მდგომარეობა?</string>
+    <string name="habit_update_failed">ჩვევის განახლება ვერ მოხერხდა: %1$s</string>
+    <string name="settings">პარამეტრები</string>
+    <string name="language">ენა</string>
+    <string name="language_system">სისტემის ნაგულისხმევი</string>
+    <string name="start_of_week">კვირის დასაწყისი</string>
+    <string name="date_format">თარიღის ფორმატი</string>
+    <string name="habit_order_by">ჩვევების დალაგება</string>
+    <string name="sort_direction">დალაგების მიმართულება</string>
+    <string name="order_created_at">შექმნის თარიღით</string>
+    <string name="order_updated_at">განახლების თარიღით</string>
+    <string name="order_title">სახელით</string>
+    <string name="sort_ascending">ზრდადობით</string>
+    <string name="sort_descending">კლებადობით</string>
+    <string name="import_data">იმპორტი</string>
+    <string name="export_data">ექსპორტი</string>
+    <string name="data_exported">მონაცემები ექსპორტირებულია.</string>
+    <string name="data_imported">იმპორტირებული ჩანაწერები: %1$s</string>
+    <string name="data_transfer_failed">მონაცემების გადატანა ვერ მოხერხდა: %1$s</string>
+    <string-array name="days_short">
+        <item>ორშ</item>
+        <item>სამ</item>
+        <item>ოთხ</item>
+        <item>ხუთ</item>
+        <item>პარ</item>
+        <item>შაბ</item>
+        <item>კვი</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>იან</item>
+        <item>თებ</item>
+        <item>მარ</item>
+        <item>აპრ</item>
+        <item>მაი</item>
+        <item>ივნ</item>
+        <item>ივლ</item>
+        <item>აგვ</item>
+        <item>სექ</item>
+        <item>ოქტ</item>
+        <item>ნოე</item>
+        <item>დეკ</item>
+    </string-array>
+    <string name="saturday">შაბათი</string>
+    <string name="sunday">კვირა</string>
+    <string name="monday">ორშაბათი</string>
+    <string name="search_languages">ენების ძიება</string>
+    <string name="theme_mode">თემა</string>
+    <string name="theme_system">სისტემის ნაგულისხმევი</string>
+    <string name="theme_light">ღია</string>
+    <string name="theme_dark">მუქი</string>
+    <string name="metrics">სტატისტიკა</string>
+    <string name="metrics_days">დღეები</string>
+    <string name="metrics_completion">შესრულება, %</string>
+    <string name="calendar">კალენდარი</string>
+    <string name="today">დღეს</string>
+    <string name="previous_day">წინა დღე</string>
+    <string name="next_day">შემდეგი დღე</string>
+    <string name="add_habit_time">ჩვევის დაგეგმვა</string>
+    <string name="edit_habit_time">განრიგის რედაქტირება</string>
+    <string name="habit">ჩვევა</string>
+    <string name="interval">ინტერვალი</string>
+    <string name="interval_30_min">30 წთ</string>
+    <string name="interval_1_hour">1 საათი</string>
+    <string name="interval_2_hours">2 საათი</string>
+    <string name="interval_custom">მორგებული</string>
+    <string name="time_start">დასაწყისი (HH:MM)</string>
+    <string name="time_end">დასასრული (HH:MM)</string>
+    <string name="habit_time_note">შენიშვნა</string>
+    <string name="delete">წაშლა</string>
+    <string name="invalid_time_range">დასრულების დრო უნდა იყოს დაწყების დროის შემდეგ</string>
+    <string name="habit_time_save_failed">განრიგის შენახვა ვერ მოხერხდა: %1$s</string>
+    <string name="habit_or_intent">ჩვევა / განზრახვა</string>
+    <string name="intent_title">განზრახვა</string>
+    <string name="new_intent">ახალი განზრახვა</string>
+    <string name="notify">შეტყობინება</string>
+    <string name="add_to_calendar">კალენდარში დამატება</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Apple Calendar</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">კალენდარში დამატება ვერ მოხერხდა: %1$s</string>
+</resources>

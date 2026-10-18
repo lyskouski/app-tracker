@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">Alışkanlık veritabanı kullanılamıyor.</string>
+    <string name="habits_loading">Alışkanlıklar yükleniyor...</string>
+    <string name="habits_load_failed">Alışkanlıklar yüklenemedi: %1$s</string>
+    <string name="database_error_unknown">Bilinmeyen veritabanı hatası</string>
+    <string name="add_habit">Alışkanlık ekle</string>
+    <string name="add_habit_failed">Alışkanlık eklenemedi: %1$s</string>
+    <string name="habit_name">Alışkanlık adı</string>
+    <string name="habit_remarks">Notlar</string>
+    <string name="active_days">Aktif günler</string>
+    <string name="save">Kaydet</string>
+    <string name="cancel">İptal</string>
+    <string name="no_icon">Simge yok</string>
+    <string name="select_icon">Simge seç</string>
+    <string name="search_icons">Simge ara</string>
+    <string name="back">Geri</string>
+    <string name="default_color">Varsayılan</string>
+    <string name="select_color">Renk seç</string>
+    <string name="color_value">Onaltılık renk değeri (#RRGGBB)</string>
+    <string name="invalid_color">Geçerli, altı haneli onaltılık bir renk girin.</string>
+    <string name="color_scheme_not_provided">Renk şeması sağlanmadı.</string>
+    <string name="edit_day_state">Gün durumunu güncelle</string>
+    <string name="date">Tarih</string>
+    <string name="status">Durum</string>
+    <string name="status_start">%0 Başlangıç</string>
+    <string name="status_25_percent">%25</string>
+    <string name="status_50_percent">%50</string>
+    <string name="status_75_percent">%75</string>
+    <string name="status_100_percent">%100</string>
+    <string name="status_over_100_percent">%100+</string>
+    <string name="day_state_save_failed">Gün durumu güncellenemedi: %1$s</string>
+    <string name="edit_habit">Alışkanlığı düzenle</string>
+    <string name="delete_habit">Sil</string>
+    <string name="delete_habit_confirmation">Alışkanlık silinsin mi?</string>
+    <string name="delete_habit_confirmation_message">“%1$s” ve kaydedilmiş tüm gün durumları silinsin mi?</string>
+    <string name="habit_update_failed">Alışkanlık güncellenemedi: %1$s</string>
+    <string name="settings">Ayarlar</string>
+    <string name="language">Dil</string>
+    <string name="language_system">Sistem varsayılanı</string>
+    <string name="start_of_week">Haftanın başlangıcı</string>
+    <string name="date_format">Tarih biçimi</string>
+    <string name="habit_order_by">Alışkanlıkları sırala</string>
+    <string name="sort_direction">Sıralama yönü</string>
+    <string name="order_created_at">Oluşturulma tarihi</string>
+    <string name="order_updated_at">Güncellenme tarihi</string>
+    <string name="order_title">Başlık</string>
+    <string name="sort_ascending">Artan</string>
+    <string name="sort_descending">Azalan</string>
+    <string name="import_data">İçe aktar</string>
+    <string name="export_data">Dışa aktar</string>
+    <string name="data_exported">Veriler dışa aktarıldı.</string>
+    <string name="data_imported">İçe aktarılan kayıtlar: %1$s</string>
+    <string name="data_transfer_failed">Veriler aktarılamadı: %1$s</string>
+    <string-array name="days_short">
+        <item>Pzt</item>
+        <item>Sal</item>
+        <item>Çar</item>
+        <item>Per</item>
+        <item>Cum</item>
+        <item>Cmt</item>
+        <item>Paz</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Oca</item>
+        <item>Şub</item>
+        <item>Mar</item>
+        <item>Nis</item>
+        <item>May</item>
+        <item>Haz</item>
+        <item>Tem</item>
+        <item>Ağu</item>
+        <item>Eyl</item>
+        <item>Eki</item>
+        <item>Kas</item>
+        <item>Ara</item>
+    </string-array>
+    <string name="saturday">Cumartesi</string>
+    <string name="sunday">Pazar</string>
+    <string name="monday">Pazartesi</string>
+    <string name="search_languages">Dil ara</string>
+    <string name="theme_mode">Tema</string>
+    <string name="theme_system">Sistem varsayılanı</string>
+    <string name="theme_light">Açık</string>
+    <string name="theme_dark">Koyu</string>
+    <string name="metrics">İstatistikler</string>
+    <string name="metrics_days">Günler</string>
+    <string name="metrics_completion">Tamamlanma, %</string>
+    <string name="calendar">Takvim</string>
+    <string name="today">Bugün</string>
+    <string name="previous_day">Önceki gün</string>
+    <string name="next_day">Sonraki gün</string>
+    <string name="add_habit_time">Alışkanlık planla</string>
+    <string name="edit_habit_time">Programı düzenle</string>
+    <string name="habit">Alışkanlık</string>
+    <string name="interval">Aralık</string>
+    <string name="interval_30_min">30 dk</string>
+    <string name="interval_1_hour">1 saat</string>
+    <string name="interval_2_hours">2 saat</string>
+    <string name="interval_custom">Özel</string>
+    <string name="time_start">Başlangıç (HH:MM)</string>
+    <string name="time_end">Bitiş (HH:MM)</string>
+    <string name="habit_time_note">Not</string>
+    <string name="delete">Sil</string>
+    <string name="invalid_time_range">Bitiş saati başlangıç saatinden sonra olmalıdır</string>
+    <string name="habit_time_save_failed">Program kaydedilemedi: %1$s</string>
+    <string name="habit_or_intent">Alışkanlık / Niyet</string>
+    <string name="intent_title">Niyet</string>
+    <string name="new_intent">Yeni niyet</string>
+    <string name="notify">Bildir</string>
+    <string name="add_to_calendar">Takvime ekle</string>
+    <string name="google_calendar">Google Takvim</string>
+    <string name="apple_calendar">Apple Takvim</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Takvime eklenemedi: %1$s</string>
+</resources>
