@@ -34,6 +34,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathMeasure
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.isShiftPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
@@ -303,6 +305,61 @@ fun CalendarTable(
                             )
                         },
                     )
+                }
+                /*
+                 * Mouse wheel scrolls dates, Shift + wheel scrolls habits.
+                 *
+                 * Some platforms already report Shift + wheel as a
+                 * horizontal delta, so both axes are accepted.
+                 */
+                .pointerInput(
+                    maxScrollX,
+                    maxScrollY,
+                ) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            if (event.type != PointerEventType.Scroll) continue
+
+                            val delta = event.changes.fold(Offset.Zero) { sum, change ->
+                                sum + change.scrollDelta
+                            }
+                            val wheel =
+                                if (event.keyboardModifiers.isShiftPressed) {
+                                    Offset(
+                                        x = if (delta.x != 0f) delta.x else delta.y,
+                                        y = 0f,
+                                    )
+                                } else {
+                                    delta
+                                }
+                            if (wheel == Offset.Zero) continue
+
+                            event.changes.forEach { it.consume() }
+
+                            val currentOffset = scrollOffset ?: Offset(
+                                x = 0f,
+                                y = maxScrollY,
+                            )
+
+                            scrollOffset = Offset(
+                                x = (
+                                    currentOffset.x +
+                                        wheel.x * cellWidthPx
+                                    ).coerceIn(
+                                        0f,
+                                        maxScrollX,
+                                    ),
+                                y = (
+                                    currentOffset.y +
+                                        wheel.y * cellHeightPx
+                                    ).coerceIn(
+                                        0f,
+                                        maxScrollY,
+                                    ),
+                            )
+                        }
+                    }
                 },
         ) {
 
