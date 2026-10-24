@@ -9,6 +9,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,6 +39,7 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -114,7 +117,6 @@ fun CalendarTable(
      */
     val firstColumnWidth = 100.dp
     val headerHeight = 56.dp
-    val cellWidth = 48.dp
     val cellHeight = 48.dp
 
     val firstColumnWidthPx =
@@ -125,11 +127,6 @@ fun CalendarTable(
     val headerHeightPx =
         with(density) {
             headerHeight.toPx()
-        }
-
-    val cellWidthPx =
-        with(density) {
-            cellWidth.toPx()
         }
 
     val cellHeightPx =
@@ -159,6 +156,18 @@ fun CalendarTable(
         val viewportHeightPx =
             with(density) {
                 maxHeight.toPx()
+            }
+
+        /*
+         * Horizontal layout has room for habit titles next to their icons.
+         */
+        val isHorizontal = maxWidth > maxHeight
+
+        val cellWidth = if (isHorizontal) 150.dp else 48.dp
+
+        val cellWidthPx =
+            with(density) {
+                cellWidth.toPx()
             }
 
         /*
@@ -380,6 +389,7 @@ fun CalendarTable(
                     cellWidthPx = cellWidthPx,
                     headerHeight = headerHeight,
                     headerHeightPx = headerHeightPx,
+                    showTitles = isHorizontal,
                     onHabitClick = onHabitClick,
                 )
             }
@@ -553,6 +563,7 @@ private fun CalendarHeaderViewport(
     cellWidthPx: Float,
     headerHeight: Dp,
     headerHeightPx: Float,
+    showTitles: Boolean,
     onHabitClick: (Habit) -> Unit,
 ) {
     val firstVisibleColumn =
@@ -603,6 +614,7 @@ private fun CalendarHeaderViewport(
                     iconTint = iconTint,
                     textColor = iconTint,
                     contentDescription = habit.title,
+                    title = if (showTitles) habit.title else null,
                     modifier = Modifier.clickable { onHabitClick(habit) },
                 )
             }
@@ -1060,6 +1072,7 @@ private fun CalendarTableCell(
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     contentDescription: String? = null,
     topLabel: String? = null,
+    title: String? = null,
     highlight: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
@@ -1076,24 +1089,46 @@ private fun CalendarTableCell(
             .then(highlight),
         contentAlignment = Alignment.Center,
     ) {
-        if (icon != null) {
-            Icon(
-                imageVector = icon,
-                contentDescription = contentDescription,
-                tint = iconTint,
-            )
+        val mark: @Composable () -> Unit = {
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    tint = iconTint,
+                )
+            } else {
+                StatusMark(
+                    mark = text,
+                    modifier = if (contentDescription == null) {
+                        Modifier
+                    } else {
+                        Modifier.semantics {
+                            this.contentDescription = contentDescription
+                        }
+                    },
+                    color = textColor,
+                )
+            }
+        }
+        if (title != null) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                mark()
+                Text(
+                    text = title,
+                    modifier = Modifier.weight(1f).padding(start = 4.dp),
+                    color = textColor,
+                    maxLines = 1,
+                    softWrap = false,
+                    overflow = TextOverflow.Clip,
+                )
+            }
         } else {
-            StatusMark(
-                mark = text,
-                modifier = if (contentDescription == null) {
-                    Modifier
-                } else {
-                    Modifier.semantics {
-                        this.contentDescription = contentDescription
-                    }
-                },
-                color = textColor,
-            )
+            mark()
         }
         if (topLabel != null) {
             Text(
