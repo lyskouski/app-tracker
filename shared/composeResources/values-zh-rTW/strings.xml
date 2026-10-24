@@ -47,6 +47,9 @@
     <string name="order_title">標題</string>
     <string name="sort_ascending">遞增</string>
     <string name="sort_descending">遞減</string>
+    <string name="completeness_type">完成度顯示</string>
+    <string name="completeness_symbols">符號</string>
+    <string name="completeness_colors">顏色</string>
     <string name="import_data">匯入</string>
     <string name="export_data">匯出</string>
     <string name="data_exported">資料已匯出。</string>

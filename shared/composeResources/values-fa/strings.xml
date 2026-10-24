@@ -47,6 +47,9 @@
     <string name="order_title">عنوان</string>
     <string name="sort_ascending">صعودی</string>
     <string name="sort_descending">نزولی</string>
+    <string name="completeness_type">نوع تکمیل</string>
+    <string name="completeness_symbols">نمادها</string>
+    <string name="completeness_colors">رنگ‌ها</string>
     <string name="import_data">وارد کردن</string>
     <string name="export_data">خروجی گرفتن</string>
     <string name="data_exported">داده‌ها صادر شدند.</string>

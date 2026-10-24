@@ -47,6 +47,9 @@
     <string name="order_title">タイトル</string>
     <string name="sort_ascending">昇順</string>
     <string name="sort_descending">降順</string>
+    <string name="completeness_type">達成度の表示</string>
+    <string name="completeness_symbols">記号</string>
+    <string name="completeness_colors">色</string>
     <string name="import_data">インポート</string>
     <string name="export_data">エクスポート</string>
     <string name="data_exported">データをエクスポートしました。</string>

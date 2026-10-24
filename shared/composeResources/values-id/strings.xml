@@ -47,6 +47,9 @@
     <string name="order_title">Judul</string>
     <string name="sort_ascending">Naik</string>
     <string name="sort_descending">Turun</string>
+    <string name="completeness_type">Jenis Penyelesaian</string>
+    <string name="completeness_symbols">Simbol</string>
+    <string name="completeness_colors">Warna</string>
     <string name="import_data">Impor</string>
     <string name="export_data">Ekspor</string>
     <string name="data_exported">Data diekspor.</string>

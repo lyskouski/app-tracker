@@ -47,6 +47,9 @@
     <string name="order_title">Título</string>
     <string name="sort_ascending">Ascendente</string>
     <string name="sort_descending">Descendente</string>
+    <string name="completeness_type">Tipo de cumplimiento</string>
+    <string name="completeness_symbols">Símbolos</string>
+    <string name="completeness_colors">Colores</string>
     <string name="import_data">Importar</string>
     <string name="export_data">Exportar</string>
     <string name="data_exported">Datos exportados.</string>

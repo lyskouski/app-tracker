@@ -211,6 +211,7 @@ private fun HomePageContent(
                     today = today.toString(),
                     weekStart = settingsStore.current.weekStart,
                     dateFormat = settingsStore.current.dateFormat,
+                    completenessType = settingsStore.current.completenessType,
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
                     onProgressClick = {
@@ -295,6 +296,7 @@ private fun HomePageContent(
                         dayState = selected,
                         habit = habit,
                         dateFormat = settingsStore.current.dateFormat,
+                        completenessType = settingsStore.current.completenessType,
                         saveError = dayStateSaveError,
                         isSaving = isDayStateSaving,
                         onStatusChange = { mark ->

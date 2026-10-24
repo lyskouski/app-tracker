@@ -47,6 +47,9 @@
     <string name="order_title">शीर्षक</string>
     <string name="sort_ascending">आरोही</string>
     <string name="sort_descending">अवरोही</string>
+    <string name="completeness_type">पूर्णता का प्रकार</string>
+    <string name="completeness_symbols">प्रतीक</string>
+    <string name="completeness_colors">रंग</string>
     <string name="import_data">आयात करें</string>
     <string name="export_data">निर्यात करें</string>
     <string name="data_exported">डेटा निर्यात किया गया।</string>

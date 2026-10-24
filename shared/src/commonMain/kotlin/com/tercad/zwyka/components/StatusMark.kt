@@ -17,21 +17,40 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
+import com.tercad.zwyka.defines.CompletenessType
+import com.tercad.zwyka.defines.statusOptions
+
 private const val OVER_100_MARK = "▣"
 
-/** Renders a status mark; "▣" is drawn because the web build has no font glyph for it. */
+/* Fill of the colored rectangle per status, from "0% start" to "100%". */
+private val statusAlphas = listOf(0.1f, 0.25f, 0.5f, 0.75f, 1f)
+
+/**
+ * Renders a status mark; "▣" is drawn because the web build has no font glyph for it.
+ *
+ * [CompletenessType.COLORS] draws status marks as rectangles filled with [color].
+ */
 @Composable
 fun StatusMark(
     mark: String,
     modifier: Modifier = Modifier,
     color: Color = LocalContentColor.current,
     style: TextStyle = MaterialTheme.typography.bodyMedium,
+    type: CompletenessType = CompletenessType.SYMBOLS,
 ) {
+    val colored = type == CompletenessType.COLORS
+    val alpha = statusAlphas.getOrNull(statusOptions.indexOfFirst { it.mark == mark })
+    if (colored && alpha != null) {
+        Canvas(modifier.size(18.dp)) {
+            drawRect(color = color.copy(alpha = alpha))
+        }
+        return
+    }
     if (mark != OVER_100_MARK) {
         Text(text = mark, modifier = modifier, color = color, style = style)
         return
     }
-    Canvas(modifier.size(14.dp)) {
+    Canvas(modifier.size(if (colored) 18.dp else 14.dp)) {
         val stroke = 1.5.dp.toPx()
         drawRect(
             color = color,

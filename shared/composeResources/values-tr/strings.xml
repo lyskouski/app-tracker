@@ -47,6 +47,9 @@
     <string name="order_title">Başlık</string>
     <string name="sort_ascending">Artan</string>
     <string name="sort_descending">Azalan</string>
+    <string name="completeness_type">Tamamlanma türü</string>
+    <string name="completeness_symbols">Semboller</string>
+    <string name="completeness_colors">Renkler</string>
     <string name="import_data">İçe aktar</string>
     <string name="export_data">Dışa aktar</string>
     <string name="data_exported">Veriler dışa aktarıldı.</string>

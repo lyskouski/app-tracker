@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -22,7 +23,9 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.statusOptions
 import com.tercad.zwyka.resources.Res
@@ -40,12 +43,15 @@ fun DayStateDialog(
     dayState: DayState,
     habit: Habit,
     dateFormat: DateFormat,
+    completenessType: CompletenessType,
     saveError: String?,
     isSaving: Boolean,
     onStatusChange: (String) -> Unit,
     onDismiss: () -> Unit,
 ) {
     val monthNames = stringArrayResource(Res.array.months_short)
+    val habitColor = applicationColor(habit.color)
+        ?.takeIf { completenessType == CompletenessType.COLORS }
 
     AlertDialog(
         onDismissRequest = {
@@ -97,7 +103,11 @@ fun DayStateDialog(
                                     enabled = !isSaving,
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        StatusMark(option.mark)
+                                        StatusMark(
+                                            mark = option.mark,
+                                            color = habitColor ?: LocalContentColor.current,
+                                            type = completenessType,
+                                        )
                                         Text(stringResource(option.label))
                                     }
                                 }
@@ -108,7 +118,11 @@ fun DayStateDialog(
                                     enabled = !isSaving,
                                 ) {
                                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                        StatusMark(option.mark)
+                                        StatusMark(
+                                            mark = option.mark,
+                                            color = habitColor ?: LocalContentColor.current,
+                                            type = completenessType,
+                                        )
                                         Text(stringResource(option.label))
                                     }
                                 }

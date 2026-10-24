@@ -47,6 +47,9 @@
     <string name="order_title">Назвою</string>
     <string name="sort_ascending">За зростанням</string>
     <string name="sort_descending">За спаданням</string>
+    <string name="completeness_type">Тип виконання</string>
+    <string name="completeness_symbols">Символи</string>
+    <string name="completeness_colors">Кольори</string>
     <string name="import_data">Імпорт</string>
     <string name="export_data">Експорт</string>
     <string name="data_exported">Дані експортовано.</string>

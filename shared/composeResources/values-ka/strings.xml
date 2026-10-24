@@ -47,6 +47,9 @@
     <string name="order_title">სახელით</string>
     <string name="sort_ascending">ზრდადობით</string>
     <string name="sort_descending">კლებადობით</string>
+    <string name="completeness_type">შესრულების ტიპი</string>
+    <string name="completeness_symbols">სიმბოლოები</string>
+    <string name="completeness_colors">ფერები</string>
     <string name="import_data">იმპორტი</string>
     <string name="export_data">ექსპორტი</string>
     <string name="data_exported">მონაცემები ექსპორტირებულია.</string>

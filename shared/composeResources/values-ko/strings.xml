@@ -47,6 +47,9 @@
     <string name="order_title">제목</string>
     <string name="sort_ascending">오름차순</string>
     <string name="sort_descending">내림차순</string>
+    <string name="completeness_type">달성도 표시</string>
+    <string name="completeness_symbols">기호</string>
+    <string name="completeness_colors">색상</string>
     <string name="import_data">가져오기</string>
     <string name="export_data">내보내기</string>
     <string name="data_exported">데이터를 내보냈습니다.</string>

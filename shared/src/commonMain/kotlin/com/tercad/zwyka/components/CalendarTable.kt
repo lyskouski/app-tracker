@@ -60,6 +60,7 @@ import com.tercad.zwyka.core.progress.calculateDayProgress
 import com.tercad.zwyka.core.progress.calculateStreaks
 import com.tercad.zwyka.core.progress.displayedMark
 import com.tercad.zwyka.core.progress.toMarks
+import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.isStatusMark
 import com.tercad.zwyka.defines.statusProgress
@@ -84,6 +85,7 @@ fun CalendarTable(
     today: String? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
     dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
+    completenessType: CompletenessType = CompletenessType.SYMBOLS,
     modifier: Modifier = Modifier,
 ) {
     val weekStartDates = remember(dates, weekStart) {
@@ -409,6 +411,7 @@ fun CalendarTable(
                     onDayStateClick = onDayStateClick,
                     today = today,
                     weekStartDates = weekStartDates,
+                    completenessType = completenessType,
                 )
             }
 
@@ -863,6 +866,7 @@ private fun CalendarBodyViewport(
     onDayStateClick: (DayState) -> Unit,
     today: String?,
     weekStartDates: Set<String>,
+    completenessType: CompletenessType,
 ) {
     /*
      * X = habits / columns.
@@ -962,6 +966,10 @@ private fun CalendarBodyViewport(
 
                     CalendarTableCell(
                         text = value,
+                        textColor = applicationColor(habit.color)
+                            ?.takeIf { completenessType == CompletenessType.COLORS }
+                            ?: currentColorScheme().onSurface,
+                        completenessType = completenessType,
                         width = with(LocalDensity.current) {
                             cellWidthPx.toDp()
                         },
@@ -1130,6 +1138,7 @@ private fun CalendarTableCell(
     contentDescription: String? = null,
     topLabel: String? = null,
     title: String? = null,
+    completenessType: CompletenessType = CompletenessType.SYMBOLS,
     highlight: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
@@ -1164,6 +1173,7 @@ private fun CalendarTableCell(
                         }
                     },
                     color = textColor,
+                    type = completenessType,
                 )
             }
         }

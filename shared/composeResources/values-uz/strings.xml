@@ -47,6 +47,9 @@
     <string name="order_title">Nomi</string>
     <string name="sort_ascending">O‘sish bo‘yicha</string>
     <string name="sort_descending">Kamayish bo‘yicha</string>
+    <string name="completeness_type">Bajarilish turi</string>
+    <string name="completeness_symbols">Belgilar</string>
+    <string name="completeness_colors">Ranglar</string>
     <string name="import_data">Import</string>
     <string name="export_data">Eksport</string>
     <string name="data_exported">Ma’lumotlar eksport qilindi.</string>

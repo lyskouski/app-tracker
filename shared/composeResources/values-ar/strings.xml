@@ -47,6 +47,9 @@
     <string name="order_title">العنوان</string>
     <string name="sort_ascending">تصاعدي</string>
     <string name="sort_descending">تنازلي</string>
+    <string name="completeness_type">نوع الإنجاز</string>
+    <string name="completeness_symbols">رموز</string>
+    <string name="completeness_colors">ألوان</string>
     <string name="import_data">استيراد</string>
     <string name="export_data">تصدير</string>
     <string name="data_exported">تم تصدير البيانات.</string>

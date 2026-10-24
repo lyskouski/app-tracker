@@ -3,6 +3,7 @@
 
 package com.tercad.zwyka.core.model
 
+import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.HabitOrderBy
 import com.tercad.zwyka.defines.SortDirection
@@ -16,4 +17,5 @@ data class AppSettings(
     val dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
     val habitOrderBy: HabitOrderBy = HabitOrderBy.CREATED_AT,
     val sortDirection: SortDirection = SortDirection.DESC,
+    val completenessType: CompletenessType = CompletenessType.SYMBOLS,
 )

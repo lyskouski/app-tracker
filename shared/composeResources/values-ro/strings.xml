@@ -47,6 +47,9 @@
     <string name="order_title">Titlu</string>
     <string name="sort_ascending">Crescător</string>
     <string name="sort_descending">Descrescător</string>
+    <string name="completeness_type">Tip de completare</string>
+    <string name="completeness_symbols">Simboluri</string>
+    <string name="completeness_colors">Culori</string>
     <string name="import_data">Importă</string>
     <string name="export_data">Exportă</string>
     <string name="data_exported">Datele au fost exportate.</string>

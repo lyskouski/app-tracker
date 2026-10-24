@@ -47,6 +47,9 @@
     <string name="order_title">Назве</string>
     <string name="sort_ascending">Па ўзрастанні</string>
     <string name="sort_descending">Па змяншэнні</string>
+    <string name="completeness_type">Тып выканання</string>
+    <string name="completeness_symbols">Сімвалы</string>
+    <string name="completeness_colors">Колеры</string>
     <string name="import_data">Імпарт</string>
     <string name="export_data">Экспарт</string>
     <string name="data_exported">Даныя экспартаваныя.</string>

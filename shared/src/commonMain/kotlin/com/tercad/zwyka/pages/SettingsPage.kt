@@ -43,6 +43,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.defines.applicationLanguages
+import com.tercad.zwyka.defines.completenessTypeOptions
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
 import com.tercad.zwyka.defines.habitOrderByOptions
@@ -51,6 +52,7 @@ import com.tercad.zwyka.defines.themeModeOptions
 import com.tercad.zwyka.defines.weekStartOptions
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
+import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.date_format
 import com.tercad.zwyka.resources.habit_order_by
 import com.tercad.zwyka.resources.language
@@ -212,6 +214,17 @@ class SettingsPage(
                 onSelect = { index ->
                     scope.launch {
                         settingsStore.update(settings.copy(sortDirection = sortDirectionOptions[index]))
+                    }
+                },
+            )
+
+            DropdownField(
+                label = stringResource(Res.string.completeness_type),
+                options = completenessTypeOptions.map { stringResource(it.label) },
+                selectedIndex = completenessTypeOptions.indexOf(settings.completenessType),
+                onSelect = { index ->
+                    scope.launch {
+                        settingsStore.update(settings.copy(completenessType = completenessTypeOptions[index]))
                     }
                 },
             )
