@@ -1,5 +1,6 @@
 # <img title="Zwyka Logo" src="./docs/design-flow/logo.svg" width="32" /> Zwyka: Habits Tracking Application
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![Project Release Artifacts](https://github.com/lyskouski/app-tracker/actions/workflows/build.yml/badge.svg)](https://github.com/lyskouski/app-tracker/actions/workflows/build.yml)
 
 Zwyka -- open source code platform-agnostic habits tracker application. The goal of the 
 solution is to create a habits tracking application that is intuitive, efficient, and 
