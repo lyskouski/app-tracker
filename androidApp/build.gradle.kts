@@ -6,10 +6,18 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-// Release signing: key.properties (storePassword, keyPassword, keyAlias) and key.jks next to this file.
+/*
+ * Release signing: key.properties and key.jks next to this file.
+ *
+ * Same format as the other terCAD apps: key.password (store and key), key.alias (default "key");
+ * storePassword / keyPassword / keyAlias are accepted as well. key.file is ignored: key.jks is used.
+ */
 val keyProperties = file("key.properties").takeIf { it.exists() }?.let { keyFile ->
     Properties().apply { keyFile.inputStream().use { load(it) } }
 }
+
+fun keyProperty(vararg names: String): String? =
+    names.firstNotNullOfOrNull { keyProperties?.getProperty(it)?.trim()?.takeIf(String::isNotEmpty) }
 
 android {
     namespace = "com.tercad.zwyka"
@@ -32,10 +40,15 @@ android {
     signingConfigs {
         if (keyProperties != null) {
             create("release") {
-                storeFile = file("key.jks")
-                storePassword = keyProperties.getProperty("storePassword")
-                keyAlias = keyProperties.getProperty("keyAlias")
-                keyPassword = keyProperties.getProperty("keyPassword")
+                val password = keyProperty("key.password")
+                storeFile = file("key.jks").also {
+                    require(it.exists()) { "Release signing: ${it.path} is missing" }
+                }
+                storePassword = keyProperty("storePassword") ?: password
+                    ?: error("Release signing: key.password is missing in key.properties")
+                keyPassword = keyProperty("keyPassword") ?: password
+                    ?: error("Release signing: key.password is missing in key.properties")
+                keyAlias = keyProperty("keyAlias", "key.alias") ?: "key"
             }
         }
     }
