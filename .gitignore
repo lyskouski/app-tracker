@@ -12,3 +12,5 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 xcuserdata
 /screenshots/
+androidApp/key.jks
+androidApp/key.properties

@@ -23,13 +23,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Web]
+        target: [Web, Android]
         include:
           - os: ubuntu-latest
             target: Web
             build_path: webApp/build/dist/wasmJs/productionExecutable/
             asset_extension: .tar.gz
             asset_content_type: application/gzip
+          - os: ubuntu-latest
+            target: Android
+            build_path: androidApp/build/outputs/bundle/release/
+            asset_extension: .aab
+            asset_content_type: application/zip
 
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +56,29 @@ jobs:
         run: tar czf zwyka_${{ matrix.target }}${{ matrix.asset_extension }} *
         working-directory: ${{ matrix.build_path }}
 
+# Android
+      - name: Apply Android Keychain
+        if: matrix.target == 'Android'
+        env:
+          ANDROID_JKS: ${{ secrets.ANDROID_JKS }}
+          ANDROID_KEY: ${{ secrets.ANDROID_KEY }}
+        run: |
+          echo -n "$ANDROID_JKS" | base64 -d > $GITHUB_WORKSPACE/androidApp/key.jks
+          echo -n "$ANDROID_KEY" | base64 -d > $GITHUB_WORKSPACE/androidApp/key.properties
 
+      - name: Run Android Build
+        if: matrix.target == 'Android'
+        run: |
+          ./gradlew :androidApp:bundleRelease --no-daemon \
+            -PversionCode=${{ needs.release.outputs.build_number }} \
+            -PversionName=${{ needs.release.outputs.version }}
+
+      - name: Rename Android Bundle
+        if: matrix.target == 'Android'
+        run: mv androidApp-release.aab zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+        working-directory: ${{ matrix.build_path }}
+
+#
       - name: Upload ${{ matrix.target }} Artifact
         id: upload_release_asset
         uses: actions/upload-release-asset@latest
