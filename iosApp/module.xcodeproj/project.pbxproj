@@ -119,6 +119,7 @@
 				uk,
 				uz,
 				zh,
+				"zh-Hant",
 				Base,
 			);
 			mainGroup = B1D993D769F886B34E28ED34;

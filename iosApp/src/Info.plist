@@ -30,6 +30,7 @@
 		<string>uk</string>
 		<string>uz</string>
 		<string>zh</string>
+		<string>zh-Hant</string>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>

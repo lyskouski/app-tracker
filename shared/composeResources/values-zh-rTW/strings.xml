@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">習慣資料庫無法使用。</string>
+    <string name="habits_loading">正在載入習慣...</string>
+    <string name="habits_load_failed">無法載入習慣：%1$s</string>
+    <string name="database_error_unknown">未知的資料庫錯誤</string>
+    <string name="add_habit">新增習慣</string>
+    <string name="add_habit_failed">無法新增習慣：%1$s</string>
+    <string name="habit_name">習慣名稱</string>
+    <string name="habit_remarks">備註</string>
+    <string name="active_days">活躍日</string>
+    <string name="save">儲存</string>
+    <string name="cancel">取消</string>
+    <string name="no_icon">無圖示</string>
+    <string name="select_icon">選擇圖示</string>
+    <string name="search_icons">搜尋圖示</string>
+    <string name="back">返回</string>
+    <string name="default_color">預設</string>
+    <string name="select_color">選擇顏色</string>
+    <string name="color_value">十六進位顏色值 (#RRGGBB)</string>
+    <string name="invalid_color">請輸入有效的六位十六進位顏色。</string>
+    <string name="color_scheme_not_provided">未提供配色方案。</string>
+    <string name="edit_day_state">更新當日狀態</string>
+    <string name="date">日期</string>
+    <string name="status">狀態</string>
+    <string name="status_start">0% 開始</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">無法更新當日狀態：%1$s</string>
+    <string name="edit_habit">編輯習慣</string>
+    <string name="delete_habit">刪除</string>
+    <string name="delete_habit_confirmation">刪除習慣？</string>
+    <string name="delete_habit_confirmation_message">刪除「%1$s」及其所有已記錄的每日狀態？</string>
+    <string name="habit_update_failed">無法更新習慣：%1$s</string>
+    <string name="settings">設定</string>
+    <string name="language">語言</string>
+    <string name="language_system">跟隨系統</string>
+    <string name="start_of_week">每週起始日</string>
+    <string name="date_format">日期格式</string>
+    <string name="habit_order_by">習慣排序依據</string>
+    <string name="sort_direction">排序方向</string>
+    <string name="order_created_at">建立時間</string>
+    <string name="order_updated_at">更新時間</string>
+    <string name="order_title">標題</string>
+    <string name="sort_ascending">遞增</string>
+    <string name="sort_descending">遞減</string>
+    <string name="import_data">匯入</string>
+    <string name="export_data">匯出</string>
+    <string name="data_exported">資料已匯出。</string>
+    <string name="data_imported">已匯入記錄：%1$s</string>
+    <string name="data_transfer_failed">無法傳輸資料：%1$s</string>
+    <string-array name="days_short">
+        <item>週一</item>
+        <item>週二</item>
+        <item>週三</item>
+        <item>週四</item>
+        <item>週五</item>
+        <item>週六</item>
+        <item>週日</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
+    </string-array>
+    <string name="saturday">星期六</string>
+    <string name="sunday">星期日</string>
+    <string name="monday">星期一</string>
+    <string name="search_languages">搜尋語言</string>
+    <string name="theme_mode">主題</string>
+    <string name="theme_system">跟隨系統</string>
+    <string name="theme_light">淺色</string>
+    <string name="theme_dark">深色</string>
+    <string name="metrics">統計</string>
+    <string name="metrics_days">天數</string>
+    <string name="metrics_completion">完成率，%</string>
+    <string name="calendar">行事曆</string>
+    <string name="today">今天</string>
+    <string name="previous_day">前一天</string>
+    <string name="next_day">後一天</string>
+    <string name="add_habit_time">安排習慣</string>
+    <string name="edit_habit_time">編輯行程</string>
+    <string name="habit">習慣</string>
+    <string name="interval">間隔</string>
+    <string name="interval_30_min">30 分鐘</string>
+    <string name="interval_1_hour">1 小時</string>
+    <string name="interval_2_hours">2 小時</string>
+    <string name="interval_custom">自訂</string>
+    <string name="time_start">開始 (HH:MM)</string>
+    <string name="time_end">結束 (HH:MM)</string>
+    <string name="habit_time_note">備註</string>
+    <string name="delete">刪除</string>
+    <string name="invalid_time_range">結束時間必須晚於開始時間</string>
+    <string name="habit_time_save_failed">無法儲存行程：%1$s</string>
+    <string name="habit_or_intent">習慣 / 意圖</string>
+    <string name="intent_title">意圖</string>
+    <string name="new_intent">新意圖</string>
+    <string name="notify">通知</string>
+    <string name="add_to_calendar">加入行事曆</string>
+    <string name="google_calendar">Google 日曆</string>
+    <string name="apple_calendar">Apple 行事曆</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">無法加入行事曆：%1$s</string>
+</resources>
