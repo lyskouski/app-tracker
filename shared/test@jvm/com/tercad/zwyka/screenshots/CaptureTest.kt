@@ -32,8 +32,13 @@ import io.github.lyskouski.screenshot.ScreenshotGenerator
 import io.github.lyskouski.screenshot.ScreenshotScope
 import io.github.lyskouski.screenshot.ScreenshotTarget
 import org.jetbrains.compose.resources.getString
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.plus
+import kotlinx.datetime.todayIn
 import java.io.File
 import kotlin.test.Test
+import kotlin.time.Clock
 
 /*
  * Store screenshots: ./gradlew :shared:jvmScreenshots
@@ -98,7 +103,7 @@ class CaptureTest {
         }
         val database = Database(driver)
         val services = database.createServices(NoReminderScheduler)
-        services.backup.import(SAMPLE_DATA.readText())
+        services.backup.import(resolveDates(SAMPLE_DATA.readText()))
         // Regional variants (zh-TW) have their own translation, other locales use the language only.
         val language = target.languageTag.takeIf { tag -> applicationLanguages.any { it.tag == tag } }
             ?: target.language
@@ -106,7 +111,18 @@ class CaptureTest {
         return database
     }
 
+    /* The import reads values only: `date('now', '-N days')` is replaced by the date itself. */
+    private fun resolveDates(sql: String): String {
+        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        return RELATIVE_DATE.replace(sql) { match ->
+            val days = match.groupValues[1].ifEmpty { "0" }.toInt()
+            "'${today.plus(days, DateTimeUnit.DAY)}'"
+        }
+    }
+
     private companion object {
+        val RELATIVE_DATE = Regex("""date\('now'(?:, '([+-]\d+) days?')?\)""")
+
         // Relative to the module directory, the working directory of Gradle tests.
         val SAMPLE_DATA = File("test@jvm/com/tercad/zwyka/screenshots/zwyka-sample.sq")
     }
