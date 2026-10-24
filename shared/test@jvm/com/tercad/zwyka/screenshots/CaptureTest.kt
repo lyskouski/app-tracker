@@ -18,11 +18,15 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.tercad.zwyka.App
 import com.tercad.zwyka.core.notifications.NoReminderScheduler
 import com.tercad.zwyka.core.time.formatTime
+import com.tercad.zwyka.defines.applicationLanguages
 import com.tercad.zwyka.infrastructures.Database
 import com.tercad.zwyka.infrastructures.createServices
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
+import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.calendar
+import com.tercad.zwyka.resources.completeness_colors
+import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.settings
 import io.github.lyskouski.screenshot.ScreenshotGenerator
 import io.github.lyskouski.screenshot.ScreenshotScope
@@ -69,6 +73,14 @@ class CaptureTest {
             onRoot().performTouchInput { click(Offset(right - 32.dp.toPx(), y)) }
             waitForIdle()
         }
+        // Every screenshot starts from its own database: the changed setting stays in this step.
+        gen.inject("6_home_colors") {
+            onNodeWithText(getString(Res.string.settings)).performClick()
+            onNodeWithText(getString(Res.string.completeness_type)).performScrollTo().performClick()
+            onNodeWithText(getString(Res.string.completeness_colors)).performClick()
+            onNodeWithText(getString(Res.string.back)).performClick()
+            waitForIdle()
+        }
         gen.run()
     }
 
@@ -87,7 +99,10 @@ class CaptureTest {
         val database = Database(driver)
         val services = database.createServices(NoReminderScheduler)
         services.backup.import(SAMPLE_DATA.readText())
-        services.settings.save(services.settings.load().copy(language = target.language))
+        // Regional variants (zh-TW) have their own translation, other locales use the language only.
+        val language = target.languageTag.takeIf { tag -> applicationLanguages.any { it.tag == tag } }
+            ?: target.language
+        services.settings.save(services.settings.load().copy(language = language))
         return database
     }
 
