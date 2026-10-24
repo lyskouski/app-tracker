@@ -21,7 +21,8 @@ one is left behind.
 
 **Habits Calendar (home screen)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
-  in both directions with pinned habit headers and dates.
+  in both directions (by touch, or Shift + Scroll Wheel for horizontal scroll and Scroll Wheel
+  for vertical) with pinned habit headers and dates.
 - Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
   `▣` over 100%.
 - Today's row is highlighted, and a separator marks the start of each week.
@@ -43,12 +44,13 @@ one is left behind.
 - Add to external calendar (Apple, Google, Microsoft)
 
 **Settings**
-- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, ka_GE, ru_RU, id_ID.
-- Theme: system default, light, dark.
+- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, ka_GE, ru_RU, id_ID
+- Theme: system default, light, dark
 - Start of the week
 - Dates format
-- Habits order (by creation date, last update, or title; ascending or descending).
+- Habits order (by creation date, last update, or title; ascending or descending)
 - Import / Export data
+- Habits' day state representation: symbols, colored rectangles
 
 <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_1.jpg" width="240" /> . <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_2.jpg" width="240" /> . <img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/calendar.jpg" width="240" />
 
