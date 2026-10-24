@@ -1,0 +1,64 @@
+[اللغة العربية (AR)](./about_ar.md) |
+[Azərbaycan dili (AZ)](./about_az.md) |
+[Беларуская (BE)](./about_be.md) |
+[Čeština (CS)](./about_cs.md) |
+[Deutsch (DE)](./about_de.md) |
+[English (EN-US)](./about_en.md) |
+[Español (ES)](./about_es.md) |
+[فارسی (FA)](./about_fa.md) |
+[Français (FR)](./about_fr.md) |
+[हिंदी (HI-IN)](./about_hi.md) |
+[Bahasa Indonesia (ID)](./about_id.md) |
+[Italiano (IT)](./about_it.md) |
+[日本語 (JA)](./about_ja.md) |
+[ქართული (KA-GE)](./about_ka.md) |
+[한국어 (KO)](./about_ko.md) |
+[Nederlands (NL)](./about_nl.md) |
+[Polski (PL)](./about_pl.md) |
+[Português Brasileiro (PT-BR)](./about_pt.md) |
+[Limba română (RO)](./about_ro.md) |
+[Русский (RU)](./about_ru.md) |
+[Türkçe (TR)](./about_tr.md) |
+[Українська (UK-UA)](./about_uk.md) |
+[Oʻzbekcha (UZ)](./about_uz.md) |
+简体中文 (ZH-CN) |
+[繁體中文 (ZH-TW)](./about_zh_TW.md) |
+
+---
+
+**Zwyka** -- 一款开源、跨平台、无广告、无限制的习惯追踪应用。
+本项目的目标是打造一款直观、高效且包容的习惯追踪应用，
+让用户轻松管理自己的习惯，同时确保不让任何人掉队。
+
+<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
+
+### 功能
+- 习惯
+  - 标题、备注、图标（2,000 多个 Material 图标）和颜色（调色板或自定义 RGB / HEX）
+  - 每周的活跃日；非活跃日以 "—" 标记
+  - 归档（停用）习惯：该习惯显示为灰色、排在最后，并在日程中隐藏
+- 习惯日历（主页）
+  - 按天（行）排列的习惯（列）：最近 66 天以及接下来的 5 天
+  - 每个习惯的当日进度：`·` 已开始，`\` 25%，`|` 50%，`/` 75%，`X` 100%，`▣` 超过 100%
+  - 进度以符号或彩色矩形显示
+  - 点击日期，可将该日所有未标记的习惯标记为跳过（"—"）
+  - 连续天数：连续标记的天数（"—" 的日子不会中断连续记录）
+  - 今日进度：今日习惯的总体完成情况
+- 统计
+  - 最近 66 天的每日完成率（%）
+- 日程（日历）
+  - 按小时显示的日视图，类似 Google 或 Outlook 日历
+  - 将习惯安排为 30 分钟、1 小时、2 小时或自定义时间段，在每周选定的日子重复，
+    并可添加备注
+  - 重叠的时间段并排显示
+  - 提醒（通知）
+  - 添加到外部日历（Apple、Google、Microsoft）
+- 设置
+  - 本地化
+  - 主题模式（跟随系统、浅色、深色）
+  - 每周起始日、日期格式
+  - 习惯排序（按创建时间、最后更新时间或标题；升序或降序）
+  - 数据导入 / 导出
+- 用户体验
+  - 响应式与自适应设计
+  - 通过触摸或鼠标滚动：`Scroll Wheel` 按天滚动，`Shift` + `Scroll Wheel` 按习惯滚动

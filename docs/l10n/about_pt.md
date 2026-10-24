@@ -1,0 +1,64 @@
+[اللغة العربية (AR)](./about_ar.md) |
+[Azərbaycan dili (AZ)](./about_az.md) |
+[Беларуская (BE)](./about_be.md) |
+[Čeština (CS)](./about_cs.md) |
+[Deutsch (DE)](./about_de.md) |
+[English (EN-US)](./about_en.md) |
+[Español (ES)](./about_es.md) |
+[فارسی (FA)](./about_fa.md) |
+[Français (FR)](./about_fr.md) |
+[हिंदी (HI-IN)](./about_hi.md) |
+[Bahasa Indonesia (ID)](./about_id.md) |
+[Italiano (IT)](./about_it.md) |
+[日本語 (JA)](./about_ja.md) |
+[ქართული (KA-GE)](./about_ka.md) |
+[한국어 (KO)](./about_ko.md) |
+[Nederlands (NL)](./about_nl.md) |
+[Polski (PL)](./about_pl.md) |
+Português Brasileiro (PT-BR) |
+[Limba română (RO)](./about_ro.md) |
+[Русский (RU)](./about_ru.md) |
+[Türkçe (TR)](./about_tr.md) |
+[Українська (UK-UA)](./about_uk.md) |
+[Oʻzbekcha (UZ)](./about_uz.md) |
+[简体中文 (ZH-CN)](./about_zh.md) |
+[繁體中文 (ZH-TW)](./about_zh_TW.md) |
+
+---
+
+**Zwyka** -- aplicativo multiplataforma de código aberto para acompanhamento de hábitos, sem anúncios e sem limitações.
+O objetivo da solução é criar um aplicativo de acompanhamento de hábitos intuitivo, eficiente e inclusivo.
+Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo que ninguém fique para trás.
+
+<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
+
+### Funcionalidades
+- Hábitos
+  - Título, observações, ícone (mais de 2.000 ícones Material) e cor (da paleta ou RGB / HEX personalizado)
+  - Dias ativos da semana; os dias inativos são marcados com "—"
+  - Arquivar (desativar) um hábito: ele fica acinzentado, é exibido por último e fica oculto na Agenda
+- Calendário de hábitos (página principal)
+  - Hábitos (colunas) por dias (linhas): os últimos 66 dias mais os 5 próximos
+  - Progresso do dia por hábito: `·` iniciado, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` acima de 100%
+  - Progresso exibido como símbolos ou como retângulos coloridos
+  - Toque em uma data para marcar o dia como pulado ("—") para todos os hábitos não marcados
+  - Sequência de dias: o número de dias marcados consecutivos (os dias "—" não a interrompem)
+  - Progresso de hoje: conclusão geral dos hábitos de hoje
+- Métricas
+  - Conclusão diária (%) nos últimos 66 dias
+- Agenda (Calendário)
+  - Visualização do dia com horas, como no Google Agenda ou no Calendário do Outlook
+  - Agende um hábito para 30 minutos, 1 hora, 2 horas ou um intervalo de tempo personalizado, repetido nos dias da
+    semana selecionados, com uma nota opcional
+  - Intervalos de tempo sobrepostos são exibidos lado a lado
+  - Lembretes (notificações)
+  - Adicionar a um calendário externo (Apple, Google, Microsoft)
+- Configurações
+  - Localização
+  - Tema (sistema, claro, escuro)
+  - Início da semana, formato de data
+  - Ordem dos hábitos (por data de criação, última atualização ou título; crescente ou decrescente)
+  - Importação / Exportação de dados
+- Experiência do usuário
+  - Design responsivo e adaptável
+  - Rolagem por toque ou com o mouse: `Scroll Wheel` para os dias, `Shift` + `Scroll Wheel` para os hábitos
