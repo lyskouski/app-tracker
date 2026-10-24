@@ -155,17 +155,16 @@ jobs:
           sed -i "s/^version: .*/version: '${{ needs.release.outputs.version }}'/" snapcraft.yaml
           sudo snap install snapcraft --classic
           sudo snapcraft pack --destructive-mode --verbose
+          # Packed by root: hand it over to the runner user.
+          sudo chown "$(id -u):$(id -g)" zwyka_*.snap
           mv zwyka_*.snap zwyka_LinuxSnap.snap
+          ls -la zwyka_LinuxSnap.snap
 
+      # --clobber: a re-run replaces the already uploaded asset.
       - name: Upload Snap Artifact
-        uses: actions/upload-release-asset@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.release.outputs.upload_url }}
-          asset_path: zwyka_LinuxSnap.snap
-          asset_name: zwyka_LinuxSnap.snap
-          asset_content_type: application/vnd.snap
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "${{ github.ref_name }}" zwyka_LinuxSnap.snap --clobber
 
       # Requires the registered "zwyka" name and `snapcraft export-login` credentials.
       - name: Publish Snap
