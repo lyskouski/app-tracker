@@ -234,9 +234,9 @@ jobs:
           # flatpak-builder of Ubuntu calls appstream-compose, which is gone from the newer SDKs:
           # the builder of Flathub (org.flatpak.Builder) uses appstreamcli instead.
           flatpak install --user -y flathub org.flatpak.Builder
-          # The builder is sandboxed and has its own user installation: it installs the SDK by itself,
-          # and the result is exported into a local repository.
-          flatpak run org.flatpak.Builder --user --force-clean --install-deps-from=flathub \
+          # The builder is sandboxed and has its own user installation: it installs the SDK by itself
+          # (through a D-Bus session, absent on CI runners), and the result is exported into a local repository.
+          dbus-run-session -- flatpak run org.flatpak.Builder --user --force-clean --install-deps-from=flathub \
             --repo=repo build-dir com.tercad.zwyka.yml
           flatpak build-bundle --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo \
             repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
