@@ -193,14 +193,14 @@ importSetting:
 INSERT OR IGNORE INTO Setting(key, value)
 VALUES (?, ?);
 
-INSERT INTO Habit(id, title) VALUES (1, 'Sample 1');
-INSERT INTO Habit(id, title) VALUES (2, 'Sample 2');
-INSERT INTO Habit(id, title) VALUES (3, 'Sample 3');
-INSERT INTO Habit(id, title) VALUES (4, 'Sample 4');
+INSERT INTO Habit(id, title, icon) VALUES (1, 'Health Care', 'FitnessCenter');
+INSERT INTO Habit(id, title, icon) VALUES (2, 'Reading', 'MenuBook');
+INSERT INTO Habit(id, title, icon) VALUES (3, 'Water', 'LocalDrink');
+INSERT INTO Habit(id, title, icon) VALUES (4, 'Mental Training', 'SelfImprovement');
 
-INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-01', 'X');
-INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-02', ' ');
-INSERT INTO DayState(habitId, date, mark) VALUES (1, '2026-10-03', '/');
-INSERT INTO DayState(habitId, date, mark) VALUES (2, '2026-10-02', 'X');
-INSERT INTO DayState(habitId, date, mark) VALUES (2, '2026-10-03', 'X');
-INSERT INTO DayState(habitId, date, mark) VALUES (3, '2026-10-03', 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-3 days'), 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-2 days'), ' ');
+INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-1 day'), '/');
+INSERT INTO DayState(habitId, date, mark) VALUES (2, date('now', '-2 days'), 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (2, date('now', '-1 day'), 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (3, date('now', '-1 day'), 'X');
