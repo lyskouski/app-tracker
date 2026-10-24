@@ -1182,6 +1182,7 @@ private fun CalendarTableCell(
                     maxLines = 1,
                     softWrap = false,
                     overflow = TextOverflow.Clip,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         } else {
