@@ -152,7 +152,7 @@ jobs:
 
       - name: Build Snap
         run: |
-          sed -i "s/^version: .*/version: '${{ needs.release.outputs.version }}'/" snapcraft.yaml
+          sed -i "s/^version: .*/version: '${{ needs.release.outputs.version }}+${{ needs.release.outputs.build_number }}'/" snapcraft.yaml
           sudo snap install snapcraft --classic
           sudo snapcraft pack --destructive-mode --verbose
           # Packed by root: hand it over to the runner user.

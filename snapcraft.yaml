@@ -1,8 +1,10 @@
 name: zwyka
 base: core22
-# Replaced by the release workflow with the tag version.
-version: 1.0.0
+# Replaced by the release workflow: <tag>+<build number>.
+version: 1.0.0+1
 title: Zwyka
+# Shown in the Snap Store and app centers (512x512, exported from com.tercad.zwyka.svg).
+icon: snap/gui/zwyka.png
 summary: Open-source cross-platform habits tracking application
 description: |
   The goal of the solution is to create a habits tracking application that is intuitive, efficient,
