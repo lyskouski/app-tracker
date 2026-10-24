@@ -1,3 +1,4 @@
+import java.security.KeyStore
 import java.util.Properties
 
 plugins {
@@ -9,7 +10,8 @@ plugins {
 /*
  * Release signing: key.properties and key.jks next to this file.
  *
- * Same format as the other terCAD apps: key.password (store and key), key.alias (default "key");
+ * Same format as the other terCAD apps: key.password (store and key),
+ * key.alias (default: the only key of the store, or "key");
  * storePassword / keyPassword / keyAlias are accepted as well. key.file is ignored: key.jks is used.
  */
 val keyProperties = file("key.properties").takeIf { it.exists() }?.let { keyFile ->
@@ -48,7 +50,11 @@ android {
                     ?: error("Release signing: key.password is missing in key.properties")
                 keyPassword = keyProperty("keyPassword") ?: password
                     ?: error("Release signing: key.password is missing in key.properties")
-                keyAlias = keyProperty("keyAlias", "key.alias") ?: "key"
+                // Without an alias, the only key of the store is used.
+                keyAlias = keyProperty("keyAlias", "key.alias")
+                    ?: KeyStore.getInstance(storeFile, storePassword!!.toCharArray()).aliases().toList()
+                        .singleOrNull()
+                    ?: "key"
             }
         }
     }
