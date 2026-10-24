@@ -20,7 +20,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
 private val database by lazy {
-    val databaseFile = File(System.getProperty("user.home"), ".zwyka.db")
+    // Sandboxed packages (Snap, Flatpak) have no write access to the home folder: ZWYKA_DATA_DIR overrides it.
+    val dataDir = System.getenv("ZWYKA_DATA_DIR")?.takeIf { it.isNotBlank() }?.let(::File)?.apply { mkdirs() }
+    val databaseFile = File(dataDir ?: File(System.getProperty("user.home")), ".zwyka.db")
     Database(
         JdbcSqliteDriver(
             url = "jdbc:sqlite:${databaseFile.absolutePath}",

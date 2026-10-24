@@ -14,3 +14,10 @@ xcuserdata
 /screenshots/
 androidApp/key.jks
 androidApp/key.properties
+linux-appimage/AppDir
+linux-appimage/appimagetool
+linux-appimage/*.AppImage
+linux-appimage/*.tar.gz
+linux-flatpak/.flatpak-builder
+linux-flatpak/build-dir
+*.snap

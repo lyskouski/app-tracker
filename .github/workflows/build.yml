@@ -89,3 +89,168 @@ jobs:
           asset_path: ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
           asset_name: zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
           asset_content_type: ${{ matrix.asset_content_type }}
+
+# Linux: Compose distributable with a bundled JRE, repacked below into Snap, AppImage and Flatpak.
+  build-linux:
+    name: Create Linux build
+    permissions:
+      contents: write
+    # The oldest supported Ubuntu for a better glibc compatibility.
+    runs-on: ubuntu-22.04
+    needs: release
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Run Linux Build
+        run: |
+          ./gradlew :desktopApp:createDistributable --no-daemon \
+            -PversionName=${{ needs.release.outputs.version }}
+
+      - name: Compress Linux Package
+        run: |
+          cp $GITHUB_WORKSPACE/com.tercad.zwyka.desktop ./
+          cp $GITHUB_WORKSPACE/com.tercad.zwyka.svg ./
+          tar czf $GITHUB_WORKSPACE/zwyka_Linux.tar.gz *
+        working-directory: desktopApp/build/compose/binaries/main/app/zwyka
+
+      - name: Add Linux Artifact to Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: zwyka_Linux
+          path: zwyka_Linux.tar.gz
+
+      - name: Upload Linux Artifact
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: zwyka_Linux.tar.gz
+          asset_name: zwyka_Linux.tar.gz
+          asset_content_type: application/gzip
+
+# Linux Snap
+  build-snap:
+    name: Create Linux Snap build
+    permissions:
+      contents: write
+    runs-on: ubuntu-22.04
+    needs: [release, build-linux]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zwyka_Linux
+
+      - name: Build Snap
+        run: |
+          sed -i "s/^version: .*/version: '${{ needs.release.outputs.version }}'/" snapcraft.yaml
+          sudo snap install snapcraft --classic
+          sudo snapcraft pack --destructive-mode --verbose
+          mv zwyka_*.snap zwyka_LinuxSnap.snap
+
+      - name: Upload Snap Artifact
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: zwyka_LinuxSnap.snap
+          asset_name: zwyka_LinuxSnap.snap
+          asset_content_type: application/vnd.snap
+
+      # Requires the registered "zwyka" name and `snapcraft export-login` credentials.
+      - name: Publish Snap
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_CREDENTIALS }}
+        run: |
+          sudo --preserve-env=SNAPCRAFT_STORE_CREDENTIALS snapcraft upload zwyka_LinuxSnap.snap --release=latest/stable
+
+# Linux AppImage
+  build-appimage:
+    name: Create Linux AppImage build
+    permissions:
+      contents: write
+    runs-on: ubuntu-22.04
+    needs: [release, build-linux]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zwyka_Linux
+          path: linux-appimage
+
+      - name: Build Linux AppImage
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libfuse2
+          sh build.sh -v "${{ needs.release.outputs.version }}"
+        working-directory: linux-appimage
+
+      - name: Upload AppImage Artifact
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: linux-appimage/Zwyka-${{ needs.release.outputs.version }}-x86_64.AppImage
+          asset_name: Zwyka-${{ needs.release.outputs.version }}-x86_64.AppImage
+          asset_content_type: application/vnd.appimage
+
+# Linux Flatpak
+  build-flatpak:
+    name: Create Linux Flatpak build
+    permissions:
+      contents: write
+    runs-on: ubuntu-22.04
+    needs: [release, build-linux]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: zwyka_Linux
+
+      - name: Patch Manifest
+        run: |
+          sh patch.sh -v "${{ needs.release.outputs.version }}" \
+            -s $(sha256sum $GITHUB_WORKSPACE/zwyka_Linux.tar.gz | gawk '{ print $1 }')
+        working-directory: linux-flatpak
+
+      - name: Build Linux Flatpak
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak flatpak-builder appstream-util
+          appstream-util validate-relax com.tercad.zwyka.metainfo.xml
+          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          sudo flatpak install flathub org.gnome.Platform//51 org.gnome.Sdk//51 -y
+          sudo flatpak-builder --install build-dir com.tercad.zwyka.yml
+          sudo flatpak build-bundle /var/lib/flatpak/repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
+        working-directory: linux-flatpak
+
+      - name: Store Configs for github.com/flathub
+        uses: actions/upload-artifact@v4
+        with:
+          name: flatpak-configs
+          path: |
+            linux-flatpak/com.tercad.zwyka.metainfo.xml
+            linux-flatpak/com.tercad.zwyka.yml
+
+      - name: Upload Flatpak Artifact
+        uses: actions/upload-release-asset@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: linux-flatpak/zwyka_LinuxFlatpak.flatpak
+          asset_name: zwyka_LinuxFlatpak.flatpak
+          asset_content_type: application/vnd.flatpak

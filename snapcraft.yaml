@@ -1,0 +1,50 @@
+name: zwyka
+base: core22
+# Replaced by the release workflow with the tag version.
+version: 1.0.0
+title: Zwyka
+summary: Open-source cross-platform habits tracking application
+description: |
+  The goal of the solution is to create a habits tracking application that is intuitive, efficient,
+  and inclusive. That empowers users to effortlessly manage their habits while ensuring that no one is left behind.
+
+license: CC-BY-NC-ND-4.0
+website: https://github.com/lyskouski/app-tracker
+source-code: https://github.com/lyskouski/app-tracker
+issues: https://github.com/lyskouski/app-tracker/issues
+contact: support@tercad.pl
+
+grade: stable
+confinement: strict
+architectures:
+  - build-on: amd64
+
+apps:
+  zwyka:
+    command: zwyka/bin/zwyka
+    desktop: com.tercad.zwyka.desktop
+    extensions: [gnome]
+    plugs: [home, desktop, desktop-legacy, network, opengl, x11, wayland, unity7]
+    environment:
+      # Hidden files in the home folder are not writable under strict confinement.
+      ZWYKA_DATA_DIR: $SNAP_USER_COMMON
+
+parts:
+  zwyka:
+    # Prebuilt by `./gradlew :desktopApp:createDistributable` and packed into zwyka_Linux.tar.gz.
+    plugin: dump
+    source: zwyka_Linux.tar.gz
+    source-type: tar
+    organize:
+      'bin': zwyka/bin
+      'lib': zwyka/lib
+    stage-packages:
+      - libxi6
+      - libxrender1
+      - libxtst6
+      - libgl1
+      - libfreetype6
+      - libfontconfig1
+    override-prime: |
+      craftctl default
+      sed -i 's|^Icon=.*|Icon=${SNAP}/com.tercad.zwyka.svg|' com.tercad.zwyka.desktop

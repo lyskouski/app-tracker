@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Zwyka
+Comment=Open-source cross-platform habits tracking application
+Categories=Utility;
+Keywords=Habits;Tracker;Streak;Routine;Schedule;Reminders;Goals;
+Icon=com.tercad.zwyka
+Exec=zwyka
+StartupWMClass=com-tercad-zwyka-MainKt
+X-Purism-FormFactor=Workstation;Mobile;
+X-KDE-FormFactors=desktop;tablet;handset;mediacenter;
