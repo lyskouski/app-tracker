@@ -26,6 +26,7 @@ one is left behind.
 - Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
   `▣` over 100%.
 - Today's row is highlighted, and a separator marks the start of each week.
+- Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" days don't break it).
 - **Today's progress**: the top-left corner shows the overall completion of today's habits 
   as a progress bar around the cell, with the percentage in the middle.

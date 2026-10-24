@@ -82,6 +82,7 @@ fun CalendarTable(
     onDayStateClick: (DayState) -> Unit,
     onHabitClick: (Habit) -> Unit,
     onProgressClick: () -> Unit = {},
+    onDateClick: (String) -> Unit = {},
     today: String? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
     dateFormat: DateFormat = DateFormat.YYYY_MM_DD,
@@ -492,6 +493,7 @@ fun CalendarTable(
                     habits = habits,
                     weekStartDates = weekStartDates,
                     dateFormat = dateFormat,
+                    onDateClick = onDateClick,
                 )
             }
 
@@ -746,6 +748,7 @@ private fun CalendarFirstColumnViewport(
     habits: List<Habit>,
     weekStartDates: Set<String>,
     dateFormat: DateFormat,
+    onDateClick: (String) -> Unit,
 ) {
     val monthNames = stringArrayResource(Res.array.months_short)
     val firstVisibleRow =
@@ -791,6 +794,7 @@ private fun CalendarFirstColumnViewport(
                         left = true,
                         right = habits.isEmpty(),
                     ).then(weekStartLine(dates[row] in weekStartDates)),
+                    modifier = Modifier.clickable { onDateClick(dates[row]) },
                 )
             }
         },

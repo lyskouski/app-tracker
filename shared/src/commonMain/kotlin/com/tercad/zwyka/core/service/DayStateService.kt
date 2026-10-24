@@ -4,6 +4,7 @@
 package com.tercad.zwyka.core.service
 
 import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.INACTIVE_MARK
 import com.tercad.zwyka.core.repository.DayStateRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 
@@ -18,5 +19,19 @@ class DayStateService(
     suspend fun setMark(state: DayState) {
         dayStates.upsert(state)
         habits.touch(state.habitId)
+    }
+
+    /**
+     * Marks [date] as skipped ("—") for the habits without a mark on it;
+     * existing marks are kept.
+     *
+     * @return the added day states.
+     */
+    suspend fun skipDay(date: String, habitIds: List<Long>): List<DayState> {
+        val marked = dayStates.getRange(date, date).mapTo(HashSet()) { it.habitId }
+        return habitIds
+            .filterNot { it in marked }
+            .map { DayState(habitId = it, date = date, mark = INACTIVE_MARK) }
+            .onEach { setMark(it) }
     }
 }

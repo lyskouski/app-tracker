@@ -46,6 +46,7 @@ import kotlin.time.Clock
 
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
@@ -214,6 +215,30 @@ private fun HomePageContent(
                     completenessType = settingsStore.current.completenessType,
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
+                    onDateClick = { date ->
+                        coroutineScope.launch {
+                            try {
+                                // Days before the habit creation are not part of it.
+                                val skipped = services.dayStates.skipDay(
+                                    date,
+                                    current.habits
+                                        .filterNot { it.isBeforeCreation(date, null) }
+                                        .map { it.id },
+                                )
+                                if (skipped.isNotEmpty()) {
+                                    state = current.copy(
+                                        // Reloaded: `updatedAt` of the habits has changed.
+                                        habits = services.habits.getAll(),
+                                        dayStates = current.dayStates + skipped,
+                                    )
+                                }
+                            } catch (error: CancellationException) {
+                                throw error
+                            } catch (error: Exception) {
+                                state = HomePageState.Failed(error.message)
+                            }
+                        }
+                    },
                     onProgressClick = {
                         navigator.push(MetricsPage(current.habits, current.dayStates, today))
                     },
