@@ -9,6 +9,7 @@
     <string name="habit_name">Nome do hábito</string>
     <string name="habit_remarks">Observações</string>
     <string name="active_days">Dias ativos</string>
+    <string name="archive_habit">Arquivar/desativar hábito</string>
     <string name="save">Salvar</string>
     <string name="cancel">Cancelar</string>
     <string name="no_icon">Sem ícone</string>

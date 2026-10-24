@@ -73,6 +73,8 @@ import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 
+/** Opacity of the archived habits in the header. */
+private const val ARCHIVED_ALPHA = 0.38f
 
 @Composable
 fun CalendarTable(
@@ -101,8 +103,13 @@ fun CalendarTable(
      *
      *     habitId + date
      *
+     *
+     * Marks of archived habits are not shown.
      */
-    val marks = remember(dayState) { dayState.toMarks() }
+    val marks = remember(dayState, habits) {
+        val archivedIds = habits.filter { it.isArchived }.mapTo(HashSet()) { it.id }
+        dayState.filterNot { it.habitId in archivedIds }.toMarks()
+    }
 
     /*
      * Day Streak per habit, keyed by the free cell right after the streak.
@@ -661,8 +668,11 @@ private fun CalendarHeaderViewport(
             ) {
                 val habit = habits[column]
                 val icon = applicationIcon(habit.icon)
-                val iconTint =
+                val iconTint = if (habit.isArchived) {
+                    currentColorScheme().onSurface.copy(alpha = ARCHIVED_ALPHA)
+                } else {
                     applicationColor(habit.color) ?: currentColorScheme().onSurface
+                }
 
                 CalendarTableCell(
                     text = if (icon == null) "?" else "",
@@ -955,13 +965,15 @@ private fun CalendarBodyViewport(
                             date = date,
                         )
                     val beforeCreation = habit.isBeforeCreation(date, marks[key])
-                    val backgroundColor = if (beforeCreation) {
+                    val backgroundColor = if (habit.isArchived) {
+                        currentColorScheme().surfaceVariant
+                    } else if (beforeCreation) {
                         currentColorScheme().background
                     } else {
                         applicationColor(habit.color)?.copy(alpha = 0.05f)
                             ?: currentColorScheme().surface
                     }
-                    val value = displayedMark(habit, date, marks, today)
+                    val value = if (habit.isArchived) " " else displayedMark(habit, date, marks, today)
                     // A single day is not a streak yet.
                     val streak = streaks[key]?.takeIf { it > 1 }
                     val status = marks[key]
@@ -988,7 +1000,7 @@ private fun CalendarBodyViewport(
                             right = column == habits.lastIndex,
                         ).then(weekStartLine(date in weekStartDates)),
                         modifier = Modifier
-                            .clickable {
+                            .clickable(enabled = !habit.isArchived) {
                                 onDayStateClick(
                                     DayState(
                                         habitId = habit.id,

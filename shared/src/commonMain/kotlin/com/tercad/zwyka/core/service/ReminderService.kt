@@ -41,7 +41,8 @@ class ReminderService(
     }
 
     private suspend fun buildReminders(): List<Reminder> {
-        val habitTitles = habits.getAll().associate { it.id to it.title }
+        // Archived habits are deactivated: no reminders.
+        val habitTitles = habits.getAll().filterNot { it.isArchived }.associate { it.id to it.title }
         val intentTitles = intents.getAll().associate { it.id to it.title }
         return habitTimes.getAll()
             .filter { it.notify }

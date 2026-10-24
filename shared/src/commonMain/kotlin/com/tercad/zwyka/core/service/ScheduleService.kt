@@ -30,11 +30,16 @@ class ScheduleService(
     private val habitService: HabitService,
     private val reminders: ReminderService,
 ) {
-    suspend fun load(): Schedule = Schedule(
-        habits = habitService.getAll(),
-        intents = intents.getAll(),
-        habitTimes = habitTimes.getAll(),
-    )
+    /** Archived habits and their time ranges are hidden. */
+    suspend fun load(): Schedule {
+        val (archived, habits) = habitService.getAll().partition { it.isArchived }
+        val archivedIds = archived.mapTo(HashSet()) { it.id }
+        return Schedule(
+            habits = habits,
+            intents = intents.getAll(),
+            habitTimes = habitTimes.getAll().filterNot { it.habitId in archivedIds },
+        )
+    }
 
     /**
      * Creates ([existing] is null) or updates a time range; a new intent is created on demand.

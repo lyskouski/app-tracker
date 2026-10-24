@@ -33,5 +33,9 @@ fun List<Habit>.sortedBy(orderBy: HabitOrderBy, direction: SortDirection): List<
         HabitOrderBy.TITLE -> compareBy<Habit, String>(String.CASE_INSENSITIVE_ORDER) { it.title }
             .thenBy { it.id }
     }
-    return sortedWith(if (direction == SortDirection.DESC) comparator.reversed() else comparator)
+    // Archived habits always go last, regardless of the direction.
+    return sortedWith(
+        compareBy<Habit> { it.isArchived }
+            .then(if (direction == SortDirection.DESC) comparator.reversed() else comparator),
+    )
 }

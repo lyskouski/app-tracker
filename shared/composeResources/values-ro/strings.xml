@@ -9,6 +9,7 @@
     <string name="habit_name">Numele obiceiului</string>
     <string name="habit_remarks">Observații</string>
     <string name="active_days">Zile active</string>
+    <string name="archive_habit">Arhivează/dezactivează obiceiul</string>
     <string name="save">Salvează</string>
     <string name="cancel">Anulează</string>
     <string name="no_icon">Fără pictogramă</string>

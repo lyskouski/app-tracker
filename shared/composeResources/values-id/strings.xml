@@ -9,6 +9,7 @@
     <string name="habit_name">Nama kebiasaan</string>
     <string name="habit_remarks">Catatan</string>
     <string name="active_days">Hari aktif</string>
+    <string name="archive_habit">Arsipkan/nonaktifkan kebiasaan</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="no_icon">Tanpa ikon</string>

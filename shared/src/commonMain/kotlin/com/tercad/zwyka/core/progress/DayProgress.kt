@@ -18,7 +18,7 @@ import com.tercad.zwyka.defines.statusProgress
  *
  * Each status mark contributes by its percentage ("·" = 0%, "X" = 100%),
  * values over 100% are capped. Habits marked with "—", unmarked inactive
- * days and days before the habit creation are skipped.
+ * days, days before the habit creation and archived habits are skipped.
  */
 fun calculateDayProgress(
     habits: List<Habit>,
@@ -30,6 +30,7 @@ fun calculateDayProgress(
     val values = habits.mapNotNull { habit ->
         val mark = marks[CellKey(habitId = habit.id, date = date)]
         when {
+            habit.isArchived -> null
             mark == INACTIVE_MARK -> null
             mark == null && !habit.isActiveOn(dayOfWeek) -> null
             habit.isBeforeCreation(date, mark) -> null

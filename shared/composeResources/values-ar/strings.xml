@@ -9,6 +9,7 @@
     <string name="habit_name">اسم العادة</string>
     <string name="habit_remarks">ملاحظات</string>
     <string name="active_days">الأيام النشطة</string>
+    <string name="archive_habit">أرشفة/إلغاء تفعيل العادة</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
     <string name="no_icon">بلا أيقونة</string>

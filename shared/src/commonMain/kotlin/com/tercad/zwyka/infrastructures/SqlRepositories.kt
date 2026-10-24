@@ -30,17 +30,23 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
     private val queries get() = database.databaseQueries
 
     override suspend fun getAll(): List<Habit> =
-        queries.selectAllHabits { id, title, icon, color, remarks, createdAt, updatedAt, activeDays ->
-            Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays.toInt())
+        queries.selectAllHabits { id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived ->
+            Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays.toInt(), isArchived != 0L)
         }.awaitAsList()
 
     override suspend fun insert(draft: HabitDraft): Long {
-        queries.insertHabit(draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong())
+        queries.insertHabit(
+            draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
+            if (draft.isArchived) 1L else 0L,
+        )
         return queries.selectLastHabitId().awaitAsOne().max ?: error("Habit was not created")
     }
 
     override suspend fun update(id: Long, draft: HabitDraft) {
-        queries.updateHabit(draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(), id)
+        queries.updateHabit(
+            draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
+            if (draft.isArchived) 1L else 0L, id,
+        )
     }
 
     override suspend fun updateActiveDays(id: Long, activeDays: Int) {
@@ -181,7 +187,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
                     listOf(
                         "id" to it.id, "title" to it.title, "icon" to it.icon, "color" to it.color,
                         "remarks" to it.remarks, "createdAt" to it.createdAt, "updatedAt" to it.updatedAt,
-                        "activeDays" to it.activeDays,
+                        "activeDays" to it.activeDays, "isArchived" to it.isArchived,
                     ),
                 ),
             )
@@ -234,6 +240,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
         "Habit" -> queries.importHabit(
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
             long("createdAt", 0), long("updatedAt", 0), long("activeDays", ALL_DAYS.toLong()),
+            long("isArchived", 0),
         )
         "Intent" -> queries.importIntent(
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),

@@ -16,6 +16,8 @@ data class Habit(
     val createdAt: Long = 0,
     val updatedAt: Long = 0,
     val activeDays: Int = ALL_DAYS,
+    /** Deactivated: shown last in the calendar, without marks. */
+    val isArchived: Boolean = false,
 )
 
 /** Bitmask of active weekdays: bit 0 is Monday ... bit 6 is Sunday. */

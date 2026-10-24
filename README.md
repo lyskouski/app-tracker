@@ -27,6 +27,7 @@ one is left behind.
   `▣` over 100%.
 - Today's row is highlighted, and a separator marks the start of each week.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
+- Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
 - **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" days don't break it).
 - **Today's progress**: the top-left corner shows the overall completion of today's habits 
   as a progress bar around the cell, with the percentage in the middle.
@@ -40,6 +41,7 @@ one is left behind.
 - Tap a time slot to schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom start 
   and end time, repeated on the selected days of the week, with an optional note.
 - Overlapping time ranges are shown side by side; tap a range to edit or delete it.
+- Archived (deactivated) habits and their time ranges are hidden.
 - Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
   `iOS` allows max 9 daily reminders per day)
 - Add to external calendar (Apple, Google, Microsoft)

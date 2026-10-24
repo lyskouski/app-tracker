@@ -9,6 +9,7 @@
     <string name="habit_name">Назва звички</string>
     <string name="habit_remarks">Примітки</string>
     <string name="active_days">Активні дні</string>
+    <string name="archive_habit">Архівувати/деактивувати звичку</string>
     <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
     <string name="no_icon">Без значка</string>

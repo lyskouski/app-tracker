@@ -6,7 +6,9 @@ CREATE TABLE Habit (
     remarks TEXT,
     createdAt INTEGER NOT NULL DEFAULT 0,
     updatedAt INTEGER NOT NULL DEFAULT 0,
-    activeDays INTEGER NOT NULL DEFAULT 127
+    activeDays INTEGER NOT NULL DEFAULT 127,
+    -- 1: archived (deactivated), shown last in the calendar without marks.
+    isArchived INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE DayState (
@@ -68,8 +70,8 @@ FROM Habit
 ORDER BY id;
 
 insertHabit:
-INSERT INTO Habit(title, icon, color, remarks, activeDays, createdAt, updatedAt)
-VALUES (?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
+INSERT INTO Habit(title, icon, color, remarks, activeDays, isArchived, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
 
 selectLastHabitId:
 SELECT max(id)
@@ -77,7 +79,7 @@ FROM Habit;
 
 updateHabit:
 UPDATE Habit
-SET title = ?, icon = ?, color = ?, remarks = ?, activeDays = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
+SET title = ?, icon = ?, color = ?, remarks = ?, activeDays = ?, isArchived = ?, updatedAt = CAST(strftime('%s', 'now') AS INTEGER) * 1000
 WHERE id = ?;
 
 updateHabitActiveDays:
@@ -174,8 +176,8 @@ FROM HabitTime
 ORDER BY id;
 
 importHabit:
-INSERT OR IGNORE INTO Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+INSERT OR IGNORE INTO Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 importIntent:
 INSERT OR IGNORE INTO Intent(id, title, icon, color, remarks, createdAt, updatedAt, activeDays)

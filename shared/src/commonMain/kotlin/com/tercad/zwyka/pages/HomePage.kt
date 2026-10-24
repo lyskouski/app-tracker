@@ -222,7 +222,7 @@ private fun HomePageContent(
                                 val skipped = services.dayStates.skipDay(
                                     date,
                                     current.habits
-                                        .filterNot { it.isBeforeCreation(date, null) }
+                                        .filterNot { it.isArchived || it.isBeforeCreation(date, null) }
                                         .map { it.id },
                                 )
                                 if (skipped.isNotEmpty()) {
@@ -264,14 +264,14 @@ private fun HomePageContent(
                         showHabitDialog = false
                         editingHabit = null
                     },
-                    onSave = { title, icon, color, remarks, activeDays ->
+                    onSave = { title, icon, color, remarks, activeDays, isArchived ->
                         isHabitSaving = true
                         habitError = null
                         coroutineScope.launch {
                             try {
                                 val habits = services.habits.save(
                                     id = habitToEdit?.id,
-                                    draft = HabitDraft(title, icon, color, remarks, activeDays),
+                                    draft = HabitDraft(title, icon, color, remarks, activeDays, isArchived),
                                     weekStart = settingsStore.current.weekStart,
                                 )
                                 val dayStates = services.dayStates.getRange(dates.first(), dates.last())

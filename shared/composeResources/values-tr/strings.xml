@@ -9,6 +9,7 @@
     <string name="habit_name">Alışkanlık adı</string>
     <string name="habit_remarks">Notlar</string>
     <string name="active_days">Aktif günler</string>
+    <string name="archive_habit">Alışkanlığı arşivle/devre dışı bırak</string>
     <string name="save">Kaydet</string>
     <string name="cancel">İptal</string>
     <string name="no_icon">Simge yok</string>

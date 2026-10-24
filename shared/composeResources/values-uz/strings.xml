@@ -9,6 +9,7 @@
     <string name="habit_name">Odat nomi</string>
     <string name="habit_remarks">Izohlar</string>
     <string name="active_days">Faol kunlar</string>
+    <string name="archive_habit">Odatni arxivlash/o‘chirish</string>
     <string name="save">Saqlash</string>
     <string name="cancel">Bekor qilish</string>
     <string name="no_icon">Belgisiz</string>

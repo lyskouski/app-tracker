@@ -9,6 +9,7 @@
     <string name="habit_name">ჩვევის სახელი</string>
     <string name="habit_remarks">შენიშვნები</string>
     <string name="active_days">აქტიური დღეები</string>
+    <string name="archive_habit">ჩვევის დაარქივება/დეაქტივაცია</string>
     <string name="save">შენახვა</string>
     <string name="cancel">გაუქმება</string>
     <string name="no_icon">ხატულის გარეშე</string>

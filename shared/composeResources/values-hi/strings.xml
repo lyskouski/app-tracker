@@ -9,6 +9,7 @@
     <string name="habit_name">आदत का नाम</string>
     <string name="habit_remarks">टिप्पणियाँ</string>
     <string name="active_days">सक्रिय दिन</string>
+    <string name="archive_habit">आदत संग्रहित/निष्क्रिय करें</string>
     <string name="save">सहेजें</string>
     <string name="cancel">रद्द करें</string>
     <string name="no_icon">कोई आइकन नहीं</string>

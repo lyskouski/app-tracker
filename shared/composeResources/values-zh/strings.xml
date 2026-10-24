@@ -9,6 +9,7 @@
     <string name="habit_name">习惯名称</string>
     <string name="habit_remarks">备注</string>
     <string name="active_days">活跃日</string>
+    <string name="archive_habit">归档/停用习惯</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="no_icon">无图标</string>

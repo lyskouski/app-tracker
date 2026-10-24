@@ -10,6 +10,7 @@ data class HabitDraft(
     val color: String?,
     val remarks: String?,
     val activeDays: Int,
+    val isArchived: Boolean = false,
 )
 
 /** Editable fields of a [HabitTime]. */

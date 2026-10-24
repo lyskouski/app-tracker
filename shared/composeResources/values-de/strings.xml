@@ -9,6 +9,7 @@
     <string name="habit_name">Name der Gewohnheit</string>
     <string name="habit_remarks">Anmerkungen</string>
     <string name="active_days">Aktive Tage</string>
+    <string name="archive_habit">Gewohnheit archivieren/deaktivieren</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="no_icon">Kein Symbol</string>

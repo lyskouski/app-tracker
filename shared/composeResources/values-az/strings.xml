@@ -9,6 +9,7 @@
     <string name="habit_name">Vərdişin adı</string>
     <string name="habit_remarks">Qeydlər</string>
     <string name="active_days">Aktiv günlər</string>
+    <string name="archive_habit">Vərdişi arxivləşdir/deaktiv et</string>
     <string name="save">Yadda saxla</string>
     <string name="cancel">Ləğv et</string>
     <string name="no_icon">İkon yoxdur</string>

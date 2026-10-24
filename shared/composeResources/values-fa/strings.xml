@@ -9,6 +9,7 @@
     <string name="habit_name">نام عادت</string>
     <string name="habit_remarks">یادداشت‌ها</string>
     <string name="active_days">روزهای فعال</string>
+    <string name="archive_habit">بایگانی/غیرفعال‌سازی عادت</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
     <string name="no_icon">بدون نماد</string>

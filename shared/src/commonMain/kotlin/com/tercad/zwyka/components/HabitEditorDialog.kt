@@ -25,6 +25,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
@@ -58,6 +59,7 @@ import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.active_days
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.add_habit_failed
+import com.tercad.zwyka.resources.archive_habit
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.color_value
@@ -82,7 +84,14 @@ fun HabitEditorDialog(
     isSaving: Boolean,
     error: String?,
     onDismiss: () -> Unit,
-    onSave: (title: String, icon: String?, color: String?, remarks: String?, activeDays: Int) -> Unit,
+    onSave: (
+        title: String,
+        icon: String?,
+        color: String?,
+        remarks: String?,
+        activeDays: Int,
+        isArchived: Boolean,
+    ) -> Unit,
     onDelete: (() -> Unit)? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
 ) {
@@ -91,6 +100,7 @@ fun HabitEditorDialog(
     var color by remember(habit?.id) { mutableStateOf(habit?.color) }
     var remarks by remember(habit?.id) { mutableStateOf(habit?.remarks.orEmpty()) }
     var activeDays by remember(habit?.id) { mutableStateOf(habit?.activeDays ?: ALL_DAYS) }
+    var isArchived by remember(habit?.id) { mutableStateOf(habit?.isArchived ?: false) }
     var iconSearch by remember(habit?.id) { mutableStateOf("") }
     var colorInput by remember(habit?.id) { mutableStateOf(habit?.color.orEmpty()) }
     var selectingIcon by remember(habit?.id) { mutableStateOf(false) }
@@ -336,6 +346,17 @@ fun HabitEditorDialog(
                                     ?: stringResource(Res.string.no_icon),
                             )
                         }
+                        Row(
+                            modifier = Modifier.clickable(enabled = !isSaving) { isArchived = !isArchived },
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Checkbox(
+                                checked = isArchived,
+                                onCheckedChange = { isArchived = it },
+                                enabled = !isSaving,
+                            )
+                            Text(stringResource(Res.string.archive_habit))
+                        }
                         error?.let {
                             Text(
                                 stringResource(
@@ -386,7 +407,14 @@ fun HabitEditorDialog(
                                     color = normalizedColor
                                     selectingColor = false
                                 }
-                                else -> onSave(title.trim(), icon, color, remarks.trim().ifEmpty { null }, activeDays)
+                                else -> onSave(
+                                    title.trim(),
+                                    icon,
+                                    color,
+                                    remarks.trim().ifEmpty { null },
+                                    activeDays,
+                                    isArchived,
+                                )
                             }
                         },
                         enabled = canSave,

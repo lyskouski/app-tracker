@@ -9,6 +9,7 @@
     <string name="habit_name">Naam van gewoonte</string>
     <string name="habit_remarks">Opmerkingen</string>
     <string name="active_days">Actieve dagen</string>
+    <string name="archive_habit">Gewoonte archiveren/deactiveren</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleren</string>
     <string name="no_icon">Geen pictogram</string>
