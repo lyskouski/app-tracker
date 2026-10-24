@@ -228,12 +228,14 @@ jobs:
       - name: Build Linux Flatpak
         run: |
           sudo apt-get update
-          sudo apt-get install -y flatpak flatpak-builder appstream-util
+          sudo apt-get install -y flatpak appstream-util
           appstream-util validate-relax com.tercad.zwyka.metainfo.xml
-          sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-          sudo flatpak install flathub org.gnome.Platform//51 org.gnome.Sdk//51 -y
-          sudo flatpak-builder --install build-dir com.tercad.zwyka.yml
-          sudo flatpak build-bundle /var/lib/flatpak/repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
+          flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          # flatpak-builder of Ubuntu calls appstream-compose, which is gone from the newer SDKs:
+          # the builder of Flathub (org.flatpak.Builder) uses appstreamcli instead.
+          flatpak install --user -y flathub org.flatpak.Builder org.gnome.Platform//51 org.gnome.Sdk//51
+          flatpak run org.flatpak.Builder --user --install --force-clean build-dir com.tercad.zwyka.yml
+          flatpak build-bundle ~/.local/share/flatpak/repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
         working-directory: linux-flatpak
 
       - name: Store Configs for github.com/flathub
