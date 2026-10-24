@@ -233,9 +233,13 @@ jobs:
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           # flatpak-builder of Ubuntu calls appstream-compose, which is gone from the newer SDKs:
           # the builder of Flathub (org.flatpak.Builder) uses appstreamcli instead.
-          flatpak install --user -y flathub org.flatpak.Builder org.gnome.Platform//51 org.gnome.Sdk//51
-          flatpak run org.flatpak.Builder --user --install --force-clean build-dir com.tercad.zwyka.yml
-          flatpak build-bundle ~/.local/share/flatpak/repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
+          flatpak install --user -y flathub org.flatpak.Builder
+          # The builder is sandboxed and has its own user installation: it installs the SDK by itself,
+          # and the result is exported into a local repository.
+          flatpak run org.flatpak.Builder --user --force-clean --install-deps-from=flathub \
+            --repo=repo build-dir com.tercad.zwyka.yml
+          flatpak build-bundle --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo \
+            repo zwyka_LinuxFlatpak.flatpak com.tercad.zwyka
         working-directory: linux-flatpak
 
       - name: Store Configs for github.com/flathub

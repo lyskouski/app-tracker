@@ -21,3 +21,4 @@ linux-appimage/*.tar.gz
 linux-flatpak/.flatpak-builder
 linux-flatpak/build-dir
 *.snap
+linux-flatpak/repo
