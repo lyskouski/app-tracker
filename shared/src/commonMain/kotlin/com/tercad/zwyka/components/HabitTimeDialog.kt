@@ -358,48 +358,46 @@ fun HabitTimeDialog(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (habitTime != null && onDelete != null) {
-                    TextButton(
-                        onClick = onDelete,
-                        enabled = !isSaving,
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().error,
-                        ),
-                    ) {
-                        Text(stringResource(Res.string.delete))
-                    }
-                } else {
-                    Spacer(Modifier)
-                }
                 Row {
                     TextButton(onClick = onDismiss, enabled = !isSaving) {
                         Text(stringResource(Res.string.cancel))
                     }
-                    TextButton(
-                        onClick = {
-                            val id = habitId
-                            val owner = if (id != null) {
-                                HabitTimeOwner.OfHabit(id)
-                            } else {
-                                HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
-                            }
-                            if (timeStart != null && timeEnd != null) {
-                                onSave(
-                                    HabitTimeDraft(
-                                        owner = owner,
-                                        timeStart = timeStart,
-                                        timeEnd = timeEnd,
-                                        note = note.trim().ifEmpty { null },
-                                        activeDays = activeDays,
-                                        notify = notify,
-                                    ),
-                                )
-                            }
-                        },
-                        enabled = canSave,
-                    ) {
-                        Text(stringResource(Res.string.save))
+                    if (habitTime != null && onDelete != null) {
+                        TextButton(
+                            onClick = onDelete,
+                            enabled = !isSaving,
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = currentColorScheme().error,
+                            ),
+                        ) {
+                            Text(stringResource(Res.string.delete))
+                        }
                     }
+                }
+                TextButton(
+                    onClick = {
+                        val id = habitId
+                        val owner = if (id != null) {
+                            HabitTimeOwner.OfHabit(id)
+                        } else {
+                            HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
+                        }
+                        if (timeStart != null && timeEnd != null) {
+                            onSave(
+                                HabitTimeDraft(
+                                    owner = owner,
+                                    timeStart = timeStart,
+                                    timeEnd = timeEnd,
+                                    note = note.trim().ifEmpty { null },
+                                    activeDays = activeDays,
+                                    notify = notify,
+                                ),
+                            )
+                        }
+                    },
+                    enabled = canSave,
+                ) {
+                    Text(stringResource(Res.string.save))
                 }
             }
         },

@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -383,19 +382,6 @@ fun HabitEditorDialog(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (habit != null && onDelete != null && !selectingIcon && !selectingColor) {
-                    TextButton(
-                        onClick = { confirmingDelete = true },
-                        enabled = !isSaving,
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().error,
-                        ),
-                    ) {
-                        Text(stringResource(Res.string.delete_habit))
-                    }
-                } else {
-                    Spacer(Modifier)
-                }
                 Row {
                     TextButton(
                         onClick = onDismiss,
@@ -403,32 +389,43 @@ fun HabitEditorDialog(
                     ) {
                         Text(stringResource(Res.string.cancel))
                     }
-                    TextButton(
-                        onClick = {
-                            when {
-                                selectingIcon -> selectingIcon = false
-                                selectingColor -> {
-                                    color = normalizedColor
-                                    selectingColor = false
-                                }
-                                else -> onSave(
-                                    title.trim(),
-                                    icon,
-                                    color,
-                                    remarks.trim().ifEmpty { null },
-                                    activeDays,
-                                    isArchived,
-                                )
-                            }
-                        },
-                        enabled = canSave,
-                    ) {
-                        Text(
-                            stringResource(
-                                if (selectingIcon) Res.string.back else Res.string.save,
+                    if (habit != null && onDelete != null && !selectingIcon && !selectingColor) {
+                        TextButton(
+                            onClick = { confirmingDelete = true },
+                            enabled = !isSaving,
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = currentColorScheme().error,
                             ),
-                        )
+                        ) {
+                            Text(stringResource(Res.string.delete_habit))
+                        }
                     }
+                }
+                TextButton(
+                    onClick = {
+                        when {
+                            selectingIcon -> selectingIcon = false
+                            selectingColor -> {
+                                color = normalizedColor
+                                selectingColor = false
+                            }
+                            else -> onSave(
+                                title.trim(),
+                                icon,
+                                color,
+                                remarks.trim().ifEmpty { null },
+                                activeDays,
+                                isArchived,
+                            )
+                        }
+                    },
+                    enabled = canSave,
+                ) {
+                    Text(
+                        stringResource(
+                            if (selectingIcon) Res.string.back else Res.string.save,
+                        ),
+                    )
                 }
             }
         },
