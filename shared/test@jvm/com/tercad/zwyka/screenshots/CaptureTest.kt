@@ -30,6 +30,8 @@ import com.tercad.zwyka.resources.completeness_colors
 import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.max_streak
 import com.tercad.zwyka.resources.settings
+import com.tercad.zwyka.resources.timer
+import com.tercad.zwyka.resources.timer_next_events
 import io.github.lyskouski.screenshot.ScreenshotGenerator
 import io.github.lyskouski.screenshot.ScreenshotScope
 import io.github.lyskouski.screenshot.ScreenshotTarget
@@ -94,6 +96,13 @@ class CaptureTest {
             // The day states of the habit load after the page is shown.
             val maxStreak = getString(Res.string.max_streak, "").trim()
             waitUntil { onAllNodesWithText(maxStreak, substring = true).fetchSemanticsNodes().isNotEmpty() }
+        }
+        gen.inject("8_timer") {
+            openCalendar()
+            onNodeWithText(getString(Res.string.timer)).performClick()
+            // The schedule loads after the page is shown.
+            val nextEvents = getString(Res.string.timer_next_events)
+            waitUntil { onAllNodesWithText(nextEvents).fetchSemanticsNodes().isNotEmpty() }
         }
         gen.run()
     }
