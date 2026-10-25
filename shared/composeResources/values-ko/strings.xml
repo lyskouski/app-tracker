@@ -36,6 +36,7 @@
     <string name="delete_habit">삭제</string>
     <string name="delete_habit_confirmation">습관을 삭제할까요?</string>
     <string name="delete_habit_confirmation_message">“%1$s” 및 기록된 모든 날짜 상태를 삭제할까요?</string>
+    <string name="delete_day_state_confirmation">상태를 삭제하시겠습니까?</string>
     <string name="habit_update_failed">습관을 업데이트할 수 없습니다: %1$s</string>
     <string name="settings">설정</string>
     <string name="language">언어</string>

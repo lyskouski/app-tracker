@@ -36,6 +36,7 @@
     <string name="delete_habit">Excluir</string>
     <string name="delete_habit_confirmation">Excluir hábito?</string>
     <string name="delete_habit_confirmation_message">Excluir “%1$s” e todos os estados de dias registrados?</string>
+    <string name="delete_day_state_confirmation">Tem certeza de que deseja excluir o estado?</string>
     <string name="habit_update_failed">Não foi possível atualizar o hábito: %1$s</string>
     <string name="settings">Configurações</string>
     <string name="language">Idioma</string>

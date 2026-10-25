@@ -36,6 +36,7 @@
     <string name="delete_habit">Sil</string>
     <string name="delete_habit_confirmation">Vərdiş silinsin?</string>
     <string name="delete_habit_confirmation_message">“%1$s” və onun bütün qeydə alınmış gün vəziyyətləri silinsin?</string>
+    <string name="delete_day_state_confirmation">Vəziyyəti silmək istədiyinizə əminsiniz?</string>
     <string name="habit_update_failed">Vərdişi yeniləmək mümkün olmadı: %1$s</string>
     <string name="settings">Ayarlar</string>
     <string name="language">Dil</string>

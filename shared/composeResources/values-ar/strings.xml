@@ -36,6 +36,7 @@
     <string name="delete_habit">حذف</string>
     <string name="delete_habit_confirmation">حذف العادة؟</string>
     <string name="delete_habit_confirmation_message">هل تريد حذف «%1$s» وجميع حالات الأيام المسجلة لها؟</string>
+    <string name="delete_day_state_confirmation">هل أنت متأكد من حذف الحالة؟</string>
     <string name="habit_update_failed">تعذّر تحديث العادة: %1$s</string>
     <string name="settings">الإعدادات</string>
     <string name="language">اللغة</string>

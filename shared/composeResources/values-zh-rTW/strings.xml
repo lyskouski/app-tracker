@@ -36,6 +36,7 @@
     <string name="delete_habit">刪除</string>
     <string name="delete_habit_confirmation">刪除習慣？</string>
     <string name="delete_habit_confirmation_message">刪除「%1$s」及其所有已記錄的每日狀態？</string>
+    <string name="delete_day_state_confirmation">確定要刪除此狀態嗎？</string>
     <string name="habit_update_failed">無法更新習慣：%1$s</string>
     <string name="settings">設定</string>
     <string name="language">語言</string>

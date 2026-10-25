@@ -40,6 +40,7 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
 - Calendarul obiceiurilor (pagina principală)
   - Obiceiuri (coloane) pe zile (rânduri): ultimele 66 de zile plus următoarele 5
   - Progresul zilnic pentru fiecare obicei: `·` început, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` peste 100%
+  - O celulă poate fi marcată și ca omisă ("—"); o apăsare lungă pe o celulă îi șterge starea
   - Progresul este afișat ca simboluri sau ca dreptunghiuri colorate
   - Atingeți o dată pentru a marca ziua ca sărită ("—") pentru toate obiceiurile nemarcate
   - Seria de zile: numărul de zile marcate consecutiv (zilele "—" nu o întrerup)

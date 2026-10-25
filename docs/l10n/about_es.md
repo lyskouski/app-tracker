@@ -40,6 +40,7 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
 - Calendario de hábitos (página principal)
   - Hábitos (columnas) por días (filas): los últimos 66 días más los 5 siguientes
   - Progreso diario por hábito: `·` iniciado, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` más del 100 %
+  - Una celda también puede marcarse como omitida ("—"); una pulsación larga en una celda elimina su estado
   - Progreso mostrado como símbolos o como rectángulos de color
   - Toca una fecha para marcar el día como omitido ("—") para todos los hábitos no marcados
   - Racha de días: el número de días marcados consecutivos (los días "—" no la interrumpen)

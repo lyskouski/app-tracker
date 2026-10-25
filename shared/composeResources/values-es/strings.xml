@@ -36,6 +36,7 @@
     <string name="delete_habit">Eliminar</string>
     <string name="delete_habit_confirmation">¿Eliminar hábito?</string>
     <string name="delete_habit_confirmation_message">¿Eliminar «%1$s» y todos sus estados de días registrados?</string>
+    <string name="delete_day_state_confirmation">¿Seguro que quieres eliminar el estado?</string>
     <string name="habit_update_failed">No se pudo actualizar el hábito: %1$s</string>
     <string name="settings">Ajustes</string>
     <string name="language">Idioma</string>

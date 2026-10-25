@@ -36,6 +36,7 @@
     <string name="delete_habit">წაშლა</string>
     <string name="delete_habit_confirmation">წაიშალოს ჩვევა?</string>
     <string name="delete_habit_confirmation_message">წაიშალოს „%1$s“ და მისი ყველა ჩაწერილი დღის მდგომარეობა?</string>
+    <string name="delete_day_state_confirmation">ნამდვილად გსურთ მდგომარეობის წაშლა?</string>
     <string name="habit_update_failed">ჩვევის განახლება ვერ მოხერხდა: %1$s</string>
     <string name="settings">პარამეტრები</string>
     <string name="language">ენა</string>

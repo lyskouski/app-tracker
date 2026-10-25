@@ -36,6 +36,7 @@
     <string name="delete_habit">Löschen</string>
     <string name="delete_habit_confirmation">Gewohnheit löschen?</string>
     <string name="delete_habit_confirmation_message">„%1$s“ und alle aufgezeichneten Tagesstatus löschen?</string>
+    <string name="delete_day_state_confirmation">Möchtest du den Status wirklich löschen?</string>
     <string name="habit_update_failed">Gewohnheit konnte nicht aktualisiert werden: %1$s</string>
     <string name="settings">Einstellungen</string>
     <string name="language">Sprache</string>

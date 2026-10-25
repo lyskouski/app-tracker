@@ -36,6 +36,7 @@
     <string name="delete_habit">हटाएँ</string>
     <string name="delete_habit_confirmation">आदत हटाएँ?</string>
     <string name="delete_habit_confirmation_message">“%1$s” और उसकी सभी दर्ज दिन स्थितियाँ हटाएँ?</string>
+    <string name="delete_day_state_confirmation">क्या आप वाकई स्थिति हटाना चाहते हैं?</string>
     <string name="habit_update_failed">आदत अपडेट नहीं हो सकी: %1$s</string>
     <string name="settings">सेटिंग्स</string>
     <string name="language">भाषा</string>

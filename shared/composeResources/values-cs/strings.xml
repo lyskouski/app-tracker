@@ -36,6 +36,7 @@
     <string name="delete_habit">Smazat</string>
     <string name="delete_habit_confirmation">Smazat návyk?</string>
     <string name="delete_habit_confirmation_message">Smazat „%1$s“ a všechny zaznamenané stavy dnů?</string>
+    <string name="delete_day_state_confirmation">Opravdu chcete stav smazat?</string>
     <string name="habit_update_failed">Návyk se nepodařilo aktualizovat: %1$s</string>
     <string name="settings">Nastavení</string>
     <string name="language">Jazyk</string>

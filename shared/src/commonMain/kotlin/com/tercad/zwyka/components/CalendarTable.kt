@@ -6,6 +6,7 @@ package com.tercad.zwyka.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -83,6 +84,7 @@ fun CalendarTable(
     dayState: List<DayState>,
     onDayStateClick: (DayState) -> Unit,
     onHabitClick: (Habit) -> Unit,
+    onDayStateLongClick: (DayState) -> Unit = {},
     onProgressClick: () -> Unit = {},
     onDateClick: (String) -> Unit = {},
     today: String? = null,
@@ -417,6 +419,7 @@ fun CalendarTable(
                     cellWidthPx = cellWidthPx,
                     cellHeightPx = cellHeightPx,
                     onDayStateClick = onDayStateClick,
+                    onDayStateLongClick = onDayStateLongClick,
                     today = today,
                     weekStartDates = weekStartDates,
                     completenessType = completenessType,
@@ -878,6 +881,7 @@ private fun CalendarBodyViewport(
     cellWidthPx: Float,
     cellHeightPx: Float,
     onDayStateClick: (DayState) -> Unit,
+    onDayStateLongClick: (DayState) -> Unit,
     today: String?,
     weekStartDates: Set<String>,
     completenessType: CompletenessType,
@@ -1000,7 +1004,21 @@ private fun CalendarBodyViewport(
                             right = column == habits.lastIndex,
                         ).then(weekStartLine(date in weekStartDates)),
                         modifier = Modifier
-                            .clickable(enabled = !habit.isArchived) {
+                            .combinedClickable(
+                                enabled = !habit.isArchived,
+                                // Only a stored mark can be deleted.
+                                onLongClick = marks[key]?.let { mark ->
+                                    {
+                                        onDayStateLongClick(
+                                            DayState(
+                                                habitId = habit.id,
+                                                date = date,
+                                                mark = mark,
+                                            ),
+                                        )
+                                    }
+                                },
+                            ) {
                                 onDayStateClick(
                                     DayState(
                                         habitId = habit.id,

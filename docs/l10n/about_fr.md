@@ -41,6 +41,7 @@ de côté.
 - Calendrier des habitudes (page principale)
   - Habitudes (colonnes) par jours (lignes) : les 66 derniers jours plus les 5 à venir
   - Progression du jour par habitude : `·` commencée, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` plus de 100 %
+  - Une cellule peut aussi être marquée comme passée ("—") ; un appui long sur une cellule supprime son état
   - Progression affichée sous forme de symboles ou de rectangles colorés
   - Touchez une date pour marquer le jour comme sauté (« — ») pour toutes les habitudes non marquées
   - Série de jours : le nombre de jours marqués consécutifs (les jours « — » ne l’interrompent pas)

@@ -64,7 +64,10 @@ import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
 import com.tercad.zwyka.resources.calendar
+import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.database_error_unknown
+import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.delete_day_state_confirmation
 import com.tercad.zwyka.resources.habit_database_unavailable
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
@@ -115,6 +118,7 @@ private fun HomePageContent(
     var selectedDayState by remember { mutableStateOf<DayState?>(null) }
     var dayStateSaveError by remember { mutableStateOf<String?>(null) }
     var isDayStateSaving by remember { mutableStateOf(false) }
+    var deletingDayState by remember { mutableStateOf<DayState?>(null) }
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
 
@@ -215,6 +219,7 @@ private fun HomePageContent(
                     completenessType = settingsStore.current.completenessType,
                     dayState = current.dayStates,
                     onDayStateClick = { selectedDayState = it },
+                    onDayStateLongClick = { deletingDayState = it },
                     onDateClick = { date ->
                         coroutineScope.launch {
                             try {
@@ -359,6 +364,47 @@ private fun HomePageContent(
                         },
                     )
                 }
+            }
+
+            deletingDayState?.let { deleting ->
+                AlertDialog(
+                    onDismissRequest = { deletingDayState = null },
+                    title = { Text(stringResource(Res.string.delete_day_state_confirmation)) },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                deletingDayState = null
+                                coroutineScope.launch {
+                                    try {
+                                        services.dayStates.deleteMark(deleting.habitId, deleting.date)
+                                        state = current.copy(
+                                            // Reloaded: `updatedAt` of the habit has changed.
+                                            habits = services.habits.getAll(),
+                                            dayStates = current.dayStates.filterNot {
+                                                it.habitId == deleting.habitId &&
+                                                    it.date == deleting.date
+                                            },
+                                        )
+                                    } catch (error: CancellationException) {
+                                        throw error
+                                    } catch (error: Exception) {
+                                        state = HomePageState.Failed(error.message)
+                                    }
+                                }
+                            },
+                            colors = ButtonDefaults.textButtonColors(
+                                contentColor = currentColorScheme().error,
+                            ),
+                        ) {
+                            Text(stringResource(Res.string.delete))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { deletingDayState = null }) {
+                            Text(stringResource(Res.string.cancel))
+                        }
+                    },
+                )
             }
         }
     }

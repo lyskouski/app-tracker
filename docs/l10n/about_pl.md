@@ -40,6 +40,7 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
 - Kalendarz nawyków (strona główna)
   - Nawyki (kolumny) według dni (wiersze): ostatnie 66 dni oraz 5 nadchodzących
   - Postęp dnia dla każdego nawyku: `·` rozpoczęty, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` ponad 100%
+  - Komórkę można też oznaczyć jako pominiętą ("—"); długie naciśnięcie komórki usuwa jej stan
   - Postęp wyświetlany jako symbole lub jako kolorowe prostokąty
   - Stuknij datę, aby oznaczyć dzień jako pominięty ("—") dla wszystkich nieoznaczonych nawyków
   - Seria dni: liczba kolejnych oznaczonych dni (dni "—" jej nie przerywają)

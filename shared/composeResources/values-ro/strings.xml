@@ -36,6 +36,7 @@
     <string name="delete_habit">Șterge</string>
     <string name="delete_habit_confirmation">Ștergi obiceiul?</string>
     <string name="delete_habit_confirmation_message">Ștergi „%1$s” și toate stările zilelor înregistrate?</string>
+    <string name="delete_day_state_confirmation">Sigur doriți să ștergeți starea?</string>
     <string name="habit_update_failed">Obiceiul nu a putut fi actualizat: %1$s</string>
     <string name="settings">Setări</string>
     <string name="language">Limbă</string>

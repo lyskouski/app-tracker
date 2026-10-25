@@ -36,6 +36,7 @@
     <string name="delete_habit">Sil</string>
     <string name="delete_habit_confirmation">Alışkanlık silinsin mi?</string>
     <string name="delete_habit_confirmation_message">“%1$s” ve kaydedilmiş tüm gün durumları silinsin mi?</string>
+    <string name="delete_day_state_confirmation">Durumu silmek istediğinizden emin misiniz?</string>
     <string name="habit_update_failed">Alışkanlık güncellenemedi: %1$s</string>
     <string name="settings">Ayarlar</string>
     <string name="language">Dil</string>

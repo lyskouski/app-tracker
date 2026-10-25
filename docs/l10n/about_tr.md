@@ -40,6 +40,7 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
 - Alışkanlık Takvimi (ana sayfa)
   - Günlere (satırlar) göre alışkanlıklar (sütunlar): son 66 gün ve gelecek 5 gün
   - Her alışkanlık için günlük ilerleme: `·` başlandı, `\` %25, `|` %50, `/` %75, `X` %100, `▣` %100'ün üzerinde
+  - Bir hücre atlandı ("—") olarak da işaretlenebilir; bir hücreye uzun basmak durumunu siler
   - İlerleme semboller veya renkli dikdörtgenler olarak gösterilir
   - İşaretlenmemiş tüm alışkanlıklar için günü atlandı ("—") olarak işaretlemek üzere bir tarihe dokunun
   - Gün Serisi: art arda işaretlenen günlerin sayısı ("—" günleri seriyi bozmaz)

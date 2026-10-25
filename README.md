@@ -30,7 +30,7 @@ one is left behind.
   in both directions (by touch, or Shift + Scroll Wheel for horizontal scroll and Scroll Wheel
   for vertical) with pinned habit headers and dates.
 - Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
-  `▣` over 100%.
+  `▣` over 100%. Also can be marked as skipped. Long press on a cell ("Day State") will delete its state.
 - Today's row is highlighted, and a separator marks the start of each week.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.

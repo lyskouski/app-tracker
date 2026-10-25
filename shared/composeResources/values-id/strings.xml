@@ -36,6 +36,7 @@
     <string name="delete_habit">Hapus</string>
     <string name="delete_habit_confirmation">Hapus kebiasaan?</string>
     <string name="delete_habit_confirmation_message">Hapus “%1$s” dan semua status hari yang tercatat?</string>
+    <string name="delete_day_state_confirmation">Yakin ingin menghapus status?</string>
     <string name="habit_update_failed">Tidak dapat memperbarui kebiasaan: %1$s</string>
     <string name="settings">Pengaturan</string>
     <string name="language">Bahasa</string>

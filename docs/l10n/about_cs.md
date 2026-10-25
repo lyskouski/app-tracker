@@ -40,6 +40,7 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
 - Kalendář návyků (hlavní stránka)
   - Návyky (sloupce) podle dnů (řádky): posledních 66 dnů a nadcházejících 5
   - Denní pokrok u každého návyku: `·` zahájeno, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` přes 100 %
+  - Buňku lze také označit jako přeskočenou ("—"); dlouhé stisknutí buňky smaže její stav
   - Pokrok zobrazený jako symboly nebo jako barevné obdélníky
   - Klepnutím na datum označíte den jako vynechaný („—“) u všech neoznačených návyků
   - Série dnů: počet po sobě jdoucích označených dnů (dny „—“ ji nepřeruší)

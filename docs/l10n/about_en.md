@@ -40,6 +40,7 @@ That empowers users to effortlessly manage their habits while ensuring that no o
 - Habits Calendar (main page)
   - Habits (columns) by days (rows): the last 66 days plus the upcoming 5
   - Day progress per habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` over 100%
+  - A cell can also be marked as skipped ("—"); long press on a cell deletes its state
   - Progress shown as symbols or as colored rectangles
   - Tap a date to mark the day as skipped ("—") for all not marked habits
   - Day Streak: the number of consecutive marked days ("—" days don't break it)

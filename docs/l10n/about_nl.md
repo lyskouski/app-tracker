@@ -40,6 +40,7 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
 - Gewoontekalender (hoofdpagina)
   - Gewoontes (kolommen) per dag (rijen): de afgelopen 66 dagen plus de komende 5
   - Dagvoortgang per gewoonte: `·` begonnen, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` meer dan 100%
+  - Een cel kan ook als overgeslagen ("—") worden gemarkeerd; lang drukken op een cel verwijdert de status
   - Voortgang weergegeven als symbolen of als gekleurde rechthoeken
   - Tik op een datum om de dag als overgeslagen ("—") te markeren voor alle niet-gemarkeerde gewoontes
   - Dagenreeks: het aantal opeenvolgende gemarkeerde dagen ("—"-dagen onderbreken de reeks niet)

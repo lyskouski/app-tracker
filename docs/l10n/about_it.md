@@ -41,6 +41,7 @@ indietro.
 - Calendario delle abitudini (pagina principale)
   - Abitudini (colonne) per giorni (righe): gli ultimi 66 giorni più i 5 successivi
   - Avanzamento giornaliero per abitudine: `·` iniziata, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` oltre il 100%
+  - Una cella può anche essere segnata come saltata ("—"); una pressione prolungata su una cella ne elimina lo stato
   - Avanzamento mostrato come simboli o come rettangoli colorati
   - Tocca una data per contrassegnare il giorno come saltato ("—") per tutte le abitudini non contrassegnate
   - Serie di giorni: il numero di giorni consecutivi contrassegnati (i giorni "—" non la interrompono)

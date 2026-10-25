@@ -40,6 +40,7 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
 - Gewohnheitskalender (Hauptseite)
   - Gewohnheiten (Spalten) nach Tagen (Zeilen): die letzten 66 Tage plus die kommenden 5
   - Tagesfortschritt pro Gewohnheit: `·` begonnen, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` über 100 %
+  - Eine Zelle kann auch als übersprungen ("—") markiert werden; langes Drücken auf eine Zelle löscht ihren Status
   - Fortschritt als Symbole oder als farbige Rechtecke dargestellt
   - Auf ein Datum tippen, um den Tag für alle nicht markierten Gewohnheiten als übersprungen („—“) zu markieren
   - Tagesserie: die Anzahl aufeinanderfolgender markierter Tage („—“-Tage unterbrechen sie nicht)

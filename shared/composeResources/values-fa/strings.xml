@@ -36,6 +36,7 @@
     <string name="delete_habit">حذف</string>
     <string name="delete_habit_confirmation">عادت حذف شود؟</string>
     <string name="delete_habit_confirmation_message">«%1$s» و همه وضعیت‌های ثبت‌شده روزهای آن حذف شود؟</string>
+    <string name="delete_day_state_confirmation">آیا مطمئن هستید که می‌خواهید وضعیت را حذف کنید؟</string>
     <string name="habit_update_failed">به‌روزرسانی عادت ممکن نشد: %1$s</string>
     <string name="settings">تنظیمات</string>
     <string name="language">زبان</string>

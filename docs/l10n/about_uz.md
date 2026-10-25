@@ -40,6 +40,7 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
 - Odatlar taqvimi (asosiy sahifa)
   - Kunlar (qatorlar) bo‘yicha odatlar (ustunlar): oxirgi 66 kun va keyingi 5 kun
   - Har bir odat bo‘yicha kunlik jarayon: `·` boshlangan, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100% dan ortiq
+  - Katakni o‘tkazib yuborilgan ("—") deb ham belgilash mumkin; katakka uzoq bosish uning holatini o‘chiradi
   - Jarayon belgilar yoki rangli to‘rtburchaklar ko‘rinishida ko‘rsatiladi
   - Barcha belgilanmagan odatlar uchun kunni o‘tkazib yuborilgan ("—") deb belgilash uchun sanaga bosing
   - Kunlar seriyasi: ketma-ket belgilangan kunlar soni ("—" kunlari seriyani buzmaydi)

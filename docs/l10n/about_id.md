@@ -42,6 +42,7 @@ tertinggal.
 - Kalender Kebiasaan (halaman utama)
   - Kebiasaan (kolom) per hari (baris): 66 hari terakhir ditambah 5 hari mendatang
   - Kemajuan harian per kebiasaan: `·` dimulai, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` lebih dari 100%
+  - Sel juga dapat ditandai sebagai dilewati ("—"); tekan lama pada sel untuk menghapus statusnya
   - Kemajuan ditampilkan sebagai simbol atau sebagai persegi panjang berwarna
   - Ketuk tanggal untuk menandai hari tersebut sebagai dilewati ("—") untuk semua kebiasaan yang belum ditandai
   - Rentetan Hari: jumlah hari berturut-turut yang ditandai (hari "—" tidak memutusnya)

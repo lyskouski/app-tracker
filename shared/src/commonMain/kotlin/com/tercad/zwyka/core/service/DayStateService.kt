@@ -21,6 +21,12 @@ class DayStateService(
         habits.touch(state.habitId)
     }
 
+    /** Removes the mark of [habitId] on [date]; the habit counts as updated. */
+    suspend fun deleteMark(habitId: Long, date: String) {
+        dayStates.delete(habitId, date)
+        habits.touch(habitId)
+    }
+
     /**
      * Marks [date] as skipped ("—") for the habits without a mark on it;
      * existing marks are kept.

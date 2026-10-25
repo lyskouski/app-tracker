@@ -40,6 +40,7 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
 - Vərdişlər Təqvimi (əsas səhifə)
   - Günlər (sətirlər) üzrə vərdişlər (sütunlar): son 66 gün və qarşıdakı 5 gün
   - Hər vərdiş üzrə günün irəliləyişi: `·` başlanıb, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100%-dən çox
+  - Xana həmçinin buraxılmış ("—") kimi qeyd edilə bilər; xanaya uzun basmaq onun vəziyyətini silir
   - İrəliləyiş simvollarla və ya rəngli düzbucaqlılarla göstərilir
   - Bütün işarələnməmiş vərdişlər üçün günü buraxılmış ("—") kimi işarələmək üçün tarixə toxunun
   - Günlər seriyası: ardıcıl işarələnmiş günlərin sayı ("—" günləri onu qırmır)

@@ -36,6 +36,7 @@
     <string name="delete_habit">削除</string>
     <string name="delete_habit_confirmation">習慣を削除しますか？</string>
     <string name="delete_habit_confirmation_message">「%1$s」と記録されたすべての日の状態を削除しますか？</string>
+    <string name="delete_day_state_confirmation">状態を削除してもよろしいですか？</string>
     <string name="habit_update_failed">習慣を更新できませんでした：%1$s</string>
     <string name="settings">設定</string>
     <string name="language">言語</string>

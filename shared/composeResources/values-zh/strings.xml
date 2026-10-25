@@ -36,6 +36,7 @@
     <string name="delete_habit">删除</string>
     <string name="delete_habit_confirmation">删除习惯？</string>
     <string name="delete_habit_confirmation_message">删除“%1$s”及其所有已记录的每日状态？</string>
+    <string name="delete_day_state_confirmation">确定要删除此状态吗？</string>
     <string name="habit_update_failed">无法更新习惯：%1$s</string>
     <string name="settings">设置</string>
     <string name="language">语言</string>

@@ -36,6 +36,7 @@
     <string name="delete_habit">Supprimer</string>
     <string name="delete_habit_confirmation">Supprimer l’habitude ?</string>
     <string name="delete_habit_confirmation_message">Supprimer « %1$s » et tous les états de jour enregistrés ?</string>
+    <string name="delete_day_state_confirmation">Voulez-vous vraiment supprimer l’état ?</string>
     <string name="habit_update_failed">Impossible de modifier l’habitude : %1$s</string>
     <string name="settings">Paramètres</string>
     <string name="language">Langue</string>

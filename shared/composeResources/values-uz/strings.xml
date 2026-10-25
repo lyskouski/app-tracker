@@ -12,7 +12,7 @@
     <string name="archive_habit">Odatni arxivlash/o‘chirish</string>
     <string name="save">Saqlash</string>
     <string name="cancel">Bekor qilish</string>
-    <string name="skip">O'tkazib yuborish</string>
+    <string name="skip">O’tkazib yuborish</string>
     <string name="no_icon">Belgisiz</string>
     <string name="select_icon">Belgi tanlash</string>
     <string name="search_icons">Belgilarni qidirish</string>
@@ -36,6 +36,7 @@
     <string name="delete_habit">O‘chirish</string>
     <string name="delete_habit_confirmation">Odat o‘chirilsinmi?</string>
     <string name="delete_habit_confirmation_message">“%1$s” va uning barcha qayd etilgan kun holatlari o‘chirilsinmi?</string>
+    <string name="delete_day_state_confirmation">Holatni o’chirishni xohlaysizmi?</string>
     <string name="habit_update_failed">Odatni yangilab bo‘lmadi: %1$s</string>
     <string name="settings">Sozlamalar</string>
     <string name="language">Til</string>

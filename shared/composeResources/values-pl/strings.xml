@@ -36,6 +36,7 @@
     <string name="delete_habit">Usuń</string>
     <string name="delete_habit_confirmation">Usunąć nawyk?</string>
     <string name="delete_habit_confirmation_message">Usunąć „%1$s” i wszystkie zapisane stany dni?</string>
+    <string name="delete_day_state_confirmation">Czy na pewno chcesz usunąć stan?</string>
     <string name="habit_update_failed">Nie udało się zaktualizować nawyku: %1$s</string>
     <string name="settings">Ustawienia</string>
     <string name="language">Język</string>

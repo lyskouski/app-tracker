@@ -40,6 +40,7 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
 - Calendário de hábitos (página principal)
   - Hábitos (colunas) por dias (linhas): os últimos 66 dias mais os 5 próximos
   - Progresso do dia por hábito: `·` iniciado, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` acima de 100%
+  - Uma célula também pode ser marcada como pulada ("—"); um toque longo em uma célula exclui seu estado
   - Progresso exibido como símbolos ou como retângulos coloridos
   - Toque em uma data para marcar o dia como pulado ("—") para todos os hábitos não marcados
   - Sequência de dias: o número de dias marcados consecutivos (os dias "—" não a interrompem)

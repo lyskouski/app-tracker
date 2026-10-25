@@ -36,6 +36,7 @@
     <string name="delete_habit">Выдаліць</string>
     <string name="delete_habit_confirmation">Выдаліць звычку?</string>
     <string name="delete_habit_confirmation_message">Выдаліць «%1$s» і ўсе запісаныя станы дзён?</string>
+    <string name="delete_day_state_confirmation">Вы ўпэўнены, што хочаце выдаліць стан?</string>
     <string name="habit_update_failed">Не ўдалося абнавіць звычку: %1$s</string>
     <string name="settings">Налады</string>
     <string name="language">Мова</string>
