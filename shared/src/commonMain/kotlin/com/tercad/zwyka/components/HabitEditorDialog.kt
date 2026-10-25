@@ -346,16 +346,18 @@ fun HabitEditorDialog(
                                     ?: stringResource(Res.string.no_icon),
                             )
                         }
-                        Row(
-                            modifier = Modifier.clickable(enabled = !isSaving) { isArchived = !isArchived },
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Checkbox(
-                                checked = isArchived,
-                                onCheckedChange = { isArchived = it },
-                                enabled = !isSaving,
-                            )
-                            Text(stringResource(Res.string.archive_habit))
+                        if (habit != null) {
+                            Row(
+                                modifier = Modifier.clickable(enabled = !isSaving) { isArchived = !isArchived },
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Checkbox(
+                                    checked = isArchived,
+                                    onCheckedChange = { isArchived = it },
+                                    enabled = !isSaving,
+                                )
+                                Text(stringResource(Res.string.archive_habit))
+                            }
                         }
                         error?.let {
                             Text(
