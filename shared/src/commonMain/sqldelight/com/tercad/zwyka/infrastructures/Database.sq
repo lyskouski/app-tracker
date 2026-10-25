@@ -204,10 +204,11 @@ importSetting:
 INSERT OR IGNORE INTO Setting(key, value)
 VALUES (?, ?);
 
-INSERT INTO Habit(id, title, icon) VALUES (1, 'Health Care', 'FitnessCenter');
-INSERT INTO Habit(id, title, icon) VALUES (2, 'Reading', 'MenuBook');
-INSERT INTO Habit(id, title, icon) VALUES (3, 'Water', 'LocalDrink');
-INSERT INTO Habit(id, title, icon) VALUES (4, 'Mental Training', 'SelfImprovement');
+INSERT INTO Habit(id, title, icon, color) VALUES (1, 'Health Care', 'FitnessCenter', '#00897B');
+INSERT INTO Habit(id, title, icon, color) VALUES (2, 'Reading', 'MenuBook', '#EF6C00');
+INSERT INTO Habit(id, title, icon, color) VALUES (3, 'Water', 'LocalDrink', '#1E88E5');
+INSERT INTO Habit(id, title, icon, color) VALUES (4, 'Mental Training', 'SelfImprovement', '#F4511E');
+INSERT INTO Habit(id, title, icon, color, targetValue, targetType) VALUES (5, 'Walking', 'DirectionsWalk', '#7CB342', 10000, 'steps');
 
 INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-3 days'), 'X');
 INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-2 days'), ' ');
@@ -215,3 +216,6 @@ INSERT INTO DayState(habitId, date, mark) VALUES (1, date('now', '-1 day'), '/')
 INSERT INTO DayState(habitId, date, mark) VALUES (2, date('now', '-2 days'), 'X');
 INSERT INTO DayState(habitId, date, mark) VALUES (2, date('now', '-1 day'), 'X');
 INSERT INTO DayState(habitId, date, mark) VALUES (3, date('now', '-1 day'), 'X');
+INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-3 days'), '3000');
+INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-2 days'), '2500');
+INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-1 day'), '6000');
