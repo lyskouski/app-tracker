@@ -26,8 +26,8 @@ INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-45 da
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-44 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-43 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-42 days'), 'X');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-41 days'), '\');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-40 days'), '\');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-41 days'), '\\');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-40 days'), '\\');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-39 days'), '|');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-38 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-37 days'), '/');
@@ -38,8 +38,8 @@ INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-33 da
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-32 days'), '/');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-31 days'), '|');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-30 days'), 'X');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-29 days'), '\');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-28 days'), '\');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-29 days'), '\\');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-28 days'), '\\');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-27 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-26 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-25 days'), 'X');
