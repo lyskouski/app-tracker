@@ -38,16 +38,19 @@ indietro.
   - Titolo, note, icona (oltre 2.000 icone Material) e colore (palette o RGB / HEX personalizzato)
   - Giorni attivi della settimana; i giorni inattivi sono contrassegnati con "—"
   - Archiviare (disattivare) un’abitudine: viene mostrata in grigio, in fondo all’elenco e nascosta nella Pianificazione
+  - Obiettivo numerico, ad es. 10000 passi: il giorno conserva il valore raggiunto, completamento = valore / obiettivo
 - Calendario delle abitudini (pagina principale)
   - Abitudini (colonne) per giorni (righe): gli ultimi 66 giorni più i 5 successivi
   - Avanzamento giornaliero per abitudine: `·` iniziata, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` oltre il 100%
   - Una cella può anche essere segnata come saltata ("—"); una pressione prolungata su una cella ne elimina lo stato
-  - Avanzamento mostrato come simboli o come rettangoli colorati
+  - Una pressione prolungata su un’abitudine ne apre i dettagli
+  - Avanzamento mostrato come simboli o come cerchi colorati
   - Tocca una data per contrassegnare il giorno come saltato ("—") per tutte le abitudini non contrassegnate
   - Serie di giorni: il numero di giorni consecutivi contrassegnati (i giorni "—" non la interrompono)
   - Avanzamento di oggi: completamento complessivo delle abitudini di oggi
 - Statistiche
   - Completamento giornaliero (%) negli ultimi 66 giorni
+  - Dettagli dell’abitudine: descrizione, obiettivo, completamento di ogni giorno nell’ultimo anno (come i contributi GitHub), serie massima e attuale
 - Pianificazione (Calendario)
   - Vista giornaliera con le ore, come Google o Outlook Calendar
   - Pianifica un’abitudine per 30 minuti, 1 ora, 2 ore o un intervallo di tempo personalizzato, ripetuto nei giorni

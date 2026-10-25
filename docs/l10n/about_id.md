@@ -39,16 +39,19 @@ tertinggal.
   - Hari aktif dalam seminggu; hari tidak aktif ditandai dengan "—"
   - Arsipkan (nonaktifkan) kebiasaan: kebiasaan ditampilkan berwarna abu-abu, diletakkan paling akhir, dan disembunyikan
     di Jadwal
+  - Target angka, mis. 10000 langkah: hari menyimpan nilai yang dicapai, penyelesaian = nilai / target
 - Kalender Kebiasaan (halaman utama)
   - Kebiasaan (kolom) per hari (baris): 66 hari terakhir ditambah 5 hari mendatang
   - Kemajuan harian per kebiasaan: `·` dimulai, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` lebih dari 100%
   - Sel juga dapat ditandai sebagai dilewati ("—"); tekan lama pada sel untuk menghapus statusnya
-  - Kemajuan ditampilkan sebagai simbol atau sebagai persegi panjang berwarna
+  - Tekan lama pada kebiasaan untuk membuka detailnya
+  - Kemajuan ditampilkan sebagai simbol atau sebagai lingkaran berwarna
   - Ketuk tanggal untuk menandai hari tersebut sebagai dilewati ("—") untuk semua kebiasaan yang belum ditandai
   - Rentetan Hari: jumlah hari berturut-turut yang ditandai (hari "—" tidak memutusnya)
   - Kemajuan hari ini: penyelesaian keseluruhan kebiasaan hari ini
 - Statistik
   - Penyelesaian harian (%) selama 66 hari terakhir
+  - Detail kebiasaan: deskripsi, target, penyelesaian setiap hari selama setahun terakhir (seperti kontribusi GitHub), rentetan terpanjang dan saat ini
 - Jadwal (Kalender)
   - Tampilan harian dengan jam, seperti Google atau Outlook Calendar
   - Jadwalkan kebiasaan selama 30 menit, 1 jam, 2 jam, atau rentang waktu khusus, diulang pada hari-hari yang dipilih

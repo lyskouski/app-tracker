@@ -37,16 +37,19 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Nomi, izohlar, belgi (2 000 dan ortiq Material belgilari) va rang (palitradan yoki maxsus RGB / HEX)
   - Haftaning faol kunlari; nofaol kunlar "—" bilan belgilanadi
   - Odatni arxivlash (o‘chirish): u kulrang bo‘ladi, oxirida ko‘rsatiladi va Jadvalda yashiriladi
+  - Raqamli maqsad, masalan 10000 qadam: kun erishilgan qiymatni saqlaydi, bajarilish = qiymat / maqsad
 - Odatlar taqvimi (asosiy sahifa)
   - Kunlar (qatorlar) bo‘yicha odatlar (ustunlar): oxirgi 66 kun va keyingi 5 kun
   - Har bir odat bo‘yicha kunlik jarayon: `·` boshlangan, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100% dan ortiq
   - Katakni o‘tkazib yuborilgan ("—") deb ham belgilash mumkin; katakka uzoq bosish uning holatini o‘chiradi
-  - Jarayon belgilar yoki rangli to‘rtburchaklar ko‘rinishida ko‘rsatiladi
+  - Odatga uzoq bosish uning tafsilotlarini ochadi
+  - Jarayon belgilar yoki rangli doiralar ko‘rinishida ko‘rsatiladi
   - Barcha belgilanmagan odatlar uchun kunni o‘tkazib yuborilgan ("—") deb belgilash uchun sanaga bosing
   - Kunlar seriyasi: ketma-ket belgilangan kunlar soni ("—" kunlari seriyani buzmaydi)
   - Bugungi jarayon: bugungi odatlarning umumiy bajarilishi
 - Statistika
   - Oxirgi 66 kun davomidagi kunlik bajarilish (%)
+  - Odat tafsilotlari: tavsif, maqsad, oxirgi yilning har bir kuni bo‘yicha bajarilish (GitHub hissalari kabi), eng uzun va joriy ketma-ketlik
 - Jadval (Taqvim)
   - Google yoki Outlook Taqvimidagi kabi soatlarga bo‘lingan kun ko‘rinishi
   - Odatni 30 daqiqa, 1 soat, 2 soat yoki maxsus vaqt oralig‘iga, haftaning tanlangan kunlarida takrorlanadigan qilib

@@ -25,6 +25,9 @@ one is left behind.
   and a color (palette or custom RGB / HEX).
 - Set the active days of the week for each habit; inactive days are marked with "—" in 
   the calendar.
+- Set a numeric target with a value and a type (e.g. 10000 steps): the day's state keeps the
+  reached value instead of a status mark, and its completion is the value divided by the target.
+  Once set, the target can be changed but not turned off.
 
 **Habits Calendar (home screen)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
@@ -32,6 +35,8 @@ one is left behind.
   for vertical) with pinned habit headers and dates.
 - Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
   `▣` over 100%. Also can be marked as skipped. Long press on a cell ("Day State") will delete its state.
+- Habits with a numeric target show the reached value above its type in the cell.
+- Long press on a habit header opens the habit details.
 - Today's row is highlighted, and a separator marks the start of each week.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
@@ -41,6 +46,9 @@ one is left behind.
 
 **Metrics**
 - Open by tapping today's progress: a graph of daily completion (%) over the last 66 days.
+- **Habit details** (long press on a habit header): title, remarks, target, completion of every
+  day over the last year (days of the week by weeks, like GitHub contributions, colored by the
+  completion), max and current Day Streak calculated over the whole history.
 
 **Schedule (Calendar)**
 - Day view with hours, like Google or Outlook Calendar: move between days with `<` / `>` 
@@ -60,7 +68,7 @@ one is left behind.
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending)
 - Import / Export data
-- Habits' day state representation: symbols, colored rectangles
+- Habits' day state representation: symbols, colored circles
 
 <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_1.jpg" width="240" /> . <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_2.jpg" width="240" /> . <img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/calendar.jpg" width="240" />
 

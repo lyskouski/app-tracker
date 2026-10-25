@@ -37,16 +37,19 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Título, observaciones, icono (más de 2000 iconos Material) y color (paleta o RGB / HEX personalizado)
   - Días activos de la semana; los días inactivos se marcan con "—"
   - Archivar (desactivar) un hábito: se muestra en gris, al final y se oculta en el Horario
+  - Objetivo numérico, p. ej. 10000 pasos: el día guarda el valor alcanzado, cumplimiento = valor / objetivo
 - Calendario de hábitos (página principal)
   - Hábitos (columnas) por días (filas): los últimos 66 días más los 5 siguientes
   - Progreso diario por hábito: `·` iniciado, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` más del 100 %
   - Una celda también puede marcarse como omitida ("—"); una pulsación larga en una celda elimina su estado
-  - Progreso mostrado como símbolos o como rectángulos de color
+  - Una pulsación larga en un hábito abre sus detalles
+  - Progreso mostrado como símbolos o como círculos de color
   - Toca una fecha para marcar el día como omitido ("—") para todos los hábitos no marcados
   - Racha de días: el número de días marcados consecutivos (los días "—" no la interrumpen)
   - Progreso de hoy: cumplimiento total de los hábitos de hoy
 - Métricas
   - Cumplimiento diario (%) durante los últimos 66 días
+  - Detalles del hábito: descripción, objetivo, cumplimiento de cada día del último año (como las contribuciones de GitHub), racha máxima y actual
 - Horario (Calendario)
   - Vista diaria por horas, como en Google o Outlook Calendar
   - Programa un hábito para 30 minutos, 1 hora, 2 horas o un intervalo personalizado, repetido los días de la semana

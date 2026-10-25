@@ -37,16 +37,19 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Título, observações, ícone (mais de 2.000 ícones Material) e cor (da paleta ou RGB / HEX personalizado)
   - Dias ativos da semana; os dias inativos são marcados com "—"
   - Arquivar (desativar) um hábito: ele fica acinzentado, é exibido por último e fica oculto na Agenda
+  - Meta numérica, ex. 10000 passos: o dia guarda o valor alcançado, conclusão = valor / meta
 - Calendário de hábitos (página principal)
   - Hábitos (colunas) por dias (linhas): os últimos 66 dias mais os 5 próximos
   - Progresso do dia por hábito: `·` iniciado, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` acima de 100%
   - Uma célula também pode ser marcada como pulada ("—"); um toque longo em uma célula exclui seu estado
-  - Progresso exibido como símbolos ou como retângulos coloridos
+  - Um toque longo em um hábito abre seus detalhes
+  - Progresso exibido como símbolos ou como círculos coloridos
   - Toque em uma data para marcar o dia como pulado ("—") para todos os hábitos não marcados
   - Sequência de dias: o número de dias marcados consecutivos (os dias "—" não a interrompem)
   - Progresso de hoje: conclusão geral dos hábitos de hoje
 - Métricas
   - Conclusão diária (%) nos últimos 66 dias
+  - Detalhes do hábito: descrição, meta, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual
 - Agenda (Calendário)
   - Visualização do dia com horas, como no Google Agenda ou no Calendário do Outlook
   - Agende um hábito para 30 minutos, 1 hora, 2 horas ou um intervalo de tempo personalizado, repetido nos dias da

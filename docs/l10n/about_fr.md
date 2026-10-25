@@ -38,16 +38,19 @@ de côté.
   - Titre, remarques, icône (plus de 2 000 icônes Material) et couleur (palette ou RVB / HEX personnalisé)
   - Jours actifs de la semaine ; les jours inactifs sont marqués par « — »
   - Archiver (désactiver) une habitude : elle est grisée, affichée en dernier et masquée dans le Planning
+  - Objectif numérique, p. ex. 10000 pas : le jour garde la valeur atteinte, réalisation = valeur / objectif
 - Calendrier des habitudes (page principale)
   - Habitudes (colonnes) par jours (lignes) : les 66 derniers jours plus les 5 à venir
   - Progression du jour par habitude : `·` commencée, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` plus de 100 %
   - Une cellule peut aussi être marquée comme passée ("—") ; un appui long sur une cellule supprime son état
-  - Progression affichée sous forme de symboles ou de rectangles colorés
+  - Un appui long sur une habitude ouvre ses détails
+  - Progression affichée sous forme de symboles ou de cercles colorés
   - Touchez une date pour marquer le jour comme sauté (« — ») pour toutes les habitudes non marquées
   - Série de jours : le nombre de jours marqués consécutifs (les jours « — » ne l’interrompent pas)
   - Progression du jour : taux de réalisation global des habitudes du jour
 - Statistiques
   - Réalisation quotidienne (%) sur les 66 derniers jours
+  - Détails de l’habitude : description, objectif, réalisation de chaque jour sur la dernière année (comme les contributions GitHub), séries maximale et actuelle
 - Planning (Calendrier)
   - Vue journalière avec les heures, comme Google ou Outlook Calendar
   - Planifier une habitude pour 30 minutes, 1 heure, 2 heures ou une plage horaire personnalisée, répétée les jours

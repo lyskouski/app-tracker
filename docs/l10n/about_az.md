@@ -37,16 +37,19 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Ad, qeydlər, ikona (2 000-dən çox Material ikonası) və rəng (palitra və ya fərdi RGB / HEX)
   - Həftənin aktiv günləri; qeyri-aktiv günlər "—" ilə işarələnir
   - Vərdişi arxivləşdirmək (deaktiv etmək): o, boz rəngdə göstərilir, sonda yerləşir və Cədvəldə gizlədilir
+  - Rəqəmsal hədəf, məs. 10000 addım: gün çatılan dəyəri saxlayır, icra = dəyər / hədəf
 - Vərdişlər Təqvimi (əsas səhifə)
   - Günlər (sətirlər) üzrə vərdişlər (sütunlar): son 66 gün və qarşıdakı 5 gün
   - Hər vərdiş üzrə günün irəliləyişi: `·` başlanıb, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100%-dən çox
   - Xana həmçinin buraxılmış ("—") kimi qeyd edilə bilər; xanaya uzun basmaq onun vəziyyətini silir
-  - İrəliləyiş simvollarla və ya rəngli düzbucaqlılarla göstərilir
+  - Vərdişə uzun basmaq onun təfərrüatlarını açır
+  - İrəliləyiş simvollarla və ya rəngli dairələrlə göstərilir
   - Bütün işarələnməmiş vərdişlər üçün günü buraxılmış ("—") kimi işarələmək üçün tarixə toxunun
   - Günlər seriyası: ardıcıl işarələnmiş günlərin sayı ("—" günləri onu qırmır)
   - Bugünkü irəliləyiş: bugünkü vərdişlərin ümumi icrası
 - Statistika
   - Son 66 gün üzrə gündəlik icra (%)
+  - Vərdişin təfərrüatları: təsvir, hədəf, son ilin hər günü üzrə icra (GitHub töhfələri kimi), ən uzun və cari seriya
 - Cədvəl (Təqvim)
   - Google və ya Outlook Calendar kimi saatlarla gün görünüşü
   - Vərdişi 30 dəqiqə, 1 saat, 2 saat və ya fərdi vaxt aralığı üçün planlaşdırmaq, həftənin seçilmiş günlərində

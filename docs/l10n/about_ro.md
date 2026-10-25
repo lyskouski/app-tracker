@@ -37,16 +37,19 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Titlu, observații, pictogramă (peste 2.000 de pictograme Material) și culoare (din paletă sau RGB / HEX personalizat)
   - Zilele active ale săptămânii; zilele inactive sunt marcate cu "—"
   - Arhivarea (dezactivarea) unui obicei: acesta devine gri, este afișat ultimul și este ascuns în Program
+  - Obiectiv numeric, de ex. 10000 de pași: ziua păstrează valoarea atinsă, îndeplinire = valoare / obiectiv
 - Calendarul obiceiurilor (pagina principală)
   - Obiceiuri (coloane) pe zile (rânduri): ultimele 66 de zile plus următoarele 5
   - Progresul zilnic pentru fiecare obicei: `·` început, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` peste 100%
   - O celulă poate fi marcată și ca omisă ("—"); o apăsare lungă pe o celulă îi șterge starea
-  - Progresul este afișat ca simboluri sau ca dreptunghiuri colorate
+  - O apăsare lungă pe un obicei îi deschide detaliile
+  - Progresul este afișat ca simboluri sau ca cercuri colorate
   - Atingeți o dată pentru a marca ziua ca sărită ("—") pentru toate obiceiurile nemarcate
   - Seria de zile: numărul de zile marcate consecutiv (zilele "—" nu o întrerup)
   - Progresul de azi: gradul total de îndeplinire a obiceiurilor de astăzi
 - Statistici
   - Îndeplinirea zilnică (%) în ultimele 66 de zile
+  - Detaliile obiceiului: descriere, obiectiv, îndeplinirea fiecărei zile din ultimul an (ca contribuțiile GitHub), seria maximă și cea curentă
 - Program (Calendar)
   - Vizualizare pe zi cu ore, ca în Google Calendar sau Outlook Calendar
   - Programați un obicei pentru 30 de minute, 1 oră, 2 ore sau un interval de timp personalizat, repetat în zilele

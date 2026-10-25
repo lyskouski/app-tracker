@@ -37,16 +37,19 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Title, remarks, icon (2,000+ Material icons), and color (palette or custom RGB / HEX)
   - Active days of the week; inactive days are marked with "—"
   - Archive (deactivate) a habit: it is grayed out, shown last, and hidden in the Schedule
+  - Numeric target, e.g. 10000 steps: a day keeps the reached value, completion is value / target
 - Habits Calendar (main page)
   - Habits (columns) by days (rows): the last 66 days plus the upcoming 5
   - Day progress per habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` over 100%
   - A cell can also be marked as skipped ("—"); long press on a cell deletes its state
-  - Progress shown as symbols or as colored rectangles
+  - Long press on a habit opens its details
+  - Progress shown as symbols or as colored circles
   - Tap a date to mark the day as skipped ("—") for all not marked habits
   - Day Streak: the number of consecutive marked days ("—" days don't break it)
   - Today's progress: overall completion of today's habits
 - Metrics
   - Daily completion (%) over the last 66 days
+  - Habit details: description, target, completion of every day for the last year (like GitHub contributions), max and current streak
 - Schedule (Calendar)
   - Day view with hours, like Google or Outlook Calendar
   - Schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom time range, repeated on the selected days of the week,

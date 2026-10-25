@@ -37,16 +37,19 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Başlık, notlar, simge (2.000'den fazla Material simgesi) ve renk (paletten veya özel RGB / HEX)
   - Haftanın aktif günleri; aktif olmayan günler "—" ile işaretlenir
   - Alışkanlığı arşivleme (devre dışı bırakma): gri görünür, en sonda gösterilir ve Programda gizlenir
+  - Sayısal hedef, ör. 10000 adım: gün ulaşılan değeri saklar, tamamlanma = değer / hedef
 - Alışkanlık Takvimi (ana sayfa)
   - Günlere (satırlar) göre alışkanlıklar (sütunlar): son 66 gün ve gelecek 5 gün
   - Her alışkanlık için günlük ilerleme: `·` başlandı, `\` %25, `|` %50, `/` %75, `X` %100, `▣` %100'ün üzerinde
   - Bir hücre atlandı ("—") olarak da işaretlenebilir; bir hücreye uzun basmak durumunu siler
-  - İlerleme semboller veya renkli dikdörtgenler olarak gösterilir
+  - Bir alışkanlığa uzun basmak ayrıntılarını açar
+  - İlerleme semboller veya renkli daireler olarak gösterilir
   - İşaretlenmemiş tüm alışkanlıklar için günü atlandı ("—") olarak işaretlemek üzere bir tarihe dokunun
   - Gün Serisi: art arda işaretlenen günlerin sayısı ("—" günleri seriyi bozmaz)
   - Bugünün ilerlemesi: bugünkü alışkanlıkların genel tamamlanma oranı
 - İstatistikler
   - Son 66 gün için günlük tamamlanma (%)
+  - Alışkanlık ayrıntıları: açıklama, hedef, son bir yılın her günü için tamamlanma (GitHub katkıları gibi), en uzun ve mevcut seri
 - Program (Takvim)
   - Google veya Outlook Takvim'deki gibi saatlere bölünmüş gün görünümü
   - Bir alışkanlığı 30 dakika, 1 saat, 2 saat veya özel bir zaman aralığı için, haftanın seçilen günlerinde tekrarlanacak

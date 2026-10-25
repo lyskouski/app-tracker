@@ -37,16 +37,19 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Titel, Anmerkungen, Symbol (über 2.000 Material-Symbole) und Farbe (Palette oder eigene RGB / HEX)
   - Aktive Wochentage; inaktive Tage werden mit „—“ markiert
   - Eine Gewohnheit archivieren (deaktivieren): Sie wird ausgegraut, zuletzt angezeigt und im Zeitplan ausgeblendet
+  - Numerisches Ziel, z. B. 10000 Schritte: ein Tag speichert den erreichten Wert, Erfüllung = Wert / Ziel
 - Gewohnheitskalender (Hauptseite)
   - Gewohnheiten (Spalten) nach Tagen (Zeilen): die letzten 66 Tage plus die kommenden 5
   - Tagesfortschritt pro Gewohnheit: `·` begonnen, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` über 100 %
   - Eine Zelle kann auch als übersprungen ("—") markiert werden; langes Drücken auf eine Zelle löscht ihren Status
-  - Fortschritt als Symbole oder als farbige Rechtecke dargestellt
+  - Langes Drücken auf eine Gewohnheit öffnet ihre Details
+  - Fortschritt als Symbole oder als farbige Kreise dargestellt
   - Auf ein Datum tippen, um den Tag für alle nicht markierten Gewohnheiten als übersprungen („—“) zu markieren
   - Tagesserie: die Anzahl aufeinanderfolgender markierter Tage („—“-Tage unterbrechen sie nicht)
   - Heutiger Fortschritt: Gesamterfüllung der heutigen Gewohnheiten
 - Kennzahlen
   - Tägliche Erfüllung (%) über die letzten 66 Tage
+  - Gewohnheitsdetails: Beschreibung, Ziel, Erfüllung jedes Tages im letzten Jahr (wie GitHub-Beiträge), längste und aktuelle Serie
 - Zeitplan (Kalender)
   - Tagesansicht mit Stunden, wie in Google oder Outlook Kalender
   - Eine Gewohnheit für 30 Minuten, 1 Stunde, 2 Stunden oder einen eigenen Zeitraum planen, wiederholt an den gewählten

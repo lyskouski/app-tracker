@@ -37,16 +37,19 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Titel, opmerkingen, pictogram (meer dan 2.000 Material-pictogrammen) en kleur (palet of eigen RGB / HEX)
   - Actieve dagen van de week; inactieve dagen worden gemarkeerd met "—"
   - Een gewoonte archiveren (deactiveren): deze wordt grijs weergegeven, als laatste getoond en verborgen in de Planning
+  - Numeriek doel, bijv. 10000 stappen: een dag bewaart de behaalde waarde, voltooiing = waarde / doel
 - Gewoontekalender (hoofdpagina)
   - Gewoontes (kolommen) per dag (rijen): de afgelopen 66 dagen plus de komende 5
   - Dagvoortgang per gewoonte: `·` begonnen, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` meer dan 100%
   - Een cel kan ook als overgeslagen ("—") worden gemarkeerd; lang drukken op een cel verwijdert de status
-  - Voortgang weergegeven als symbolen of als gekleurde rechthoeken
+  - Lang drukken op een gewoonte opent de details
+  - Voortgang weergegeven als symbolen of als gekleurde cirkels
   - Tik op een datum om de dag als overgeslagen ("—") te markeren voor alle niet-gemarkeerde gewoontes
   - Dagenreeks: het aantal opeenvolgende gemarkeerde dagen ("—"-dagen onderbreken de reeks niet)
   - Voortgang van vandaag: totale voltooiing van de gewoontes van vandaag
 - Statistieken
   - Dagelijkse voltooiing (%) over de afgelopen 66 dagen
+  - Details van een gewoonte: beschrijving, doel, voltooiing van elke dag in het afgelopen jaar (zoals GitHub-bijdragen), langste en huidige reeks
 - Planning (Kalender)
   - Dagweergave met uren, zoals in Google of Outlook Agenda
   - Plan een gewoonte voor 30 minuten, 1 uur, 2 uur of een eigen tijdsbereik, herhaald op de gekozen dagen van de week,

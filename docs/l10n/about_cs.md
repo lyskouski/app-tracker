@@ -37,16 +37,19 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Název, poznámky, ikona (více než 2 000 ikon Material) a barva (paleta nebo vlastní RGB / HEX)
   - Aktivní dny v týdnu; neaktivní dny jsou označeny „—“
   - Archivace (deaktivace) návyku: návyk je zašedlý, zobrazený na konci a skrytý v Plánu
+  - Číselný cíl, např. 10000 kroků: den uchovává dosaženou hodnotu, plnění = hodnota / cíl
 - Kalendář návyků (hlavní stránka)
   - Návyky (sloupce) podle dnů (řádky): posledních 66 dnů a nadcházejících 5
   - Denní pokrok u každého návyku: `·` zahájeno, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` přes 100 %
   - Buňku lze také označit jako přeskočenou ("—"); dlouhé stisknutí buňky smaže její stav
-  - Pokrok zobrazený jako symboly nebo jako barevné obdélníky
+  - Dlouhé stisknutí návyku otevře jeho detail
+  - Pokrok zobrazený jako symboly nebo jako barevné kruhy
   - Klepnutím na datum označíte den jako vynechaný („—“) u všech neoznačených návyků
   - Série dnů: počet po sobě jdoucích označených dnů (dny „—“ ji nepřeruší)
   - Dnešní pokrok: celkové plnění dnešních návyků
 - Statistiky
   - Denní plnění (%) za posledních 66 dnů
+  - Detail návyku: popis, cíl, plnění každého dne za poslední rok (jako příspěvky na GitHubu), nejdelší a aktuální série
 - Plán (Kalendář)
   - Denní zobrazení po hodinách, jako v Google nebo Outlook kalendáři
   - Naplánování návyku na 30 minut, 1 hodinu, 2 hodiny nebo vlastní časový úsek, opakovaně ve vybrané dny v týdnu,

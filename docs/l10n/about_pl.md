@@ -37,16 +37,19 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Nazwa, uwagi, ikona (ponad 2000 ikon Material) i kolor (z palety lub własny RGB / HEX)
   - Aktywne dni tygodnia; nieaktywne dni są oznaczone symbolem "—"
   - Archiwizacja (dezaktywacja) nawyku: jest on wyszarzony, wyświetlany na końcu i ukryty w Harmonogramie
+  - Cel liczbowy, np. 10000 kroków: dzień przechowuje osiągniętą wartość, realizacja = wartość / cel
 - Kalendarz nawyków (strona główna)
   - Nawyki (kolumny) według dni (wiersze): ostatnie 66 dni oraz 5 nadchodzących
   - Postęp dnia dla każdego nawyku: `·` rozpoczęty, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` ponad 100%
   - Komórkę można też oznaczyć jako pominiętą ("—"); długie naciśnięcie komórki usuwa jej stan
-  - Postęp wyświetlany jako symbole lub jako kolorowe prostokąty
+  - Długie naciśnięcie nawyku otwiera jego szczegóły
+  - Postęp wyświetlany jako symbole lub jako kolorowe koła
   - Stuknij datę, aby oznaczyć dzień jako pominięty ("—") dla wszystkich nieoznaczonych nawyków
   - Seria dni: liczba kolejnych oznaczonych dni (dni "—" jej nie przerywają)
   - Dzisiejszy postęp: ogólny stopień realizacji dzisiejszych nawyków
 - Statystyki
   - Dzienna realizacja (%) w ciągu ostatnich 66 dni
+  - Szczegóły nawyku: opis, cel, realizacja każdego dnia z ostatniego roku (jak wkład na GitHub), najdłuższa i obecna seria
 - Harmonogram (Kalendarz)
   - Widok dnia z godzinami, jak w Kalendarzu Google lub Outlook
   - Zaplanuj nawyk na 30 minut, 1 godzinę, 2 godziny lub własny przedział czasu, powtarzany w wybrane dni tygodnia,
