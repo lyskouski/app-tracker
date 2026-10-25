@@ -16,6 +16,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,8 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.datetime.DateTimeUnit
@@ -105,46 +108,49 @@ fun HabitContributionGraph(
                 }
             }
         }
-        Box(modifier = Modifier.horizontalScroll(scrollState)) {
-            Canvas(
-                modifier = Modifier
-                    .width((CELL_SIZE + CELL_GAP) * GRAPH_WEEKS)
-                    .height(MONTH_LABEL_HEIGHT + (CELL_SIZE + CELL_GAP) * 7),
-            ) {
-                val cell = CELL_SIZE.toPx()
-                val step = cell + CELL_GAP.toPx()
-                val top = MONTH_LABEL_HEIGHT.toPx()
-                val corner = CornerRadius(2.dp.toPx())
-                var labelEnd = 0f
-                for (week in 0 until GRAPH_WEEKS) {
-                    val weekFirstDay = firstDay.plus(week * 7, DateTimeUnit.DAY)
-                    val x = week * step
-                    // Month name above the first week of the month, if it fits.
-                    val previousMonth = weekFirstDay.minus(7, DateTimeUnit.DAY).month
-                    if (week == 0 || weekFirstDay.month != previousMonth) {
-                        val label = textMeasurer.measure(
-                            monthNames.getOrNull(weekFirstDay.month.ordinal).orEmpty(),
-                            labelStyle,
-                        )
-                        if (x >= labelEnd) {
-                            drawText(label, topLeft = Offset(x, 0f))
-                            labelEnd = x + label.size.width + step / 2
+        // Time goes left to right in every language: RTL only moves the day labels to the right.
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+            Box(modifier = Modifier.horizontalScroll(scrollState)) {
+                Canvas(
+                    modifier = Modifier
+                        .width((CELL_SIZE + CELL_GAP) * GRAPH_WEEKS)
+                        .height(MONTH_LABEL_HEIGHT + (CELL_SIZE + CELL_GAP) * 7),
+                ) {
+                    val cell = CELL_SIZE.toPx()
+                    val step = cell + CELL_GAP.toPx()
+                    val top = MONTH_LABEL_HEIGHT.toPx()
+                    val corner = CornerRadius(2.dp.toPx())
+                    var labelEnd = 0f
+                    for (week in 0 until GRAPH_WEEKS) {
+                        val weekFirstDay = firstDay.plus(week * 7, DateTimeUnit.DAY)
+                        val x = week * step
+                        // Month name above the first week of the month, if it fits.
+                        val previousMonth = weekFirstDay.minus(7, DateTimeUnit.DAY).month
+                        if (week == 0 || weekFirstDay.month != previousMonth) {
+                            val label = textMeasurer.measure(
+                                monthNames.getOrNull(weekFirstDay.month.ordinal).orEmpty(),
+                                labelStyle,
+                            )
+                            if (x >= labelEnd) {
+                                drawText(label, topLeft = Offset(x, 0f))
+                                labelEnd = x + label.size.width + step / 2
+                            }
                         }
-                    }
-                    for (row in 0 until 7) {
-                        val date = weekFirstDay.plus(row, DateTimeUnit.DAY)
-                        if (date > today) break
-                        val mark = marks[date.toString()]
-                        val color = when (mark) {
-                            null, INACTIVE_MARK -> emptyColor
-                            else -> baseColor.copy(alpha = markProgress(habit, mark).coerceAtLeast(0.1f))
+                        for (row in 0 until 7) {
+                            val date = weekFirstDay.plus(row, DateTimeUnit.DAY)
+                            if (date > today) break
+                            val mark = marks[date.toString()]
+                            val color = when (mark) {
+                                null, INACTIVE_MARK -> emptyColor
+                                else -> baseColor.copy(alpha = markProgress(habit, mark).coerceAtLeast(0.1f))
+                            }
+                            drawRoundRect(
+                                color = color,
+                                topLeft = Offset(x, top + row * step),
+                                size = Size(cell, cell),
+                                cornerRadius = corner,
+                            )
                         }
-                        drawRoundRect(
-                            color = color,
-                            topLeft = Offset(x, top + row * step),
-                            size = Size(cell, cell),
-                            cornerRadius = corner,
-                        )
                     }
                 }
             }
