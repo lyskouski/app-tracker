@@ -145,8 +145,8 @@ class DetailedPage(
                     val streaks = remember(habitMarks, today) {
                         calculateStreakSummary(habit, habitMarks, today)
                     }
-                    Text(stringResource(Res.string.max_streak, streaks.max.toString()), color = textColor)
                     Text(stringResource(Res.string.current_streak, streaks.current.toString()), color = textColor)
+                    Text(stringResource(Res.string.max_streak, streaks.max.toString()), color = textColor)
                 }
             }
         }
