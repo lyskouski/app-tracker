@@ -42,7 +42,7 @@ fun StatusMark(
     val alpha = statusAlphas.getOrNull(statusOptions.indexOfFirst { it.mark == mark })
     if (colored && alpha != null) {
         Canvas(modifier.size(18.dp)) {
-            drawRect(color = color.copy(alpha = alpha))
+            drawCircle(color = color.copy(alpha = alpha))
         }
         return
     }
