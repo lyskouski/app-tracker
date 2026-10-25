@@ -9,12 +9,13 @@ one is left behind.
 
 | Type                     | Alpha Version         | Pre-Release                   | Release                       |
 | ------------------------ | ----------------------| ----------------------------- | ----------------------------- |
-| ![Web Browsers](./docs/design-flow/icons/web.png) Web                      | [zwyka_Web.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | [GitHub Pages: Zwyka](https://lyskouski.github.io/app-tracker/) | [terCAD: Zwyka](https://tercad.com/app/tracker/index.html) |
+| ![Android](./docs/design-flow/icons/android.png) Android (Google Play)    | [zwyka_Android.aab](https://github.com/lyskouski/app-tracker/releases/latest) | [Google Play](https://play.google.com/store/apps/details?id=com.tercad.zwyka) | Pending [![Google Play](./docs/design-flow/badges/google.png)](https://play.google.com/store/apps/details?id=com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux                    | [zwyka_Linux.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Not available |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux (Snap Store)       | [zwyka_LinuxSnap.snap](https://github.com/lyskouski/app-tracker/releases/latest) | [![Zwyka](https://snapcraft.io/zwyka/badge.svg)](https://snapcraft.io/zwyka) | [![Snapcraft: Zwyka](./docs/design-flow/badges/snap-store.png)](https://snapcraft.io/zwyka) |
-| ![Linux](./docs/design-flow/icons/linux.png) Linux (Flathub)          | [zwyka_LinuxFlatpak.flatpak](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | [![Flathub: Zwyka](./docs/design-flow/badges/flathub.png)](https://flathub.org/apps/com.tercad.zwyka) |
+| ![Linux](./docs/design-flow/icons/linux.png) Linux (Flathub)          | [zwyka_LinuxFlatpak.flatpak](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Pending [![Flathub: Zwyka](./docs/design-flow/badges/flathub.png)](https://flathub.org/apps/com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux (AppImage)         | [Zwyka-x86_64.AppImage](https://github.com/lyskouski/app-tracker/releases/latest) | [Pling Store](https://www.pling.com/p/2380239/) | [![App Image Hub](./docs/design-flow/badges/appimagehub.png)](https://www.appimagehub.com/p/2380239) |
 | ![Windows](./docs/design-flow/icons/windows.png) Windows (Microsoft Store) | [zwyka_Windows.msix](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Pending |
+| ![Web Browsers](./docs/design-flow/icons/web.png) Web                      | [zwyka_Web.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | [GitHub Pages: Zwyka](https://lyskouski.github.io/app-tracker/) | [terCAD: Zwyka](https://tercad.com/app/tracker/index.html) |
 
 
 ## Functionality
