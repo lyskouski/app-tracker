@@ -16,6 +16,15 @@
     <string name="habit_target">लक्ष्य: %1$s %2$s</string>
     <string name="max_streak">सबसे लंबी लय: %1$s</string>
     <string name="current_streak">मौजूदा लय: %1$s</string>
+    <string name="timer">टाइमर</string>
+    <string name="timer_now">अभी</string>
+    <string name="timer_free">खाली समय</string>
+    <string name="timer_left">शेष</string>
+    <string name="timer_until_start">शुरू होने तक</string>
+    <string name="timer_next_events">अगले कार्यक्रम</string>
+    <string name="timer_no_events">आज और कल कोई कार्यक्रम नहीं</string>
+    <string name="timer_in">%1$s में</string>
+    <string name="tomorrow">कल</string>
     <string name="save">सहेजें</string>
     <string name="cancel">रद्द करें</string>
     <string name="skip">छोड़ें</string>

@@ -16,6 +16,15 @@
     <string name="habit_target">Target: %1$s %2$s</string>
     <string name="max_streak">Max streak: %1$s</string>
     <string name="current_streak">Current streak: %1$s</string>
+    <string name="timer">Timer</string>
+    <string name="timer_now">Now</string>
+    <string name="timer_free">Free time</string>
+    <string name="timer_left">left</string>
+    <string name="timer_until_start">until start</string>
+    <string name="timer_next_events">Next events</string>
+    <string name="timer_no_events">No events today and tomorrow</string>
+    <string name="timer_in">in %1$s</string>
+    <string name="tomorrow">Tomorrow</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="skip">Skip</string>

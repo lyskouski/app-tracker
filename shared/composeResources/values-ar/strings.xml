@@ -16,6 +16,15 @@
     <string name="habit_target">الهدف: %1$s %2$s</string>
     <string name="max_streak">أطول سلسلة: %1$s</string>
     <string name="current_streak">السلسلة الحالية: %1$s</string>
+    <string name="timer">المؤقت</string>
+    <string name="timer_now">الآن</string>
+    <string name="timer_free">وقت فراغ</string>
+    <string name="timer_left">متبقٍ</string>
+    <string name="timer_until_start">حتى البدء</string>
+    <string name="timer_next_events">الأحداث التالية</string>
+    <string name="timer_no_events">لا توجد أحداث اليوم وغدًا</string>
+    <string name="timer_in">خلال %1$s</string>
+    <string name="tomorrow">غدًا</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
     <string name="skip">تخطي</string>

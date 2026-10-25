@@ -16,6 +16,15 @@
     <string name="habit_target">Target: %1$s %2$s</string>
     <string name="max_streak">Rentetan terpanjang: %1$s</string>
     <string name="current_streak">Rentetan saat ini: %1$s</string>
+    <string name="timer">Pengatur waktu</string>
+    <string name="timer_now">Sekarang</string>
+    <string name="timer_free">Waktu luang</string>
+    <string name="timer_left">tersisa</string>
+    <string name="timer_until_start">hingga mulai</string>
+    <string name="timer_next_events">Acara berikutnya</string>
+    <string name="timer_no_events">Tidak ada acara hari ini dan besok</string>
+    <string name="timer_in">dalam %1$s</string>
+    <string name="tomorrow">Besok</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="skip">Lewati</string>

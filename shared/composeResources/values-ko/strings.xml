@@ -16,6 +16,15 @@
     <string name="habit_target">목표: %1$s %2$s</string>
     <string name="max_streak">최장 연속: %1$s</string>
     <string name="current_streak">현재 연속: %1$s</string>
+    <string name="timer">타이머</string>
+    <string name="timer_now">지금</string>
+    <string name="timer_free">자유 시간</string>
+    <string name="timer_left">남음</string>
+    <string name="timer_until_start">시작까지</string>
+    <string name="timer_next_events">다음 일정</string>
+    <string name="timer_no_events">오늘과 내일 일정이 없습니다</string>
+    <string name="timer_in">%1$s 후</string>
+    <string name="tomorrow">내일</string>
     <string name="save">저장</string>
     <string name="cancel">취소</string>
     <string name="skip">건너뛰기</string>

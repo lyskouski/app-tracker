@@ -28,6 +28,7 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.NotificationsActive
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -95,6 +96,7 @@ import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.next_day
 import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.previous_day
+import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.today
 import com.tercad.zwyka.state.AppSettingsStore
 
@@ -179,6 +181,22 @@ private fun CalendarPageContent(
                     )
                     Text(
                         text = stringResource(Res.string.back),
+                        modifier = Modifier.padding(start = 8.dp),
+                    )
+                }
+                TextButton(
+                    onClick = { navigator.push(TimerPage(services)) },
+                    modifier = Modifier.align(Alignment.CenterEnd),
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = currentColorScheme().onPrimary,
+                    ),
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Timer,
+                        contentDescription = null,
+                    )
+                    Text(
+                        text = stringResource(Res.string.timer),
                         modifier = Modifier.padding(start = 8.dp),
                     )
                 }

@@ -16,6 +16,15 @@
     <string name="habit_target">Hedef: %1$s %2$s</string>
     <string name="max_streak">En uzun seri: %1$s</string>
     <string name="current_streak">Mevcut seri: %1$s</string>
+    <string name="timer">Zamanlayıcı</string>
+    <string name="timer_now">Şimdi</string>
+    <string name="timer_free">Boş zaman</string>
+    <string name="timer_left">kaldı</string>
+    <string name="timer_until_start">başlangıca</string>
+    <string name="timer_next_events">Sonraki etkinlikler</string>
+    <string name="timer_no_events">Bugün ve yarın etkinlik yok</string>
+    <string name="timer_in">%1$s sonra</string>
+    <string name="tomorrow">Yarın</string>
     <string name="save">Kaydet</string>
     <string name="cancel">İptal</string>
     <string name="skip">Atla</string>

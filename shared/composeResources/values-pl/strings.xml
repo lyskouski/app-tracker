@@ -16,6 +16,15 @@
     <string name="habit_target">Cel: %1$s %2$s</string>
     <string name="max_streak">Najdłuższa seria: %1$s</string>
     <string name="current_streak">Obecna seria: %1$s</string>
+    <string name="timer">Minutnik</string>
+    <string name="timer_now">Teraz</string>
+    <string name="timer_free">Czas wolny</string>
+    <string name="timer_left">pozostało</string>
+    <string name="timer_until_start">do rozpoczęcia</string>
+    <string name="timer_next_events">Następne wydarzenia</string>
+    <string name="timer_no_events">Brak wydarzeń dziś i jutro</string>
+    <string name="timer_in">za %1$s</string>
+    <string name="tomorrow">Jutro</string>
     <string name="save">Zapisz</string>
     <string name="cancel">Anuluj</string>
     <string name="skip">Pomiń</string>

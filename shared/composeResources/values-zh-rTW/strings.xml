@@ -16,6 +16,15 @@
     <string name="habit_target">目標：%1$s %2$s</string>
     <string name="max_streak">最長連續：%1$s</string>
     <string name="current_streak">目前連續：%1$s</string>
+    <string name="timer">計時器</string>
+    <string name="timer_now">現在</string>
+    <string name="timer_free">空閒時間</string>
+    <string name="timer_left">剩餘</string>
+    <string name="timer_until_start">距開始</string>
+    <string name="timer_next_events">接下來的事件</string>
+    <string name="timer_no_events">今天和明天沒有事件</string>
+    <string name="timer_in">%1$s後</string>
+    <string name="tomorrow">明天</string>
     <string name="save">儲存</string>
     <string name="cancel">取消</string>
     <string name="skip">略過</string>

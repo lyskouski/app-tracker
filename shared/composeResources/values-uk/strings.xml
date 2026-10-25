@@ -16,6 +16,15 @@
     <string name="habit_target">Ціль: %1$s %2$s</string>
     <string name="max_streak">Найдовша серія: %1$s</string>
     <string name="current_streak">Поточна серія: %1$s</string>
+    <string name="timer">Таймер</string>
+    <string name="timer_now">Зараз</string>
+    <string name="timer_free">Вільний час</string>
+    <string name="timer_left">залишилось</string>
+    <string name="timer_until_start">до початку</string>
+    <string name="timer_next_events">Наступні події</string>
+    <string name="timer_no_events">Немає подій сьогодні й завтра</string>
+    <string name="timer_in">через %1$s</string>
+    <string name="tomorrow">Завтра</string>
     <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
     <string name="skip">Пропустити</string>

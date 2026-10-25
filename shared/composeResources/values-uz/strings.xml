@@ -16,6 +16,15 @@
     <string name="habit_target">Maqsad: %1$s %2$s</string>
     <string name="max_streak">Eng uzun ketma-ketlik: %1$s</string>
     <string name="current_streak">Joriy ketma-ketlik: %1$s</string>
+    <string name="timer">Taymer</string>
+    <string name="timer_now">Hozir</string>
+    <string name="timer_free">Bo‘sh vaqt</string>
+    <string name="timer_left">qoldi</string>
+    <string name="timer_until_start">boshlanishigacha</string>
+    <string name="timer_next_events">Keyingi tadbirlar</string>
+    <string name="timer_no_events">Bugun va ertaga tadbirlar yo‘q</string>
+    <string name="timer_in">%1$s dan so‘ng</string>
+    <string name="tomorrow">Ertaga</string>
     <string name="save">Saqlash</string>
     <string name="cancel">Bekor qilish</string>
     <string name="skip">O’tkazib yuborish</string>

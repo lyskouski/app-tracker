@@ -16,6 +16,15 @@
     <string name="habit_target">Doel: %1$s %2$s</string>
     <string name="max_streak">Langste reeks: %1$s</string>
     <string name="current_streak">Huidige reeks: %1$s</string>
+    <string name="timer">Timer</string>
+    <string name="timer_now">Nu</string>
+    <string name="timer_free">Vrije tijd</string>
+    <string name="timer_left">resterend</string>
+    <string name="timer_until_start">tot de start</string>
+    <string name="timer_next_events">Volgende afspraken</string>
+    <string name="timer_no_events">Geen afspraken vandaag en morgen</string>
+    <string name="timer_in">over %1$s</string>
+    <string name="tomorrow">Morgen</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleren</string>
     <string name="skip">Overslaan</string>

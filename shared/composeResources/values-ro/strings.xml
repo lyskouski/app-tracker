@@ -16,6 +16,15 @@
     <string name="habit_target">Obiectiv: %1$s %2$s</string>
     <string name="max_streak">Serie maximă: %1$s</string>
     <string name="current_streak">Serie curentă: %1$s</string>
+    <string name="timer">Cronometru</string>
+    <string name="timer_now">Acum</string>
+    <string name="timer_free">Timp liber</string>
+    <string name="timer_left">rămas</string>
+    <string name="timer_until_start">până la început</string>
+    <string name="timer_next_events">Evenimente următoare</string>
+    <string name="timer_no_events">Niciun eveniment azi și mâine</string>
+    <string name="timer_in">în %1$s</string>
+    <string name="tomorrow">Mâine</string>
     <string name="save">Salvează</string>
     <string name="cancel">Anulează</string>
     <string name="skip">Omite</string>

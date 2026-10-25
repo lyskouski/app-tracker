@@ -16,6 +16,15 @@
     <string name="habit_target">هدف: %1$s %2$s</string>
     <string name="max_streak">بیشترین زنجیره: %1$s</string>
     <string name="current_streak">زنجیره فعلی: %1$s</string>
+    <string name="timer">زمان‌سنج</string>
+    <string name="timer_now">اکنون</string>
+    <string name="timer_free">وقت آزاد</string>
+    <string name="timer_left">باقی‌مانده</string>
+    <string name="timer_until_start">تا شروع</string>
+    <string name="timer_next_events">رویدادهای بعدی</string>
+    <string name="timer_no_events">امروز و فردا رویدادی نیست</string>
+    <string name="timer_in">تا %1$s دیگر</string>
+    <string name="tomorrow">فردا</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
     <string name="skip">رد شدن</string>

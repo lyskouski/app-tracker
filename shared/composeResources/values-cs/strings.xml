@@ -16,6 +16,15 @@
     <string name="habit_target">Cíl: %1$s %2$s</string>
     <string name="max_streak">Nejdelší série: %1$s</string>
     <string name="current_streak">Aktuální série: %1$s</string>
+    <string name="timer">Časovač</string>
+    <string name="timer_now">Nyní</string>
+    <string name="timer_free">Volný čas</string>
+    <string name="timer_left">zbývá</string>
+    <string name="timer_until_start">do začátku</string>
+    <string name="timer_next_events">Další události</string>
+    <string name="timer_no_events">Žádné události dnes ani zítra</string>
+    <string name="timer_in">za %1$s</string>
+    <string name="tomorrow">Zítra</string>
     <string name="save">Uložit</string>
     <string name="cancel">Zrušit</string>
     <string name="skip">Přeskočit</string>

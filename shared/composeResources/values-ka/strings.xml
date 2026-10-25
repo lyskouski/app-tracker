@@ -16,6 +16,15 @@
     <string name="habit_target">მიზანი: %1$s %2$s</string>
     <string name="max_streak">მაქსიმალური სერია: %1$s</string>
     <string name="current_streak">მიმდინარე სერია: %1$s</string>
+    <string name="timer">ტაიმერი</string>
+    <string name="timer_now">ახლა</string>
+    <string name="timer_free">თავისუფალი დრო</string>
+    <string name="timer_left">დარჩა</string>
+    <string name="timer_until_start">დაწყებამდე</string>
+    <string name="timer_next_events">შემდეგი მოვლენები</string>
+    <string name="timer_no_events">დღეს და ხვალ მოვლენები არ არის</string>
+    <string name="timer_in">%1$s-ში</string>
+    <string name="tomorrow">ხვალ</string>
     <string name="save">შენახვა</string>
     <string name="cancel">გაუქმება</string>
     <string name="skip">გამოტოვება</string>
