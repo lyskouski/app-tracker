@@ -25,6 +25,13 @@
     <string name="timer_no_events">Žádné události dnes ani zítra</string>
     <string name="timer_in">za %1$s</string>
     <string name="tomorrow">Zítra</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="add_pomodoro">Přidat časovač</string>
+    <string name="pomodoro_habit">Návyk (nepovinné)</string>
+    <string name="pomodoro_no_habit">Bez návyku</string>
+    <string name="pomodoro_minutes">Minuty</string>
+    <string name="start">Spustit</string>
+    <string name="stop">Zastavit</string>
     <string name="save">Uložit</string>
     <string name="cancel">Zrušit</string>
     <string name="skip">Přeskočit</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Upravit plán</string>
     <string name="habit">Návyk</string>
     <string name="interval">Interval</string>
+    <string name="interval_15_min">15 min</string>
     <string name="interval_30_min">30 min</string>
     <string name="interval_1_hour">1 hodina</string>
     <string name="interval_2_hours">2 hodiny</string>

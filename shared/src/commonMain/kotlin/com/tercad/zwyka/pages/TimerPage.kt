@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -24,7 +25,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -53,12 +58,16 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Instant
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.components.DayStateDialog
+import com.tercad.zwyka.components.PomodoroDialog
 import com.tercad.zwyka.components.TimerClock
 import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.HabitTime
 import com.tercad.zwyka.core.model.MINUTES_PER_DAY
 import com.tercad.zwyka.core.service.Schedule
 import com.tercad.zwyka.core.time.ScheduledEvent
@@ -72,10 +81,13 @@ import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.rememberVibration
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.add_pomodoro
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
+import com.tercad.zwyka.resources.pomodoro
+import com.tercad.zwyka.resources.stop
 import com.tercad.zwyka.resources.timer_free
 import com.tercad.zwyka.resources.timer_in
 import com.tercad.zwyka.resources.timer_left
@@ -101,6 +113,8 @@ class TimerPage(
         var schedule by remember { mutableStateOf<Schedule?>(null) }
         var loadError by remember { mutableStateOf<String?>(null) }
         var dateTime by remember { mutableStateOf(currentDateTime()) }
+        var pomodoro by remember { mutableStateOf<Pomodoro?>(null) }
+        var showPomodoroDialog by remember { mutableStateOf(false) }
         LaunchedEffect(services) {
             try {
                 schedule = services.schedule.load()
@@ -146,8 +160,34 @@ class TimerPage(
                     }
                 }
             },
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                // Same as on the home page: Scaffold lifts the FAB 16.dp above the bar, it protrudes 12.dp.
+                FloatingActionButton(
+                    onClick = { showPomodoroDialog = true },
+                    modifier = Modifier.offset(y = 52.dp),
+                    containerColor = currentColorScheme().inversePrimary,
+                    contentColor = currentColorScheme().secondary,
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = stringResource(Res.string.add_pomodoro),
+                    )
+                }
+            },
         ) { contentPadding ->
             val loaded = schedule
+            if (showPomodoroDialog && loaded != null) {
+                PomodoroDialog(
+                    habits = loaded.habits,
+                    onStart = { minutes, habitId ->
+                        val startedAt = Clock.System.now()
+                        pomodoro = Pomodoro(habitId, startedAt, startedAt + minutes.minutes)
+                        showPomodoroDialog = false
+                    },
+                    onDismiss = { showPomodoroDialog = false },
+                )
+            }
             BoxWithConstraints(
                 modifier = Modifier
                     .fillMaxSize()
@@ -160,6 +200,8 @@ class TimerPage(
                     loaded == null -> Text(stringResource(Res.string.habits_loading))
                     else -> TimerContent(
                         services, settingsStore, loaded, dateTime, isHorizontal = maxWidth > maxHeight,
+                        pomodoro = pomodoro,
+                        onPomodoroEnd = { pomodoro = null },
                     )
                 }
             }
@@ -169,6 +211,13 @@ class TimerPage(
 
 private fun currentDateTime() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
+/** Custom timer, optionally for a habit (its completion is asked at the end). */
+private data class Pomodoro(
+    val habitId: Long?,
+    val startedAt: Instant,
+    val endsAt: Instant,
+)
+
 @Composable
 private fun TimerContent(
     services: Services,
@@ -176,11 +225,22 @@ private fun TimerContent(
     schedule: Schedule,
     dateTime: kotlinx.datetime.LocalDateTime,
     isHorizontal: Boolean,
+    pomodoro: Pomodoro?,
+    onPomodoroEnd: () -> Unit,
 ) {
     val events = remember(schedule, dateTime.date) { scheduledEvents(schedule.habitTimes, dateTime.date) }
     val seconds = dateTime.hour * 3600 + dateTime.minute * 60 + dateTime.second
     val now = seconds / 60
-    val current = events.currentAt(now)
+    // A running custom timer is shown on the dial and counted down instead of the scheduled event.
+    val pomodoroEvent = pomodoro?.let { timer ->
+        val start = timer.startedAt.toLocalDateTime(TimeZone.currentSystemDefault())
+        val startMinute = (start.date.toEpochDays() - dateTime.date.toEpochDays()).toInt() * MINUTES_PER_DAY +
+            start.hour * 60 + start.minute
+        val endMinute = startMinute + ((timer.endsAt - timer.startedAt).inWholeMinutes).toInt()
+        ScheduledEvent(HabitTime(id = -1, habitId = timer.habitId, timeStart = startMinute, timeEnd = endMinute), startMinute, endMinute)
+    }
+    val dialEvents = if (pomodoroEvent == null) events else (events + pomodoroEvent).sortedBy { it.start }
+    val current = pomodoroEvent ?: events.currentAt(now)
     val upcoming = events.upcomingAfter(now)
     val next = upcoming.firstOrNull()
     val defaultColor = currentColorScheme().primary
@@ -196,6 +256,15 @@ private fun TimerContent(
     var endedDayState by remember { mutableStateOf<DayState?>(null) }
     var isSaving by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf<String?>(null) }
+    // Opens the completion of the habit for today, unless another one is asked already.
+    val askCompletion: suspend (Long) -> Unit = { habitId ->
+        if (endedDayState == null) {
+            val date = dateTime.date.toString()
+            val mark = services.dayStates.getRange(date, date).firstOrNull { it.habitId == habitId }?.mark
+            saveError = null
+            endedDayState = DayState(habitId = habitId, date = date, mark = mark ?: "·")
+        }
+    }
     LaunchedEffect(now) {
         // After midnight the minutes start over.
         val previous = if (now < checkedMinute) -1 else checkedMinute
@@ -206,13 +275,14 @@ private fun TimerContent(
             vibrate()
         }
         val ended = events.firstOrNull { it.habitTime.habitId != null && it.end.isJustReached() }
-        val habitId = ended?.habitTime?.habitId
-        if (habitId != null && endedDayState == null) {
-            val date = dateTime.date.toString()
-            val mark = services.dayStates.getRange(date, date).firstOrNull { it.habitId == habitId }?.mark
-            saveError = null
-            endedDayState = DayState(habitId = habitId, date = date, mark = mark ?: "·")
-        }
+        ended?.habitTime?.habitId?.let { askCompletion(it) }
+    }
+    LaunchedEffect(pomodoro) {
+        val timer = pomodoro ?: return@LaunchedEffect
+        delay(timer.endsAt - Clock.System.now())
+        vibrate()
+        onPomodoroEnd()
+        timer.habitId?.let { askCompletion(it) }
     }
     endedDayState?.let { dayState ->
         schedule.habits.firstOrNull { it.id == dayState.habitId }?.let { habit ->
@@ -246,16 +316,17 @@ private fun TimerContent(
 
     val clock = @Composable { modifier: Modifier ->
         TimerClock(
-            events = events,
+            events = dialEvents,
             now = now,
             current = current,
             colorOf = colorOf,
             modifier = modifier,
         ) {
             // Rounded up: "0:01" is shown until the very end.
-            val target = current?.end ?: next?.start
-            if (target != null) {
-                val minutesLeft = (target * 60 - seconds + 59) / 60
+            val secondsLeft = pomodoro?.let { (it.endsAt - Clock.System.now()).inWholeSeconds.toInt().coerceAtLeast(0) }
+                ?: (current?.end ?: next?.start)?.let { it * 60 - seconds }
+            if (secondsLeft != null) {
+                val minutesLeft = (secondsLeft + 59) / 60
                 Text(
                     text = formatDuration(minutesLeft),
                     style = MaterialTheme.typography.displaySmall,
@@ -316,7 +387,7 @@ private fun TimerContent(
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
-                CurrentEvent(schedule, current, colorOf)
+                CurrentEvent(schedule, current, colorOf, isPomodoro = pomodoro != null, onStop = onPomodoroEnd)
                 nextEvents()
             }
         }
@@ -328,7 +399,7 @@ private fun TimerContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            CurrentEvent(schedule, current, colorOf)
+            CurrentEvent(schedule, current, colorOf, isPomodoro = pomodoro != null, onStop = onPomodoroEnd)
             clock(Modifier.widthIn(max = 420.dp))
             nextEvents()
         }
@@ -339,7 +410,13 @@ private fun TimerContent(
  * The scheduled habit in progress, or free time.
  */
 @Composable
-private fun CurrentEvent(schedule: Schedule, current: ScheduledEvent?, colorOf: (ScheduledEvent) -> Color) {
+private fun CurrentEvent(
+    schedule: Schedule,
+    current: ScheduledEvent?,
+    colorOf: (ScheduledEvent) -> Color,
+    isPomodoro: Boolean,
+    onStop: () -> Unit,
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = stringResource(Res.string.timer_now),
@@ -359,13 +436,13 @@ private fun CurrentEvent(schedule: Schedule, current: ScheduledEvent?, colorOf: 
                         .background(color, CircleShape),
                     contentAlignment = Alignment.Center,
                 ) {
-                    applicationIcon(schedule.iconOf(current))?.let { icon ->
+                    (applicationIcon(schedule.iconOf(current)) ?: Icons.Filled.Timer.takeIf { isPomodoro })?.let { icon ->
                         Icon(imageVector = icon, contentDescription = null, tint = Color.White)
                     }
                 }
-                Column {
+                Column(Modifier.weight(1f)) {
                     Text(
-                        text = schedule.titleOf(current),
+                        text = schedule.titleOf(current).ifEmpty { stringResource(Res.string.pomodoro) },
                         style = MaterialTheme.typography.headlineSmall,
                         color = currentColorScheme().onSurface,
                         maxLines = 2,
@@ -377,6 +454,11 @@ private fun CurrentEvent(schedule: Schedule, current: ScheduledEvent?, colorOf: 
                         style = MaterialTheme.typography.bodyMedium,
                         color = currentColorScheme().onSurfaceVariant,
                     )
+                }
+                if (isPomodoro) {
+                    TextButton(onClick = onStop) {
+                        Text(stringResource(Res.string.stop))
+                    }
                 }
             } else {
                 Text(

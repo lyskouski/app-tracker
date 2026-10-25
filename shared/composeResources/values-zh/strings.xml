@@ -25,6 +25,13 @@
     <string name="timer_no_events">今天和明天没有事件</string>
     <string name="timer_in">%1$s后</string>
     <string name="tomorrow">明天</string>
+    <string name="pomodoro">番茄钟</string>
+    <string name="add_pomodoro">添加计时器</string>
+    <string name="pomodoro_habit">习惯（可选）</string>
+    <string name="pomodoro_no_habit">无习惯</string>
+    <string name="pomodoro_minutes">分钟</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="skip">跳过</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">编辑日程</string>
     <string name="habit">习惯</string>
     <string name="interval">间隔</string>
+    <string name="interval_15_min">15 分钟</string>
     <string name="interval_30_min">30 分钟</string>
     <string name="interval_1_hour">1 小时</string>
     <string name="interval_2_hours">2 小时</string>

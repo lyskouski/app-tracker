@@ -25,6 +25,13 @@
     <string name="timer_no_events">Aucun événement aujourd’hui ni demain</string>
     <string name="timer_in">dans %1$s</string>
     <string name="tomorrow">Demain</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="add_pomodoro">Ajouter un minuteur</string>
+    <string name="pomodoro_habit">Habitude (facultatif)</string>
+    <string name="pomodoro_no_habit">Aucune habitude</string>
+    <string name="pomodoro_minutes">Minutes</string>
+    <string name="start">Démarrer</string>
+    <string name="stop">Arrêter</string>
     <string name="save">Enregistrer</string>
     <string name="cancel">Annuler</string>
     <string name="skip">Passer</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Modifier le planning</string>
     <string name="habit">Habitude</string>
     <string name="interval">Intervalle</string>
+    <string name="interval_15_min">15 min</string>
     <string name="interval_30_min">30 min</string>
     <string name="interval_1_hour">1 heure</string>
     <string name="interval_2_hours">2 heures</string>

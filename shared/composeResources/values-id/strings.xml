@@ -25,6 +25,13 @@
     <string name="timer_no_events">Tidak ada acara hari ini dan besok</string>
     <string name="timer_in">dalam %1$s</string>
     <string name="tomorrow">Besok</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="add_pomodoro">Tambah pengatur waktu</string>
+    <string name="pomodoro_habit">Kebiasaan (opsional)</string>
+    <string name="pomodoro_no_habit">Tanpa kebiasaan</string>
+    <string name="pomodoro_minutes">Menit</string>
+    <string name="start">Mulai</string>
+    <string name="stop">Berhenti</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="skip">Lewati</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Edit jadwal</string>
     <string name="habit">Kebiasaan</string>
     <string name="interval">Interval</string>
+    <string name="interval_15_min">15 mnt</string>
     <string name="interval_30_min">30 mnt</string>
     <string name="interval_1_hour">1 jam</string>
     <string name="interval_2_hours">2 jam</string>

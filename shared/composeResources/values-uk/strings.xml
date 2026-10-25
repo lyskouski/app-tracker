@@ -25,6 +25,13 @@
     <string name="timer_no_events">Немає подій сьогодні й завтра</string>
     <string name="timer_in">через %1$s</string>
     <string name="tomorrow">Завтра</string>
+    <string name="pomodoro">Помодоро</string>
+    <string name="add_pomodoro">Додати таймер</string>
+    <string name="pomodoro_habit">Звичка (необов’язково)</string>
+    <string name="pomodoro_no_habit">Без звички</string>
+    <string name="pomodoro_minutes">Хвилини</string>
+    <string name="start">Старт</string>
+    <string name="stop">Стоп</string>
     <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
     <string name="skip">Пропустити</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Редагувати розклад</string>
     <string name="habit">Звичка</string>
     <string name="interval">Інтервал</string>
+    <string name="interval_15_min">15 хв</string>
     <string name="interval_30_min">30 хв</string>
     <string name="interval_1_hour">1 година</string>
     <string name="interval_2_hours">2 години</string>

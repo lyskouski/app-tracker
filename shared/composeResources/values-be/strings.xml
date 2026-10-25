@@ -25,6 +25,13 @@
     <string name="timer_no_events">Няма падзей сёння і заўтра</string>
     <string name="timer_in">праз %1$s</string>
     <string name="tomorrow">Заўтра</string>
+    <string name="pomodoro">Памадора</string>
+    <string name="add_pomodoro">Дадаць таймер</string>
+    <string name="pomodoro_habit">Звычка (неабавязкова)</string>
+    <string name="pomodoro_no_habit">Без звычкі</string>
+    <string name="pomodoro_minutes">Хвіліны</string>
+    <string name="start">Старт</string>
+    <string name="stop">Стоп</string>
     <string name="save">Захаваць</string>
     <string name="cancel">Скасаваць</string>
     <string name="skip">Прапусціць</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Рэдагаваць расклад</string>
     <string name="habit">Звычка</string>
     <string name="interval">Інтэрвал</string>
+    <string name="interval_15_min">15 хв</string>
     <string name="interval_30_min">30 хв</string>
     <string name="interval_1_hour">1 гадзіна</string>
     <string name="interval_2_hours">2 гадзіны</string>

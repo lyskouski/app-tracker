@@ -25,6 +25,13 @@
     <string name="timer_no_events">امروز و فردا رویدادی نیست</string>
     <string name="timer_in">تا %1$s دیگر</string>
     <string name="tomorrow">فردا</string>
+    <string name="pomodoro">پومودورو</string>
+    <string name="add_pomodoro">افزودن زمان‌سنج</string>
+    <string name="pomodoro_habit">عادت (اختیاری)</string>
+    <string name="pomodoro_no_habit">بدون عادت</string>
+    <string name="pomodoro_minutes">دقیقه</string>
+    <string name="start">شروع</string>
+    <string name="stop">توقف</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
     <string name="skip">رد شدن</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">ویرایش برنامه</string>
     <string name="habit">عادت</string>
     <string name="interval">بازه</string>
+    <string name="interval_15_min">15 دقیقه</string>
     <string name="interval_30_min">30 دقیقه</string>
     <string name="interval_1_hour">1 ساعت</string>
     <string name="interval_2_hours">2 ساعت</string>

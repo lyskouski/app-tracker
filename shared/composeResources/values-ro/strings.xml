@@ -25,6 +25,13 @@
     <string name="timer_no_events">Niciun eveniment azi și mâine</string>
     <string name="timer_in">în %1$s</string>
     <string name="tomorrow">Mâine</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="add_pomodoro">Adaugă cronometru</string>
+    <string name="pomodoro_habit">Obicei (opțional)</string>
+    <string name="pomodoro_no_habit">Fără obicei</string>
+    <string name="pomodoro_minutes">Minute</string>
+    <string name="start">Pornește</string>
+    <string name="stop">Oprește</string>
     <string name="save">Salvează</string>
     <string name="cancel">Anulează</string>
     <string name="skip">Omite</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">Editează programul</string>
     <string name="habit">Obicei</string>
     <string name="interval">Interval</string>
+    <string name="interval_15_min">15 min</string>
     <string name="interval_30_min">30 min</string>
     <string name="interval_1_hour">1 oră</string>
     <string name="interval_2_hours">2 ore</string>

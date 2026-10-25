@@ -405,7 +405,7 @@ fun HabitTimeDialog(
 }
 
 @Composable
-private fun OwnerLabel(
+internal fun OwnerLabel(
     title: String,
     icon: String?,
     color: String?,

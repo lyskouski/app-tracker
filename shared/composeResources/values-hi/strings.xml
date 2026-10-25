@@ -25,6 +25,13 @@
     <string name="timer_no_events">आज और कल कोई कार्यक्रम नहीं</string>
     <string name="timer_in">%1$s में</string>
     <string name="tomorrow">कल</string>
+    <string name="pomodoro">पोमोडोरो</string>
+    <string name="add_pomodoro">टाइमर जोड़ें</string>
+    <string name="pomodoro_habit">आदत (वैकल्पिक)</string>
+    <string name="pomodoro_no_habit">कोई आदत नहीं</string>
+    <string name="pomodoro_minutes">मिनट</string>
+    <string name="start">शुरू करें</string>
+    <string name="stop">रोकें</string>
     <string name="save">सहेजें</string>
     <string name="cancel">रद्द करें</string>
     <string name="skip">छोड़ें</string>
@@ -115,6 +122,7 @@
     <string name="edit_habit_time">शेड्यूल संपादित करें</string>
     <string name="habit">आदत</string>
     <string name="interval">अंतराल</string>
+    <string name="interval_15_min">15 मिनट</string>
     <string name="interval_30_min">30 मिनट</string>
     <string name="interval_1_hour">1 घंटा</string>
     <string name="interval_2_hours">2 घंटे</string>
