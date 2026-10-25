@@ -185,7 +185,7 @@ private fun CalendarPageContent(
                     )
                 }
                 TextButton(
-                    onClick = { navigator.push(TimerPage(services)) },
+                    onClick = { navigator.push(TimerPage(services, settingsStore)) },
                     modifier = Modifier.align(Alignment.CenterEnd),
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = currentColorScheme().onPrimary,

@@ -35,6 +35,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,13 +49,16 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.TimerClock
 import com.tercad.zwyka.core.Services
+import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.MINUTES_PER_DAY
 import com.tercad.zwyka.core.service.Schedule
 import com.tercad.zwyka.core.time.ScheduledEvent
@@ -80,6 +84,7 @@ import com.tercad.zwyka.resources.timer_no_events
 import com.tercad.zwyka.resources.timer_now
 import com.tercad.zwyka.resources.timer_until_start
 import com.tercad.zwyka.resources.tomorrow
+import com.tercad.zwyka.state.AppSettingsStore
 
 /** Number of upcoming events listed under the clock. */
 private const val NEXT_EVENTS = 5
@@ -87,6 +92,7 @@ private const val NEXT_EVENTS = 5
 /** Countdown of the current scheduled habit, the dial of the next hours and the upcoming events. */
 class TimerPage(
     private val services: Services,
+    private val settingsStore: AppSettingsStore,
 ) : Screen {
     @Composable
     override fun Content() {
@@ -152,7 +158,9 @@ class TimerPage(
                 when {
                     loadError != null -> Text(stringResource(Res.string.habits_load_failed, loadError.orEmpty()))
                     loaded == null -> Text(stringResource(Res.string.habits_loading))
-                    else -> TimerContent(loaded, dateTime, isHorizontal = maxWidth > maxHeight)
+                    else -> TimerContent(
+                        services, settingsStore, loaded, dateTime, isHorizontal = maxWidth > maxHeight,
+                    )
                 }
             }
         }
@@ -162,7 +170,13 @@ class TimerPage(
 private fun currentDateTime() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
 @Composable
-private fun TimerContent(schedule: Schedule, dateTime: kotlinx.datetime.LocalDateTime, isHorizontal: Boolean) {
+private fun TimerContent(
+    services: Services,
+    settingsStore: AppSettingsStore,
+    schedule: Schedule,
+    dateTime: kotlinx.datetime.LocalDateTime,
+    isHorizontal: Boolean,
+) {
     val events = remember(schedule, dateTime.date) { scheduledEvents(schedule.habitTimes, dateTime.date) }
     val seconds = dateTime.hour * 3600 + dateTime.minute * 60 + dateTime.second
     val now = seconds / 60
@@ -172,16 +186,62 @@ private fun TimerContent(schedule: Schedule, dateTime: kotlinx.datetime.LocalDat
     val defaultColor = currentColorScheme().primary
     val colorOf = { event: ScheduledEvent -> applicationColor(schedule.colorOf(event)) ?: defaultColor }
 
-    // Vibrates when an event starts while the page is open; the minute is checked once.
+    /*
+     * While the page is open, every minute is checked once:
+     * a started event vibrates, an ended habit asks for its completion (intents are not tracked).
+     */
     val vibrate = rememberVibration()
+    val coroutineScope = rememberCoroutineScope()
     var checkedMinute by remember { mutableStateOf(now) }
+    var endedDayState by remember { mutableStateOf<DayState?>(null) }
+    var isSaving by remember { mutableStateOf(false) }
+    var saveError by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(now) {
         // After midnight the minutes start over.
         val previous = if (now < checkedMinute) -1 else checkedMinute
-        if (now != previous && events.any { it.start in (previous + 1)..now && now - it.start <= 1 }) {
+        checkedMinute = now
+        if (now == previous) return@LaunchedEffect
+        fun Int.isJustReached() = this in (previous + 1)..now && now - this <= 1
+        if (events.any { it.start.isJustReached() }) {
             vibrate()
         }
-        checkedMinute = now
+        val ended = events.firstOrNull { it.habitTime.habitId != null && it.end.isJustReached() }
+        val habitId = ended?.habitTime?.habitId
+        if (habitId != null && endedDayState == null) {
+            val date = dateTime.date.toString()
+            val mark = services.dayStates.getRange(date, date).firstOrNull { it.habitId == habitId }?.mark
+            saveError = null
+            endedDayState = DayState(habitId = habitId, date = date, mark = mark ?: "·")
+        }
+    }
+    endedDayState?.let { dayState ->
+        schedule.habits.firstOrNull { it.id == dayState.habitId }?.let { habit ->
+            DayStateDialog(
+                dayState = dayState,
+                habit = habit,
+                dateFormat = settingsStore.current.dateFormat,
+                completenessType = settingsStore.current.completenessType,
+                saveError = saveError,
+                isSaving = isSaving,
+                onStatusChange = { mark ->
+                    isSaving = true
+                    saveError = null
+                    coroutineScope.launch {
+                        try {
+                            services.dayStates.setMark(dayState.copy(mark = mark))
+                            endedDayState = null
+                        } catch (error: CancellationException) {
+                            throw error
+                        } catch (error: Exception) {
+                            saveError = error.message.orEmpty()
+                        } finally {
+                            isSaving = false
+                        }
+                    }
+                },
+                onDismiss = { endedDayState = null },
+            )
+        }
     }
 
     val clock = @Composable { modifier: Modifier ->
