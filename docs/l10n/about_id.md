@@ -59,6 +59,11 @@ tertinggal.
   - Rentang waktu yang tumpang tindih ditampilkan berdampingan
   - Pengingat (notifikasi)
   - Tambahkan ke kalender eksternal (Apple, Google, Microsoft)
+  - Tombol (+) menjadwalkan kebiasaan
+- Pengatur waktu (dari Jadwal)
+  - Jam 12 jam ke depan dengan acara terjadwal, hitung mundur acara saat ini, dan acara berikutnya
+  - Layar tetap menyala, bergetar saat acara dimulai, dan menanyakan penyelesaian kebiasaan saat berakhir
+  - Pomodoro: 15 mnt, 30 mnt, 1 jam, 2 jam, atau kustom, opsional untuk kebiasaan
 - Pengaturan
   - Lokalisasi
   - Mode Tema (sistem, terang, gelap)

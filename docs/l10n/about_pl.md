@@ -57,6 +57,11 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Nakładające się przedziały czasu są wyświetlane obok siebie
   - Przypomnienia (powiadomienia)
   - Dodawanie do zewnętrznego kalendarza (Apple, Google, Microsoft)
+  - Przycisk (+) planuje nawyk
+- Minutnik (z Harmonogramu)
+  - Zegar najbliższych 12 godzin z zaplanowanymi wydarzeniami, odliczanie bieżącego wydarzenia i następne wydarzenia
+  - Ekran nie gaśnie; wibracja na początku wydarzenia i pytanie o realizację nawyku po jego zakończeniu
+  - Pomodoro: 15 min, 30 min, 1 godzina, 2 godziny lub własny czas, opcjonalnie dla nawyku
 - Ustawienia
   - Lokalizacja
   - Motyw (systemowy, jasny, ciemny)

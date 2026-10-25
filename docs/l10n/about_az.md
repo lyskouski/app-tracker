@@ -57,6 +57,11 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Üst-üstə düşən vaxt aralıqları yan-yana göstərilir
   - Xatırlatmalar (bildirişlər)
   - Xarici təqvimə əlavə etmək (Apple, Google, Microsoft)
+  - (+) düyməsi vərdişi planlaşdırır
+- Taymer (Cədvəldən)
+  - Planlaşdırılmış tədbirlərlə növbəti 12 saatın saatı, cari tədbirin geri sayımı və növbəti tədbirlər
+  - Ekranı açıq saxlayır, tədbir başlayanda titrəyir və bitəndə vərdişin icrasını soruşur
+  - Pomodoro: 15 dəq, 30 dəq, 1 saat, 2 saat və ya xüsusi müddət, istəyə görə vərdiş üçün
 - Ayarlar
   - Lokallaşdırma
   - Mövzu (sistem, açıq, tünd)

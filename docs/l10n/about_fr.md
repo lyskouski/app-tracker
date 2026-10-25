@@ -58,6 +58,11 @@ de côté.
   - Les plages horaires qui se chevauchent sont affichées côte à côte
   - Rappels (notifications)
   - Ajout à un calendrier externe (Apple, Google, Microsoft)
+  - Le bouton (+) planifie une habitude
+- Minuteur (depuis le Planning)
+  - Horloge des 12 prochaines heures avec les événements planifiés, compte à rebours de l’événement en cours et prochains événements
+  - Garde l’écran allumé, vibre au début d’un événement et demande la réalisation de l’habitude à sa fin
+  - Pomodoro : 15 min, 30 min, 1 heure, 2 heures ou durée personnalisée, éventuellement pour une habitude
 - Paramètres
   - Localisation
   - Thème (système, clair, sombre)

@@ -60,6 +60,18 @@ one is left behind.
 - Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
   `iOS` allows max 9 daily reminders per day)
 - Add to external calendar (Apple, Google, Microsoft)
+- The `(+)` button in the bottom bar schedules a habit (today: from the next full hour, other days: from 09:00).
+
+**Timer** (the `Timer` button on the Schedule)
+- Watch-like dial of the next 12 hours: scheduled events are arcs in the habit colors (overlapping ones on inner
+  rings), the hand shows the current time.
+- The current habit is shown on top, the countdown (hours:minutes) of the current event or until the next one
+  in the middle, and the next events (today and tomorrow) below; in landscape the dial is on the left and the
+  events are on the right.
+- The screen stays on while the timer is open; mobile devices vibrate when an event starts, and the completion
+  of the habit is asked when its time range ends (intents are skipped).
+- Pomodoro: the `(+)` button starts a custom timer for 15 min, 30 min, 1 hour, 2 hours, or a custom number of
+  minutes, optionally for a habit; it vibrates at the end and asks for the completion of the selected habit.
 
 **Settings**
 - Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, ka_GE, ru_RU, id_ID

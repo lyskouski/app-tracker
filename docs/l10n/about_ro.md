@@ -57,6 +57,11 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Intervalele de timp suprapuse sunt afișate unul lângă altul
   - Mementouri (notificări)
   - Adăugare într-un calendar extern (Apple, Google, Microsoft)
+  - Butonul (+) programează un obicei
+- Cronometru (din Program)
+  - Ceas al următoarelor 12 ore cu evenimentele programate, numărătoare inversă a evenimentului curent și evenimentele următoare
+  - Menține ecranul aprins, vibrează la începutul unui eveniment și cere îndeplinirea obiceiului la final
+  - Pomodoro: 15 min, 30 min, 1 oră, 2 ore sau durată personalizată, opțional pentru un obicei
 - Setări
   - Localizare
   - Temă (sistem, luminoasă, întunecată)

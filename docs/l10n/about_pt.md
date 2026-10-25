@@ -57,6 +57,11 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Intervalos de tempo sobrepostos são exibidos lado a lado
   - Lembretes (notificações)
   - Adicionar a um calendário externo (Apple, Google, Microsoft)
+  - O botão (+) agenda um hábito
+- Temporizador (a partir da Agenda)
+  - Relógio das próximas 12 horas com os eventos agendados, contagem regressiva do evento atual e próximos eventos
+  - Mantém a tela ligada, vibra quando um evento começa e pede a conclusão do hábito quando termina
+  - Pomodoro: 15 min, 30 min, 1 hora, 2 horas ou personalizado, opcionalmente para um hábito
 - Configurações
   - Localização
   - Tema (sistema, claro, escuro)

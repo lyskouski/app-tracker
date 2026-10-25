@@ -57,6 +57,11 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Overlapping time ranges are shown side by side
   - Reminders (notifications)
   - Add to an external calendar (Apple, Google, Microsoft)
+  - The (+) button schedules a habit
+- Timer (from the Schedule)
+  - Clock of the next 12 hours with the scheduled events, countdown of the current event, and the next events
+  - Keeps the screen on, vibrates when an event starts, and asks for the habit’s completion when it ends
+  - Pomodoro: 15 min, 30 min, 1 hour, 2 hours, or custom, optionally for a habit
 - Settings
   - Localization
   - Theme Mode (system, light, dark)

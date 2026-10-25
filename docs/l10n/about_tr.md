@@ -57,6 +57,11 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Çakışan zaman aralıkları yan yana gösterilir
   - Hatırlatıcılar (bildirimler)
   - Harici bir takvime ekleme (Apple, Google, Microsoft)
+  - (+) düğmesi bir alışkanlık planlar
+- Zamanlayıcı (Programdan)
+  - Planlanan etkinliklerle sonraki 12 saatin saati, mevcut etkinliğin geri sayımı ve sonraki etkinlikler
+  - Ekranı açık tutar, etkinlik başladığında titrer ve bittiğinde alışkanlığın tamamlanmasını sorar
+  - Pomodoro: 15 dk, 30 dk, 1 saat, 2 saat veya özel süre, isteğe bağlı olarak bir alışkanlık için
 - Ayarlar
   - Yerelleştirme
   - Tema (sistem varsayılanı, açık, koyu)

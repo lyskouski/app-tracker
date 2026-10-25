@@ -57,6 +57,11 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Bir-birini kesib o‘tadigan vaqt oraliqlari yonma-yon ko‘rsatiladi
   - Eslatmalar (bildirishnomalar)
   - Tashqi taqvimga qo‘shish (Apple, Google, Microsoft)
+  - (+) tugmasi odatni rejalashtiradi
+- Taymer (Jadvaldan)
+  - Rejalashtirilgan tadbirlar bilan keyingi 12 soat soati, joriy tadbirning teskari sanog‘i va keyingi tadbirlar
+  - Ekranni yoniq saqlaydi, tadbir boshlanganda tebranadi va tugaganda odat bajarilishini so‘raydi
+  - Pomodoro: 15 daq, 30 daq, 1 soat, 2 soat yoki maxsus vaqt, ixtiyoriy ravishda odat uchun
 - Sozlamalar
   - Lokalizatsiya
   - Mavzu (tizim standarti, yorug‘, qorong‘i)

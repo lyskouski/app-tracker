@@ -57,6 +57,11 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Sich überschneidende Zeiträume werden nebeneinander angezeigt
   - Erinnerungen (Benachrichtigungen)
   - Zu einem externen Kalender hinzufügen (Apple, Google, Microsoft)
+  - Die Schaltfläche (+) plant eine Gewohnheit
+- Timer (aus dem Zeitplan)
+  - Uhr der nächsten 12 Stunden mit den geplanten Terminen, Countdown des aktuellen Termins und die nächsten Termine
+  - Hält den Bildschirm an, vibriert bei Beginn eines Termins und fragt am Ende nach der Erfüllung der Gewohnheit
+  - Pomodoro: 15 Min., 30 Min., 1 Stunde, 2 Stunden oder eigene Dauer, optional für eine Gewohnheit
 - Einstellungen
   - Lokalisierung
   - Design (System, hell, dunkel)

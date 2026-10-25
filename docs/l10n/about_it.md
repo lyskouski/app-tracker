@@ -58,6 +58,11 @@ indietro.
   - Gli intervalli di tempo sovrapposti sono mostrati affiancati
   - Promemoria (notifiche)
   - Aggiunta a un calendario esterno (Apple, Google, Microsoft)
+  - Il pulsante (+) pianifica un’abitudine
+- Timer (dalla Pianificazione)
+  - Orologio delle prossime 12 ore con gli eventi pianificati, conto alla rovescia dell’evento in corso e prossimi eventi
+  - Mantiene lo schermo acceso, vibra all’inizio di un evento e chiede il completamento dell’abitudine alla fine
+  - Pomodoro: 15 min, 30 min, 1 ora, 2 ore o durata personalizzata, facoltativamente per un’abitudine
 - Impostazioni
   - Localizzazione
   - Tema (di sistema, chiaro, scuro)

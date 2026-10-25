@@ -57,6 +57,11 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Overlappende tijdsbereiken worden naast elkaar weergegeven
   - Herinneringen (meldingen)
   - Toevoegen aan een externe agenda (Apple, Google, Microsoft)
+  - De knop (+) plant een gewoonte
+- Timer (vanuit de Planning)
+  - Klok van de komende 12 uur met de geplande afspraken, aftellen van de huidige afspraak en de volgende afspraken
+  - Houdt het scherm aan, trilt bij de start van een afspraak en vraagt aan het einde naar de voltooiing van de gewoonte
+  - Pomodoro: 15 min, 30 min, 1 uur, 2 uur of eigen duur, optioneel voor een gewoonte
 - Instellingen
   - Lokalisatie
   - Thema (systeem, licht, donker)

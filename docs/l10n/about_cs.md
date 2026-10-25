@@ -57,6 +57,11 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Překrývající se časové úseky se zobrazují vedle sebe
   - Připomínky (oznámení)
   - Přidání do externího kalendáře (Apple, Google, Microsoft)
+  - Tlačítko (+) naplánuje návyk
+- Časovač (z Plánu)
+  - Hodiny na příštích 12 hodin s naplánovanými událostmi, odpočet aktuální události a další události
+  - Obrazovka nezhasne; vibrace při začátku události a dotaz na plnění návyku po jejím konci
+  - Pomodoro: 15 min, 30 min, 1 hodina, 2 hodiny nebo vlastní čas, volitelně pro návyk
 - Nastavení
   - Lokalizace
   - Motiv (podle systému, světlý, tmavý)
