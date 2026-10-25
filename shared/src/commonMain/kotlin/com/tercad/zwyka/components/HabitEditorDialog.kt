@@ -318,6 +318,7 @@ fun HabitEditorDialog(
                                 selectingColor = true
                             },
                             enabled = !isSaving,
+                            modifier = Modifier.padding(top = 14.dp),
                         ) {
                             Box(
                                 modifier = Modifier
@@ -337,6 +338,7 @@ fun HabitEditorDialog(
                                 selectingIcon = true
                             },
                             enabled = !isSaving,
+                            modifier = Modifier.padding(top = 10.dp),
                         ) {
                             applicationIcon(icon)?.let { image ->
                                 Icon(imageVector = image, contentDescription = null)
