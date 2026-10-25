@@ -25,3 +25,4 @@ linux-flatpak/repo
 windows-msix/layout
 windows-msix/priconfig.xml
 windows-msix/*.msix
+windows-msix/store
