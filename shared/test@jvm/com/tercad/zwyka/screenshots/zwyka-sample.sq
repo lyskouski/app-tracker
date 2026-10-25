@@ -7,8 +7,8 @@ INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt,
 INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt, activeDays) VALUES (11, 'Youtube Cources', 'SmartDisplay', '#FF0000', 'Software Architecture Monday, ...', 1792058374000, 1792304098000, 127);
 INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt, activeDays) VALUES (12, 'Language: English', 'Translate', '#0000FF', NULL, 1792058409000, 1792179121000, 42);
 INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt, activeDays) VALUES (13, 'Language: Polish', 'Translate', '#FF0000', NULL, 1792058432000, 1792179131000, 85);
-INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt, activeDays, targetValue, targetType) VALUES (14, 'Walking', 'NordicWalking', '#1E88E5', NULL, 1792058450000, 1792304120000, 127, 10000, 'steps');
-INSERT IGNORE INTO Intent (id, title, icon, color, remarks, createdAt, updatedAt, activeDays) VALUES (1, 'Working hours', NULL, NULL, NULL, 1792225498000, 1792225788000, 31);
+INSERT IGNORE INTO Habit (id, title, icon, color, remarks, createdAt, updatedAt, activeDays, targetValue, targetType) VALUES (14, 'Walking', 'NordicWalking', '#1E88E5', NULL, 1792058000000, 1792058100000, 127, 10000, 'steps');
+INSERT IGNORE INTO Intent (id, title, icon, color, remarks, createdAt, updatedAt, activeDays) VALUES (14, 'Working hours', NULL, NULL, NULL, 1792225498000, 1792225788000, 31);
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (1, NULL, 1, 480, 1020, NULL, 31, 0);
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (2, 10, NULL, 780, 840, NULL, 127, 1);
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (3, 11, NULL, 360, 420, 'Software Architecture Monday', 127, 0);
@@ -21,6 +21,11 @@ INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, a
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (10, 13, NULL, 1230, 1260, NULL, 85, 0);
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (13, 7, NULL, 840, 1020, NULL, 96, 0);
 INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (14, 8, NULL, 480, 780, NULL, 96, 0);
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-8 days'), '10000');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-4 days'), '2000');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-3 days'), '2000');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-2 days'), '3500');
+INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-1 day'), '5000');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-46 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-45 days'), 'X');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (5, date('now', '-44 days'), 'X');
@@ -240,9 +245,6 @@ INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (12, date('now', '+1 da
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (13, date('now', '-4 days'), '—');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (13, date('now', '-2 days'), '—');
 INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (13, date('now'), '—');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-3 days'), '2000');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-2 days'), '3500');
-INSERT IGNORE INTO DayState (habitId, date, mark) VALUES (14, date('now', '-1 day'), '5000');
 INSERT IGNORE INTO Setting (key, value) VALUES ('language', 'en');
 INSERT IGNORE INTO Setting (key, value) VALUES ('week_start', 'MONDAY');
 INSERT IGNORE INTO Setting (key, value) VALUES ('theme_mode', 'LIGHT');
