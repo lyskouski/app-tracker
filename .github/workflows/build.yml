@@ -88,7 +88,7 @@ jobs:
         if: matrix.target == 'Windows'
         run: |
           ./gradlew :desktopApp:createDistributable --no-daemon `
-            -PversionName=${{ needs.release.outputs.version }}
+            "-PversionName=${{ needs.release.outputs.version }}"
 
       - name: Build Windows MSIX
         if: matrix.target == 'Windows'
