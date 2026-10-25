@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -65,6 +66,7 @@ import com.tercad.zwyka.core.time.upcomingAfter
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.defines.rememberVibration
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
@@ -110,6 +112,8 @@ class TimerPage(
         }
 
         Scaffold(
+            // The countdown stays visible while the page is open.
+            modifier = Modifier.keepScreenOn(),
             containerColor = currentColorScheme().surface,
             bottomBar = {
                 Box(
@@ -167,6 +171,18 @@ private fun TimerContent(schedule: Schedule, dateTime: kotlinx.datetime.LocalDat
     val next = upcoming.firstOrNull()
     val defaultColor = currentColorScheme().primary
     val colorOf = { event: ScheduledEvent -> applicationColor(schedule.colorOf(event)) ?: defaultColor }
+
+    // Vibrates when an event starts while the page is open; the minute is checked once.
+    val vibrate = rememberVibration()
+    var checkedMinute by remember { mutableStateOf(now) }
+    LaunchedEffect(now) {
+        // After midnight the minutes start over.
+        val previous = if (now < checkedMinute) -1 else checkedMinute
+        if (now != previous && events.any { it.start in (previous + 1)..now && now - it.start <= 1 }) {
+            vibrate()
+        }
+        checkedMinute = now
+    }
 
     val clock = @Composable { modifier: Modifier ->
         TimerClock(
