@@ -23,6 +23,7 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.INACTIVE_MARK
 import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.applicationColor
@@ -35,6 +36,7 @@ import com.tercad.zwyka.resources.day_state_save_failed
 import com.tercad.zwyka.resources.edit_day_state
 import com.tercad.zwyka.resources.habit_name
 import com.tercad.zwyka.resources.months_short
+import com.tercad.zwyka.resources.skip
 import com.tercad.zwyka.resources.status
 import org.jetbrains.compose.resources.stringArrayResource
 
@@ -135,13 +137,24 @@ fun DayStateDialog(
                 }
             }
         },
-        confirmButton = {},
-        dismissButton = {
-            TextButton(
-                onClick = onDismiss,
-                enabled = !isSaving,
+        confirmButton = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(stringResource(Res.string.cancel))
+                TextButton(
+                    onClick = { onStatusChange(INACTIVE_MARK) },
+                    enabled = !isSaving,
+                ) {
+                    Text(stringResource(Res.string.skip))
+                }
+                TextButton(
+                    onClick = onDismiss,
+                    enabled = !isSaving,
+                ) {
+                    Text(stringResource(Res.string.cancel))
+                }
             }
         },
     )

@@ -12,6 +12,7 @@
     <string name="archive_habit">أرشفة/إلغاء تفعيل العادة</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
+    <string name="skip">تخطي</string>
     <string name="no_icon">بلا أيقونة</string>
     <string name="select_icon">اختيار أيقونة</string>
     <string name="search_icons">البحث عن أيقونات</string>

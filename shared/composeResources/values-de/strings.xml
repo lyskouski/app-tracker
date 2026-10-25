@@ -12,6 +12,7 @@
     <string name="archive_habit">Gewohnheit archivieren/deaktivieren</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
+    <string name="skip">Überspringen</string>
     <string name="no_icon">Kein Symbol</string>
     <string name="select_icon">Symbol auswählen</string>
     <string name="search_icons">Symbole suchen</string>

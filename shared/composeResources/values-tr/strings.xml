@@ -12,6 +12,7 @@
     <string name="archive_habit">Alışkanlığı arşivle/devre dışı bırak</string>
     <string name="save">Kaydet</string>
     <string name="cancel">İptal</string>
+    <string name="skip">Atla</string>
     <string name="no_icon">Simge yok</string>
     <string name="select_icon">Simge seç</string>
     <string name="search_icons">Simge ara</string>

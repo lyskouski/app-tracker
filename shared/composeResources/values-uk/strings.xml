@@ -12,6 +12,7 @@
     <string name="archive_habit">Архівувати/деактивувати звичку</string>
     <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
+    <string name="skip">Пропустити</string>
     <string name="no_icon">Без значка</string>
     <string name="select_icon">Вибрати значок</string>
     <string name="search_icons">Пошук значків</string>

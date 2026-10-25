@@ -12,6 +12,7 @@
     <string name="archive_habit">ჩვევის დაარქივება/დეაქტივაცია</string>
     <string name="save">შენახვა</string>
     <string name="cancel">გაუქმება</string>
+    <string name="skip">გამოტოვება</string>
     <string name="no_icon">ხატულის გარეშე</string>
     <string name="select_icon">ხატულის არჩევა</string>
     <string name="search_icons">ხატულების ძიება</string>

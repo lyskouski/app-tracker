@@ -12,6 +12,7 @@
     <string name="archive_habit">Vərdişi arxivləşdir/deaktiv et</string>
     <string name="save">Yadda saxla</string>
     <string name="cancel">Ləğv et</string>
+    <string name="skip">Keç</string>
     <string name="no_icon">İkon yoxdur</string>
     <string name="select_icon">İkon seç</string>
     <string name="search_icons">İkon axtar</string>

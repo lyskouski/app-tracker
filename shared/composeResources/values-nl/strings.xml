@@ -12,6 +12,7 @@
     <string name="archive_habit">Gewoonte archiveren/deactiveren</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleren</string>
+    <string name="skip">Overslaan</string>
     <string name="no_icon">Geen pictogram</string>
     <string name="select_icon">Pictogram kiezen</string>
     <string name="search_icons">Pictogrammen zoeken</string>

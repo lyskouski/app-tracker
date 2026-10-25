@@ -12,6 +12,7 @@
     <string name="archive_habit">Archivovat/deaktivovat návyk</string>
     <string name="save">Uložit</string>
     <string name="cancel">Zrušit</string>
+    <string name="skip">Přeskočit</string>
     <string name="no_icon">Bez ikony</string>
     <string name="select_icon">Vybrat ikonu</string>
     <string name="search_icons">Hledat ikony</string>

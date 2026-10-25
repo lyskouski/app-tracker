@@ -12,6 +12,7 @@
     <string name="archive_habit">Arquivar/desativar hábito</string>
     <string name="save">Salvar</string>
     <string name="cancel">Cancelar</string>
+    <string name="skip">Pular</string>
     <string name="no_icon">Sem ícone</string>
     <string name="select_icon">Selecionar ícone</string>
     <string name="search_icons">Pesquisar ícones</string>

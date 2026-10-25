@@ -12,6 +12,7 @@
     <string name="archive_habit">بایگانی/غیرفعال‌سازی عادت</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
+    <string name="skip">رد شدن</string>
     <string name="no_icon">بدون نماد</string>
     <string name="select_icon">انتخاب نماد</string>
     <string name="search_icons">جستجوی نمادها</string>

@@ -12,6 +12,7 @@
     <string name="archive_habit">封存/停用習慣</string>
     <string name="save">儲存</string>
     <string name="cancel">取消</string>
+    <string name="skip">略過</string>
     <string name="no_icon">無圖示</string>
     <string name="select_icon">選擇圖示</string>
     <string name="search_icons">搜尋圖示</string>

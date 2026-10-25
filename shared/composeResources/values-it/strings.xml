@@ -12,6 +12,7 @@
     <string name="archive_habit">Archivia/disattiva abitudine</string>
     <string name="save">Salva</string>
     <string name="cancel">Annulla</string>
+    <string name="skip">Salta</string>
     <string name="no_icon">Nessuna icona</string>
     <string name="select_icon">Seleziona icona</string>
     <string name="search_icons">Cerca icone</string>
