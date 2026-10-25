@@ -70,10 +70,11 @@ one is left behind.
 - Import / Export data
 - Habits' day state representation: symbols, colored circles
 
-<img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_1.jpg" width="240" /> . <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/main_2.jpg" width="240" /> . <img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/calendar.jpg" width="240" />
+<img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/1_home.png" width="240" /> . <img title="Zwyka: Add Habit" src="./docs/design-flow/screenshots/2_add_habit.png" width="240" /> . <img title="Zwyka: Settings" src="./docs/design-flow/screenshots/3_settings.png" width="240" />
 
-<img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/metrics.jpg" width="240" /> . <img title="Zwyka: Settings" src="./docs/design-flow/screenshots/settings.jpg" width="240" /> . 
+<img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/4_calendar.png" width="240" /> . <img title="Zwyka: Add to Calendar" src="./docs/design-flow/screenshots/5_calendar_add.png" width="240" /> . <img title="Zwyka: Main Screen with Colors" src="./docs/design-flow/screenshots/6_home_colors.png" width="240" />
 
+<img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/7_metrics.png" width="240" /> . <img title="Zwyka: Detailed Metrics" src="./docs/design-flow/screenshots/7_detailed_metrics.png" width="240" /> .
 
 ## Support (Sponsorship)
 
