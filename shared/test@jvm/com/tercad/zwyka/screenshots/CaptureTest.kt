@@ -5,6 +5,7 @@ package com.tercad.zwyka.screenshots
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -27,6 +28,7 @@ import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.completeness_colors
 import com.tercad.zwyka.resources.completeness_type
+import com.tercad.zwyka.resources.max_streak
 import com.tercad.zwyka.resources.settings
 import io.github.lyskouski.screenshot.ScreenshotGenerator
 import io.github.lyskouski.screenshot.ScreenshotScope
@@ -85,6 +87,13 @@ class CaptureTest {
             onNodeWithText(getString(Res.string.completeness_colors)).performClick()
             onNodeWithText(getString(Res.string.back)).performClick()
             waitForIdle()
+        }
+        gen.inject("7_detailed_metrics") {
+            // The header cell of a habit is described by its title.
+            onNodeWithContentDescription("Mental Training").performTouchInput { longClick() }
+            // The day states of the habit load after the page is shown.
+            val maxStreak = getString(Res.string.max_streak, "").trim()
+            waitUntil { onAllNodesWithText(maxStreak, substring = true).fetchSemanticsNodes().isNotEmpty() }
         }
         gen.run()
     }
