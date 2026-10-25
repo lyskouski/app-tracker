@@ -30,8 +30,6 @@
 이 솔루션의 목표는 직관적이고 효율적이며 포용적인 습관 추적 애플리케이션을 만드는 것입니다.
 누구도 소외되지 않도록 하면서 사용자가 손쉽게 자신의 습관을 관리할 수 있도록 돕습니다.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### 기능
 - 습관
   - 제목, 메모, 아이콘(2,000개 이상의 Material 아이콘), 색상(팔레트 또는 사용자 지정 RGB / HEX)

@@ -30,8 +30,6 @@ English (EN-US) |
 The goal of the solution is to create a habits tracking application that is intuitive, efficient, and inclusive.
 That empowers users to effortlessly manage their habits while ensuring that no one is left behind.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Functionality
 - Habits
   - Title, remarks, icon (2,000+ Material icons), and color (palette or custom RGB / HEX)

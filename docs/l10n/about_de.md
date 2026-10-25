@@ -30,8 +30,6 @@ Deutsch (DE) |
 Einschränkungen. Ziel der Lösung ist es, eine Gewohnheits-Tracker-App zu schaffen, die intuitiv, effizient und inklusiv
 ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und sorgt dafür, dass niemand zurückgelassen wird.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funktionen
 - Gewohnheiten
   - Titel, Anmerkungen, Symbol (über 2.000 Material-Symbole) und Farbe (Palette oder eigene RGB / HEX)

@@ -31,8 +31,6 @@ L’obiettivo della soluzione è creare un’applicazione per il monitoraggio de
 che consenta agli utenti di gestire le proprie abitudini senza sforzo, garantendo al contempo che nessuno venga lasciato
 indietro.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funzionalità
 - Abitudini
   - Titolo, note, icona (oltre 2.000 icone Material) e colore (palette o RGB / HEX personalizzato)

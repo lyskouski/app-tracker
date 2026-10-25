@@ -30,8 +30,6 @@
 Мэта рашэння -- стварыць дадатак для адсочвання звычак, які будзе інтуітыўным, эфектыўным і інклюзіўным.
 Ён дазваляе карыстальнікам лёгка кіраваць сваімі звычкамі і гарантуе, што ніхто не застанецца па-за ўвагай.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Функцыянальнасць
 - Звычкі
   - Назва, заўвагі, значок (больш за 2 000 значкоў Material) і колер (палітра або ўласны RGB / HEX)

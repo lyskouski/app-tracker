@@ -31,8 +31,6 @@ L’objectif de la solution est de créer une application de suivi des habitudes
 qui permette aux utilisateurs de gérer leurs habitudes sans effort tout en veillant à ce que personne ne soit laissé
 de côté.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Fonctionnalités
 - Habitudes
   - Titre, remarques, icône (plus de 2 000 icônes Material) et couleur (palette ou RVB / HEX personnalisé)

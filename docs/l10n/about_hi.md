@@ -31,8 +31,6 @@
 यह उपयोगकर्ताओं को बिना किसी परेशानी के अपनी आदतों को प्रबंधित करने में सक्षम बनाता है और सुनिश्चित करता है कि कोई भी
 पीछे न छूटे।
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### कार्यक्षमता
 - आदतें
   - शीर्षक, टिप्पणियाँ, आइकन (2,000+ Material आइकन), और रंग (पैलेट या कस्टम RGB / HEX)

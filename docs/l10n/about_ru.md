@@ -30,8 +30,6 @@
 Цель проекта — создать интуитивно понятное, эффективное и инклюзивное приложение для отслеживания привычек,
 которое позволяет пользователям легко управлять своими привычками и при этом никого не оставляет в стороне.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Функциональность
 - Привычки
   - Название, примечания, иконка (более 2 000 иконок Material) и цвет (из палитры или собственный RGB / HEX)

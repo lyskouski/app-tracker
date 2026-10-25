@@ -30,8 +30,6 @@
 Мета проєкту — створити інтуїтивно зрозумілий, ефективний та інклюзивний застосунок для відстеження звичок,
 який дає змогу користувачам легко керувати своїми звичками і водночас нікого не залишає осторонь.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Функціональність
 - Звички
   - Назва, примітки, іконка (понад 2 000 іконок Material) і колір (з палітри або власний RGB / HEX)

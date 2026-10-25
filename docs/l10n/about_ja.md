@@ -30,8 +30,6 @@
 このソリューションの目標は、直感的で効率的、そして誰もが使いやすい習慣トラッキングアプリを作ることです。
 誰一人取り残すことなく、ユーザーが手間なく習慣を管理できるようにします。
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### 機能
 - 習慣
   - タイトル、メモ、アイコン（2,000 以上の Material アイコン）、色（パレットまたはカスタム RGB / HEX）

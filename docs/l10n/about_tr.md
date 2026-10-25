@@ -30,8 +30,6 @@ Türkçe (TR) |
 Çözümün amacı, sezgisel, verimli ve kapsayıcı bir alışkanlık takip uygulaması oluşturmaktır.
 Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını zahmetsizce yönetmelerini sağlar.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### İşlevsellik
 - Alışkanlıklar
   - Başlık, notlar, simge (2.000'den fazla Material simgesi) ve renk (paletten veya özel RGB / HEX)

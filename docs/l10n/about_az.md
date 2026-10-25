@@ -30,8 +30,6 @@ Azərbaycan dili (AZ) |
 Həllin məqsədi intuitiv, səmərəli və inklüziv vərdiş izləmə tətbiqi yaratmaqdır.
 O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və heç kimin geridə qalmamasını təmin edir.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funksionallıq
 - Vərdişlər
   - Ad, qeydlər, ikona (2 000-dən çox Material ikonası) və rəng (palitra və ya fərdi RGB / HEX)

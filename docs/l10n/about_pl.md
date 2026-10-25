@@ -30,8 +30,6 @@ Polski (PL) |
 Celem rozwiązania jest stworzenie aplikacji do śledzenia nawyków, która jest intuicyjna, wydajna i inkluzywna.
 Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to, by nikt nie został pominięty.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funkcjonalność
 - Nawyki
   - Nazwa, uwagi, ikona (ponad 2000 ikon Material) i kolor (z palety lub własny RGB / HEX)

@@ -30,8 +30,6 @@
 Cílem řešení je vytvořit aplikaci pro sledování návyků, která je intuitivní, efektivní a inkluzivní.
 Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, že nikdo nezůstane pozadu.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funkce
 - Návyky
   - Název, poznámky, ikona (více než 2 000 ikon Material) a barva (paleta nebo vlastní RGB / HEX)

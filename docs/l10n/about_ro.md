@@ -30,8 +30,6 @@ Limba română (RO) |
 Scopul soluției este de a crea o aplicație de urmărire a obiceiurilor intuitivă, eficientă și incluzivă.
 Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort, asigurându-se că nimeni nu rămâne în urmă.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funcționalități
 - Obiceiuri
   - Titlu, observații, pictogramă (peste 2.000 de pictograme Material) și culoare (din paletă sau RGB / HEX personalizat)

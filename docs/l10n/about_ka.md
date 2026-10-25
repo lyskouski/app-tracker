@@ -30,8 +30,6 @@
 გადაწყვეტის მიზანია შეიქმნას ჩვევების აღრიცხვის აპლიკაცია, რომელიც არის ინტუიციური, ეფექტური და ინკლუზიური.
 ის მომხმარებლებს საშუალებას აძლევს, უპრობლემოდ მართონ თავიანთი ჩვევები და ამავდროულად არავინ დარჩეს მიღმა.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### ფუნქციონალი
 - ჩვევები
   - სახელი, შენიშვნები, ხატულა (2000-ზე მეტი Material ხატულა) და ფერი (პალიტრიდან ან მორგებული RGB / HEX)

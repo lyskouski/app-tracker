@@ -30,8 +30,6 @@
 本專案的目標是打造一款直覺、高效且具包容性的習慣追蹤應用程式，
 讓使用者輕鬆管理自己的習慣，同時確保不讓任何人落後。
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### 功能
 - 習慣
   - 標題、備註、圖示（2,000 多個 Material 圖示）和顏色（調色盤或自訂 RGB / HEX）

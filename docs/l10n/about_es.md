@@ -30,8 +30,6 @@ Español (ES) |
 El objetivo de la solución es crear una aplicación de seguimiento de hábitos intuitiva, eficiente e inclusiva.
 Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que nadie se quede atrás.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Funcionalidad
 - Hábitos
   - Título, observaciones, icono (más de 2000 iconos Material) y color (paleta o RGB / HEX personalizado)

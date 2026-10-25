@@ -30,8 +30,6 @@
 本项目的目标是打造一款直观、高效且包容的习惯追踪应用，
 让用户轻松管理自己的习惯，同时确保不让任何人掉队。
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### 功能
 - 习惯
   - 标题、备注、图标（2,000 多个 Material 图标）和颜色（调色板或自定义 RGB / HEX）

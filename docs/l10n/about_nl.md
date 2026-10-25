@@ -30,8 +30,6 @@ Nederlands (NL) |
 Het doel van de oplossing is een app voor het bijhouden van gewoontes te maken die intuïtief, efficiënt en inclusief is.
 Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterblijft.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Functionaliteit
 - Gewoontes
   - Titel, opmerkingen, pictogram (meer dan 2.000 Material-pictogrammen) en kleur (palet of eigen RGB / HEX)

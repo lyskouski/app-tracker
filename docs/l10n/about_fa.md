@@ -31,8 +31,6 @@
 برنامه‌ای که به کاربران امکان می‌دهد بدون زحمت عادت‌های خود را مدیریت کنند و در عین حال اطمینان حاصل شود که هیچ‌کس
 عقب نمی‌ماند.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### قابلیت‌ها
 - عادت‌ها
   - عنوان، یادداشت‌ها، نماد (بیش از ۲٬۰۰۰ نماد Material) و رنگ (از پالت یا RGB / HEX دلخواه)

@@ -30,8 +30,6 @@ Oʻzbekcha (UZ) |
 Loyihaning maqsadi — intuitiv, samarali va inklyuziv odatlarni kuzatish ilovasini yaratish.
 U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hech kimni chetda qoldirmaydi.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Imkoniyatlar
 - Odatlar
   - Nomi, izohlar, belgi (2 000 dan ortiq Material belgilari) va rang (palitradan yoki maxsus RGB / HEX)

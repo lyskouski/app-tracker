@@ -31,8 +31,6 @@ Tujuan solusi ini adalah menciptakan aplikasi pelacak kebiasaan yang intuitif, e
 yang memungkinkan pengguna mengelola kebiasaan mereka dengan mudah sambil memastikan tidak ada seorang pun yang
 tertinggal.
 
-<img title="Zwyka: Main Screen" src="../design-flow/screenshots/main_1.jpg" width="240" /> <img title="Zwyka: Calendar" src="../design-flow/screenshots/calendar.jpg" width="240" /> <img title="Zwyka: Metrics" src="../design-flow/screenshots/metrics.jpg" width="240" />
-
 ### Fungsionalitas
 - Kebiasaan
   - Judul, catatan, ikon (lebih dari 2.000 ikon Material), dan warna (palet atau RGB / HEX khusus)
