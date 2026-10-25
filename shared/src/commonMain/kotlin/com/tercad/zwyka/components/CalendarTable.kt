@@ -10,6 +10,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -42,11 +43,13 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.max
@@ -55,16 +58,17 @@ import kotlin.math.roundToInt
 
 import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.hasNumericTarget
+import com.tercad.zwyka.core.model.parseNumericValue
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.core.progress.calculateDayProgress
 import com.tercad.zwyka.core.progress.calculateStreaks
 import com.tercad.zwyka.core.progress.displayedMark
+import com.tercad.zwyka.core.progress.isProgressMark
 import com.tercad.zwyka.core.progress.toMarks
 import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
-import com.tercad.zwyka.defines.isStatusMark
-import com.tercad.zwyka.defines.statusProgress
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.months_short
 import org.jetbrains.compose.resources.stringArrayResource
@@ -981,8 +985,11 @@ private fun CalendarBodyViewport(
                     // A single day is not a streak yet.
                     val streak = streaks[key]?.takeIf { it > 1 }
                     val status = marks[key]
-                        ?.takeIf { mark -> isStatusMark(mark) }
+                        ?.takeIf { mark -> isProgressMark(habit, mark) }
                         ?: "·"
+                    // A reached value of a numeric target is shown above its unit.
+                    val unit = habit.targetType
+                        ?.takeIf { habit.hasNumericTarget && parseNumericValue(value) != null }
 
                     CalendarTableCell(
                         text = value,
@@ -998,6 +1005,7 @@ private fun CalendarBodyViewport(
                         },
                         background = backgroundColor,
                         topLabel = streak?.toString(),
+                        bottomLabel = unit,
                         highlight = todayHighlight(
                             isToday = date == today,
                             left = false,
@@ -1029,6 +1037,7 @@ private fun CalendarBodyViewport(
                             }
                             .semantics {
                                 contentDescription = "${habit.title}, $date, $value" +
+                                    (unit?.let { " $it" } ?: "") +
                                     (streak?.let { ", $it" } ?: "")
                             },
                     )
@@ -1171,6 +1180,8 @@ private fun CalendarTableCell(
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     contentDescription: String? = null,
     topLabel: String? = null,
+    /** Shown under the mark, e.g. the unit of a numeric value. */
+    bottomLabel: String? = null,
     title: String? = null,
     completenessType: CompletenessType = CompletenessType.SYMBOLS,
     highlight: Modifier = Modifier,
@@ -1189,7 +1200,7 @@ private fun CalendarTableCell(
             .then(highlight),
         contentAlignment = Alignment.Center,
     ) {
-        val mark: @Composable () -> Unit = {
+        val mark: @Composable (TextStyle) -> Unit = { style ->
             if (icon != null) {
                 Icon(
                     imageVector = icon,
@@ -1207,6 +1218,7 @@ private fun CalendarTableCell(
                         }
                     },
                     color = textColor,
+                    style = style,
                     type = completenessType,
                 )
             }
@@ -1218,7 +1230,7 @@ private fun CalendarTableCell(
                     .padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                mark()
+                mark(MaterialTheme.typography.bodyMedium)
                 Text(
                     text = title,
                     modifier = Modifier.weight(1f).padding(start = 4.dp),
@@ -1229,8 +1241,20 @@ private fun CalendarTableCell(
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }
+        } else if (bottomLabel != null) {
+            // Compact line heights: the streak above stays clear.
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                mark(MaterialTheme.typography.labelMedium.copy(lineHeight = 12.sp))
+                Text(
+                    text = bottomLabel,
+                    color = textColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp, lineHeight = 10.sp),
+                )
+            }
         } else {
-            mark()
+            mark(MaterialTheme.typography.bodyMedium)
         }
         if (topLabel != null) {
             Text(

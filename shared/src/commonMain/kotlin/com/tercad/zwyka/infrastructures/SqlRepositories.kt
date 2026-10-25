@@ -30,14 +30,18 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
     private val queries get() = database.databaseQueries
 
     override suspend fun getAll(): List<Habit> =
-        queries.selectAllHabits { id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived ->
-            Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays.toInt(), isArchived != 0L)
+        queries.selectAllHabits {
+                id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived, targetValue, targetType ->
+            Habit(
+                id, title, icon, color, remarks, createdAt, updatedAt, activeDays.toInt(), isArchived != 0L,
+                targetValue, targetType,
+            )
         }.awaitAsList()
 
     override suspend fun insert(draft: HabitDraft): Long {
         queries.insertHabit(
             draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
-            if (draft.isArchived) 1L else 0L,
+            if (draft.isArchived) 1L else 0L, draft.targetValue, draft.targetType,
         )
         return queries.selectLastHabitId().awaitAsOne().max ?: error("Habit was not created")
     }
@@ -45,7 +49,7 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
     override suspend fun update(id: Long, draft: HabitDraft) {
         queries.updateHabit(
             draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
-            if (draft.isArchived) 1L else 0L, id,
+            if (draft.isArchived) 1L else 0L, draft.targetValue, draft.targetType, id,
         )
     }
 
@@ -188,6 +192,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
                         "id" to it.id, "title" to it.title, "icon" to it.icon, "color" to it.color,
                         "remarks" to it.remarks, "createdAt" to it.createdAt, "updatedAt" to it.updatedAt,
                         "activeDays" to it.activeDays, "isArchived" to it.isArchived,
+                        "targetValue" to it.targetValue, "targetType" to it.targetType,
                     ),
                 ),
             )
@@ -240,7 +245,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
         "Habit" -> queries.importHabit(
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
             long("createdAt", 0), long("updatedAt", 0), long("activeDays", ALL_DAYS.toLong()),
-            long("isArchived", 0),
+            long("isArchived", 0), doubleOrNull("targetValue"), stringOrNull("targetType"),
         )
         "Intent" -> queries.importIntent(
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
@@ -257,6 +262,11 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
 
     private fun SqlInsert.longOrNull(column: String): Long? = values[column]?.let {
         it as? Long ?: throw IllegalArgumentException("$table.$column is not a number")
+    }
+
+    private fun SqlInsert.doubleOrNull(column: String): Double? = values[column]?.let {
+        (it as? Double ?: (it as? Long)?.toDouble())
+            ?: throw IllegalArgumentException("$table.$column is not a number")
     }
 
     private fun SqlInsert.long(column: String, default: Long? = null): Long =

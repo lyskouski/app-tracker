@@ -5,6 +5,7 @@ package com.tercad.zwyka.core.model
 
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlin.math.abs
 import kotlin.time.Instant
 
 data class Habit(
@@ -18,11 +19,26 @@ data class Habit(
     val activeDays: Int = ALL_DAYS,
     /** Deactivated: shown last in the calendar, without marks. */
     val isArchived: Boolean = false,
+    /** Numeric target of a day, e.g. 8 (glasses); day states keep the reached value then. */
+    val targetValue: Double? = null,
+    /** Unit of [targetValue], e.g. "glasses". */
+    val targetType: String? = null,
 )
 
 /** Bitmask of active weekdays: bit 0 is Monday ... bit 6 is Sunday. */
 const val ALL_DAYS = 0x7F
 const val INACTIVE_MARK = "—"
+
+val Habit.hasNumericTarget: Boolean
+    get() = targetValue != null
+
+/** Number entered by the user ("," is accepted as the decimal separator), or null. */
+fun parseNumericValue(text: String): Double? =
+    text.trim().replace(',', '.').toDoubleOrNull()?.takeIf { it.isFinite() }
+
+/** [value] without a redundant ".0". */
+fun formatNumericValue(value: Double): String =
+    if (value % 1.0 == 0.0 && abs(value) < 1e15) value.toLong().toString() else value.toString()
 
 fun Habit.isActiveOn(dayOfWeek: kotlinx.datetime.DayOfWeek): Boolean =
     activeDays and (1 shl dayOfWeek.ordinal) != 0

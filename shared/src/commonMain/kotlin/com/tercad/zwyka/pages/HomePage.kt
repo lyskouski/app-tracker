@@ -269,14 +269,17 @@ private fun HomePageContent(
                         showHabitDialog = false
                         editingHabit = null
                     },
-                    onSave = { title, icon, color, remarks, activeDays, isArchived ->
+                    onSave = { title, icon, color, remarks, activeDays, isArchived, targetValue, targetType ->
                         isHabitSaving = true
                         habitError = null
                         coroutineScope.launch {
                             try {
                                 val habits = services.habits.save(
                                     id = habitToEdit?.id,
-                                    draft = HabitDraft(title, icon, color, remarks, activeDays, isArchived),
+                                    draft = HabitDraft(
+                                        title, icon, color, remarks, activeDays, isArchived,
+                                        targetValue, targetType,
+                                    ),
                                     weekStart = settingsStore.current.weekStart,
                                 )
                                 val dayStates = services.dayStates.getRange(dates.first(), dates.last())

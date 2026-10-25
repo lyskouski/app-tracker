@@ -5,6 +5,8 @@ package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +21,7 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
@@ -30,6 +33,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -41,11 +45,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.Habit
+import com.tercad.zwyka.core.model.formatNumericValue
+import com.tercad.zwyka.core.model.parseNumericValue
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationColorOptions
@@ -72,10 +79,13 @@ import com.tercad.zwyka.resources.habit_remarks
 import com.tercad.zwyka.resources.habit_update_failed
 import com.tercad.zwyka.resources.invalid_color
 import com.tercad.zwyka.resources.no_icon
+import com.tercad.zwyka.resources.numeric_target
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.search_icons
 import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
+import com.tercad.zwyka.resources.target_type
+import com.tercad.zwyka.resources.target_value
 
 @Composable
 fun HabitEditorDialog(
@@ -90,6 +100,8 @@ fun HabitEditorDialog(
         remarks: String?,
         activeDays: Int,
         isArchived: Boolean,
+        targetValue: Double?,
+        targetType: String?,
     ) -> Unit,
     onDelete: (() -> Unit)? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
@@ -100,6 +112,11 @@ fun HabitEditorDialog(
     var remarks by remember(habit?.id) { mutableStateOf(habit?.remarks.orEmpty()) }
     var activeDays by remember(habit?.id) { mutableStateOf(habit?.activeDays ?: ALL_DAYS) }
     var isArchived by remember(habit?.id) { mutableStateOf(habit?.isArchived ?: false) }
+    var hasTarget by remember(habit?.id) { mutableStateOf(habit?.targetValue != null) }
+    var targetValue by remember(habit?.id) {
+        mutableStateOf(habit?.targetValue?.let(::formatNumericValue).orEmpty())
+    }
+    var targetType by remember(habit?.id) { mutableStateOf(habit?.targetType.orEmpty()) }
     var iconSearch by remember(habit?.id) { mutableStateOf("") }
     var colorInput by remember(habit?.id) { mutableStateOf(habit?.color.orEmpty()) }
     var selectingIcon by remember(habit?.id) { mutableStateOf(false) }
@@ -107,10 +124,11 @@ fun HabitEditorDialog(
     var confirmingDelete by remember(habit?.id) { mutableStateOf(false) }
 
     val normalizedColor = normalizeApplicationColor(colorInput)
+    val parsedTarget = parseNumericValue(targetValue)?.takeIf { it > 0 }
     val canSave = !isSaving && when {
         selectingIcon -> true
         selectingColor -> normalizedColor != null
-        else -> title.isNotBlank()
+        else -> title.isNotBlank() && (!hasTarget || parsedTarget != null)
     }
     val noIconDescription = stringResource(Res.string.no_icon)
 
@@ -280,7 +298,7 @@ fun HabitEditorDialog(
                     }
                 }
                 else -> {
-                    Column {
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                         OutlinedTextField(
                             value = title,
                             onValueChange = { title = it },
@@ -301,6 +319,45 @@ fun HabitEditorDialog(
                                 .fillMaxWidth()
                                 .padding(top = 8.dp),
                         )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(stringResource(Res.string.numeric_target), modifier = Modifier.weight(1f))
+                            Switch(
+                                checked = hasTarget,
+                                onCheckedChange = { hasTarget = it },
+                                // Stored values would lose their meaning without the target.
+                                enabled = !isSaving && habit?.targetValue == null,
+                            )
+                        }
+                        if (hasTarget) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            ) {
+                                OutlinedTextField(
+                                    value = targetValue,
+                                    onValueChange = { targetValue = it },
+                                    label = { Text(stringResource(Res.string.target_value)) },
+                                    singleLine = true,
+                                    isError = targetValue.isNotBlank() && parsedTarget == null,
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                                    enabled = !isSaving,
+                                    modifier = Modifier.weight(1f),
+                                )
+                                OutlinedTextField(
+                                    value = targetType,
+                                    onValueChange = { targetType = it },
+                                    label = { Text(stringResource(Res.string.target_type)) },
+                                    singleLine = true,
+                                    enabled = !isSaving,
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                        }
                         Text(
                             stringResource(Res.string.active_days),
                             modifier = Modifier.padding(top = 8.dp),
@@ -416,6 +473,8 @@ fun HabitEditorDialog(
                                 remarks.trim().ifEmpty { null },
                                 activeDays,
                                 isArchived,
+                                parsedTarget.takeIf { hasTarget },
+                                targetType.trim().ifEmpty { null }.takeIf { hasTarget },
                             )
                         }
                     },

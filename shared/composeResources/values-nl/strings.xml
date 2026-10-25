@@ -10,6 +10,9 @@
     <string name="habit_remarks">Opmerkingen</string>
     <string name="active_days">Actieve dagen</string>
     <string name="archive_habit">Gewoonte archiveren/deactiveren</string>
+    <string name="numeric_target">Numeriek doel instellen</string>
+    <string name="target_value">Waarde</string>
+    <string name="target_type">Type</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleren</string>
     <string name="skip">Overslaan</string>

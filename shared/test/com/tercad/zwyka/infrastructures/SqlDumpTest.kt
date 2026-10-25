@@ -22,6 +22,13 @@ class SqlDumpTest {
     }
 
     @Test
+    fun readsRealNumbersBack() {
+        val values = listOf("id" to 1L, "targetValue" to 2.5)
+        val parsed = parseSqlDump(sqlInsert("Habit", values) + "\n")
+        assertEquals(listOf(SqlInsert("Habit", values.toMap())), parsed)
+    }
+
+    @Test
     fun acceptsSqliteNotationAndComments() {
         val parsed = parseSqlDump(
             """

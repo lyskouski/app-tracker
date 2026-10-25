@@ -10,6 +10,9 @@
     <string name="habit_remarks">Anmerkungen</string>
     <string name="active_days">Aktive Tage</string>
     <string name="archive_habit">Gewohnheit archivieren/deaktivieren</string>
+    <string name="numeric_target">Numerisches Ziel festlegen</string>
+    <string name="target_value">Wert</string>
+    <string name="target_type">Typ</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="skip">Überspringen</string>

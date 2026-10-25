@@ -10,6 +10,9 @@
     <string name="habit_remarks">Catatan</string>
     <string name="active_days">Hari aktif</string>
     <string name="archive_habit">Arsipkan/nonaktifkan kebiasaan</string>
+    <string name="numeric_target">Tetapkan target angka</string>
+    <string name="target_value">Nilai</string>
+    <string name="target_type">Jenis</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="skip">Lewati</string>

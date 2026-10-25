@@ -10,6 +10,9 @@
     <string name="habit_remarks">メモ</string>
     <string name="active_days">実施日</string>
     <string name="archive_habit">習慣をアーカイブ/無効化</string>
+    <string name="numeric_target">数値目標を設定</string>
+    <string name="target_value">値</string>
+    <string name="target_type">種類</string>
     <string name="save">保存</string>
     <string name="cancel">キャンセル</string>
     <string name="skip">スキップ</string>

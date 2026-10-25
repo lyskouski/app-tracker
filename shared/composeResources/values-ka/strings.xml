@@ -10,6 +10,9 @@
     <string name="habit_remarks">შენიშვნები</string>
     <string name="active_days">აქტიური დღეები</string>
     <string name="archive_habit">ჩვევის დაარქივება/დეაქტივაცია</string>
+    <string name="numeric_target">რიცხვითი მიზნის დაყენება</string>
+    <string name="target_value">მნიშვნელობა</string>
+    <string name="target_type">ტიპი</string>
     <string name="save">შენახვა</string>
     <string name="cancel">გაუქმება</string>
     <string name="skip">გამოტოვება</string>

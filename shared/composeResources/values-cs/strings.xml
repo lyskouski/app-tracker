@@ -10,6 +10,9 @@
     <string name="habit_remarks">Poznámky</string>
     <string name="active_days">Aktivní dny</string>
     <string name="archive_habit">Archivovat/deaktivovat návyk</string>
+    <string name="numeric_target">Nastavit číselný cíl</string>
+    <string name="target_value">Hodnota</string>
+    <string name="target_type">Typ</string>
     <string name="save">Uložit</string>
     <string name="cancel">Zrušit</string>
     <string name="skip">Přeskočit</string>

@@ -10,6 +10,9 @@
     <string name="habit_remarks">یادداشت‌ها</string>
     <string name="active_days">روزهای فعال</string>
     <string name="archive_habit">بایگانی/غیرفعال‌سازی عادت</string>
+    <string name="numeric_target">تعیین هدف عددی</string>
+    <string name="target_value">مقدار</string>
+    <string name="target_type">نوع</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
     <string name="skip">رد شدن</string>

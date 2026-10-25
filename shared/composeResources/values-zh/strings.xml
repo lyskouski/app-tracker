@@ -10,6 +10,9 @@
     <string name="habit_remarks">备注</string>
     <string name="active_days">活跃日</string>
     <string name="archive_habit">归档/停用习惯</string>
+    <string name="numeric_target">设置数值目标</string>
+    <string name="target_value">数值</string>
+    <string name="target_type">类型</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="skip">跳过</string>

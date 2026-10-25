@@ -10,6 +10,9 @@
     <string name="habit_remarks">Note</string>
     <string name="active_days">Giorni attivi</string>
     <string name="archive_habit">Archivia/disattiva abitudine</string>
+    <string name="numeric_target">Imposta obiettivo numerico</string>
+    <string name="target_value">Valore</string>
+    <string name="target_type">Tipo</string>
     <string name="save">Salva</string>
     <string name="cancel">Annulla</string>
     <string name="skip">Salta</string>

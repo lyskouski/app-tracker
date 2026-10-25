@@ -11,6 +11,8 @@ data class HabitDraft(
     val remarks: String?,
     val activeDays: Int,
     val isArchived: Boolean = false,
+    val targetValue: Double? = null,
+    val targetType: String? = null,
 )
 
 /** Editable fields of a [HabitTime]. */

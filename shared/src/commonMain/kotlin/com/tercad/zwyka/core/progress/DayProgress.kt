@@ -8,15 +8,35 @@ import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
+import com.tercad.zwyka.core.model.hasNumericTarget
 import com.tercad.zwyka.core.model.isActiveOn
 import com.tercad.zwyka.core.model.isBeforeCreation
+import com.tercad.zwyka.core.model.parseNumericValue
 import com.tercad.zwyka.defines.isStatusMark
 import com.tercad.zwyka.defines.statusProgress
+
+/** Marks the progress of the day: a status mark, or a reached value of a numeric target. */
+fun isProgressMark(habit: Habit, mark: String?): Boolean =
+    isStatusMark(mark) || (habit.hasNumericTarget && mark != null && parseNumericValue(mark) != null)
+
+/*
+ * Completion of [mark], 0..1: the reached value divided by the numeric target,
+ * otherwise by the status mark (see [statusProgress]); over 100% is capped.
+ */
+fun markProgress(habit: Habit, mark: String?): Float {
+    val target = habit.targetValue?.takeIf { it > 0 }
+    val value = mark?.let(::parseNumericValue)
+    return if (target != null && value != null) {
+        (value / target).toFloat().coerceIn(0f, 1f)
+    } else {
+        statusProgress(mark)
+    }
+}
 
 /*
  * Progress of all habits applicable on [date], 0..1, or null if none applies.
  *
- * Each status mark contributes by its percentage ("·" = 0%, "X" = 100%),
+ * Each mark contributes by its percentage ("·" = 0%, "X" = 100%, value / target),
  * values over 100% are capped. Habits marked with "—", unmarked inactive
  * days, days before the habit creation and archived habits are skipped.
  */
@@ -34,7 +54,7 @@ fun calculateDayProgress(
             mark == INACTIVE_MARK -> null
             mark == null && !habit.isActiveOn(dayOfWeek) -> null
             habit.isBeforeCreation(date, mark) -> null
-            else -> statusProgress(mark)
+            else -> markProgress(habit, mark)
         }
     }
     if (values.isEmpty()) return null

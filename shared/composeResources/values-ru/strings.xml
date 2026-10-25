@@ -10,6 +10,9 @@
     <string name="habit_remarks">Примечания</string>
     <string name="active_days">Активные дни</string>
     <string name="archive_habit">Архивировать/деактивировать привычку</string>
+    <string name="numeric_target">Задать числовую цель</string>
+    <string name="target_value">Значение</string>
+    <string name="target_type">Тип</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
     <string name="skip">Пропустить</string>

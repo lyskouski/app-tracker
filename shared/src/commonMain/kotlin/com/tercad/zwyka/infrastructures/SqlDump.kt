@@ -5,10 +5,10 @@ package com.tercad.zwyka.infrastructures
 
 /*
  * Backup format: one `INSERT IGNORE INTO Table (columns) VALUES (values);` statement per line.
- * Values are NULL, integers or quoted strings; strings escape `\`, `'` and line breaks with `\`.
+ * Values are NULL, integers, real numbers or quoted strings; strings escape `\`, `'` and line breaks with `\`.
  */
 
-/** One parsed statement: column name to value (null, [Long] or [String]). */
+/** One parsed statement: column name to value (null, [Long], [Double] or [String]). */
 data class SqlInsert(val table: String, val values: Map<String, Any?>)
 
 class SqlDumpException(lineNumber: Int, reason: String) : Exception("Line $lineNumber: $reason")
@@ -20,6 +20,7 @@ fun sqlInsert(table: String, values: List<Pair<String, Any?>>): String =
 private fun sqlLiteral(value: Any?): String = when (value) {
     null -> "NULL"
     is Long, is Int -> value.toString()
+    is Double -> value.toString()
     is String -> buildString {
         append('\'')
         value.forEach { char ->
@@ -104,7 +105,9 @@ private fun parseValues(text: String): List<Any?> {
             val token = text.substring(start, index)
             values += when {
                 token.equals("NULL", ignoreCase = true) -> null
-                else -> token.toLongOrNull() ?: throw IllegalArgumentException("invalid value: $token")
+                else -> token.toLongOrNull()
+                    ?: token.toDoubleOrNull()?.takeIf { it.isFinite() }
+                    ?: throw IllegalArgumentException("invalid value: $token")
             }
         }
         skipSpaces()

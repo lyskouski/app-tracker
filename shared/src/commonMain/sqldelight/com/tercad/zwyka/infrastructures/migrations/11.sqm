@@ -1,0 +1,3 @@
+ALTER TABLE Habit ADD COLUMN targetValue REAL;
+
+ALTER TABLE Habit ADD COLUMN targetType TEXT;

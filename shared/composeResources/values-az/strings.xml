@@ -10,6 +10,9 @@
     <string name="habit_remarks">Qeydlər</string>
     <string name="active_days">Aktiv günlər</string>
     <string name="archive_habit">Vərdişi arxivləşdir/deaktiv et</string>
+    <string name="numeric_target">Rəqəmsal hədəf təyin et</string>
+    <string name="target_value">Dəyər</string>
+    <string name="target_type">Növ</string>
     <string name="save">Yadda saxla</string>
     <string name="cancel">Ləğv et</string>
     <string name="skip">Keç</string>

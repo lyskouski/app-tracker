@@ -41,8 +41,8 @@ class SqlBackupRepositoryTest {
     fun importAddsMissingRowsOnly() = runTest {
         val source = database()
         val habits = SqlHabitRepository(source)
-        val id = habits.insert(HabitDraft("Read", "MenuBook", "#26A69A", "20 pages", 0b11))
-        SqlDayStateRepository(source).upsert(DayState(id, "2026-10-18", "X"))
+        val id = habits.insert(HabitDraft("Read", "MenuBook", "#26A69A", "20 pages", 0b11, targetValue = 20.5, targetType = "pages"))
+        SqlDayStateRepository(source).upsert(DayState(id, "2026-10-18", "12"))
         SqlSettingsRepository(source).put("language", "de")
         val sql = SqlBackupRepository(source).export()
 
