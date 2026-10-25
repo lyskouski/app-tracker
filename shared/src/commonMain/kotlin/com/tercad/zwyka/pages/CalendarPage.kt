@@ -26,8 +26,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -82,6 +85,7 @@ import com.tercad.zwyka.components.HabitTimeDialog
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.add_habit_time
 import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.days_short
@@ -178,6 +182,25 @@ private fun CalendarPageContent(
                         modifier = Modifier.padding(start = 8.dp),
                     )
                 }
+            }
+        },
+        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+                    val start = if (selectedDate == today) ((now.hour + 1) * 60).coerceAtMost(23 * 60) else 9 * 60
+                    saveError = null
+                    editing = HabitTimeEditing(null, start)
+                },
+                modifier = Modifier.offset(y = 52.dp),
+                containerColor = currentColorScheme().inversePrimary,
+                contentColor = currentColorScheme().secondary,
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(Res.string.add_habit_time),
+                )
             }
         },
     ) { contentPadding ->
