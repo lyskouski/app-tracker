@@ -82,11 +82,13 @@ one is left behind.
 - Import / Export data
 - Habits' day state representation: symbols, colored circles
 
+## Screenshots
+
 <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/1_home.png" width="240" /> . <img title="Zwyka: Add Habit" src="./docs/design-flow/screenshots/2_add_habit.png" width="240" /> . <img title="Zwyka: Settings" src="./docs/design-flow/screenshots/3_settings.png" width="240" />
 
 <img title="Zwyka: Calendar" src="./docs/design-flow/screenshots/4_calendar.png" width="240" /> . <img title="Zwyka: Add to Calendar" src="./docs/design-flow/screenshots/5_calendar_add.png" width="240" /> . <img title="Zwyka: Main Screen with Colors" src="./docs/design-flow/screenshots/6_home_colors.png" width="240" />
 
-<img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/7_metrics.jpg" width="240" /> . <img title="Zwyka: Detailed Metrics" src="./docs/design-flow/screenshots/7_detailed_metrics.png" width="240" /> . <img title="Zwyka: Timer" src="./docs/design-flow/screenshots/8_timer.png" width="240" />
+<img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/9_metrics.png" width="240" /> . <img title="Zwyka: Detailed Metrics" src="./docs/design-flow/screenshots/7_detailed_metrics.png" width="240" /> . <img title="Zwyka: Timer" src="./docs/design-flow/screenshots/8_timer.png" width="240" />
 
 ## Support (Sponsorship)
 

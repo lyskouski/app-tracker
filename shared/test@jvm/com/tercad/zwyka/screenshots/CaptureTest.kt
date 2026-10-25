@@ -5,8 +5,11 @@ package com.tercad.zwyka.screenshots
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.click
+import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -29,6 +32,7 @@ import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.completeness_colors
 import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.max_streak
+import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.timer_next_events
@@ -103,6 +107,12 @@ class CaptureTest {
             // The schedule loads after the page is shown.
             val nextEvents = getString(Res.string.timer_next_events)
             waitUntil { onAllNodesWithText(nextEvents).fetchSemanticsNodes().isNotEmpty() }
+        }
+        gen.inject("9_metrics") {
+            // Today's progress (the corner cell of the table) is described by its percentage.
+            onAllNodes(hasClickAction() and hasContentDescription("%", substring = true)).onFirst().performClick()
+            val metrics = getString(Res.string.metrics)
+            waitUntil { onAllNodesWithText(metrics).fetchSemanticsNodes().isNotEmpty() }
         }
         gen.run()
     }
