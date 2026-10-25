@@ -31,6 +31,10 @@ compose.desktop {
             vendor = "terCAD"
             // From `./gradlew :desktopApp:suggestRuntimeModules`.
             modules("java.instrument", "java.sql", "jdk.unsupported")
+
+            windows {
+                iconFile.set(project.file("icons/zwyka.ico"))
+            }
         }
     }
 }

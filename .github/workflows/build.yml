@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Web, Android]
+        target: [Web, Android, Windows]
         include:
           - os: ubuntu-latest
             target: Web
@@ -35,6 +35,11 @@ jobs:
             build_path: androidApp/build/outputs/bundle/release/
             asset_extension: .aab
             asset_content_type: application/zip
+          - os: windows-latest
+            target: Windows
+            build_path: windows-msix/
+            asset_extension: .msix
+            asset_content_type: application/msix
 
     steps:
       - uses: actions/checkout@v4
@@ -78,6 +83,31 @@ jobs:
         run: mv androidApp-release.aab zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
         working-directory: ${{ matrix.build_path }}
 
+# Windows
+      - name: Run Windows Build
+        if: matrix.target == 'Windows'
+        run: |
+          ./gradlew :desktopApp:createDistributable --no-daemon `
+            -PversionName=${{ needs.release.outputs.version }}
+
+      - name: Build Windows MSIX
+        if: matrix.target == 'Windows'
+        run: ./build.ps1 -Version "${{ needs.release.outputs.version }}" -Output zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+        working-directory: ${{ matrix.build_path }}
+
+      - name: Setup MS Store CLI
+        if: matrix.target == 'Windows'
+        uses: microsoft/setup-msstore-cli@ec39acd1144351ab7a9d8d25e12bf6fd1ba03150
+
+      # Requires the Partner Center credentials of terCAD and the Store ID of the reserved "Zwyka" app.
+      - name: Publish MSIX to the Microsoft Store
+        if: matrix.target == 'Windows'
+        run: |
+          msstore reconfigure --tenantId ${{ secrets.WINDOWS_TENANT_ID }} --clientId ${{ secrets.WINDOWS_CLIENT_ID }} --clientSecret ${{ secrets.WINDOWS_SECRET }} --sellerId ${{ secrets.WINDOWS_SELLER_ID }}
+          msstore publish -i zwyka_${{ matrix.target }}${{ matrix.asset_extension }} -id ${{ secrets.WINDOWS_APP_ID }}
+          if ($LASTEXITCODE -ne 0) { echo "Publishing failed since replaced build in review state."; exit 0 }
+        working-directory: ${{ matrix.build_path }}
+
 #
       - name: Upload ${{ matrix.target }} Artifact
         id: upload_release_asset
@@ -90,7 +120,7 @@ jobs:
           asset_name: zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
           asset_content_type: ${{ matrix.asset_content_type }}
 
-# Linux: Compose distributable with a bundled JRE, repacked below into Snap, AppImage and Flatpak.
+# Linux
   build-linux:
     name: Create Linux build
     permissions:
