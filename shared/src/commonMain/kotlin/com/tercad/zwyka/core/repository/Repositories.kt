@@ -34,6 +34,9 @@ interface DayStateRepository {
     /** Day states within [from]..[to] (ISO dates, inclusive). */
     suspend fun getRange(from: String, to: String): List<DayState>
 
+    /** Every day state of the habit, ordered by date. */
+    suspend fun getForHabit(habitId: Long): List<DayState>
+
     suspend fun upsert(state: DayState)
 
     suspend fun delete(habitId: Long, date: String)

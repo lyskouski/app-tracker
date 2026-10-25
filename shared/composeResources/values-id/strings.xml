@@ -13,6 +13,9 @@
     <string name="numeric_target">Tetapkan target angka</string>
     <string name="target_value">Nilai</string>
     <string name="target_type">Jenis</string>
+    <string name="habit_target">Target: %1$s %2$s</string>
+    <string name="max_streak">Rentetan terpanjang: %1$s</string>
+    <string name="current_streak">Rentetan saat ini: %1$s</string>
     <string name="save">Simpan</string>
     <string name="cancel">Batal</string>
     <string name="skip">Lewati</string>

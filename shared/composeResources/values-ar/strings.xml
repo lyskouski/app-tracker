@@ -13,6 +13,9 @@
     <string name="numeric_target">تعيين هدف رقمي</string>
     <string name="target_value">القيمة</string>
     <string name="target_type">النوع</string>
+    <string name="habit_target">الهدف: %1$s %2$s</string>
+    <string name="max_streak">أطول سلسلة: %1$s</string>
+    <string name="current_streak">السلسلة الحالية: %1$s</string>
     <string name="save">حفظ</string>
     <string name="cancel">إلغاء</string>
     <string name="skip">تخطي</string>

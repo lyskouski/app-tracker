@@ -13,6 +13,9 @@
     <string name="numeric_target">Sayısal hedef belirle</string>
     <string name="target_value">Değer</string>
     <string name="target_type">Tür</string>
+    <string name="habit_target">Hedef: %1$s %2$s</string>
+    <string name="max_streak">En uzun seri: %1$s</string>
+    <string name="current_streak">Mevcut seri: %1$s</string>
     <string name="save">Kaydet</string>
     <string name="cancel">İptal</string>
     <string name="skip">Atla</string>

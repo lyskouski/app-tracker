@@ -3,7 +3,9 @@
 
 package com.tercad.zwyka.core.progress
 
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.DayState
@@ -60,4 +62,27 @@ fun calculateStreaks(
         }
     }
     return result
+}
+
+data class StreakSummary(val max: Int, val current: Int)
+
+/*
+ * Longest and current Day Streak of [habit] over all its marks ([marks] by ISO date).
+ *
+ * Same rules as [calculateStreaks]; a not yet marked [today] keeps the current streak.
+ */
+fun calculateStreakSummary(habit: Habit, marks: Map<String, String>, today: LocalDate): StreakSummary {
+    var date = marks.keys.minOrNull()?.let { LocalDate.parse(it) } ?: return StreakSummary(0, 0)
+    var streak = 0
+    var max = 0
+    while (date <= today) {
+        val mark = marks[date.toString()]
+        when {
+            isProgressMark(habit, mark) -> max = maxOf(max, ++streak)
+            mark == INACTIVE_MARK || date == today -> Unit
+            else -> streak = 0
+        }
+        date = date.plus(1, DateTimeUnit.DAY)
+    }
+    return StreakSummary(max, streak)
 }

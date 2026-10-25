@@ -13,6 +13,9 @@
     <string name="numeric_target">Numerisches Ziel festlegen</string>
     <string name="target_value">Wert</string>
     <string name="target_type">Typ</string>
+    <string name="habit_target">Ziel: %1$s %2$s</string>
+    <string name="max_streak">Längste Serie: %1$s</string>
+    <string name="current_streak">Aktuelle Serie: %1$s</string>
     <string name="save">Speichern</string>
     <string name="cancel">Abbrechen</string>
     <string name="skip">Überspringen</string>

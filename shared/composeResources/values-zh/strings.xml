@@ -13,6 +13,9 @@
     <string name="numeric_target">设置数值目标</string>
     <string name="target_value">数值</string>
     <string name="target_type">类型</string>
+    <string name="habit_target">目标：%1$s %2$s</string>
+    <string name="max_streak">最长连续：%1$s</string>
+    <string name="current_streak">当前连续：%1$s</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="skip">跳过</string>

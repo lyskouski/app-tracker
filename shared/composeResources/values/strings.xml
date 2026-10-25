@@ -13,6 +13,9 @@
     <string name="numeric_target">Set numeric target</string>
     <string name="target_value">Value</string>
     <string name="target_type">Type</string>
+    <string name="habit_target">Target: %1$s %2$s</string>
+    <string name="max_streak">Max streak: %1$s</string>
+    <string name="current_streak">Current streak: %1$s</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="skip">Skip</string>

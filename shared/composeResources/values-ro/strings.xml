@@ -13,6 +13,9 @@
     <string name="numeric_target">Setează obiectiv numeric</string>
     <string name="target_value">Valoare</string>
     <string name="target_type">Tip</string>
+    <string name="habit_target">Obiectiv: %1$s %2$s</string>
+    <string name="max_streak">Serie maximă: %1$s</string>
+    <string name="current_streak">Serie curentă: %1$s</string>
     <string name="save">Salvează</string>
     <string name="cancel">Anulează</string>
     <string name="skip">Omite</string>

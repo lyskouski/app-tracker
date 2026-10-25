@@ -252,6 +252,9 @@ private fun HomePageContent(
                         habitError = null
                         showHabitDialog = true
                     },
+                    onHabitLongClick = { habit ->
+                        navigator.push(DetailedPage(habit, services, today, settingsStore.current.weekStart))
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(contentPadding),

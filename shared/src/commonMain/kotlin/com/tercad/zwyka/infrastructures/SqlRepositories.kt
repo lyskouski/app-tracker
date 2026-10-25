@@ -78,6 +78,11 @@ class SqlDayStateRepository(private val database: Database) : DayStateRepository
             DayState(habitId, date, mark)
         }.awaitAsList()
 
+    override suspend fun getForHabit(habitId: Long): List<DayState> =
+        queries.selectDayStatesForHabit(habitId) { id, date, mark ->
+            DayState(id, date, mark)
+        }.awaitAsList()
+
     override suspend fun upsert(state: DayState) {
         queries.upsertDayState(state.habitId, state.date, state.mark)
     }

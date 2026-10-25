@@ -13,6 +13,9 @@
     <string name="numeric_target">Задати числову ціль</string>
     <string name="target_value">Значення</string>
     <string name="target_type">Тип</string>
+    <string name="habit_target">Ціль: %1$s %2$s</string>
+    <string name="max_streak">Найдовша серія: %1$s</string>
+    <string name="current_streak">Поточна серія: %1$s</string>
     <string name="save">Зберегти</string>
     <string name="cancel">Скасувати</string>
     <string name="skip">Пропустити</string>

@@ -13,6 +13,9 @@
     <string name="numeric_target">Imposta obiettivo numerico</string>
     <string name="target_value">Valore</string>
     <string name="target_type">Tipo</string>
+    <string name="habit_target">Obiettivo: %1$s %2$s</string>
+    <string name="max_streak">Serie massima: %1$s</string>
+    <string name="current_streak">Serie attuale: %1$s</string>
     <string name="save">Salva</string>
     <string name="cancel">Annulla</string>
     <string name="skip">Salta</string>

@@ -109,6 +109,12 @@ FROM DayState
 WHERE date BETWEEN ? AND ?
 ORDER BY habitId, date;
 
+selectDayStatesForHabit:
+SELECT *
+FROM DayState
+WHERE habitId = ?
+ORDER BY date;
+
 deleteDayState:
 DELETE FROM DayState
 WHERE habitId = ? AND date = ?;

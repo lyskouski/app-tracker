@@ -15,6 +15,9 @@ class DayStateService(
     /** Day states within [from]..[to] (ISO dates, inclusive). */
     suspend fun getRange(from: String, to: String): List<DayState> = dayStates.getRange(from, to)
 
+    /** Every day state of the habit, ordered by date. */
+    suspend fun getForHabit(habitId: Long): List<DayState> = dayStates.getForHabit(habitId)
+
     /** Stores the mark; the habit counts as updated. */
     suspend fun setMark(state: DayState) {
         dayStates.upsert(state)

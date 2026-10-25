@@ -13,6 +13,9 @@
     <string name="numeric_target">რიცხვითი მიზნის დაყენება</string>
     <string name="target_value">მნიშვნელობა</string>
     <string name="target_type">ტიპი</string>
+    <string name="habit_target">მიზანი: %1$s %2$s</string>
+    <string name="max_streak">მაქსიმალური სერია: %1$s</string>
+    <string name="current_streak">მიმდინარე სერია: %1$s</string>
     <string name="save">შენახვა</string>
     <string name="cancel">გაუქმება</string>
     <string name="skip">გამოტოვება</string>

@@ -13,6 +13,9 @@
     <string name="numeric_target">Задаць лікавую мэту</string>
     <string name="target_value">Значэнне</string>
     <string name="target_type">Тып</string>
+    <string name="habit_target">Мэта: %1$s %2$s</string>
+    <string name="max_streak">Максімальная серыя: %1$s</string>
+    <string name="current_streak">Бягучая серыя: %1$s</string>
     <string name="save">Захаваць</string>
     <string name="cancel">Скасаваць</string>
     <string name="skip">Прапусціць</string>

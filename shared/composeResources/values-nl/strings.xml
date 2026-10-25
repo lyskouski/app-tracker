@@ -13,6 +13,9 @@
     <string name="numeric_target">Numeriek doel instellen</string>
     <string name="target_value">Waarde</string>
     <string name="target_type">Type</string>
+    <string name="habit_target">Doel: %1$s %2$s</string>
+    <string name="max_streak">Langste reeks: %1$s</string>
+    <string name="current_streak">Huidige reeks: %1$s</string>
     <string name="save">Opslaan</string>
     <string name="cancel">Annuleren</string>
     <string name="skip">Overslaan</string>

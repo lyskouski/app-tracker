@@ -13,6 +13,9 @@
     <string name="numeric_target">Nastavit číselný cíl</string>
     <string name="target_value">Hodnota</string>
     <string name="target_type">Typ</string>
+    <string name="habit_target">Cíl: %1$s %2$s</string>
+    <string name="max_streak">Nejdelší série: %1$s</string>
+    <string name="current_streak">Aktuální série: %1$s</string>
     <string name="save">Uložit</string>
     <string name="cancel">Zrušit</string>
     <string name="skip">Přeskočit</string>

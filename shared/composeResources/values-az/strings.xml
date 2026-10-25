@@ -13,6 +13,9 @@
     <string name="numeric_target">Rəqəmsal hədəf təyin et</string>
     <string name="target_value">Dəyər</string>
     <string name="target_type">Növ</string>
+    <string name="habit_target">Hədəf: %1$s %2$s</string>
+    <string name="max_streak">Ən uzun seriya: %1$s</string>
+    <string name="current_streak">Cari seriya: %1$s</string>
     <string name="save">Yadda saxla</string>
     <string name="cancel">Ləğv et</string>
     <string name="skip">Keç</string>

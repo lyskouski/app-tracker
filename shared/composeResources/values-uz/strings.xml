@@ -13,6 +13,9 @@
     <string name="numeric_target">Raqamli maqsad belgilash</string>
     <string name="target_value">Qiymat</string>
     <string name="target_type">Turi</string>
+    <string name="habit_target">Maqsad: %1$s %2$s</string>
+    <string name="max_streak">Eng uzun ketma-ketlik: %1$s</string>
+    <string name="current_streak">Joriy ketma-ketlik: %1$s</string>
     <string name="save">Saqlash</string>
     <string name="cancel">Bekor qilish</string>
     <string name="skip">O’tkazib yuborish</string>

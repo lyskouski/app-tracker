@@ -13,6 +13,9 @@
     <string name="numeric_target">تعیین هدف عددی</string>
     <string name="target_value">مقدار</string>
     <string name="target_type">نوع</string>
+    <string name="habit_target">هدف: %1$s %2$s</string>
+    <string name="max_streak">بیشترین زنجیره: %1$s</string>
+    <string name="current_streak">زنجیره فعلی: %1$s</string>
     <string name="save">ذخیره</string>
     <string name="cancel">لغو</string>
     <string name="skip">رد شدن</string>
