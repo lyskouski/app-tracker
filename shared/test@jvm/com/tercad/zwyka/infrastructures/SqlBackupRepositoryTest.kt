@@ -34,7 +34,8 @@ class SqlBackupRepositoryTest {
             lines.map { it.removePrefix("INSERT IGNORE INTO ").substringBefore(' ') }.distinct(),
         )
         assertTrue("INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) " +
-            "VALUES (1, 1, NULL, 60, 90, 'it\\'s\\nnote', 3, 1);" in lines)
+            // The schema seeds 4 time ranges.
+            "VALUES (5, 1, NULL, 60, 90, 'it\\'s\\nnote', 3, 1);" in lines)
     }
 
     @Test

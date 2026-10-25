@@ -219,3 +219,8 @@ INSERT INTO DayState(habitId, date, mark) VALUES (3, date('now', '-1 day'), 'X')
 INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-3 days'), '3000');
 INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-2 days'), '2500');
 INSERT INTO DayState(habitId, date, mark) VALUES (5, date('now', '-1 day'), '6000');
+
+INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (1, NULL, 420, 480, 'Morning workout', 127, 0);
+INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (4, NULL, 480, 510, NULL, 127, 0);
+INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (5, NULL, 1080, 1140, NULL, 127, 0);
+INSERT INTO HabitTime(habitId, intentId, timeStart, timeEnd, note, activeDays, notify) VALUES (2, NULL, 1260, 1320, NULL, 127, 0);
