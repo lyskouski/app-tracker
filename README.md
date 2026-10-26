@@ -49,6 +49,11 @@ one is left behind.
 - **Habit details** (long press on a habit header): title, remarks, target, completion of every
   day over the last year (days of the week by weeks, like GitHub contributions, colored by the
   completion), max and current Day Streak calculated over the whole history.
+- **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, a description,
+  and a group (typed, or chosen from the existing groups of the habit). Goals and groups belong to their habit only.
+  - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished again).
+  - A group whose goals are all finished is struck through and goes after the active groups.
+  - The `↑` button on the top-right corner of a card moves the group up by one position.
 
 **Schedule (Calendar)**
 - Day view with hours, like Google or Outlook Calendar: move between days with `<` / `>` 

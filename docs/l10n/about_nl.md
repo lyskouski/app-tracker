@@ -48,6 +48,7 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
 - Statistieken
   - Dagelijkse voltooiing (%) over de afgelopen 66 dagen
   - Details van een gewoonte: beschrijving, doel, voltooiing van elke dag in het afgelopen jaar (zoals GitHub-bijdragen), langste en huidige reeks
+  - Doelen van de gewoonte: de knop (+) voegt een doel toe (titel, beschrijving en een nieuwe of bestaande groep); doelen worden op naam gegroepeerd, een tik markeert een doel als behaald, volledig behaalde groepen gaan naar onderen en ↑ verplaatst een groep omhoog
 - Planning (Kalender)
   - Dagweergave met uren, zoals in Google of Outlook Agenda
   - Plan een gewoonte voor 30 minuten, 1 uur, 2 uur of een eigen tijdsbereik, herhaald op de gekozen dagen van de week,

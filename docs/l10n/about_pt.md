@@ -48,6 +48,7 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
 - Métricas
   - Conclusão diária (%) nos últimos 66 dias
   - Detalhes do hábito: descrição, meta, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual
+  - Metas do hábito: o botão (+) adiciona uma meta (título, descrição e um grupo novo ou existente); as metas são agrupadas por nome, um toque marca a meta como concluída, grupos totalmente concluídos vão para o final e ↑ move um grupo para cima
 - Agenda (Calendário)
   - Visualização do dia com horas, como no Google Agenda ou no Calendário do Outlook
   - Agende um hábito para 30 minutos, 1 hora, 2 horas ou um intervalo de tempo personalizado, repetido nos dias da
