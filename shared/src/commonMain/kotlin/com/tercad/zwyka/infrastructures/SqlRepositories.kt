@@ -10,6 +10,8 @@ import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.createServices
 import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.Goal
+import com.tercad.zwyka.core.model.GoalGroup
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.HabitTime
@@ -17,6 +19,7 @@ import com.tercad.zwyka.core.model.Intent
 import com.tercad.zwyka.core.notifications.ReminderScheduler
 import com.tercad.zwyka.core.repository.BackupRepository
 import com.tercad.zwyka.core.repository.DayStateRepository
+import com.tercad.zwyka.core.repository.GoalRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 import com.tercad.zwyka.core.repository.HabitTimeRepository
 import com.tercad.zwyka.core.repository.IntentRepository
@@ -65,6 +68,8 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
         database.transaction {
             queries.deleteDayStatesForHabit(id)
             queries.deleteHabitTimesForHabit(id)
+            queries.deleteGoalsForHabit(id)
+            queries.deleteGoalGroupsForHabit(id)
             queries.deleteHabit(id)
         }
     }
@@ -89,6 +94,41 @@ class SqlDayStateRepository(private val database: Database) : DayStateRepository
 
     override suspend fun delete(habitId: Long, date: String) {
         queries.deleteDayState(habitId, date)
+    }
+}
+
+class SqlGoalRepository(private val database: Database) : GoalRepository {
+    private val queries get() = database.databaseQueries
+
+    override suspend fun getGroups(habitId: Long): List<GoalGroup> =
+        queries.selectGoalGroupsForHabit(habitId) { id, groupHabitId, title, position ->
+            GoalGroup(id, groupHabitId, title, position.toInt())
+        }.awaitAsList()
+
+    override suspend fun getGoals(habitId: Long): List<Goal> =
+        queries.selectGoalsForHabit(habitId) { id, groupId, title, description, isFinished, createdAt ->
+            Goal(id, groupId, title, description, isFinished != 0L, createdAt)
+        }.awaitAsList()
+
+    override suspend fun insertGroup(habitId: Long, title: String, position: Int): Long {
+        queries.insertGoalGroup(habitId, title, position.toLong())
+        return queries.selectLastGoalGroupId().awaitAsOne().max ?: error("Goal group was not created")
+    }
+
+    override suspend fun updatePositions(groupIds: List<Long>) {
+        database.transaction {
+            groupIds.forEachIndexed { position, id ->
+                queries.updateGoalGroupPosition(position.toLong(), id)
+            }
+        }
+    }
+
+    override suspend fun insert(groupId: Long, title: String, description: String?) {
+        queries.insertGoal(groupId, title, description)
+    }
+
+    override suspend fun updateFinished(id: Long, isFinished: Boolean) {
+        queries.updateGoalFinished(if (isFinished) 1L else 0L, id)
     }
 }
 
@@ -229,6 +269,25 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
         queries.selectAllDayStates().awaitAsList().forEach {
             add(sqlInsert("DayState", listOf("habitId" to it.habitId, "date" to it.date, "mark" to it.mark)))
         }
+        queries.selectAllGoalGroups().awaitAsList().forEach {
+            add(
+                sqlInsert(
+                    "GoalGroup",
+                    listOf("id" to it.id, "habitId" to it.habitId, "title" to it.title, "position" to it.position),
+                ),
+            )
+        }
+        queries.selectAllGoals().awaitAsList().forEach {
+            add(
+                sqlInsert(
+                    "Goal",
+                    listOf(
+                        "id" to it.id, "groupId" to it.groupId, "title" to it.title,
+                        "description" to it.description, "isFinished" to it.isFinished, "createdAt" to it.createdAt,
+                    ),
+                ),
+            )
+        }
         queries.selectAllSettings().awaitAsList().forEach {
             add(sqlInsert("Setting", listOf("key" to it.key, "value" to it.value_)))
         }
@@ -261,6 +320,11 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
             stringOrNull("note"), long("activeDays", ALL_DAYS.toLong()), long("notify", 0),
         )
         "DayState" -> queries.importDayState(long("habitId"), string("date"), string("mark"))
+        "GoalGroup" -> queries.importGoalGroup(long("id"), long("habitId"), string("title"), long("position", 0))
+        "Goal" -> queries.importGoal(
+            long("id"), long("groupId"), string("title"), stringOrNull("description"),
+            long("isFinished", 0), long("createdAt", 0),
+        )
         "Setting" -> queries.importSetting(string("key"), string("value"))
         else -> throw IllegalArgumentException("Unknown table: $table")
     }
@@ -290,6 +354,7 @@ fun Database.createServices(reminderScheduler: ReminderScheduler): Services =
     createServices(
         habitRepository = SqlHabitRepository(this),
         dayStateRepository = SqlDayStateRepository(this),
+        goalRepository = SqlGoalRepository(this),
         habitTimeRepository = SqlHabitTimeRepository(this),
         intentRepository = SqlIntentRepository(this),
         settingsRepository = SqlSettingsRepository(this),

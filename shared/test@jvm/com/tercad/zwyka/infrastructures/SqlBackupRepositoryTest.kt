@@ -25,12 +25,13 @@ class SqlBackupRepositoryTest {
         SqlHabitTimeRepository(database).insert(HabitTime(0, 1, null, 60, 90, "it's\nnote", 3, true))
         SqlIntentRepository(database).insert("Walk", 1)
         SqlSettingsRepository(database).put("language", "de")
+        SqlGoalRepository(database).run { insert(insertGroup(1, "Morning", 0), "Run", null) }
 
         val lines = SqlBackupRepository(database).export().lines().filter { it.isNotEmpty() }
 
         assertTrue(lines.all { it.startsWith("INSERT IGNORE INTO ") && it.endsWith(");") })
         assertEquals(
-            listOf("Habit", "Intent", "HabitTime", "DayState", "Setting"),
+            listOf("Habit", "Intent", "HabitTime", "DayState", "GoalGroup", "Goal", "Setting"),
             lines.map { it.removePrefix("INSERT IGNORE INTO ").substringBefore(' ') }.distinct(),
         )
         assertTrue("INSERT IGNORE INTO HabitTime (id, habitId, intentId, timeStart, timeEnd, note, activeDays, notify) " +
@@ -45,6 +46,7 @@ class SqlBackupRepositoryTest {
         val id = habits.insert(HabitDraft("Read", "MenuBook", "#26A69A", "20 pages", 0b11, targetValue = 20.5, targetType = "pages"))
         SqlDayStateRepository(source).upsert(DayState(id, "2026-10-18", "12"))
         SqlSettingsRepository(source).put("language", "de")
+        SqlGoalRepository(source).run { insert(insertGroup(id, "Books", 0), "Finish a novel", "300 pages") }
         val sql = SqlBackupRepository(source).export()
 
         val target = database()
@@ -52,7 +54,7 @@ class SqlBackupRepositoryTest {
         val targetBackup = SqlBackupRepository(target)
 
         // Seeded habits and day states, and the setting, already exist.
-        assertEquals(2, targetBackup.import(sql))
+        assertEquals(4, targetBackup.import(sql))
         assertEquals(sql, targetBackup.export().replace("'en'", "'de'"))
         assertEquals(0, targetBackup.import(sql))
     }

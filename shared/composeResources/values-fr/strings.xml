@@ -144,4 +144,11 @@
     <string name="apple_calendar">Calendrier Apple</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">Impossible d’ajouter au calendrier : %1$s</string>
+    <string name="add_goal">Ajouter un objectif</string>
+    <string name="goal_title">Objectif</string>
+    <string name="goal_description">Description</string>
+    <string name="goal_group">Groupe</string>
+    <string name="choose_goal_group">Choisir un groupe</string>
+    <string name="move_up">Monter</string>
+    <string name="goal_save_failed">Impossible d’enregistrer l’objectif : %1$s</string>
 </resources>

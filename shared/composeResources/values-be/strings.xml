@@ -144,4 +144,11 @@
     <string name="apple_calendar">Каляндар Apple</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">Не ўдалося дадаць у каляндар: %1$s</string>
+    <string name="add_goal">Дадаць мэту</string>
+    <string name="goal_title">Мэта</string>
+    <string name="goal_description">Апісанне</string>
+    <string name="goal_group">Група</string>
+    <string name="choose_goal_group">Выбраць групу</string>
+    <string name="move_up">Перамясціць вышэй</string>
+    <string name="goal_save_failed">Не ўдалося захаваць мэту: %1$s</string>
 </resources>

@@ -6,12 +6,14 @@ package com.tercad.zwyka.core
 import com.tercad.zwyka.core.notifications.ReminderScheduler
 import com.tercad.zwyka.core.repository.BackupRepository
 import com.tercad.zwyka.core.repository.DayStateRepository
+import com.tercad.zwyka.core.repository.GoalRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 import com.tercad.zwyka.core.repository.HabitTimeRepository
 import com.tercad.zwyka.core.repository.IntentRepository
 import com.tercad.zwyka.core.repository.SettingsRepository
 import com.tercad.zwyka.core.service.BackupService
 import com.tercad.zwyka.core.service.DayStateService
+import com.tercad.zwyka.core.service.GoalService
 import com.tercad.zwyka.core.service.HabitService
 import com.tercad.zwyka.core.service.ReminderService
 import com.tercad.zwyka.core.service.ScheduleService
@@ -23,6 +25,7 @@ import com.tercad.zwyka.core.service.SettingsService
 class Services(
     val habits: HabitService,
     val dayStates: DayStateService,
+    val goals: GoalService,
     val schedule: ScheduleService,
     val reminders: ReminderService,
     val settings: SettingsService,
@@ -35,6 +38,7 @@ class Services(
 fun createServices(
     habitRepository: HabitRepository,
     dayStateRepository: DayStateRepository,
+    goalRepository: GoalRepository,
     habitTimeRepository: HabitTimeRepository,
     intentRepository: IntentRepository,
     settingsRepository: SettingsRepository,
@@ -52,6 +56,7 @@ fun createServices(
     return Services(
         habits = habits,
         dayStates = DayStateService(dayStateRepository, habitRepository),
+        goals = GoalService(goalRepository),
         schedule = ScheduleService(habitTimeRepository, intentRepository, habits, reminders),
         reminders = reminders,
         settings = SettingsService(settingsRepository),

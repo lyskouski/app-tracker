@@ -144,4 +144,11 @@
     <string name="apple_calendar">Apple Calendar</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">कैलेंडर में नहीं जोड़ा जा सका: %1$s</string>
+    <string name="add_goal">लक्ष्य जोड़ें</string>
+    <string name="goal_title">लक्ष्य</string>
+    <string name="goal_description">विवरण</string>
+    <string name="goal_group">समूह</string>
+    <string name="choose_goal_group">समूह चुनें</string>
+    <string name="move_up">ऊपर ले जाएँ</string>
+    <string name="goal_save_failed">लक्ष्य सहेजा नहीं जा सका: %1$s</string>
 </resources>

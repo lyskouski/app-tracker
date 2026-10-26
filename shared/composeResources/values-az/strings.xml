@@ -144,4 +144,11 @@
     <string name="apple_calendar">Apple Təqvim</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">Təqvimə əlavə etmək mümkün olmadı: %1$s</string>
+    <string name="add_goal">Məqsəd əlavə et</string>
+    <string name="goal_title">Məqsəd</string>
+    <string name="goal_description">Təsvir</string>
+    <string name="goal_group">Qrup</string>
+    <string name="choose_goal_group">Qrup seçin</string>
+    <string name="move_up">Yuxarı qaldır</string>
+    <string name="goal_save_failed">Məqsədi yadda saxlamaq mümkün olmadı: %1$s</string>
 </resources>

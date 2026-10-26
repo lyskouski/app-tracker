@@ -144,4 +144,11 @@
     <string name="apple_calendar">Apple Taqvim</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">Taqvimga qo‘shib bo‘lmadi: %1$s</string>
+    <string name="add_goal">Maqsad qo‘shish</string>
+    <string name="goal_title">Maqsad</string>
+    <string name="goal_description">Tavsif</string>
+    <string name="goal_group">Guruh</string>
+    <string name="choose_goal_group">Guruhni tanlang</string>
+    <string name="move_up">Yuqoriga ko‘chirish</string>
+    <string name="goal_save_failed">Maqsadni saqlab bo‘lmadi: %1$s</string>
 </resources>

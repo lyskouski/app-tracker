@@ -50,6 +50,26 @@ CREATE TABLE HabitTime (
     FOREIGN KEY (intentId) REFERENCES Intent(id)
 );
 
+-- Named group of goals of one Habit; groups are shown by position.
+CREATE TABLE GoalGroup (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    habitId INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    position INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (habitId) REFERENCES Habit(id)
+);
+
+CREATE TABLE Goal (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    groupId INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    -- 1: finished.
+    isFinished INTEGER NOT NULL DEFAULT 0,
+    createdAt INTEGER NOT NULL DEFAULT 0,
+    FOREIGN KEY (groupId) REFERENCES GoalGroup(id)
+);
+
 CREATE TABLE Setting (
     key TEXT NOT NULL PRIMARY KEY,
     value TEXT NOT NULL
@@ -101,6 +121,49 @@ WHERE habitId = ?;
 
 deleteHabit:
 DELETE FROM Habit
+WHERE id = ?;
+
+deleteGoalsForHabit:
+DELETE FROM Goal
+WHERE groupId IN (SELECT id FROM GoalGroup WHERE habitId = ?);
+
+deleteGoalGroupsForHabit:
+DELETE FROM GoalGroup
+WHERE habitId = ?;
+
+selectGoalGroupsForHabit:
+SELECT *
+FROM GoalGroup
+WHERE habitId = ?
+ORDER BY position, id;
+
+selectGoalsForHabit:
+SELECT Goal.*
+FROM Goal
+JOIN GoalGroup ON GoalGroup.id = Goal.groupId
+WHERE GoalGroup.habitId = ?
+ORDER BY Goal.id;
+
+insertGoalGroup:
+INSERT INTO GoalGroup(habitId, title, position)
+VALUES (?, ?, ?);
+
+selectLastGoalGroupId:
+SELECT max(id)
+FROM GoalGroup;
+
+updateGoalGroupPosition:
+UPDATE GoalGroup
+SET position = ?
+WHERE id = ?;
+
+insertGoal:
+INSERT INTO Goal(groupId, title, description, createdAt)
+VALUES (?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
+
+updateGoalFinished:
+UPDATE Goal
+SET isFinished = ?
 WHERE id = ?;
 
 selectDayStatesForDateRange:
@@ -199,6 +262,24 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 importDayState:
 INSERT OR IGNORE INTO DayState(habitId, date, mark)
 VALUES (?, ?, ?);
+
+selectAllGoalGroups:
+SELECT *
+FROM GoalGroup
+ORDER BY id;
+
+selectAllGoals:
+SELECT *
+FROM Goal
+ORDER BY id;
+
+importGoalGroup:
+INSERT OR IGNORE INTO GoalGroup(id, habitId, title, position)
+VALUES (?, ?, ?, ?);
+
+importGoal:
+INSERT OR IGNORE INTO Goal(id, groupId, title, description, isFinished, createdAt)
+VALUES (?, ?, ?, ?, ?, ?);
 
 importSetting:
 INSERT OR IGNORE INTO Setting(key, value)

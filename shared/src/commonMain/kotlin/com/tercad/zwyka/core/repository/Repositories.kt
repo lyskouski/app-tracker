@@ -4,6 +4,8 @@
 package com.tercad.zwyka.core.repository
 
 import com.tercad.zwyka.core.model.DayState
+import com.tercad.zwyka.core.model.Goal
+import com.tercad.zwyka.core.model.GoalGroup
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.HabitTime
@@ -26,7 +28,7 @@ interface HabitRepository {
     /** Sets `updatedAt` to now, for changes of data belonging to the habit (marks, scheduled times). */
     suspend fun touch(id: Long)
 
-    /** Deletes the habit together with its day states and scheduled times. */
+    /** Deletes the habit together with its day states, scheduled times and goals. */
     suspend fun delete(id: Long)
 }
 
@@ -40,6 +42,24 @@ interface DayStateRepository {
     suspend fun upsert(state: DayState)
 
     suspend fun delete(habitId: Long, date: String)
+}
+
+interface GoalRepository {
+    /** Groups of the habit, ordered by position. */
+    suspend fun getGroups(habitId: Long): List<GoalGroup>
+
+    /** Goals of every group of the habit. */
+    suspend fun getGoals(habitId: Long): List<Goal>
+
+    /** @return id of the new group. */
+    suspend fun insertGroup(habitId: Long, title: String, position: Int): Long
+
+    /** Sets the position of each group to its index in [groupIds]. */
+    suspend fun updatePositions(groupIds: List<Long>)
+
+    suspend fun insert(groupId: Long, title: String, description: String?)
+
+    suspend fun updateFinished(id: Long, isFinished: Boolean)
 }
 
 interface HabitTimeRepository {

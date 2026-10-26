@@ -126,7 +126,7 @@ class CaptureTest {
     private suspend fun sampleDatabase(target: ScreenshotTarget): Database {
         val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY, schema = Database.Schema.synchronous())
         // The schema seeds placeholder data: start from empty tables.
-        listOf("DayState", "HabitTime", "Habit", "Intent", "Setting").forEach { table ->
+        listOf("Goal", "GoalGroup", "DayState", "HabitTime", "Habit", "Intent", "Setting").forEach { table ->
             driver.execute(null, "DELETE FROM $table", 0)
         }
         val database = Database(driver)

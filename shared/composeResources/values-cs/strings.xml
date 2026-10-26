@@ -144,4 +144,11 @@
     <string name="apple_calendar">Kalendář Apple</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">Nepodařilo se přidat do kalendáře: %1$s</string>
+    <string name="add_goal">Přidat cíl</string>
+    <string name="goal_title">Cíl</string>
+    <string name="goal_description">Popis</string>
+    <string name="goal_group">Skupina</string>
+    <string name="choose_goal_group">Vybrat skupinu</string>
+    <string name="move_up">Posunout nahoru</string>
+    <string name="goal_save_failed">Cíl nelze uložit: %1$s</string>
 </resources>

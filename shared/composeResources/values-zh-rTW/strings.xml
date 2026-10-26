@@ -144,4 +144,11 @@
     <string name="apple_calendar">Apple 行事曆</string>
     <string name="microsoft_calendar">Microsoft Outlook</string>
     <string name="calendar_export_failed">無法加入行事曆：%1$s</string>
+    <string name="add_goal">新增目標</string>
+    <string name="goal_title">目標</string>
+    <string name="goal_description">描述</string>
+    <string name="goal_group">群組</string>
+    <string name="choose_goal_group">選擇群組</string>
+    <string name="move_up">上移</string>
+    <string name="goal_save_failed">無法儲存目標：%1$s</string>
 </resources>

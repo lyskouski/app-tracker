@@ -15,6 +15,13 @@ data class HabitDraft(
     val targetType: String? = null,
 )
 
+/** Editable fields of a [Goal]; [groupTitle] names an existing or a new [GoalGroup]. */
+data class GoalDraft(
+    val title: String,
+    val description: String?,
+    val groupTitle: String,
+)
+
 /** Editable fields of a [HabitTime]. */
 data class HabitTimeDraft(
     val owner: HabitTimeOwner,
