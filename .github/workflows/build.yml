@@ -247,25 +247,30 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-22.04
-    needs: [release, build-linux]
+    needs: release
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/setup-java@v4
         with:
-          name: zwyka_Linux
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Flathub builds from the sources offline: the Gradle dependencies are listed in gradle-sources-*.json.
+      - name: Generate Gradle Sources
+        run: ./gradlew flatpakGradleGenerator --no-configuration-cache --no-daemon
 
       - name: Patch Manifest
-        run: |
-          sh patch.sh -v "${{ needs.release.outputs.version }}" \
-            -s $(sha256sum $GITHUB_WORKSPACE/zwyka_Linux.tar.gz | gawk '{ print $1 }')
+        run: sh patch.sh -v "${{ needs.release.outputs.version }}" -c "${{ github.sha }}"
         working-directory: linux-flatpak
 
       - name: Build Linux Flatpak
         run: |
           sudo apt-get update
           sudo apt-get install -y flatpak appstream-util
-          appstream-util validate-relax com.tercad.zwyka.metainfo.xml
+          appstream-util validate-relax ../com.tercad.zwyka.metainfo.xml
           flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           # flatpak-builder of Ubuntu calls appstream-compose, which is gone from the newer SDKs:
           # the builder of Flathub (org.flatpak.Builder) uses appstreamcli instead.
@@ -283,8 +288,8 @@ jobs:
         with:
           name: flatpak-configs
           path: |
-            linux-flatpak/com.tercad.zwyka.metainfo.xml
             linux-flatpak/com.tercad.zwyka.yml
+            linux-flatpak/gradle-sources-*.json
 
       - name: Upload Flatpak Artifact
         uses: actions/upload-release-asset@latest

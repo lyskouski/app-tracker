@@ -26,3 +26,5 @@ windows-msix/layout
 windows-msix/priconfig.xml
 windows-msix/*.msix
 windows-msix/store
+offline-repository
+linux-flatpak/gradle-sources-*.json

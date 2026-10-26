@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.flatpak.gradle.generator)
 }
 
 kotlin {
@@ -150,5 +151,14 @@ sqldelight {
             packageName.set("com.tercad.zwyka.infrastructures")
             generateAsync.set(true)
         }
+    }
+}
+
+// The Flatpak package needs only the desktop (JVM) target.
+tasks.flatpakGradleGenerator {
+    outputFile = rootProject.file("linux-flatpak/gradle-sources-shared.json")
+    downloadDirectory = "./offline-repository"
+    excludeConfigurations = configurations.names.filter { name ->
+        listOf("android", "ios", "wasm", "js", "native", "test", "hotReload").any { name.contains(it, ignoreCase = true) }
     }
 }

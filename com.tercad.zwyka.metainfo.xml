@@ -58,23 +58,33 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/main_1.jpg</image>
+      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/1_home_wide.png</image>
       <caption>Habits Calendar</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/calendar.jpg</image>
+      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/4_calendar_wide.png</image>
       <caption>Schedule</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/metrics.jpg</image>
+      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/7_detailed_metrics_wide.png</image>
+      <caption>Detailed Metrics</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/9_metrics_wide.png</image>
       <caption>Metrics</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/settings.jpg</image>
-      <caption>Settings</caption>
+      <image type="source">https://raw.githubusercontent.com/lyskouski/app-tracker/main/docs/design-flow/screenshots/8_timer_wide.png</image>
+      <caption>Timer</caption>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="{VERSION}" date="{DATE}" />
+    <release version="{VERSION}" date="{DATE}">
+      <description translatable="no">
+        <ul>
+          <li>{CHANGE}</li>
+        </ul>
+      </description>
+    </release>
   </releases>
 </component>
