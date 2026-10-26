@@ -27,7 +27,7 @@ modules:
         GRADLE_USER_HOME: /run/build/zwyka/.gradle
     build-commands:
       - gradle-dist/bin/gradle --offline --no-daemon --init-script linux-flatpak/offline-repository.init.gradle.kts
-        :desktopApp:createDistributable -PversionName={VERSION}
+        -Pkotlin.incremental=false :desktopApp:createDistributable -PversionName={VERSION}
       - cp -a desktopApp/build/compose/binaries/main/app/zwyka/bin desktopApp/build/compose/binaries/main/app/zwyka/lib /app/
       - install -Dm644 com.tercad.zwyka.svg /app/share/icons/hicolor/scalable/apps/com.tercad.zwyka.svg
       - install -Dm644 com.tercad.zwyka.desktop /app/share/applications/com.tercad.zwyka.desktop
