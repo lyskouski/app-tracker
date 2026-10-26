@@ -181,7 +181,9 @@ private fun ProgressDay(
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val stroke = 3.dp.toPx()
-            val diameter = min(size.width, size.height) - stroke - 2.dp.toPx()
+            val progressStroke = stroke + 2.dp.toPx()
+            // The thicker progress line has to fit into the cell.
+            val diameter = min(size.width, size.height) - progressStroke - 2.dp.toPx()
             if (diameter <= 0f) return@Canvas
             val topLeft = Offset(
                 (size.width - diameter) / 2,
@@ -205,7 +207,7 @@ private fun ProgressDay(
                     useCenter = false,
                     topLeft = topLeft,
                     size = arcSize,
-                    style = Stroke(width = stroke, cap = StrokeCap.Round),
+                    style = Stroke(width = progressStroke, cap = StrokeCap.Round),
                 )
             }
         }
