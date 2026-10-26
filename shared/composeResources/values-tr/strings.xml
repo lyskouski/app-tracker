@@ -118,6 +118,8 @@
     <string name="today">Bugün</string>
     <string name="previous_day">Önceki gün</string>
     <string name="next_day">Sonraki gün</string>
+    <string name="previous_month">Önceki ay</string>
+    <string name="next_month">Sonraki ay</string>
     <string name="add_habit_time">Alışkanlık planla</string>
     <string name="edit_habit_time">Programı düzenle</string>
     <string name="habit">Alışkanlık</string>

@@ -118,6 +118,8 @@
     <string name="today">Vandaag</string>
     <string name="previous_day">Vorige dag</string>
     <string name="next_day">Volgende dag</string>
+    <string name="previous_month">Vorige maand</string>
+    <string name="next_month">Volgende maand</string>
     <string name="add_habit_time">Gewoonte plannen</string>
     <string name="edit_habit_time">Planning bewerken</string>
     <string name="habit">Gewoonte</string>

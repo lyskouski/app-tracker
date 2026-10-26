@@ -118,6 +118,8 @@
     <string name="today">Hari ini</string>
     <string name="previous_day">Hari sebelumnya</string>
     <string name="next_day">Hari berikutnya</string>
+    <string name="previous_month">Bulan sebelumnya</string>
+    <string name="next_month">Bulan berikutnya</string>
     <string name="add_habit_time">Jadwalkan kebiasaan</string>
     <string name="edit_habit_time">Edit jadwal</string>
     <string name="habit">Kebiasaan</string>

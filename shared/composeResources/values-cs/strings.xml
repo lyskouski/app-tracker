@@ -118,6 +118,8 @@
     <string name="today">Dnes</string>
     <string name="previous_day">Předchozí den</string>
     <string name="next_day">Následující den</string>
+    <string name="previous_month">Předchozí měsíc</string>
+    <string name="next_month">Následující měsíc</string>
     <string name="add_habit_time">Naplánovat návyk</string>
     <string name="edit_habit_time">Upravit plán</string>
     <string name="habit">Návyk</string>

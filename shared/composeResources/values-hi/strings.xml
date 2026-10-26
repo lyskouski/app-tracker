@@ -118,6 +118,8 @@
     <string name="today">आज</string>
     <string name="previous_day">पिछला दिन</string>
     <string name="next_day">अगला दिन</string>
+    <string name="previous_month">पिछला महीना</string>
+    <string name="next_month">अगला महीना</string>
     <string name="add_habit_time">आदत शेड्यूल करें</string>
     <string name="edit_habit_time">शेड्यूल संपादित करें</string>
     <string name="habit">आदत</string>

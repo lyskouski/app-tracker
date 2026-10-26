@@ -245,7 +245,9 @@ private fun HomePageContent(
                         }
                     },
                     onProgressClick = {
-                        navigator.push(MetricsPage(current.habits, current.dayStates, today))
+                        navigator.push(
+                            MetricsPage(current.habits, current.dayStates, today, settingsStore.current.weekStart),
+                        )
                     },
                     onHabitClick = {
                         editingHabit = it

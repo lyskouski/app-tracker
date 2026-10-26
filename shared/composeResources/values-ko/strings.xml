@@ -118,6 +118,8 @@
     <string name="today">오늘</string>
     <string name="previous_day">이전 날</string>
     <string name="next_day">다음 날</string>
+    <string name="previous_month">이전 달</string>
+    <string name="next_month">다음 달</string>
     <string name="add_habit_time">습관 일정 추가</string>
     <string name="edit_habit_time">일정 편집</string>
     <string name="habit">습관</string>

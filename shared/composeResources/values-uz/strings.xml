@@ -118,6 +118,8 @@
     <string name="today">Bugun</string>
     <string name="previous_day">Oldingi kun</string>
     <string name="next_day">Keyingi kun</string>
+    <string name="previous_month">Oldingi oy</string>
+    <string name="next_month">Keyingi oy</string>
     <string name="add_habit_time">Odatni rejalashtirish</string>
     <string name="edit_habit_time">Jadvalni tahrirlash</string>
     <string name="habit">Odat</string>

@@ -47,11 +47,13 @@ import kotlinx.datetime.minus
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.components.ProgressCalendar
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.progress.calculateProgressHistory
 import com.tercad.zwyka.core.progress.toMarks
 import com.tercad.zwyka.defines.DateFormat
+import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.back
@@ -67,6 +69,7 @@ class MetricsPage(
     private val habits: List<Habit>,
     private val dayStates: List<DayState>,
     private val today: LocalDate,
+    private val weekStart: WeekStart,
 ) : Screen {
     @Composable
     override fun Content() {
@@ -119,13 +122,24 @@ class MetricsPage(
                         today.minus(offset, DateTimeUnit.DAY).toString()
                     }
                 }
-                val progress = remember(habits, dayStates, dates) {
-                    calculateProgressHistory(habits, dayStates.toMarks(), dates)
+                val marks = remember(dayStates) { dayStates.toMarks() }
+                val progress = remember(habits, marks, dates) {
+                    calculateProgressHistory(habits, marks, dates)
                 }
 
                 ProgressGraph(
                     dates = dates,
                     progress = progress,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                )
+
+                ProgressCalendar(
+                    habits = habits,
+                    marks = marks,
+                    today = today,
+                    weekStart = weekStart,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),

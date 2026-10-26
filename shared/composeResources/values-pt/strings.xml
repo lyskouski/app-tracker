@@ -118,6 +118,8 @@
     <string name="today">Hoje</string>
     <string name="previous_day">Dia anterior</string>
     <string name="next_day">Próximo dia</string>
+    <string name="previous_month">Mês anterior</string>
+    <string name="next_month">Próximo mês</string>
     <string name="add_habit_time">Agendar hábito</string>
     <string name="edit_habit_time">Editar agenda</string>
     <string name="habit">Hábito</string>
