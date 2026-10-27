@@ -54,6 +54,9 @@ compose.desktop {
             windows {
                 iconFile.set(project.file("icons/zwyka.ico"))
             }
+            macOS {
+                iconFile.set(project.file("icons/zwyka.icns"))
+            }
         }
     }
 }
