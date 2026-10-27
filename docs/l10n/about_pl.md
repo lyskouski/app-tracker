@@ -48,7 +48,7 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
 - Statystyki
   - Dzienna realizacja (%) w ciągu ostatnich 66 dni
   - Szczegóły nawyku: opis, cel, realizacja każdego dnia z ostatniego roku (jak wkład na GitHub), najdłuższa i obecna seria
-  - Cele nawyku: przycisk (+) dodaje cel (tytuł, opis oraz nowa lub istniejąca grupa); cele są grupowane według nazwy, dotknięcie oznacza cel jako osiągnięty, w pełni osiągnięte grupy trafiają na koniec, a ↑ przesuwa grupę wyżej
+  - Cele nawyku: przycisk (+) dodaje cel (tytuł, opis oraz nowa lub istniejąca grupa); cele są grupowane według nazwy, dotknięcie oznacza cel jako osiągnięty, w pełni osiągnięte grupy trafiają na koniec, a ↑ przesuwa grupę wyżej; długie naciśnięcie celu pozwala go edytować, a długie naciśnięcie grupy usuwa ją wraz ze wszystkimi celami (po potwierdzeniu)
 - Harmonogram (Kalendarz)
   - Widok dnia z godzinami, jak w Kalendarzu Google lub Outlook
   - Zaplanuj nawyk na 30 minut, 1 godzinę, 2 godziny lub własny przedział czasu, powtarzany w wybrane dni tygodnia,

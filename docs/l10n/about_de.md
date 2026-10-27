@@ -48,7 +48,7 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
 - Kennzahlen
   - Tägliche Erfüllung (%) über die letzten 66 Tage
   - Gewohnheitsdetails: Beschreibung, Ziel, Erfüllung jedes Tages im letzten Jahr (wie GitHub-Beiträge), längste und aktuelle Serie
-  - Ziele der Gewohnheit: Die Schaltfläche (+) fügt ein Ziel hinzu (Titel, Beschreibung und eine neue oder vorhandene Gruppe); Ziele werden nach Namen gruppiert, ein Tippen markiert ein Ziel als erledigt, vollständig erledigte Gruppen rücken ans Ende, ↑ verschiebt eine Gruppe nach oben
+  - Ziele der Gewohnheit: Die Schaltfläche (+) fügt ein Ziel hinzu (Titel, Beschreibung und eine neue oder vorhandene Gruppe); Ziele werden nach Namen gruppiert, ein Tippen markiert ein Ziel als erledigt, vollständig erledigte Gruppen rücken ans Ende, ↑ verschiebt eine Gruppe nach oben; langes Drücken auf ein Ziel bearbeitet es, langes Drücken auf eine Gruppe löscht sie samt allen Zielen (nach Bestätigung)
 - Zeitplan (Kalender)
   - Tagesansicht mit Stunden, wie in Google oder Outlook Kalender
   - Eine Gewohnheit für 30 Minuten, 1 Stunde, 2 Stunden oder einen eigenen Zeitraum planen, wiederholt an den gewählten

@@ -49,7 +49,7 @@ indietro.
 - Statistiche
   - Completamento giornaliero (%) negli ultimi 66 giorni
   - Dettagli dell’abitudine: descrizione, obiettivo, completamento di ogni giorno nell’ultimo anno (come i contributi GitHub), serie massima e attuale
-  - Obiettivi dell’abitudine: il pulsante (+) aggiunge un obiettivo (titolo, descrizione e un gruppo nuovo o esistente); gli obiettivi sono raggruppati per nome, un tocco segna un obiettivo come raggiunto, i gruppi completati vanno in fondo e ↑ sposta un gruppo in su
+  - Obiettivi dell’abitudine: il pulsante (+) aggiunge un obiettivo (titolo, descrizione e un gruppo nuovo o esistente); gli obiettivi sono raggruppati per nome, un tocco segna un obiettivo come raggiunto, i gruppi completati vanno in fondo e ↑ sposta un gruppo in su; una pressione prolungata su un obiettivo lo modifica e una pressione prolungata su un gruppo lo elimina con tutti i suoi obiettivi (dopo conferma)
 - Pianificazione (Calendario)
   - Vista giornaliera con le ore, come Google o Outlook Calendar
   - Pianifica un’abitudine per 30 minuti, 1 ora, 2 ore o un intervallo di tempo personalizzato, ripetuto nei giorni

@@ -52,6 +52,8 @@ one is left behind.
 - **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, a description,
   and a group (typed, or chosen from the existing groups of the habit). Goals and groups belong to their habit only.
   - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished again).
+  - Long press on a goal to edit its title, description, or group; a group left without goals is removed.
+  - Long press on a group card (outside its goals) to delete the group with all its goals, after a confirmation.
   - A group whose goals are all finished is struck through and goes after the active groups.
   - The `↑` button on the top-right corner of a card moves the group up by one position.
 

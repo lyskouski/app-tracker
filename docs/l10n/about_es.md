@@ -48,7 +48,7 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
 - Métricas
   - Cumplimiento diario (%) durante los últimos 66 días
   - Detalles del hábito: descripción, objetivo, cumplimiento de cada día del último año (como las contribuciones de GitHub), racha máxima y actual
-  - Objetivos del hábito: el botón (+) añade un objetivo (título, descripción y un grupo nuevo o existente); los objetivos se agrupan por nombre, un toque marca un objetivo como cumplido, los grupos cumplidos por completo van al final y ↑ sube un grupo
+  - Objetivos del hábito: el botón (+) añade un objetivo (título, descripción y un grupo nuevo o existente); los objetivos se agrupan por nombre, un toque marca un objetivo como cumplido, los grupos cumplidos por completo van al final y ↑ sube un grupo; una pulsación larga en un objetivo lo edita y una pulsación larga en un grupo lo elimina con todos sus objetivos (tras confirmar)
 - Horario (Calendario)
   - Vista diaria por horas, como en Google o Outlook Calendar
   - Programa un hábito para 30 minutos, 1 hora, 2 horas o un intervalo personalizado, repetido los días de la semana

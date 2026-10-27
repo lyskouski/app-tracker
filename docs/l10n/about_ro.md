@@ -48,7 +48,7 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
 - Statistici
   - Îndeplinirea zilnică (%) în ultimele 66 de zile
   - Detaliile obiceiului: descriere, obiectiv, îndeplinirea fiecărei zile din ultimul an (ca contribuțiile GitHub), seria maximă și cea curentă
-  - Obiectivele obiceiului: butonul (+) adaugă un obiectiv (titlu, descriere și un grup nou sau existent); obiectivele sunt grupate după nume, o atingere marchează obiectivul ca îndeplinit, grupurile îndeplinite complet trec la final, iar ↑ mută un grup în sus
+  - Obiectivele obiceiului: butonul (+) adaugă un obiectiv (titlu, descriere și un grup nou sau existent); obiectivele sunt grupate după nume, o atingere marchează obiectivul ca îndeplinit, grupurile îndeplinite complet trec la final, iar ↑ mută un grup în sus; o apăsare lungă pe un obiectiv îl editează, iar o apăsare lungă pe un grup îl șterge împreună cu toate obiectivele sale (după confirmare)
 - Program (Calendar)
   - Vizualizare pe zi cu ore, ca în Google Calendar sau Outlook Calendar
   - Programați un obicei pentru 30 de minute, 1 oră, 2 ore sau un interval de timp personalizat, repetat în zilele

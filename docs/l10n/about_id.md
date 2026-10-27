@@ -50,7 +50,7 @@ tertinggal.
 - Statistik
   - Penyelesaian harian (%) selama 66 hari terakhir
   - Detail kebiasaan: deskripsi, target, penyelesaian setiap hari selama setahun terakhir (seperti kontribusi GitHub), rentetan terpanjang dan saat ini
-  - Tujuan kebiasaan: tombol (+) menambahkan tujuan (judul, deskripsi, dan grup baru atau yang sudah ada); tujuan dikelompokkan menurut nama, ketukan menandai tujuan selesai, grup yang selesai seluruhnya pindah ke akhir, dan ↑ memindahkan grup ke atas
+  - Tujuan kebiasaan: tombol (+) menambahkan tujuan (judul, deskripsi, dan grup baru atau yang sudah ada); tujuan dikelompokkan menurut nama, ketukan menandai tujuan selesai, grup yang selesai seluruhnya pindah ke akhir, dan ↑ memindahkan grup ke atas; tekan lama pada tujuan untuk mengeditnya, dan tekan lama pada grup untuk menghapusnya beserta semua tujuannya (setelah konfirmasi)
 - Jadwal (Kalender)
   - Tampilan harian dengan jam, seperti Google atau Outlook Calendar
   - Jadwalkan kebiasaan selama 30 menit, 1 jam, 2 jam, atau rentang waktu khusus, diulang pada hari-hari yang dipilih

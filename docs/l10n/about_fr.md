@@ -49,7 +49,7 @@ de côté.
 - Statistiques
   - Réalisation quotidienne (%) sur les 66 derniers jours
   - Détails de l’habitude : description, objectif, réalisation de chaque jour sur la dernière année (comme les contributions GitHub), séries maximale et actuelle
-  - Objectifs de l’habitude : le bouton (+) ajoute un objectif (titre, description et un groupe nouveau ou existant) ; les objectifs sont regroupés par nom, un appui marque un objectif comme atteint, les groupes entièrement atteints passent en dernier et ↑ fait monter un groupe
+  - Objectifs de l’habitude : le bouton (+) ajoute un objectif (titre, description et un groupe nouveau ou existant) ; les objectifs sont regroupés par nom, un appui marque un objectif comme atteint, les groupes entièrement atteints passent en dernier et ↑ fait monter un groupe ; un appui long sur un objectif permet de le modifier, et un appui long sur un groupe le supprime avec tous ses objectifs (après confirmation)
 - Planning (Calendrier)
   - Vue journalière avec les heures, comme Google ou Outlook Calendar
   - Planifier une habitude pour 30 minutes, 1 heure, 2 heures ou une plage horaire personnalisée, répétée les jours
