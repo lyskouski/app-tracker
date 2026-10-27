@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Shapes of docs/design-flow/logo-inverse.svg, scaled into the 66dp safe zone of an adaptive icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:pivotX="55.9"
+        android:pivotY="51.64"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
+        android:translateX="-1.9"
+        android:translateY="2.36">
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M25.913151,60.332054C17.459862,71.572859 16.150805,92.731071 20.40067,93.012578C26.526461,93.627341 29.073867,76.980861 44.66384,72.878273C54.698369,70.237631 64.857311,72.036549 73.205175,73.841161C84.222277,74.007875 77.487949,54.814699 86.089025,49.829876C88.620167,48.385744 91.163912,46.280984 89.426657,44.069445C88.455257,42.799755 86.561357,42.186122 85.117508,41.884046C60.21628,37.791999 43.105147,39.640879 25.913151,60.332054Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M68.15787,23.058905a12.79952,12.79952 0,1 0,25.59904 0a12.79952,12.79952 0,1 0,-25.59904 0Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M45.3511406,28.297575a8.0582294,8.0582294 0,1 0,16.1164588 0a8.0582294,8.0582294 0,1 0,-16.1164588 0Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M22.2954086,38.469524a8.0582294,8.0582294 0,1 0,16.1164588 0a8.0582294,8.0582294 0,1 0,-16.1164588 0Z" />
+    </group>
+</vector>
