@@ -5,7 +5,7 @@ package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,7 +49,8 @@ private val cardShape = RoundedCornerShape(16.dp)
  * │  ✓ 2 Write a paragraph   │
  * │ ( ) Group title          │
  * └──────────────────────────┘
- * A goal toggles its status on click; a finished group is struck through.
+ * A goal toggles its status on click and is edited on long press; a long press elsewhere deletes the group.
+ * A finished group is struck through.
  */
 @Composable
 fun GoalGroupCard(
@@ -58,6 +59,8 @@ fun GoalGroupCard(
     enabled: Boolean,
     onMoveUp: () -> Unit,
     onToggle: (Goal) -> Unit,
+    onEdit: (Goal) -> Unit,
+    onDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val colors = currentColorScheme()
@@ -68,6 +71,7 @@ fun GoalGroupCard(
             .clip(cardShape)
             .background(colors.surfaceContainerLow)
             .border(1.dp, colors.outlineVariant, cardShape)
+            .combinedClickable(enabled = enabled, onLongClick = onDelete, onClick = {})
             .padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -89,7 +93,7 @@ fun GoalGroupCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp))
-                    .clickable(enabled = enabled) { onToggle(goal) }
+                    .combinedClickable(enabled = enabled, onLongClick = { onEdit(goal) }) { onToggle(goal) }
                     .padding(vertical = 4.dp)
                     .padding(end = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

@@ -60,6 +60,11 @@ interface GoalRepository {
     suspend fun insert(groupId: Long, title: String, description: String?)
 
     suspend fun updateFinished(id: Long, isFinished: Boolean)
+
+    suspend fun update(id: Long, groupId: Long, title: String, description: String?)
+
+    /** Deletes the group together with its goals. */
+    suspend fun deleteGroup(groupId: Long)
 }
 
 interface HabitTimeRepository {

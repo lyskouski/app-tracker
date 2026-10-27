@@ -21,11 +21,30 @@ class GoalService(private val goals: GoalRepository) {
      * @return groups of the habit after the change.
      */
     suspend fun create(habitId: Long, draft: GoalDraft): List<GroupedGoals> {
-        val groups = goals.getGroups(habitId)
-        val groupTitle = draft.groupTitle.trim()
-        val groupId = groups.firstOrNull { it.title.equals(groupTitle, ignoreCase = true) }?.id
-            ?: goals.insertGroup(habitId, groupTitle, (groups.maxOfOrNull { it.position } ?: -1) + 1)
+        val groupId = resolveGroup(habitId, draft.groupTitle)
         goals.insert(groupId, draft.title.trim(), draft.description?.trim()?.ifEmpty { null })
+        return getForHabit(habitId)
+    }
+
+    /**
+     * Changes the goal, moving it into the group named [GoalDraft.groupTitle] as [create] does;
+     * a group left without goals is deleted.
+     *
+     * @return groups of the habit after the change.
+     */
+    suspend fun update(habitId: Long, goalId: Long, draft: GoalDraft): List<GroupedGoals> {
+        val previousGroupId = goals.getGoals(habitId).first { it.id == goalId }.groupId
+        val groupId = resolveGroup(habitId, draft.groupTitle)
+        goals.update(goalId, groupId, draft.title.trim(), draft.description?.trim()?.ifEmpty { null })
+        if (goals.getGoals(habitId).none { it.groupId == previousGroupId }) {
+            goals.deleteGroup(previousGroupId)
+        }
+        return getForHabit(habitId)
+    }
+
+    /** @return groups of the habit after the change. */
+    suspend fun deleteGroup(habitId: Long, groupId: Long): List<GroupedGoals> {
+        goals.deleteGroup(groupId)
         return getForHabit(habitId)
     }
 
@@ -48,5 +67,13 @@ class GoalService(private val goals: GoalRepository) {
         order[index - 1] = groupId
         goals.updatePositions(order)
         return getForHabit(habitId)
+    }
+
+    /** @return id of the group named [title] (case-insensitive), created as the last one when missing. */
+    private suspend fun resolveGroup(habitId: Long, title: String): Long {
+        val groups = goals.getGroups(habitId)
+        val groupTitle = title.trim()
+        return groups.firstOrNull { it.title.equals(groupTitle, ignoreCase = true) }?.id
+            ?: goals.insertGroup(habitId, groupTitle, (groups.maxOfOrNull { it.position } ?: -1) + 1)
     }
 }

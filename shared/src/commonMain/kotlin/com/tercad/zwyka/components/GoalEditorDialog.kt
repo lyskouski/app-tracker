@@ -33,12 +33,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.core.model.Goal
 import com.tercad.zwyka.core.model.GoalDraft
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_goal
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.choose_goal_group
+import com.tercad.zwyka.resources.edit_goal
 import com.tercad.zwyka.resources.goal_description
 import com.tercad.zwyka.resources.goal_group
 import com.tercad.zwyka.resources.goal_save_failed
@@ -46,7 +48,7 @@ import com.tercad.zwyka.resources.goal_title
 import com.tercad.zwyka.resources.save
 
 /*
- * Creates a goal; its group is either typed (a new one) or chosen from [groups].
+ * Creates a goal, or edits [goal] of [goalGroup]; its group is either typed (a new one) or chosen from [groups].
  */
 @Composable
 fun GoalEditorDialog(
@@ -55,10 +57,12 @@ fun GoalEditorDialog(
     error: String?,
     onDismiss: () -> Unit,
     onSave: (GoalDraft) -> Unit,
+    goal: Goal? = null,
+    goalGroup: String = "",
 ) {
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var groupTitle by remember { mutableStateOf("") }
+    var title by remember(goal) { mutableStateOf(goal?.title.orEmpty()) }
+    var description by remember(goal) { mutableStateOf(goal?.description.orEmpty()) }
+    var groupTitle by remember(goal) { mutableStateOf(goalGroup) }
     var selectingGroup by remember { mutableStateOf(false) }
     var groupWidthPx by remember { mutableStateOf(0) }
     val groupWidth = with(LocalDensity.current) { groupWidthPx.toDp() }
@@ -73,7 +77,7 @@ fun GoalEditorDialog(
 
     AlertDialog(
         onDismissRequest = { if (!isSaving) onDismiss() },
-        title = { Text(stringResource(Res.string.add_goal)) },
+        title = { Text(stringResource(if (goal == null) Res.string.add_goal else Res.string.edit_goal)) },
         text = {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState()),

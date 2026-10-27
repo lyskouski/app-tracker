@@ -66,6 +66,29 @@ class GoalServiceTest {
     }
 
     @Test
+    fun editsGoalAndDropsEmptiedGroup() = runTest {
+        goals.create(1, GoalDraft("a", null, "First"))
+        val created = goals.create(1, GoalDraft("b", null, "Second"))
+        val goal = created.first().goals.single()
+
+        val edited = goals.update(1, goal.id, GoalDraft("a2", "note", "second"))
+        assertEquals(listOf("Second" to listOf("a2", "b")), edited.titles())
+        assertEquals("note", edited.single().goals.first().description)
+
+        val moved = goals.update(1, goal.id, GoalDraft("a2", null, "Third"))
+        assertEquals(listOf("Second" to listOf("b"), "Third" to listOf("a2")), moved.titles())
+    }
+
+    @Test
+    fun deletesGroupWithGoals() = runTest {
+        goals.create(1, GoalDraft("a", null, "First"))
+        val created = goals.create(1, GoalDraft("b", null, "Second"))
+
+        val deleted = goals.deleteGroup(1, created.first().group.id)
+        assertEquals(listOf("Second" to listOf("b")), deleted.titles())
+    }
+
+    @Test
     fun habitDeletionRemovesGoals() = runTest {
         goals.create(1, GoalDraft("a", null, "First"))
         goals.create(2, GoalDraft("b", null, "First"))

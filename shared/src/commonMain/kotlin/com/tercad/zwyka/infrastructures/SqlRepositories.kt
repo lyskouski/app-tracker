@@ -130,6 +130,17 @@ class SqlGoalRepository(private val database: Database) : GoalRepository {
     override suspend fun updateFinished(id: Long, isFinished: Boolean) {
         queries.updateGoalFinished(if (isFinished) 1L else 0L, id)
     }
+
+    override suspend fun update(id: Long, groupId: Long, title: String, description: String?) {
+        queries.updateGoal(groupId, title, description, id)
+    }
+
+    override suspend fun deleteGroup(groupId: Long) {
+        database.transaction {
+            queries.deleteGoalsForGroup(groupId)
+            queries.deleteGoalGroup(groupId)
+        }
+    }
 }
 
 class SqlHabitTimeRepository(private val database: Database) : HabitTimeRepository {

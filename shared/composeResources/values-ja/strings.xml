@@ -151,4 +151,7 @@
     <string name="choose_goal_group">グループを選択</string>
     <string name="move_up">上へ移動</string>
     <string name="goal_save_failed">目標を保存できません: %1$s</string>
+    <string name="edit_goal">目標を編集</string>
+    <string name="delete_goal_group_confirmation">グループを削除しますか？</string>
+    <string name="delete_goal_group_confirmation_message">「%1$s」とそのすべての目標を削除しますか？</string>
 </resources>

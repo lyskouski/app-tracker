@@ -151,4 +151,7 @@
     <string name="choose_goal_group">Choisir un groupe</string>
     <string name="move_up">Monter</string>
     <string name="goal_save_failed">Impossible d’enregistrer l’objectif : %1$s</string>
+    <string name="edit_goal">Modifier l’objectif</string>
+    <string name="delete_goal_group_confirmation">Supprimer le groupe ?</string>
+    <string name="delete_goal_group_confirmation_message">Supprimer « %1$s » et tous ses objectifs ?</string>
 </resources>

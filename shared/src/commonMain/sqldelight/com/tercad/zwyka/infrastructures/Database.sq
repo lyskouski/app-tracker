@@ -166,6 +166,19 @@ UPDATE Goal
 SET isFinished = ?
 WHERE id = ?;
 
+updateGoal:
+UPDATE Goal
+SET groupId = ?, title = ?, description = ?
+WHERE id = ?;
+
+deleteGoalsForGroup:
+DELETE FROM Goal
+WHERE groupId = ?;
+
+deleteGoalGroup:
+DELETE FROM GoalGroup
+WHERE id = ?;
+
 selectDayStatesForDateRange:
 SELECT *
 FROM DayState

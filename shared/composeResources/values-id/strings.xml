@@ -151,4 +151,7 @@
     <string name="choose_goal_group">Pilih grup</string>
     <string name="move_up">Pindah ke atas</string>
     <string name="goal_save_failed">Tidak dapat menyimpan tujuan: %1$s</string>
+    <string name="edit_goal">Edit tujuan</string>
+    <string name="delete_goal_group_confirmation">Hapus grup?</string>
+    <string name="delete_goal_group_confirmation_message">Hapus “%1$s” dan semua tujuannya?</string>
 </resources>

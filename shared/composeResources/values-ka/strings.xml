@@ -151,4 +151,7 @@
     <string name="choose_goal_group">ჯგუფის არჩევა</string>
     <string name="move_up">ზემოთ გადატანა</string>
     <string name="goal_save_failed">მიზნის შენახვა ვერ მოხერხდა: %1$s</string>
+    <string name="edit_goal">მიზნის რედაქტირება</string>
+    <string name="delete_goal_group_confirmation">წაიშალოს ჯგუფი?</string>
+    <string name="delete_goal_group_confirmation_message">წაიშალოს „%1$s“ და მისი ყველა მიზანი?</string>
 </resources>

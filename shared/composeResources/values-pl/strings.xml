@@ -151,4 +151,7 @@
     <string name="choose_goal_group">Wybierz grupę</string>
     <string name="move_up">Przenieś wyżej</string>
     <string name="goal_save_failed">Nie można zapisać celu: %1$s</string>
+    <string name="edit_goal">Edytuj cel</string>
+    <string name="delete_goal_group_confirmation">Usunąć grupę?</string>
+    <string name="delete_goal_group_confirmation_message">Usunąć „%1$s” i wszystkie jej cele?</string>
 </resources>

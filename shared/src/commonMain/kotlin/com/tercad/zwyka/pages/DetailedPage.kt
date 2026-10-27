@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
@@ -45,6 +46,8 @@ import kotlinx.datetime.LocalDate
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.Services
+import com.tercad.zwyka.core.model.Goal
+import com.tercad.zwyka.core.model.GoalGroup
 import com.tercad.zwyka.core.model.GroupedGoals
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.formatNumericValue
@@ -57,8 +60,12 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_goal
 import com.tercad.zwyka.resources.back
+import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.current_streak
 import com.tercad.zwyka.resources.database_error_unknown
+import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.delete_goal_group_confirmation
+import com.tercad.zwyka.resources.delete_goal_group_confirmation_message
 import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.habit_target
 import com.tercad.zwyka.resources.habits_load_failed
@@ -80,6 +87,9 @@ class DetailedPage(
         // Goal groups of the habit as shown; null while loading.
         var goals by remember(habit.id) { mutableStateOf<List<GroupedGoals>?>(null) }
         var showGoalDialog by remember { mutableStateOf(false) }
+        // Goal changed by the dialog; null to create a new one.
+        var editingGoal by remember { mutableStateOf<Goal?>(null) }
+        var deletingGroup by remember { mutableStateOf<GoalGroup?>(null) }
         var isGoalSaving by remember { mutableStateOf(false) }
         var goalError by remember { mutableStateOf<String?>(null) }
         val coroutineScope = rememberCoroutineScope()
@@ -146,6 +156,7 @@ class DetailedPage(
                 FloatingActionButton(
                     onClick = {
                         goalError = null
+                        editingGoal = null
                         showGoalDialog = true
                     },
                     modifier = Modifier.offset(y = 52.dp),
@@ -213,6 +224,15 @@ class DetailedPage(
                         onToggle = { goal ->
                             changeGoals { services.goals.setFinished(habit.id, goal.id, !goal.isFinished) }
                         },
+                        onEdit = { goal ->
+                            goalError = null
+                            editingGoal = goal
+                            showGoalDialog = true
+                        },
+                        onDelete = {
+                            goalError = null
+                            deletingGroup = groupedGoals.group
+                        },
                     )
                 }
                 if (!showGoalDialog) {
@@ -224,6 +244,7 @@ class DetailedPage(
         }
 
         if (showGoalDialog) {
+            val goal = editingGoal
             GoalEditorDialog(
                 groups = goals.orEmpty().map { it.group.title },
                 isSaving = isGoalSaving,
@@ -234,7 +255,39 @@ class DetailedPage(
                 },
                 onSave = { draft ->
                     changeGoals(onSuccess = { showGoalDialog = false }) {
-                        services.goals.create(habit.id, draft)
+                        if (goal == null) {
+                            services.goals.create(habit.id, draft)
+                        } else {
+                            services.goals.update(habit.id, goal.id, draft)
+                        }
+                    }
+                },
+                goal = goal,
+                goalGroup = goals.orEmpty().firstOrNull { it.group.id == goal?.groupId }?.group?.title.orEmpty(),
+            )
+        }
+
+        deletingGroup?.let { group ->
+            AlertDialog(
+                onDismissRequest = { deletingGroup = null },
+                title = { Text(stringResource(Res.string.delete_goal_group_confirmation)) },
+                text = { Text(stringResource(Res.string.delete_goal_group_confirmation_message, group.title)) },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            deletingGroup = null
+                            changeGoals { services.goals.deleteGroup(habit.id, group.id) }
+                        },
+                        colors = ButtonDefaults.textButtonColors(
+                            contentColor = currentColorScheme().error,
+                        ),
+                    ) {
+                        Text(stringResource(Res.string.delete))
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { deletingGroup = null }) {
+                        Text(stringResource(Res.string.cancel))
                     }
                 },
             )

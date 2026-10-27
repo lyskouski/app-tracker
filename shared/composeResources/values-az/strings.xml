@@ -151,4 +151,7 @@
     <string name="choose_goal_group">Qrup seçin</string>
     <string name="move_up">Yuxarı qaldır</string>
     <string name="goal_save_failed">Məqsədi yadda saxlamaq mümkün olmadı: %1$s</string>
+    <string name="edit_goal">Məqsədi redaktə et</string>
+    <string name="delete_goal_group_confirmation">Qrup silinsin?</string>
+    <string name="delete_goal_group_confirmation_message">“%1$s” və onun bütün məqsədləri silinsin?</string>
 </resources>
