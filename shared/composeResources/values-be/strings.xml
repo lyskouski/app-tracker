@@ -154,4 +154,10 @@
     <string name="edit_goal">Рэдагаваць мэту</string>
     <string name="delete_goal_group_confirmation">Выдаліць групу?</string>
     <string name="delete_goal_group_confirmation_message">Выдаліць «%1$s» і ўсе яе мэты?</string>
+    <string name="weekly">Тыдзень</string>
+    <string name="overall">Агульна</string>
+    <string name="completed_skipped">Выкананыя / Прапушчаныя</string>
+    <string name="every_day">Кожны дзень</string>
+    <string name="apply">Ужыць</string>
+    <string name="done">Зроблена</string>
 </resources>

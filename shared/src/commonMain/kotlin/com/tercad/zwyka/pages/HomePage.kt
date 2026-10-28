@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -44,12 +45,19 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
+import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
+import com.tercad.zwyka.components.SegmentedSelector
+import com.tercad.zwyka.components.TodayHabitList
+import com.tercad.zwyka.components.WeeklyHabitList
+import com.tercad.zwyka.core.time.currentWeekDates
+import com.tercad.zwyka.defines.HomeView
+import com.tercad.zwyka.defines.homeViewOptions
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.sortedBy
@@ -107,6 +115,8 @@ private fun HomePageContent(
             today.plus(dayOffset, DateTimeUnit.DAY).toString()
         }
     }
+    // The whole current week is shown by the "Weekly" view, whatever the week start is.
+    val lastLoadedDate = remember(today) { today.plus(6, DateTimeUnit.DAY).toString() }
 
     var state by remember(services) {
         mutableStateOf<HomePageState>(HomePageState.Loading)
@@ -129,7 +139,7 @@ private fun HomePageContent(
             initializeDatabase()
             services.habits.fillInactiveDays(settingsStore.current.weekStart)
             val habits = services.habits.getAll()
-            val dayStates = services.dayStates.getRange(dates.first(), dates.last())
+            val dayStates = services.dayStates.getRange(dates.first(), lastLoadedDate)
             state = HomePageState.Loaded(habits, dayStates)
         } catch (error: CancellationException) {
             throw error
@@ -147,7 +157,50 @@ private fun HomePageContent(
             ),
         )
         is HomePageState.Loaded -> {
+            val settings = settingsStore.current
+            val sortedHabits = current.habits.sortedBy(settings.habitOrderBy, settings.sortDirection)
+            val marks = remember(current.dayStates) {
+                current.dayStates.associate { CellKey(habitId = it.habitId, date = it.date) to it.mark }
+            }
+
+            // Reads the latest state on completion: other changes may be stored meanwhile.
+            fun saveMark(updated: DayState) {
+                coroutineScope.launch {
+                    try {
+                        services.dayStates.setMark(updated)
+                        val latest = state as? HomePageState.Loaded ?: return@launch
+                        state = latest.copy(
+                            // Reloaded: `updatedAt` of the habit has changed.
+                            habits = services.habits.getAll(),
+                            dayStates = latest.dayStates.filterNot {
+                                it.habitId == updated.habitId && it.date == updated.date
+                            } + updated,
+                        )
+                    } catch (error: CancellationException) {
+                        throw error
+                    } catch (error: Exception) {
+                        state = HomePageState.Failed(error.message)
+                    }
+                }
+            }
+
             Scaffold(
+                topBar = {
+                    SegmentedSelector(
+                        labels = homeViewOptions.map { stringResource(it.label) },
+                        isSelected = { homeViewOptions[it] == settings.homeView },
+                        onClick = { index ->
+                            coroutineScope.launch {
+                                settingsStore.update(settingsStore.current.copy(homeView = homeViewOptions[index]))
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(currentColorScheme().surfaceVariant)
+                            .statusBarsPadding()
+                            .padding(horizontal = 8.dp, vertical = 4.dp),
+                    )
+                },
                 bottomBar = {
                     Box(
                         modifier = Modifier
@@ -209,60 +262,83 @@ private fun HomePageContent(
                     }
                 },
             ) { contentPadding ->
-                CalendarTable(
-                    habits = current.habits.sortedBy(
-                        settingsStore.current.habitOrderBy,
-                        settingsStore.current.sortDirection,
-                    ),
-                    dates = dates,
-                    today = today.toString(),
-                    weekStart = settingsStore.current.weekStart,
-                    dateFormat = settingsStore.current.dateFormat,
-                    completenessType = settingsStore.current.completenessType,
-                    dayState = current.dayStates,
-                    onDayStateClick = { selectedDayState = it },
-                    onDayStateLongClick = { deletingDayState = it },
-                    onDateClick = { date ->
-                        coroutineScope.launch {
-                            try {
-                                // Days before the habit creation are not part of it.
-                                val skipped = services.dayStates.skipDay(
-                                    date,
-                                    current.habits
-                                        .filterNot { it.isArchived || it.isBeforeCreation(date, null) }
-                                        .map { it.id },
-                                )
-                                if (skipped.isNotEmpty()) {
-                                    state = current.copy(
-                                        // Reloaded: `updatedAt` of the habits has changed.
-                                        habits = services.habits.getAll(),
-                                        dayStates = current.dayStates + skipped,
+                when (settings.homeView) {
+                    HomeView.TODAY -> TodayHabitList(
+                        habits = sortedHabits,
+                        marks = marks,
+                        today = today.toString(),
+                        completenessType = settings.completenessType,
+                        onMarkChange = ::saveMark,
+                        onDayStateClick = { selectedDayState = it },
+                        onDayStateLongClick = { deletingDayState = it },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(contentPadding),
+                    )
+                    HomeView.WEEKLY -> WeeklyHabitList(
+                        habits = sortedHabits,
+                        marks = marks,
+                        weekDates = currentWeekDates(today, settings.weekStart),
+                        today = today.toString(),
+                        completenessType = settings.completenessType,
+                        onDayStateClick = { selectedDayState = it },
+                        onDayStateLongClick = { deletingDayState = it },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(contentPadding),
+                    )
+                    HomeView.OVERALL -> CalendarTable(
+                        habits = sortedHabits,
+                        dates = dates,
+                        today = today.toString(),
+                        weekStart = settingsStore.current.weekStart,
+                        dateFormat = settingsStore.current.dateFormat,
+                        completenessType = settingsStore.current.completenessType,
+                        dayState = current.dayStates,
+                        onDayStateClick = { selectedDayState = it },
+                        onDayStateLongClick = { deletingDayState = it },
+                        onDateClick = { date ->
+                            coroutineScope.launch {
+                                try {
+                                    // Days before the habit creation are not part of it.
+                                    val skipped = services.dayStates.skipDay(
+                                        date,
+                                        current.habits
+                                            .filterNot { it.isArchived || it.isBeforeCreation(date, null) }
+                                            .map { it.id },
                                     )
+                                    if (skipped.isNotEmpty()) {
+                                        state = current.copy(
+                                            // Reloaded: `updatedAt` of the habits has changed.
+                                            habits = services.habits.getAll(),
+                                            dayStates = current.dayStates + skipped,
+                                        )
+                                    }
+                                } catch (error: CancellationException) {
+                                    throw error
+                                } catch (error: Exception) {
+                                    state = HomePageState.Failed(error.message)
                                 }
-                            } catch (error: CancellationException) {
-                                throw error
-                            } catch (error: Exception) {
-                                state = HomePageState.Failed(error.message)
                             }
-                        }
-                    },
-                    onProgressClick = {
-                        navigator.push(
-                            MetricsPage(current.habits, current.dayStates, today, settingsStore.current.weekStart),
-                        )
-                    },
-                    onHabitClick = {
-                        editingHabit = it
-                        habitError = null
-                        showHabitDialog = true
-                    },
-                    onHabitLongClick = { habit ->
-                        navigator.push(DetailedPage(habit, services, today, settingsStore.current.weekStart))
-                    },
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(contentPadding),
-                )
+                        },
+                        onProgressClick = {
+                            navigator.push(
+                                MetricsPage(current.habits, current.dayStates, today, settingsStore.current.weekStart),
+                            )
+                        },
+                        onHabitClick = {
+                            editingHabit = it
+                            habitError = null
+                            showHabitDialog = true
+                        },
+                        onHabitLongClick = { habit ->
+                            navigator.push(DetailedPage(habit, services, today, settingsStore.current.weekStart))
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(contentPadding),
+                    )
+                }
             }
 
             if (showHabitDialog) {
@@ -289,7 +365,7 @@ private fun HomePageContent(
                                     ),
                                     weekStart = settingsStore.current.weekStart,
                                 )
-                                val dayStates = services.dayStates.getRange(dates.first(), dates.last())
+                                val dayStates = services.dayStates.getRange(dates.first(), lastLoadedDate)
                                 state = current.copy(habits = habits, dayStates = dayStates)
                                 showHabitDialog = false
                                 editingHabit = null

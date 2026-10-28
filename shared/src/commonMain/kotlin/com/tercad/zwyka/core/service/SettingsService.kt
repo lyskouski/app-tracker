@@ -13,6 +13,7 @@ private const val DATE_FORMAT_KEY = "date_format"
 private const val HABIT_ORDER_BY_KEY = "habit_order_by"
 private const val SORT_DIRECTION_KEY = "sort_direction"
 private const val COMPLETENESS_TYPE_KEY = "completeness_type"
+private const val HOME_VIEW_KEY = "home_view"
 
 /*
  * Maps [AppSettings] to stored key / value pairs.
@@ -31,6 +32,7 @@ class SettingsService(
             habitOrderBy = values[HABIT_ORDER_BY_KEY].toEnum(defaults.habitOrderBy),
             sortDirection = values[SORT_DIRECTION_KEY].toEnum(defaults.sortDirection),
             completenessType = values[COMPLETENESS_TYPE_KEY].toEnum(defaults.completenessType),
+            homeView = values[HOME_VIEW_KEY].toEnum(defaults.homeView),
         )
     }
 
@@ -43,6 +45,7 @@ class SettingsService(
         settings.put(HABIT_ORDER_BY_KEY, value.habitOrderBy.name)
         settings.put(SORT_DIRECTION_KEY, value.sortDirection.name)
         settings.put(COMPLETENESS_TYPE_KEY, value.completenessType.name)
+        settings.put(HOME_VIEW_KEY, value.homeView.name)
     }
 }
 

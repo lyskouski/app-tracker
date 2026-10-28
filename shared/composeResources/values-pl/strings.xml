@@ -154,4 +154,10 @@
     <string name="edit_goal">Edytuj cel</string>
     <string name="delete_goal_group_confirmation">Usunąć grupę?</string>
     <string name="delete_goal_group_confirmation_message">Usunąć „%1$s” i wszystkie jej cele?</string>
+    <string name="weekly">Tydzień</string>
+    <string name="overall">Ogółem</string>
+    <string name="completed_skipped">Wykonane / Pominięte</string>
+    <string name="every_day">Codziennie</string>
+    <string name="apply">Zastosuj</string>
+    <string name="done">Zrobione</string>
 </resources>

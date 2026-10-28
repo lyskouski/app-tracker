@@ -154,4 +154,10 @@
     <string name="edit_goal">Upravit cíl</string>
     <string name="delete_goal_group_confirmation">Smazat skupinu?</string>
     <string name="delete_goal_group_confirmation_message">Smazat „%1$s“ a všechny její cíle?</string>
+    <string name="weekly">Týden</string>
+    <string name="overall">Celkově</string>
+    <string name="completed_skipped">Splněné / Přeskočené</string>
+    <string name="every_day">Každý den</string>
+    <string name="apply">Použít</string>
+    <string name="done">Hotovo</string>
 </resources>

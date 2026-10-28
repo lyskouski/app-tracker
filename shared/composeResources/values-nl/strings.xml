@@ -154,4 +154,10 @@
     <string name="edit_goal">Doel bewerken</string>
     <string name="delete_goal_group_confirmation">Groep verwijderen?</string>
     <string name="delete_goal_group_confirmation_message">„%1$s” en alle bijbehorende doelen verwijderen?</string>
+    <string name="weekly">Week</string>
+    <string name="overall">Totaal</string>
+    <string name="completed_skipped">Voltooid / Overgeslagen</string>
+    <string name="every_day">Elke dag</string>
+    <string name="apply">Toepassen</string>
+    <string name="done">Klaar</string>
 </resources>

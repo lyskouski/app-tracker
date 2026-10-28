@@ -154,4 +154,10 @@
     <string name="edit_goal">მიზნის რედაქტირება</string>
     <string name="delete_goal_group_confirmation">წაიშალოს ჯგუფი?</string>
     <string name="delete_goal_group_confirmation_message">წაიშალოს „%1$s“ და მისი ყველა მიზანი?</string>
+    <string name="weekly">კვირა</string>
+    <string name="overall">სრული</string>
+    <string name="completed_skipped">შესრულებული / გამოტოვებული</string>
+    <string name="every_day">ყოველდღე</string>
+    <string name="apply">გამოყენება</string>
+    <string name="done">შესრულდა</string>
 </resources>

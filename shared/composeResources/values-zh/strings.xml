@@ -154,4 +154,10 @@
     <string name="edit_goal">编辑目标</string>
     <string name="delete_goal_group_confirmation">删除分组？</string>
     <string name="delete_goal_group_confirmation_message">删除“%1$s”及其所有目标？</string>
+    <string name="weekly">每周</string>
+    <string name="overall">总览</string>
+    <string name="completed_skipped">已完成 / 已跳过</string>
+    <string name="every_day">每天</string>
+    <string name="apply">应用</string>
+    <string name="done">完成</string>
 </resources>

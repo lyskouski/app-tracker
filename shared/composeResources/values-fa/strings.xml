@@ -154,4 +154,10 @@
     <string name="edit_goal">ویرایش هدف</string>
     <string name="delete_goal_group_confirmation">گروه حذف شود؟</string>
     <string name="delete_goal_group_confirmation_message">«%1$s» و همه اهداف آن حذف شود؟</string>
+    <string name="weekly">هفتگی</string>
+    <string name="overall">کلی</string>
+    <string name="completed_skipped">انجام‌شده / ردشده</string>
+    <string name="every_day">هر روز</string>
+    <string name="apply">اعمال</string>
+    <string name="done">انجام شد</string>
 </resources>

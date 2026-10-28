@@ -154,4 +154,10 @@
     <string name="edit_goal">Maqsadni tahrirlash</string>
     <string name="delete_goal_group_confirmation">Guruh o‘chirilsinmi?</string>
     <string name="delete_goal_group_confirmation_message">“%1$s” va uning barcha maqsadlari o‘chirilsinmi?</string>
+    <string name="weekly">Haftalik</string>
+    <string name="overall">Umumiy</string>
+    <string name="completed_skipped">Bajarilgan / Oʻtkazilgan</string>
+    <string name="every_day">Har kuni</string>
+    <string name="apply">Qoʻllash</string>
+    <string name="done">Bajarildi</string>
 </resources>

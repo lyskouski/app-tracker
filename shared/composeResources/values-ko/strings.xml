@@ -154,4 +154,10 @@
     <string name="edit_goal">목표 편집</string>
     <string name="delete_goal_group_confirmation">그룹을 삭제할까요?</string>
     <string name="delete_goal_group_confirmation_message">“%1$s” 및 모든 목표를 삭제할까요?</string>
+    <string name="weekly">주간</string>
+    <string name="overall">전체</string>
+    <string name="completed_skipped">완료 / 건너뜀</string>
+    <string name="every_day">매일</string>
+    <string name="apply">적용</string>
+    <string name="done">완료</string>
 </resources>
