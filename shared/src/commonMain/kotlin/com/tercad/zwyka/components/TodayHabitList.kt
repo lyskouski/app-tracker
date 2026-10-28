@@ -11,6 +11,7 @@ import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -98,6 +99,7 @@ fun TodayHabitList(
 
     LazyColumn(
         modifier = modifier,
+        contentPadding = PaddingValues(bottom = 14.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         grouped.forEachIndexed { index, (habit, _) ->

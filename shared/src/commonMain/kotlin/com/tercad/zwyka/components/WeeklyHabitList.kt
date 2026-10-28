@@ -10,6 +10,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -74,6 +75,7 @@ fun WeeklyHabitList(
     val dayNames = stringArrayResource(Res.array.days_short)
     LazyColumn(
         modifier = modifier,
+        contentPadding = PaddingValues(bottom = 14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(habits.filterNot { it.isArchived }, key = { it.id }) { habit ->
