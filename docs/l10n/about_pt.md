@@ -37,7 +37,10 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Arquivar (desativar) um hábito: ele fica acinzentado, é exibido por último e fica oculto na Agenda
   - Meta numérica, ex. 10000 passos: o dia guarda o valor alcançado, conclusão = valor / meta
 - Calendário de hábitos (página principal)
-  - Hábitos (colunas) por dias (linhas): os últimos 66 dias mais os 5 próximos
+  - Três visualizações, trocadas pelas abas no topo (a escolhida é lembrada): Hoje, Semanal e Geral
+  - Hoje: os hábitos de hoje em lista, os concluídos e ignorados ficam abaixo; deslizar para a direita marca um hábito como feito (uma meta numérica pede o valor), deslizar para a esquerda o pula, um toque abre o estado do dia, um toque longo edita o hábito
+  - Semanal: um cartão por hábito com seus dias ativos e marcas da semana atual; um toque longo no cartão edita o hábito
+  - Geral: Hábitos (colunas) por dias (linhas): os últimos 66 dias mais os 5 próximos
   - Progresso do dia por hábito: `·` iniciado, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` acima de 100%
   - Uma célula também pode ser marcada como pulada ("—"); um toque longo em uma célula exclui seu estado
   - Um toque longo em um hábito abre seus detalhes

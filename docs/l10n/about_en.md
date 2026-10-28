@@ -37,7 +37,10 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Archive (deactivate) a habit: it is grayed out, shown last, and hidden in the Schedule
   - Numeric target, e.g. 10000 steps: a day keeps the reached value, completion is value / target
 - Habits Calendar (main page)
-  - Habits (columns) by days (rows): the last 66 days plus the upcoming 5
+  - Three views, switched by the tabs on top (the chosen one is remembered): Today, Weekly, and Overall
+  - Today: today's habits as a list, the completed and skipped ones go below; swipe right marks a habit as done (a numeric target asks for its value), swipe left skips it, a tap opens the day state, a long press edits the habit
+  - Weekly: a card per habit with its active days and its marks for the current week; a long press on the card edits the habit
+  - Overall: habits (columns) by days (rows): the last 66 days plus the upcoming 5
   - Day progress per habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` over 100%
   - A cell can also be marked as skipped ("—"); long press on a cell deletes its state
   - Long press on a habit opens its details

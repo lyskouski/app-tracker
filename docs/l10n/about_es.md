@@ -37,7 +37,10 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Archivar (desactivar) un hábito: se muestra en gris, al final y se oculta en el Horario
   - Objetivo numérico, p. ej. 10000 pasos: el día guarda el valor alcanzado, cumplimiento = valor / objetivo
 - Calendario de hábitos (página principal)
-  - Hábitos (columnas) por días (filas): los últimos 66 días más los 5 siguientes
+  - Tres vistas, que se cambian con las pestañas superiores (se recuerda la elegida): Hoy, Semanal y General
+  - Hoy: los hábitos de hoy como lista, los completados y omitidos van debajo; deslizar a la derecha marca un hábito como hecho (un objetivo numérico pide su valor), deslizar a la izquierda lo omite, un toque abre el estado del día y una pulsación larga edita el hábito
+  - Semanal: una tarjeta por hábito con sus días activos y sus marcas de la semana actual; una pulsación larga en la tarjeta edita el hábito
+  - General: Hábitos (columnas) por días (filas): los últimos 66 días más los 5 siguientes
   - Progreso diario por hábito: `·` iniciado, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` más del 100 %
   - Una celda también puede marcarse como omitida ("—"); una pulsación larga en una celda elimina su estado
   - Una pulsación larga en un hábito abre sus detalles

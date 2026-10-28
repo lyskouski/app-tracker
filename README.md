@@ -12,7 +12,7 @@ one is left behind.
 | ![Android](./docs/design-flow/icons/android.png) Android (Google Play)    | [zwyka_Android.aab](https://github.com/lyskouski/app-tracker/releases/latest) | [Google Play](https://play.google.com/store/apps/details?id=com.tercad.zwyka) | Pending [![Google Play](./docs/design-flow/badges/google.png)](https://play.google.com/store/apps/details?id=com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux                    | [zwyka_Linux.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Not available |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux (Snap Store)       | [zwyka_LinuxSnap.snap](https://github.com/lyskouski/app-tracker/releases/latest) | [![Zwyka](https://snapcraft.io/zwyka/badge.svg)](https://snapcraft.io/zwyka) | [![Snapcraft: Zwyka](./docs/design-flow/badges/snap-store.png)](https://snapcraft.io/zwyka) |
-| ![Linux](./docs/design-flow/icons/linux.png) Linux (Flathub)          | [zwyka_LinuxFlatpak.flatpak](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Pending [![Flathub: Zwyka](./docs/design-flow/badges/flathub.png)](https://flathub.org/apps/com.tercad.zwyka) |
+| ![Linux](./docs/design-flow/icons/linux.png) Linux (Flathub)          | [zwyka_LinuxFlatpak.flatpak](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Blocked [#73](https://github.com/lyskouski/app-tracker/issues/73) [![Flathub: Zwyka](./docs/design-flow/badges/flathub.png)](https://flathub.org/apps/com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux (AppImage)         | [Zwyka-x86_64.AppImage](https://github.com/lyskouski/app-tracker/releases/latest) | [Pling Store](https://www.pling.com/p/2380239/) | [![App Image Hub](./docs/design-flow/badges/appimagehub.png)](https://www.appimagehub.com/p/2380239) |
 | ![Windows](./docs/design-flow/icons/windows.png) Windows (Microsoft Store) | [zwyka_Windows.msix](https://github.com/lyskouski/app-tracker/releases/latest) | Not available |   [![Microsoft Store](./docs/design-flow/badges/windows.png)](https://apps.microsoft.com/detail/9nzp2060q3rw?ocid=webpdpshare) |
 | ![Web Browsers](./docs/design-flow/icons/web.png) Web                      | [zwyka_Web.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | [GitHub Pages: Zwyka](https://lyskouski.github.io/app-tracker/) | [terCAD: Zwyka](https://tercad.com/app/tracker/index.html) |
@@ -29,7 +29,25 @@ one is left behind.
   reached value instead of a status mark, and its completion is the value divided by the target.
   Once set, the target can be changed but not turned off.
 
-**Habits Calendar (home screen)**
+**Home screen**
+- Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default); the chosen view
+  is remembered.
+
+**Today**
+- Today's habits as a list (archived ones and the ones created later are left out): not done habits first, then
+  the done and skipped ones below the "Completed / Skipped" divider.
+- Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value first (prefilled
+  with the target). Swipe left to skip it ("—").
+- Tap a habit to set its day state, long press to edit the habit.
+- Habits with a numeric target show the reached value and the target (e.g. `5000 / 10000 steps`), others show
+  their mark.
+
+**Weekly**
+- A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every day"), and the marks
+  of the current week (from the selected start of the week); today is highlighted.
+- Tap a day to set its state, long press on a day to delete its state, long press on the card to edit the habit.
+
+**Overall (Habits Calendar)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
   in both directions (by touch, or Shift + Scroll Wheel for horizontal scroll and Scroll Wheel
   for vertical) with pinned habit headers and dates.

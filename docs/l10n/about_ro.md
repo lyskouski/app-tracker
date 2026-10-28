@@ -37,7 +37,10 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Arhivarea (dezactivarea) unui obicei: acesta devine gri, este afișat ultimul și este ascuns în Program
   - Obiectiv numeric, de ex. 10000 de pași: ziua păstrează valoarea atinsă, îndeplinire = valoare / obiectiv
 - Calendarul obiceiurilor (pagina principală)
-  - Obiceiuri (coloane) pe zile (rânduri): ultimele 66 de zile plus următoarele 5
+  - Trei vizualizări, schimbate din filele de sus (cea aleasă este reținută): Astăzi, Săptămână și General
+  - Astăzi: obiceiurile de azi ca listă, cele finalizate și omise sunt dedesubt; glisarea la dreapta marchează un obicei ca făcut (o țintă numerică cere valoarea), glisarea la stânga îl omite, o atingere deschide starea zilei, o apăsare lungă editează obiceiul
+  - Săptămână: un card pentru fiecare obicei cu zilele active și marcajele din săptămâna curentă; o apăsare lungă pe card editează obiceiul
+  - General: Obiceiuri (coloane) pe zile (rânduri): ultimele 66 de zile plus următoarele 5
   - Progresul zilnic pentru fiecare obicei: `·` început, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` peste 100%
   - O celulă poate fi marcată și ca omisă ("—"); o apăsare lungă pe o celulă îi șterge starea
   - O apăsare lungă pe un obicei îi deschide detaliile

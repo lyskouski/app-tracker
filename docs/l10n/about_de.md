@@ -37,7 +37,10 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Eine Gewohnheit archivieren (deaktivieren): Sie wird ausgegraut, zuletzt angezeigt und im Zeitplan ausgeblendet
   - Numerisches Ziel, z. B. 10000 Schritte: ein Tag speichert den erreichten Wert, Erfüllung = Wert / Ziel
 - Gewohnheitskalender (Hauptseite)
-  - Gewohnheiten (Spalten) nach Tagen (Zeilen): die letzten 66 Tage plus die kommenden 5
+  - Drei Ansichten, umschaltbar über die Tabs oben (die gewählte wird gemerkt): Heute, Woche und Gesamt
+  - Heute: die heutigen Gewohnheiten als Liste, erledigte und übersprungene stehen darunter; Wischen nach rechts markiert eine Gewohnheit als erledigt (bei einem numerischen Ziel wird der Wert abgefragt), Wischen nach links überspringt sie, Tippen öffnet den Tagesstatus, langes Drücken bearbeitet die Gewohnheit
+  - Woche: eine Karte pro Gewohnheit mit ihren aktiven Tagen und Markierungen der aktuellen Woche; langes Drücken auf die Karte bearbeitet die Gewohnheit
+  - Gesamt: Gewohnheiten (Spalten) nach Tagen (Zeilen): die letzten 66 Tage plus die kommenden 5
   - Tagesfortschritt pro Gewohnheit: `·` begonnen, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` über 100 %
   - Eine Zelle kann auch als übersprungen ("—") markiert werden; langes Drücken auf eine Zelle löscht ihren Status
   - Langes Drücken auf eine Gewohnheit öffnet ihre Details

@@ -37,7 +37,10 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Archivace (deaktivace) návyku: návyk je zašedlý, zobrazený na konci a skrytý v Plánu
   - Číselný cíl, např. 10000 kroků: den uchovává dosaženou hodnotu, plnění = hodnota / cíl
 - Kalendář návyků (hlavní stránka)
-  - Návyky (sloupce) podle dnů (řádky): posledních 66 dnů a nadcházejících 5
+  - Tři zobrazení přepínaná kartami nahoře (vybrané se pamatuje): Dnes, Týden a Celkově
+  - Dnes: dnešní návyky jako seznam, splněné a přeskočené jsou níže; přejetí doprava označí návyk jako splněný (u číselného cíle se zeptá na hodnotu), přejetí doleva ho přeskočí, klepnutí otevře stav dne, dlouhé stisknutí návyk upraví
+  - Týden: karta pro každý návyk s jeho aktivními dny a značkami za aktuální týden; dlouhé stisknutí karty návyk upraví
+  - Celkově: Návyky (sloupce) podle dnů (řádky): posledních 66 dnů a nadcházejících 5
   - Denní pokrok u každého návyku: `·` zahájeno, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` přes 100 %
   - Buňku lze také označit jako přeskočenou ("—"); dlouhé stisknutí buňky smaže její stav
   - Dlouhé stisknutí návyku otevře jeho detail

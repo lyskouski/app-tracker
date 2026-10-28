@@ -37,7 +37,10 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Alışkanlığı arşivleme (devre dışı bırakma): gri görünür, en sonda gösterilir ve Programda gizlenir
   - Sayısal hedef, ör. 10000 adım: gün ulaşılan değeri saklar, tamamlanma = değer / hedef
 - Alışkanlık Takvimi (ana sayfa)
-  - Günlere (satırlar) göre alışkanlıklar (sütunlar): son 66 gün ve gelecek 5 gün
+  - Üstteki sekmelerle değiştirilen üç görünüm (seçilen hatırlanır): Bugün, Haftalık ve Genel
+  - Bugün: bugünün alışkanlıkları liste halinde, tamamlanan ve atlananlar altta; sağa kaydırma alışkanlığı tamamlandı olarak işaretler (sayısal hedef değeri sorar), sola kaydırma atlar, dokunma günün durumunu açar, uzun basma alışkanlığı düzenler
+  - Haftalık: her alışkanlık için aktif günleri ve bu haftanın işaretleriyle bir kart; karta uzun basma alışkanlığı düzenler
+  - Genel: Günlere (satırlar) göre alışkanlıklar (sütunlar): son 66 gün ve gelecek 5 gün
   - Her alışkanlık için günlük ilerleme: `·` başlandı, `\` %25, `|` %50, `/` %75, `X` %100, `▣` %100'ün üzerinde
   - Bir hücre atlandı ("—") olarak da işaretlenebilir; bir hücreye uzun basmak durumunu siler
   - Bir alışkanlığa uzun basmak ayrıntılarını açar

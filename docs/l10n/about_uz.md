@@ -37,7 +37,10 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Odatni arxivlash (o‘chirish): u kulrang bo‘ladi, oxirida ko‘rsatiladi va Jadvalda yashiriladi
   - Raqamli maqsad, masalan 10000 qadam: kun erishilgan qiymatni saqlaydi, bajarilish = qiymat / maqsad
 - Odatlar taqvimi (asosiy sahifa)
-  - Kunlar (qatorlar) bo‘yicha odatlar (ustunlar): oxirgi 66 kun va keyingi 5 kun
+  - Yuqoridagi yorliqlar bilan almashtiriladigan uchta ko‘rinish (tanlangani eslab qolinadi): Bugun, Haftalik va Umumiy
+  - Bugun: bugungi odatlar ro‘yxat ko‘rinishida, bajarilgan va o‘tkazilganlari pastda; o‘ngga surish odatni bajarilgan deb belgilaydi (raqamli maqsad qiymatni so‘raydi), chapga surish uni o‘tkazib yuboradi, bosish kun holatini ochadi, uzoq bosish odatni tahrirlaydi
+  - Haftalik: har bir odat uchun faol kunlari va joriy hafta belgilari bilan karta; kartani uzoq bosish odatni tahrirlaydi
+  - Umumiy: Kunlar (qatorlar) bo‘yicha odatlar (ustunlar): oxirgi 66 kun va keyingi 5 kun
   - Har bir odat bo‘yicha kunlik jarayon: `·` boshlangan, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100% dan ortiq
   - Katakni o‘tkazib yuborilgan ("—") deb ham belgilash mumkin; katakka uzoq bosish uning holatini o‘chiradi
   - Odatga uzoq bosish uning tafsilotlarini ochadi

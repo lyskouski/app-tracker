@@ -37,7 +37,10 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Archiwizacja (dezaktywacja) nawyku: jest on wyszarzony, wyświetlany na końcu i ukryty w Harmonogramie
   - Cel liczbowy, np. 10000 kroków: dzień przechowuje osiągniętą wartość, realizacja = wartość / cel
 - Kalendarz nawyków (strona główna)
-  - Nawyki (kolumny) według dni (wiersze): ostatnie 66 dni oraz 5 nadchodzących
+  - Trzy widoki przełączane kartami u góry (wybrany jest zapamiętywany): Dziś, Tydzień i Ogółem
+  - Dziś: dzisiejsze nawyki jako lista, wykonane i pominięte trafiają niżej; przesunięcie w prawo oznacza nawyk jako zrobiony (cel liczbowy pyta o wartość), przesunięcie w lewo go pomija, dotknięcie otwiera stan dnia, długie naciśnięcie edytuje nawyk
+  - Tydzień: karta dla każdego nawyku z jego aktywnymi dniami i oznaczeniami z bieżącego tygodnia; długie naciśnięcie karty edytuje nawyk
+  - Ogółem: Nawyki (kolumny) według dni (wiersze): ostatnie 66 dni oraz 5 nadchodzących
   - Postęp dnia dla każdego nawyku: `·` rozpoczęty, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` ponad 100%
   - Komórkę można też oznaczyć jako pominiętą ("—"); długie naciśnięcie komórki usuwa jej stan
   - Długie naciśnięcie nawyku otwiera jego szczegóły

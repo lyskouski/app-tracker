@@ -38,7 +38,10 @@ indietro.
   - Archiviare (disattivare) un’abitudine: viene mostrata in grigio, in fondo all’elenco e nascosta nella Pianificazione
   - Obiettivo numerico, ad es. 10000 passi: il giorno conserva il valore raggiunto, completamento = valore / obiettivo
 - Calendario delle abitudini (pagina principale)
-  - Abitudini (colonne) per giorni (righe): gli ultimi 66 giorni più i 5 successivi
+  - Tre viste, da cambiare con le schede in alto (quella scelta viene ricordata): Oggi, Settimana e Generale
+  - Oggi: le abitudini di oggi come elenco, quelle completate e saltate vanno sotto; scorrere a destra segna un'abitudine come fatta (un obiettivo numerico chiede il valore), scorrere a sinistra la salta, un tocco apre lo stato del giorno, una pressione prolungata modifica l'abitudine
+  - Settimana: una scheda per abitudine con i suoi giorni attivi e i segni della settimana corrente; una pressione prolungata sulla scheda modifica l'abitudine
+  - Generale: Abitudini (colonne) per giorni (righe): gli ultimi 66 giorni più i 5 successivi
   - Avanzamento giornaliero per abitudine: `·` iniziata, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` oltre il 100%
   - Una cella può anche essere segnata come saltata ("—"); una pressione prolungata su una cella ne elimina lo stato
   - Una pressione prolungata su un’abitudine ne apre i dettagli
