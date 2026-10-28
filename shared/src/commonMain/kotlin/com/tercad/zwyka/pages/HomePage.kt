@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -52,12 +51,11 @@ import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
-import com.tercad.zwyka.components.SegmentedSelector
+import com.tercad.zwyka.components.HomeViewTabs
 import com.tercad.zwyka.components.TodayHabitList
 import com.tercad.zwyka.components.WeeklyHabitList
 import com.tercad.zwyka.core.time.currentWeekDates
 import com.tercad.zwyka.defines.HomeView
-import com.tercad.zwyka.defines.homeViewOptions
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.sortedBy
@@ -186,19 +184,13 @@ private fun HomePageContent(
 
             Scaffold(
                 topBar = {
-                    SegmentedSelector(
-                        labels = homeViewOptions.map { stringResource(it.label) },
-                        isSelected = { homeViewOptions[it] == settings.homeView },
-                        onClick = { index ->
+                    HomeViewTabs(
+                        selected = settings.homeView,
+                        onSelect = { view ->
                             coroutineScope.launch {
-                                settingsStore.update(settingsStore.current.copy(homeView = homeViewOptions[index]))
+                                settingsStore.update(settingsStore.current.copy(homeView = view))
                             }
                         },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(currentColorScheme().surfaceVariant)
-                            .statusBarsPadding()
-                            .padding(horizontal = 8.dp, vertical = 4.dp),
                     )
                 },
                 bottomBar = {
@@ -273,7 +265,8 @@ private fun HomePageContent(
                         onDayStateLongClick = { deletingDayState = it },
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(contentPadding),
+                            .padding(contentPadding)
+                            .padding(top = 4.dp),
                     )
                     HomeView.WEEKLY -> WeeklyHabitList(
                         habits = sortedHabits,
@@ -285,7 +278,8 @@ private fun HomePageContent(
                         onDayStateLongClick = { deletingDayState = it },
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(contentPadding),
+                            .padding(contentPadding)
+                            .padding(top = 4.dp),
                     )
                     HomeView.OVERALL -> CalendarTable(
                         habits = sortedHabits,
@@ -336,7 +330,8 @@ private fun HomePageContent(
                         },
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(contentPadding),
+                            .padding(contentPadding)
+                            .padding(top = 4.dp),
                     )
                 }
             }
