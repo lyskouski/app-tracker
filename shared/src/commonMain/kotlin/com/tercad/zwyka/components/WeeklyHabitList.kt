@@ -6,6 +6,7 @@ package com.tercad.zwyka.components
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.onLongClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -65,6 +68,7 @@ fun WeeklyHabitList(
     completenessType: CompletenessType,
     onDayStateClick: (DayState) -> Unit,
     onDayStateLongClick: (DayState) -> Unit,
+    onHabitLongClick: (Habit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val dayNames = stringArrayResource(Res.array.days_short)
@@ -82,6 +86,7 @@ fun WeeklyHabitList(
                 completenessType = completenessType,
                 onDayStateClick = onDayStateClick,
                 onDayStateLongClick = onDayStateLongClick,
+                onHabitLongClick = onHabitLongClick,
             )
         }
     }
@@ -97,6 +102,7 @@ private fun WeeklyHabitCard(
     completenessType: CompletenessType,
     onDayStateClick: (DayState) -> Unit,
     onDayStateLongClick: (DayState) -> Unit,
+    onHabitLongClick: (Habit) -> Unit,
 ) {
     val habitColor = applicationColor(habit.color) ?: currentColorScheme().primary
     Column(
@@ -104,6 +110,11 @@ private fun WeeklyHabitCard(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .background(currentColorScheme().surfaceVariant, RoundedCornerShape(12.dp))
+            // Day cells handle their own clicks, the rest of the card opens the habit editor.
+            .pointerInput(habit) { detectTapGestures(onLongPress = { onHabitLongClick(habit) }) }
+            .semantics {
+                onLongClick { onHabitLongClick(habit); true }
+            }
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {

@@ -78,7 +78,7 @@ private const val DONE_MARK = "X"
  *
  * Swipe to the right marks a habit as done (a numeric target asks for the value first),
  * swipe to the left skips it. A click opens the day state ([onDayStateClick]),
- * a long click on a marked habit deletes its mark ([onDayStateLongClick]).
+ * a long click opens the habit editor ([onHabitLongClick]).
  */
 @Composable
 fun TodayHabitList(
@@ -88,7 +88,7 @@ fun TodayHabitList(
     completenessType: CompletenessType,
     onMarkChange: (DayState) -> Unit,
     onDayStateClick: (DayState) -> Unit,
-    onDayStateLongClick: (DayState) -> Unit,
+    onHabitLongClick: (Habit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val grouped = remember(habits, marks, today) { groupByTodayStatus(habits, marks, today) }
@@ -129,8 +129,7 @@ fun TodayHabitList(
                                     ),
                                 )
                             },
-                            // Only a stored mark can be deleted.
-                            onLongClick = mark?.let { { onDayStateLongClick(DayState(habit.id, today, it)) } },
+                            onLongClick = { onHabitLongClick(habit) },
                         )
                     }
                     if (valueHabitId == habit.id) {
@@ -262,7 +261,7 @@ private fun TodayHabitRow(
     mark: String?,
     completenessType: CompletenessType,
     onClick: () -> Unit,
-    onLongClick: (() -> Unit)?,
+    onLongClick: () -> Unit,
 ) {
     val habitColor = applicationColor(habit.color)
     Row(

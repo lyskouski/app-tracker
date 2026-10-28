@@ -262,7 +262,11 @@ private fun HomePageContent(
                         completenessType = settings.completenessType,
                         onMarkChange = ::saveMark,
                         onDayStateClick = { selectedDayState = it },
-                        onDayStateLongClick = { deletingDayState = it },
+                        onHabitLongClick = {
+                            editingHabit = it
+                            habitError = null
+                            showHabitDialog = true
+                        },
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(contentPadding)
@@ -276,6 +280,11 @@ private fun HomePageContent(
                         completenessType = settings.completenessType,
                         onDayStateClick = { selectedDayState = it },
                         onDayStateLongClick = { deletingDayState = it },
+                        onHabitLongClick = {
+                            editingHabit = it
+                            habitError = null
+                            showHabitDialog = true
+                        },
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(contentPadding)
