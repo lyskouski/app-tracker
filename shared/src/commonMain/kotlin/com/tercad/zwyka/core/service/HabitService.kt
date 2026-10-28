@@ -4,6 +4,7 @@
 package com.tercad.zwyka.core.service
 
 import kotlin.time.Clock
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 
@@ -11,6 +12,8 @@ import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.INACTIVE_MARK
+import com.tercad.zwyka.core.model.isActiveOn
+import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.core.repository.DayStateRepository
 import com.tercad.zwyka.core.repository.HabitRepository
 import com.tercad.zwyka.core.time.currentWeekDates
@@ -53,6 +56,28 @@ class HabitService(
     suspend fun updateActiveDays(id: Long, activeDays: Int, weekStart: WeekStart) {
         habits.updateActiveDays(id, activeDays)
         applyActiveDays(id, activeDays, weekStart)
+    }
+
+    /*
+     * Inactive days of the current week without a mark get "—" for every not archived habit;
+     * existing marks are kept. Future inactive days are only displayed as "—" (see `displayedMark`),
+     * so they have to be stored once their week comes, otherwise they turn into missed days.
+     */
+    suspend fun fillInactiveDays(weekStart: WeekStart) {
+        val weekDates = currentWeekDates(clock.todayIn(TimeZone.currentSystemDefault()), weekStart)
+        val marked = dayStates
+            .getRange(weekDates.first().toString(), weekDates.last().toString())
+            .mapTo(HashSet()) { it.habitId to it.date }
+        habits.getAll().filterNot { it.isArchived }.forEach { habit ->
+            weekDates
+                .map { it.toString() }
+                .filter { date ->
+                    (habit.id to date) !in marked &&
+                        !habit.isActiveOn(LocalDate.parse(date).dayOfWeek) &&
+                        !habit.isBeforeCreation(date, null)
+                }
+                .forEach { dayStates.upsert(DayState(habit.id, it, INACTIVE_MARK)) }
+        }
     }
 
     /*

@@ -122,10 +122,12 @@ private fun HomePageContent(
     val coroutineScope = rememberCoroutineScope()
     val unknownDatabaseError = stringResource(Res.string.database_error_unknown)
 
-    LaunchedEffect(services) {
+    // Reloaded on a new day as well: its inactive days have to be stored.
+    LaunchedEffect(services, today) {
         state = HomePageState.Loading
         try {
             initializeDatabase()
+            services.habits.fillInactiveDays(settingsStore.current.weekStart)
             val habits = services.habits.getAll()
             val dayStates = services.dayStates.getRange(dates.first(), dates.last())
             state = HomePageState.Loaded(habits, dayStates)
