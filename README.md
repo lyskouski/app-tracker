@@ -115,6 +115,8 @@ one is left behind.
 
 <img title="Zwyka: Metrics" src="./docs/design-flow/screenshots/9_metrics.png" width="240" /> . <img title="Zwyka: Detailed Metrics" src="./docs/design-flow/screenshots/7_detailed_metrics.png" width="240" /> . <img title="Zwyka: Timer" src="./docs/design-flow/screenshots/8_timer.png" width="240" />
 
+<img title="Zwyka: Daily" src="./docs/design-flow/screenshots/10_daily.png" width="240" /> . <img title="Zwyka: Weekly" src="./docs/design-flow/screenshots/11_weekly.png" width="240" /> .
+
 ## Support (Sponsorship)
 
 As an open-source project, subscribing will not unlock any additional features in the app. However, it would serve as
