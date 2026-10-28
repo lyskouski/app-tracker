@@ -1177,7 +1177,7 @@ private fun DayProgressCell(
  */
 
 @Composable
-private fun CalendarTableCell(
+internal fun CalendarTableCell(
     text: String,
     width: Dp,
     height: Dp,
@@ -1278,7 +1278,7 @@ private fun CalendarTableCell(
  * Draws one continuous outline around the current day's row.
  */
 @Composable
-private fun todayHighlight(
+internal fun todayHighlight(
     isToday: Boolean,
     left: Boolean,
     right: Boolean,

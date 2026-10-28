@@ -285,13 +285,23 @@ private fun TodayHabitRow(
                 tint = habitColor ?: currentColorScheme().onSurface,
             )
         }
-        Text(
-            text = habit.title,
-            modifier = Modifier.weight(1f),
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.bodyLarge,
-        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = habit.title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            habit.remarks?.takeIf { it.isNotBlank() }?.let { remarks ->
+                Text(
+                    text = remarks,
+                    color = currentColorScheme().onSurfaceVariant,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
+        }
         val target = habit.targetValue
         if (target != null) {
             val value = mark?.let(::parseNumericValue)?.let(::formatNumericValue) ?: "0"
