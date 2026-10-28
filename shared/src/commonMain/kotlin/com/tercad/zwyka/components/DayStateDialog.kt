@@ -17,13 +17,18 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
@@ -65,10 +70,12 @@ fun DayStateDialog(
     val monthNames = stringArrayResource(Res.array.months_short)
     val habitColor = applicationColor(habit.color)
         ?.takeIf { completenessType == CompletenessType.COLORS }
+    // A stored value is selected, so typing replaces it.
     var value by remember(dayState) {
-        mutableStateOf(parseNumericValue(dayState.mark)?.let(::formatNumericValue).orEmpty())
+        val text = parseNumericValue(dayState.mark)?.let(::formatNumericValue).orEmpty()
+        mutableStateOf(TextFieldValue(text, selection = TextRange(0, text.length)))
     }
-    val parsedValue = parseNumericValue(value)?.takeIf { it >= 0 }
+    val parsedValue = parseNumericValue(value.text)?.takeIf { it >= 0 }
 
     AlertDialog(
         onDismissRequest = {
@@ -105,6 +112,9 @@ fun DayStateDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (habit.hasNumericTarget) {
+                    // The value is what is changed here: typed right away.
+                    val focusRequester = remember { FocusRequester() }
+                    LaunchedEffect(focusRequester) { focusRequester.requestFocus() }
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically,
@@ -115,10 +125,12 @@ fun DayStateDialog(
                             onValueChange = { value = it },
                             label = { Text(stringResource(Res.string.target_value)) },
                             singleLine = true,
-                            isError = value.isNotBlank() && parsedValue == null,
+                            isError = value.text.isNotBlank() && parsedValue == null,
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                             enabled = !isSaving,
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier
+                                .weight(1f)
+                                .focusRequester(focusRequester),
                         )
                         habit.targetType?.let { Text(it) }
                     }
