@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -51,7 +53,8 @@ fun HomeViewTabs(
             .fillMaxWidth()
             .background(currentColorScheme().surfaceVariant)
             .statusBarsPadding()
-            .padding(start = 4.dp, end = 4.dp, top = 6.dp),
+            .padding(start = 4.dp, end = 4.dp, top = 6.dp)
+            .selectableGroup(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         homeViewOptions.forEachIndexed { index, view ->
@@ -73,7 +76,8 @@ fun HomeViewTabs(
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .height(36.dp)
+                    // Grows with the font size (WCAG 1.4.4).
+                    .heightIn(min = 36.dp)
                     .clip(shape)
                     .background(if (isSelected) currentColorScheme().background else currentColorScheme().surfaceVariant)
                     .clickable(role = Role.Tab) { onSelect(view) }

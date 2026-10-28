@@ -7,7 +7,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.darkColorScheme
 
 public val ColorSchemeDark = darkColorScheme(
-    primary = Color(0xff912391),
+    // Light tint of the brand color: readable as text and outlines on dark surfaces (WCAG 1.4.3, 1.4.11).
+    primary = Color(0xffe6a8e6),
+    onPrimary = Color(0xff4a0e4a),
+    // Brand color of the bars.
+    primaryContainer = Color(0xff912391),
+    onPrimaryContainer = Color(0xffffffff),
     secondary = Color(0xFFFFFBFE),
     background = Color(0xff000000),
     surface = Color(0xFF1C1B1F),

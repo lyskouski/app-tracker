@@ -8,6 +8,9 @@ import androidx.compose.material3.lightColorScheme
 
 public val ColorSchemeLight = lightColorScheme(
     primary = Color(0xff912391),
+    // Brand color of the bars, the same as in the dark scheme.
+    primaryContainer = Color(0xff912391),
+    onPrimaryContainer = Color(0xffffffff),
     secondary = Color(0xff000000),
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),

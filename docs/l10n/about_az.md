@@ -73,3 +73,5 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
 - İstifadəçi təcrübəsi
   - Responsiv və adaptiv dizayn
   - Toxunuşla və ya siçanla sürüşdürmə: günlər üçün `Scroll Wheel`, vərdişlər üçün `Shift` + `Scroll Wheel`
+  - Klaviatura: oxlar, `Page Up` / `Page Down`, `Home` / `End` cədvəli sürüşdürür; `Menu` / `Shift` + `F10` uzun basmanı əvəz edir
+  - Əlçatanlıq (WCAG 2.1): ekran oxuyucuları üçün hər əməliyyatın adı, hər iki temada oxunaqlı kontrast, sistem şrift ölçüsünə uyğunlaşan mətn

@@ -6,8 +6,10 @@ package com.tercad.zwyka.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -35,14 +37,25 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathMeasure
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.isShiftPressed
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.ScrollAxisRange
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.horizontalScrollAxisRange
+import androidx.compose.ui.semantics.scrollBy
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.verticalScrollAxisRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
@@ -70,13 +83,23 @@ import com.tercad.zwyka.core.progress.toMarks
 import com.tercad.zwyka.defines.CompletenessType
 import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.edit_day_state
+import com.tercad.zwyka.resources.edit_habit
+import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.months_short
+import com.tercad.zwyka.resources.skip
+import com.tercad.zwyka.resources.today
 import org.jetbrains.compose.resources.stringArrayResource
+import org.jetbrains.compose.resources.stringResource
 import com.tercad.zwyka.defines.WeekStart
 import kotlinx.datetime.LocalDate
 import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
+import com.tercad.zwyka.widgets.actionable
+import com.tercad.zwyka.widgets.readableOn
 
 /** Opacity of the archived habits in the header. */
 private const val ARCHIVED_ALPHA = 0.38f
@@ -288,9 +311,65 @@ fun CalendarTable(
          *     scrollX -= dragAmount.x
          *     scrollY -= dragAmount.y
          */
+        /*
+         * Keyboard and screen readers scroll by cells (WCAG 2.1.1):
+         *
+         *     arrows          one cell
+         *     Page Up / Down  one screen of dates
+         *     Home / End      first / last date
+         */
+        val tableInteraction = remember { MutableInteractionSource() }
+        val isTableFocused by tableInteraction.collectIsFocusedAsState()
+        val focusColor = currentColorScheme().primary
+
+        fun scrollBy(delta: Offset) {
+            scrollOffset = Offset(
+                x = (currentScrollOffset.x + delta.x).coerceIn(0f, maxScrollX),
+                y = (currentScrollOffset.y + delta.y).coerceIn(0f, maxScrollY),
+            )
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .onKeyEvent { event ->
+                    if (event.type != KeyEventType.KeyDown) return@onKeyEvent false
+                    val delta = when (event.key) {
+                        Key.DirectionUp -> Offset(0f, -cellHeightPx)
+                        Key.DirectionDown -> Offset(0f, cellHeightPx)
+                        Key.DirectionLeft -> Offset(-cellWidthPx, 0f)
+                        Key.DirectionRight -> Offset(cellWidthPx, 0f)
+                        Key.PageUp -> Offset(0f, -bodyHeightPx)
+                        Key.PageDown -> Offset(0f, bodyHeightPx)
+                        Key.MoveHome -> Offset(0f, -contentHeightPx)
+                        Key.MoveEnd -> Offset(0f, contentHeightPx)
+                        else -> return@onKeyEvent false
+                    }
+                    scrollBy(delta)
+                    true
+                }
+                .semantics {
+                    horizontalScrollAxisRange = ScrollAxisRange(
+                        value = { currentScrollOffset.x },
+                        maxValue = { maxScrollX },
+                    )
+                    verticalScrollAxisRange = ScrollAxisRange(
+                        value = { currentScrollOffset.y },
+                        maxValue = { maxScrollY },
+                    )
+                    scrollBy { x, y ->
+                        scrollBy(Offset(x, y))
+                        true
+                    }
+                }
+                .focusable(interactionSource = tableInteraction)
+                // Outline of the focused table (WCAG 2.4.7).
+                .drawWithContent {
+                    drawContent()
+                    if (isTableFocused) {
+                        drawRect(focusColor, style = Stroke(width = 2.dp.toPx()))
+                    }
+                }
                 .pointerInput(
                     maxScrollX,
                     maxScrollY,
@@ -697,11 +776,13 @@ private fun CalendarHeaderViewport(
                     textColor = iconTint,
                     contentDescription = habit.title,
                     title = if (showTitles) habit.title else null,
-                    modifier = Modifier.combinedClickable(
-                        onLongClick = { onHabitLongClick(habit) },
-                    ) {
-                        onHabitClick(habit)
-                    },
+                    modifier = Modifier
+                        .actionable(
+                            onClick = { onHabitClick(habit) },
+                            onLongClick = { onHabitLongClick(habit) },
+                            onLongClickLabel = stringResource(Res.string.edit_habit),
+                        )
+                        .clearAndSetSemantics { contentDescription = habit.title },
                 )
             }
         },
@@ -775,6 +856,8 @@ private fun CalendarFirstColumnViewport(
     onDateClick: (String) -> Unit,
 ) {
     val monthNames = stringArrayResource(Res.array.months_short)
+    val skipLabel = stringResource(Res.string.skip)
+    val todayLabel = stringResource(Res.string.today)
     val firstVisibleRow =
         floor(
             scrollY / cellHeightPx,
@@ -806,8 +889,9 @@ private fun CalendarFirstColumnViewport(
             for (
                 row in startRow until endRow
             ) {
+                val dateText = dateFormat.format(dates[row], monthNames)
                 CalendarTableCell(
-                    text = dateFormat.format(dates[row], monthNames),
+                    text = dateText,
                     width = firstColumnWidth,
                     height = with(LocalDensity.current) {
                         cellHeightPx.toDp()
@@ -818,7 +902,12 @@ private fun CalendarFirstColumnViewport(
                         left = true,
                         right = habits.isEmpty(),
                     ).then(weekStartLine(dates[row] in weekStartDates)),
-                    modifier = Modifier.clickable { onDateClick(dates[row]) },
+                    modifier = Modifier
+                        .clickable(onClickLabel = skipLabel) { onDateClick(dates[row]) }
+                        .clearAndSetSemantics {
+                            contentDescription = listOfNotNull(dateText, todayLabel.takeIf { dates[row] == today })
+                                .joinToString(", ")
+                        },
                 )
             }
         },
@@ -958,6 +1047,12 @@ private fun CalendarBodyViewport(
     val rowCount =
         endRow - startRow
 
+    val labels = CellLabels(
+        today = stringResource(Res.string.today),
+        edit = stringResource(Res.string.edit_day_state),
+        delete = stringResource(Res.string.delete),
+    )
+
     /*
      * Only visible dates × visible habits are composed.
      */
@@ -997,6 +1092,13 @@ private fun CalendarBodyViewport(
                     // A reached value of a numeric target is shown above its unit.
                     val unit = habit.targetType
                         ?.takeIf { habit.hasNumericTarget && parseNumericValue(value) != null }
+                    val description = listOfNotNull(
+                        habit.title,
+                        date,
+                        (statusMarkDescription(value) ?: value.trim()) + (unit?.let { " $it" } ?: ""),
+                        streak?.toString(),
+                        labels.today.takeIf { date == today },
+                    ).filter { it.isNotBlank() }.joinToString(", ")
 
                     CalendarTableCell(
                         text = value,
@@ -1019,8 +1121,18 @@ private fun CalendarBodyViewport(
                             right = column == habits.lastIndex,
                         ).then(weekStartLine(date in weekStartDates)),
                         modifier = Modifier
-                            .combinedClickable(
+                            .actionable(
                                 enabled = !habit.isArchived,
+                                onClick = {
+                                    onDayStateClick(
+                                        DayState(
+                                            habitId = habit.id,
+                                            date = date,
+                                            mark = status,
+                                        ),
+                                    )
+                                },
+                                onClickLabel = labels.edit,
                                 // Only a stored mark can be deleted.
                                 onLongClick = marks[key]?.let { mark ->
                                     {
@@ -1033,20 +1145,9 @@ private fun CalendarBodyViewport(
                                         )
                                     }
                                 },
-                            ) {
-                                onDayStateClick(
-                                    DayState(
-                                        habitId = habit.id,
-                                        date = date,
-                                        mark = status,
-                                    ),
-                                )
-                            }
-                            .semantics {
-                                contentDescription = "${habit.title}, $date, $value" +
-                                    (unit?.let { " $it" } ?: "") +
-                                    (streak?.let { ", $it" } ?: "")
-                            },
+                                onLongClickLabel = labels.delete,
+                            )
+                            .clearAndSetSemantics { contentDescription = description },
                     )
                 }
             }
@@ -1106,6 +1207,13 @@ private fun CalendarBodyViewport(
     }
 }
 
+/** Texts shared by all cells of the body. */
+private class CellLabels(
+    val today: String,
+    val edit: String,
+    val delete: String,
+)
+
 /*
  * Progress bar wrapping around the cell edge (clockwise from the top center)
  * with the percentage in the middle.
@@ -1126,7 +1234,7 @@ private fun DayProgressCell(
             .width(width)
             .height(height)
             .background(colorScheme.surfaceVariant)
-            .clickable(onClick = onClick)
+            .clickable(onClickLabel = stringResource(Res.string.metrics), onClick = onClick)
             .drawWithContent {
                 drawContent()
                 val stroke = 4.dp.toPx()
@@ -1194,6 +1302,12 @@ internal fun CalendarTableCell(
     highlight: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
+    // Habit colors may be too light or too dark for the cell (WCAG 1.4.3, 1.4.11).
+    val opaqueBackground = background.compositeOver(currentColorScheme().surface)
+    @Suppress("NAME_SHADOWING")
+    val textColor = textColor.readableOn(opaqueBackground)
+    @Suppress("NAME_SHADOWING")
+    val iconTint = iconTint.readableOn(opaqueBackground, GRAPHICS_CONTRAST)
     Box(
         modifier = modifier
             .width(width)

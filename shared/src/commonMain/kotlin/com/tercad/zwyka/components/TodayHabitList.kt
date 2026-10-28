@@ -4,9 +4,7 @@
 package com.tercad.zwyka.components
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -69,8 +67,14 @@ import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.apply
 import com.tercad.zwyka.resources.completed_skipped
 import com.tercad.zwyka.resources.done
+import com.tercad.zwyka.resources.edit_day_state
+import com.tercad.zwyka.resources.edit_habit
 import com.tercad.zwyka.resources.skip
 import com.tercad.zwyka.resources.target_value
+import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
+import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.actionable
+import com.tercad.zwyka.widgets.readableOn
 
 private const val DONE_MARK = "X"
 
@@ -132,6 +136,8 @@ fun TodayHabitList(
                                 )
                             },
                             onLongClick = { onHabitLongClick(habit) },
+                            onDone = done,
+                            onSkip = skip,
                         )
                     }
                     if (valueHabitId == habit.id) {
@@ -162,7 +168,7 @@ private fun CompletedDivider() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         HorizontalDivider(modifier = Modifier.weight(1f))
-        Text(
+        Heading(
             text = stringResource(Res.string.completed_skipped),
             modifier = Modifier.padding(horizontal = 8.dp),
             color = currentColorScheme().onSurfaceVariant,
@@ -175,6 +181,7 @@ private fun CompletedDivider() {
 /*
  * Moves [content] horizontally with the finger; past the threshold
  * a swipe to the right calls [onDone], to the left [onSkip].
+ * Without a pointer the same is done by the actions of the row, see [TodayHabitRow].
  */
 @Composable
 private fun SwipeableHabitRow(
@@ -193,15 +200,10 @@ private fun SwipeableHabitRow(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape)
-            .semantics {
-                customActions = listOf(
-                    CustomAccessibilityAction(doneLabel) { onDone(); true },
-                    CustomAccessibilityAction(skipLabel) { onSkip(); true },
-                )
-            },
+            .clip(shape),
     ) {
         val isDone = offset.value > 0f
+        val hintColor = if (isDone) currentColorScheme().onPrimaryContainer else currentColorScheme().onSurfaceVariant
         Row(
             modifier = Modifier
                 .matchParentSize()
@@ -220,10 +222,12 @@ private fun SwipeableHabitRow(
                 Icon(
                     imageVector = if (isDone) Icons.Filled.Check else Icons.Filled.Close,
                     contentDescription = null,
+                    tint = hintColor,
                 )
                 Text(
                     text = if (isDone) doneLabel else skipLabel,
                     modifier = Modifier.padding(start = 4.dp),
+                    color = hintColor,
                 )
             }
         }
@@ -255,8 +259,9 @@ private fun SwipeableHabitRow(
 
 /*
  * [icon] Title                         mark / value of target
+ *
+ * Screen readers offer [onDone] and [onSkip] as actions of the row, instead of the swipes.
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun TodayHabitRow(
     habit: Habit,
@@ -264,14 +269,30 @@ private fun TodayHabitRow(
     completenessType: CompletenessType,
     onClick: () -> Unit,
     onLongClick: () -> Unit,
+    onDone: () -> Unit,
+    onSkip: () -> Unit,
 ) {
-    val habitColor = applicationColor(habit.color)
+    val background = currentColorScheme().surfaceVariant
+    val habitColor = applicationColor(habit.color)?.readableOn(background, GRAPHICS_CONTRAST)
+    val doneLabel = stringResource(Res.string.done)
+    val skipLabel = stringResource(Res.string.skip)
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 52.dp)
-            .background(currentColorScheme().surfaceVariant, RoundedCornerShape(8.dp))
-            .combinedClickable(onLongClick = onLongClick, onClick = onClick)
+            .background(background, RoundedCornerShape(8.dp))
+            .actionable(
+                onClick = onClick,
+                onClickLabel = stringResource(Res.string.edit_day_state),
+                onLongClick = onLongClick,
+                onLongClickLabel = stringResource(Res.string.edit_habit),
+            )
+            .semantics {
+                customActions = listOf(
+                    CustomAccessibilityAction(doneLabel) { onDone(); true },
+                    CustomAccessibilityAction(skipLabel) { onSkip(); true },
+                )
+            }
             .padding(horizontal = 12.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),

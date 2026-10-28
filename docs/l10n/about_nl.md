@@ -73,3 +73,5 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
 - Gebruikerservaring
   - Responsief en adaptief ontwerp
   - Scrollen via aanraking of met de muis: `Scroll Wheel` voor dagen, `Shift` + `Scroll Wheel` voor gewoontes
+  - Toetsenbord: pijltjes, `Page Up` / `Page Down`, `Home` / `End` scrollen door de tabel; `Menu` / `Shift` + `F10` vervangt lang indrukken
+  - Toegankelijkheid (WCAG 2.1): elke actie heeft een naam voor schermlezers, leesbaar contrast in beide thema's, tekst schaalt mee met de systeemlettergrootte

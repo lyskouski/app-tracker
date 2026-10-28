@@ -73,3 +73,5 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
 - Kullanıcı Deneyimi
   - Duyarlı ve Uyarlanabilir Tasarım
   - Dokunarak veya fareyle kaydırma: günler için `Scroll Wheel`, alışkanlıklar için `Shift` + `Scroll Wheel`
+  - Klavye: ok tuşları, `Page Up` / `Page Down`, `Home` / `End` tabloyu kaydırır; `Menu` / `Shift` + `F10` uzun basmanın yerini alır
+  - Erişilebilirlik (WCAG 2.1): ekran okuyucular için her eylemin adı, her iki temada okunabilir kontrast, sistem yazı tipi boyutuyla ölçeklenen metin

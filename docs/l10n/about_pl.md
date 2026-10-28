@@ -73,3 +73,5 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
 - Doświadczenie użytkownika
   - Responsywny i adaptacyjny projekt
   - Przewijanie dotykiem lub myszą: `Scroll Wheel` dla dni, `Shift` + `Scroll Wheel` dla nawyków
+  - Klawiatura: strzałki, `Page Up` / `Page Down`, `Home` / `End` przewijają tabelę; `Menu` / `Shift` + `F10` zastępuje długie naciśnięcie
+  - Dostępność (WCAG 2.1): nazwy wszystkich akcji dla czytników ekranu, czytelny kontrast w obu motywach, tekst skaluje się z systemowym rozmiarem czcionki

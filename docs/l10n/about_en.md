@@ -73,3 +73,5 @@ That empowers users to effortlessly manage their habits while ensuring that no o
 - User Experience
   - Responsive & Adaptive Design
   - Scroll by touch, or by mouse: `Scroll Wheel` for days, `Shift` + `Scroll Wheel` for habits
+  - Keyboard: arrows, `Page Up` / `Page Down`, `Home` / `End` scroll the table; `Menu` / `Shift` + `F10` replaces a long press
+  - Accessibility (WCAG 2.1): every action is named for screen readers, readable contrast in both themes, text scales with the system font size

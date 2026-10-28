@@ -9,10 +9,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -54,6 +52,8 @@ import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.skip
 import com.tercad.zwyka.resources.status
 import com.tercad.zwyka.resources.target_value
+import com.tercad.zwyka.widgets.ChoiceButton
+import com.tercad.zwyka.widgets.ErrorMessage
 import org.jetbrains.compose.resources.stringArrayResource
 
 @Composable
@@ -142,37 +142,21 @@ fun DayStateDialog(
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             rowOptions.forEach { option ->
-                                val onClick = { onStatusChange(option.mark) }
-                                val buttonModifier = Modifier.weight(1f)
-                                if (dayState.mark == option.mark) {
-                                    Button(
-                                        onClick = onClick,
-                                        modifier = buttonModifier,
-                                        enabled = !isSaving,
-                                    ) {
-                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                            StatusMark(
-                                                mark = option.mark,
-                                                color = habitColor ?: LocalContentColor.current,
-                                                type = completenessType,
-                                            )
-                                            Text(stringResource(option.label))
-                                        }
-                                    }
-                                } else {
-                                    OutlinedButton(
-                                        onClick = onClick,
-                                        modifier = buttonModifier,
-                                        enabled = !isSaving,
-                                    ) {
-                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                            StatusMark(
-                                                mark = option.mark,
-                                                color = habitColor ?: LocalContentColor.current,
-                                                type = completenessType,
-                                            )
-                                            Text(stringResource(option.label))
-                                        }
+                                ChoiceButton(
+                                    selected = dayState.mark == option.mark,
+                                    onClick = { onStatusChange(option.mark) },
+                                    modifier = Modifier.weight(1f),
+                                    enabled = !isSaving,
+                                ) {
+                                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                        StatusMark(
+                                            mark = option.mark,
+                                            color = habitColor ?: LocalContentColor.current,
+                                            type = completenessType,
+                                            // Named by the label below.
+                                            description = null,
+                                        )
+                                        Text(stringResource(option.label))
                                     }
                                 }
                             }
@@ -180,7 +164,7 @@ fun DayStateDialog(
                     }
                 }
                 saveError?.let { error ->
-                    Text(stringResource(Res.string.day_state_save_failed, error))
+                    ErrorMessage(stringResource(Res.string.day_state_save_failed, error))
                 }
             }
         },

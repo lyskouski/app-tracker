@@ -4,7 +4,6 @@
 package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Box
@@ -27,13 +26,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -86,6 +83,10 @@ import com.tercad.zwyka.resources.select_color
 import com.tercad.zwyka.resources.select_icon
 import com.tercad.zwyka.resources.target_type
 import com.tercad.zwyka.resources.target_value
+import com.tercad.zwyka.widgets.CheckboxRow
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.SwitchRow
+import com.tercad.zwyka.widgets.chosen
 
 @Composable
 fun HabitEditorDialog(
@@ -189,9 +190,9 @@ fun HabitEditorDialog(
                                         icon = option.id
                                         selectingIcon = false
                                     },
-                                    modifier = Modifier.semantics {
-                                        contentDescription = option.title
-                                    },
+                                    modifier = Modifier
+                                        .semantics { contentDescription = option.title }
+                                        .chosen(icon == option.id),
                                 ) {
                                     Icon(
                                         imageVector = option.imageVector(),
@@ -246,7 +247,9 @@ fun HabitEditorDialog(
                                         thumbColor = tint,
                                         activeTrackColor = tint,
                                     ),
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .semantics { contentDescription = name },
                                 )
                                 Text(
                                     channel.toString(),
@@ -270,9 +273,9 @@ fun HabitEditorDialog(
                                         colorInput = colorOption
                                         selectingColor = false
                                     },
-                                    modifier = Modifier.semantics {
-                                        contentDescription = colorOption
-                                    },
+                                    modifier = Modifier
+                                        .semantics { contentDescription = colorOption }
+                                        .chosen(normalizedColor == colorOption),
                                 ) {
                                     applicationColor(colorOption)?.let { colorValue ->
                                         Box(
@@ -285,7 +288,7 @@ fun HabitEditorDialog(
                             }
                         }
                         if (colorInput.isNotBlank() && normalizedColor == null) {
-                            Text(stringResource(Res.string.invalid_color))
+                            ErrorMessage(stringResource(Res.string.invalid_color))
                         }
                         TextButton(
                             onClick = {
@@ -319,20 +322,14 @@ fun HabitEditorDialog(
                                 .fillMaxWidth()
                                 .padding(top = 8.dp),
                         )
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Text(stringResource(Res.string.numeric_target), modifier = Modifier.weight(1f))
-                            Switch(
-                                checked = hasTarget,
-                                onCheckedChange = { hasTarget = it },
-                                // Stored values would lose their meaning without the target.
-                                enabled = !isSaving && habit?.targetValue == null,
-                            )
-                        }
+                        SwitchRow(
+                            checked = hasTarget,
+                            onCheckedChange = { hasTarget = it },
+                            label = stringResource(Res.string.numeric_target),
+                            modifier = Modifier.padding(top = 8.dp),
+                            // Stored values would lose their meaning without the target.
+                            enabled = !isSaving && habit?.targetValue == null,
+                        )
                         if (hasTarget) {
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -405,20 +402,15 @@ fun HabitEditorDialog(
                             )
                         }
                         if (habit != null) {
-                            Row(
-                                modifier = Modifier.clickable(enabled = !isSaving) { isArchived = !isArchived },
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Checkbox(
-                                    checked = isArchived,
-                                    onCheckedChange = { isArchived = it },
-                                    enabled = !isSaving,
-                                )
-                                Text(stringResource(Res.string.archive_habit))
-                            }
+                            CheckboxRow(
+                                checked = isArchived,
+                                onCheckedChange = { isArchived = it },
+                                label = stringResource(Res.string.archive_habit),
+                                enabled = !isSaving,
+                            )
                         }
                         error?.let {
-                            Text(
+                            ErrorMessage(
                                 stringResource(
                                     if (habit == null) {
                                         Res.string.add_habit_failed

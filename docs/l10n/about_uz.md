@@ -73,3 +73,5 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
 - Foydalanuvchi tajribasi
   - Moslashuvchan va adaptiv dizayn
   - Teginish yoki sichqoncha bilan aylantirish: kunlar uchun `Scroll Wheel`, odatlar uchun `Shift` + `Scroll Wheel`
+  - Klaviatura: strelkalar, `Page Up` / `Page Down`, `Home` / `End` jadvalni aylantiradi; `Menu` / `Shift` + `F10` uzoq bosishni almashtiradi
+  - Qulaylik (WCAG 2.1): ekran o‘qish dasturlari uchun har bir amalning nomi, ikkala mavzuda o‘qiladigan kontrast, tizim shrift o‘lchamiga moslashadigan matn

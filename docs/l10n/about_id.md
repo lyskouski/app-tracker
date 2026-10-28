@@ -75,3 +75,5 @@ tertinggal.
 - Pengalaman Pengguna
   - Desain Responsif & Adaptif
   - Gulir dengan sentuhan, atau dengan mouse: `Scroll Wheel` untuk hari, `Shift` + `Scroll Wheel` untuk kebiasaan
+  - Keyboard: tombol panah, `Page Up` / `Page Down`, `Home` / `End` menggulir tabel; `Menu` / `Shift` + `F10` menggantikan tekan lama
+  - Aksesibilitas (WCAG 2.1): setiap tindakan diberi nama untuk pembaca layar, kontras yang mudah dibaca di kedua tema, teks mengikuti ukuran font sistem

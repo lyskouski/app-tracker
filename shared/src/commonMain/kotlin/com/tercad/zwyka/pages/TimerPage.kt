@@ -27,7 +27,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Timer
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -46,6 +45,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.keepScreenOn
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -88,6 +88,7 @@ import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.pomodoro
 import com.tercad.zwyka.resources.stop
+import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.timer_free
 import com.tercad.zwyka.resources.timer_in
 import com.tercad.zwyka.resources.timer_left
@@ -97,6 +98,13 @@ import com.tercad.zwyka.resources.timer_now
 import com.tercad.zwyka.resources.timer_until_start
 import com.tercad.zwyka.resources.tomorrow
 import com.tercad.zwyka.state.AppSettingsStore
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.StatusMessage
+import com.tercad.zwyka.widgets.readableOn
+import com.tercad.zwyka.widgets.screenTitle
 
 /** Number of upcoming events listed under the clock. */
 private const val NEXT_EVENTS = 5
@@ -133,31 +141,18 @@ class TimerPage(
 
         Scaffold(
             // The countdown stays visible while the page is open.
-            modifier = Modifier.keepScreenOn(),
+            modifier = Modifier
+                .keepScreenOn()
+                .screenTitle(stringResource(Res.string.timer)),
             containerColor = currentColorScheme().surface,
             bottomBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(46.dp)
-                        .background(currentColorScheme().primary),
-                ) {
-                    TextButton(
+                BottomBar {
+                    BottomBarButton(
+                        icon = Icons.AutoMirrored.Filled.ArrowBack,
+                        text = stringResource(Res.string.back),
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().onPrimary,
-                        ),
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                        Text(
-                            text = stringResource(Res.string.back),
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
-                    }
+                    )
                 }
             },
             floatingActionButtonPosition = FabPosition.Center,
@@ -196,8 +191,8 @@ class TimerPage(
                     .padding(16.dp),
             ) {
                 when {
-                    loadError != null -> Text(stringResource(Res.string.habits_load_failed, loadError.orEmpty()))
-                    loaded == null -> Text(stringResource(Res.string.habits_loading))
+                    loadError != null -> ErrorMessage(stringResource(Res.string.habits_load_failed, loadError.orEmpty()))
+                    loaded == null -> StatusMessage(stringResource(Res.string.habits_loading))
                     else -> TimerContent(
                         services, settingsStore, loaded, dateTime, isHorizontal = maxWidth > maxHeight,
                         pomodoro = pomodoro,
@@ -353,10 +348,9 @@ private fun TimerContent(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text(
+            Heading(
                 text = stringResource(Res.string.timer_next_events),
                 style = MaterialTheme.typography.titleMedium,
-                color = currentColorScheme().onSurface,
             )
             if (upcoming.isEmpty()) {
                 Text(
@@ -505,7 +499,7 @@ private fun UpcomingEvent(schedule: Schedule, event: ScheduledEvent, color: Colo
         Text(
             text = stringResource(Res.string.timer_in, formatDuration(minutesUntil)),
             style = MaterialTheme.typography.labelLarge,
-            color = color,
+            color = color.readableOn(currentColorScheme().surfaceVariant.copy(alpha = 0.5f).compositeOver(currentColorScheme().surface)),
         )
     }
 }

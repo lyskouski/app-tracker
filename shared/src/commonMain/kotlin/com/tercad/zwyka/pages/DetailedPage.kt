@@ -3,13 +3,9 @@
 
 package com.tercad.zwyka.pages
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -23,7 +19,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -70,6 +65,11 @@ import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.habit_target
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.max_streak
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.screenTitle
 
 /** Details of one habit: description, target, completion of every day, streaks and goals. */
 class DetailedPage(
@@ -124,30 +124,16 @@ class DetailedPage(
         }
 
         Scaffold(
+            modifier = Modifier.screenTitle(habit.title),
             containerColor = currentColorScheme().surface,
             bottomBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(46.dp)
-                        .background(currentColorScheme().primary),
-                ) {
-                    TextButton(
+                BottomBar {
+                    BottomBarButton(
+                        icon = Icons.AutoMirrored.Filled.ArrowBack,
+                        text = stringResource(Res.string.back),
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().onPrimary,
-                        ),
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                        Text(
-                            text = stringResource(Res.string.back),
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
-                    }
+                    )
                 }
             },
             floatingActionButtonPosition = FabPosition.Center,
@@ -180,11 +166,7 @@ class DetailedPage(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 val textColor = currentColorScheme().onSurface
-                Text(
-                    text = habit.title,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = textColor,
-                )
+                Heading(habit.title)
                 habit.remarks?.let {
                     Text(text = it, color = textColor)
                 }
@@ -199,7 +181,7 @@ class DetailedPage(
                     )
                 }
                 error?.let {
-                    Text(stringResource(Res.string.habits_load_failed, it), color = currentColorScheme().error)
+                    ErrorMessage(stringResource(Res.string.habits_load_failed, it))
                 }
                 marks?.let { habitMarks ->
                     HabitContributionGraph(
@@ -237,7 +219,7 @@ class DetailedPage(
                 }
                 if (!showGoalDialog) {
                     goalError?.let {
-                        Text(stringResource(Res.string.goal_save_failed, it), color = currentColorScheme().error)
+                        ErrorMessage(stringResource(Res.string.goal_save_failed, it))
                     }
                 }
             }

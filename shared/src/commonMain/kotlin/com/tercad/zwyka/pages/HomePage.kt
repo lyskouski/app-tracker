@@ -7,15 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -69,6 +66,7 @@ import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit
+import com.tercad.zwyka.resources.app_name
 import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.database_error_unknown
@@ -79,6 +77,11 @@ import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.state.AppSettingsStore
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.StatusMessage
+import com.tercad.zwyka.widgets.screenTitle
 
 class HomePage(
     private val services: Services?,
@@ -100,7 +103,7 @@ private fun HomePageContent(
     val navigator = LocalNavigator.currentOrThrow
     if (services == null) {
         Box(Modifier.fillMaxSize()) {
-            Text(stringResource(Res.string.habit_database_unavailable))
+            ErrorMessage(stringResource(Res.string.habit_database_unavailable))
         }
         return
     }
@@ -147,8 +150,8 @@ private fun HomePageContent(
     }
 
     when (val current = state) {
-        HomePageState.Loading -> Text(stringResource(Res.string.habits_loading))
-        is HomePageState.Failed -> Text(
+        HomePageState.Loading -> StatusMessage(stringResource(Res.string.habits_loading))
+        is HomePageState.Failed -> ErrorMessage(
             stringResource(
                 Res.string.habits_load_failed,
                 current.message ?: stringResource(Res.string.database_error_unknown),
@@ -183,6 +186,7 @@ private fun HomePageContent(
             }
 
             Scaffold(
+                modifier = Modifier.screenTitle(stringResource(Res.string.app_name)),
                 topBar = {
                     HomeViewTabs(
                         selected = settings.homeView,
@@ -194,44 +198,19 @@ private fun HomePageContent(
                     )
                 },
                 bottomBar = {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(46.dp)
-                            .background(currentColorScheme().primary),
-                    ) {
-                        TextButton(
+                    BottomBar {
+                        BottomBarButton(
+                            icon = Icons.Filled.CalendarMonth,
+                            text = stringResource(Res.string.calendar),
                             onClick = { navigator.push(CalendarPage(services, settingsStore)) },
                             modifier = Modifier.align(Alignment.CenterStart),
-                            colors = ButtonDefaults.textButtonColors(
-                                contentColor = currentColorScheme().onPrimary,
-                            ),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.CalendarMonth,
-                                contentDescription = null,
-                            )
-                            Text(
-                                text = stringResource(Res.string.calendar),
-                                modifier = Modifier.padding(start = 8.dp),
-                            )
-                        }
-                        TextButton(
+                        )
+                        BottomBarButton(
+                            icon = Icons.Filled.Settings,
+                            text = stringResource(Res.string.settings),
                             onClick = { navigator.push(SettingsPage(settingsStore, services)) },
                             modifier = Modifier.align(Alignment.CenterEnd),
-                            colors = ButtonDefaults.textButtonColors(
-                                contentColor = currentColorScheme().onPrimary,
-                            ),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Settings,
-                                contentDescription = null,
-                            )
-                            Text(
-                                text = stringResource(Res.string.settings),
-                                modifier = Modifier.padding(start = 8.dp),
-                            )
-                        }
+                        )
                     }
                 },
                 floatingActionButtonPosition = FabPosition.Center,

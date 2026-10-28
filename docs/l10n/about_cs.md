@@ -73,3 +73,5 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
 - Uživatelský zážitek
   - Responzivní a adaptivní design
   - Posouvání dotykem nebo myší: `Scroll Wheel` pro dny, `Shift` + `Scroll Wheel` pro návyky
+  - Klávesnice: šipky, `Page Up` / `Page Down`, `Home` / `End` posouvají tabulku; `Menu` / `Shift` + `F10` nahrazuje dlouhé stisknutí
+  - Přístupnost (WCAG 2.1): popisky všech akcí pro čtečky obrazovky, čitelný kontrast v obou motivech, text se přizpůsobuje systémové velikosti písma

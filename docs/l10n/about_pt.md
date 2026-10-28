@@ -73,3 +73,5 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
 - Experiência do usuário
   - Design responsivo e adaptável
   - Rolagem por toque ou com o mouse: `Scroll Wheel` para os dias, `Shift` + `Scroll Wheel` para os hábitos
+  - Teclado: as setas, `Page Up` / `Page Down`, `Home` / `End` rolam a tabela; `Menu` / `Shift` + `F10` substitui o toque longo
+  - Acessibilidade (WCAG 2.1): todas as ações têm nome para leitores de tela, contraste legível nos dois temas, o texto acompanha o tamanho da fonte do sistema

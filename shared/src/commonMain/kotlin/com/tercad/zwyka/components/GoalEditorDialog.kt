@@ -35,7 +35,6 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.core.model.Goal
 import com.tercad.zwyka.core.model.GoalDraft
-import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_goal
 import com.tercad.zwyka.resources.cancel
@@ -46,6 +45,7 @@ import com.tercad.zwyka.resources.goal_group
 import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.goal_title
 import com.tercad.zwyka.resources.save
+import com.tercad.zwyka.widgets.ErrorMessage
 
 /*
  * Creates a goal, or edits [goal] of [goalGroup]; its group is either typed (a new one) or chosen from [groups].
@@ -142,10 +142,7 @@ fun GoalEditorDialog(
                     }
                 }
                 error?.let {
-                    Text(
-                        stringResource(Res.string.goal_save_failed, it),
-                        color = currentColorScheme().error,
-                    )
+                    ErrorMessage(stringResource(Res.string.goal_save_failed, it))
                 }
             }
         },

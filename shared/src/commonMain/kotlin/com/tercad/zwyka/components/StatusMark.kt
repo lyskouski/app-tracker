@@ -4,6 +4,7 @@
 package com.tercad.zwyka.components
 
 import androidx.compose.foundation.Canvas
+import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -14,21 +15,36 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
 import com.tercad.zwyka.defines.CompletenessType
+import com.tercad.zwyka.core.model.INACTIVE_MARK
 import com.tercad.zwyka.defines.statusOptions
+import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.skip
 
 private const val OVER_100_MARK = "▣"
 
 /* Fill of the colored rectangle per status, from "0% start" to "100%". */
 private val statusAlphas = listOf(0.1f, 0.25f, 0.5f, 0.75f, 1f)
 
+/** Spoken name of [mark] ("100%", "Skip"), or null when the mark reads well as is, e.g. a number. */
+@Composable
+fun statusMarkDescription(mark: String): String? =
+    if (mark == INACTIVE_MARK) {
+        stringResource(Res.string.skip)
+    } else {
+        statusOptions.firstOrNull { it.mark == mark }?.let { stringResource(it.label) }
+    }
+
 /**
  * Renders a status mark; "▣" is drawn because the web build has no font glyph for it.
  *
  * [CompletenessType.COLORS] draws status marks as rectangles filled with [color].
+ * Screen readers announce the [description] instead of the symbol or the shape.
  */
 @Composable
 fun StatusMark(
@@ -37,7 +53,10 @@ fun StatusMark(
     color: Color = LocalContentColor.current,
     style: TextStyle = MaterialTheme.typography.bodyMedium,
     type: CompletenessType = CompletenessType.SYMBOLS,
+    description: String? = statusMarkDescription(mark),
 ) {
+    @Suppress("NAME_SHADOWING")
+    val modifier = if (description == null) modifier else modifier.semantics { contentDescription = description }
     val colored = type == CompletenessType.COLORS
     val alpha = statusAlphas.getOrNull(statusOptions.indexOfFirst { it.mark == mark })
     if (colored && alpha != null) {

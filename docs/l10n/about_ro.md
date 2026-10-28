@@ -73,3 +73,5 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
 - Experiența utilizatorului
   - Design responsiv și adaptiv
   - Derulare prin atingere sau cu mouse-ul: `Scroll Wheel` pentru zile, `Shift` + `Scroll Wheel` pentru obiceiuri
+  - Tastatură: săgețile, `Page Up` / `Page Down`, `Home` / `End` derulează tabelul; `Menu` / `Shift` + `F10` înlocuiește apăsarea lungă
+  - Accesibilitate (WCAG 2.1): fiecare acțiune are nume pentru cititoarele de ecran, contrast lizibil în ambele teme, textul urmează dimensiunea fontului de sistem

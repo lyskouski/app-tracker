@@ -5,7 +5,6 @@ package com.tercad.zwyka.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +28,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.toggleableState
+import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -38,7 +41,10 @@ import com.tercad.zwyka.core.model.Goal
 import com.tercad.zwyka.core.model.GroupedGoals
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.edit_goal
 import com.tercad.zwyka.resources.move_up
+import com.tercad.zwyka.widgets.actionable
 
 private val cardShape = RoundedCornerShape(16.dp)
 
@@ -71,7 +77,12 @@ fun GoalGroupCard(
             .clip(cardShape)
             .background(colors.surfaceContainerLow)
             .border(1.dp, colors.outlineVariant, cardShape)
-            .combinedClickable(enabled = enabled, onLongClick = onDelete, onClick = {})
+            .actionable(
+                onClick = null,
+                onLongClick = onDelete,
+                onLongClickLabel = stringResource(Res.string.delete),
+                enabled = enabled,
+            )
             .padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 16.dp),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -93,7 +104,14 @@ fun GoalGroupCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(8.dp))
-                    .combinedClickable(enabled = enabled, onLongClick = { onEdit(goal) }) { onToggle(goal) }
+                    .actionable(
+                        onClick = { onToggle(goal) },
+                        onLongClick = { onEdit(goal) },
+                        onLongClickLabel = stringResource(Res.string.edit_goal),
+                        role = Role.Checkbox,
+                        enabled = enabled,
+                    )
+                    .semantics { toggleableState = ToggleableState(goal.isFinished) }
                     .padding(vertical = 4.dp)
                     .padding(end = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

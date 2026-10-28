@@ -73,3 +73,5 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
 - Benutzererlebnis
   - Responsives & adaptives Design
   - Scrollen per Touch oder mit der Maus: `Scroll Wheel` für Tage, `Shift` + `Scroll Wheel` für Gewohnheiten
+  - Tastatur: Pfeiltasten, `Page Up` / `Page Down`, `Home` / `End` scrollen die Tabelle; `Menu` / `Shift` + `F10` ersetzt das lange Drücken
+  - Barrierefreiheit (WCAG 2.1): Bezeichnungen aller Aktionen für Screenreader, gut lesbarer Kontrast in beiden Themes, Text skaliert mit der Systemschriftgröße

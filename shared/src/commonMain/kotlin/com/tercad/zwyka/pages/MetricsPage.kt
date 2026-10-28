@@ -4,9 +4,7 @@
 package com.tercad.zwyka.pages
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,12 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -61,6 +55,10 @@ import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.metrics_completion
 import com.tercad.zwyka.resources.metrics_days
 import com.tercad.zwyka.resources.months_short
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.screenTitle
 
 /** Number of days (including today) shown on the progress graph. */
 private const val METRICS_DAYS = 66
@@ -76,30 +74,16 @@ class MetricsPage(
         val navigator = LocalNavigator.currentOrThrow
 
         Scaffold(
+            modifier = Modifier.screenTitle(stringResource(Res.string.metrics)),
             containerColor = currentColorScheme().surface,
             bottomBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(46.dp)
-                        .background(currentColorScheme().primary),
-                ) {
-                    TextButton(
+                BottomBar {
+                    BottomBarButton(
+                        icon = Icons.AutoMirrored.Filled.ArrowBack,
+                        text = stringResource(Res.string.back),
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().onPrimary,
-                        ),
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                        Text(
-                            text = stringResource(Res.string.back),
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
-                    }
+                    )
                 }
             },
         ) { contentPadding ->
@@ -111,11 +95,7 @@ class MetricsPage(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Text(
-                    text = stringResource(Res.string.metrics),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = currentColorScheme().onSurface,
-                )
+                Heading(stringResource(Res.string.metrics))
 
                 val dates = remember(today) {
                     (METRICS_DAYS - 1 downTo 0).map { offset ->

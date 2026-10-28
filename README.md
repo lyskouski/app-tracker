@@ -30,27 +30,29 @@ one is left behind.
   Once set, the target can be changed but not turned off.
 
 **Home screen**
-- Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default); the chosen view
-  is remembered.
+- Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default); 
+  the chosen view is remembered.
 
 **Today**
-- Today's habits as a list (archived ones and the ones created later are left out): not done habits first, then
-  the done and skipped ones below the "Completed / Skipped" divider.
-- Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value first (prefilled
-  with the target). Swipe left to skip it ("—").
+- Today's habits as a list (archived ones and the ones created later are left out): not done 
+  habits first, then the done and skipped ones below the "Completed / Skipped" divider.
+- Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value 
+  first (prefilled with the target). Swipe left to skip it ("—").
 - Tap a habit to set its day state, long press to edit the habit.
-- Habits with a numeric target show the reached value and the target (e.g. `5000 / 10000 steps`), others show
-  their mark.
+- Habits with a numeric target show the reached value and the target 
+  (e.g. `5000 / 10000 steps`), others show their mark.
 
 **Weekly**
-- A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every day"), and the marks
-  of the current week (from the selected start of the week); today is highlighted.
-- Tap a day to set its state, long press on a day to delete its state, long press on the card to edit the habit.
+- A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every  
+  day"), and the marks of the current week (from the selected start of the week); today is 
+  highlighted.
+- Tap a day to set its state, long press on a day to delete its state, long press on the card to 
+  edit the habit.
 
 **Overall (Habits Calendar)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
   in both directions (by touch, or Shift + Scroll Wheel for horizontal scroll and Scroll Wheel
-  for vertical) with pinned habit headers and dates.
+  for vertical, or by keyboard: arrows, Page Up / Page Down, Home / End) with pinned habit headers and dates.
 - Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
   `▣` over 100%. Also can be marked as skipped. Long press on a cell ("Day State") will delete its state.
 - Habits with a numeric target show the reached value above its type in the cell.
@@ -58,7 +60,8 @@ one is left behind.
 - Today's row is highlighted, and a separator marks the start of each week.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
-- **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" days don't break it).
+- **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" 
+  days don't break it).
 - **Today's progress**: the top-left corner shows the overall completion of today's habits 
   as a progress bar around the cell, with the percentage in the middle.
 
@@ -67,11 +70,15 @@ one is left behind.
 - **Habit details** (long press on a habit header): title, remarks, target, completion of every
   day over the last year (days of the week by weeks, like GitHub contributions, colored by the
   completion), max and current Day Streak calculated over the whole history.
-- **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, a description,
-  and a group (typed, or chosen from the existing groups of the habit). Goals and groups belong to their habit only.
-  - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished again).
-  - Long press on a goal to edit its title, description, or group; a group left without goals is removed.
-  - Long press on a group card (outside its goals) to delete the group with all its goals, after a confirmation.
+- **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, 
+  a description, and a group (typed, or chosen from the existing groups of the habit). Goals and 
+  groups belong to their habit only.
+  - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished 
+  again).
+  - Long press on a goal to edit its title, description, or group; a group left without goals is 
+  removed.
+  - Long press on a group card (outside its goals) to delete the group with all its goals, after 
+  a confirmation.
   - A group whose goals are all finished is struck through and goes after the active groups.
   - The `↑` button on the top-right corner of a card moves the group up by one position.
 
@@ -85,27 +92,49 @@ one is left behind.
 - Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
   `iOS` allows max 9 daily reminders per day)
 - Add to external calendar (Apple, Google, Microsoft)
-- The `(+)` button in the bottom bar schedules a habit (today: from the next full hour, other days: from 09:00).
+- The `(+)` button in the bottom bar schedules a habit (today: from the next full hour, other 
+  days: from 09:00).
 
 **Timer** (the `Timer` button on the Schedule)
-- Watch-like dial of the next 12 hours: scheduled events are arcs in the habit colors (overlapping ones on inner
-  rings), the hand shows the current time.
-- The current habit is shown on top, the countdown (hours:minutes) of the current event or until the next one
-  in the middle, and the next events (today and tomorrow) below; in landscape the dial is on the left and the
-  events are on the right.
-- The screen stays on while the timer is open; mobile devices vibrate when an event starts, and the completion
+- Watch-like dial of the next 12 hours: scheduled events are arcs in the habit colors 
+  (overlapping ones on inner rings), the hand shows the current time.
+- The current habit is shown on top, the countdown (hours:minutes) of the current event or until 
+  the next one in the middle, and the next events (today and tomorrow) below; in landscape the 
+  dial is on the left and the events are on the right.
+- The screen stays on while the timer is open; mobile devices vibrate when an event starts, and 
+  the completion
   of the habit is asked when its time range ends (intents are skipped).
-- Pomodoro: the `(+)` button starts a custom timer for 15 min, 30 min, 1 hour, 2 hours, or a custom number of
-  minutes, optionally for a habit; it vibrates at the end and asks for the completion of the selected habit.
+- Pomodoro: the `(+)` button starts a custom timer for 15 min, 30 min, 1 hour, 2 hours, or a 
+  custom number of minutes, optionally for a habit; it vibrates at the end and asks for the 
+  completion of the selected habit.
 
 **Settings**
-- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, ka_GE, ru_RU, id_ID
+- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, 
+  hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, 
+  ka_GE, ru_RU, id_ID
 - Theme: system default, light, dark
 - Start of the week
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending)
 - Import / Export data
 - Habits' day state representation: symbols, colored circles
+
+**Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))
+- Screen readers: every screen announces its title, page titles and sections are headings, and 
+  every action is named — including long presses ("Edit habit", "Delete", "Edit goal") and the 
+  swipes of the `Today` view ("Done", "Skip"). Status marks are read by their meaning ("100%", 
+  "Skip") instead of the symbols, and day cells announce the habit, weekday, date, status, and 
+  "Today".
+- Toggles, tabs, status buttons, and goals announce whether they are selected or finished; 
+  drop-down fields announce their label and the chosen value.
+- Errors and loading states are announced without moving the focus.
+- Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu` or `Shift` + `F10` 
+  replaces a long press; the `Overall` table scrolls by arrows, `Page Up` / `Page Down`, and 
+  `Home` / `End`.
+- Contrast: texts and controls are readable in both themes; habit colors used as text or icons 
+  are adjusted when they are too light or too dark for the background.
+- Text grows with the system font size; tabs, toggles, and the bottom bar grow with it.
+- The habit completion graph has a text alternative.
 
 ## Screenshots
 

@@ -3,10 +3,7 @@
 
 package com.tercad.zwyka.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -23,10 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.onLongClick
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -51,7 +46,14 @@ import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.days_short
+import com.tercad.zwyka.resources.delete
+import com.tercad.zwyka.resources.edit_day_state
+import com.tercad.zwyka.resources.edit_habit
 import com.tercad.zwyka.resources.every_day
+import com.tercad.zwyka.resources.today
+import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
+import com.tercad.zwyka.widgets.actionable
+import com.tercad.zwyka.widgets.readableOn
 
 /*
  * A card per not archived habit with its marks of [weekDates]:
@@ -106,17 +108,20 @@ private fun WeeklyHabitCard(
     onDayStateLongClick: (DayState) -> Unit,
     onHabitLongClick: (Habit) -> Unit,
 ) {
-    val habitColor = applicationColor(habit.color) ?: currentColorScheme().primary
+    val background = currentColorScheme().surfaceVariant
+    val habitColor = (applicationColor(habit.color) ?: currentColorScheme().primary)
+        .readableOn(background, GRAPHICS_CONTRAST)
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
-            .background(currentColorScheme().surfaceVariant, RoundedCornerShape(12.dp))
+            .background(background, RoundedCornerShape(12.dp))
             // Day cells handle their own clicks, the rest of the card opens the habit editor.
-            .pointerInput(habit) { detectTapGestures(onLongPress = { onHabitLongClick(habit) }) }
-            .semantics {
-                onLongClick { onHabitLongClick(habit); true }
-            }
+            .actionable(
+                onClick = null,
+                onLongClick = { onHabitLongClick(habit) },
+                onLongClickLabel = stringResource(Res.string.edit_habit),
+            )
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
@@ -177,6 +182,7 @@ private fun WeeklyHabitCard(
                         WeeklyDayCell(
                             habit = habit,
                             date = date,
+                            dayName = dayNames.getOrElse(localDate.dayOfWeek.ordinal) { "" },
                             marks = marks,
                             today = today,
                             width = maxWidth,
@@ -195,11 +201,11 @@ private fun WeeklyHabitCard(
  * Same cell as the "Overall" table: a rectangle with the mark shown
  * as a symbol or a colored circle (see [CompletenessType]), today is outlined.
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun WeeklyDayCell(
     habit: Habit,
     date: String,
+    dayName: String,
     marks: Map<CellKey, String>,
     today: String,
     width: Dp,
@@ -212,6 +218,12 @@ private fun WeeklyDayCell(
     // A reached value of a numeric target is shown above its unit.
     val unit = habit.targetType
         ?.takeIf { habit.hasNumericTarget && parseNumericValue(value) != null }
+    val description = listOfNotNull(
+        habit.title,
+        "$dayName $date",
+        (statusMarkDescription(value) ?: value.trim()) + (unit?.let { " $it" } ?: ""),
+        stringResource(Res.string.today).takeIf { date == today },
+    ).filter { it.isNotBlank() }.joinToString(", ")
     CalendarTableCell(
         text = value,
         width = width,
@@ -228,20 +240,21 @@ private fun WeeklyDayCell(
         bottomLabel = unit,
         highlight = todayHighlight(isToday = date == today, left = true, right = true),
         modifier = Modifier
-            .combinedClickable(
+            .actionable(
+                onClick = {
+                    onDayStateClick(
+                        DayState(
+                            habitId = habit.id,
+                            date = date,
+                            mark = stored?.takeIf { isProgressMark(habit, it) } ?: "·",
+                        ),
+                    )
+                },
+                onClickLabel = stringResource(Res.string.edit_day_state),
                 // Only a stored mark can be deleted.
                 onLongClick = stored?.let { { onDayStateLongClick(DayState(habit.id, date, it)) } },
-            ) {
-                onDayStateClick(
-                    DayState(
-                        habitId = habit.id,
-                        date = date,
-                        mark = stored?.takeIf { isProgressMark(habit, it) } ?: "·",
-                    ),
-                )
-            }
-            .semantics {
-                contentDescription = "${habit.title}, $date, $value" + (unit?.let { " $it" } ?: "")
-            },
+                onLongClickLabel = stringResource(Res.string.delete),
+            )
+            .clearAndSetSemantics { contentDescription = description },
     )
 }

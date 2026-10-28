@@ -29,7 +29,6 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.NotificationsActive
 import androidx.compose.material.icons.filled.Timer
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -38,7 +37,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -54,6 +52,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -88,8 +89,10 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit_time
 import com.tercad.zwyka.resources.back
+import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.days_short
+import com.tercad.zwyka.resources.edit_habit_time
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
 import com.tercad.zwyka.resources.months_short
@@ -99,6 +102,11 @@ import com.tercad.zwyka.resources.previous_day
 import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.today
 import com.tercad.zwyka.state.AppSettingsStore
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.StatusMessage
+import com.tercad.zwyka.widgets.screenTitle
 
 /** Snap of a click on an empty slot, minutes. */
 private const val SLOT_MINUTES = 30
@@ -151,6 +159,7 @@ private fun CalendarPageContent(
     }
 
     Scaffold(
+        modifier = Modifier.screenTitle(stringResource(Res.string.calendar)),
         containerColor = currentColorScheme().surface,
         topBar = {
             CalendarTopBar(
@@ -162,44 +171,19 @@ private fun CalendarPageContent(
             )
         },
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(46.dp)
-                    .background(currentColorScheme().primary),
-            ) {
-                TextButton(
+            BottomBar {
+                BottomBarButton(
+                    icon = Icons.AutoMirrored.Filled.ArrowBack,
+                    text = stringResource(Res.string.back),
                     onClick = { navigator.pop() },
                     modifier = Modifier.align(Alignment.CenterStart),
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = currentColorScheme().onPrimary,
-                    ),
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = null,
-                    )
-                    Text(
-                        text = stringResource(Res.string.back),
-                        modifier = Modifier.padding(start = 8.dp),
-                    )
-                }
-                TextButton(
+                )
+                BottomBarButton(
+                    icon = Icons.Filled.Timer,
+                    text = stringResource(Res.string.timer),
                     onClick = { navigator.push(TimerPage(services, settingsStore)) },
                     modifier = Modifier.align(Alignment.CenterEnd),
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = currentColorScheme().onPrimary,
-                    ),
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Timer,
-                        contentDescription = null,
-                    )
-                    Text(
-                        text = stringResource(Res.string.timer),
-                        modifier = Modifier.padding(start = 8.dp),
-                    )
-                }
+                )
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
@@ -224,11 +208,11 @@ private fun CalendarPageContent(
     ) { contentPadding ->
         val loaded = schedule
         when {
-            loadError != null -> Text(
+            loadError != null -> ErrorMessage(
                 stringResource(Res.string.habits_load_failed, loadError.orEmpty()),
                 modifier = Modifier.padding(contentPadding),
             )
-            loaded == null -> Text(
+            loaded == null -> StatusMessage(
                 stringResource(Res.string.habits_loading),
                 modifier = Modifier.padding(contentPadding),
             )
@@ -369,7 +353,13 @@ private fun CalendarTopBar(
             color = currentColorScheme().onSurface,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = 8.dp),
+            modifier = Modifier
+                .padding(start = 8.dp)
+                // The shown day changes by swipes too: it is read out (WCAG 4.1.3).
+                .semantics {
+                    heading()
+                    liveRegion = LiveRegionMode.Polite
+                },
         )
     }
 }
@@ -516,7 +506,7 @@ private fun HabitTimeBlock(
             .drawBehind {
                 drawRect(color, size = size.copy(width = 3.dp.toPx()))
             }
-            .clickable(onClick = onClick)
+            .clickable(onClickLabel = stringResource(Res.string.edit_habit_time), onClick = onClick)
             .semantics { contentDescription = "$title, $range" }
             .padding(start = 6.dp, end = 4.dp, top = 2.dp),
     ) {

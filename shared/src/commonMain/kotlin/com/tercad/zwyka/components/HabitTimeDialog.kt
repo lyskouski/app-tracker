@@ -25,7 +25,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -94,6 +93,11 @@ import com.tercad.zwyka.resources.notify
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.resources.time_end
 import com.tercad.zwyka.resources.time_start
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.SegmentedSelector
+import com.tercad.zwyka.widgets.SelectButton
+import com.tercad.zwyka.widgets.SwitchRow
+import com.tercad.zwyka.widgets.chosen
 
 private enum class HabitTimeInterval(val minutes: Int?, val label: StringResource) {
     MIN_30(30, Res.string.interval_30_min),
@@ -158,8 +162,6 @@ fun HabitTimeDialog(
         )
     }
     var selectingHabit by remember { mutableStateOf(false) }
-    var ownerWidthPx by remember { mutableStateOf(0) }
-    val ownerWidth = with(LocalDensity.current) { ownerWidthPx.toDp() }
 
     val timeStart = parseTime(startInput)
     val timeEnd = interval.minutes
@@ -196,59 +198,55 @@ fun HabitTimeDialog(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Text(stringResource(Res.string.habit_or_intent))
-                Box(Modifier.fillMaxWidth().onSizeChanged { ownerWidthPx = it.width }) {
-                    val newIntent = stringResource(Res.string.new_intent)
-                    val selectedHabit = habits.firstOrNull { it.id == habitId }
-                    val selectedIntent = intents.firstOrNull { it.id == intentId }
-                    OutlinedButton(
-                        onClick = { selectingHabit = true },
-                        enabled = !isSaving,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
+                val newIntent = stringResource(Res.string.new_intent)
+                val selectedHabit = habits.firstOrNull { it.id == habitId }
+                val selectedIntent = intents.firstOrNull { it.id == intentId }
+                SelectButton(
+                    label = stringResource(Res.string.habit_or_intent),
+                    value = selectedHabit?.title ?: selectedIntent?.title ?: newIntent,
+                    expanded = selectingHabit,
+                    onExpandedChange = { selectingHabit = it },
+                    enabled = !isSaving,
+                    content = {
                         when {
                             selectedHabit != null -> OwnerLabel(selectedHabit.title, selectedHabit.icon, selectedHabit.color)
                             selectedIntent != null -> OwnerLabel(selectedIntent.title, selectedIntent.icon, selectedIntent.color)
                             else -> OwnerLabel(newIntent, null, null, Icons.Filled.Add)
                         }
-                        Spacer(Modifier.weight(1f))
-                        Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
-                    }
-                    DropdownMenu(
-                        expanded = selectingHabit,
-                        onDismissRequest = { selectingHabit = false },
-                        modifier = Modifier.width(ownerWidth),
-                    ) {
-                        habits.forEach { habit ->
-                            DropdownMenuItem(
-                                text = { OwnerLabel(habit.title, habit.icon, habit.color) },
-                                onClick = {
-                                    habitId = habit.id
-                                    intentId = null
-                                    selectingHabit = false
-                                },
-                            )
-                        }
-                        if (habits.isNotEmpty()) HorizontalDivider()
-                        intents.forEach { intent ->
-                            DropdownMenuItem(
-                                text = { OwnerLabel(intent.title, intent.icon, intent.color) },
-                                onClick = {
-                                    habitId = null
-                                    intentId = intent.id
-                                    selectingHabit = false
-                                },
-                            )
-                        }
+                    },
+                ) {
+                    habits.forEach { habit ->
                         DropdownMenuItem(
-                            text = { OwnerLabel(newIntent, null, null, Icons.Filled.Add) },
+                            text = { OwnerLabel(habit.title, habit.icon, habit.color) },
                             onClick = {
-                                habitId = null
+                                habitId = habit.id
                                 intentId = null
                                 selectingHabit = false
                             },
+                            modifier = Modifier.chosen(habitId == habit.id),
                         )
                     }
+                    if (habits.isNotEmpty()) HorizontalDivider()
+                    intents.forEach { intent ->
+                        DropdownMenuItem(
+                            text = { OwnerLabel(intent.title, intent.icon, intent.color) },
+                            onClick = {
+                                habitId = null
+                                intentId = intent.id
+                                selectingHabit = false
+                            },
+                            modifier = Modifier.chosen(habitId == null && intentId == intent.id),
+                        )
+                    }
+                    DropdownMenuItem(
+                        text = { OwnerLabel(newIntent, null, null, Icons.Filled.Add) },
+                        onClick = {
+                            habitId = null
+                            intentId = null
+                            selectingHabit = false
+                        },
+                        modifier = Modifier.chosen(habitId == null && intentId == null),
+                    )
                 }
                 if (habitId == null) {
                     OutlinedTextField(
@@ -303,26 +301,18 @@ fun HabitTimeDialog(
                     )
                 }
                 if (timeStart != null && !isRangeValid) {
-                    Text(
-                        stringResource(Res.string.invalid_time_range),
-                        color = currentColorScheme().error,
-                    )
+                    ErrorMessage(stringResource(Res.string.invalid_time_range))
                 }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(stringResource(Res.string.notify), modifier = Modifier.weight(1f))
-                    Switch(
-                        checked = notify,
-                        onCheckedChange = { checked ->
-                            if (checked) onNotifyEnabled()
-                            notify = checked
-                        },
-                        enabled = !isSaving,
-                    )
-                }
+                SwitchRow(
+                    checked = notify,
+                    onCheckedChange = { checked ->
+                        if (checked) onNotifyEnabled()
+                        notify = checked
+                    },
+                    label = stringResource(Res.string.notify),
+                    enabled = !isSaving,
+                )
 
                 Text(stringResource(Res.string.active_days))
                 WeekDaysSelector(
@@ -345,10 +335,7 @@ fun HabitTimeDialog(
                 CalendarExport(calendarEvent, enabled = !isSaving)
 
                 error?.let {
-                    Text(
-                        stringResource(Res.string.habit_time_save_failed, it),
-                        color = currentColorScheme().error,
-                    )
+                    ErrorMessage(stringResource(Res.string.habit_time_save_failed, it))
                 }
             }
         },
@@ -487,9 +474,6 @@ private fun CalendarExport(event: CalendarEvent?, enabled: Boolean) {
         }
     }
     failure?.let {
-        Text(
-            stringResource(Res.string.calendar_export_failed, it),
-            color = currentColorScheme().error,
-        )
+        ErrorMessage(stringResource(Res.string.calendar_export_failed, it))
     }
 }

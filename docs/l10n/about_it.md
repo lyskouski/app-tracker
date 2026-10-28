@@ -74,3 +74,5 @@ indietro.
 - Esperienza utente
   - Design responsivo e adattivo
   - Scorrimento al tocco o con il mouse: `Scroll Wheel` per i giorni, `Shift` + `Scroll Wheel` per le abitudini
+  - Tastiera: le frecce, `Page Up` / `Page Down`, `Home` / `End` scorrono la tabella; `Menu` / `Shift` + `F10` sostituisce la pressione prolungata
+  - Accessibilità (WCAG 2.1): ogni azione ha un nome per gli screen reader, contrasto leggibile in entrambi i temi, il testo segue la dimensione del carattere di sistema

@@ -73,3 +73,5 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
 - Experiencia de usuario
   - Diseño responsivo y adaptativo
   - Desplazamiento táctil o con el ratón: `Scroll Wheel` para los días, `Shift` + `Scroll Wheel` para los hábitos
+  - Teclado: las flechas, `Page Up` / `Page Down`, `Home` / `End` desplazan la tabla; `Menu` / `Shift` + `F10` sustituye la pulsación larga
+  - Accesibilidad (WCAG 2.1): todas las acciones tienen nombre para los lectores de pantalla, contraste legible en ambos temas, el texto se adapta al tamaño de fuente del sistema

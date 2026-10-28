@@ -74,3 +74,5 @@ de côté.
 - Expérience utilisateur
   - Design réactif et adaptatif
   - Défilement tactile ou à la souris : `Scroll Wheel` pour les jours, `Shift` + `Scroll Wheel` pour les habitudes
+  - Clavier : les flèches, `Page Up` / `Page Down`, `Home` / `End` font défiler le tableau ; `Menu` / `Shift` + `F10` remplace l'appui long
+  - Accessibilité (WCAG 2.1) : chaque action est nommée pour les lecteurs d'écran, contraste lisible dans les deux thèmes, le texte suit la taille de police du système

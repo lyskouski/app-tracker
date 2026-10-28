@@ -3,41 +3,27 @@
 
 package com.tercad.zwyka.pages
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -77,6 +63,13 @@ import com.tercad.zwyka.resources.data_transfer_failed
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.export_data
 import com.tercad.zwyka.resources.import_data
+import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.DropdownField
+import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.StatusMessage
+import com.tercad.zwyka.widgets.screenTitle
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
@@ -97,30 +90,16 @@ class SettingsPage(
         val settings = settingsStore.current
 
         Scaffold(
+            modifier = Modifier.screenTitle(stringResource(Res.string.settings)),
             containerColor = currentColorScheme().surface,
             bottomBar = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(46.dp)
-                        .background(currentColorScheme().primary),
-                ) {
-                    TextButton(
+                BottomBar {
+                    BottomBarButton(
+                        icon = Icons.AutoMirrored.Filled.ArrowBack,
+                        text = stringResource(Res.string.back),
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = currentColorScheme().onPrimary,
-                        ),
-                    ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null,
-                        )
-                        Text(
-                            text = stringResource(Res.string.back),
-                            modifier = Modifier.padding(start = 8.dp),
-                        )
-                    }
+                    )
                 }
             },
         ) { contentPadding ->
@@ -133,11 +112,7 @@ class SettingsPage(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text(
-                text = stringResource(Res.string.settings),
-                style = MaterialTheme.typography.titleLarge,
-                color = currentColorScheme().onSurface,
-            )
+            Heading(stringResource(Res.string.settings))
 
             val languageLabels = applicationLanguages.map { option ->
                 option.nativeName ?: option.label?.let { stringResource(it) }.orEmpty()
@@ -145,7 +120,7 @@ class SettingsPage(
             DropdownField(
                 label = stringResource(Res.string.language),
                 options = languageLabels,
-                searchable = true,
+                searchLabel = stringResource(Res.string.search_languages),
                 selectedIndex = applicationLanguages
                     .indexOfFirst { it.tag == settings.language }
                     .coerceAtLeast(0),
@@ -236,71 +211,6 @@ class SettingsPage(
 }
 
 @Composable
-private fun DropdownField(
-    label: String,
-    options: List<String>,
-    selectedIndex: Int,
-    onSelect: (Int) -> Unit,
-    searchable: Boolean = false,
-) {
-    var expanded by remember { mutableStateOf(false) }
-    var query by remember { mutableStateOf("") }
-    var fieldWidthPx by remember { mutableStateOf(0) }
-    val fieldWidth = with(LocalDensity.current) { fieldWidthPx.toDp() }
-    Box(Modifier.fillMaxWidth().onSizeChanged { fieldWidthPx = it.width }) {
-        OutlinedTextField(
-            value = options.getOrElse(selectedIndex) { "" },
-            onValueChange = {},
-            readOnly = true,
-            label = { Text(label) },
-            trailingIcon = {
-                Icon(
-                    imageVector = Icons.Filled.ArrowDropDown,
-                    contentDescription = null,
-                )
-            },
-            modifier = Modifier.fillMaxWidth(),
-        )
-        // Transparent overlay: a read-only text field does not forward clicks.
-        Box(
-            Modifier
-                .matchParentSize()
-                .clickable {
-                    query = ""
-                    expanded = true
-                },
-        )
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            modifier = Modifier.width(fieldWidth),
-        ) {
-            if (searchable) {
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = { query = it },
-                    label = { Text(stringResource(Res.string.search_languages)) },
-                    singleLine = true,
-                    modifier = Modifier
-                        .padding(horizontal = 8.dp)
-                        .fillMaxWidth(),
-                )
-            }
-            options.forEachIndexed { index, text ->
-                if (searchable && !text.contains(query.trim(), ignoreCase = true)) return@forEachIndexed
-                DropdownMenuItem(
-                    text = { Text(text) },
-                    onClick = {
-                        expanded = false
-                        onSelect(index)
-                    },
-                )
-            }
-        }
-    }
-}
-
-@Composable
 private fun BackupButtons(backup: BackupService, settingsStore: AppSettingsStore) {
     val fileTransfer = LocalFileTransfer.current
     val scope = rememberCoroutineScope()
@@ -321,11 +231,11 @@ private fun BackupButtons(backup: BackupService, settingsStore: AppSettingsStore
     }
 
     message?.let { (text, argument) ->
-        Text(
-            text = stringResource(text, argument),
-            style = MaterialTheme.typography.bodyMedium,
-            color = currentColorScheme().onSurface,
-        )
+        if (text == Res.string.data_transfer_failed) {
+            ErrorMessage(stringResource(text, argument))
+        } else {
+            StatusMessage(stringResource(text, argument))
+        }
     }
     Row(
         modifier = Modifier.fillMaxWidth().padding(top = 8.dp),

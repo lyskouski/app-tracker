@@ -4,6 +4,7 @@
 package com.tercad.zwyka.components
 
 import androidx.compose.foundation.Canvas
+import kotlin.math.roundToInt
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,8 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.LayoutDirection
@@ -88,6 +91,17 @@ fun HabitContributionGraph(
         val daysFromWeekStart = (today.dayOfWeek.ordinal - weekStart.dayOfWeek.ordinal + 7) % 7
         today.minus(daysFromWeekStart + (GRAPH_WEEKS - 1) * 7, DateTimeUnit.DAY)
     }
+    // Text alternative of the graph (WCAG 1.1.1): completion of every marked day.
+    val description = remember(habit, marks, firstDay, today) {
+        generateSequence(firstDay) { it.plus(1, DateTimeUnit.DAY) }
+            .takeWhile { it <= today }
+            .mapNotNull { date ->
+                marks[date.toString()]
+                    ?.takeIf { it != INACTIVE_MARK }
+                    ?.let { "$date: ${(markProgress(habit, it) * 100).roundToInt()}%" }
+            }
+            .joinToString()
+    }
     val scrollState = rememberScrollState()
     // The latest weeks are the most relevant.
     LaunchedEffect(scrollState.maxValue) {
@@ -113,6 +127,7 @@ fun HabitContributionGraph(
             Box(modifier = Modifier.horizontalScroll(scrollState)) {
                 Canvas(
                     modifier = Modifier
+                        .semantics { contentDescription = description }
                         .width((CELL_SIZE + CELL_GAP) * GRAPH_WEEKS)
                         .height(MONTH_LABEL_HEIGHT + (CELL_SIZE + CELL_GAP) * 7),
                 ) {
