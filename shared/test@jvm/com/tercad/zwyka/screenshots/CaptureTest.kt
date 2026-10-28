@@ -7,6 +7,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
@@ -36,6 +37,8 @@ import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.timer_next_events
+import com.tercad.zwyka.resources.today
+import com.tercad.zwyka.resources.weekly
 import io.github.lyskouski.screenshot.ScreenshotGenerator
 import io.github.lyskouski.screenshot.ScreenshotScope
 import io.github.lyskouski.screenshot.ScreenshotTarget
@@ -114,6 +117,12 @@ class CaptureTest {
             val metrics = getString(Res.string.metrics)
             waitUntil { onAllNodesWithText(metrics).fetchSemanticsNodes().isNotEmpty() }
         }
+        gen.inject("10_daily") {
+            openHomeTab(getString(Res.string.today))
+        }
+        gen.inject("11_weekly") {
+            openHomeTab(getString(Res.string.weekly))
+        }
         gen.run()
     }
 
@@ -121,6 +130,12 @@ class CaptureTest {
         onNodeWithText(getString(Res.string.calendar)).performClick()
         // The schedule loads after the page is shown.
         waitUntil { onAllNodesWithText(formatTime(0)).fetchSemanticsNodes().isNotEmpty() }
+    }
+
+    private fun ScreenshotScope.openHomeTab(label: String) {
+        // Only the tab is clickable by its label.
+        onNode(hasText(label) and hasClickAction()).performClick()
+        waitForIdle()
     }
 
     private suspend fun sampleDatabase(target: ScreenshotTarget): Database {
