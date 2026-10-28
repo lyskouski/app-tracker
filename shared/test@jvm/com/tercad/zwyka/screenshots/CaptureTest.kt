@@ -92,7 +92,7 @@ class CaptureTest {
         // Every screenshot starts from its own database: the changed setting stays in this step.
         gen.inject("6_home_colors") {
             onNodeWithText(getString(Res.string.settings)).performClick()
-            onNodeWithText(getString(Res.string.completeness_type)).performScrollTo().performClick()
+            onNodeWithContentDescription(getString(Res.string.completeness_type)).performScrollTo().performClick()
             onNodeWithText(getString(Res.string.completeness_colors)).performClick()
             onNodeWithText(getString(Res.string.back)).performClick()
             waitForIdle()
