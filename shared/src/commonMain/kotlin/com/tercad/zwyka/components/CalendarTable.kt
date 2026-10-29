@@ -57,6 +57,7 @@ import androidx.compose.ui.semantics.scrollBy
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.verticalScrollAxisRange
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
@@ -892,6 +893,7 @@ private fun CalendarFirstColumnViewport(
                 row in startRow until endRow
             ) {
                 val dateText = dateFormat.format(dates[row], monthNames)
+                val isToday = dates[row] == today
                 CalendarTableCell(
                     text = dateText,
                     width = firstColumnWidth,
@@ -899,15 +901,18 @@ private fun CalendarFirstColumnViewport(
                         cellHeightPx.toDp()
                     },
                     background = currentColorScheme().surface,
+                    // Same as the day names of the "Weekly" view.
+                    textColor = if (isToday) currentColorScheme().primary else currentColorScheme().onSurface,
+                    fontWeight = if (isToday) FontWeight.Bold else null,
                     highlight = todayHighlight(
-                        isToday = dates[row] == today,
+                        isToday = isToday,
                         left = true,
                         right = habits.isEmpty(),
                     ).then(weekStartLine(dates[row] in weekStartDates)),
                     modifier = Modifier
                         .clickable(onClickLabel = skipLabel) { onDateClick(dates[row]) }
                         .clearAndSetSemantics {
-                            contentDescription = listOfNotNull(dateText, todayLabel.takeIf { dates[row] == today })
+                            contentDescription = listOfNotNull(dateText, todayLabel.takeIf { isToday })
                                 .joinToString(", ")
                         },
                 )
@@ -1295,6 +1300,7 @@ internal fun CalendarTableCell(
     icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     iconTint: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
+    fontWeight: FontWeight? = null,
     contentDescription: String? = null,
     topLabel: String? = null,
     /** Shown under the mark, e.g. the unit of a numeric value. */
@@ -1341,7 +1347,7 @@ internal fun CalendarTableCell(
                         }
                     },
                     color = textColor,
-                    style = style,
+                    style = style.copy(fontWeight = fontWeight ?: style.fontWeight),
                     type = completenessType,
                 )
             }
