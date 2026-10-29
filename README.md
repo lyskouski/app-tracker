@@ -62,7 +62,7 @@ one is left behind.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
 - **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" 
-  days don't break it).
+  days don't break it); 66 days or more are shown as "66+".
 - **Today's progress**: the top-left corner shows the overall completion of today's habits 
   as a progress bar around the cell, with the percentage in the middle.
 

@@ -106,6 +106,9 @@ import com.tercad.zwyka.widgets.readableOn
 /** Opacity of the archived habits in the header. */
 private const val ARCHIVED_ALPHA = 0.38f
 
+/** Longest Day Streak shown as is, a longer one is shown as "66+" (the table loads 66 past days). */
+private const val MAX_SHOWN_STREAK = 66
+
 @Composable
 fun CalendarTable(
     habits: List<Habit>,
@@ -1093,6 +1096,7 @@ private fun CalendarBodyViewport(
                     val value = if (habit.isArchived) " " else displayedMark(habit, date, marks, today)
                     // A single day is not a streak yet.
                     val streak = streaks[key]?.takeIf { it > 1 }
+                        ?.let { if (it >= MAX_SHOWN_STREAK) "$MAX_SHOWN_STREAK+" else it.toString() }
                     val status = marks[key]
                         ?.takeIf { mark -> isProgressMark(habit, mark) }
                         ?: "·"
@@ -1103,7 +1107,7 @@ private fun CalendarBodyViewport(
                         habit.title,
                         date,
                         (statusMarkDescription(value) ?: value.trim()) + (unit?.let { " $it" } ?: ""),
-                        streak?.toString(),
+                        streak,
                         labels.today.takeIf { date == today },
                     ).filter { it.isNotBlank() }.joinToString(", ")
 
@@ -1120,7 +1124,7 @@ private fun CalendarBodyViewport(
                             cellHeightPx.toDp()
                         },
                         background = backgroundColor,
-                        topLabel = streak?.toString(),
+                        topLabel = streak,
                         bottomLabel = unit,
                         highlight = todayHighlight(
                             isToday = date == today,
