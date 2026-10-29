@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Stav dne se nepodařilo aktualizovat: %1$s</string>
     <string name="edit_habit">Upravit návyk</string>
+    <string name="habit_details">Podrobnosti návyku</string>
     <string name="delete_habit">Smazat</string>
     <string name="delete_habit_confirmation">Smazat návyk?</string>
     <string name="delete_habit_confirmation_message">Smazat „%1$s“ a všechny zaznamenané stavy dnů?</string>

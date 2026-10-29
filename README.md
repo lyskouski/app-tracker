@@ -38,7 +38,8 @@ one is left behind.
   habits first, then the done and skipped ones below the "Completed / Skipped" divider.
 - Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value 
   first (prefilled with the target). Swipe left to skip it ("—").
-- Tap a habit to set its day state, long press to edit the habit.
+- Tap a habit to set its day state, tap its icon to edit the habit, long press to open the 
+  habit details.
 - Habits with a numeric target show the reached value and the target 
   (e.g. `5000 / 10000 steps`), others show their mark.
 
@@ -46,8 +47,8 @@ one is left behind.
 - A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every  
   day"), and the marks of the current week (from the selected start of the week); today is 
   highlighted.
-- Tap a day to set its state, long press on a day to delete its state, long press on the card to 
-  edit the habit.
+- Tap a day to set its state, long press on a day to delete its state; tap the card to set 
+  today's state, tap its icon to edit the habit, long press on the card to open the habit details.
 
 **Overall (Habits Calendar)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
@@ -67,7 +68,7 @@ one is left behind.
 
 **Metrics**
 - Open by tapping today's progress: a graph of daily completion (%) over the last 66 days.
-- **Habit details** (long press on a habit header): title, remarks, target, completion of every
+- **Habit details** (long press on a habit, or on a habit header of `Overall`): title, remarks, target, completion of every
   day over the last year (days of the week by weeks, like GitHub contributions, colored by the
   completion), max and current Day Streak calculated over the whole history.
 - **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, 
@@ -121,7 +122,7 @@ one is left behind.
 
 **Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))
 - Screen readers: every screen announces its title, page titles and sections are headings, and 
-  every action is named — including long presses ("Edit habit", "Delete", "Edit goal") and the 
+  every action is named — including long presses ("Habit details", "Delete", "Edit goal") and the 
   swipes of the `Today` view ("Done", "Skip"). Status marks are read by their meaning ("100%", 
   "Skip") instead of the symbols, and day cells announce the habit, weekday, date, status, and 
   "Today".
@@ -131,6 +132,8 @@ one is left behind.
 - Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu` or `Shift` + `F10` 
   replaces a long press; the `Overall` table scrolls by arrows, `Page Up` / `Page Down`, and 
   `Home` / `End`.
+- Habit icons of the `Today` and `Weekly` views are buttons on a square of the habit color, with 
+  a 48dp touch target, announced as "Edit habit" with the habit title.
 - Contrast: texts and controls are readable in both themes; habit colors used as text or icons 
   are adjusted when they are too light or too dark for the background.
 - Text grows with the system font size; tabs, toggles, and the bottom bar grow with it.

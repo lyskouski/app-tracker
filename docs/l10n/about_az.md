@@ -38,8 +38,8 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Rəqəmsal hədəf, məs. 10000 addım: gün çatılan dəyəri saxlayır, icra = dəyər / hədəf
 - Vərdişlər Təqvimi (əsas səhifə)
   - Yuxarıdakı tablarla dəyişdirilən üç görünüş (seçilən yadda saxlanılır): Bu gün, Həftəlik və Ümumi
-  - Bu gün: bugünkü vərdişlər siyahı şəklində, tamamlanmış və ötürülmüşlər aşağıda; sağa sürüşdürmə vərdişi tamamlanmış kimi qeyd edir (rəqəmsal hədəf dəyəri soruşur), sola sürüşdürmə onu ötürür, toxunma günün vəziyyətini açır, uzun basma vərdişi redaktə edir
-  - Həftəlik: hər vərdiş üçün aktiv günləri və cari həftənin qeydləri ilə bir kart; karta uzun basma vərdişi redaktə edir
+  - Bu gün: bugünkü vərdişlər siyahı şəklində, tamamlanmış və ötürülmüşlər aşağıda; sağa sürüşdürmə vərdişi tamamlanmış kimi qeyd edir (rəqəmsal hədəf dəyəri soruşur), sola sürüşdürmə onu ötürür, toxunma günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, uzun basma onun təfərrüatlarını açır
+  - Həftəlik: hər vərdiş üçün aktiv günləri və cari həftənin qeydləri ilə bir kart; karta toxunma bu günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, karta uzun basma onun təfərrüatlarını açır
   - Ümumi: Günlər (sətirlər) üzrə vərdişlər (sütunlar): son 66 gün və qarşıdakı 5 gün
   - Hər vərdiş üzrə günün irəliləyişi: `·` başlanıb, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100%-dən çox
   - Xana həmçinin buraxılmış ("—") kimi qeyd edilə bilər; xanaya uzun basmaq onun vəziyyətini silir

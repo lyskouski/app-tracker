@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">दिन की स्थिति अपडेट नहीं हो सकी: %1$s</string>
     <string name="edit_habit">आदत संपादित करें</string>
+    <string name="habit_details">आदत का विवरण</string>
     <string name="delete_habit">हटाएँ</string>
     <string name="delete_habit_confirmation">आदत हटाएँ?</string>
     <string name="delete_habit_confirmation_message">“%1$s” और उसकी सभी दर्ज दिन स्थितियाँ हटाएँ?</string>

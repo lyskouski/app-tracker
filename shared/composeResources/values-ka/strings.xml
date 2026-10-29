@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">დღის მდგომარეობის განახლება ვერ მოხერხდა: %1$s</string>
     <string name="edit_habit">ჩვევის რედაქტირება</string>
+    <string name="habit_details">ჩვევის დეტალები</string>
     <string name="delete_habit">წაშლა</string>
     <string name="delete_habit_confirmation">წაიშალოს ჩვევა?</string>
     <string name="delete_habit_confirmation_message">წაიშალოს „%1$s“ და მისი ყველა ჩაწერილი დღის მდგომარეობა?</string>

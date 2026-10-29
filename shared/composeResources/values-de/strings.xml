@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+ %</string>
     <string name="day_state_save_failed">Tagesstatus konnte nicht aktualisiert werden: %1$s</string>
     <string name="edit_habit">Gewohnheit bearbeiten</string>
+    <string name="habit_details">Gewohnheitsdetails</string>
     <string name="delete_habit">Löschen</string>
     <string name="delete_habit_confirmation">Gewohnheit löschen?</string>
     <string name="delete_habit_confirmation_message">„%1$s“ und alle aufgezeichneten Tagesstatus löschen?</string>

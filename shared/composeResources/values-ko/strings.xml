@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">날짜 상태를 업데이트할 수 없습니다: %1$s</string>
     <string name="edit_habit">습관 편집</string>
+    <string name="habit_details">습관 세부 정보</string>
     <string name="delete_habit">삭제</string>
     <string name="delete_habit_confirmation">습관을 삭제할까요?</string>
     <string name="delete_habit_confirmation_message">“%1$s” 및 기록된 모든 날짜 상태를 삭제할까요?</string>

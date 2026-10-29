@@ -241,10 +241,13 @@ private fun HomePageContent(
                         completenessType = settings.completenessType,
                         onMarkChange = ::saveMark,
                         onDayStateClick = { selectedDayState = it },
-                        onHabitLongClick = {
+                        onHabitClick = {
                             editingHabit = it
                             habitError = null
                             showHabitDialog = true
+                        },
+                        onHabitLongClick = { habit ->
+                            navigator.push(DetailedPage(habit, services, today, settingsStore.current.weekStart))
                         },
                         modifier = Modifier
                             .fillMaxSize()
@@ -259,10 +262,13 @@ private fun HomePageContent(
                         completenessType = settings.completenessType,
                         onDayStateClick = { selectedDayState = it },
                         onDayStateLongClick = { deletingDayState = it },
-                        onHabitLongClick = {
+                        onHabitClick = {
                             editingHabit = it
                             habitError = null
                             showHabitDialog = true
+                        },
+                        onHabitLongClick = { habit ->
+                            navigator.push(DetailedPage(habit, services, today, settingsStore.current.weekStart))
                         },
                         modifier = Modifier
                             .fillMaxSize()

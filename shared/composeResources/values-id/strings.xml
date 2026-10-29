@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Tidak dapat memperbarui status hari: %1$s</string>
     <string name="edit_habit">Edit kebiasaan</string>
+    <string name="habit_details">Detail kebiasaan</string>
     <string name="delete_habit">Hapus</string>
     <string name="delete_habit_confirmation">Hapus kebiasaan?</string>
     <string name="delete_habit_confirmation_message">Hapus “%1$s” dan semua status hari yang tercatat?</string>

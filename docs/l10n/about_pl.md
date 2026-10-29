@@ -38,8 +38,8 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Cel liczbowy, np. 10000 kroków: dzień przechowuje osiągniętą wartość, realizacja = wartość / cel
 - Kalendarz nawyków (strona główna)
   - Trzy widoki przełączane kartami u góry (wybrany jest zapamiętywany): Dziś, Tydzień i Ogółem
-  - Dziś: dzisiejsze nawyki jako lista, wykonane i pominięte trafiają niżej; przesunięcie w prawo oznacza nawyk jako zrobiony (cel liczbowy pyta o wartość), przesunięcie w lewo go pomija, dotknięcie otwiera stan dnia, długie naciśnięcie edytuje nawyk
-  - Tydzień: karta dla każdego nawyku z jego aktywnymi dniami i oznaczeniami z bieżącego tygodnia; długie naciśnięcie karty edytuje nawyk
+  - Dziś: dzisiejsze nawyki jako lista, wykonane i pominięte trafiają niżej; przesunięcie w prawo oznacza nawyk jako zrobiony (cel liczbowy pyta o wartość), przesunięcie w lewo go pomija, dotknięcie otwiera stan dnia, dotknięcie ikony edytuje nawyk, długie naciśnięcie otwiera jego szczegóły
+  - Tydzień: karta dla każdego nawyku z jego aktywnymi dniami i oznaczeniami z bieżącego tygodnia; dotknięcie karty otwiera dzisiejszy stan dnia, dotknięcie ikony edytuje nawyk, długie naciśnięcie karty otwiera jego szczegóły
   - Ogółem: Nawyki (kolumny) według dni (wiersze): ostatnie 66 dni oraz 5 nadchodzących
   - Postęp dnia dla każdego nawyku: `·` rozpoczęty, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` ponad 100%
   - Komórkę można też oznaczyć jako pominiętą ("—"); długie naciśnięcie komórki usuwa jej stan

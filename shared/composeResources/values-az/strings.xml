@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Günün vəziyyətini yeniləmək mümkün olmadı: %1$s</string>
     <string name="edit_habit">Vərdişi redaktə et</string>
+    <string name="habit_details">Vərdiş təfərrüatları</string>
     <string name="delete_habit">Sil</string>
     <string name="delete_habit_confirmation">Vərdiş silinsin?</string>
     <string name="delete_habit_confirmation_message">“%1$s” və onun bütün qeydə alınmış gün vəziyyətləri silinsin?</string>

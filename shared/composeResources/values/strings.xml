@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Unable to update day state: %1$s</string>
     <string name="edit_habit">Edit habit</string>
+    <string name="habit_details">Habit details</string>
     <string name="delete_habit">Delete</string>
     <string name="delete_habit_confirmation">Delete habit?</string>
     <string name="delete_habit_confirmation_message">Delete “%1$s” and all its recorded day states?</string>

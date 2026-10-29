@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">به‌روزرسانی وضعیت روز ممکن نشد: %1$s</string>
     <string name="edit_habit">ویرایش عادت</string>
+    <string name="habit_details">جزئیات عادت</string>
     <string name="delete_habit">حذف</string>
     <string name="delete_habit_confirmation">عادت حذف شود؟</string>
     <string name="delete_habit_confirmation_message">«%1$s» و همه وضعیت‌های ثبت‌شده روزهای آن حذف شود؟</string>

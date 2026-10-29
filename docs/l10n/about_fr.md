@@ -39,8 +39,8 @@ de côté.
   - Objectif numérique, p. ex. 10000 pas : le jour garde la valeur atteinte, réalisation = valeur / objectif
 - Calendrier des habitudes (page principale)
   - Trois vues, à changer avec les onglets en haut (la vue choisie est mémorisée) : Aujourd’hui, Semaine et Global
-  - Aujourd’hui : les habitudes du jour en liste, les terminées et ignorées en dessous ; un balayage vers la droite marque une habitude comme faite (un objectif numérique demande sa valeur), vers la gauche la passe, un appui ouvre l’état du jour, un appui long modifie l’habitude
-  - Semaine : une carte par habitude avec ses jours actifs et ses marques de la semaine en cours ; un appui long sur la carte modifie l’habitude
+  - Aujourd’hui : les habitudes du jour en liste, les terminées et ignorées en dessous ; un balayage vers la droite marque une habitude comme faite (un objectif numérique demande sa valeur), vers la gauche la passe, un appui ouvre l’état du jour, un appui sur l’icône modifie l’habitude, un appui long ouvre ses détails
+  - Semaine : une carte par habitude avec ses jours actifs et ses marques de la semaine en cours ; un appui sur la carte ouvre l’état du jour d’aujourd’hui, un appui sur l’icône modifie l’habitude, un appui long sur la carte ouvre ses détails
   - Global : Habitudes (colonnes) par jours (lignes) : les 66 derniers jours plus les 5 à venir
   - Progression du jour par habitude : `·` commencée, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` plus de 100 %
   - Une cellule peut aussi être marquée comme passée ("—") ; un appui long sur une cellule supprime son état

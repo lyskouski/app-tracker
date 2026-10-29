@@ -69,10 +69,12 @@ import com.tercad.zwyka.resources.completed_skipped
 import com.tercad.zwyka.resources.done
 import com.tercad.zwyka.resources.edit_day_state
 import com.tercad.zwyka.resources.edit_habit
+import com.tercad.zwyka.resources.habit_details
 import com.tercad.zwyka.resources.skip
 import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
 import com.tercad.zwyka.widgets.Heading
+import com.tercad.zwyka.widgets.IconButton
 import com.tercad.zwyka.widgets.actionable
 import com.tercad.zwyka.widgets.readableOn
 
@@ -83,7 +85,8 @@ private const val DONE_MARK = "X"
  *
  * Swipe to the right marks a habit as done (a numeric target asks for the value first),
  * swipe to the left skips it. A click opens the day state ([onDayStateClick]),
- * a long click opens the habit editor ([onHabitLongClick]).
+ * a click on the icon opens the habit editor ([onHabitClick]),
+ * a long click opens the habit details ([onHabitLongClick]).
  */
 @Composable
 fun TodayHabitList(
@@ -93,6 +96,7 @@ fun TodayHabitList(
     completenessType: CompletenessType,
     onMarkChange: (DayState) -> Unit,
     onDayStateClick: (DayState) -> Unit,
+    onHabitClick: (Habit) -> Unit,
     onHabitLongClick: (Habit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -135,6 +139,7 @@ fun TodayHabitList(
                                     ),
                                 )
                             },
+                            onIconClick = { onHabitClick(habit) },
                             onLongClick = { onHabitLongClick(habit) },
                             onDone = done,
                             onSkip = skip,
@@ -260,6 +265,7 @@ private fun SwipeableHabitRow(
 /*
  * [icon] Title                         mark / value of target
  *
+ * The icon is a button of its own opening the habit editor ([onIconClick]).
  * Screen readers offer [onDone] and [onSkip] as actions of the row, instead of the swipes.
  */
 @Composable
@@ -268,6 +274,7 @@ private fun TodayHabitRow(
     mark: String?,
     completenessType: CompletenessType,
     onClick: () -> Unit,
+    onIconClick: () -> Unit,
     onLongClick: () -> Unit,
     onDone: () -> Unit,
     onSkip: () -> Unit,
@@ -276,6 +283,7 @@ private fun TodayHabitRow(
     val habitColor = applicationColor(habit.color)?.readableOn(background, GRAPHICS_CONTRAST)
     val doneLabel = stringResource(Res.string.done)
     val skipLabel = stringResource(Res.string.skip)
+    val editLabel = stringResource(Res.string.edit_habit)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -285,7 +293,7 @@ private fun TodayHabitRow(
                 onClick = onClick,
                 onClickLabel = stringResource(Res.string.edit_day_state),
                 onLongClick = onLongClick,
-                onLongClickLabel = stringResource(Res.string.edit_habit),
+                onLongClickLabel = stringResource(Res.string.habit_details),
             )
             .semantics {
                 customActions = listOf(
@@ -293,20 +301,18 @@ private fun TodayHabitRow(
                     CustomAccessibilityAction(skipLabel) { onSkip(); true },
                 )
             }
-            .padding(horizontal = 12.dp, vertical = 8.dp),
+            // The icon button reserves 4.dp around its square for the touch target.
+            .padding(start = 8.dp, end = 12.dp, top = 4.dp, bottom = 4.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        val icon = applicationIcon(habit.icon)
-        if (icon == null) {
-            Text("?")
-        } else {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = habitColor ?: currentColorScheme().onSurface,
-            )
-        }
+        IconButton(
+            icon = applicationIcon(habit.icon),
+            color = habitColor ?: currentColorScheme().primary,
+            contentDescription = "$editLabel: ${habit.title}",
+            onClickLabel = editLabel,
+            onClick = onIconClick,
+        )
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = habit.title,

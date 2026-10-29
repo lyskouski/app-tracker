@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Impossibile aggiornare lo stato del giorno: %1$s</string>
     <string name="edit_habit">Modifica abitudine</string>
+    <string name="habit_details">Dettagli abitudine</string>
     <string name="delete_habit">Elimina</string>
     <string name="delete_habit_confirmation">Eliminare l’abitudine?</string>
     <string name="delete_habit_confirmation_message">Eliminare «%1$s» e tutti gli stati dei giorni registrati?</string>

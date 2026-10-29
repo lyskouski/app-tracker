@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">تعذّر تحديث حالة اليوم: %1$s</string>
     <string name="edit_habit">تعديل العادة</string>
+    <string name="habit_details">تفاصيل العادة</string>
     <string name="delete_habit">حذف</string>
     <string name="delete_habit_confirmation">حذف العادة؟</string>
     <string name="delete_habit_confirmation_message">هل تريد حذف «%1$s» وجميع حالات الأيام المسجلة لها؟</string>

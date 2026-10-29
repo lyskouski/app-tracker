@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Не вдалося оновити стан дня: %1$s</string>
     <string name="edit_habit">Редагувати звичку</string>
+    <string name="habit_details">Подробиці звички</string>
     <string name="delete_habit">Видалити</string>
     <string name="delete_habit_confirmation">Видалити звичку?</string>
     <string name="delete_habit_confirmation_message">Видалити «%1$s» і всі записані стани днів?</string>

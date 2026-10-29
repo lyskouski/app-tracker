@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,8 +49,10 @@ import com.tercad.zwyka.resources.delete
 import com.tercad.zwyka.resources.edit_day_state
 import com.tercad.zwyka.resources.edit_habit
 import com.tercad.zwyka.resources.every_day
+import com.tercad.zwyka.resources.habit_details
 import com.tercad.zwyka.resources.today
 import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
+import com.tercad.zwyka.widgets.IconButton
 import com.tercad.zwyka.widgets.actionable
 import com.tercad.zwyka.widgets.readableOn
 
@@ -61,6 +62,10 @@ import com.tercad.zwyka.widgets.readableOn
  * [icon] Title                    Every day
  *  Mon  Tue  Wed  Thu  Fri  Sat  Sun
  *  [X]  [X]  [|]  [ ]  [ ]  [—]  [ ]
+ *
+ * A click on the card opens the day state of [today], a click on a day of that day
+ * ([onDayStateClick]); a click on the icon opens the habit editor ([onHabitClick]),
+ * a long click on the card opens the habit details ([onHabitLongClick]).
  */
 @Composable
 fun WeeklyHabitList(
@@ -71,6 +76,7 @@ fun WeeklyHabitList(
     completenessType: CompletenessType,
     onDayStateClick: (DayState) -> Unit,
     onDayStateLongClick: (DayState) -> Unit,
+    onHabitClick: (Habit) -> Unit,
     onHabitLongClick: (Habit) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -90,6 +96,7 @@ fun WeeklyHabitList(
                 completenessType = completenessType,
                 onDayStateClick = onDayStateClick,
                 onDayStateLongClick = onDayStateLongClick,
+                onHabitClick = onHabitClick,
                 onHabitLongClick = onHabitLongClick,
             )
         }
@@ -106,6 +113,7 @@ private fun WeeklyHabitCard(
     completenessType: CompletenessType,
     onDayStateClick: (DayState) -> Unit,
     onDayStateLongClick: (DayState) -> Unit,
+    onHabitClick: (Habit) -> Unit,
     onHabitLongClick: (Habit) -> Unit,
 ) {
     val background = currentColorScheme().surfaceVariant
@@ -116,11 +124,12 @@ private fun WeeklyHabitCard(
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
             .background(background, RoundedCornerShape(12.dp))
-            // Day cells handle their own clicks, the rest of the card opens the habit editor.
+            // Day cells and the icon handle their own clicks, the rest of the card is about today.
             .actionable(
-                onClick = null,
+                onClick = { onDayStateClick(dayStateOf(habit, today, marks)) },
+                onClickLabel = stringResource(Res.string.edit_day_state),
                 onLongClick = { onHabitLongClick(habit) },
-                onLongClickLabel = stringResource(Res.string.edit_habit),
+                onLongClickLabel = stringResource(Res.string.habit_details),
             )
             .padding(12.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -129,12 +138,14 @@ private fun WeeklyHabitCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            val icon = applicationIcon(habit.icon)
-            if (icon == null) {
-                Text("?")
-            } else {
-                Icon(imageVector = icon, contentDescription = null, tint = habitColor)
-            }
+            val editLabel = stringResource(Res.string.edit_habit)
+            IconButton(
+                icon = applicationIcon(habit.icon),
+                color = habitColor,
+                contentDescription = "$editLabel: ${habit.title}",
+                onClickLabel = editLabel,
+                onClick = { onHabitClick(habit) },
+            )
             Text(
                 text = habit.title,
                 modifier = Modifier.weight(1f),
@@ -241,15 +252,7 @@ private fun WeeklyDayCell(
         highlight = todayHighlight(isToday = date == today, left = true, right = true),
         modifier = Modifier
             .actionable(
-                onClick = {
-                    onDayStateClick(
-                        DayState(
-                            habitId = habit.id,
-                            date = date,
-                            mark = stored?.takeIf { isProgressMark(habit, it) } ?: "·",
-                        ),
-                    )
-                },
+                onClick = { onDayStateClick(dayStateOf(habit, date, marks)) },
                 onClickLabel = stringResource(Res.string.edit_day_state),
                 // Only a stored mark can be deleted.
                 onLongClick = stored?.let { { onDayStateLongClick(DayState(habit.id, date, it)) } },
@@ -258,3 +261,11 @@ private fun WeeklyDayCell(
             .clearAndSetSemantics { contentDescription = description },
     )
 }
+
+/** Day state of [habit] on [date] to be edited: the stored progress, "·" (started) otherwise. */
+private fun dayStateOf(habit: Habit, date: String, marks: Map<CellKey, String>): DayState =
+    DayState(
+        habitId = habit.id,
+        date = date,
+        mark = marks[CellKey(habitId = habit.id, date = date)]?.takeIf { isProgressMark(habit, it) } ?: "·",
+    )

@@ -86,6 +86,7 @@ import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.delete
 import com.tercad.zwyka.resources.edit_day_state
 import com.tercad.zwyka.resources.edit_habit
+import com.tercad.zwyka.resources.habit_details
 import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.skip
@@ -779,8 +780,9 @@ private fun CalendarHeaderViewport(
                     modifier = Modifier
                         .actionable(
                             onClick = { onHabitClick(habit) },
+                            onClickLabel = stringResource(Res.string.edit_habit),
                             onLongClick = { onHabitLongClick(habit) },
-                            onLongClickLabel = stringResource(Res.string.edit_habit),
+                            onLongClickLabel = stringResource(Res.string.habit_details),
                         )
                         .clearAndSetSemantics { contentDescription = habit.title },
                 )

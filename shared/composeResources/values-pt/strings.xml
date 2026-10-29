@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Não foi possível atualizar o estado do dia: %1$s</string>
     <string name="edit_habit">Editar hábito</string>
+    <string name="habit_details">Detalhes do hábito</string>
     <string name="delete_habit">Excluir</string>
     <string name="delete_habit_confirmation">Excluir hábito?</string>
     <string name="delete_habit_confirmation_message">Excluir “%1$s” e todos os estados de dias registrados?</string>

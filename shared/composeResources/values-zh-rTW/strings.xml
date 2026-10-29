@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">無法更新當日狀態：%1$s</string>
     <string name="edit_habit">編輯習慣</string>
+    <string name="habit_details">習慣詳情</string>
     <string name="delete_habit">刪除</string>
     <string name="delete_habit_confirmation">刪除習慣？</string>
     <string name="delete_habit_confirmation_message">刪除「%1$s」及其所有已記錄的每日狀態？</string>

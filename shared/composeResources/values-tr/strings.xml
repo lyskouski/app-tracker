@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">%100+</string>
     <string name="day_state_save_failed">Gün durumu güncellenemedi: %1$s</string>
     <string name="edit_habit">Alışkanlığı düzenle</string>
+    <string name="habit_details">Alışkanlık ayrıntıları</string>
     <string name="delete_habit">Sil</string>
     <string name="delete_habit_confirmation">Alışkanlık silinsin mi?</string>
     <string name="delete_habit_confirmation_message">“%1$s” ve kaydedilmiş tüm gün durumları silinsin mi?</string>

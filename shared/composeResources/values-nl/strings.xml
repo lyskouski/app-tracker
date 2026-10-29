@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Kan dagstatus niet bijwerken: %1$s</string>
     <string name="edit_habit">Gewoonte bewerken</string>
+    <string name="habit_details">Gewoontedetails</string>
     <string name="delete_habit">Verwijderen</string>
     <string name="delete_habit_confirmation">Gewoonte verwijderen?</string>
     <string name="delete_habit_confirmation_message">„%1$s” en alle vastgelegde dagstatussen verwijderen?</string>

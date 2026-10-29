@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Starea zilei nu a putut fi actualizată: %1$s</string>
     <string name="edit_habit">Editează obiceiul</string>
+    <string name="habit_details">Detalii obicei</string>
     <string name="delete_habit">Șterge</string>
     <string name="delete_habit_confirmation">Ștergi obiceiul?</string>
     <string name="delete_habit_confirmation_message">Ștergi „%1$s” și toate stările zilelor înregistrate?</string>

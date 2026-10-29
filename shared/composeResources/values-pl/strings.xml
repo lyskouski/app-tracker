@@ -55,6 +55,7 @@
     <string name="status_over_100_percent">100+%</string>
     <string name="day_state_save_failed">Nie udało się zaktualizować stanu dnia: %1$s</string>
     <string name="edit_habit">Edytuj nawyk</string>
+    <string name="habit_details">Szczegóły nawyku</string>
     <string name="delete_habit">Usuń</string>
     <string name="delete_habit_confirmation">Usunąć nawyk?</string>
     <string name="delete_habit_confirmation_message">Usunąć „%1$s” i wszystkie zapisane stany dni?</string>

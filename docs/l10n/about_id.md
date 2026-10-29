@@ -40,8 +40,8 @@ tertinggal.
   - Target angka, mis. 10000 langkah: hari menyimpan nilai yang dicapai, penyelesaian = nilai / target
 - Kalender Kebiasaan (halaman utama)
   - Tiga tampilan, diganti dengan tab di atas (pilihan terakhir diingat): Hari ini, Mingguan, dan Keseluruhan
-  - Hari ini: kebiasaan hari ini dalam daftar, yang selesai dan dilewati ada di bawah; geser ke kanan menandai kebiasaan selesai (target numerik meminta nilainya), geser ke kiri melewatinya, ketuk membuka status hari, tekan lama mengedit kebiasaan
-  - Mingguan: kartu per kebiasaan dengan hari aktif dan tandanya untuk minggu ini; tekan lama pada kartu mengedit kebiasaan
+  - Hari ini: kebiasaan hari ini dalam daftar, yang selesai dan dilewati ada di bawah; geser ke kanan menandai kebiasaan selesai (target numerik meminta nilainya), geser ke kiri melewatinya, ketuk membuka status hari, ketuk ikon mengedit kebiasaan, tekan lama membuka detailnya
+  - Mingguan: kartu per kebiasaan dengan hari aktif dan tandanya untuk minggu ini; ketuk kartu membuka status hari ini, ketuk ikon mengedit kebiasaan, tekan lama pada kartu membuka detailnya
   - Keseluruhan: Kebiasaan (kolom) per hari (baris): 66 hari terakhir ditambah 5 hari mendatang
   - Kemajuan harian per kebiasaan: `·` dimulai, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` lebih dari 100%
   - Sel juga dapat ditandai sebagai dilewati ("—"); tekan lama pada sel untuk menghapus statusnya

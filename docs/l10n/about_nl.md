@@ -38,8 +38,8 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Numeriek doel, bijv. 10000 stappen: een dag bewaart de behaalde waarde, voltooiing = waarde / doel
 - Gewoontekalender (hoofdpagina)
   - Drie weergaven, te wisselen met de tabbladen bovenaan (de gekozen weergave wordt onthouden): Vandaag, Week en Totaal
-  - Vandaag: de gewoontes van vandaag als lijst, voltooide en overgeslagen staan eronder; naar rechts vegen markeert een gewoonte als klaar (een numeriek doel vraagt om de waarde), naar links vegen slaat haar over, tikken opent de dagstatus, lang drukken bewerkt de gewoonte
-  - Week: een kaart per gewoonte met haar actieve dagen en markeringen van de huidige week; lang drukken op de kaart bewerkt de gewoonte
+  - Vandaag: de gewoontes van vandaag als lijst, voltooide en overgeslagen staan eronder; naar rechts vegen markeert een gewoonte als klaar (een numeriek doel vraagt om de waarde), naar links vegen slaat haar over, tikken opent de dagstatus, tikken op het pictogram bewerkt de gewoonte, lang drukken opent haar details
+  - Week: een kaart per gewoonte met haar actieve dagen en markeringen van de huidige week; tikken op de kaart opent de dagstatus van vandaag, tikken op het pictogram bewerkt de gewoonte, lang drukken op de kaart opent haar details
   - Totaal: Gewoontes (kolommen) per dag (rijen): de afgelopen 66 dagen plus de komende 5
   - Dagvoortgang per gewoonte: `·` begonnen, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` meer dan 100%
   - Een cel kan ook als overgeslagen ("—") worden gemarkeerd; lang drukken op een cel verwijdert de status
