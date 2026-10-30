@@ -131,7 +131,7 @@ one is left behind.
 - Errors and loading states are announced without moving the focus.
 - Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu` or `Shift` + `F10` 
   replaces a long press; the `Overall` table scrolls by arrows, `Page Up` / `Page Down`, and 
-  `Home` / `End`.
+  `Home` / `End`, while `Tab` goes through its habit headers and the current day only.
 - Shortcuts (focused buttons and text fields keep their own keys):
   - `Ctrl` (`Cmd` on macOS) + `N`: the `(+)` button of the screen — a new habit, calendar 
     event, goal, or Pomodoro;

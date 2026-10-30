@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,7 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathMeasure
 import androidx.compose.ui.graphics.compositeOver
@@ -334,6 +338,24 @@ fun CalendarTable(
             )
         }
 
+        /*
+         * Brings a focused cell into the view (WCAG 2.4.7); a null [row] or [column] keeps its axis.
+         */
+        fun scrollToCell(row: Int?, column: Int?) {
+            fun reveal(scroll: Float, start: Float, size: Float, viewport: Float): Float =
+                min(max(scroll, start + size - viewport), start)
+            scrollOffset = Offset(
+                x = column
+                    ?.let { reveal(currentScrollOffset.x, it * cellWidthPx, cellWidthPx, bodyWidthPx) }
+                    ?.coerceIn(0f, maxScrollX)
+                    ?: currentScrollOffset.x,
+                y = row
+                    ?.let { reveal(currentScrollOffset.y, it * cellHeightPx, cellHeightPx, bodyHeightPx) }
+                    ?.coerceIn(0f, maxScrollY)
+                    ?: currentScrollOffset.y,
+            )
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -512,6 +534,7 @@ fun CalendarTable(
                     today = today,
                     weekStartDates = weekStartDates,
                     completenessType = completenessType,
+                    onCellFocused = ::scrollToCell,
                 )
             }
 
@@ -552,6 +575,7 @@ fun CalendarTable(
                     showTitles = isHorizontal,
                     onHabitClick = onHabitClick,
                     onHabitLongClick = onHabitLongClick,
+                    onColumnFocused = { scrollToCell(row = null, column = it) },
                 )
             }
 
@@ -594,6 +618,7 @@ fun CalendarTable(
                     weekStartDates = weekStartDates,
                     dateFormat = dateFormat,
                     onDateClick = onDateClick,
+                    onRowFocused = { scrollToCell(row = it, column = null) },
                 )
             }
 
@@ -728,6 +753,7 @@ private fun CalendarHeaderViewport(
     showTitles: Boolean,
     onHabitClick: (Habit) -> Unit,
     onHabitLongClick: (Habit) -> Unit,
+    onColumnFocused: (Int) -> Unit,
 ) {
     val firstVisibleColumn =
         floor(
@@ -768,28 +794,32 @@ private fun CalendarHeaderViewport(
                     applicationColor(habit.color) ?: currentColorScheme().onSurface
                 }
 
-                CalendarTableCell(
-                    text = if (icon == null) "?" else "",
-                    width = with(LocalDensity.current) {
-                        cellWidthPx.toDp()
-                    },
-                    height = headerHeight,
-                    background =
-                        currentColorScheme().surfaceVariant,
-                    icon = icon,
-                    iconTint = iconTint,
-                    textColor = iconTint,
-                    contentDescription = habit.title,
-                    title = if (showTitles) habit.title else null,
-                    modifier = Modifier
-                        .actionable(
-                            onClick = { onHabitClick(habit) },
-                            onClickLabel = stringResource(Res.string.edit_habit),
-                            onLongClick = { onHabitLongClick(habit) },
-                            onLongClickLabel = stringResource(Res.string.habit_details),
-                        )
-                        .clearAndSetSemantics { contentDescription = habit.title },
-                )
+                // Keyed: the focused cell stays the same while the table scrolls.
+                key(habit.id) {
+                    CalendarTableCell(
+                        text = if (icon == null) "?" else "",
+                        width = with(LocalDensity.current) {
+                            cellWidthPx.toDp()
+                        },
+                        height = headerHeight,
+                        background =
+                            currentColorScheme().surfaceVariant,
+                        icon = icon,
+                        iconTint = iconTint,
+                        textColor = iconTint,
+                        contentDescription = habit.title,
+                        title = if (showTitles) habit.title else null,
+                        modifier = Modifier
+                            .onFocusChanged { if (it.isFocused) onColumnFocused(column) }
+                            .actionable(
+                                onClick = { onHabitClick(habit) },
+                                onClickLabel = stringResource(Res.string.edit_habit),
+                                onLongClick = { onHabitLongClick(habit) },
+                                onLongClickLabel = stringResource(Res.string.habit_details),
+                            )
+                            .clearAndSetSemantics { contentDescription = habit.title },
+                    )
+                }
             }
         },
     ) { measurables, constraints ->
@@ -860,6 +890,7 @@ private fun CalendarFirstColumnViewport(
     weekStartDates: Set<String>,
     dateFormat: DateFormat,
     onDateClick: (String) -> Unit,
+    onRowFocused: (Int) -> Unit,
 ) {
     val monthNames = stringArrayResource(Res.array.months_short)
     val skipLabel = stringResource(Res.string.skip)
@@ -890,35 +921,41 @@ private fun CalendarFirstColumnViewport(
         (lastVisibleRow + 2)
             .coerceAtMost(dates.size)
 
+    val rows = composedRows(startRow, endRow, dates, today)
+
     Layout(
         content = {
-            for (
-                row in startRow until endRow
-            ) {
+            for (row in rows) {
                 val dateText = dateFormat.format(dates[row], monthNames)
                 val isToday = dates[row] == today
-                CalendarTableCell(
-                    text = dateText,
-                    width = firstColumnWidth,
-                    height = with(LocalDensity.current) {
-                        cellHeightPx.toDp()
-                    },
-                    background = currentColorScheme().surface,
-                    // Same as the day names of the "Weekly" view.
-                    textColor = if (isToday) currentColorScheme().primary else currentColorScheme().onSurface,
-                    fontWeight = if (isToday) FontWeight.Bold else null,
-                    highlight = todayHighlight(
-                        isToday = isToday,
-                        left = true,
-                        right = habits.isEmpty(),
-                    ).then(weekStartLine(dates[row] in weekStartDates)),
-                    modifier = Modifier
-                        .clickable(onClickLabel = skipLabel) { onDateClick(dates[row]) }
-                        .clearAndSetSemantics {
-                            contentDescription = listOfNotNull(dateText, todayLabel.takeIf { isToday })
-                                .joinToString(", ")
+                // Keyed: the focused cell stays the same while the table scrolls.
+                key(dates[row]) {
+                    CalendarTableCell(
+                        text = dateText,
+                        width = firstColumnWidth,
+                        height = with(LocalDensity.current) {
+                            cellHeightPx.toDp()
                         },
-                )
+                        background = currentColorScheme().surface,
+                        // Same as the day names of the "Weekly" view.
+                        textColor = if (isToday) currentColorScheme().primary else currentColorScheme().onSurface,
+                        fontWeight = if (isToday) FontWeight.Bold else null,
+                        highlight = todayHighlight(
+                            isToday = isToday,
+                            left = true,
+                            right = habits.isEmpty(),
+                        ).then(weekStartLine(dates[row] in weekStartDates)),
+                        modifier = Modifier
+                            // Tab goes through the current day only.
+                            .focusProperties { canFocus = isToday }
+                            .onFocusChanged { if (it.isFocused) onRowFocused(row) }
+                            .clickable(onClickLabel = skipLabel) { onDateClick(dates[row]) }
+                            .clearAndSetSemantics {
+                                contentDescription = listOfNotNull(dateText, todayLabel.takeIf { isToday })
+                                    .joinToString(", ")
+                            },
+                    )
+                }
             }
         },
     ) { measurables, constraints ->
@@ -946,7 +983,7 @@ private fun CalendarFirstColumnViewport(
             placeables.forEachIndexed { index, placeable ->
 
                 val row =
-                    startRow + index
+                    rows[index]
 
                 val y =
                     row * cellHeight -
@@ -995,6 +1032,7 @@ private fun CalendarBodyViewport(
     today: String?,
     weekStartDates: Set<String>,
     completenessType: CompletenessType,
+    onCellFocused: (row: Int, column: Int) -> Unit,
 ) {
     /*
      * X = habits / columns.
@@ -1054,8 +1092,7 @@ private fun CalendarBodyViewport(
     val columnCount =
         endColumn - startColumn
 
-    val rowCount =
-        endRow - startRow
+    val rows = composedRows(startRow, endRow, dates, today)
 
     val labels = CellLabels(
         today = stringResource(Res.string.today),
@@ -1069,9 +1106,7 @@ private fun CalendarBodyViewport(
     Layout(
         content = {
 
-            for (
-                row in startRow until endRow
-            ) {
+            for (row in rows) {
                 val date =
                     dates[row]
 
@@ -1111,55 +1146,61 @@ private fun CalendarBodyViewport(
                         labels.today.takeIf { date == today },
                     ).filter { it.isNotBlank() }.joinToString(", ")
 
-                    CalendarTableCell(
-                        text = value,
-                        textColor = applicationColor(habit.color)
-                            ?.takeIf { completenessType == CompletenessType.COLORS }
-                            ?: currentColorScheme().onSurface,
-                        completenessType = completenessType,
-                        width = with(LocalDensity.current) {
-                            cellWidthPx.toDp()
-                        },
-                        height = with(LocalDensity.current) {
-                            cellHeightPx.toDp()
-                        },
-                        background = backgroundColor,
-                        topLabel = streak,
-                        bottomLabel = unit,
-                        highlight = todayHighlight(
-                            isToday = date == today,
-                            left = false,
-                            right = column == habits.lastIndex,
-                        ).then(weekStartLine(date in weekStartDates)),
-                        modifier = Modifier
-                            .actionable(
-                                enabled = !habit.isArchived,
-                                onClick = {
-                                    onDayStateClick(
-                                        DayState(
-                                            habitId = habit.id,
-                                            date = date,
-                                            mark = status,
-                                        ),
-                                    )
-                                },
-                                onClickLabel = labels.edit,
-                                // Only a stored mark can be deleted.
-                                onLongClick = marks[key]?.let { mark ->
-                                    {
-                                        onDayStateLongClick(
+                    // Keyed: the focused cell stays the same while the table scrolls.
+                    key(habit.id, date) {
+                        CalendarTableCell(
+                            text = value,
+                            textColor = applicationColor(habit.color)
+                                ?.takeIf { completenessType == CompletenessType.COLORS }
+                                ?: currentColorScheme().onSurface,
+                            completenessType = completenessType,
+                            width = with(LocalDensity.current) {
+                                cellWidthPx.toDp()
+                            },
+                            height = with(LocalDensity.current) {
+                                cellHeightPx.toDp()
+                            },
+                            background = backgroundColor,
+                            topLabel = streak,
+                            bottomLabel = unit,
+                            highlight = todayHighlight(
+                                isToday = date == today,
+                                left = false,
+                                right = column == habits.lastIndex,
+                            ).then(weekStartLine(date in weekStartDates)),
+                            modifier = Modifier
+                                // Tab goes through the current day only; other days are reached by pointer.
+                                .focusProperties { canFocus = date == today }
+                                .onFocusChanged { if (it.isFocused) onCellFocused(row, column) }
+                                .actionable(
+                                    enabled = !habit.isArchived,
+                                    onClick = {
+                                        onDayStateClick(
                                             DayState(
                                                 habitId = habit.id,
                                                 date = date,
-                                                mark = mark,
+                                                mark = status,
                                             ),
                                         )
-                                    }
-                                },
-                                onLongClickLabel = labels.delete,
-                            )
-                            .clearAndSetSemantics { contentDescription = description },
-                    )
+                                    },
+                                    onClickLabel = labels.edit,
+                                    // Only a stored mark can be deleted.
+                                    onLongClick = marks[key]?.let { mark ->
+                                        {
+                                            onDayStateLongClick(
+                                                DayState(
+                                                    habitId = habit.id,
+                                                    date = date,
+                                                    mark = mark,
+                                                ),
+                                            )
+                                        }
+                                    },
+                                    onLongClickLabel = labels.delete,
+                                )
+                                .clearAndSetSemantics { contentDescription = description },
+                        )
+                    }
                 }
             }
         },
@@ -1188,12 +1229,7 @@ private fun CalendarBodyViewport(
 
             var index = 0
 
-            for (
-                rowOffset in 0 until rowCount
-            ) {
-                val row =
-                    startRow + rowOffset
-
+            for (row in rows) {
                 val y =
                     row * cellHeight -
                         scrollY.roundToInt()
@@ -1215,6 +1251,19 @@ private fun CalendarBodyViewport(
                 }
             }
         }
+    }
+}
+
+/*
+ * Rows to compose: the visible ones with the overscan, and the current day,
+ * so that it keeps the keyboard focus and stays reachable by Tab while scrolled away.
+ */
+private fun composedRows(startRow: Int, endRow: Int, dates: List<String>, today: String?): List<Int> {
+    val todayRow = dates.indexOf(today)
+    return if (todayRow < 0 || todayRow in startRow until endRow) {
+        (startRow until endRow).toList()
+    } else {
+        (startRow until endRow) + todayRow
     }
 }
 
@@ -1320,8 +1369,13 @@ internal fun CalendarTableCell(
     val textColor = textColor.readableOn(opaqueBackground)
     @Suppress("NAME_SHADOWING")
     val iconTint = iconTint.readableOn(opaqueBackground, GRAPHICS_CONTRAST)
+    // Drawn over the background, which hides the focus indication of the click (WCAG 2.4.7).
+    var isFocused by remember { mutableStateOf(false) }
+    val focusColor = currentColorScheme().primary
     Box(
-        modifier = modifier
+        modifier = Modifier
+            .onFocusChanged { isFocused = it.isFocused }
+            .then(modifier)
             .width(width)
             .height(height)
             .background(background)
@@ -1330,7 +1384,19 @@ internal fun CalendarTableCell(
                 color =
                     currentColorScheme().outlineVariant,
             )
-            .then(highlight),
+            .then(highlight)
+            .drawWithContent {
+                drawContent()
+                if (isFocused) {
+                    val stroke = 2.dp.toPx()
+                    drawRect(
+                        focusColor,
+                        topLeft = Offset(stroke / 2, stroke / 2),
+                        size = Size(size.width - stroke, size.height - stroke),
+                        style = Stroke(width = stroke),
+                    )
+                }
+            },
         contentAlignment = Alignment.Center,
     ) {
         val mark: @Composable (TextStyle) -> Unit = { style ->

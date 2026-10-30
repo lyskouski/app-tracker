@@ -73,6 +73,6 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
 - Gebruikerservaring
   - Responsief en adaptief ontwerp
   - Scrollen via aanraking of met de muis: `Scroll Wheel` voor dagen, `Shift` + `Scroll Wheel` voor gewoontes
-  - Toetsenbord: pijltjes, `Page Up` / `Page Down`, `Home` / `End` scrollen door de tabel; `Menu` / `Shift` + `F10` vervangt lang indrukken
+  - Toetsenbord: pijltjes, `Page Up` / `Page Down`, `Home` / `End` scrollen door de tabel; `Menu` / `Shift` + `F10` vervangt lang indrukken; `Tab` gaat alleen door de gewoonten en de huidige dag, de cel met focus krijgt een rand en wordt in beeld gescrold
   - Sneltoetsen: `Ctrl` + `N` voegt een gewoonte toe (een afspraak, een doel, een Pomodoro); `Alt` + `1` … `0` opent de status van vandaag van de 1e … 10e gewoonte; `Enter` bevestigt een venster (100% voor een dagstatus), `Delete` slaat een dagstatus over of verwijdert een item, `Esc` sluit een venster
   - Toegankelijkheid (WCAG 2.1): elke actie heeft een naam voor schermlezers, leesbaar contrast in beide thema's, tekst schaalt mee met de systeemlettergrootte
