@@ -74,4 +74,5 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Responsive & Adaptive Design
   - Scroll by touch, or by mouse: `Scroll Wheel` for days, `Shift` + `Scroll Wheel` for habits
   - Keyboard: arrows, `Page Up` / `Page Down`, `Home` / `End` scroll the table; `Menu` / `Shift` + `F10` replaces a long press
+  - Shortcuts: `Ctrl` + `N` adds a habit (an event, a goal, a Pomodoro); `Alt` + `1` … `0` opens today's state of the 1st … 10th habit; `Enter` applies a popup (100% for a day state), `Delete` skips a day state or deletes an item, `Esc` closes a popup
   - Accessibility (WCAG 2.1): every action is named for screen readers, readable contrast in both themes, text scales with the system font size

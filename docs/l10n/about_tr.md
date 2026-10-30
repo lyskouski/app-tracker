@@ -74,4 +74,5 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Duyarlı ve Uyarlanabilir Tasarım
   - Dokunarak veya fareyle kaydırma: günler için `Scroll Wheel`, alışkanlıklar için `Shift` + `Scroll Wheel`
   - Klavye: ok tuşları, `Page Up` / `Page Down`, `Home` / `End` tabloyu kaydırır; `Menu` / `Shift` + `F10` uzun basmanın yerini alır
+  - Kısayollar: `Ctrl` + `N` alışkanlık ekler (etkinlik, hedef, Pomodoro); `Alt` + `1` … `0` 1. … 10. alışkanlığın bugünkü durumunu açar; `Enter` pencereyi onaylar (gün durumu için %100), `Delete` gün durumunu atlar veya öğeyi siler, `Esc` pencereyi kapatır
   - Erişilebilirlik (WCAG 2.1): ekran okuyucular için her eylemin adı, her iki temada okunabilir kontrast, sistem yazı tipi boyutuyla ölçeklenen metin

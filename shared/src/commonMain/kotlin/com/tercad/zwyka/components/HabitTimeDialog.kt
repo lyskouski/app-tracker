@@ -98,6 +98,7 @@ import com.tercad.zwyka.widgets.SegmentedSelector
 import com.tercad.zwyka.widgets.SelectButton
 import com.tercad.zwyka.widgets.SwitchRow
 import com.tercad.zwyka.widgets.chosen
+import com.tercad.zwyka.widgets.popupShortcuts
 
 private enum class HabitTimeInterval(val minutes: Int?, val label: StringResource) {
     MIN_30(30, Res.string.interval_30_min),
@@ -184,8 +185,33 @@ fun HabitTimeDialog(
     val canSave = !isSaving && (habitId != null || intentTitle.isNotBlank()) &&
         isRangeValid && activeDays != 0
 
+    fun save() {
+        val id = habitId
+        val owner = if (id != null) {
+            HabitTimeOwner.OfHabit(id)
+        } else {
+            HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
+        }
+        if (timeStart != null && timeEnd != null) {
+            onSave(
+                HabitTimeDraft(
+                    owner = owner,
+                    timeStart = timeStart,
+                    timeEnd = timeEnd,
+                    note = note.trim().ifEmpty { null },
+                    activeDays = activeDays,
+                    notify = notify,
+                ),
+            )
+        }
+    }
+
     AlertDialog(
         onDismissRequest = { if (!isSaving) onDismiss() },
+        modifier = Modifier.popupShortcuts(
+            onEnter = ::save.takeIf { canSave },
+            onDelete = onDelete?.takeIf { habitTime != null && !isSaving },
+        ),
         title = {
             Text(
                 stringResource(
@@ -362,26 +388,7 @@ fun HabitTimeDialog(
                     }
                 }
                 TextButton(
-                    onClick = {
-                        val id = habitId
-                        val owner = if (id != null) {
-                            HabitTimeOwner.OfHabit(id)
-                        } else {
-                            HabitTimeOwner.OfIntent(intentId, intentTitle.trim())
-                        }
-                        if (timeStart != null && timeEnd != null) {
-                            onSave(
-                                HabitTimeDraft(
-                                    owner = owner,
-                                    timeStart = timeStart,
-                                    timeEnd = timeEnd,
-                                    note = note.trim().ifEmpty { null },
-                                    activeDays = activeDays,
-                                    notify = notify,
-                                ),
-                            )
-                        }
-                    },
+                    onClick = ::save,
                     enabled = canSave,
                 ) {
                     Text(stringResource(Res.string.save))

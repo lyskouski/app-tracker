@@ -74,4 +74,5 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Design responsiv și adaptiv
   - Derulare prin atingere sau cu mouse-ul: `Scroll Wheel` pentru zile, `Shift` + `Scroll Wheel` pentru obiceiuri
   - Tastatură: săgețile, `Page Up` / `Page Down`, `Home` / `End` derulează tabelul; `Menu` / `Shift` + `F10` înlocuiește apăsarea lungă
+  - Comenzi rapide: `Ctrl` + `N` adaugă un obicei (un eveniment, un obiectiv, un Pomodoro); `Alt` + `1` … `0` deschide starea de azi a obiceiului 1 … 10; `Enter` confirmă o fereastră (100% pentru o stare a zilei), `Delete` omite o stare a zilei sau șterge un element, `Esc` închide o fereastră
   - Accesibilitate (WCAG 2.1): fiecare acțiune are nume pentru cititoarele de ecran, contrast lizibil în ambele teme, textul urmează dimensiunea fontului de sistem

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
+import com.tercad.zwyka.core.model.DONE_MARK
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
@@ -54,6 +55,7 @@ import com.tercad.zwyka.resources.status
 import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.ChoiceButton
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.popupShortcuts
 import org.jetbrains.compose.resources.stringArrayResource
 
 @Composable
@@ -76,11 +78,21 @@ fun DayStateDialog(
         mutableStateOf(TextFieldValue(text, selection = TextRange(0, text.length)))
     }
     val parsedValue = parseNumericValue(value.text)?.takeIf { it >= 0 }
+    // Enter completes the day: the typed value, or the target (100%) when none is typed.
+    val enteredMark = if (habit.hasNumericTarget) {
+        (if (value.text.isBlank()) habit.targetValue else parsedValue)?.let(::formatNumericValue)
+    } else {
+        DONE_MARK
+    }
 
     AlertDialog(
         onDismissRequest = {
             if (!isSaving) onDismiss()
         },
+        modifier = Modifier.popupShortcuts(
+            onEnter = enteredMark?.takeIf { !isSaving }?.let { mark -> { onStatusChange(mark) } },
+            onDelete = { onStatusChange(INACTIVE_MARK) }.takeIf { !isSaving },
+        ),
         title = { Text(stringResource(Res.string.edit_day_state)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {

@@ -34,6 +34,7 @@ import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
+import com.tercad.zwyka.widgets.ShortcutsHost
 
 @Composable
 fun App(
@@ -85,7 +86,9 @@ fun App(
                         listOf(home)
                     }
                 }
-                Navigator(screens = screens)
+                ShortcutsHost {
+                    Navigator(screens = screens)
+                }
             }
         }
     }

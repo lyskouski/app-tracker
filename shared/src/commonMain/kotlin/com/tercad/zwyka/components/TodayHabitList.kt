@@ -50,6 +50,7 @@ import org.jetbrains.compose.resources.stringResource
 import kotlin.math.roundToInt
 
 import com.tercad.zwyka.core.model.CellKey
+import com.tercad.zwyka.core.model.DONE_MARK
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
@@ -77,8 +78,6 @@ import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.IconButton
 import com.tercad.zwyka.widgets.actionable
 import com.tercad.zwyka.widgets.readableOn
-
-private const val DONE_MARK = "X"
 
 /*
  * Habits of [today] as a list: not done first, then done and skipped below a divider.

@@ -75,4 +75,5 @@ indietro.
   - Design responsivo e adattivo
   - Scorrimento al tocco o con il mouse: `Scroll Wheel` per i giorni, `Shift` + `Scroll Wheel` per le abitudini
   - Tastiera: le frecce, `Page Up` / `Page Down`, `Home` / `End` scorrono la tabella; `Menu` / `Shift` + `F10` sostituisce la pressione prolungata
+  - Scorciatoie: `Ctrl` + `N` aggiunge un'abitudine (un evento, un obiettivo, un Pomodoro); `Alt` + `1` … `0` apre lo stato di oggi della 1ª … 10ª abitudine; `Enter` conferma una finestra (100% per uno stato del giorno), `Delete` salta uno stato del giorno o elimina un elemento, `Esc` chiude una finestra
   - Accessibilità (WCAG 2.1): ogni azione ha un nome per gli screen reader, contrasto leggibile in entrambi i temi, il testo segue la dimensione del carattere di sistema

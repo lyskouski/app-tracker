@@ -45,6 +45,7 @@ import com.tercad.zwyka.resources.start
 import com.tercad.zwyka.widgets.SegmentedSelector
 import com.tercad.zwyka.widgets.SelectButton
 import com.tercad.zwyka.widgets.chosen
+import com.tercad.zwyka.widgets.popupShortcuts
 
 private enum class PomodoroInterval(val minutes: Int?, val label: StringResource) {
     MIN_15(15, Res.string.interval_15_min),
@@ -72,9 +73,11 @@ fun PomodoroDialog(
     var habitId by remember { mutableStateOf<Long?>(null) }
     var selectingHabit by remember { mutableStateOf(false) }
     val minutes = interval.minutes ?: customMinutes.trim().toIntOrNull()?.takeIf { it in 1..MAX_MINUTES }
+    val start = minutes?.let { value -> { onStart(value, habitId) } }
 
     AlertDialog(
         onDismissRequest = onDismiss,
+        modifier = Modifier.popupShortcuts(onEnter = start),
         title = { Text(stringResource(Res.string.add_pomodoro)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -145,8 +148,8 @@ fun PomodoroDialog(
                     Text(stringResource(Res.string.cancel))
                 }
                 TextButton(
-                    onClick = { minutes?.let { onStart(it, habitId) } },
-                    enabled = minutes != null,
+                    onClick = { start?.invoke() },
+                    enabled = start != null,
                 ) {
                     Text(stringResource(Res.string.start))
                 }

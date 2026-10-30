@@ -70,6 +70,9 @@ import com.tercad.zwyka.widgets.BottomBarButton
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.screenTitle
+import com.tercad.zwyka.widgets.ScreenShortcuts
+import com.tercad.zwyka.widgets.isNewItem
+import com.tercad.zwyka.widgets.popupShortcuts
 
 /** Details of one habit: description, target, completion of every day, streaks and goals. */
 class DetailedPage(
@@ -123,6 +126,17 @@ class DetailedPage(
             }
         }
 
+        fun addGoal() {
+            goalError = null
+            editingGoal = null
+            showGoalDialog = true
+        }
+
+        // Ctrl + N adds a goal.
+        ScreenShortcuts { event ->
+            event.isNewItem.also { if (it) addGoal() }
+        }
+
         Scaffold(
             modifier = Modifier.screenTitle(habit.title),
             containerColor = currentColorScheme().surface,
@@ -140,11 +154,7 @@ class DetailedPage(
             floatingActionButton = {
                 // Scaffold lifts the FAB 16.dp above the bar; shift it so it protrudes 12.dp.
                 FloatingActionButton(
-                    onClick = {
-                        goalError = null
-                        editingGoal = null
-                        showGoalDialog = true
-                    },
+                    onClick = ::addGoal,
                     modifier = Modifier.offset(y = 52.dp),
                     containerColor = currentColorScheme().inversePrimary,
                     contentColor = currentColorScheme().secondary,
@@ -250,16 +260,18 @@ class DetailedPage(
         }
 
         deletingGroup?.let { group ->
+            val delete = {
+                deletingGroup = null
+                changeGoals { services.goals.deleteGroup(habit.id, group.id) }
+            }
             AlertDialog(
                 onDismissRequest = { deletingGroup = null },
+                modifier = Modifier.popupShortcuts(onEnter = delete),
                 title = { Text(stringResource(Res.string.delete_goal_group_confirmation)) },
                 text = { Text(stringResource(Res.string.delete_goal_group_confirmation_message, group.title)) },
                 confirmButton = {
                     TextButton(
-                        onClick = {
-                            deletingGroup = null
-                            changeGoals { services.goals.deleteGroup(habit.id, group.id) }
-                        },
+                        onClick = delete,
                         colors = ButtonDefaults.textButtonColors(
                             contentColor = currentColorScheme().error,
                         ),

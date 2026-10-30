@@ -46,6 +46,7 @@ import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.goal_title
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.popupShortcuts
 
 /*
  * Creates a goal, or edits [goal] of [goalGroup]; its group is either typed (a new one) or chosen from [groups].
@@ -75,8 +76,19 @@ fun GoalEditorDialog(
     }
     val canSave = !isSaving && title.isNotBlank() && groupTitle.isNotBlank()
 
+    fun save() {
+        onSave(
+            GoalDraft(
+                title = title.trim(),
+                description = description.trim().ifEmpty { null },
+                groupTitle = groupTitle.trim(),
+            ),
+        )
+    }
+
     AlertDialog(
         onDismissRequest = { if (!isSaving) onDismiss() },
+        modifier = Modifier.popupShortcuts(onEnter = ::save.takeIf { canSave }),
         title = { Text(stringResource(if (goal == null) Res.string.add_goal else Res.string.edit_goal)) },
         text = {
             Column(
@@ -153,15 +165,7 @@ fun GoalEditorDialog(
         },
         confirmButton = {
             TextButton(
-                onClick = {
-                    onSave(
-                        GoalDraft(
-                            title = title.trim(),
-                            description = description.trim().ifEmpty { null },
-                            groupTitle = groupTitle.trim(),
-                        ),
-                    )
-                },
+                onClick = ::save,
                 enabled = canSave,
             ) {
                 Text(stringResource(Res.string.save))

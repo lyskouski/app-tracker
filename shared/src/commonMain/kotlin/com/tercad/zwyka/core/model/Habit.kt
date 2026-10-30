@@ -28,6 +28,7 @@ data class Habit(
 /** Bitmask of active weekdays: bit 0 is Monday ... bit 6 is Sunday. */
 const val ALL_DAYS = 0x7F
 const val INACTIVE_MARK = "—"
+const val DONE_MARK = "X"
 
 val Habit.hasNumericTarget: Boolean
     get() = targetValue != null

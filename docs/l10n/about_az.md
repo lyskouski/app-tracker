@@ -74,4 +74,5 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Responsiv və adaptiv dizayn
   - Toxunuşla və ya siçanla sürüşdürmə: günlər üçün `Scroll Wheel`, vərdişlər üçün `Shift` + `Scroll Wheel`
   - Klaviatura: oxlar, `Page Up` / `Page Down`, `Home` / `End` cədvəli sürüşdürür; `Menu` / `Shift` + `F10` uzun basmanı əvəz edir
+  - Qısayollar: `Ctrl` + `N` vərdiş əlavə edir (hadisə, məqsəd, Pomodoro); `Alt` + `1` … `0` 1-ci … 10-cu vərdişin bugünkü vəziyyətini açır; `Enter` pəncərəni təsdiqləyir (gün vəziyyəti üçün 100%), `Delete` gün vəziyyətini ötürür və ya elementi silir, `Esc` pəncərəni bağlayır
   - Əlçatanlıq (WCAG 2.1): ekran oxuyucuları üçün hər əməliyyatın adı, hər iki temada oxunaqlı kontrast, sistem şrift ölçüsünə uyğunlaşan mətn

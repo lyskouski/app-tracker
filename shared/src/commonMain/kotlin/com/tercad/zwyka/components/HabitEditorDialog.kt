@@ -87,6 +87,7 @@ import com.tercad.zwyka.widgets.CheckboxRow
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.SwitchRow
 import com.tercad.zwyka.widgets.chosen
+import com.tercad.zwyka.widgets.popupShortcuts
 
 @Composable
 fun HabitEditorDialog(
@@ -132,11 +133,36 @@ fun HabitEditorDialog(
         else -> title.isNotBlank() && (!hasTarget || parsedTarget != null)
     }
     val noIconDescription = stringResource(Res.string.no_icon)
+    val canDelete = habit != null && onDelete != null && !selectingIcon && !selectingColor
+
+    fun confirm() {
+        when {
+            selectingIcon -> selectingIcon = false
+            selectingColor -> {
+                color = normalizedColor
+                selectingColor = false
+            }
+            else -> onSave(
+                title.trim(),
+                icon,
+                color,
+                remarks.trim().ifEmpty { null },
+                activeDays,
+                isArchived,
+                parsedTarget.takeIf { hasTarget },
+                targetType.trim().ifEmpty { null }.takeIf { hasTarget },
+            )
+        }
+    }
 
     AlertDialog(
         onDismissRequest = {
             if (!isSaving && !confirmingDelete) onDismiss()
         },
+        modifier = Modifier.popupShortcuts(
+            onEnter = ::confirm.takeIf { canSave },
+            onDelete = { confirmingDelete = true }.takeIf { canDelete && !isSaving },
+        ),
         title = {
             Text(
                 stringResource(
@@ -438,7 +464,7 @@ fun HabitEditorDialog(
                     ) {
                         Text(stringResource(Res.string.cancel))
                     }
-                    if (habit != null && onDelete != null && !selectingIcon && !selectingColor) {
+                    if (canDelete) {
                         TextButton(
                             onClick = { confirmingDelete = true },
                             enabled = !isSaving,
@@ -451,25 +477,7 @@ fun HabitEditorDialog(
                     }
                 }
                 TextButton(
-                    onClick = {
-                        when {
-                            selectingIcon -> selectingIcon = false
-                            selectingColor -> {
-                                color = normalizedColor
-                                selectingColor = false
-                            }
-                            else -> onSave(
-                                title.trim(),
-                                icon,
-                                color,
-                                remarks.trim().ifEmpty { null },
-                                activeDays,
-                                isArchived,
-                                parsedTarget.takeIf { hasTarget },
-                                targetType.trim().ifEmpty { null }.takeIf { hasTarget },
-                            )
-                        }
-                    },
+                    onClick = ::confirm,
                     enabled = canSave,
                 ) {
                     Text(
@@ -483,16 +491,18 @@ fun HabitEditorDialog(
     )
 
     if (confirmingDelete && habit != null && onDelete != null) {
+        val delete = {
+            confirmingDelete = false
+            onDelete()
+        }
         AlertDialog(
             onDismissRequest = { confirmingDelete = false },
+            modifier = Modifier.popupShortcuts(onEnter = delete.takeIf { !isSaving }),
             title = { Text(stringResource(Res.string.delete_habit_confirmation)) },
             text = { Text(stringResource(Res.string.delete_habit_confirmation_message, habit.title)) },
             confirmButton = {
                 TextButton(
-                    onClick = {
-                        confirmingDelete = false
-                        onDelete()
-                    },
+                    onClick = delete,
                     enabled = !isSaving,
                     colors = ButtonDefaults.textButtonColors(
                         contentColor = currentColorScheme().error,

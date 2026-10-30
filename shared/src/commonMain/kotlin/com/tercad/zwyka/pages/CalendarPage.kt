@@ -107,6 +107,8 @@ import com.tercad.zwyka.widgets.BottomBarButton
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.StatusMessage
 import com.tercad.zwyka.widgets.screenTitle
+import com.tercad.zwyka.widgets.ScreenShortcuts
+import com.tercad.zwyka.widgets.isNewItem
 
 /** Snap of a click on an empty slot, minutes. */
 private const val SLOT_MINUTES = 30
@@ -158,6 +160,18 @@ private fun CalendarPageContent(
         }
     }
 
+    fun addHabitTime() {
+        val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+        val start = if (selectedDate == today) ((now.hour + 1) * 60).coerceAtMost(23 * 60) else 9 * 60
+        saveError = null
+        editing = HabitTimeEditing(null, start)
+    }
+
+    // Ctrl + N adds a calendar event.
+    ScreenShortcuts { event ->
+        event.isNewItem.also { if (it) addHabitTime() }
+    }
+
     Scaffold(
         modifier = Modifier.screenTitle(stringResource(Res.string.calendar)),
         containerColor = currentColorScheme().surface,
@@ -189,12 +203,7 @@ private fun CalendarPageContent(
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {
-                    val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-                    val start = if (selectedDate == today) ((now.hour + 1) * 60).coerceAtMost(23 * 60) else 9 * 60
-                    saveError = null
-                    editing = HabitTimeEditing(null, start)
-                },
+                onClick = ::addHabitTime,
                 modifier = Modifier.offset(y = 52.dp),
                 containerColor = currentColorScheme().inversePrimary,
                 contentColor = currentColorScheme().secondary,

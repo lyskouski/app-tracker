@@ -105,6 +105,8 @@ import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.StatusMessage
 import com.tercad.zwyka.widgets.readableOn
 import com.tercad.zwyka.widgets.screenTitle
+import com.tercad.zwyka.widgets.ScreenShortcuts
+import com.tercad.zwyka.widgets.isNewItem
 
 /** Number of upcoming events listed under the clock. */
 private const val NEXT_EVENTS = 5
@@ -137,6 +139,11 @@ class TimerPage(
                 dateTime = currentDateTime()
                 delay(1000)
             }
+        }
+
+        // Ctrl + N starts a Pomodoro.
+        ScreenShortcuts { event ->
+            event.isNewItem.also { if (it) showPomodoroDialog = true }
         }
 
         Scaffold(

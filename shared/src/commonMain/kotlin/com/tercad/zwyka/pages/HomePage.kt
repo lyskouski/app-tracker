@@ -45,6 +45,7 @@ import com.tercad.zwyka.core.model.CellKey
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.isBeforeCreation
+import com.tercad.zwyka.core.progress.isProgressMark
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
@@ -80,7 +81,11 @@ import com.tercad.zwyka.state.AppSettingsStore
 import com.tercad.zwyka.widgets.BottomBar
 import com.tercad.zwyka.widgets.BottomBarButton
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.ScreenShortcuts
 import com.tercad.zwyka.widgets.StatusMessage
+import com.tercad.zwyka.widgets.altDigitIndex
+import com.tercad.zwyka.widgets.isNewItem
+import com.tercad.zwyka.widgets.popupShortcuts
 import com.tercad.zwyka.widgets.screenTitle
 
 class HomePage(
@@ -185,6 +190,33 @@ private fun HomePageContent(
                 }
             }
 
+            fun addHabit() {
+                editingHabit = null
+                habitError = null
+                showHabitDialog = true
+            }
+
+            // Ctrl + N adds a habit, Alt + 1 ... Alt + 0 open today's state of the 1st ... 10th habit (by columns).
+            ScreenShortcuts { event ->
+                if (event.isNewItem) {
+                    addHabit()
+                    return@ScreenShortcuts true
+                }
+                val habit = event.altDigitIndex
+                    ?.let { index -> sortedHabits.filterNot { it.isArchived }.getOrNull(index) }
+                    ?: return@ScreenShortcuts false
+                val date = today.toString()
+                dayStateSaveError = null
+                selectedDayState = DayState(
+                    habitId = habit.id,
+                    date = date,
+                    mark = marks[CellKey(habitId = habit.id, date = date)]
+                        ?.takeIf { isProgressMark(habit, it) }
+                        ?: "·",
+                )
+                true
+            }
+
             Scaffold(
                 modifier = Modifier.screenTitle(stringResource(Res.string.app_name)),
                 topBar = {
@@ -217,11 +249,7 @@ private fun HomePageContent(
                 floatingActionButton = {
                     // Scaffold lifts the FAB 16.dp above the bar; shift it so it protrudes 12.dp.
                     FloatingActionButton(
-                        onClick = {
-                            editingHabit = null
-                            habitError = null
-                            showHabitDialog = true
-                        },
+                        onClick = ::addHabit,
                         modifier = Modifier.offset(y = 52.dp),
                         containerColor = currentColorScheme().inversePrimary,
                         contentColor = currentColorScheme().secondary,
@@ -442,31 +470,34 @@ private fun HomePageContent(
             }
 
             deletingDayState?.let { deleting ->
+                fun delete() {
+                    deletingDayState = null
+                    coroutineScope.launch {
+                        try {
+                            services.dayStates.deleteMark(deleting.habitId, deleting.date)
+                            state = current.copy(
+                                // Reloaded: `updatedAt` of the habit has changed.
+                                habits = services.habits.getAll(),
+                                dayStates = current.dayStates.filterNot {
+                                    it.habitId == deleting.habitId &&
+                                        it.date == deleting.date
+                                },
+                            )
+                        } catch (error: CancellationException) {
+                            throw error
+                        } catch (error: Exception) {
+                            state = HomePageState.Failed(error.message)
+                        }
+                    }
+                }
+
                 AlertDialog(
                     onDismissRequest = { deletingDayState = null },
+                    modifier = Modifier.popupShortcuts(onEnter = ::delete),
                     title = { Text(stringResource(Res.string.delete_day_state_confirmation)) },
                     confirmButton = {
                         TextButton(
-                            onClick = {
-                                deletingDayState = null
-                                coroutineScope.launch {
-                                    try {
-                                        services.dayStates.deleteMark(deleting.habitId, deleting.date)
-                                        state = current.copy(
-                                            // Reloaded: `updatedAt` of the habit has changed.
-                                            habits = services.habits.getAll(),
-                                            dayStates = current.dayStates.filterNot {
-                                                it.habitId == deleting.habitId &&
-                                                    it.date == deleting.date
-                                            },
-                                        )
-                                    } catch (error: CancellationException) {
-                                        throw error
-                                    } catch (error: Exception) {
-                                        state = HomePageState.Failed(error.message)
-                                    }
-                                }
-                            },
+                            onClick = ::delete,
                             colors = ButtonDefaults.textButtonColors(
                                 contentColor = currentColorScheme().error,
                             ),
