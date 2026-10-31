@@ -120,9 +120,11 @@ compose.resources {
 }
 
 val screenshotTests = "com.tercad.zwyka.screenshots.*"
+val stressTests = "com.tercad.zwyka.stress.*"
 
 tasks.named<Test>("jvmTest") {
     filter.excludeTestsMatching(screenshotTests)
+    filter.excludeTestsMatching(stressTests)
     filter.isFailOnNoMatchingTests = false
 }
 
@@ -145,6 +147,24 @@ tasks.register<Test>("jvmScreenshots") {
     )
     outputs.upToDateWhen { false }
     testLogging.showStandardStreams = true
+}
+
+// ./gradlew :androidApp:installDebug :shared:androidStressTest -PSTRESS_HABITS=60 -PSTRESS_YEARS=3
+tasks.register<Test>("androidStressTest") {
+    description = "Stress test of the Android app on the connected device or emulator (see AndroidStressTest)."
+    group = "verification"
+    val jvmTest = tasks.named<Test>("jvmTest").get()
+    testClassesDirs = jvmTest.testClassesDirs
+    classpath = jvmTest.classpath
+    filter.includeTestsMatching(stressTests)
+    // -P properties are forwarded to the test.
+    providers.gradlePropertiesPrefixedBy("STRESS_").get().forEach { (name, value) -> systemProperty(name, value) }
+    providers.gradleProperty("ADB").orNull?.let { systemProperty("ADB", it) }
+    systemProperty("STRESS_OUTPUT", layout.buildDirectory.dir("stress").get().asFile.path)
+    outputs.upToDateWhen { false }
+    testLogging.showStandardStreams = true
+    testLogging.events("passed", "failed", "skipped")
+    testLogging.exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 }
 
 sqldelight {

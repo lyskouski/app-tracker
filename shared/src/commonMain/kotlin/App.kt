@@ -16,6 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.navigator.LocalNavigatorSaver
 import cafe.adriel.voyager.navigator.Navigator
 import kotlinx.coroutines.CancellationException
 import com.tercad.zwyka.defines.LocalAppLocale
@@ -34,8 +36,10 @@ import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
+import com.tercad.zwyka.pages.inMemoryNavigatorSaver
 import com.tercad.zwyka.widgets.ShortcutsHost
 
+@OptIn(ExperimentalVoyagerApi::class)
 @Composable
 fun App(
     database: Database? = null,
@@ -87,7 +91,9 @@ fun App(
                     }
                 }
                 ShortcutsHost {
-                    Navigator(screens = screens)
+                    CompositionLocalProvider(LocalNavigatorSaver provides inMemoryNavigatorSaver()) {
+                        Navigator(screens = screens)
+                    }
                 }
             }
         }

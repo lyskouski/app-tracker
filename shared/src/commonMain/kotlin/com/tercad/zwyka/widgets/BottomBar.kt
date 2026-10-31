@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -41,8 +42,10 @@ fun BottomBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = BottomBarHeight)
-            .background(currentColorScheme().primaryContainer),
+            .background(currentColorScheme().primaryContainer)
+            // Above the system navigation (Android draws the app edge-to-edge)
+            .navigationBarsPadding()
+            .heightIn(min = BottomBarHeight),
         content = content,
     )
 }
