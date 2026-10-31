@@ -116,9 +116,10 @@ class AndroidStressTest {
         val events = intSetting("STRESS_MONKEY_EVENTS", 5_000)
         val seed = intSetting("STRESS_MONKEY_SEED", 52)
         shell("logcat -c -b crash", check = false)
+        // Not responding apps (the system UI as well, on a slow emulator) do not stop the run, they are counted.
+        // A native crash of the app is reported as its crash; the native crashes of system daemons are not ours.
         val output = shell(
-            "monkey -p $PACKAGE -s $seed --throttle 30 --pct-syskeys 0 --pct-appswitch 2 " +
-                "--monitor-native-crashes -v $events",
+            "monkey -p $PACKAGE -s $seed --throttle 30 --pct-syskeys 0 --pct-appswitch 2 --ignore-timeouts -v $events",
             check = false,
             timeoutSeconds = 3_600,
         )
@@ -126,9 +127,13 @@ class AndroidStressTest {
         val injected = Regex("""Events injected: (\d+)""").find(output)?.groupValues?.get(1)?.toInt() ?: 0
         val crash = Regex("""// Long Msg: (.*)""").find(output)?.groupValues?.get(1)
             ?: "System appears to have crashed".takeIf { it in output }
+        val anrs = Regex("""// NOT RESPONDING: (\S+)""").findAll(output).map { it.groupValues[1] }.toList()
         log("events: $injected of $events (seed $seed), log: $logFile")
+        log("not responding: ${anrs.groupingBy { it }.eachCount().ifEmpty { "none" }}")
         assertEquals(null, crash, "Crash, see $logFile")
-        assertTrue("// NOT RESPONDING" !in output && "ANR in" !in output, "ANR, see $logFile")
+        // An emulator rendering by the CPU may need -PSTRESS_MAX_ANRS above 0.
+        val appAnrs = anrs.count { it == PACKAGE }
+        assertTrue(appAnrs <= intSetting("STRESS_MAX_ANRS", 0), "$appAnrs ANRs of the app, see $logFile")
         // An aborted run proves nothing about the events it has not sent.
         assertEquals(events, injected, "Monkey aborted, see $logFile")
     }
@@ -336,8 +341,9 @@ class AndroidStressTest {
             return load
         }
 
+        /** Output of [command] on the device; its errors are included: monkey reports crashes and ANRs there. */
         private fun shell(command: String, check: Boolean = true, timeoutSeconds: Long = 600): String =
-            String(adbBytes("shell", command, check = check, timeoutSeconds = timeoutSeconds))
+            String(adbBytes("shell", command, check = check, timeoutSeconds = timeoutSeconds, withErrors = true))
 
         private fun adbOrNull(vararg args: String): String? =
             runCatching { String(adbBytes(*args, timeoutSeconds = 30)) }.getOrNull()
@@ -347,8 +353,12 @@ class AndroidStressTest {
             input: ByteArray? = null,
             check: Boolean = true,
             timeoutSeconds: Long = 600,
+            withErrors: Boolean = false,
         ): ByteArray {
-            val process = ProcessBuilder(adb(), *args).redirectError(ProcessBuilder.Redirect.DISCARD).start()
+            // Without errors for the binary output, e.g. the pulled database.
+            val process = ProcessBuilder(adb(), *args)
+                .apply { if (withErrors) redirectErrorStream(true) else redirectError(ProcessBuilder.Redirect.DISCARD) }
+                .start()
             process.outputStream.use { stream -> input?.let(stream::write) }
             val output = process.inputStream.readBytes()
             if (!process.waitFor(timeoutSeconds, TimeUnit.SECONDS)) {
