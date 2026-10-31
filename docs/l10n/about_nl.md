@@ -26,6 +26,8 @@ Nederlands (NL) |
 
 ---
 
+Motto: Kleine stappen. Zichtbare vooruitgang. Blijvende gewoontes.
+
 **Zwyka** -- open-source, cross-platform app om gewoontes bij te houden, zonder advertenties en beperkingen.
 Het doel van de oplossing is een app voor het bijhouden van gewoontes te maken die intuïtief, efficiënt en inclusief is.
 Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterblijft.

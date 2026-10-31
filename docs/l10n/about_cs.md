@@ -26,6 +26,8 @@
 
 ---
 
+Motto: Malé krůčky. Viditelný pokrok. Trvalé návyky.
+
 **Zwyka** -- otevřená multiplatformní aplikace pro sledování návyků bez reklam a omezení.
 Cílem řešení je vytvořit aplikaci pro sledování návyků, která je intuitivní, efektivní a inkluzivní.
 Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, že nikdo nezůstane pozadu.

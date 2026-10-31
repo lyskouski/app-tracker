@@ -26,6 +26,8 @@ Polski (PL) |
 
 ---
 
+Motto: Małe kroki. Widoczne postępy. Trwałe nawyki.
+
 **Zwyka** -- otwartoźródłowa, wieloplatformowa aplikacja do śledzenia nawyków bez reklam i ograniczeń.
 Celem rozwiązania jest stworzenie aplikacji do śledzenia nawyków, która jest intuicyjna, wydajna i inkluzywna.
 Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to, by nikt nie został pominięty.

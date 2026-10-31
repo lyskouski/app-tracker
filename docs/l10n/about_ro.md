@@ -26,6 +26,8 @@ Limba română (RO) |
 
 ---
 
+Moto: Pași mici. Progres vizibil. Obiceiuri durabile.
+
 **Zwyka** -- aplicație open-source, multiplatformă, pentru urmărirea obiceiurilor, fără reclame și fără limitări.
 Scopul soluției este de a crea o aplicație de urmărire a obiceiurilor intuitivă, eficientă și incluzivă.
 Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort, asigurându-se că nimeni nu rămâne în urmă.

@@ -26,6 +26,8 @@ Français (FR) |
 
 ---
 
+Devise : Petits pas. Progrès visibles. Habitudes durables.
+
 **Zwyka** -- application open source et multiplateforme de suivi des habitudes, sans publicités ni limitations.
 L’objectif de la solution est de créer une application de suivi des habitudes intuitive, efficace et inclusive,
 qui permette aux utilisateurs de gérer leurs habitudes sans effort tout en veillant à ce que personne ne soit laissé

@@ -26,6 +26,8 @@ Deutsch (DE) |
 
 ---
 
+Motto: Kleine Schritte. Sichtbarer Fortschritt. Bleibende Gewohnheiten.
+
 **Zwyka** -- quelloffene, plattformübergreifende Anwendung zum Verfolgen von Gewohnheiten ohne Werbung und
 Einschränkungen. Ziel der Lösung ist es, eine Gewohnheits-Tracker-App zu schaffen, die intuitiv, effizient und inklusiv
 ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und sorgt dafür, dass niemand zurückgelassen wird.

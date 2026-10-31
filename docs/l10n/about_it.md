@@ -26,6 +26,8 @@ Italiano (IT) |
 
 ---
 
+Motto: Piccoli passi. Progressi visibili. Abitudini durature.
+
 **Zwyka** -- applicazione open source e multipiattaforma per monitorare le abitudini, senza pubblicità né limitazioni.
 L’obiettivo della soluzione è creare un’applicazione per il monitoraggio delle abitudini intuitiva, efficiente e inclusiva,
 che consenta agli utenti di gestire le proprie abitudini senza sforzo, garantendo al contempo che nessuno venga lasciato

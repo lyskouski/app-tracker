@@ -26,6 +26,8 @@ Azərbaycan dili (AZ) |
 
 ---
 
+Şüar: Kiçik addımlar. Görünən irəliləyiş. Davamlı vərdişlər.
+
 **Zwyka** -- reklamsız və məhdudiyyətsiz, açıq mənbəli, çoxplatformalı vərdiş izləmə tətbiqi.
 Həllin məqsədi intuitiv, səmərəli və inklüziv vərdiş izləmə tətbiqi yaratmaqdır.
 O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və heç kimin geridə qalmamasını təmin edir.

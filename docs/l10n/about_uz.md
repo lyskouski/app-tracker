@@ -26,6 +26,8 @@ Oʻzbekcha (UZ) |
 
 ---
 
+Shior: Kichik qadamlar. Koʻrinadigan natija. Barqaror odatlar.
+
 **Zwyka** -- reklamasiz va cheklovlarsiz, ochiq kodli, krossplatforma odatlarni kuzatish ilovasi.
 Loyihaning maqsadi — intuitiv, samarali va inklyuziv odatlarni kuzatish ilovasini yaratish.
 U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hech kimni chetda qoldirmaydi.

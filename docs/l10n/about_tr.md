@@ -26,6 +26,8 @@ Türkçe (TR) |
 
 ---
 
+Slogan: Küçük adımlar. Görünür ilerleme. Kalıcı alışkanlıklar.
+
 **Zwyka** -- reklamsız ve sınırlamasız, açık kaynaklı, çapraz platform bir alışkanlık takip uygulamasıdır.
 Çözümün amacı, sezgisel, verimli ve kapsayıcı bir alışkanlık takip uygulaması oluşturmaktır.
 Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını zahmetsizce yönetmelerini sağlar.

@@ -26,6 +26,8 @@ English (EN-US) |
 
 ---
 
+Moto: Small steps. Visible progress. Lasting habits.
+
 **Zwyka** -- open-source cross-platform habits tracking application without Ads and limitations.
 The goal of the solution is to create a habits tracking application that is intuitive, efficient, and inclusive.
 That empowers users to effortlessly manage their habits while ensuring that no one is left behind.

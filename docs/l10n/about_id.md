@@ -26,6 +26,8 @@ Bahasa Indonesia (ID) |
 
 ---
 
+Moto: Langkah kecil. Kemajuan nyata. Kebiasaan yang bertahan.
+
 **Zwyka** -- aplikasi pelacak kebiasaan sumber terbuka dan lintas platform tanpa iklan dan tanpa batasan.
 Tujuan solusi ini adalah menciptakan aplikasi pelacak kebiasaan yang intuitif, efisien, dan inklusif,
 yang memungkinkan pengguna mengelola kebiasaan mereka dengan mudah sambil memastikan tidak ada seorang pun yang

@@ -26,6 +26,8 @@ Português Brasileiro (PT-BR) |
 
 ---
 
+Lema: Pequenos passos. Progresso visível. Hábitos duradouros.
+
 **Zwyka** -- aplicativo multiplataforma de código aberto para acompanhamento de hábitos, sem anúncios e sem limitações.
 O objetivo da solução é criar um aplicativo de acompanhamento de hábitos intuitivo, eficiente e inclusivo.
 Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo que ninguém fique para trás.
