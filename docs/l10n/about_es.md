@@ -73,6 +73,6 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
 - Experiencia de usuario
   - Diseño responsivo y adaptativo
   - Desplazamiento táctil o con el ratón: `Scroll Wheel` para los días, `Shift` + `Scroll Wheel` para los hábitos
-  - Teclado: las flechas, `Page Up` / `Page Down`, `Home` / `End` desplazan la tabla; `Menu` / `Shift` + `F10` sustituye la pulsación larga; `Tab` recorre solo los hábitos y el día actual, la celda enfocada se resalta con un borde y se desplaza a la vista
-  - Atajos: `Ctrl` + `N` añade un hábito (un evento, una meta, un Pomodoro); `Alt` + `1` … `0` abre el estado de hoy del 1.º … 10.º hábito; `Enter` confirma una ventana (100 % para un estado del día), `Delete` omite un estado del día o elimina un elemento, `Esc` cierra una ventana
+  - Teclado: las flechas, `Page Up` / `Page Down`, `Home` / `End` desplazan la tabla; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` sustituye la pulsación larga; `Tab` recorre solo los hábitos y el día actual, la celda enfocada se resalta con un borde y se desplaza a la vista
+  - Atajos: `Ctrl` + `N` añade un hábito (un evento, una meta, un Pomodoro); `Alt` + `1` … `0` abre el estado de hoy del 1.º … 10.º hábito; `Enter` confirma una ventana (100 % para un estado del día), `Delete` omite un estado del día o elimina un elemento, `Esc` cierra una ventana, `Backspace` vuelve atrás
   - Accesibilidad (WCAG 2.1): todas las acciones tienen nombre para los lectores de pantalla, contraste legible en ambos temas, el texto se adapta al tamaño de fuente del sistema

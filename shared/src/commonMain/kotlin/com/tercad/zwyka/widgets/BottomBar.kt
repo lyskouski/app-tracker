@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -17,8 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.defines.currentColorScheme
+import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.back
 
 /** Height of [BottomBar] at the default font size. */
 private val BottomBarHeight = 46.dp
@@ -62,4 +67,23 @@ fun BottomBarButton(
         Icon(imageVector = icon, contentDescription = null)
         Text(text = text, modifier = Modifier.padding(start = 8.dp))
     }
+}
+
+/*
+ * "Back" button of [BottomBar], also pressed by Backspace (WCAG 2.1.1).
+ */
+@Composable
+fun BottomBarBackButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    ScreenShortcuts { event ->
+        event.isBack.also { if (it) onClick() }
+    }
+    BottomBarButton(
+        icon = Icons.AutoMirrored.Filled.ArrowBack,
+        text = stringResource(Res.string.back),
+        onClick = onClick,
+        modifier = modifier,
+    )
 }

@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -50,13 +48,12 @@ import com.tercad.zwyka.defines.DateFormat
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
-import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.metrics
 import com.tercad.zwyka.resources.metrics_completion
 import com.tercad.zwyka.resources.metrics_days
 import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.widgets.BottomBar
-import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.BottomBarBackButton
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.screenTitle
 
@@ -78,9 +75,7 @@ class MetricsPage(
             containerColor = currentColorScheme().surface,
             bottomBar = {
                 BottomBar {
-                    BottomBarButton(
-                        icon = Icons.AutoMirrored.Filled.ArrowBack,
-                        text = stringResource(Res.string.back),
+                    BottomBarBackButton(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
                     )

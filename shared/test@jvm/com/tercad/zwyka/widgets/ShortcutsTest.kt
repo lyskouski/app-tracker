@@ -8,6 +8,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,6 +29,8 @@ import androidx.compose.ui.test.requestFocus
 import androidx.compose.ui.test.runComposeUiTest
 import androidx.compose.ui.test.withKeyDown
 import androidx.compose.ui.platform.testTag
+import com.tercad.zwyka.defines.ColorSchemeLight
+import com.tercad.zwyka.defines.LocalColorScheme
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -125,5 +128,63 @@ class ShortcutsTest {
         // A focused button is clicked by Enter.
         onNodeWithText("Save").requestFocus().performKeyInput { pressKey(Key.Enter) }
         assertEquals("button", log.last())
+    }
+
+    @Test
+    fun ctrlEnterLongClicksFocusedElementOnly() = runComposeUiTest {
+        var log by mutableStateOf(listOf<String>())
+        setContent {
+            ShortcutsHost {
+                Column(modifier = Modifier.actionable(onClick = null, onLongClick = { log = log + "card" })) {
+                    Text(
+                        text = "Item",
+                        modifier = Modifier.actionable(
+                            onClick = { log = log + "click" },
+                            onLongClick = { log = log + "long" },
+                        ),
+                    )
+                    TextButton(onClick = { log = log + "button" }) { Text("Plain") }
+                }
+            }
+        }
+
+        onNodeWithText("Item").requestFocus().performKeyInput { withKeyDown(Key.CtrlLeft) { pressKey(Key.Enter) } }
+        assertEquals(listOf("long"), log)
+        onNodeWithText("Item").performKeyInput { pressKey(Key.Enter) }
+        assertEquals(listOf("long", "click"), log)
+
+        // An element without a long click keeps Ctrl + Enter: the card is not long clicked.
+        onNodeWithText("Plain").requestFocus().performKeyInput { withKeyDown(Key.CtrlLeft) { pressKey(Key.Enter) } }
+        assertEquals(false, "card" in log)
+    }
+
+    @Test
+    fun backspacePressesBackButton() = runComposeUiTest {
+        var back = 0
+        setContent {
+            ShortcutsHost {
+                Column {
+                    var text by remember { mutableStateOf("") }
+                    OutlinedTextField(value = text, onValueChange = { text = it }, modifier = Modifier.testTag("text"))
+                    CompositionLocalProvider(LocalColorScheme provides ColorSchemeLight) {
+                        BottomBar { BottomBarBackButton(onClick = { back++ }) }
+                    }
+                }
+            }
+        }
+
+        onRoot().performKeyInput { pressKey(Key.Backspace) }
+        assertEquals(1, back)
+        onRoot().performKeyInput { withKeyDown(Key.CtrlLeft) { pressKey(Key.Backspace) } }
+        assertEquals(1, back)
+
+        // A text field keeps Backspace, even when empty.
+        onNodeWithTag("text").performClick().performTextInput("a")
+        onNodeWithTag("text").performKeyInput {
+            pressKey(Key.Backspace)
+            pressKey(Key.Backspace)
+        }
+        onNodeWithTag("text").assertTextEquals("")
+        assertEquals(1, back)
     }
 }

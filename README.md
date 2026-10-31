@@ -129,9 +129,9 @@ one is left behind.
 - Toggles, tabs, status buttons, and goals announce whether they are selected or finished; 
   drop-down fields announce their label and the chosen value.
 - Errors and loading states are announced without moving the focus.
-- Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu` or `Shift` + `F10` 
-  replaces a long press; the `Overall` table scrolls by arrows, `Page Up` / `Page Down`, and 
-  `Home` / `End`, while `Tab` goes through its habit headers and the current day only.
+- Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu`, `Shift` + `F10`, or 
+  `Ctrl` (`Cmd` on macOS) + `Enter` replaces a long press; the `Overall` table scrolls by arrows, 
+  `Page Up` / `Page Down`, and `Home` / `End`, while `Tab` goes through its habit headers and the current day only.
 - Shortcuts (focused buttons and text fields keep their own keys):
   - `Ctrl` (`Cmd` on macOS) + `N`: the `(+)` button of the screen — a new habit, calendar 
     event, goal, or Pomodoro;
@@ -140,7 +140,8 @@ one is left behind.
   - `Enter` on a day state: 100% (or the typed value, the target when none is typed); on other 
     popups: apply or save (confirm on deletion warnings);
   - `Delete` on a day state: skip; on popups with "Delete": delete the item;
-  - `Esc`: close a popup.
+  - `Esc`: close a popup;
+  - `Backspace`: the `Back` button of the bottom bar.
 - Habit icons of the `Today` and `Weekly` views are buttons on a square of the habit color, with 
   a 48dp touch target, announced as "Edit habit" with the habit title.
 - Contrast: texts and controls are readable in both themes; habit colors used as text or icons 

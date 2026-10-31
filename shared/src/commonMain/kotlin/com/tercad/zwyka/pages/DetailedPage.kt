@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
@@ -54,7 +53,6 @@ import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_goal
-import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.current_streak
 import com.tercad.zwyka.resources.database_error_unknown
@@ -66,7 +64,7 @@ import com.tercad.zwyka.resources.habit_target
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.max_streak
 import com.tercad.zwyka.widgets.BottomBar
-import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.BottomBarBackButton
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.screenTitle
@@ -142,9 +140,7 @@ class DetailedPage(
             containerColor = currentColorScheme().surface,
             bottomBar = {
                 BottomBar {
-                    BottomBarButton(
-                        icon = Icons.AutoMirrored.Filled.ArrowBack,
-                        text = stringResource(Res.string.back),
+                    BottomBarBackButton(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
                     )

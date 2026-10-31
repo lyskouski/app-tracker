@@ -73,6 +73,6 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
 - Doświadczenie użytkownika
   - Responsywny i adaptacyjny projekt
   - Przewijanie dotykiem lub myszą: `Scroll Wheel` dla dni, `Shift` + `Scroll Wheel` dla nawyków
-  - Klawiatura: strzałki, `Page Up` / `Page Down`, `Home` / `End` przewijają tabelę; `Menu` / `Shift` + `F10` zastępuje długie naciśnięcie; `Tab` przechodzi tylko po nawykach i bieżącym dniu, komórka z fokusem jest obramowana i przewijana do widoku
-  - Skróty: `Ctrl` + `N` dodaje nawyk (wydarzenie, cel, Pomodoro); `Alt` + `1` … `0` otwiera dzisiejszy stan 1. … 10. nawyku; `Enter` zatwierdza okno (100% dla stanu dnia), `Delete` pomija stan dnia lub usuwa element, `Esc` zamyka okno
+  - Klawiatura: strzałki, `Page Up` / `Page Down`, `Home` / `End` przewijają tabelę; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` zastępuje długie naciśnięcie; `Tab` przechodzi tylko po nawykach i bieżącym dniu, komórka z fokusem jest obramowana i przewijana do widoku
+  - Skróty: `Ctrl` + `N` dodaje nawyk (wydarzenie, cel, Pomodoro); `Alt` + `1` … `0` otwiera dzisiejszy stan 1. … 10. nawyku; `Enter` zatwierdza okno (100% dla stanu dnia), `Delete` pomija stan dnia lub usuwa element, `Esc` zamyka okno, `Backspace` wraca
   - Dostępność (WCAG 2.1): nazwy wszystkich akcji dla czytników ekranu, czytelny kontrast w obu motywach, tekst skaluje się z systemowym rozmiarem czcionki

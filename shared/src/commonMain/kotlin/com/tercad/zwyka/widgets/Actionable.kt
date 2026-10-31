@@ -10,14 +10,23 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isAltPressed
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.isMetaPressed
 import androidx.compose.ui.input.key.isShiftPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
@@ -29,7 +38,8 @@ import androidx.compose.ui.semantics.semantics
  *
  * - screen readers announce both actions by their labels;
  * - the keyboard clicks with Enter / Space and long clicks with
- *   the context menu key or Shift + F10, as desktop applications do.
+ *   the context menu key or Shift + F10, as desktop applications do,
+ *   or with Ctrl + Enter (Cmd + Enter on macOS).
  *
  * Without [onClick] only the long click is handled, e.g. for a card
  * whose children have their own clicks.
@@ -44,11 +54,23 @@ fun Modifier.actionable(
     enabled: Boolean = true,
 ): Modifier {
     val longClickKeys = if (onLongClick != null && enabled) {
-        Modifier.onKeyEvent { event ->
-            val isContextMenu = event.key == Key.Menu ||
-                (event.key == Key.F10 && event.isShiftPressed)
-            if (isContextMenu && event.type == KeyEventType.KeyUp) onLongClick()
-            isContextMenu
+        Modifier.composed {
+            var isFocused by remember { mutableStateOf(false) }
+            Modifier
+                .onFocusChanged { isFocused = it.isFocused }
+                .onKeyEvent { event ->
+                    val isContextMenu = event.key == Key.Menu ||
+                        (event.key == Key.F10 && event.isShiftPressed)
+                    if (isContextMenu && event.type == KeyEventType.KeyUp) onLongClick()
+                    isContextMenu
+                }
+                // Previewed: the click takes Enter whatever modifier keys are pressed.
+                // Only for the element itself, not for its focused children.
+                .onPreviewKeyEvent { event ->
+                    val isCtrlEnter = isFocused && event.isCtrlEnter
+                    if (isCtrlEnter && event.type == KeyEventType.KeyUp) onLongClick()
+                    isCtrlEnter
+                }
         }
     } else {
         Modifier
@@ -77,3 +99,8 @@ fun Modifier.actionable(
             .indication(interactionSource, LocalIndication.current)
     }
 }
+
+/** Ctrl + Enter (Cmd + Enter on macOS), pressed or released. */
+private val KeyEvent.isCtrlEnter: Boolean
+    get() = (key == Key.Enter || key == Key.NumPadEnter) &&
+        (isCtrlPressed || isMetaPressed) && !isAltPressed && !isShiftPressed

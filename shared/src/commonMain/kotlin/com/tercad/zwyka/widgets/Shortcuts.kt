@@ -39,7 +39,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
  *
  * Keys reach the focused element first and then its parents, so a focused
  * element keeps its own keys: Enter clicks a button, a multi-line text field
- * types a new line, an editable text field deletes a character by Delete.
+ * types a new line, an editable text field deletes a character by Delete or Backspace.
  */
 
 /*
@@ -108,6 +108,11 @@ fun ScreenShortcuts(onKeyEvent: (KeyEvent) -> Boolean) {
 val KeyEvent.isNewItem: Boolean
     get() = type == KeyEventType.KeyDown && key == Key.N &&
         (isCtrlPressed || isMetaPressed) && !isAltPressed && !isShiftPressed
+
+/** Backspace: the "Back" button of the screen. */
+val KeyEvent.isBack: Boolean
+    get() = type == KeyEventType.KeyDown && key == Key.Backspace &&
+        !isCtrlPressed && !isMetaPressed && !isAltPressed && !isShiftPressed
 
 /** Alt + 1 ... Alt + 9, Alt + 0: index 0 ... 9, null for other keys. */
 val KeyEvent.altDigitIndex: Int?

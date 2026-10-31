@@ -73,6 +73,6 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
 - Benutzererlebnis
   - Responsives & adaptives Design
   - Scrollen per Touch oder mit der Maus: `Scroll Wheel` für Tage, `Shift` + `Scroll Wheel` für Gewohnheiten
-  - Tastatur: Pfeiltasten, `Page Up` / `Page Down`, `Home` / `End` scrollen die Tabelle; `Menu` / `Shift` + `F10` ersetzt das lange Drücken; `Tab` springt nur durch die Gewohnheiten und den aktuellen Tag, die fokussierte Zelle wird umrandet und in den sichtbaren Bereich gescrollt
-  - Tastenkürzel: `Ctrl` + `N` fügt eine Gewohnheit hinzu (einen Termin, ein Ziel, einen Pomodoro); `Alt` + `1` … `0` öffnet den heutigen Status der 1. … 10. Gewohnheit; `Enter` bestätigt ein Popup (100 % für einen Tagesstatus), `Delete` überspringt einen Tagesstatus oder löscht ein Element, `Esc` schließt ein Popup
+  - Tastatur: Pfeiltasten, `Page Up` / `Page Down`, `Home` / `End` scrollen die Tabelle; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` ersetzt das lange Drücken; `Tab` springt nur durch die Gewohnheiten und den aktuellen Tag, die fokussierte Zelle wird umrandet und in den sichtbaren Bereich gescrollt
+  - Tastenkürzel: `Ctrl` + `N` fügt eine Gewohnheit hinzu (einen Termin, ein Ziel, einen Pomodoro); `Alt` + `1` … `0` öffnet den heutigen Status der 1. … 10. Gewohnheit; `Enter` bestätigt ein Popup (100 % für einen Tagesstatus), `Delete` überspringt einen Tagesstatus oder löscht ein Element, `Esc` schließt ein Popup, `Backspace` geht zurück
   - Barrierefreiheit (WCAG 2.1): Bezeichnungen aller Aktionen für Screenreader, gut lesbarer Kontrast in beiden Themes, Text skaliert mit der Systemschriftgröße

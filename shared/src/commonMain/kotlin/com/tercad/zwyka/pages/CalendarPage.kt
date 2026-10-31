@@ -23,7 +23,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
@@ -88,7 +87,6 @@ import com.tercad.zwyka.defines.applicationColor
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_habit_time
-import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.calendar
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.days_short
@@ -103,6 +101,7 @@ import com.tercad.zwyka.resources.timer
 import com.tercad.zwyka.resources.today
 import com.tercad.zwyka.state.AppSettingsStore
 import com.tercad.zwyka.widgets.BottomBar
+import com.tercad.zwyka.widgets.BottomBarBackButton
 import com.tercad.zwyka.widgets.BottomBarButton
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.StatusMessage
@@ -186,9 +185,7 @@ private fun CalendarPageContent(
         },
         bottomBar = {
             BottomBar {
-                BottomBarButton(
-                    icon = Icons.AutoMirrored.Filled.ArrowBack,
-                    text = stringResource(Res.string.back),
+                BottomBarBackButton(
                     onClick = { navigator.pop() },
                     modifier = Modifier.align(Alignment.CenterStart),
                 )

@@ -24,7 +24,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.FabPosition
@@ -82,7 +81,6 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.rememberVibration
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.add_pomodoro
-import com.tercad.zwyka.resources.back
 import com.tercad.zwyka.resources.database_error_unknown
 import com.tercad.zwyka.resources.habits_load_failed
 import com.tercad.zwyka.resources.habits_loading
@@ -99,7 +97,7 @@ import com.tercad.zwyka.resources.timer_until_start
 import com.tercad.zwyka.resources.tomorrow
 import com.tercad.zwyka.state.AppSettingsStore
 import com.tercad.zwyka.widgets.BottomBar
-import com.tercad.zwyka.widgets.BottomBarButton
+import com.tercad.zwyka.widgets.BottomBarBackButton
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.StatusMessage
@@ -154,9 +152,7 @@ class TimerPage(
             containerColor = currentColorScheme().surface,
             bottomBar = {
                 BottomBar {
-                    BottomBarButton(
-                        icon = Icons.AutoMirrored.Filled.ArrowBack,
-                        text = stringResource(Res.string.back),
+                    BottomBarBackButton(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
                     )
