@@ -28,3 +28,5 @@ windows-msix/*.msix
 windows-msix/store
 offline-repository
 linux-flatpak/gradle-sources-*.json
+*.mp4
+*.kdenlive
