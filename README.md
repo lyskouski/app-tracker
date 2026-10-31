@@ -7,6 +7,8 @@ solution is to create a habits tracking application that is intuitive, efficient
 inclusive. That empowers users to effortlessly manage their habits while ensuring that no 
 one is left behind.
 
+[![Watch the video](./docs/marketing-flow/presentation_video.png)](https://youtu.be/Mv6XR7YtqVQ)
+
 | Type                     | Alpha Version         | Pre-Release                   | Release                       |
 | ------------------------ | ----------------------| ----------------------------- | ----------------------------- |
 | ![Android](./docs/design-flow/icons/android.png) Android (Google Play)    | [zwyka_Android.aab](https://github.com/lyskouski/app-tracker/releases/latest) | [Google Play](https://play.google.com/store/apps/details?id=com.tercad.zwyka) | Pending [![Google Play](./docs/design-flow/badges/google.png)](https://play.google.com/store/apps/details?id=com.tercad.zwyka) |
