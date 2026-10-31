@@ -15,16 +15,20 @@ done
 
 rm -rf AppDir
 mkdir -p AppDir/usr/lib/zwyka AppDir/usr/bin \
-    AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/scalable/apps
+    AppDir/usr/share/applications AppDir/usr/share/icons/hicolor/scalable/apps \
+    AppDir/usr/share/icons/hicolor/256x256/apps
 tar -xzf "$tarball" -C AppDir/usr/lib/zwyka
 ln -s ../lib/zwyka/bin/zwyka AppDir/usr/bin/zwyka
 
 mv AppDir/usr/lib/zwyka/com.tercad.zwyka.desktop AppDir/usr/share/applications/
 mv AppDir/usr/lib/zwyka/com.tercad.zwyka.svg AppDir/usr/share/icons/hicolor/scalable/apps/
+# .DirIcon has to be a PNG (appimagetool rejects an SVG one).
+rsvg-convert -w 256 -h 256 AppDir/usr/share/icons/hicolor/scalable/apps/com.tercad.zwyka.svg \
+    -o AppDir/usr/share/icons/hicolor/256x256/apps/com.tercad.zwyka.png
 # appimagetool expects the desktop entry and the icon in the root as well.
 ln -s usr/share/applications/com.tercad.zwyka.desktop AppDir/com.tercad.zwyka.desktop
-ln -s usr/share/icons/hicolor/scalable/apps/com.tercad.zwyka.svg AppDir/com.tercad.zwyka.svg
-ln -s com.tercad.zwyka.svg AppDir/.DirIcon
+ln -s usr/share/icons/hicolor/256x256/apps/com.tercad.zwyka.png AppDir/com.tercad.zwyka.png
+ln -s com.tercad.zwyka.png AppDir/.DirIcon
 
 cat > AppDir/AppRun <<'EOF'
 #!/bin/sh

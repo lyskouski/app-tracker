@@ -227,7 +227,7 @@ jobs:
       - name: Build Linux AppImage
         run: |
           sudo apt-get update
-          sudo apt-get install -y libfuse2
+          sudo apt-get install -y libfuse2 librsvg2-bin
           sh build.sh -v "${{ needs.release.outputs.version }}"
         working-directory: linux-appimage
 
