@@ -44,7 +44,7 @@
         <li>Archive (deactivate) habits</li>
         <li>Import / Export of data</li>
         <li>Theme Mode: system, light, dark</li>
-        <li>Localizations: EN, AR, AZ, BE, CS, DE, ES, FA, FR, HI, ID, IT, JA, KA, KO, NL, PL, PT, RO, RU, TR, UK, UZ, ZH</li>
+        <li>Localization: 20+ languages</li>
         <li>Responsive and Adaptive Design</li>
     </ul>
     <p>
@@ -79,10 +79,10 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="{VERSION}" date="{DATE}">
+    <release version="0.4.0" date="2026-10-31">
       <description translatable="no">
         <ul>
-          <li>{CHANGE}</li>
+          <li>Visual mode: daily, weekly, overall</li>
         </ul>
       </description>
     </release>
