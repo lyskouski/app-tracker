@@ -161,4 +161,7 @@
     <string name="every_day">Elke dag</string>
     <string name="apply">Toepassen</string>
     <string name="done">Klaar</string>
+    <string name="automation_habit_not_found">Geen gewoonte “%1$s”</string>
+    <string name="automation_left_today">Vandaag nog: %1$s</string>
+    <string name="automation_all_done">Alle gewoonten van vandaag zijn gedaan</string>
 </resources>

@@ -161,4 +161,7 @@
     <string name="every_day">Jeden Tag</string>
     <string name="apply">Übernehmen</string>
     <string name="done">Erledigt</string>
+    <string name="automation_habit_not_found">Keine Gewohnheit „%1$s“</string>
+    <string name="automation_left_today">Heute offen: %1$s</string>
+    <string name="automation_all_done">Alle Gewohnheiten für heute sind erledigt</string>
 </resources>

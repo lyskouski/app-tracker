@@ -75,4 +75,5 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Dokunarak veya fareyle kaydırma: günler için `Scroll Wheel`, alışkanlıklar için `Shift` + `Scroll Wheel`
   - Klavye: ok tuşları, `Page Up` / `Page Down`, `Home` / `End` tabloyu kaydırır; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` uzun basmanın yerini alır; `Tab` yalnızca alışkanlıklar ve bugün arasında gezinir, odaktaki hücre çerçevelenir ve görünür alana kaydırılır
   - Kısayollar: `Ctrl` + `N` alışkanlık ekler (etkinlik, hedef, Pomodoro); `Alt` + `1` … `0` 1. … 10. alışkanlığın bugünkü durumunu açar; `Enter` pencereyi onaylar (gün durumu için %100), `Delete` gün durumunu atlar veya öğeyi siler, `Esc` pencereyi kapatır, `Backspace` geri döner
+  - Otomasyon: Siri Kestirmeleri (bir alışkanlığı tamamlama, ona ekleme veya atlama; bugün kalan alışkanlıklar) ve Tasker, Automate ya da `adb` için Android intent’leri; gösterilen ekran hemen güncellenir
   - Erişilebilirlik (WCAG 2.1): ekran okuyucular için her eylemin adı, her iki temada okunabilir kontrast, sistem yazı tipi boyutuyla ölçeklenen metin

@@ -161,4 +161,7 @@
     <string name="every_day">ყოველდღე</string>
     <string name="apply">გამოყენება</string>
     <string name="done">შესრულდა</string>
+    <string name="automation_habit_not_found">ჩვევა „%1$s“ არ არსებობს</string>
+    <string name="automation_left_today">დღეს დარჩა: %1$s</string>
+    <string name="automation_all_done">დღევანდელი ყველა ჩვევა შესრულებულია</string>
 </resources>

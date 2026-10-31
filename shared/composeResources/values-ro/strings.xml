@@ -161,4 +161,7 @@
     <string name="every_day">În fiecare zi</string>
     <string name="apply">Aplică</string>
     <string name="done">Gata</string>
+    <string name="automation_habit_not_found">Nu există obiceiul „%1$s”</string>
+    <string name="automation_left_today">Rămase azi: %1$s</string>
+    <string name="automation_all_done">Toate obiceiurile de azi sunt făcute</string>
 </resources>

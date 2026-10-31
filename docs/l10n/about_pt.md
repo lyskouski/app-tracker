@@ -75,4 +75,5 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Rolagem por toque ou com o mouse: `Scroll Wheel` para os dias, `Shift` + `Scroll Wheel` para os hábitos
   - Teclado: as setas, `Page Up` / `Page Down`, `Home` / `End` rolam a tabela; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` substitui o toque longo; `Tab` percorre apenas os hábitos e o dia atual, a célula em foco recebe um contorno e é rolada para a área visível
   - Atalhos: `Ctrl` + `N` adiciona um hábito (um evento, uma meta, um Pomodoro); `Alt` + `1` … `0` abre o estado de hoje do 1º … 10º hábito; `Enter` confirma uma janela (100% para um estado do dia), `Delete` pula um estado do dia ou exclui um item, `Esc` fecha uma janela, `Backspace` volta
+  - Automação: Atalhos da Siri (concluir, somar a um hábito ou pulá-lo; hábitos que faltam hoje) e intents do Android para Tasker, Automate ou `adb`; a tela exibida é atualizada na hora
   - Acessibilidade (WCAG 2.1): todas as ações têm nome para leitores de tela, contraste legível nos dois temas, o texto acompanha o tamanho da fonte do sistema

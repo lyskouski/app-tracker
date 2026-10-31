@@ -77,4 +77,5 @@ tertinggal.
   - Gulir dengan sentuhan, atau dengan mouse: `Scroll Wheel` untuk hari, `Shift` + `Scroll Wheel` untuk kebiasaan
   - Keyboard: tombol panah, `Page Up` / `Page Down`, `Home` / `End` menggulir tabel; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` menggantikan tekan lama; `Tab` hanya berpindah di antara kebiasaan dan hari ini, sel yang difokuskan diberi garis tepi dan digulir agar terlihat
   - Pintasan: `Ctrl` + `N` menambah kebiasaan (acara, tujuan, Pomodoro); `Alt` + `1` … `0` membuka status hari ini dari kebiasaan ke-1 … ke-10; `Enter` mengonfirmasi jendela (100% untuk status hari), `Delete` melewati status hari atau menghapus item, `Esc` menutup jendela, `Backspace` kembali
+  - Otomatisasi: Pintasan Siri (menyelesaikan, menambah, atau melewati kebiasaan; kebiasaan yang tersisa hari ini) dan intent Android untuk Tasker, Automate, atau `adb`; layar yang ditampilkan langsung diperbarui
   - Aksesibilitas (WCAG 2.1): setiap tindakan diberi nama untuk pembaca layar, kontras yang mudah dibaca di kedua tema, teks mengikuti ukuran font sistem

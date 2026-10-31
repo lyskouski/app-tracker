@@ -75,4 +75,5 @@
   - 通过触摸或鼠标滚动：`Scroll Wheel` 按天滚动，`Shift` + `Scroll Wheel` 按习惯滚动
   - 键盘：方向键、`Page Up` / `Page Down`, `Home` / `End` 滚动表格；`Menu` / `Shift` + `F10` / `Ctrl` + `Enter` 代替长按；`Tab` 仅在习惯和当天之间切换，获得焦点的单元格会显示边框并滚动到可见区域
   - 快捷键：`Ctrl` + `N` 添加习惯（事件、目标、番茄钟）；`Alt` + `1` … `0` 打开第 1 … 10 个习惯的今日状态；`Enter` 确认弹窗（日状态为 100%），`Delete` 跳过日状态或删除项目，`Esc` 关闭弹窗，`Backspace` 返回上一页
+  - 自动化：Siri 快捷指令（完成、累加或跳过习惯；今天剩余的习惯）以及供 Tasker、Automate 或 `adb` 使用的 Android Intent；当前显示的屏幕会立即更新
   - 无障碍（WCAG 2.1）：每个操作都有供读屏软件使用的名称，两种主题下对比度清晰易读，文字随系统字号缩放

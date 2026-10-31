@@ -16,9 +16,17 @@ struct ContentView: View {
 
 @main
 struct iosApp: App {
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+        }
+        // Habit titles spoken in the Siri phrases ("Complete Water in Zwyka"), after the habits are edited.
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active {
+                ZwykaShortcuts.updateAppShortcutParameters()
+            }
         }
     }
 }

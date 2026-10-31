@@ -46,6 +46,7 @@ import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.core.progress.isProgressMark
+import com.tercad.zwyka.core.service.DataChanges
 import com.tercad.zwyka.components.CalendarTable
 import com.tercad.zwyka.components.DayStateDialog
 import com.tercad.zwyka.components.HabitEditorDialog
@@ -151,6 +152,22 @@ private fun HomePageContent(
             throw error
         } catch (error: Exception) {
             state = HomePageState.Failed(error.message)
+        }
+    }
+
+    // Marks stored by Siri or an intent while the page is shown.
+    LaunchedEffect(services, today) {
+        DataChanges.events.collect {
+            if (state !is HomePageState.Loaded) return@collect
+            try {
+                val habits = services.habits.getAll()
+                val dayStates = services.dayStates.getRange(dates.first(), lastLoadedDate)
+                state = HomePageState.Loaded(habits, dayStates)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                state = HomePageState.Failed(error.message)
+            }
         }
     }
 

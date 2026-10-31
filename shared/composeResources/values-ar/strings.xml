@@ -161,4 +161,7 @@
     <string name="every_day">كل يوم</string>
     <string name="apply">تطبيق</string>
     <string name="done">تم</string>
+    <string name="automation_habit_not_found">لا توجد عادة «%1$s»</string>
+    <string name="automation_left_today">المتبقي اليوم: %1$s</string>
+    <string name="automation_all_done">أُنجزت كل العادات اليوم</string>
 </resources>

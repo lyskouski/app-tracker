@@ -75,4 +75,5 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Posouvání dotykem nebo myší: `Scroll Wheel` pro dny, `Shift` + `Scroll Wheel` pro návyky
   - Klávesnice: šipky, `Page Up` / `Page Down`, `Home` / `End` posouvají tabulku; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` nahrazuje dlouhé stisknutí; `Tab` prochází jen návyky a aktuální den, buňka s fokusem je orámována a posunuta do zobrazení
   - Klávesové zkratky: `Ctrl` + `N` přidá návyk (událost, cíl, Pomodoro); `Alt` + `1` … `0` otevře dnešní stav 1. … 10. návyku; `Enter` potvrdí okno (100 % pro stav dne), `Delete` přeskočí stav dne nebo smaže položku, `Esc` zavře okno, `Backspace` vrátí zpět
+  - Automatizace: Siri Shortcuts (splnit, přičíst k návyku nebo ho přeskočit; návyky zbývající na dnešek) a intenty Androidu pro Tasker, Automate nebo `adb`; zobrazená obrazovka se hned aktualizuje
   - Přístupnost (WCAG 2.1): popisky všech akcí pro čtečky obrazovky, čitelný kontrast v obou motivech, text se přizpůsobuje systémové velikosti písma

@@ -82,4 +82,5 @@ dependencies {
     implementation(project(":shared"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.sqldelight.android.driver)
+    implementation(libs.kotlinx.coroutines.core)
 }

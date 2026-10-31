@@ -161,4 +161,7 @@
     <string name="every_day">매일</string>
     <string name="apply">적용</string>
     <string name="done">완료</string>
+    <string name="automation_habit_not_found">“%1$s” 습관이 없습니다</string>
+    <string name="automation_left_today">오늘 남은 습관: %1$s</string>
+    <string name="automation_all_done">오늘의 습관을 모두 완료했습니다</string>
 </resources>

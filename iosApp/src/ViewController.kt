@@ -5,7 +5,8 @@ import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import com.tercad.zwyka.infrastructures.Database
 
-private val database by lazy {
+/** Database of the process, shared by the screens and the Siri Shortcuts. */
+internal val database by lazy {
     Database(NativeSqliteDriver(Database.Schema.synchronous(), "zwyka.db"))
 }
 

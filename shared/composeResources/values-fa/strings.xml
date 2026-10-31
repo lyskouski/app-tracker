@@ -161,4 +161,7 @@
     <string name="every_day">هر روز</string>
     <string name="apply">اعمال</string>
     <string name="done">انجام شد</string>
+    <string name="automation_habit_not_found">عادتی با نام «%1$s» نیست</string>
+    <string name="automation_left_today">باقی‌ماندهٔ امروز: %1$s</string>
+    <string name="automation_all_done">همهٔ عادت‌های امروز انجام شده‌اند</string>
 </resources>

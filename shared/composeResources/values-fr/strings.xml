@@ -161,4 +161,7 @@
     <string name="every_day">Chaque jour</string>
     <string name="apply">Appliquer</string>
     <string name="done">Fait</string>
+    <string name="automation_habit_not_found">Aucune habitude « %1$s »</string>
+    <string name="automation_left_today">Reste aujourd’hui : %1$s</string>
+    <string name="automation_all_done">Toutes les habitudes du jour sont faites</string>
 </resources>

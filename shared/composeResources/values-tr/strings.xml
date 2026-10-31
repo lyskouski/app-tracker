@@ -161,4 +161,7 @@
     <string name="every_day">Her gün</string>
     <string name="apply">Uygula</string>
     <string name="done">Tamam</string>
+    <string name="automation_habit_not_found">“%1$s” adlı alışkanlık yok</string>
+    <string name="automation_left_today">Bugün kalan: %1$s</string>
+    <string name="automation_all_done">Bugünün tüm alışkanlıkları tamamlandı</string>
 </resources>

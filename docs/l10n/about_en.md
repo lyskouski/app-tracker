@@ -75,4 +75,5 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Scroll by touch, or by mouse: `Scroll Wheel` for days, `Shift` + `Scroll Wheel` for habits
   - Keyboard: arrows, `Page Up` / `Page Down`, `Home` / `End` scroll the table; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` replaces a long press; `Tab` goes through the habits and the current day only, the focused cell is outlined and scrolled into view
   - Shortcuts: `Ctrl` + `N` adds a habit (an event, a goal, a Pomodoro); `Alt` + `1` … `0` opens today's state of the 1st … 10th habit; `Enter` applies a popup (100% for a day state), `Delete` skips a day state or deletes an item, `Esc` closes a popup, `Backspace` goes back
+  - Automation: Siri Shortcuts (complete, add to, or skip a habit; habits left today) and Android intents for Tasker, Automate, or `adb`; the shown screen updates at once
   - Accessibility (WCAG 2.1): every action is named for screen readers, readable contrast in both themes, text scales with the system font size

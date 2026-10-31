@@ -161,4 +161,7 @@
     <string name="every_day">每天</string>
     <string name="apply">套用</string>
     <string name="done">完成</string>
+    <string name="automation_habit_not_found">沒有習慣「%1$s」</string>
+    <string name="automation_left_today">今天剩餘：%1$s</string>
+    <string name="automation_all_done">今天的習慣已全部完成</string>
 </resources>

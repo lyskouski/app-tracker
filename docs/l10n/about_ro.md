@@ -75,4 +75,5 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Derulare prin atingere sau cu mouse-ul: `Scroll Wheel` pentru zile, `Shift` + `Scroll Wheel` pentru obiceiuri
   - Tastatură: săgețile, `Page Up` / `Page Down`, `Home` / `End` derulează tabelul; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` înlocuiește apăsarea lungă; `Tab` trece doar prin obiceiuri și ziua curentă, celula în focus este conturată și derulată în zona vizibilă
   - Comenzi rapide: `Ctrl` + `N` adaugă un obicei (un eveniment, un obiectiv, un Pomodoro); `Alt` + `1` … `0` deschide starea de azi a obiceiului 1 … 10; `Enter` confirmă o fereastră (100% pentru o stare a zilei), `Delete` omite o stare a zilei sau șterge un element, `Esc` închide o fereastră, `Backspace` revine înapoi
+  - Automatizare: Comenzi rapide Siri (finalizarea, adăugarea la un obicei sau sărirea lui; obiceiurile rămase azi) și intenturi Android pentru Tasker, Automate sau `adb`; ecranul afișat se actualizează imediat
   - Accesibilitate (WCAG 2.1): fiecare acțiune are nume pentru cititoarele de ecran, contrast lizibil în ambele teme, textul urmează dimensiunea fontului de sistem

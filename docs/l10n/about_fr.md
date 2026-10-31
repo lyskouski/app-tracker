@@ -76,4 +76,5 @@ de côté.
   - Défilement tactile ou à la souris : `Scroll Wheel` pour les jours, `Shift` + `Scroll Wheel` pour les habitudes
   - Clavier : les flèches, `Page Up` / `Page Down`, `Home` / `End` font défiler le tableau ; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` remplace l'appui long ; `Tab` ne parcourt que les habitudes et le jour actuel, la cellule active est encadrée et défilée jusqu'à être visible
   - Raccourcis : `Ctrl` + `N` ajoute une habitude (un événement, un objectif, un Pomodoro) ; `Alt` + `1` … `0` ouvre l'état du jour de la 1re … 10e habitude ; `Enter` valide une fenêtre (100 % pour un état du jour), `Delete` saute un état du jour ou supprime un élément, `Esc` ferme une fenêtre, `Backspace` revient en arrière
+  - Automatisation : Raccourcis Siri (terminer, compléter ou sauter une habitude ; habitudes restantes du jour) et intents Android pour Tasker, Automate ou `adb` ; l’écran affiché est mis à jour aussitôt
   - Accessibilité (WCAG 2.1) : chaque action est nommée pour les lecteurs d'écran, contraste lisible dans les deux thèmes, le texte suit la taille de police du système

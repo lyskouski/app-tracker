@@ -161,4 +161,7 @@
     <string name="every_day">Кожны дзень</string>
     <string name="apply">Ужыць</string>
     <string name="done">Зроблена</string>
+    <string name="automation_habit_not_found">Няма звычкі «%1$s»</string>
+    <string name="automation_left_today">Засталося сёння: %1$s</string>
+    <string name="automation_all_done">Усе звычкі на сёння выкананы</string>
 </resources>

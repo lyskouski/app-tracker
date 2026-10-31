@@ -161,4 +161,7 @@
     <string name="every_day">Har kuni</string>
     <string name="apply">Qoʻllash</string>
     <string name="done">Bajarildi</string>
+    <string name="automation_habit_not_found">“%1$s” odati yo‘q</string>
+    <string name="automation_left_today">Bugun qoldi: %1$s</string>
+    <string name="automation_all_done">Bugungi barcha odatlar bajarildi</string>
 </resources>

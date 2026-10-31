@@ -161,4 +161,7 @@
     <string name="every_day">हर दिन</string>
     <string name="apply">लागू करें</string>
     <string name="done">पूर्ण</string>
+    <string name="automation_habit_not_found">“%1$s” नाम की कोई आदत नहीं है</string>
+    <string name="automation_left_today">आज बाकी: %1$s</string>
+    <string name="automation_all_done">आज की सभी आदतें पूरी हो गईं</string>
 </resources>

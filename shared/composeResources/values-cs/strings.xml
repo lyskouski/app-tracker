@@ -161,4 +161,7 @@
     <string name="every_day">Každý den</string>
     <string name="apply">Použít</string>
     <string name="done">Hotovo</string>
+    <string name="automation_habit_not_found">Návyk „%1$s“ neexistuje</string>
+    <string name="automation_left_today">Dnes zbývá: %1$s</string>
+    <string name="automation_all_done">Všechny dnešní návyky jsou splněny</string>
 </resources>

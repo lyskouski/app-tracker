@@ -161,4 +161,7 @@
     <string name="every_day">Hər gün</string>
     <string name="apply">Tətbiq et</string>
     <string name="done">Hazırdır</string>
+    <string name="automation_habit_not_found">“%1$s” vərdişi yoxdur</string>
+    <string name="automation_left_today">Bu gün qalıb: %1$s</string>
+    <string name="automation_all_done">Bu günün bütün vərdişləri yerinə yetirilib</string>
 </resources>

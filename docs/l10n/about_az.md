@@ -75,4 +75,5 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Toxunuşla və ya siçanla sürüşdürmə: günlər üçün `Scroll Wheel`, vərdişlər üçün `Shift` + `Scroll Wheel`
   - Klaviatura: oxlar, `Page Up` / `Page Down`, `Home` / `End` cədvəli sürüşdürür; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` uzun basmanı əvəz edir; `Tab` yalnız vərdişlər və cari gün üzrə keçir, fokusdakı xana haşiyələnir və görünən sahəyə sürüşdürülür
   - Qısayollar: `Ctrl` + `N` vərdiş əlavə edir (hadisə, məqsəd, Pomodoro); `Alt` + `1` … `0` 1-ci … 10-cu vərdişin bugünkü vəziyyətini açır; `Enter` pəncərəni təsdiqləyir (gün vəziyyəti üçün 100%), `Delete` gün vəziyyətini ötürür və ya elementi silir, `Esc` pəncərəni bağlayır, `Backspace` geri qayıdır
+  - Avtomatlaşdırma: Siri Shortcuts (vərdişi tamamlamaq, ona əlavə etmək və ya buraxmaq; bu gün qalan vərdişlər) və Tasker, Automate və ya `adb` üçün Android intent-ləri; göstərilən ekran dərhal yenilənir
   - Əlçatanlıq (WCAG 2.1): ekran oxuyucuları üçün hər əməliyyatın adı, hər iki temada oxunaqlı kontrast, sistem şrift ölçüsünə uyğunlaşan mətn

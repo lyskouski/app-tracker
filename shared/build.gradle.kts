@@ -14,6 +14,8 @@ kotlin {
         namespace = "com.tercad.zwyka.shared"
         compileSdk = 37
         minSdk = 24
+        // Packs the compose resources (strings, ...) into the app: without it they are missing on Android.
+        androidResources.enable = true
         withHostTest {}
     }
     jvm()

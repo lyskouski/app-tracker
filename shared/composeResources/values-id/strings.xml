@@ -161,4 +161,7 @@
     <string name="every_day">Setiap hari</string>
     <string name="apply">Terapkan</string>
     <string name="done">Selesai</string>
+    <string name="automation_habit_not_found">Tidak ada kebiasaan “%1$s”</string>
+    <string name="automation_left_today">Tersisa hari ini: %1$s</string>
+    <string name="automation_all_done">Semua kebiasaan hari ini sudah selesai</string>
 </resources>

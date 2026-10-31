@@ -149,6 +149,24 @@ one is left behind.
 - Text grows with the system font size; tabs, toggles, and the bottom bar grow with it.
 - The habit completion graph has a text alternative.
 
+**Automation** (today's state of a habit without opening the app)
+- Siri Shortcuts (iOS): "Complete Habit" (100%, or the reached value of a numeric target), 
+  "Add to Habit" (e.g. a glass of water), "Skip Habit", "Habits Left Today"; 
+  spoken as "Complete Water in Zwyka" or used in the Shortcuts app. Siri answers with the 
+  outcome, e.g. "Water: 3 / 8 glasses".
+- Android intents (Tasker, Automate, `adb`), explicit broadcasts to 
+  `com.tercad.zwyka/.AutomationReceiver`:
+  - actions `com.tercad.zwyka.action.COMPLETE`, `.ADD`, `.SKIP`, `.LEFT_TODAY`;
+  - extras `habit` (title; a unique beginning or part of it is enough) or `habit_id`, 
+    and `value` (a number or a text: the reached value for `COMPLETE`, the added one for 
+    `ADD`, 1 by default);
+  - an ordered broadcast gets the outcome as its result data;
+  ```
+  adb shell am broadcast -n com.tercad.zwyka/.AutomationReceiver \
+      -a com.tercad.zwyka.action.ADD --es habit Water --ef value 1
+  ```
+- A shown screen is updated at once; archived habits are left out.
+
 ## Screenshots
 
 <img title="Zwyka: Main Screen" src="./docs/design-flow/screenshots/1_home.png" width="240" /> . <img title="Zwyka: Add Habit" src="./docs/design-flow/screenshots/2_add_habit.png" width="240" /> . <img title="Zwyka: Settings" src="./docs/design-flow/screenshots/3_settings.png" width="240" />

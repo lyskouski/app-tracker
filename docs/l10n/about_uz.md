@@ -75,4 +75,5 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Teginish yoki sichqoncha bilan aylantirish: kunlar uchun `Scroll Wheel`, odatlar uchun `Shift` + `Scroll Wheel`
   - Klaviatura: strelkalar, `Page Up` / `Page Down`, `Home` / `End` jadvalni aylantiradi; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` uzoq bosishni almashtiradi; `Tab` faqat odatlar va joriy kun bo'ylab o'tadi, fokusdagi katak hoshiyalanadi va ko'rinadigan joyga aylantiriladi
   - Tezkor tugmalar: `Ctrl` + `N` odat qo'shadi (tadbir, maqsad, Pomodoro); `Alt` + `1` … `0` 1- … 10-odatning bugungi holatini ochadi; `Enter` oynani tasdiqlaydi (kun holati uchun 100%), `Delete` kun holatini o'tkazib yuboradi yoki elementni o'chiradi, `Esc` oynani yopadi, `Backspace` orqaga qaytaradi
+  - Avtomatlashtirish: Siri Shortcuts (odatni bajarish, unga qo‘shish yoki o‘tkazib yuborish; bugun qolgan odatlar) va Tasker, Automate yoki `adb` uchun Android intentlari; ko‘rsatilgan ekran darhol yangilanadi
   - Qulaylik (WCAG 2.1): ekran o‘qish dasturlari uchun har bir amalning nomi, ikkala mavzuda o‘qiladigan kontrast, tizim shrift o‘lchamiga moslashadigan matn
