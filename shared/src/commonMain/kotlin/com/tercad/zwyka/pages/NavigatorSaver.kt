@@ -3,7 +3,9 @@
 
 package com.tercad.zwyka.pages
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
 import cafe.adriel.voyager.core.screen.Screen
@@ -29,3 +31,23 @@ fun inMemoryNavigatorSaver(): NavigatorSaver<String> =
     }
 
 private val savedScreens = mutableMapOf<String, List<Screen>>()
+
+/**
+ * As [androidx.compose.runtime.remember], but the value survives the window recreation in the same process,
+ * as the screens of [inMemoryNavigatorSaver] do: the restored screens and the new window share the same instance.
+ */
+@Composable
+fun <T : Any> rememberInMemory(init: () -> T): T =
+    rememberSaveable(
+        saver = Saver(
+            save = { value -> "in-memory-${++lastValueKey}".also { savedValues[it] = value } },
+            restore = { saved ->
+                @Suppress("UNCHECKED_CAST")
+                savedValues.remove(saved) as T?
+            },
+        ),
+        init = init,
+    )
+
+private val savedValues = mutableMapOf<String, Any>()
+private var lastValueKey = 0

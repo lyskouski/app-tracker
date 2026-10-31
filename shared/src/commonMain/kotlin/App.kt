@@ -37,6 +37,7 @@ import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 import com.tercad.zwyka.pages.inMemoryNavigatorSaver
+import com.tercad.zwyka.pages.rememberInMemory
 import com.tercad.zwyka.widgets.ShortcutsHost
 
 @OptIn(ExperimentalVoyagerApi::class)
@@ -52,7 +53,7 @@ fun App(
     val services = remember(database, reminderScheduler) {
         database?.createServices(reminderScheduler)
     }
-    val settingsStore = remember(services) { AppSettingsStore(services?.settings) }
+    val settingsStore = rememberInMemory { AppSettingsStore(services?.settings) }
     val colorScheme = when (settingsStore.current.themeMode) {
         ThemeMode.LIGHT -> ColorSchemeLight
         ThemeMode.DARK -> ColorSchemeDark
