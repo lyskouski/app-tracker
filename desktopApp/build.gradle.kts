@@ -56,6 +56,27 @@ compose.desktop {
             }
             macOS {
                 iconFile.set(project.file("icons/zwyka.icns"))
+                bundleID = "com.tercad.zwyka"
+                dockName = "Zwyka"
+                appCategory = "public.app-category.productivity"
+                minimumSystemVersion = "12.0"
+                // Set by the release workflow: -PversionCode=<commits count>, has to increase on each upload.
+                (findProperty("versionCode") as String?)?.let { packageBuildVersion = it }
+                infoPlist {
+                    extraKeysRawXml = """
+                        <key>ITSAppUsesNonExemptEncryption</key>
+                        <false/>
+                    """.trimIndent()
+                }
+                // Mac App Store: the release workflow puts the provisioning profiles next to this file.
+                val appStoreProfile = project.file("embedded.provisionprofile")
+                if (appStoreProfile.exists()) {
+                    appStore = true
+                    provisioningProfile.set(appStoreProfile)
+                    runtimeProvisioningProfile.set(project.file("runtime.provisionprofile"))
+                    entitlementsFile.set(project.file("entitlements.plist"))
+                    runtimeEntitlementsFile.set(project.file("runtime-entitlements.plist"))
+                }
             }
         }
     }

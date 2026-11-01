@@ -30,3 +30,4 @@ offline-repository
 linux-flatpak/gradle-sources-*.json
 *.mp4
 *.kdenlive
+desktopApp/*.provisionprofile

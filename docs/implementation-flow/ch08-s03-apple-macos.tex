@@ -1,0 +1,195 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsubsection{Apple Store - macOS} \label{d-macos}
+
+The process of creating \q{macOS}-package for a distribution is almost the same as for \q{iOS} (\ref{d-ios}) with a few
+deviations. The desktop application is a Compose Multiplatform (JVM) one, so that it's packed by Gradle
+(\q{./gradlew :desktopApp:packagePkg}) together with a Java runtime into \q{zwyka.app}, and then into a signed installer
+\q{.pkg} (\q{macOS}-target of the \q{build}-matrix in \q{.github/workflows/build.yml}). The Mac App Store specifics are
+declared in \q{desktopApp/build.gradle.kts}, and they are applied only when the provisioning profile is present (it's
+added by the pipeline), so that local builds stay unaffected:
+
+\begin{lstlisting}[language=kotlin]
+macOS {
+    bundleID = "com.tercad.zwyka"
+    appCategory = "public.app-category.productivity"
+    (findProperty("versionCode") as String?)?.let { packageBuildVersion = it }
+    val appStoreProfile = project.file("embedded.provisionprofile")
+    if (appStoreProfile.exists()) {
+        appStore = true
+        provisioningProfile.set(appStoreProfile)
+        runtimeProvisioningProfile.set(project.file("runtime.provisionprofile"))
+        entitlementsFile.set(project.file("entitlements.plist"))
+        runtimeEntitlementsFile.set(project.file("runtime-entitlements.plist"))
+    }
+}
+\end{lstlisting}
+
+\noindent The main difference with \q{iOS} is that the application consists of two signed parts: the launcher
+(\q{zwyka.app}) and the bundled Java runtime, so that both of them need their own identifier and provisioning profile.
+
+\paragraph{Step 1: Certificates.} Unlike iOS, two certificates are required (the private key and the CSR-file from
+\ref{d-ios} can be reused), both are taken from
+\href{https://developer.apple.com/account/resources/certificates/add}{https://developer.apple.com/account/resources/certificates/add}:
+
+\begin{itemize}
+  \item "\emph{Mac App Distribution}" -- gives "3rd Party Mac Developer Application" certificate, used to sign the
+  application and the runtime;
+  \item "\emph{Mac Installer Distribution}" -- gives "3rd Party Mac Developer Installer" certificate, used to sign the
+  \q{.pkg}-file.
+\end{itemize}
+
+\noindent Both of them are converted into \q{.p12} (with the same export password as for iOS) and into base64:
+
+\begin{lstlisting}[language=terminal]
+$ openssl x509 -in mac_app.cer -inform DER -out mac_app.pem -outform PEM
+$ openssl pkcs12 -export -legacy -out mac_app.p12 -inkey apple.key -in mac_app.pem
+$ base64 mac_app.p12 > apple-mac.txt
+$ openssl x509 -in mac_installer.cer -inform DER -out mac_installer.pem -outform PEM
+$ openssl pkcs12 -export -legacy -out mac_installer.p12 -inkey apple.key -in mac_installer.pem
+$ base64 mac_installer.p12 > apple-mac-installer.txt
+\end{lstlisting}
+
+\noindent The signing identity for Gradle (\q{APPLE\_MAC\_IDENTITY}) is not issued separately: it's the common name
+(\q{CN}) of the downloaded "Mac App Distribution" certificate without the "3rd Party Mac Developer Application: "
+prefix. Compose adds the prefix by itself ("3rd Party Mac Developer Application: " to sign the application,
+"3rd Party Mac Developer Installer: " to sign the \q{.pkg}), so that both certificates have to be issued for the same
+account, which is the case. The name is read from the \q{.cer}-file:
+
+\begin{lstlisting}[language=terminal]
+$ openssl x509 -in mac_app.cer -inform DER -noout -subject
+subject=UID=8PVKPQ758L, CN=3rd Party Mac Developer Application: terCAD (8PVKPQ758L), OU=8PVKPQ758L, O=terCAD, C=XX
+\end{lstlisting}
+
+\noindent Here \q{APPLE\_MAC\_IDENTITY} is "\emph{terCAD (8PVKPQ758L)}": the account holder name (the legal entity
+name of an organization, or the full name of an individual, as shown in "Membership details" on
+\href{https://developer.apple.com/account}{https://developer.apple.com/account}) followed by the Team ID in brackets.
+On macOS the same value is listed by \q{security find-identity -v -p codesigning} after the \q{.p12} is imported.
+
+\paragraph{Step 2: Identifiers.} The App ID \q{com.tercad.zwyka} from \ref{d-ios} is used for macOS as well (App IDs are
+shared across Apple platforms). In addition, the Java runtime requires a second App ID. The reason is in the structure
+of the package that is produced by \q{jpackage} (used by Compose): the JVM is a nested bundle
+\q{zwyka.app/Contents/runtime} with its own \q{Info.plist}, and its identifier is the identifier of the application with
+the \q{com.oracle.java.}-prefix. The Mac App Store requires each signed bundle inside the package to have a provisioning
+profile that matches its identifier, so that the runtime gets its own App ID and its own profile.
+
+\noindent The App ID is registered on
+\href{https://developer.apple.com/account/resources/identifiers/list}{https://developer.apple.com/account/resources/identifiers/list}:
+
+\begin{enumerate}
+  \item "\emph{+}" (Register a new identifier) $\rightarrow$ "\emph{App IDs}" $\rightarrow$ "\emph{Continue}";
+  \item type "\emph{App}" $\rightarrow$ "\emph{Continue}";
+  \item Description: "Zwyka Runtime"; Bundle ID: "\emph{Explicit}" with the value
+  \q{com.oracle.java.com.tercad.zwyka} (exactly the Bundle ID of the application, prefixed by \q{com.oracle.java.});
+  \item no capabilities are selected $\rightarrow$ "\emph{Continue}" $\rightarrow$ "\emph{Register}".
+\end{enumerate}
+
+\paragraph{Step 3: Provisioning profiles.} Two profiles of the same type are created on
+\href{https://developer.apple.com/account/resources/profiles/list}{https://developer.apple.com/account/resources/profiles/list},
+first one for the application, second one for the runtime (\q{APPLE\_MAC\_RUNTIME\_PROFILE}):
+
+\begin{enumerate}
+  \item "\emph{+}" (Generate a profile) $\rightarrow$ in the "\emph{Distribution}"-section select "\emph{Mac App Store
+  Connect}" $\rightarrow$ "\emph{Continue}";
+  \item Profile Type: "\emph{Mac}" (not "Mac Catalyst"); App ID: \q{com.tercad.zwyka} for the first profile, and
+  \q{com.oracle.java.com.tercad.zwyka} ("Zwyka Runtime" from Step 2) for the second one $\rightarrow$
+  "\emph{Continue}" (there is no separate type for the runtime: it's the same "Mac App Store Connect" profile, and the
+  App ID is listed only after it's registered in Step 2);
+  \item certificate: the "\emph{Mac App Distribution}" one from Step 1 (shown as "3rd Party Mac Developer
+  Application", not "Apple Distribution") $\rightarrow$ "\emph{Continue}";
+  \item Provisioning Profile Name: "\emph{Zwyka macOS}" for the first profile, "\emph{Zwyka macOS Runtime}" for the
+  second one $\rightarrow$ "\emph{Generate}" $\rightarrow$ "\emph{Download}".
+\end{enumerate}
+
+\noindent The downloaded files have the \q{.provisionprofile}-extension (a signed property list). The identifier inside
+can be checked before uploading to GitHub (\q{security cms -D -i <file>} does the same on macOS):
+
+\begin{lstlisting}[language=terminal]
+$ openssl smime -inform der -verify -noverify \
+    -in Zwyka_macOS_Runtime.provisionprofile 2>/dev/null \
+    | grep -A1 application-identifier
+<key>com.apple.application-identifier</key>
+<string>8PVKPQ758L.com.oracle.java.com.tercad.zwyka</string>
+\end{lstlisting}
+
+\noindent Unlike iOS, the profiles are not installed on the runner, but embedded into the package by Gradle:
+\q{embedded.provisionprofile} of \q{desktopApp/} goes to \q{zwyka.app/Contents/}, and \q{runtime.provisionprofile} --
+to the runtime bundle. Both files are converted into base64 for the GitHub secrets:
+
+\begin{lstlisting}[language=terminal]
+$ base64 Zwyka_macOS.provisionprofile > apple-mac-profile.txt
+$ base64 Zwyka_macOS_Runtime.provisionprofile > apple-mac-runtime.txt
+\end{lstlisting}
+
+\noindent Both profiles expire together with the "Mac App Distribution" certificate (in a year): then they have to be
+regenerated (Edit $\rightarrow$ select the new certificate $\rightarrow$ Generate), and the secrets replaced.
+
+\paragraph{Step 4: Application record.} The same application is extended by a new platform: on
+\href{https://appstoreconnect.apple.com/apps}{https://appstoreconnect.apple.com/apps} open "Zwyka" and use
+"\emph{Add Platform}" $\rightarrow$ "\emph{macOS}". Since the Bundle ID is the same, it's a universal purchase: the
+name, privacy details and pricing are shared, while the macOS version has its own description, keywords, "What's New" and
+screenshots (16:10 -- 1280x800, 1440x900, 2560x1600 or 2880x1800).
+
+\paragraph{Step 5: GitHub secrets.} In addition to the secrets of \ref{d-ios} (\q{APPLE\_TEAM\_ID},
+\q{APPLE\_P12\_KEY}, \q{APPLE\_API\_P8}, \q{APPLE\_API\_KEY}, \q{APPLE\_API\_ISSUE}) the following ones are required:
+
+\begin{lstlisting}[language=terminal]
+APPLE_MAC_P12              # content of apple-mac.txt (Step 1)
+APPLE_MAC_INSTALLER        # content of apple-mac-installer.txt (Step 1)
+APPLE_MAC_IDENTITY         # CN of the certificate without the prefix (Step 1)
+APPLE_MAC_PROFILE          # content of apple-mac-profile.txt (Step 3)
+APPLE_MAC_RUNTIME_PROFILE  # content of apple-mac-runtime.txt (Step 3)
+\end{lstlisting}
+
+\noindent After that, each pushed tag \q{v*} imports both certificates into a temporary keychain, puts the profiles into
+\q{desktopApp/}, packs and signs \q{zwyka\_macOS.pkg}, attaches it to the release page and uploads it to App Store
+Connect by \q{xcrun altool --upload-app --type macos} (the same step as for iOS):
+
+\begin{lstlisting}[language=terminal]
+- name: Run macOS Build
+  if: matrix.target == 'macOS'
+  run: |
+    ./gradlew :desktopApp:packagePkg --no-daemon \
+      -PversionName=${{ needs.release.outputs.version }} \
+      -PversionCode=${{ needs.release.outputs.build_number }} \
+      -Pcompose.desktop.mac.sign=true \
+      -Pcompose.desktop.mac.signing.identity="${{ secrets.APPLE_MAC_IDENTITY }}" \
+      -Pcompose.desktop.mac.signing.keychain="$MAC_KEYCHAIN"
+\end{lstlisting}
+
+\noindent \q{packagePkg} is used instead of \q{packageReleasePkg} to avoid ProGuard, the same as for other desktop
+packages. The runner is Apple silicon, so the package is \q{arm64}-only: the application is available for Macs with
+Apple silicon (M1 and later).
+
+\paragraph{Sandbox.} Any application of the Mac App Store has to be sandboxed, otherwise the upload fails with "App
+sandbox not enabled". Both parts declare \q{com.apple.security.app-sandbox}, while the runtime has to inherit the
+sandbox of the application by \q{com.apple.security.inherit} (\q{desktopApp/runtime-entitlements.plist}). The JVM
+requires JIT and unsigned executable memory, and Import / Export of data -- an access to the files that are chosen in the
+file dialogs:
+
+\begin{lstlisting}[language=xml]
+<!-- ./desktopApp/entitlements.plist -->
+<key>com.apple.security.app-sandbox</key>
+<true/>
+<key>com.apple.security.cs.allow-jit</key>
+<true/>
+<key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+<true/>
+<key>com.apple.security.files.user-selected.read-write</key>
+<true/>
+<key>com.apple.application-identifier</key>
+<string>TEAM_ID.com.tercad.zwyka</string>
+\end{lstlisting}
+
+\noindent \q{TEAM\_ID} is replaced by the pipeline from \q{APPLE\_TEAM\_ID}. The end-of-line character of the
+entitlements has to be "LF", otherwise the list is not recognized.
+
+The sandboxed application has no write access to the home folder, the same as Snap and Flatpak packages, so that the
+database is placed into the container of the application (\q{\textasciitilde/Library/Containers/com.tercad.zwyka/Data}),
+taken from \q{HOME} when \q{APP\_SANDBOX\_CONTAINER\_ID} is set (\q{desktopApp/src/main.kt}).
+
+\paragraph{Step 6: Compliance and review.} \q{ITSAppUsesNonExemptEncryption} is declared as \q{false} by
+\q{infoPlist} of \q{desktopApp/build.gradle.kts}, the same as for iOS. The build appears in the macOS section of the
+"TestFlight"-tab; then it's selected on the macOS version page and submitted for review ("\emph{Add for Review}"
+$\rightarrow$ "\emph{Submit for Review}"), the same as in \ref{d-ios}.

@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Web, Android, Windows, iOS]
+        target: [Web, Android, Windows, iOS, macOS]
         include:
           - os: ubuntu-latest
             target: Web
@@ -45,6 +45,11 @@ jobs:
             build_path: build/ios/ipa/
             asset_extension: .ipa
             asset_content_type: application/zip
+          - os: macos-26
+            target: macOS
+            build_path: desktopApp/build/compose/binaries/main/pkg/
+            asset_extension: .pkg
+            asset_content_type: application/octet-stream
 
     steps:
       - uses: actions/checkout@v4
@@ -168,8 +173,53 @@ jobs:
             -exportPath build/ios/ipa
           mv build/ios/ipa/*.ipa ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
 
+# macOS
+      - name: Import macOS Certificates
+        if: matrix.target == 'macOS'
+        env:
+          APPLE_MAC_P12: ${{ secrets.APPLE_MAC_P12 }}
+          APPLE_MAC_INSTALLER: ${{ secrets.APPLE_MAC_INSTALLER }}
+          APPLE_P12_KEY: ${{ secrets.APPLE_P12_KEY }}
+        run: |
+          KEYCHAIN=$RUNNER_TEMP/signing_mac.keychain-db
+          PASSWORD=$(uuidgen)
+          security create-keychain -p "$PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$PASSWORD" "$KEYCHAIN"
+          for CERT in APPLE_MAC_P12 APPLE_MAC_INSTALLER; do
+            echo -n "${!CERT}" | base64 --decode > $RUNNER_TEMP/cert.p12
+            security import $RUNNER_TEMP/cert.p12 -k "$KEYCHAIN" -P "$APPLE_P12_KEY" \
+              -T /usr/bin/codesign -T /usr/bin/productbuild -T /usr/bin/productsign
+          done
+          rm $RUNNER_TEMP/cert.p12
+          security set-key-partition-list -S apple-tool:,apple: -k "$PASSWORD" "$KEYCHAIN"
+          security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          echo "MAC_KEYCHAIN=$KEYCHAIN" >> $GITHUB_ENV
+
+      - name: Add macOS Provisioning Profiles
+        if: matrix.target == 'macOS'
+        env:
+          APPLE_MAC_PROFILE: ${{ secrets.APPLE_MAC_PROFILE }}
+          APPLE_MAC_RUNTIME_PROFILE: ${{ secrets.APPLE_MAC_RUNTIME_PROFILE }}
+        run: |
+          echo -n "$APPLE_MAC_PROFILE" | base64 --decode > embedded.provisionprofile
+          echo -n "$APPLE_MAC_RUNTIME_PROFILE" | base64 --decode > runtime.provisionprofile
+          sed -i '' "s/TEAM_ID/${{ secrets.APPLE_TEAM_ID }}/g" entitlements.plist
+        working-directory: desktopApp
+
+      - name: Run macOS Build
+        if: matrix.target == 'macOS'
+        run: |
+          ./gradlew :desktopApp:packagePkg --no-daemon \
+            -PversionName=${{ needs.release.outputs.version }} \
+            -PversionCode=${{ needs.release.outputs.build_number }} \
+            -Pcompose.desktop.mac.sign=true \
+            -Pcompose.desktop.mac.signing.identity="${{ secrets.APPLE_MAC_IDENTITY }}" \
+            -Pcompose.desktop.mac.signing.keychain="$MAC_KEYCHAIN"
+          mv ${{ matrix.build_path }}*.pkg ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+
       - name: Publish to the App Store
-        if: matrix.target == 'iOS'
+        if: matrix.target == 'iOS' || matrix.target == 'macOS'
         env:
           APPLE_API_P8: ${{ secrets.APPLE_API_P8 }}
           APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
@@ -177,7 +227,7 @@ jobs:
         run: |
           mkdir -p ~/private_keys
           echo -n "$APPLE_API_P8" | base64 --decode > ~/private_keys/AuthKey_$APPLE_API_KEY.p8
-          xcrun altool --upload-app --type ios -f ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }} \
+          xcrun altool --upload-app --type ${{ matrix.target == 'iOS' && 'ios' || 'macos' }} -f ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }} \
             --apiKey "$APPLE_API_KEY" \
             --apiIssuer "$APPLE_API_ISSUE"
 

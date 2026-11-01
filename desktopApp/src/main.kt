@@ -26,8 +26,13 @@ import kotlinx.coroutines.SupervisorJob
 
 private val database by lazy {
     // Sandboxed packages have no write access to the home folder:
-    // Snap sets ZWYKA_DATA_DIR, Flatpak provides ~/.var/app/com.tercad.zwyka/data as XDG_DATA_HOME.
-    val dataDir = (System.getenv("ZWYKA_DATA_DIR") ?: System.getenv("FLATPAK_ID")?.let { System.getenv("XDG_DATA_HOME") })
+    // Snap sets ZWYKA_DATA_DIR, Flatpak provides ~/.var/app/com.tercad.zwyka/data as XDG_DATA_HOME,
+    // macOS App Sandbox points HOME to ~/Library/Containers/com.tercad.zwyka/Data.
+    val dataDir = (
+        System.getenv("ZWYKA_DATA_DIR")
+            ?: System.getenv("FLATPAK_ID")?.let { System.getenv("XDG_DATA_HOME") }
+            ?: System.getenv("APP_SANDBOX_CONTAINER_ID")?.let { System.getenv("HOME") }
+        )
         ?.takeIf { it.isNotBlank() }?.let(::File)?.apply { mkdirs() }
     val databaseFile = File(dataDir ?: File(System.getProperty("user.home")), ".zwyka.db")
     Database(
