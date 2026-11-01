@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Web, Android, Windows]
+        target: [Web, Android, Windows, iOS]
         include:
           - os: ubuntu-latest
             target: Web
@@ -40,16 +40,23 @@ jobs:
             build_path: windows-msix/
             asset_extension: .msix
             asset_content_type: application/msix
+          - os: macos-26
+            target: iOS
+            build_path: build/ios/ipa/
+            asset_extension: .ipa
+            asset_content_type: application/zip
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-java@v4
+        if: matrix.target != 'iOS'
         with:
           distribution: temurin
           java-version: 21
 
       - uses: gradle/actions/setup-gradle@v4
+        if: matrix.target != 'iOS'
 
 # Web
       - name: Build Web (Kotlin/Wasm) distribution
@@ -99,9 +106,6 @@ jobs:
         if: matrix.target == 'Windows'
         uses: microsoft/setup-msstore-cli@ec39acd1144351ab7a9d8d25e12bf6fd1ba03150
 
-      # Requires the Partner Center credentials of terCAD and the Store ID of the reserved "Zwyka" app.
-      # msstore publishes only recognized projects: a ready MSIX goes as a UWP one, that is
-      # Package.appxmanifest next to AppPackages/*.msixupload (a zip with the MSIX inside).
       - name: Publish MSIX to the Microsoft Store
         if: matrix.target == 'Windows'
         run: |
@@ -113,6 +117,71 @@ jobs:
           msstore publish store -id ${{ secrets.WINDOWS_APP_ID }}
           if ($LASTEXITCODE -ne 0) { echo "Publishing failed since replaced build in review state."; exit 0 }
         working-directory: ${{ matrix.build_path }}
+
+# iOS
+      - uses: maxim-lobanov/setup-xcode@v1
+        if: matrix.target == 'iOS'
+        with:
+          xcode-version: latest-stable
+
+      - name: Import Distribution Certificate
+        if: matrix.target == 'iOS'
+        uses: apple-actions/import-codesign-certs@v3
+        with:
+          keychain: signing_distr
+          p12-file-base64: ${{ secrets.APPLE_P12 }}
+          p12-password: ${{ secrets.APPLE_P12_KEY }}
+
+      - name: Add Provision Profile
+        if: matrix.target == 'iOS'
+        env:
+          APPLE_IOS_PROFILE: ${{ secrets.APPLE_IOS_PROFILE }}
+        run: |
+          echo -n "$APPLE_IOS_PROFILE" | base64 --decode > profile.mobileprovision
+          UUID=$(security cms -D -i profile.mobileprovision | plutil -extract UUID raw -)
+          for dir in ~/Library/Developer/Xcode/UserData/Provisioning\ Profiles ~/Library/MobileDevice/Provisioning\ Profiles; do
+            mkdir -p "$dir"
+            cp profile.mobileprovision "$dir/$UUID.mobileprovision"
+          done
+          rm profile.mobileprovision
+
+      - name: Run iOS Build
+        if: matrix.target == 'iOS'
+        run: |
+          xcodebuild archive \
+            -project iosApp/module.xcodeproj \
+            -scheme app \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/ios/zwyka.xcarchive \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
+            DEVELOPMENT_TEAM=${{ secrets.APPLE_TEAM_ID }} \
+            PROVISIONING_PROFILE_SPECIFIER="Zwyka iOS" \
+            MARKETING_VERSION=${{ needs.release.outputs.version }} \
+            CURRENT_PROJECT_VERSION=${{ needs.release.outputs.build_number }}
+
+      - name: Export iOS Package
+        if: matrix.target == 'iOS'
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath build/ios/zwyka.xcarchive \
+            -exportOptionsPlist iosApp/ExportOptions.plist \
+            -exportPath build/ios/ipa
+          mv build/ios/ipa/*.ipa ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
+
+      - name: Publish to the App Store
+        if: matrix.target == 'iOS'
+        env:
+          APPLE_API_P8: ${{ secrets.APPLE_API_P8 }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_ISSUE: ${{ secrets.APPLE_API_ISSUE }}
+        run: |
+          mkdir -p ~/private_keys
+          echo -n "$APPLE_API_P8" | base64 --decode > ~/private_keys/AuthKey_$APPLE_API_KEY.p8
+          xcrun altool --upload-app --type ios -f ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }} \
+            --apiKey "$APPLE_API_KEY" \
+            --apiIssuer "$APPLE_API_ISSUE"
 
 #
       - name: Upload ${{ matrix.target }} Artifact

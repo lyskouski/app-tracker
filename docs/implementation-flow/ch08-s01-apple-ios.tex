@@ -1,0 +1,142 @@
+% Copyright 2026 The terCAD team. All rights reserved.
+% Use of this content is governed by a CC BY-NC-ND 4.0 license that can be found in the LICENSE file.
+
+\subsubsection{Apple Store - iOS} \label{d-ios}
+
+The iOS application is an Xcode project (\q{iosApp/module.xcodeproj}), and its "Build Kotlin" phase compiles the shared
+code by the Kotlin CLI wrapper (\q{./kotlin tool xcode-integration}). So that, there is no need in a device running macOS:
+the whole build, signing and upload is made by GitHub Actions on a \q{macos-26} runner (\q{iOS}-target of the \q{build}-matrix in
+\q{.github/workflows/build.yml}). All that is left to be done manually is to get the signing assets from Apple, register
+the application and put the assets into GitHub secrets.
+
+\paragraph{Prerequisites.} An Apple Developer Program membership (organization) and access to
+\href{https://appstoreconnect.apple.com/}{https://appstoreconnect.apple.com/} with "Admin" or "Account Holder" role. The
+\q{Team ID} can be taken from \href{https://developer.apple.com/account}{https://developer.apple.com/account} ("Membership
+details"). Next values are already defined in the repository and have to be consistent with those that are registered
+by Apple:
+
+\begin{lstlisting}[language=terminal]
+Bundle ID:         com.tercad.zwyka   # iosApp/module.xcodeproj/project.pbxproj
+Profile name:      Zwyka iOS          # iosApp/ExportOptions.plist, build.yml (PROFILE_NAME)
+Version:           <tag without "v">  # MARKETING_VERSION, e.g. 1.2.0 (max three integers)
+Build number:      <commits count>    # CURRENT_PROJECT_VERSION, has to increase on each upload
+\end{lstlisting}
+
+\paragraph{Step 1: Distribution certificate.} The "Apple Distribution" certificate is issued per team, so that the one
+that is already used by other applications of terCAD (secrets \q{APPLE\_P12} and \q{APPLE\_P12\_KEY}) can be reused, and
+this step skipped. Otherwise, it's needed to create a private key and a certificate signing request (by \q{openssl}, or
+via "Keychain Access" on macOS):
+
+\begin{lstlisting}[language=terminal]
+# Create a private key
+$ openssl genrsa -out apple.key 2048
+# Create the CSR file (C - Country Name [2 letter code])
+$ openssl req -new -key apple.key \
+    -out CertificateSigningRequest.certSigningRequest \
+    -subj "/emailAddress=your@mail.to, CN=Your Name, C=XX"
+\end{lstlisting}
+
+\noindent and upload it to
+\href{https://developer.apple.com/account/resources/certificates/list}{https://developer.apple.com/account/resources/certificates/list}
+by choosing "\emph{[Software] Apple Distribution: Sign your iOS, iPadOS, macOS, tvOS, watchOS, and visionOS apps for
+release testing using Ad Hoc distribution or for submission to the App Store}". Downloaded \q{.cer}-file has to be
+converted into \q{.p12}, and then into a string (base64) representation:
+
+\begin{lstlisting}[language=terminal]
+# Convert the .cer-file into .pem-format
+$ openssl x509 -in distribution.cer -inform DER -out apple.pem -outform PEM
+# Use .pem-file and private .key to generate .p12
+$ openssl pkcs12 -export -legacy -out apple.p12 -inkey apple.key -in apple.pem
+Enter Export Password: #####
+# Convert file to base64 string
+$ base64 apple.p12 > apple.txt
+\end{lstlisting}
+
+\noindent Usage of \q{legacy}-attribute is a key factor to avoid a security failure "SecKeychainItemImport: MAC
+verification failed" since OpenSSL 3.x has changed its default algorithm in \q{pkcs12} which is not compatible with
+embedded Security frameworks in macOS/iOS. Private key and \q{.p12}-file have to be stored in a safe place, outside the
+repository.
+
+\paragraph{Step 2: Identifier.} Register an App ID on
+\href{https://developer.apple.com/account/resources/identifiers/list}{https://developer.apple.com/account/resources/identifiers/list}:
+"\emph{App IDs}" $\rightarrow$ "\emph{App}", description "Zwyka", explicit Bundle ID \q{com.tercad.zwyka}. No additional
+capabilities are required: reminders are local notifications, and Siri Shortcuts are provided by App Intents (both
+of them don't need entitlements).
+
+\paragraph{Step 3: Provisioning profile.} On
+\href{https://developer.apple.com/account/resources/profiles/list}{https://developer.apple.com/account/resources/profiles/list}
+create "\emph{Distribution} $\rightarrow$ \emph{App Store Connect}" profile for the App ID from the previous step, select
+the distribution certificate, and name it exactly "\emph{Zwyka iOS}". The downloaded file is converted into base64:
+
+\begin{lstlisting}[language=terminal]
+$ base64 Zwyka_iOS.mobileprovision > apple-provision.txt
+\end{lstlisting}
+
+\noindent The profile expires together with the certificate (in a year): then it has to be regenerated, and the secret
+replaced.
+
+\paragraph{Step 4: Application record.} On \href{https://appstoreconnect.apple.com/apps}{https://appstoreconnect.apple.com/apps}
+"\emph{New App}": platform iOS, name "Zwyka", primary language English (U.S.), Bundle ID \q{com.tercad.zwyka}, SKU
+(any unique value, e.g. \q{zwyka}), full access. Name has to be unique across the App Store, otherwise a subtitle-like
+variant is required (e.g. "Zwyka: Habit Tracker").
+
+\paragraph{Step 5: API key for uploading.} On
+\href{https://appstoreconnect.apple.com/access/integrations/api}{https://appstoreconnect.apple.com/access/integrations/api}
+generate a "Team Key" with "App Manager" access (one key can be shared across applications of the team). Copy
+\q{Issuer ID} and \q{KEY ID}, download \q{AuthKey\_<KEY ID>.p8} (it can be downloaded only once) and convert it:
+
+\begin{lstlisting}[language=terminal]
+$ base64 -w 0 AuthKey_XXXXXXXXXX.p8 > apple-api.txt
+\end{lstlisting}
+
+\paragraph{Step 6: GitHub secrets.} Add next values to "Settings $\rightarrow$ Secrets and variables $\rightarrow$
+Actions" of the repository (or to the organization secrets, to be shared with other applications):
+
+\begin{lstlisting}[language=terminal]
+APPLE_P12          # content of apple.txt (Step 1)
+APPLE_P12_KEY      # export password of apple.p12
+APPLE_IOS_PROFILE  # content of apple-provision.txt (Step 3)
+APPLE_TEAM_ID      # Team ID, e.g. 8PVKPQ758L
+APPLE_API_P8       # content of apple-api.txt (Step 5)
+APPLE_API_KEY      # KEY ID (Step 5)
+APPLE_API_ISSUE    # Issuer ID (Step 5)
+\end{lstlisting}
+
+\noindent After that, each pushed tag \q{v*} archives the application by \q{xcodebuild archive} with manual signing
+(the signing parameters are passed as build settings, so that the local development with automatic signing is not
+affected), exports \q{zwyka\_iOS.ipa} by \q{iosApp/ExportOptions.plist}, attaches it to the release page, and uploads to
+App Store Connect by \q{xcrun altool --upload-app}. The pipeline ends with \q{UPLOAD SUCCEEDED}, and in a few minutes
+the build appears in the "TestFlight"-tab.
+
+\paragraph{Step 7: Compliance.} \q{ITSAppUsesNonExemptEncryption} is set to \q{false} in \q{iosApp/src/Info.plist}
+(no network communication, and no encryption beyond the operating system), so the "Export Compliance Information"
+questions are not asked for each build. It has to be revised if the application starts using encryption (for example, to
+sync data): then the flag is set to \q{true}, and \q{ITSEncryptionExportComplianceCode} is added from
+\href{https://appstoreconnect.apple.com/apps}{appstoreconnect.apple.com/apps/\q{id}/features/encryption}.
+
+The privacy manifest \q{iosApp/src/PrivacyInfo.xcprivacy} declares the usage of "required reason" APIs (UserDefaults
+for the chosen language; file timestamp, system boot time and disk space by Kotlin/Native runtime, SQLite and Compose
+Multiplatform), otherwise the upload is rejected with "ITMS-91053: Missing API declaration". The manifest has to be
+extended if new APIs of that kind are used.
+
+\paragraph{Step 8: Store listing.} On the application page (\q{App Store}-tab) it's needed to fill in:
+
+\begin{itemize}
+  \item "\emph{App Information}": subtitle, category (Health \& Fitness, or Productivity), content rights, age rating
+  questionnaire (no objectionable content $\rightarrow$ 4+);
+  \item "\emph{App Privacy}": privacy policy URL, and "\emph{Data Not Collected}" (all the data is kept on the device);
+  \item "\emph{Pricing and Availability}": price (free) and countries;
+  \item version page: description, keywords, support URL, promotional text, screenshots (6.9" iPhone -- 1320x2868 or
+  1290x2796, and 13" iPad -- 2064x2752 or 2048x2732, since iPad is supported by \q{TARGETED\_DEVICE\_FAMILY}), and
+  localizations for the supported languages;
+  \item "\emph{Business}" (Agreements, Tax, and Banking): Free Apps Agreement is accepted, and the trader status for the
+  European Union (Digital Services Act) is declared.
+\end{itemize}
+
+\paragraph{Step 9: Review.} Select the uploaded build in the "\emph{Build}"-section of the version page, and "\emph{Add
+for Review}" $\rightarrow$ "\emph{Submit for Review}". Next versions repeat only this step: create a new version (equal
+to the tag), fill "What's New in This Version", select the build and submit.
+
+\paragraph{TestFlight (optional).} Pre-release builds can be available for external testing: create an "\emph{External
+Testing}"-group in the "TestFlight"-tab, add a build to it and submit it for the beta review. After the approval,
+"\emph{Enable Public Link}" gives the link for testers.
