@@ -178,7 +178,7 @@
 				KOTLIN_CLI_WRAPPER_PATH = "$(SRCROOT)/../kotlin";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tercad.zwyka.Zwyka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tercad.zwyka;
 				PRODUCT_MODULE_NAME = app;
 				PRODUCT_NAME = "Zwyka";
 				SDKROOT = iphoneos;
@@ -208,7 +208,7 @@
 				KOTLIN_CLI_WRAPPER_PATH = "$(SRCROOT)/../kotlin";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tercad.zwyka.Zwyka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tercad.zwyka;
 				PRODUCT_MODULE_NAME = app;
 				PRODUCT_NAME = "Zwyka";
 				SDKROOT = iphoneos;
