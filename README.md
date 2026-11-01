@@ -2,15 +2,16 @@
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 [![Project Release Artifacts](https://github.com/lyskouski/app-tracker/actions/workflows/build.yml/badge.svg)](https://github.com/lyskouski/app-tracker/actions/workflows/build.yml)
 
-Zwyka -- open source code platform-agnostic habits tracker application. The goal of the 
-solution is to create a habits tracking application that is intuitive, efficient, and 
-inclusive. That empowers users to effortlessly manage their habits while ensuring that no 
+Zwyka -- open source code platform-agnostic habits tracker application. The goal of the
+solution is to create a habits tracking application that is intuitive, efficient, and
+inclusive. That empowers users to effortlessly manage their habits while ensuring that no
 one is left behind.
 
 [![Watch the video](./docs/marketing-flow/presentation_video.png)](https://youtu.be/Mv6XR7YtqVQ)
 
 | Type                     | Alpha Version         | Pre-Release                   | Release                       |
 | ------------------------ | ----------------------| ----------------------------- | ----------------------------- |
+| ![Apple](./docs/design-flow/icons/apple.png) iOS (Apple Store)        | [zwyka_iOS.ipa](https://github.com/lyskouski/app-tracker/releases/latest) | [TestFlight: Zwyka](https://testflight.apple.com/join/JXmB4r8g) | In Review |
 | ![Android](./docs/design-flow/icons/android.png) Android (Google Play)    | [zwyka_Android.aab](https://github.com/lyskouski/app-tracker/releases/latest) | [Google Play](https://play.google.com/store/apps/details?id=com.tercad.zwyka) | Pending [![Google Play](./docs/design-flow/badges/google.png)](https://play.google.com/store/apps/details?id=com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux                    | [zwyka_Linux.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Not available |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux (Snap Store)       | [zwyka_LinuxSnap.snap](https://github.com/lyskouski/app-tracker/releases/latest) | [![Zwyka](https://snapcraft.io/zwyka/badge.svg)](https://snapcraft.io/zwyka) | [![Snapcraft: Zwyka](./docs/design-flow/badges/snap-store.png)](https://snapcraft.io/zwyka) |
@@ -23,49 +24,49 @@ one is left behind.
 ## Functionality
 
 **Habits**
-- Create, edit and delete habits with a title, remarks, an icon (2,000+ Material icons), 
+- Create, edit and delete habits with a title, remarks, an icon (2,000+ Material icons),
   and a color (palette or custom RGB / HEX).
-- Set the active days of the week for each habit; inactive days are marked with "—" in 
+- Set the active days of the week for each habit; inactive days are marked with "—" in
   the calendar.
 - Set a numeric target with a value and a type (e.g. 10000 steps): the day's state keeps the
   reached value instead of a status mark, and its completion is the value divided by the target.
   Once set, the target can be changed but not turned off.
 
 **Home screen**
-- Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default); 
+- Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default);
   the chosen view is remembered.
 
 **Today**
-- Today's habits as a list (archived ones and the ones created later are left out): not done 
+- Today's habits as a list (archived ones and the ones created later are left out): not done
   habits first, then the done and skipped ones below the "Completed / Skipped" divider.
-- Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value 
+- Swipe right to mark a habit as done; a habit with a numeric target asks for the reached value
   first (prefilled with the target). Swipe left to skip it ("—").
-- Tap a habit to set its day state, tap its icon to edit the habit, long press to open the 
+- Tap a habit to set its day state, tap its icon to edit the habit, long press to open the
   habit details.
-- Habits with a numeric target show the reached value and the target 
+- Habits with a numeric target show the reached value and the target
   (e.g. `5000 / 10000 steps`), others show their mark.
 
 **Weekly**
-- A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every  
-  day"), and the marks of the current week (from the selected start of the week); today is 
+- A card per habit (archived ones are hidden) with its title, remarks, active days (or "Every
+  day"), and the marks of the current week (from the selected start of the week); today is
   highlighted.
-- Tap a day to set its state, long press on a day to delete its state; tap the card to set 
+- Tap a day to set its state, long press on a day to delete its state; tap the card to set
   today's state, tap its icon to edit the habit, long press on the card to open the habit details.
 
 **Overall (Habits Calendar)**
 - Table of habits (columns) by days (rows): the last 66 days plus the upcoming 5, scrollable
   in both directions (by touch, or Shift + Scroll Wheel for horizontal scroll and Scroll Wheel
   for vertical, or by keyboard: arrows, Page Up / Page Down, Home / End) with pinned habit headers and dates.
-- Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, 
+- Mark a day's progress for each habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%,
   `▣` over 100%. Also can be marked as skipped. Long press on a cell ("Day State") will delete its state.
 - Habits with a numeric target show the reached value above its type in the cell.
 - Long press on a habit header opens the habit details.
 - Today's row is highlighted, and a separator marks the start of each week.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
-- **Day Streak**: the number of consecutive marked days is shown right after each streak ("—" 
+- **Day Streak**: the number of consecutive marked days is shown right after each streak ("—"
   days don't break it); 66 days or more are shown as "66+".
-- **Today's progress**: the top-left corner shows the overall completion of today's habits 
+- **Today's progress**: the top-left corner shows the overall completion of today's habits
   as a progress bar around the cell, with the percentage in the middle.
 
 **Metrics**
@@ -73,47 +74,47 @@ one is left behind.
 - **Habit details** (long press on a habit, or on a habit header of `Overall`): title, remarks, target, completion of every
   day over the last year (days of the week by weeks, like GitHub contributions, colored by the
   completion), max and current Day Streak calculated over the whole history.
-- **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title, 
-  a description, and a group (typed, or chosen from the existing groups of the habit). Goals and 
+- **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title,
+  a description, and a group (typed, or chosen from the existing groups of the habit). Goals and
   groups belong to their habit only.
-  - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished 
+  - Goals of a group are shown in one card; tap a goal to mark it as finished (or not finished
   again).
-  - Long press on a goal to edit its title, description, or group; a group left without goals is 
+  - Long press on a goal to edit its title, description, or group; a group left without goals is
   removed.
-  - Long press on a group card (outside its goals) to delete the group with all its goals, after 
+  - Long press on a group card (outside its goals) to delete the group with all its goals, after
   a confirmation.
   - A group whose goals are all finished is struck through and goes after the active groups.
   - The `↑` button on the top-right corner of a card moves the group up by one position.
 
 **Schedule (Calendar)**
-- Day view with hours, like Google or Outlook Calendar: move between days with `<` / `>` 
+- Day view with hours, like Google or Outlook Calendar: move between days with `<` / `>`
   or jump back to `Today`.
-- Tap a time slot to schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom start 
+- Tap a time slot to schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom start
   and end time, repeated on the selected days of the week, with an optional note.
 - Overlapping time ranges are shown side by side; tap a range to edit or delete it.
 - Archived (deactivated) habits and their time ranges are hidden.
-- Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed, 
+- Notifications across all platforms (`Desktop`` and `Web`` can't notify while closed,
   `iOS` allows max 9 daily reminders per day)
 - Add to external calendar (Apple, Google, Microsoft)
-- The `(+)` button in the bottom bar schedules a habit (today: from the next full hour, other 
+- The `(+)` button in the bottom bar schedules a habit (today: from the next full hour, other
   days: from 09:00).
 
 **Timer** (the `Timer` button on the Schedule)
-- Watch-like dial of the next 12 hours: scheduled events are arcs in the habit colors 
+- Watch-like dial of the next 12 hours: scheduled events are arcs in the habit colors
   (overlapping ones on inner rings), the hand shows the current time.
-- The current habit is shown on top, the countdown (hours:minutes) of the current event or until 
-  the next one in the middle, and the next events (today and tomorrow) below; in landscape the 
+- The current habit is shown on top, the countdown (hours:minutes) of the current event or until
+  the next one in the middle, and the next events (today and tomorrow) below; in landscape the
   dial is on the left and the events are on the right.
-- The screen stays on while the timer is open; mobile devices vibrate when an event starts, and 
+- The screen stays on while the timer is open; mobile devices vibrate when an event starts, and
   the completion
   of the habit is asked when its time range ends (intents are skipped).
-- Pomodoro: the `(+)` button starts a custom timer for 15 min, 30 min, 1 hour, 2 hours, or a 
-  custom number of minutes, optionally for a habit; it vibrates at the end and asks for the 
+- Pomodoro: the `(+)` button starts a custom timer for 15 min, 30 min, 1 hour, 2 hours, or a
+  custom number of minutes, optionally for a habit; it vibrates at the end and asks for the
   completion of the selected habit.
 
 **Settings**
-- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW, 
-  hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO, 
+- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW,
+  hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO,
   ka_GE, ru_RU, id_ID
 - Theme: system default, light, dark
 - Start of the week
@@ -123,44 +124,44 @@ one is left behind.
 - Habits' day state representation: symbols, colored circles
 
 **Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))
-- Screen readers: every screen announces its title, page titles and sections are headings, and 
-  every action is named — including long presses ("Habit details", "Delete", "Edit goal") and the 
-  swipes of the `Today` view ("Done", "Skip"). Status marks are read by their meaning ("100%", 
-  "Skip") instead of the symbols, and day cells announce the habit, weekday, date, status, and 
+- Screen readers: every screen announces its title, page titles and sections are headings, and
+  every action is named — including long presses ("Habit details", "Delete", "Edit goal") and the
+  swipes of the `Today` view ("Done", "Skip"). Status marks are read by their meaning ("100%",
+  "Skip") instead of the symbols, and day cells announce the habit, weekday, date, status, and
   "Today".
-- Toggles, tabs, status buttons, and goals announce whether they are selected or finished; 
+- Toggles, tabs, status buttons, and goals announce whether they are selected or finished;
   drop-down fields announce their label and the chosen value.
 - Errors and loading states are announced without moving the focus.
-- Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu`, `Shift` + `F10`, or 
-  `Ctrl` (`Cmd` on macOS) + `Enter` replaces a long press; the `Overall` table scrolls by arrows, 
+- Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu`, `Shift` + `F10`, or
+  `Ctrl` (`Cmd` on macOS) + `Enter` replaces a long press; the `Overall` table scrolls by arrows,
   `Page Up` / `Page Down`, and `Home` / `End`, while `Tab` goes through its habit headers and the current day only.
 - Shortcuts (focused buttons and text fields keep their own keys):
-  - `Ctrl` (`Cmd` on macOS) + `N`: the `(+)` button of the screen — a new habit, calendar 
+  - `Ctrl` (`Cmd` on macOS) + `N`: the `(+)` button of the screen — a new habit, calendar
     event, goal, or Pomodoro;
-  - `Alt` + `1` ... `Alt` + `0`: today's state of the 1st ... 10th habit (by the columns of the 
+  - `Alt` + `1` ... `Alt` + `0`: today's state of the 1st ... 10th habit (by the columns of the
     `Overall` table, archived ones are left out);
-  - `Enter` on a day state: 100% (or the typed value, the target when none is typed); on other 
+  - `Enter` on a day state: 100% (or the typed value, the target when none is typed); on other
     popups: apply or save (confirm on deletion warnings);
   - `Delete` on a day state: skip; on popups with "Delete": delete the item;
   - `Esc`: close a popup;
   - `Backspace`: the `Back` button of the bottom bar.
-- Habit icons of the `Today` and `Weekly` views are buttons on a square of the habit color, with 
+- Habit icons of the `Today` and `Weekly` views are buttons on a square of the habit color, with
   a 48dp touch target, announced as "Edit habit" with the habit title.
-- Contrast: texts and controls are readable in both themes; habit colors used as text or icons 
+- Contrast: texts and controls are readable in both themes; habit colors used as text or icons
   are adjusted when they are too light or too dark for the background.
 - Text grows with the system font size; tabs, toggles, and the bottom bar grow with it.
 - The habit completion graph has a text alternative.
 
 **Automation** (today's state of a habit without opening the app)
-- Siri Shortcuts (iOS): "Complete Habit" (100%, or the reached value of a numeric target), 
-  "Add to Habit" (e.g. a glass of water), "Skip Habit", "Habits Left Today"; 
-  spoken as "Complete Water in Zwyka" or used in the Shortcuts app. Siri answers with the 
+- Siri Shortcuts (iOS): "Complete Habit" (100%, or the reached value of a numeric target),
+  "Add to Habit" (e.g. a glass of water), "Skip Habit", "Habits Left Today";
+  spoken as "Complete Water in Zwyka" or used in the Shortcuts app. Siri answers with the
   outcome, e.g. "Water: 3 / 8 glasses".
-- Android intents (Tasker, Automate, `adb`), explicit broadcasts to 
+- Android intents (Tasker, Automate, `adb`), explicit broadcasts to
   `com.tercad.zwyka/.AutomationReceiver`:
   - actions `com.tercad.zwyka.action.COMPLETE`, `.ADD`, `.SKIP`, `.LEFT_TODAY`;
-  - extras `habit` (title; a unique beginning or part of it is enough) or `habit_id`, 
-    and `value` (a number or a text: the reached value for `COMPLETE`, the added one for 
+  - extras `habit` (title; a unique beginning or part of it is enough) or `habit_id`,
+    and `value` (a number or a text: the reached value for `COMPLETE`, the added one for
     `ADD`, 1 by default);
   - an ordered broadcast gets the outcome as its result data;
   ```
