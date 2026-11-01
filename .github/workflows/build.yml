@@ -194,6 +194,8 @@ jobs:
           rm $RUNNER_TEMP/cert.p12
           security set-key-partition-list -S apple-tool:,apple: -k "$PASSWORD" "$KEYCHAIN"
           security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
+          # Has to list "3rd Party Mac Developer Application: <APPLE_MAC_IDENTITY>" and the Installer one.
+          security find-identity -v "$KEYCHAIN"
           echo "MAC_KEYCHAIN=$KEYCHAIN" >> $GITHUB_ENV
 
       - name: Add macOS Provisioning Profiles
