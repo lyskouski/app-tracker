@@ -1,0 +1,29 @@
+{
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "dart.lineLength": 120,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+        120
+    ],
+    "editor.wordWrap": "on",
+    "[dart]": {
+        "editor.rulers": [
+            120
+        ],
+        "editor.formatOnSave": true,
+    },
+    "cSpell.words": [
+      "autofocus",
+      "curr",
+      "lerp",
+      "LTRB",
+      "readwrite",
+      "sublist",
+      "unfocus",
+      "writeln"
+    ],
+}
