@@ -7,7 +7,7 @@ plugins {
 kotlin {
     listOf(iosArm64(), iosSimulatorArm64()).forEach { target ->
         target.binaries.framework {
-            baseName = "iosApp"
+            baseName = "KotlinModules"
             isStatic = true
             export(project(":shared"))
         }

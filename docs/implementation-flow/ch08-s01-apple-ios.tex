@@ -4,7 +4,7 @@
 \subsubsection{Apple Store - iOS} \label{d-ios}
 
 The iOS application is an Xcode project (\q{iosApp/module.xcodeproj}), and its "Build Kotlin" phase compiles the shared
-code by the Kotlin CLI wrapper (\q{./kotlin tool xcode-integration}). So that, there is no need in a device running macOS:
+code into the \q{KotlinModules}-framework by Gradle (\q{./gradlew :iosApp:embedAndSignAppleFrameworkForXcode}). So that, there is no need in a device running macOS:
 the whole build, signing and upload is made by GitHub Actions on a \q{macos-26} runner (\q{iOS}-target of the \q{build}-matrix in
 \q{.github/workflows/build.yml}). All that is left to be done manually is to get the signing assets from Apple, register
 the application and put the assets into GitHub secrets.
