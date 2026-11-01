@@ -28,6 +28,8 @@ Français (FR) |
 
 Devise : Petits pas. Progrès visibles. Habitudes durables.
 
+Mots-clés : pomodoro,rappel,planificateur,calendrier,concentration,discipline,bien-être,tâches,progrès
+
 **Zwyka** -- application open source et multiplateforme de suivi des habitudes, sans publicités ni limitations.
 L’objectif de la solution est de créer une application de suivi des habitudes intuitive, efficace et inclusive,
 qui permette aux utilisateurs de gérer leurs habitudes sans effort tout en veillant à ce que personne ne soit laissé
@@ -40,43 +42,27 @@ de côté.
   - Archiver (désactiver) une habitude : elle est grisée, affichée en dernier et masquée dans le Planning
   - Objectif numérique, p. ex. 10000 pas : le jour garde la valeur atteinte, réalisation = valeur / objectif
 - Calendrier des habitudes (page principale)
-  - Trois vues, à changer avec les onglets en haut (la vue choisie est mémorisée) : Aujourd’hui, Semaine et Global
   - Aujourd’hui : les habitudes du jour en liste, les terminées et ignorées en dessous ; un balayage vers la droite marque une habitude comme faite (un objectif numérique demande sa valeur), vers la gauche la passe, un appui ouvre l’état du jour, un appui sur l’icône modifie l’habitude, un appui long ouvre ses détails
   - Semaine : une carte par habitude avec ses jours actifs et ses marques de la semaine en cours ; un appui sur la carte ouvre l’état du jour d’aujourd’hui, un appui sur l’icône modifie l’habitude, un appui long sur la carte ouvre ses détails
   - Global : Habitudes (colonnes) par jours (lignes) : les 66 derniers jours plus les 5 à venir
   - Progression du jour par habitude : `·` commencée, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` plus de 100 %
-  - Une cellule peut aussi être marquée comme passée ("—") ; un appui long sur une cellule supprime son état
-  - Un appui long sur une habitude ouvre ses détails
-  - Progression affichée sous forme de symboles ou de cercles colorés
   - Touchez une date pour marquer le jour comme sauté (« — ») pour toutes les habitudes non marquées
   - Série de jours : le nombre de jours marqués consécutifs (les jours « — » ne l’interrompent pas)
-  - Progression du jour : taux de réalisation global des habitudes du jour
 - Statistiques
   - Réalisation quotidienne (%) sur les 66 derniers jours
   - Détails de l’habitude : description, objectif, réalisation de chaque jour sur la dernière année (comme les contributions GitHub), séries maximale et actuelle
   - Objectifs de l’habitude : le bouton (+) ajoute un objectif (titre, description et un groupe nouveau ou existant) ; les objectifs sont regroupés par nom, un appui marque un objectif comme atteint, les groupes entièrement atteints passent en dernier et ↑ fait monter un groupe ; un appui long sur un objectif permet de le modifier, et un appui long sur un groupe le supprime avec tous ses objectifs (après confirmation)
 - Planning (Calendrier)
-  - Vue journalière avec les heures, comme Google ou Outlook Calendar
   - Planifier une habitude pour 30 minutes, 1 heure, 2 heures ou une plage horaire personnalisée, répétée les jours
     de la semaine sélectionnés, avec une note facultative
-  - Les plages horaires qui se chevauchent sont affichées côte à côte
   - Rappels (notifications)
   - Ajout à un calendrier externe (Apple, Google, Microsoft)
-  - Le bouton (+) planifie une habitude
 - Minuteur (depuis le Planning)
   - Horloge des 12 prochaines heures avec les événements planifiés, compte à rebours de l’événement en cours et prochains événements
   - Garde l’écran allumé, vibre au début d’un événement et demande la réalisation de l’habitude à sa fin
   - Pomodoro : 15 min, 30 min, 1 heure, 2 heures ou durée personnalisée, éventuellement pour une habitude
 - Paramètres
-  - Localisation
-  - Thème (système, clair, sombre)
-  - Début de la semaine, format des dates
-  - Ordre des habitudes (par date de création, dernière modification ou titre ; croissant ou décroissant)
   - Importation / Exportation des données
 - Expérience utilisateur
-  - Design réactif et adaptatif
-  - Défilement tactile ou à la souris : `Scroll Wheel` pour les jours, `Shift` + `Scroll Wheel` pour les habitudes
-  - Clavier : les flèches, `Page Up` / `Page Down`, `Home` / `End` font défiler le tableau ; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` remplace l'appui long ; `Tab` ne parcourt que les habitudes et le jour actuel, la cellule active est encadrée et défilée jusqu'à être visible
-  - Raccourcis : `Ctrl` + `N` ajoute une habitude (un événement, un objectif, un Pomodoro) ; `Alt` + `1` … `0` ouvre l'état du jour de la 1re … 10e habitude ; `Enter` valide une fenêtre (100 % pour un état du jour), `Delete` saute un état du jour ou supprime un élément, `Esc` ferme une fenêtre, `Backspace` revient en arrière
   - Automatisation : Raccourcis Siri (terminer, compléter ou sauter une habitude ; habitudes restantes du jour) et intents Android pour Tasker, Automate ou `adb` ; l’écran affiché est mis à jour aussitôt
   - Accessibilité (WCAG 2.1) : chaque action est nommée pour les lecteurs d'écran, contraste lisible dans les deux thèmes, le texte suit la taille de police du système

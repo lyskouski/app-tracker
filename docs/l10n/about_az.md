@@ -28,6 +28,8 @@ Azərbaycan dili (AZ) |
 
 Şüar: Kiçik addımlar. Görünən irəliləyiş. Davamlı vərdişlər.
 
+Açar sözlər: pomodoro,xatırlatma,planlayıcı,təqvim,diqqət,intizam,özünəqulluq,tapşırıq,irəliləyiş,motivasiya
+
 **Zwyka** -- reklamsız və məhdudiyyətsiz, açıq mənbəli, çoxplatformalı vərdiş izləmə tətbiqi.
 Həllin məqsədi intuitiv, səmərəli və inklüziv vərdiş izləmə tətbiqi yaratmaqdır.
 O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və heç kimin geridə qalmamasını təmin edir.
@@ -39,43 +41,27 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Vərdişi arxivləşdirmək (deaktiv etmək): o, boz rəngdə göstərilir, sonda yerləşir və Cədvəldə gizlədilir
   - Rəqəmsal hədəf, məs. 10000 addım: gün çatılan dəyəri saxlayır, icra = dəyər / hədəf
 - Vərdişlər Təqvimi (əsas səhifə)
-  - Yuxarıdakı tablarla dəyişdirilən üç görünüş (seçilən yadda saxlanılır): Bu gün, Həftəlik və Ümumi
   - Bu gün: bugünkü vərdişlər siyahı şəklində, tamamlanmış və ötürülmüşlər aşağıda; sağa sürüşdürmə vərdişi tamamlanmış kimi qeyd edir (rəqəmsal hədəf dəyəri soruşur), sola sürüşdürmə onu ötürür, toxunma günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, uzun basma onun təfərrüatlarını açır
   - Həftəlik: hər vərdiş üçün aktiv günləri və cari həftənin qeydləri ilə bir kart; karta toxunma bu günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, karta uzun basma onun təfərrüatlarını açır
   - Ümumi: Günlər (sətirlər) üzrə vərdişlər (sütunlar): son 66 gün və qarşıdakı 5 gün
   - Hər vərdiş üzrə günün irəliləyişi: `·` başlanıb, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` 100%-dən çox
-  - Xana həmçinin buraxılmış ("—") kimi qeyd edilə bilər; xanaya uzun basmaq onun vəziyyətini silir
-  - Vərdişə uzun basmaq onun təfərrüatlarını açır
-  - İrəliləyiş simvollarla və ya rəngli dairələrlə göstərilir
   - Bütün işarələnməmiş vərdişlər üçün günü buraxılmış ("—") kimi işarələmək üçün tarixə toxunun
   - Günlər seriyası: ardıcıl işarələnmiş günlərin sayı ("—" günləri onu qırmır)
-  - Bugünkü irəliləyiş: bugünkü vərdişlərin ümumi icrası
 - Statistika
   - Son 66 gün üzrə gündəlik icra (%)
   - Vərdişin təfərrüatları: təsvir, hədəf, son ilin hər günü üzrə icra (GitHub töhfələri kimi), ən uzun və cari seriya
   - Vərdişin məqsədləri: (+) düyməsi məqsəd əlavə edir (başlıq, təsvir, yeni və ya mövcud qrup); məqsədlər ada görə qruplaşdırılır, toxunuş məqsədi bitmiş kimi qeyd edir, tam bitmiş qruplar sona keçir, ↑ qrupu yuxarı qaldırır, məqsədə uzun basmaq onu redaktə edir, qrupa uzun basmaq isə onu bütün məqsədləri ilə birlikdə silir (təsdiqdən sonra)
 - Cədvəl (Təqvim)
-  - Google və ya Outlook Calendar kimi saatlarla gün görünüşü
   - Vərdişi 30 dəqiqə, 1 saat, 2 saat və ya fərdi vaxt aralığı üçün planlaşdırmaq, həftənin seçilmiş günlərində
     təkrarlanmaqla, istəyə bağlı qeydlə
-  - Üst-üstə düşən vaxt aralıqları yan-yana göstərilir
   - Xatırlatmalar (bildirişlər)
   - Xarici təqvimə əlavə etmək (Apple, Google, Microsoft)
-  - (+) düyməsi vərdişi planlaşdırır
 - Taymer (Cədvəldən)
   - Planlaşdırılmış tədbirlərlə növbəti 12 saatın saatı, cari tədbirin geri sayımı və növbəti tədbirlər
   - Ekranı açıq saxlayır, tədbir başlayanda titrəyir və bitəndə vərdişin icrasını soruşur
   - Pomodoro: 15 dəq, 30 dəq, 1 saat, 2 saat və ya xüsusi müddət, istəyə görə vərdiş üçün
 - Ayarlar
-  - Lokallaşdırma
-  - Mövzu (sistem, açıq, tünd)
-  - Həftənin başlanğıcı, tarix formatı
-  - Vərdişlərin sırası (yaradılma tarixinə, son yeniləməyə və ya ada görə; artan və ya azalan)
   - Məlumatların idxalı / ixracı
 - İstifadəçi təcrübəsi
-  - Responsiv və adaptiv dizayn
-  - Toxunuşla və ya siçanla sürüşdürmə: günlər üçün `Scroll Wheel`, vərdişlər üçün `Shift` + `Scroll Wheel`
-  - Klaviatura: oxlar, `Page Up` / `Page Down`, `Home` / `End` cədvəli sürüşdürür; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` uzun basmanı əvəz edir; `Tab` yalnız vərdişlər və cari gün üzrə keçir, fokusdakı xana haşiyələnir və görünən sahəyə sürüşdürülür
-  - Qısayollar: `Ctrl` + `N` vərdiş əlavə edir (hadisə, məqsəd, Pomodoro); `Alt` + `1` … `0` 1-ci … 10-cu vərdişin bugünkü vəziyyətini açır; `Enter` pəncərəni təsdiqləyir (gün vəziyyəti üçün 100%), `Delete` gün vəziyyətini ötürür və ya elementi silir, `Esc` pəncərəni bağlayır, `Backspace` geri qayıdır
   - Avtomatlaşdırma: Siri Shortcuts (vərdişi tamamlamaq, ona əlavə etmək və ya buraxmaq; bu gün qalan vərdişlər) və Tasker, Automate və ya `adb` üçün Android intent-ləri; göstərilən ekran dərhal yenilənir
   - Əlçatanlıq (WCAG 2.1): ekran oxuyucuları üçün hər əməliyyatın adı, hər iki temada oxunaqlı kontrast, sistem şrift ölçüsünə uyğunlaşan mətn

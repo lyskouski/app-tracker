@@ -28,6 +28,8 @@ Italiano (IT) |
 
 Motto: Piccoli passi. Progressi visibili. Abitudini durature.
 
+Parole chiave: pomodoro,promemoria,agenda,calendario,concentrazione,disciplina,benessere,todo,progressi
+
 **Zwyka** -- applicazione open source e multipiattaforma per monitorare le abitudini, senza pubblicità né limitazioni.
 L’obiettivo della soluzione è creare un’applicazione per il monitoraggio delle abitudini intuitiva, efficiente e inclusiva,
 che consenta agli utenti di gestire le proprie abitudini senza sforzo, garantendo al contempo che nessuno venga lasciato
@@ -40,43 +42,27 @@ indietro.
   - Archiviare (disattivare) un’abitudine: viene mostrata in grigio, in fondo all’elenco e nascosta nella Pianificazione
   - Obiettivo numerico, ad es. 10000 passi: il giorno conserva il valore raggiunto, completamento = valore / obiettivo
 - Calendario delle abitudini (pagina principale)
-  - Tre viste, da cambiare con le schede in alto (quella scelta viene ricordata): Oggi, Settimana e Generale
   - Oggi: le abitudini di oggi come elenco, quelle completate e saltate vanno sotto; scorrere a destra segna un'abitudine come fatta (un obiettivo numerico chiede il valore), scorrere a sinistra la salta, un tocco apre lo stato del giorno, un tocco sull'icona modifica l'abitudine, una pressione prolungata ne apre i dettagli
   - Settimana: una scheda per abitudine con i suoi giorni attivi e i segni della settimana corrente; un tocco sulla scheda apre lo stato di oggi, un tocco sull'icona modifica l'abitudine, una pressione prolungata sulla scheda ne apre i dettagli
   - Generale: Abitudini (colonne) per giorni (righe): gli ultimi 66 giorni più i 5 successivi
   - Avanzamento giornaliero per abitudine: `·` iniziata, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` oltre il 100%
-  - Una cella può anche essere segnata come saltata ("—"); una pressione prolungata su una cella ne elimina lo stato
-  - Una pressione prolungata su un’abitudine ne apre i dettagli
-  - Avanzamento mostrato come simboli o come cerchi colorati
   - Tocca una data per contrassegnare il giorno come saltato ("—") per tutte le abitudini non contrassegnate
   - Serie di giorni: il numero di giorni consecutivi contrassegnati (i giorni "—" non la interrompono)
-  - Avanzamento di oggi: completamento complessivo delle abitudini di oggi
 - Statistiche
   - Completamento giornaliero (%) negli ultimi 66 giorni
   - Dettagli dell’abitudine: descrizione, obiettivo, completamento di ogni giorno nell’ultimo anno (come i contributi GitHub), serie massima e attuale
   - Obiettivi dell’abitudine: il pulsante (+) aggiunge un obiettivo (titolo, descrizione e un gruppo nuovo o esistente); gli obiettivi sono raggruppati per nome, un tocco segna un obiettivo come raggiunto, i gruppi completati vanno in fondo e ↑ sposta un gruppo in su; una pressione prolungata su un obiettivo lo modifica e una pressione prolungata su un gruppo lo elimina con tutti i suoi obiettivi (dopo conferma)
 - Pianificazione (Calendario)
-  - Vista giornaliera con le ore, come Google o Outlook Calendar
   - Pianifica un’abitudine per 30 minuti, 1 ora, 2 ore o un intervallo di tempo personalizzato, ripetuto nei giorni
     della settimana selezionati, con una nota facoltativa
-  - Gli intervalli di tempo sovrapposti sono mostrati affiancati
   - Promemoria (notifiche)
   - Aggiunta a un calendario esterno (Apple, Google, Microsoft)
-  - Il pulsante (+) pianifica un’abitudine
 - Timer (dalla Pianificazione)
   - Orologio delle prossime 12 ore con gli eventi pianificati, conto alla rovescia dell’evento in corso e prossimi eventi
   - Mantiene lo schermo acceso, vibra all’inizio di un evento e chiede il completamento dell’abitudine alla fine
   - Pomodoro: 15 min, 30 min, 1 ora, 2 ore o durata personalizzata, facoltativamente per un’abitudine
 - Impostazioni
-  - Localizzazione
-  - Tema (di sistema, chiaro, scuro)
-  - Inizio della settimana, formato delle date
-  - Ordine delle abitudini (per data di creazione, ultimo aggiornamento o titolo; crescente o decrescente)
   - Importazione / Esportazione dei dati
 - Esperienza utente
-  - Design responsivo e adattivo
-  - Scorrimento al tocco o con il mouse: `Scroll Wheel` per i giorni, `Shift` + `Scroll Wheel` per le abitudini
-  - Tastiera: le frecce, `Page Up` / `Page Down`, `Home` / `End` scorrono la tabella; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` sostituisce la pressione prolungata; `Tab` scorre solo le abitudini e il giorno corrente, la cella con il focus viene evidenziata da un bordo e portata in vista
-  - Scorciatoie: `Ctrl` + `N` aggiunge un'abitudine (un evento, un obiettivo, un Pomodoro); `Alt` + `1` … `0` apre lo stato di oggi della 1ª … 10ª abitudine; `Enter` conferma una finestra (100% per uno stato del giorno), `Delete` salta uno stato del giorno o elimina un elemento, `Esc` chiude una finestra, `Backspace` torna indietro
   - Automazione: Comandi rapidi di Siri (completare, aggiungere a un’abitudine o saltarla; abitudini rimaste oggi) e intent Android per Tasker, Automate o `adb`; la schermata mostrata si aggiorna subito
   - Accessibilità (WCAG 2.1): ogni azione ha un nome per gli screen reader, contrasto leggibile in entrambi i temi, il testo segue la dimensione del carattere di sistema

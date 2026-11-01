@@ -28,6 +28,8 @@ English (EN-US) |
 
 Moto: Small steps. Visible progress. Lasting habits.
 
+Keywords: pomodoro,reminder,planner,calendar,focus,discipline,selfcare,todo,checklist,progress,motivation
+
 **Zwyka** -- open-source cross-platform habits tracking application without Ads and limitations.
 The goal of the solution is to create a habits tracking application that is intuitive, efficient, and inclusive.
 That empowers users to effortlessly manage their habits while ensuring that no one is left behind.
@@ -39,43 +41,27 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Archive (deactivate) a habit: it is grayed out, shown last, and hidden in the Schedule
   - Numeric target, e.g. 10000 steps: a day keeps the reached value, completion is value / target
 - Habits Calendar (main page)
-  - Three views, switched by the tabs on top (the chosen one is remembered): Today, Weekly, and Overall
   - Today: today's habits as a list, the completed and skipped ones go below; swipe right marks a habit as done (a numeric target asks for its value), swipe left skips it, a tap opens the day state, a tap on the icon edits the habit, a long press opens its details
   - Weekly: a card per habit with its active days and its marks for the current week; a tap on the card opens today's day state, a tap on the icon edits the habit, a long press on the card opens its details
   - Overall: habits (columns) by days (rows): the last 66 days plus the upcoming 5
   - Day progress per habit: `·` started, `\` 25%, `|` 50%, `/` 75%, `X` 100%, `▣` over 100%
-  - A cell can also be marked as skipped ("—"); long press on a cell deletes its state
-  - Long press on a habit opens its details
-  - Progress shown as symbols or as colored circles
   - Tap a date to mark the day as skipped ("—") for all not marked habits
   - Day Streak: the number of consecutive marked days ("—" days don't break it)
-  - Today's progress: overall completion of today's habits
 - Metrics
   - Daily completion (%) over the last 66 days
   - Habit details: description, target, completion of every day for the last year (like GitHub contributions), max and current streak
   - Goals of the habit: the (+) button adds a goal (title, description, and a new or existing group); goals are grouped by name, a tap marks a goal as finished, fully finished groups go last, and ↑ moves a group up; a long press on a goal edits it, and a long press on a group deletes it with all its goals (after confirmation)
 - Schedule (Calendar)
-  - Day view with hours, like Google or Outlook Calendar
   - Schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom time range, repeated on the selected days of the week,
     with an optional note
-  - Overlapping time ranges are shown side by side
   - Reminders (notifications)
   - Add to an external calendar (Apple, Google, Microsoft)
-  - The (+) button schedules a habit
 - Timer (from the Schedule)
   - Clock of the next 12 hours with the scheduled events, countdown of the current event, and the next events
   - Keeps the screen on, vibrates when an event starts, and asks for the habit’s completion when it ends
   - Pomodoro: 15 min, 30 min, 1 hour, 2 hours, or custom, optionally for a habit
 - Settings
-  - Localization
-  - Theme Mode (system, light, dark)
-  - Start of the week, dates format
-  - Habits order (by creation date, last update, or title; ascending or descending)
   - Import / Export of data
 - User Experience
-  - Responsive & Adaptive Design
-  - Scroll by touch, or by mouse: `Scroll Wheel` for days, `Shift` + `Scroll Wheel` for habits
-  - Keyboard: arrows, `Page Up` / `Page Down`, `Home` / `End` scroll the table; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` replaces a long press; `Tab` goes through the habits and the current day only, the focused cell is outlined and scrolled into view
-  - Shortcuts: `Ctrl` + `N` adds a habit (an event, a goal, a Pomodoro); `Alt` + `1` … `0` opens today's state of the 1st … 10th habit; `Enter` applies a popup (100% for a day state), `Delete` skips a day state or deletes an item, `Esc` closes a popup, `Backspace` goes back
   - Automation: Siri Shortcuts (complete, add to, or skip a habit; habits left today) and Android intents for Tasker, Automate, or `adb`; the shown screen updates at once
   - Accessibility (WCAG 2.1): every action is named for screen readers, readable contrast in both themes, text scales with the system font size

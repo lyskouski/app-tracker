@@ -28,6 +28,8 @@ Español (ES) |
 
 Lema: Pequeños pasos. Progreso visible. Hábitos duraderos.
 
+Palabras clave: pomodoro,recordatorio,planificador,calendario,enfoque,disciplina,autocuidado,tareas,progreso
+
 **Zwyka** -- aplicación multiplataforma de código abierto para el seguimiento de hábitos, sin anuncios ni limitaciones.
 El objetivo de la solución es crear una aplicación de seguimiento de hábitos intuitiva, eficiente e inclusiva.
 Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que nadie se quede atrás.
@@ -39,43 +41,27 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Archivar (desactivar) un hábito: se muestra en gris, al final y se oculta en el Horario
   - Objetivo numérico, p. ej. 10000 pasos: el día guarda el valor alcanzado, cumplimiento = valor / objetivo
 - Calendario de hábitos (página principal)
-  - Tres vistas, que se cambian con las pestañas superiores (se recuerda la elegida): Hoy, Semanal y General
   - Hoy: los hábitos de hoy como lista, los completados y omitidos van debajo; deslizar a la derecha marca un hábito como hecho (un objetivo numérico pide su valor), deslizar a la izquierda lo omite, un toque abre el estado del día, un toque en el icono edita el hábito y una pulsación larga abre sus detalles
   - Semanal: una tarjeta por hábito con sus días activos y sus marcas de la semana actual; un toque en la tarjeta abre el estado del día de hoy, un toque en el icono edita el hábito y una pulsación larga en la tarjeta abre sus detalles
   - General: Hábitos (columnas) por días (filas): los últimos 66 días más los 5 siguientes
   - Progreso diario por hábito: `·` iniciado, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` más del 100 %
-  - Una celda también puede marcarse como omitida ("—"); una pulsación larga en una celda elimina su estado
-  - Una pulsación larga en un hábito abre sus detalles
-  - Progreso mostrado como símbolos o como círculos de color
   - Toca una fecha para marcar el día como omitido ("—") para todos los hábitos no marcados
   - Racha de días: el número de días marcados consecutivos (los días "—" no la interrumpen)
-  - Progreso de hoy: cumplimiento total de los hábitos de hoy
 - Métricas
   - Cumplimiento diario (%) durante los últimos 66 días
   - Detalles del hábito: descripción, objetivo, cumplimiento de cada día del último año (como las contribuciones de GitHub), racha máxima y actual
   - Objetivos del hábito: el botón (+) añade un objetivo (título, descripción y un grupo nuevo o existente); los objetivos se agrupan por nombre, un toque marca un objetivo como cumplido, los grupos cumplidos por completo van al final y ↑ sube un grupo; una pulsación larga en un objetivo lo edita y una pulsación larga en un grupo lo elimina con todos sus objetivos (tras confirmar)
 - Horario (Calendario)
-  - Vista diaria por horas, como en Google o Outlook Calendar
   - Programa un hábito para 30 minutos, 1 hora, 2 horas o un intervalo personalizado, repetido los días de la semana
     seleccionados, con una nota opcional
-  - Los intervalos de tiempo superpuestos se muestran uno al lado del otro
   - Recordatorios (notificaciones)
   - Añadir a un calendario externo (Apple, Google, Microsoft)
-  - El botón (+) programa un hábito
 - Temporizador (desde el Horario)
   - Reloj de las próximas 12 horas con los eventos programados, cuenta atrás del evento actual y los próximos eventos
   - Mantiene la pantalla encendida, vibra al empezar un evento y pide el cumplimiento del hábito al terminar
   - Pomodoro: 15 min, 30 min, 1 hora, 2 horas o personalizado, opcionalmente para un hábito
 - Ajustes
-  - Localización
-  - Tema (sistema, claro, oscuro)
-  - Inicio de la semana, formato de fecha
-  - Orden de los hábitos (por fecha de creación, última actualización o título; ascendente o descendente)
   - Importación / Exportación de datos
 - Experiencia de usuario
-  - Diseño responsivo y adaptativo
-  - Desplazamiento táctil o con el ratón: `Scroll Wheel` para los días, `Shift` + `Scroll Wheel` para los hábitos
-  - Teclado: las flechas, `Page Up` / `Page Down`, `Home` / `End` desplazan la tabla; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` sustituye la pulsación larga; `Tab` recorre solo los hábitos y el día actual, la celda enfocada se resalta con un borde y se desplaza a la vista
-  - Atajos: `Ctrl` + `N` añade un hábito (un evento, una meta, un Pomodoro); `Alt` + `1` … `0` abre el estado de hoy del 1.º … 10.º hábito; `Enter` confirma una ventana (100 % para un estado del día), `Delete` omite un estado del día o elimina un elemento, `Esc` cierra una ventana, `Backspace` vuelve atrás
   - Automatización: Atajos de Siri (completar, sumar a un hábito u omitirlo; hábitos pendientes de hoy) e intents de Android para Tasker, Automate o `adb`; la pantalla mostrada se actualiza al instante
   - Accesibilidad (WCAG 2.1): todas las acciones tienen nombre para los lectores de pantalla, contraste legible en ambos temas, el texto se adapta al tamaño de fuente del sistema

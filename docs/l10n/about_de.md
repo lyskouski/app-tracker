@@ -28,6 +28,8 @@ Deutsch (DE) |
 
 Motto: Kleine Schritte. Sichtbarer Fortschritt. Bleibende Gewohnheiten.
 
+Schlüsselwörter: pomodoro,erinnerung,planer,kalender,fokus,disziplin,selbstfürsorge,todo,checkliste,fortschritt
+
 **Zwyka** -- quelloffene, plattformübergreifende Anwendung zum Verfolgen von Gewohnheiten ohne Werbung und
 Einschränkungen. Ziel der Lösung ist es, eine Gewohnheits-Tracker-App zu schaffen, die intuitiv, effizient und inklusiv
 ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und sorgt dafür, dass niemand zurückgelassen wird.
@@ -39,43 +41,27 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Eine Gewohnheit archivieren (deaktivieren): Sie wird ausgegraut, zuletzt angezeigt und im Zeitplan ausgeblendet
   - Numerisches Ziel, z. B. 10000 Schritte: ein Tag speichert den erreichten Wert, Erfüllung = Wert / Ziel
 - Gewohnheitskalender (Hauptseite)
-  - Drei Ansichten, umschaltbar über die Tabs oben (die gewählte wird gemerkt): Heute, Woche und Gesamt
   - Heute: die heutigen Gewohnheiten als Liste, erledigte und übersprungene stehen darunter; Wischen nach rechts markiert eine Gewohnheit als erledigt (bei einem numerischen Ziel wird der Wert abgefragt), Wischen nach links überspringt sie, Tippen öffnet den Tagesstatus, Tippen auf das Symbol bearbeitet die Gewohnheit, langes Drücken öffnet ihre Details
   - Woche: eine Karte pro Gewohnheit mit ihren aktiven Tagen und Markierungen der aktuellen Woche; Tippen auf die Karte öffnet den heutigen Tagesstatus, Tippen auf das Symbol bearbeitet die Gewohnheit, langes Drücken auf die Karte öffnet ihre Details
   - Gesamt: Gewohnheiten (Spalten) nach Tagen (Zeilen): die letzten 66 Tage plus die kommenden 5
   - Tagesfortschritt pro Gewohnheit: `·` begonnen, `\` 25 %, `|` 50 %, `/` 75 %, `X` 100 %, `▣` über 100 %
-  - Eine Zelle kann auch als übersprungen ("—") markiert werden; langes Drücken auf eine Zelle löscht ihren Status
-  - Langes Drücken auf eine Gewohnheit öffnet ihre Details
-  - Fortschritt als Symbole oder als farbige Kreise dargestellt
   - Auf ein Datum tippen, um den Tag für alle nicht markierten Gewohnheiten als übersprungen („—“) zu markieren
   - Tagesserie: die Anzahl aufeinanderfolgender markierter Tage („—“-Tage unterbrechen sie nicht)
-  - Heutiger Fortschritt: Gesamterfüllung der heutigen Gewohnheiten
 - Kennzahlen
   - Tägliche Erfüllung (%) über die letzten 66 Tage
   - Gewohnheitsdetails: Beschreibung, Ziel, Erfüllung jedes Tages im letzten Jahr (wie GitHub-Beiträge), längste und aktuelle Serie
   - Ziele der Gewohnheit: Die Schaltfläche (+) fügt ein Ziel hinzu (Titel, Beschreibung und eine neue oder vorhandene Gruppe); Ziele werden nach Namen gruppiert, ein Tippen markiert ein Ziel als erledigt, vollständig erledigte Gruppen rücken ans Ende, ↑ verschiebt eine Gruppe nach oben; langes Drücken auf ein Ziel bearbeitet es, langes Drücken auf eine Gruppe löscht sie samt allen Zielen (nach Bestätigung)
 - Zeitplan (Kalender)
-  - Tagesansicht mit Stunden, wie in Google oder Outlook Kalender
   - Eine Gewohnheit für 30 Minuten, 1 Stunde, 2 Stunden oder einen eigenen Zeitraum planen, wiederholt an den gewählten
     Wochentagen, mit optionaler Notiz
-  - Sich überschneidende Zeiträume werden nebeneinander angezeigt
   - Erinnerungen (Benachrichtigungen)
   - Zu einem externen Kalender hinzufügen (Apple, Google, Microsoft)
-  - Die Schaltfläche (+) plant eine Gewohnheit
 - Timer (aus dem Zeitplan)
   - Uhr der nächsten 12 Stunden mit den geplanten Terminen, Countdown des aktuellen Termins und die nächsten Termine
   - Hält den Bildschirm an, vibriert bei Beginn eines Termins und fragt am Ende nach der Erfüllung der Gewohnheit
   - Pomodoro: 15 Min., 30 Min., 1 Stunde, 2 Stunden oder eigene Dauer, optional für eine Gewohnheit
 - Einstellungen
-  - Lokalisierung
-  - Design (System, hell, dunkel)
-  - Wochenbeginn, Datumsformat
-  - Reihenfolge der Gewohnheiten (nach Erstellungsdatum, letzter Änderung oder Titel; aufsteigend oder absteigend)
   - Import / Export von Daten
 - Benutzererlebnis
-  - Responsives & adaptives Design
-  - Scrollen per Touch oder mit der Maus: `Scroll Wheel` für Tage, `Shift` + `Scroll Wheel` für Gewohnheiten
-  - Tastatur: Pfeiltasten, `Page Up` / `Page Down`, `Home` / `End` scrollen die Tabelle; `Menu` / `Shift` + `F10` / `Ctrl` + `Enter` ersetzt das lange Drücken; `Tab` springt nur durch die Gewohnheiten und den aktuellen Tag, die fokussierte Zelle wird umrandet und in den sichtbaren Bereich gescrollt
-  - Tastenkürzel: `Ctrl` + `N` fügt eine Gewohnheit hinzu (einen Termin, ein Ziel, einen Pomodoro); `Alt` + `1` … `0` öffnet den heutigen Status der 1. … 10. Gewohnheit; `Enter` bestätigt ein Popup (100 % für einen Tagesstatus), `Delete` überspringt einen Tagesstatus oder löscht ein Element, `Esc` schließt ein Popup, `Backspace` geht zurück
   - Automatisierung: Siri-Kurzbefehle (eine Gewohnheit erledigen, ergänzen oder überspringen; heute offene Gewohnheiten) und Android-Intents für Tasker, Automate oder `adb`; der angezeigte Bildschirm wird sofort aktualisiert
   - Barrierefreiheit (WCAG 2.1): Bezeichnungen aller Aktionen für Screenreader, gut lesbarer Kontrast in beiden Themes, Text skaliert mit der Systemschriftgröße
