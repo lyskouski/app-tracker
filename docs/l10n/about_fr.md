@@ -41,6 +41,7 @@ de côté.
   - Jours actifs de la semaine ; les jours inactifs sont marqués par « — »
   - Archiver (désactiver) une habitude : elle est grisée, affichée en dernier et masquée dans le Planning
   - Objectif numérique, p. ex. 10000 pas : le jour garde la valeur atteinte, réalisation = valeur / objectif
+  - Habitude à éviter (choisie à la création) : l’icône est barrée, un jour sans marque = 100 %, une marque donne 100 % moins son pourcentage, la série compte les jours sans marque
 - Calendrier des habitudes (page principale)
   - Aujourd’hui : les habitudes du jour en liste, les terminées et ignorées en dessous ; un balayage vers la droite marque une habitude comme faite (un objectif numérique demande sa valeur), vers la gauche la passe, un appui ouvre l’état du jour, un appui sur l’icône modifie l’habitude, un appui long ouvre ses détails
   - Semaine : une carte par habitude avec ses jours actifs et ses marques de la semaine en cours ; un appui sur la carte ouvre l’état du jour d’aujourd’hui, un appui sur l’icône modifie l’habitude, un appui long sur la carte ouvre ses détails

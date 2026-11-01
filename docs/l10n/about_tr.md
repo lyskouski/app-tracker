@@ -40,6 +40,7 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Haftanın aktif günleri; aktif olmayan günler "—" ile işaretlenir
   - Alışkanlığı arşivleme (devre dışı bırakma): gri görünür, en sonda gösterilir ve Programda gizlenir
   - Sayısal hedef, ör. 10000 adım: gün ulaşılan değeri saklar, tamamlanma = değer / hedef
+  - Kaçınılacak alışkanlık (oluştururken seçilir): simgesi üstü çizili görünür, işaretsiz gün = %100, işaret %100 eksi kendi yüzdesini verir, gün serisi işaretsiz günleri sayar
 - Alışkanlık Takvimi (ana sayfa)
   - Bugün: bugünün alışkanlıkları liste halinde, tamamlanan ve atlananlar altta; sağa kaydırma alışkanlığı tamamlandı olarak işaretler (sayısal hedef değeri sorar), sola kaydırma atlar, dokunma günün durumunu açar, simgeye dokunma alışkanlığı düzenler, uzun basma ayrıntılarını açar
   - Haftalık: her alışkanlık için aktif günleri ve bu haftanın işaretleriyle bir kart; karta dokunma bugünün durumunu açar, simgeye dokunma alışkanlığı düzenler, karta uzun basma ayrıntılarını açar

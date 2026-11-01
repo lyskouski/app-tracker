@@ -40,6 +40,7 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Haftaning faol kunlari; nofaol kunlar "—" bilan belgilanadi
   - Odatni arxivlash (o‘chirish): u kulrang bo‘ladi, oxirida ko‘rsatiladi va Jadvalda yashiriladi
   - Raqamli maqsad, masalan 10000 qadam: kun erishilgan qiymatni saqlaydi, bajarilish = qiymat / maqsad
+  - Tark etiladigan odat (yaratishda tanlanadi): belgisi ustidan chizilgan, belgisiz kun = 100%, belgi 100% minus o‘z foizini beradi, kunlar seriyasi belgisiz kunlarni sanaydi
 - Odatlar taqvimi (asosiy sahifa)
   - Bugun: bugungi odatlar ro‘yxat ko‘rinishida, bajarilgan va o‘tkazilganlari pastda; o‘ngga surish odatni bajarilgan deb belgilaydi (raqamli maqsad qiymatni so‘raydi), chapga surish uni o‘tkazib yuboradi, bosish kun holatini ochadi, belgini bosish odatni tahrirlaydi, uzoq bosish uning tafsilotlarini ochadi
   - Haftalik: har bir odat uchun faol kunlari va joriy hafta belgilari bilan karta; kartani bosish bugungi kun holatini ochadi, belgini bosish odatni tahrirlaydi, kartani uzoq bosish uning tafsilotlarini ochadi

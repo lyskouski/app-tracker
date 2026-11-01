@@ -40,6 +40,7 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Actieve dagen van de week; inactieve dagen worden gemarkeerd met "—"
   - Een gewoonte archiveren (deactiveren): deze wordt grijs weergegeven, als laatste getoond en verborgen in de Planning
   - Numeriek doel, bijv. 10000 stappen: een dag bewaart de behaalde waarde, voltooiing = waarde / doel
+  - Te vermijden gewoonte (bij aanmaken gekozen): het pictogram is doorgestreept, een dag zonder markering = 100%, een markering geeft 100% min haar percentage, de reeks telt dagen zonder markering
 - Gewoontekalender (hoofdpagina)
   - Vandaag: de gewoontes van vandaag als lijst, voltooide en overgeslagen staan eronder; naar rechts vegen markeert een gewoonte als klaar (een numeriek doel vraagt om de waarde), naar links vegen slaat haar over, tikken opent de dagstatus, tikken op het pictogram bewerkt de gewoonte, lang drukken opent haar details
   - Week: een kaart per gewoonte met haar actieve dagen en markeringen van de huidige week; tikken op de kaart opent de dagstatus van vandaag, tikken op het pictogram bewerkt de gewoonte, lang drukken op de kaart opent haar details

@@ -40,6 +40,7 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Active days of the week; inactive days are marked with "—"
   - Archive (deactivate) a habit: it is grayed out, shown last, and hidden in the Schedule
   - Numeric target, e.g. 10000 steps: a day keeps the reached value, completion is value / target
+  - Habit to avoid (set on creation): the icon is crossed out, a day without a mark is 100%, a mark gives 100% minus its percentage, Day Streak counts the days without marks
 - Habits Calendar (main page)
   - Today: today's habits as a list, the completed and skipped ones go below; swipe right marks a habit as done (a numeric target asks for its value), swipe left skips it, a tap opens the day state, a tap on the icon edits the habit, a long press opens its details
   - Weekly: a card per habit with its active days and its marks for the current week; a tap on the card opens today's day state, a tap on the icon edits the habit, a long press on the card opens its details

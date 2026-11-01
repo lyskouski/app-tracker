@@ -40,6 +40,7 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Həftənin aktiv günləri; qeyri-aktiv günlər "—" ilə işarələnir
   - Vərdişi arxivləşdirmək (deaktiv etmək): o, boz rəngdə göstərilir, sonda yerləşir və Cədvəldə gizlədilir
   - Rəqəmsal hədəf, məs. 10000 addım: gün çatılan dəyəri saxlayır, icra = dəyər / hədəf
+  - Qaçınılacaq vərdiş (yaradılarkən seçilir): ikonu üstündən xətlənir, işarəsiz gün 100%-dir, işarə 100% minus öz faizini verir, Gün Seriyası işarəsiz günləri sayır
 - Vərdişlər Təqvimi (əsas səhifə)
   - Bu gün: bugünkü vərdişlər siyahı şəklində, tamamlanmış və ötürülmüşlər aşağıda; sağa sürüşdürmə vərdişi tamamlanmış kimi qeyd edir (rəqəmsal hədəf dəyəri soruşur), sola sürüşdürmə onu ötürür, toxunma günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, uzun basma onun təfərrüatlarını açır
   - Həftəlik: hər vərdiş üçün aktiv günləri və cari həftənin qeydləri ilə bir kart; karta toxunma bu günün vəziyyətini açır, ikonaya toxunma vərdişi redaktə edir, karta uzun basma onun təfərrüatlarını açır

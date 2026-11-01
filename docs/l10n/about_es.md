@@ -40,6 +40,7 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Días activos de la semana; los días inactivos se marcan con "—"
   - Archivar (desactivar) un hábito: se muestra en gris, al final y se oculta en el Horario
   - Objetivo numérico, p. ej. 10000 pasos: el día guarda el valor alcanzado, cumplimiento = valor / objetivo
+  - Hábito a evitar (se elige al crearlo): el icono aparece tachado, un día sin marca = 100 %, una marca da 100 % menos su porcentaje, la racha cuenta los días sin marcas
 - Calendario de hábitos (página principal)
   - Hoy: los hábitos de hoy como lista, los completados y omitidos van debajo; deslizar a la derecha marca un hábito como hecho (un objetivo numérico pide su valor), deslizar a la izquierda lo omite, un toque abre el estado del día, un toque en el icono edita el hábito y una pulsación larga abre sus detalles
   - Semanal: una tarjeta por hábito con sus días activos y sus marcas de la semana actual; un toque en la tarjeta abre el estado del día de hoy, un toque en el icono edita el hábito y una pulsación larga en la tarjeta abre sus detalles

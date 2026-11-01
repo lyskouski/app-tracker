@@ -40,6 +40,7 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Aktive Wochentage; inaktive Tage werden mit „—“ markiert
   - Eine Gewohnheit archivieren (deaktivieren): Sie wird ausgegraut, zuletzt angezeigt und im Zeitplan ausgeblendet
   - Numerisches Ziel, z. B. 10000 Schritte: ein Tag speichert den erreichten Wert, Erfüllung = Wert / Ziel
+  - Zu vermeidende Gewohnheit (beim Anlegen festgelegt): das Symbol ist durchgestrichen, ein Tag ohne Markierung = 100 %, eine Markierung ergibt 100 % minus ihren Prozentsatz, die Tagesserie zählt Tage ohne Markierung
 - Gewohnheitskalender (Hauptseite)
   - Heute: die heutigen Gewohnheiten als Liste, erledigte und übersprungene stehen darunter; Wischen nach rechts markiert eine Gewohnheit als erledigt (bei einem numerischen Ziel wird der Wert abgefragt), Wischen nach links überspringt sie, Tippen öffnet den Tagesstatus, Tippen auf das Symbol bearbeitet die Gewohnheit, langes Drücken öffnet ihre Details
   - Woche: eine Karte pro Gewohnheit mit ihren aktiven Tagen und Markierungen der aktuellen Woche; Tippen auf die Karte öffnet den heutigen Tagesstatus, Tippen auf das Symbol bearbeitet die Gewohnheit, langes Drücken auf die Karte öffnet ihre Details

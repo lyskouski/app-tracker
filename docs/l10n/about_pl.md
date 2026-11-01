@@ -40,6 +40,7 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Aktywne dni tygodnia; nieaktywne dni są oznaczone symbolem "—"
   - Archiwizacja (dezaktywacja) nawyku: jest on wyszarzony, wyświetlany na końcu i ukryty w Harmonogramie
   - Cel liczbowy, np. 10000 kroków: dzień przechowuje osiągniętą wartość, realizacja = wartość / cel
+  - Nawyk do unikania (wybierany przy tworzeniu): ikona jest przekreślona, dzień bez znaku = 100%, znak daje 100% minus swój procent, seria liczy dni bez znaków
 - Kalendarz nawyków (strona główna)
   - Dziś: dzisiejsze nawyki jako lista, wykonane i pominięte trafiają niżej; przesunięcie w prawo oznacza nawyk jako zrobiony (cel liczbowy pyta o wartość), przesunięcie w lewo go pomija, dotknięcie otwiera stan dnia, dotknięcie ikony edytuje nawyk, długie naciśnięcie otwiera jego szczegóły
   - Tydzień: karta dla każdego nawyku z jego aktywnymi dniami i oznaczeniami z bieżącego tygodnia; dotknięcie karty otwiera dzisiejszy stan dnia, dotknięcie ikony edytuje nawyk, długie naciśnięcie karty otwiera jego szczegóły

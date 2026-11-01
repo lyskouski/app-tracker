@@ -40,6 +40,7 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Zilele active ale săptămânii; zilele inactive sunt marcate cu "—"
   - Arhivarea (dezactivarea) unui obicei: acesta devine gri, este afișat ultimul și este ascuns în Program
   - Obiectiv numeric, de ex. 10000 de pași: ziua păstrează valoarea atinsă, îndeplinire = valoare / obiectiv
+  - Obicei de evitat (ales la creare): pictograma este tăiată, o zi fără marcaj = 100%, un marcaj dă 100% minus procentul său, seria numără zilele fără marcaje
 - Calendarul obiceiurilor (pagina principală)
   - Astăzi: obiceiurile de azi ca listă, cele finalizate și omise sunt dedesubt; glisarea la dreapta marchează un obicei ca făcut (o țintă numerică cere valoarea), glisarea la stânga îl omite, o atingere deschide starea zilei, o atingere pe pictogramă editează obiceiul, o apăsare lungă îi deschide detaliile
   - Săptămână: un card pentru fiecare obicei cu zilele active și marcajele din săptămâna curentă; o atingere pe card deschide starea zilei de azi, o atingere pe pictogramă editează obiceiul, o apăsare lungă pe card îi deschide detaliile

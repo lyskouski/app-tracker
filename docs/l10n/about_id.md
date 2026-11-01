@@ -42,6 +42,7 @@ tertinggal.
   - Arsipkan (nonaktifkan) kebiasaan: kebiasaan ditampilkan berwarna abu-abu, diletakkan paling akhir, dan disembunyikan
     di Jadwal
   - Target angka, mis. 10000 langkah: hari menyimpan nilai yang dicapai, penyelesaian = nilai / target
+  - Kebiasaan yang dihindari (dipilih saat dibuat): ikonnya dicoret, hari tanpa tanda = 100%, tanda memberi 100% dikurangi persentasenya, runtunan menghitung hari tanpa tanda
 - Kalender Kebiasaan (halaman utama)
   - Hari ini: kebiasaan hari ini dalam daftar, yang selesai dan dilewati ada di bawah; geser ke kanan menandai kebiasaan selesai (target numerik meminta nilainya), geser ke kiri melewatinya, ketuk membuka status hari, ketuk ikon mengedit kebiasaan, tekan lama membuka detailnya
   - Mingguan: kartu per kebiasaan dengan hari aktif dan tandanya untuk minggu ini; ketuk kartu membuka status hari ini, ketuk ikon mengedit kebiasaan, tekan lama pada kartu membuka detailnya

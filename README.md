@@ -32,6 +32,9 @@ one is left behind.
 - Set a numeric target with a value and a type (e.g. 10000 steps): the day's state keeps the
   reached value instead of a status mark, and its completion is the value divided by the target.
   Once set, the target can be changed but not turned off.
+- Track a habit to avoid (a toggle of "Add Habit", it cannot be changed later): its icon is
+  shown in a crossed circle, a day without a mark is 100% complete, a marked day is 100% minus
+  the mark's percentage, and its Day Streak counts the days without marks.
 
 **Home screen**
 - Three views, switched by the tabs on top: `Today`, `Weekly`, and `Overall` (by default);
@@ -66,7 +69,8 @@ one is left behind.
 - Tap a date to mark the day as skipped ("—") for all habits that are not marked yet.
 - Archived (deactivated) habits are grayed out, always shown last, and hide their marks.
 - **Day Streak**: the number of consecutive marked days is shown right after each streak ("—"
-  days don't break it); 66 days or more are shown as "66+".
+  days don't break it); 66 days or more are shown as "66+". For a habit to avoid it counts
+  the days without marks since its creation up to today, shown on the last day of the streak.
 - **Today's progress**: the top-left corner shows the overall completion of today's habits
   as a progress bar around the cell, with the percentage in the middle.
 

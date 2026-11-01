@@ -41,6 +41,7 @@ indietro.
   - Giorni attivi della settimana; i giorni inattivi sono contrassegnati con "—"
   - Archiviare (disattivare) un’abitudine: viene mostrata in grigio, in fondo all’elenco e nascosta nella Pianificazione
   - Obiettivo numerico, ad es. 10000 passi: il giorno conserva il valore raggiunto, completamento = valore / obiettivo
+  - Abitudine da evitare (scelta alla creazione): l’icona è barrata, un giorno senza segno = 100%, un segno dà 100% meno la sua percentuale, la serie conta i giorni senza segni
 - Calendario delle abitudini (pagina principale)
   - Oggi: le abitudini di oggi come elenco, quelle completate e saltate vanno sotto; scorrere a destra segna un'abitudine come fatta (un obiettivo numerico chiede il valore), scorrere a sinistra la salta, un tocco apre lo stato del giorno, un tocco sull'icona modifica l'abitudine, una pressione prolungata ne apre i dettagli
   - Settimana: una scheda per abitudine con i suoi giorni attivi e i segni della settimana corrente; un tocco sulla scheda apre lo stato di oggi, un tocco sull'icona modifica l'abitudine, una pressione prolungata sulla scheda ne apre i dettagli

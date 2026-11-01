@@ -40,6 +40,7 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Dias ativos da semana; os dias inativos são marcados com "—"
   - Arquivar (desativar) um hábito: ele fica acinzentado, é exibido por último e fica oculto na Agenda
   - Meta numérica, ex. 10000 passos: o dia guarda o valor alcançado, conclusão = valor / meta
+  - Hábito a evitar (definido na criação): o ícone aparece riscado, um dia sem marca = 100%, uma marca dá 100% menos a sua porcentagem, a sequência conta os dias sem marcas
 - Calendário de hábitos (página principal)
   - Hoje: os hábitos de hoje em lista, os concluídos e ignorados ficam abaixo; deslizar para a direita marca um hábito como feito (uma meta numérica pede o valor), deslizar para a esquerda o pula, um toque abre o estado do dia, um toque no ícone edita o hábito, um toque longo abre seus detalhes
   - Semanal: um cartão por hábito com seus dias ativos e marcas da semana atual; um toque no cartão abre o estado do dia de hoje, um toque no ícone edita o hábito, um toque longo no cartão abre seus detalhes
