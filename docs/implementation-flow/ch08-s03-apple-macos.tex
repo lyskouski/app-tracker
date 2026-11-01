@@ -162,6 +162,18 @@ Connect by \q{xcrun altool --upload-app --type macos} (the same step as for iOS)
 packages. The runner is Apple silicon, so the package is \q{arm64}-only: the application is available for Macs with
 Apple silicon (M1 and later).
 
+The version of the package is taken from the tag, and for macOS it has to start with 1 or higher: \q{jpackage} rejects
+versions like \q{0.6.0} (tag \q{v0.6.0}), and \q{:desktopApp:createDistributable} fails with "External tool execution
+failed". The reason is written only into the logs of \q{jpackage}
+(\q{desktopApp/build/compose/logs/createDistributable/*-err.txt}):
+
+\begin{lstlisting}[language=terminal]
+Bundler Mac Application Image skipped because of a configuration problem:
+  The first number in an app-version cannot be zero or negative.
+Advice to fix: Set a compatible 'app-version' value.
+  Valid versions are one to three integers separated by dots.
+\end{lstlisting}
+
 \paragraph{Sandbox.} Any application of the Mac App Store has to be sandboxed, otherwise the upload fails with "App
 sandbox not enabled". Both parts declare \q{com.apple.security.app-sandbox}, while the runtime has to inherit the
 sandbox of the application by \q{com.apple.security.inherit} (\q{desktopApp/runtime-entitlements.plist}). The JVM
