@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 
 /*
  * [icon] on a filled square of [color], a button set apart from the rest of its row;
- * without an [icon] a "?" is shown.
+ * without an [icon] a "?" is shown. [crossed] marks the icon of a habit to avoid (see [crossedOut]).
  *
  * WCAG 1.4.11: [color] is expected to reach the graphics contrast over the row,
  * the content is adjusted to be readable over [color].
@@ -38,6 +38,7 @@ fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     onClickLabel: String? = null,
+    crossed: Boolean = false,
 ) {
     val contentColor = Color.White.readableOn(color, TEXT_CONTRAST)
     Box(
@@ -51,9 +52,9 @@ fun IconButton(
         contentAlignment = Alignment.Center,
     ) {
         if (icon == null) {
-            Text("?", color = contentColor)
+            Text("?", color = contentColor, modifier = Modifier.crossedOut(crossed))
         } else {
-            Icon(imageVector = icon, contentDescription = null, tint = contentColor)
+            Icon(imageVector = icon, contentDescription = null, tint = contentColor, modifier = Modifier.crossedOut(crossed))
         }
     }
 }

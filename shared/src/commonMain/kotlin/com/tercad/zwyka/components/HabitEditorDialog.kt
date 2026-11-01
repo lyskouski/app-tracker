@@ -75,6 +75,7 @@ import com.tercad.zwyka.resources.habit_name
 import com.tercad.zwyka.resources.habit_remarks
 import com.tercad.zwyka.resources.habit_update_failed
 import com.tercad.zwyka.resources.invalid_color
+import com.tercad.zwyka.resources.negative_habit
 import com.tercad.zwyka.resources.no_icon
 import com.tercad.zwyka.resources.numeric_target
 import com.tercad.zwyka.resources.save
@@ -87,6 +88,7 @@ import com.tercad.zwyka.widgets.CheckboxRow
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.SwitchRow
 import com.tercad.zwyka.widgets.chosen
+import com.tercad.zwyka.widgets.crossedOut
 import com.tercad.zwyka.widgets.popupShortcuts
 
 @Composable
@@ -104,6 +106,7 @@ fun HabitEditorDialog(
         isArchived: Boolean,
         targetValue: Double?,
         targetType: String?,
+        isNegative: Boolean,
     ) -> Unit,
     onDelete: (() -> Unit)? = null,
     weekStart: WeekStart = WeekStart.MONDAY,
@@ -119,6 +122,7 @@ fun HabitEditorDialog(
         mutableStateOf(habit?.targetValue?.let(::formatNumericValue).orEmpty())
     }
     var targetType by remember(habit?.id) { mutableStateOf(habit?.targetType.orEmpty()) }
+    var isNegative by remember(habit?.id) { mutableStateOf(habit?.isNegative ?: false) }
     var iconSearch by remember(habit?.id) { mutableStateOf("") }
     var colorInput by remember(habit?.id) { mutableStateOf(habit?.color.orEmpty()) }
     var selectingIcon by remember(habit?.id) { mutableStateOf(false) }
@@ -151,6 +155,7 @@ fun HabitEditorDialog(
                 isArchived,
                 parsedTarget.takeIf { hasTarget },
                 targetType.trim().ifEmpty { null }.takeIf { hasTarget },
+                isNegative,
             )
         }
     }
@@ -349,6 +354,14 @@ fun HabitEditorDialog(
                                 .padding(top = 8.dp),
                         )
                         SwitchRow(
+                            checked = isNegative,
+                            onCheckedChange = { isNegative = it },
+                            label = stringResource(Res.string.negative_habit),
+                            modifier = Modifier.padding(top = 8.dp),
+                            // Stored marks would turn from failures into successes and back.
+                            enabled = !isSaving && habit == null,
+                        )
+                        SwitchRow(
                             checked = hasTarget,
                             onCheckedChange = { hasTarget = it },
                             label = stringResource(Res.string.numeric_target),
@@ -420,8 +433,12 @@ fun HabitEditorDialog(
                             modifier = Modifier.padding(top = 10.dp),
                         ) {
                             applicationIcon(icon)?.let { image ->
-                                Icon(imageVector = image, contentDescription = null)
-                            } ?: Text("?")
+                                Icon(
+                                    imageVector = image,
+                                    contentDescription = null,
+                                    modifier = Modifier.crossedOut(isNegative),
+                                )
+                            } ?: Text("?", modifier = Modifier.crossedOut(isNegative))
                             Text(
                                 applicationIconOption(icon)?.title
                                     ?: stringResource(Res.string.no_icon),

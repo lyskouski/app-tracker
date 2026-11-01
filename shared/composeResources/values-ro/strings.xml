@@ -10,6 +10,7 @@
     <string name="habit_remarks">Observații</string>
     <string name="active_days">Zile active</string>
     <string name="archive_habit">Arhivează/dezactivează obiceiul</string>
+    <string name="negative_habit">Obicei de evitat</string>
     <string name="numeric_target">Setează obiectiv numeric</string>
     <string name="target_value">Valoare</string>
     <string name="target_type">Tip</string>

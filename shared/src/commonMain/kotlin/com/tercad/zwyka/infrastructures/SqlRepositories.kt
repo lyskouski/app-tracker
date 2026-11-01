@@ -34,10 +34,10 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
 
     override suspend fun getAll(): List<Habit> =
         queries.selectAllHabits {
-                id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived, targetValue, targetType ->
+                id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived, targetValue, targetType, isNegative ->
             Habit(
                 id, title, icon, color, remarks, createdAt, updatedAt, activeDays.toInt(), isArchived != 0L,
-                targetValue, targetType,
+                targetValue, targetType, isNegative != 0L,
             )
         }.awaitAsList()
 
@@ -45,6 +45,7 @@ class SqlHabitRepository(private val database: Database) : HabitRepository {
         queries.insertHabit(
             draft.title, draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
             if (draft.isArchived) 1L else 0L, draft.targetValue, draft.targetType,
+            if (draft.isNegative) 1L else 0L,
         )
         return queries.selectLastHabitId().awaitAsOne().max ?: error("Habit was not created")
     }
@@ -249,6 +250,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
                         "remarks" to it.remarks, "createdAt" to it.createdAt, "updatedAt" to it.updatedAt,
                         "activeDays" to it.activeDays, "isArchived" to it.isArchived,
                         "targetValue" to it.targetValue, "targetType" to it.targetType,
+                        "isNegative" to it.isNegative,
                     ),
                 ),
             )
@@ -321,6 +323,7 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),
             long("createdAt", 0), long("updatedAt", 0), long("activeDays", ALL_DAYS.toLong()),
             long("isArchived", 0), doubleOrNull("targetValue"), stringOrNull("targetType"),
+            long("isNegative", 0),
         )
         "Intent" -> queries.importIntent(
             long("id"), string("title"), stringOrNull("icon"), stringOrNull("color"), stringOrNull("remarks"),

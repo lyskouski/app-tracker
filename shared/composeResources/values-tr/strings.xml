@@ -10,6 +10,7 @@
     <string name="habit_remarks">Notlar</string>
     <string name="active_days">Aktif günler</string>
     <string name="archive_habit">Alışkanlığı arşivle/devre dışı bırak</string>
+    <string name="negative_habit">Kaçınılacak alışkanlık</string>
     <string name="numeric_target">Sayısal hedef belirle</string>
     <string name="target_value">Değer</string>
     <string name="target_type">Tür</string>

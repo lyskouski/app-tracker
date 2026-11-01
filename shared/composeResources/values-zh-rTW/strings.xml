@@ -10,6 +10,7 @@
     <string name="habit_remarks">備註</string>
     <string name="active_days">活躍日</string>
     <string name="archive_habit">封存/停用習慣</string>
+    <string name="negative_habit">要避免的習慣</string>
     <string name="numeric_target">設定數值目標</string>
     <string name="target_value">數值</string>
     <string name="target_type">類型</string>

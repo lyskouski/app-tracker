@@ -22,14 +22,20 @@ fun isProgressMark(habit: Habit, mark: String?): Boolean =
 /*
  * Completion of [mark], 0..1: the reached value divided by the numeric target,
  * otherwise by the status mark (see [statusProgress]); over 100% is capped.
+ * A habit to avoid is inverted: an empty day is 100%, a progress mark is 100% - its percentage.
  */
 fun markProgress(habit: Habit, mark: String?): Float {
     val target = habit.targetValue?.takeIf { it > 0 }
     val value = mark?.let(::parseNumericValue)
-    return if (target != null && value != null) {
+    val progress = if (target != null && value != null) {
         (value / target).toFloat().coerceIn(0f, 1f)
     } else {
         statusProgress(mark)
+    }
+    return when {
+        !habit.isNegative -> progress
+        isProgressMark(habit, mark) -> 1f - progress
+        else -> 1f
     }
 }
 

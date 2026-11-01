@@ -20,12 +20,13 @@ enum class TodayStatus {
 
 /*
  * Status of [habit] on [date]: "—" and unmarked inactive days are skipped,
- * a progress of 100% (or a reached numeric target) is done.
+ * a progress of 100% (or a reached numeric target) is done;
+ * a habit to avoid is done while it is not marked (see [markProgress]).
  */
 fun todayStatus(habit: Habit, date: String, mark: String?): TodayStatus = when {
     mark == INACTIVE_MARK -> TodayStatus.SKIPPED
     mark == null && !habit.isActiveOn(LocalDate.parse(date).dayOfWeek) -> TodayStatus.SKIPPED
-    isProgressMark(habit, mark) && markProgress(habit, mark) >= 1f -> TodayStatus.DONE
+    (habit.isNegative || isProgressMark(habit, mark)) && markProgress(habit, mark) >= 1f -> TodayStatus.DONE
     else -> TodayStatus.NOT_DONE
 }
 

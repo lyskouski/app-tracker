@@ -23,6 +23,8 @@ data class Habit(
     val targetValue: Double? = null,
     /** Unit of [targetValue], e.g. "glasses". */
     val targetType: String? = null,
+    /** Tracks a habit to avoid: an empty day is the success; fixed at creation. */
+    val isNegative: Boolean = false,
 )
 
 /** Bitmask of active weekdays: bit 0 is Monday ... bit 6 is Sunday. */

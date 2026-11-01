@@ -55,6 +55,7 @@ import com.tercad.zwyka.resources.status
 import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.ChoiceButton
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.crossedOut
 import com.tercad.zwyka.widgets.popupShortcuts
 import org.jetbrains.compose.resources.stringArrayResource
 
@@ -105,11 +106,12 @@ fun DayStateDialog(
                     leadingIcon = {
                         val icon = applicationIcon(habit.icon)
                         if (icon == null) {
-                            Text("?")
+                            Text("?", modifier = Modifier.crossedOut(habit.isNegative))
                         } else {
                             Icon(
                                 imageVector = icon,
                                 contentDescription = null,
+                                modifier = Modifier.crossedOut(habit.isNegative),
                             )
                         }
                     },

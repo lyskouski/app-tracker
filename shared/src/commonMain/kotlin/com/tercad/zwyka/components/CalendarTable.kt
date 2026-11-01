@@ -105,6 +105,7 @@ import com.tercad.zwyka.defines.applicationIcon
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
 import com.tercad.zwyka.widgets.actionable
+import com.tercad.zwyka.widgets.crossedOut
 import com.tercad.zwyka.widgets.readableOn
 
 /** Opacity of the archived habits in the header. */
@@ -806,6 +807,7 @@ private fun CalendarHeaderViewport(
                             currentColorScheme().surfaceVariant,
                         icon = icon,
                         iconTint = iconTint,
+                        crossed = habit.isNegative,
                         textColor = iconTint,
                         contentDescription = habit.title,
                         title = if (showTitles) habit.title else null,
@@ -1352,6 +1354,8 @@ internal fun CalendarTableCell(
     background: androidx.compose.ui.graphics.Color,
     icon: androidx.compose.ui.graphics.vector.ImageVector? = null,
     iconTint: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
+    /** Marks the [icon] of a habit to avoid, see [crossedOut]. */
+    crossed: Boolean = false,
     textColor: androidx.compose.ui.graphics.Color = currentColorScheme().onSurface,
     fontWeight: FontWeight? = null,
     contentDescription: String? = null,
@@ -1405,6 +1409,7 @@ internal fun CalendarTableCell(
                     imageVector = icon,
                     contentDescription = contentDescription,
                     tint = iconTint,
+                    modifier = Modifier.crossedOut(crossed),
                 )
             } else {
                 StatusMark(
@@ -1415,7 +1420,7 @@ internal fun CalendarTableCell(
                         Modifier.semantics {
                             this.contentDescription = contentDescription
                         }
-                    },
+                    }.crossedOut(crossed),
                     color = textColor,
                     style = style.copy(fontWeight = fontWeight ?: style.fontWeight),
                     type = completenessType,

@@ -386,7 +386,7 @@ private fun HomePageContent(
                         showHabitDialog = false
                         editingHabit = null
                     },
-                    onSave = { title, icon, color, remarks, activeDays, isArchived, targetValue, targetType ->
+                    onSave = { title, icon, color, remarks, activeDays, isArchived, targetValue, targetType, isNegative ->
                         isHabitSaving = true
                         habitError = null
                         coroutineScope.launch {
@@ -395,7 +395,7 @@ private fun HomePageContent(
                                     id = habitToEdit?.id,
                                     draft = HabitDraft(
                                         title, icon, color, remarks, activeDays, isArchived,
-                                        targetValue, targetType,
+                                        targetValue, targetType, isNegative,
                                     ),
                                     weekStart = settingsStore.current.weekStart,
                                 )

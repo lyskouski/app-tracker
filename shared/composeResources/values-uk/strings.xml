@@ -10,6 +10,7 @@
     <string name="habit_remarks">Примітки</string>
     <string name="active_days">Активні дні</string>
     <string name="archive_habit">Архівувати/деактивувати звичку</string>
+    <string name="negative_habit">Звичка, якої слід уникати</string>
     <string name="numeric_target">Задати числову ціль</string>
     <string name="target_value">Значення</string>
     <string name="target_type">Тип</string>

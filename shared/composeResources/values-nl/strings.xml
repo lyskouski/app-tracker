@@ -10,6 +10,7 @@
     <string name="habit_remarks">Opmerkingen</string>
     <string name="active_days">Actieve dagen</string>
     <string name="archive_habit">Gewoonte archiveren/deactiveren</string>
+    <string name="negative_habit">Te vermijden gewoonte</string>
     <string name="numeric_target">Numeriek doel instellen</string>
     <string name="target_value">Waarde</string>
     <string name="target_type">Type</string>

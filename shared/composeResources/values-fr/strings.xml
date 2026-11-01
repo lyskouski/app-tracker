@@ -10,6 +10,7 @@
     <string name="habit_remarks">Remarques</string>
     <string name="active_days">Jours actifs</string>
     <string name="archive_habit">Archiver/désactiver l’habitude</string>
+    <string name="negative_habit">Habitude à éviter</string>
     <string name="numeric_target">Définir un objectif numérique</string>
     <string name="target_value">Valeur</string>
     <string name="target_type">Type</string>

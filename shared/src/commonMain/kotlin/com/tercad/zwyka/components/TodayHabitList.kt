@@ -309,6 +309,7 @@ private fun TodayHabitRow(
             icon = applicationIcon(habit.icon),
             color = habitColor ?: currentColorScheme().primary,
             contentDescription = "$editLabel: ${habit.title}",
+            crossed = habit.isNegative,
             onClickLabel = editLabel,
             onClick = onIconClick,
         )

@@ -10,6 +10,7 @@
     <string name="habit_remarks">메모</string>
     <string name="active_days">활성 요일</string>
     <string name="archive_habit">습관 보관/비활성화</string>
+    <string name="negative_habit">피해야 할 습관</string>
     <string name="numeric_target">숫자 목표 설정</string>
     <string name="target_value">값</string>
     <string name="target_type">유형</string>

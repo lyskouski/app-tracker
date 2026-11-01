@@ -143,6 +143,7 @@ private fun WeeklyHabitCard(
                 icon = applicationIcon(habit.icon),
                 color = habitColor,
                 contentDescription = "$editLabel: ${habit.title}",
+                crossed = habit.isNegative,
                 onClickLabel = editLabel,
                 onClick = { onHabitClick(habit) },
             )

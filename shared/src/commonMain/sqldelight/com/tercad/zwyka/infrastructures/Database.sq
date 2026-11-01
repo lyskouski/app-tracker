@@ -11,7 +11,9 @@ CREATE TABLE Habit (
     isArchived INTEGER NOT NULL DEFAULT 0,
     -- Numeric target of a day (NULL: status marks); DayState.mark keeps the reached value.
     targetValue REAL,
-    targetType TEXT
+    targetType TEXT,
+    -- 1: habit to avoid, an empty day is the success; set only on creation.
+    isNegative INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE DayState (
@@ -93,8 +95,8 @@ FROM Habit
 ORDER BY id;
 
 insertHabit:
-INSERT INTO Habit(title, icon, color, remarks, activeDays, isArchived, targetValue, targetType, createdAt, updatedAt)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
+INSERT INTO Habit(title, icon, color, remarks, activeDays, isArchived, targetValue, targetType, isNegative, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
 
 selectLastHabitId:
 SELECT max(id)
@@ -261,8 +263,8 @@ FROM HabitTime
 ORDER BY id;
 
 importHabit:
-INSERT OR IGNORE INTO Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived, targetValue, targetType)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+INSERT OR IGNORE INTO Habit(id, title, icon, color, remarks, createdAt, updatedAt, activeDays, isArchived, targetValue, targetType, isNegative)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 importIntent:
 INSERT OR IGNORE INTO Intent(id, title, icon, color, remarks, createdAt, updatedAt, activeDays)

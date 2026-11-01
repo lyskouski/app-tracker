@@ -10,6 +10,7 @@
     <string name="habit_remarks">Note</string>
     <string name="active_days">Giorni attivi</string>
     <string name="archive_habit">Archivia/disattiva abitudine</string>
+    <string name="negative_habit">Abitudine da evitare</string>
     <string name="numeric_target">Imposta obiettivo numerico</string>
     <string name="target_value">Valore</string>
     <string name="target_type">Tipo</string>

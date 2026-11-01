@@ -10,6 +10,7 @@
     <string name="habit_remarks">Заўвагі</string>
     <string name="active_days">Актыўныя дні</string>
     <string name="archive_habit">Архіваваць/дэактываваць звычку</string>
+    <string name="negative_habit">Звычка, якой трэба пазбягаць</string>
     <string name="numeric_target">Задаць лікавую мэту</string>
     <string name="target_value">Значэнне</string>
     <string name="target_type">Тып</string>

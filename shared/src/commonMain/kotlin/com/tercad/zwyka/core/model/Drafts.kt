@@ -13,6 +13,7 @@ data class HabitDraft(
     val isArchived: Boolean = false,
     val targetValue: Double? = null,
     val targetType: String? = null,
+    val isNegative: Boolean = false,
 )
 
 /** Editable fields of a [Goal]; [groupTitle] names an existing or a new [GoalGroup]. */

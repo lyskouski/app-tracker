@@ -10,6 +10,7 @@
     <string name="habit_remarks">Izohlar</string>
     <string name="active_days">Faol kunlar</string>
     <string name="archive_habit">Odatni arxivlash/o‘chirish</string>
+    <string name="negative_habit">Tark etiladigan odat</string>
     <string name="numeric_target">Raqamli maqsad belgilash</string>
     <string name="target_value">Qiymat</string>
     <string name="target_type">Turi</string>

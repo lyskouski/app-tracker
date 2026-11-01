@@ -41,6 +41,7 @@ import org.jetbrains.compose.resources.stringArrayResource
 
 import com.tercad.zwyka.core.model.Habit
 import com.tercad.zwyka.core.model.INACTIVE_MARK
+import com.tercad.zwyka.core.model.isBeforeCreation
 import com.tercad.zwyka.core.progress.markProgress
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.applicationColor
@@ -155,8 +156,11 @@ fun HabitContributionGraph(
                             val date = weekFirstDay.plus(row, DateTimeUnit.DAY)
                             if (date > today) break
                             val mark = marks[date.toString()]
-                            val color = when (mark) {
-                                null, INACTIVE_MARK -> emptyColor
+                            // A not marked day of a habit to avoid is its success.
+                            val color = when {
+                                mark == INACTIVE_MARK -> emptyColor
+                                mark == null && (!habit.isNegative || habit.isBeforeCreation(date.toString(), null)) ->
+                                    emptyColor
                                 else -> baseColor.copy(alpha = markProgress(habit, mark).coerceAtLeast(0.1f))
                             }
                             drawRoundRect(
