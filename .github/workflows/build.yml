@@ -220,6 +220,16 @@ jobs:
             -Pcompose.desktop.mac.signing.keychain="$MAC_KEYCHAIN"
           mv ${{ matrix.build_path }}*.pkg ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
 
+      # Gradle reports only the exit code of jpackage, the reason is in its logs.
+      - name: Show jpackage Logs
+        if: failure() && matrix.target == 'macOS'
+        run: |
+          for log in desktopApp/build/compose/logs/*/*.txt; do
+            echo "::group::$log"
+            cat "$log"
+            echo "::endgroup::"
+          done
+
       - name: Publish to the App Store
         if: matrix.target == 'iOS' || matrix.target == 'macOS'
         env:
