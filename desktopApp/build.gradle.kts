@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.compose.multiplatform)
@@ -44,6 +46,8 @@ compose.desktop {
 
         nativeDistributions {
             packageName = "zwyka"
+            // Mac App Store installer (:desktopApp:packagePkg); other platforms use createDistributable.
+            targetFormats(TargetFormat.Pkg)
             // Set by the release workflow: -PversionName=<tag>.
             packageVersion = findProperty("versionName") as String? ?: "1.0.0"
             description = "Open-source cross-platform habits tracking application"
