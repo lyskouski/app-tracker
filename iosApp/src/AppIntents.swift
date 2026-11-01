@@ -10,7 +10,8 @@ struct HabitEntity: AppEntity {
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Habit"
     static let defaultQuery = HabitEntityQuery()
 
-    let id: Int64
+    /// Int: Int64 (Long of Kotlin) is not an identifier type of App Intents.
+    let id: Int
     let title: String
 
     var displayRepresentation: DisplayRepresentation {
@@ -21,7 +22,7 @@ struct HabitEntity: AppEntity {
 /// Active habits; Siri finds them by the spoken title.
 struct HabitEntityQuery: EntityStringQuery {
     @MainActor
-    func entities(for identifiers: [Int64]) async throws -> [HabitEntity] {
+    func entities(for identifiers: [Int]) async throws -> [HabitEntity] {
         try await habits().filter { identifiers.contains($0.id) }
     }
 
@@ -37,7 +38,7 @@ struct HabitEntityQuery: EntityStringQuery {
 
     @MainActor
     private func habits() async throws -> [HabitEntity] {
-        try await IosAutomation.shared.habits().map { HabitEntity(id: $0.id, title: $0.title) }
+        try await IosAutomation.shared.habits().map { HabitEntity(id: Int($0.id), title: $0.title) }
     }
 }
 
@@ -60,9 +61,9 @@ struct CompleteHabitIntent: AppIntent {
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
         let message = if let value {
-            try await IosAutomation.shared.completeWithValue(habitId: habit.id, value: value)
+            try await IosAutomation.shared.completeWithValue(habitId: Int64(habit.id), value: value)
         } else {
-            try await IosAutomation.shared.complete(habitId: habit.id)
+            try await IosAutomation.shared.complete(habitId: Int64(habit.id))
         }
         return .result(dialog: "\(message)")
     }
@@ -86,7 +87,7 @@ struct AddHabitValueIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let message = try await IosAutomation.shared.add(habitId: habit.id, value: value)
+        let message = try await IosAutomation.shared.add(habitId: Int64(habit.id), value: value)
         return .result(dialog: "\(message)")
     }
 }
@@ -104,7 +105,7 @@ struct SkipHabitIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let message = try await IosAutomation.shared.skip(habitId: habit.id)
+        let message = try await IosAutomation.shared.skip(habitId: Int64(habit.id))
         return .result(dialog: "\(message)")
     }
 }
