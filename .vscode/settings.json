@@ -10,12 +10,6 @@
         120
     ],
     "editor.wordWrap": "on",
-    "[dart]": {
-        "editor.rulers": [
-            120
-        ],
-        "editor.formatOnSave": true,
-    },
     "cSpell.words": [
       "autofocus",
       "curr",
