@@ -24,8 +24,9 @@ struct iosApp: App {
             ContentView()
         }
         // Habit titles spoken in the Siri phrases ("Complete Water in Zwyka"), after the habits are edited.
-        .onChange(of: scenePhase) { _, phase in
-            if phase != .active {
+        // onChange of iOS 14 (iPad Air 2 stays on iPadOS 15), deprecated since iOS 17.
+        .onChange(of: scenePhase) { phase in
+            if #available(iOS 17.0, *), phase != .active {
                 ZwykaShortcuts.updateAppShortcutParameters()
             }
         }

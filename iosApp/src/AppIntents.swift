@@ -6,6 +6,7 @@ import KotlinModules
  * The actions run in the app process (IosAutomation.kt); a shown app reloads its screen.
  */
 
+@available(iOS 16.0, *)
 struct HabitEntity: AppEntity {
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Habit"
     static let defaultQuery = HabitEntityQuery()
@@ -19,7 +20,8 @@ struct HabitEntity: AppEntity {
     }
 }
 
-/// Active habits; Siri finds them by the spoken title.
+// Active habits; Siri finds them by the spoken title
+@available(iOS 16.0, *)
 struct HabitEntityQuery: EntityStringQuery {
     @MainActor
     func entities(for identifiers: [Int]) async throws -> [HabitEntity] {
@@ -42,6 +44,7 @@ struct HabitEntityQuery: EntityStringQuery {
     }
 }
 
+@available(iOS 16.0, *)
 struct CompleteHabitIntent: AppIntent {
     static let title: LocalizedStringResource = "Complete Habit"
     static let description = IntentDescription(
@@ -69,6 +72,7 @@ struct CompleteHabitIntent: AppIntent {
     }
 }
 
+@available(iOS 16.0, *)
 struct AddHabitValueIntent: AppIntent {
     static let title: LocalizedStringResource = "Add to Habit"
     static let description = IntentDescription(
@@ -92,6 +96,7 @@ struct AddHabitValueIntent: AppIntent {
     }
 }
 
+@available(iOS 16.0, *)
 struct SkipHabitIntent: AppIntent {
     static let title: LocalizedStringResource = "Skip Habit"
     static let description = IntentDescription("Marks today's state of the habit as skipped.")
@@ -110,6 +115,7 @@ struct SkipHabitIntent: AppIntent {
     }
 }
 
+@available(iOS 16.0, *)
 struct LeftTodayIntent: AppIntent {
     static let title: LocalizedStringResource = "Habits Left Today"
     static let description = IntentDescription("Tells the habits that are neither done nor skipped today.")
@@ -121,6 +127,8 @@ struct LeftTodayIntent: AppIntent {
     }
 }
 
+// shortTitle and systemImageName of AppShortcut: iOS 17
+@available(iOS 17.0, *)
 struct ZwykaShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
