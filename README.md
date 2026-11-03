@@ -11,7 +11,7 @@ one is left behind.
 
 | Type                     | Alpha Version         | Pre-Release                   | Release                       |
 | ------------------------ | ----------------------| ----------------------------- | ----------------------------- |
-| ![Apple](./docs/design-flow/icons/apple.png) iOS (Apple Store)        | [zwyka_iOS.ipa](https://github.com/lyskouski/app-tracker/releases/latest) | [TestFlight: Zwyka](https://testflight.apple.com/join/JXmB4r8g) | In Review |
+| ![Apple](./docs/design-flow/icons/apple.png) iOS (Apple Store)        | [zwyka_iOS.ipa](https://github.com/lyskouski/app-tracker/releases/latest) | [TestFlight: Zwyka](https://testflight.apple.com/join/JXmB4r8g) | [![iOS Apple Store](./docs/design-flow/badges/ios.png)](https://apps.apple.com/app/zwyka/id6829412152) |
 | ![Apple](./docs/design-flow/icons/apple.png) macOS (Apple Store)      | [zwyka_macOS.pkg](https://github.com/lyskouski/app-tracker/releases/latest) | [TestFlight: Zwyka](https://testflight.apple.com/join/JXmB4r8g) | In Review |
 | ![Android](./docs/design-flow/icons/android.png) Android (Google Play)    | [zwyka_Android.aab](https://github.com/lyskouski/app-tracker/releases/latest) | [Google Play](https://play.google.com/store/apps/details?id=com.tercad.zwyka) | Open Testing<br /> [![Google Play](./docs/design-flow/badges/google.png)](https://play.google.com/store/apps/details?id=com.tercad.zwyka) |
 | ![Linux](./docs/design-flow/icons/linux.png) Linux                    | [zwyka_Linux.tar.gz](https://github.com/lyskouski/app-tracker/releases/latest) | Not available | Not available |
