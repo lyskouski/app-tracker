@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Bütün mövcud məlumatlar silinəcək və ehtiyat nüsxədəki məlumatlarla əvəz olunacaq.</string>
     <string name="backup_created">Ehtiyat nüsxə yaradıldı.</string>
     <string name="backup_restored">Bərpa edilmiş qeydlər: %1$s</string>
+    <string name="import_from_app">Başqa tətbiqdən idxal et</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Mövcud məlumatlar saxlanılır; eyni adlı vərdişlər birləşdirilir.</string>
+    <string name="import_file">Faylı idxal et</string>
+    <string name="import_completed">İdxal edilmiş vərdişlər: %1$s, gün qeydləri: %2$s</string>
+    <string name="import_unsupported_format">Fayl dəstəklənən ixrac deyil.</string>
     <string name="data_transfer_failed">Məlumatları ötürmək mümkün olmadı: %1$s</string>
     <string-array name="days_short">
         <item>B.e.</item>

@@ -1,0 +1,9 @@
+HabitName,HabitDescription,HabitCategory,CalendarDate,Value,CommentText
+Meditate,"calm, focus",Health,2016-03-18,1,first
+Meditate,"calm, focus",Health,2016-03-19,0,
+Meditate,"calm, focus",Health,3/20/2016,1,"multi
+line"
+Pushups,,Fitness,2021-09-01,30,
+Pushups,,Fitness,2021-09-02,50,
+Pushups,,Fitness,2021-09-03,40,
+Pushups,,Fitness,2021-09-04,-2150000000,

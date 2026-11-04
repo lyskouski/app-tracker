@@ -3,6 +3,8 @@
 
 package com.tercad.zwyka.core.repository
 
+import com.tercad.zwyka.core.importing.ImportSummary
+import com.tercad.zwyka.core.importing.ImportedHabit
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Goal
 import com.tercad.zwyka.core.model.GoalGroup
@@ -110,4 +112,10 @@ interface BackupRepository {
      * @return number of restored rows.
      */
     suspend fun restore(sql: String): Int
+
+    /**
+     * Adds the habits of another app with their marks. A habit with the same title (and the same kind
+     * of target) gets the marks of the days it has no mark for.
+     */
+    suspend fun add(habits: List<ImportedHabit>): ImportSummary
 }

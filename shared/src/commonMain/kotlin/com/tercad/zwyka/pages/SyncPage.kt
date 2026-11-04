@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.AlertDialog
@@ -36,6 +37,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.files.LocalFileTransfer
+import com.tercad.zwyka.core.importing.UnsupportedExportException
 import com.tercad.zwyka.core.service.BACKUP_EXTENSION
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
@@ -45,6 +47,11 @@ import com.tercad.zwyka.resources.cancel
 import com.tercad.zwyka.resources.create_backup
 import com.tercad.zwyka.resources.data_transfer_failed
 import com.tercad.zwyka.resources.database_error_unknown
+import com.tercad.zwyka.resources.import_completed
+import com.tercad.zwyka.resources.import_file
+import com.tercad.zwyka.resources.import_from_app
+import com.tercad.zwyka.resources.import_from_app_hint
+import com.tercad.zwyka.resources.import_unsupported_format
 import com.tercad.zwyka.resources.restore_backup
 import com.tercad.zwyka.resources.restore_backup_confirmation
 import com.tercad.zwyka.resources.restore_backup_warning
@@ -66,7 +73,8 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
 /*
- * Backup of all data into a file, and the restore from it (replaces the stored data).
+ * Backup of all data into a file, the restore from it (replaces the stored data),
+ * and the import of the habits exported by other apps (adds to the stored data).
  */
 class SyncPage(
     private val settingsStore: AppSettingsStore,
@@ -78,21 +86,23 @@ class SyncPage(
         val fileTransfer = LocalFileTransfer.current
         val scope = rememberCoroutineScope()
         val backup = services.backup
-        // Outcome of the last action: a message with its argument.
-        var message by remember { mutableStateOf<Pair<StringResource, String>?>(null) }
+        // Outcome of the last action.
+        var message by remember { mutableStateOf<Outcome?>(null) }
         var confirmingRestore by remember { mutableStateOf(false) }
         var isBusy by remember { mutableStateOf(false) }
         val unknownError = stringResource(Res.string.database_error_unknown)
 
-        fun transfer(action: suspend () -> Pair<StringResource, String>?) {
+        fun transfer(action: suspend () -> Outcome?) {
             scope.launch {
                 isBusy = true
                 message = try {
                     action()
                 } catch (error: CancellationException) {
                     throw error
+                } catch (error: UnsupportedExportException) {
+                    Outcome(Res.string.import_unsupported_format, isError = true)
                 } catch (error: Exception) {
-                    Res.string.data_transfer_failed to (error.message ?: unknownError)
+                    Outcome(Res.string.data_transfer_failed, listOf(error.message ?: unknownError), isError = true)
                 } finally {
                     isBusy = false
                 }
@@ -102,7 +112,7 @@ class SyncPage(
         fun restore() {
             confirmingRestore = false
             transfer {
-                val sql = fileTransfer.open(BACKUP_EXTENSION) ?: return@transfer null
+                val sql = fileTransfer.open(listOf(BACKUP_EXTENSION))?.decodeToString() ?: return@transfer null
                 val restored = backup.restore(sql)
                 val language = settingsStore.current.language
                 settingsStore.load()
@@ -111,7 +121,15 @@ class SyncPage(
                     settingsStore.reopenSettings = true
                     settingsStore.reopenSync = true
                 }
-                Res.string.backup_restored to restored.toString()
+                Outcome(Res.string.backup_restored, listOf(restored.toString()))
+            }
+        }
+
+        fun importFromApp() {
+            transfer {
+                val content = fileTransfer.open(IMPORT_EXTENSIONS) ?: return@transfer null
+                val summary = backup.importFromApp(content)
+                Outcome(Res.string.import_completed, listOf(summary.habits.toString(), summary.marks.toString()))
             }
         }
 
@@ -138,12 +156,9 @@ class SyncPage(
             ) {
                 Heading(stringResource(Res.string.sync))
 
-                message?.let { (text, argument) ->
-                    if (text == Res.string.data_transfer_failed) {
-                        ErrorMessage(stringResource(text, argument))
-                    } else {
-                        StatusMessage(stringResource(text, argument))
-                    }
+                message?.let { outcome ->
+                    val text = stringResource(outcome.text, *outcome.arguments.toTypedArray())
+                    if (outcome.isError) ErrorMessage(text) else StatusMessage(text)
                 }
 
                 OutlinedButton(
@@ -151,7 +166,7 @@ class SyncPage(
                         transfer {
                             val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
                             val saved = fileTransfer.save(backup.fileName(today), backup.export())
-                            if (saved) Res.string.backup_created to "" else null
+                            if (saved) Outcome(Res.string.backup_created) else null
                         }
                     },
                     enabled = !isBusy,
@@ -174,6 +189,25 @@ class SyncPage(
                     style = MaterialTheme.typography.bodySmall,
                     color = currentColorScheme().onSurfaceVariant,
                 )
+
+                Heading(
+                    text = stringResource(Res.string.import_from_app),
+                    modifier = Modifier.padding(top = 16.dp),
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                Text(
+                    text = stringResource(Res.string.import_from_app_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = currentColorScheme().onSurfaceVariant,
+                )
+                OutlinedButton(
+                    onClick = { importFromApp() },
+                    enabled = !isBusy,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Icon(imageVector = Icons.Filled.FileDownload, contentDescription = null)
+                    Text(text = stringResource(Res.string.import_file), modifier = Modifier.padding(start = 8.dp))
+                }
             }
         }
 
@@ -200,3 +234,13 @@ class SyncPage(
         }
     }
 }
+
+/** Message of the last action, with the arguments of its [text]. */
+private data class Outcome(
+    val text: StringResource,
+    val arguments: List<String> = emptyList(),
+    val isError: Boolean = false,
+)
+
+/** Extensions of the exports of other apps (see [com.tercad.zwyka.core.importing.parseHabitExport]). */
+private val IMPORT_EXTENSIONS = listOf("db", "zip", "json", "csv")

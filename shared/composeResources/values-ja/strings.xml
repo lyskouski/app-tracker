@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">既存のデータはすべて削除され、バックアップのデータに置き換えられます。</string>
     <string name="backup_created">バックアップを作成しました。</string>
     <string name="backup_restored">復元したレコード：%1$s</string>
+    <string name="import_from_app">他のアプリからインポート</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv)。既存のデータは保持され、同じ名前の習慣は統合されます。</string>
+    <string name="import_file">ファイルをインポート</string>
+    <string name="import_completed">インポートした習慣：%1$s、日の記録：%2$s</string>
+    <string name="import_unsupported_format">このファイルは対応しているエクスポートではありません。</string>
     <string name="data_transfer_failed">データを転送できませんでした：%1$s</string>
     <string-array name="days_short">
         <item>月</item>

@@ -12,14 +12,14 @@ interface FileTransfer {
     /** Lets the user store [content] as [fileName]. @return false when cancelled. */
     suspend fun save(fileName: String, content: String): Boolean
 
-    /** Lets the user pick a file, preferably with [extension]. @return its text, or null when cancelled. */
-    suspend fun open(extension: String): String?
+    /** Lets the user pick a file, preferably with one of [extensions]. @return its content, or null when cancelled. */
+    suspend fun open(extensions: List<String>): ByteArray?
 }
 
 object NoFileTransfer : FileTransfer {
     override suspend fun save(fileName: String, content: String) = false
 
-    override suspend fun open(extension: String): String? = null
+    override suspend fun open(extensions: List<String>): ByteArray? = null
 }
 
 val LocalFileTransfer = staticCompositionLocalOf<FileTransfer> { NoFileTransfer }

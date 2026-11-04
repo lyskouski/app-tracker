@@ -63,6 +63,7 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Pomodoro: 15 min, 30 min, 1 oră, 2 ore sau durată personalizată, opțional pentru un obicei
 - Setări
   - Crearea unei copii de rezervă și restaurarea din ea (înlocuiește datele existente)
+  - Import din alte aplicații: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Experiența utilizatorului
   - Automatizare: Comenzi rapide Siri (finalizarea, adăugarea la un obicei sau sărirea lui; obiceiurile rămase azi) și intenturi Android pentru Tasker, Automate sau `adb`; ecranul afișat se actualizează imediat
   - Accesibilitate (WCAG 2.1): fiecare acțiune are nume pentru cititoarele de ecran, contrast lizibil în ambele teme, textul urmează dimensiunea fontului de sistem

@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">기존 데이터가 모두 삭제되고 백업 데이터로 대체됩니다.</string>
     <string name="backup_created">백업을 만들었습니다.</string>
     <string name="backup_restored">복원된 기록: %1$s</string>
+    <string name="import_from_app">다른 앱에서 가져오기</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). 기존 데이터는 유지되며, 이름이 같은 습관은 병합됩니다.</string>
+    <string name="import_file">파일 가져오기</string>
+    <string name="import_completed">가져온 습관: %1$s, 날짜 표시: %2$s</string>
+    <string name="import_unsupported_format">지원되는 내보내기 파일이 아닙니다.</string>
     <string name="data_transfer_failed">데이터를 전송할 수 없습니다: %1$s</string>
     <string-array name="days_short">
         <item>월</item>

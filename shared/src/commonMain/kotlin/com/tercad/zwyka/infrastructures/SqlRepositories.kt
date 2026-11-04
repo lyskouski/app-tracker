@@ -8,6 +8,8 @@ import app.cash.sqldelight.async.coroutines.awaitAsOne
 
 import com.tercad.zwyka.core.Services
 import com.tercad.zwyka.core.createServices
+import com.tercad.zwyka.core.importing.ImportSummary
+import com.tercad.zwyka.core.importing.ImportedHabit
 import com.tercad.zwyka.core.model.ALL_DAYS
 import com.tercad.zwyka.core.model.DayState
 import com.tercad.zwyka.core.model.Goal
@@ -17,6 +19,10 @@ import com.tercad.zwyka.core.model.HabitDraft
 import com.tercad.zwyka.core.model.HabitTime
 import com.tercad.zwyka.core.model.Intent
 import com.tercad.zwyka.core.notifications.ReminderScheduler
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
+import kotlin.time.Clock
 import com.tercad.zwyka.core.repository.BackupRepository
 import com.tercad.zwyka.core.repository.DayStateRepository
 import com.tercad.zwyka.core.repository.GoalRepository
@@ -318,6 +324,36 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
             }
         }
         return restored.toInt()
+    }
+
+    override suspend fun add(habits: List<ImportedHabit>): ImportSummary {
+        var created = 0
+        var marks = 0L
+        database.transaction {
+            val existing = queries.selectAllHabits().awaitAsList()
+            habits.filter { it.draft.title.isNotBlank() }.forEach { habit ->
+                val draft = habit.draft
+                val id = existing.firstOrNull {
+                    it.title.trim().equals(draft.title.trim(), ignoreCase = true) &&
+                        (it.targetValue != null) == (draft.targetValue != null) &&
+                        (it.isNegative != 0L) == draft.isNegative
+                }?.id ?: run {
+                    val createdAt = habit.createdAt.takeIf { it > 0 }
+                        ?: habit.marks.keys.minOrNull()
+                            ?.let { LocalDate.parse(it).atStartOfDayIn(TimeZone.currentSystemDefault()).toEpochMilliseconds() }
+                        ?: Clock.System.now().toEpochMilliseconds()
+                    queries.insertImportedHabit(
+                        draft.title.trim(), draft.icon, draft.color, draft.remarks, draft.activeDays.toLong(),
+                        if (draft.isArchived) 1L else 0L, draft.targetValue, draft.targetType,
+                        if (draft.isNegative) 1L else 0L, createdAt,
+                    )
+                    created++
+                    queries.selectLastHabitId().awaitAsOne().max ?: error("Habit was not created")
+                }
+                habit.marks.forEach { (date, mark) -> marks += queries.importDayState(id, date, mark) }
+            }
+        }
+        return ImportSummary(created, marks.toInt())
     }
 
     private suspend fun clear() {

@@ -3,6 +3,8 @@
 
 package com.tercad.zwyka.core.service
 
+import com.tercad.zwyka.core.importing.ImportSummary
+import com.tercad.zwyka.core.importing.parseHabitExport
 import com.tercad.zwyka.core.repository.BackupRepository
 import kotlinx.datetime.LocalDate
 
@@ -18,6 +20,13 @@ class BackupService(
     fun fileName(date: LocalDate): String = "zwyka-$date.$BACKUP_EXTENSION"
 
     suspend fun export(): String = backup.export()
+
+    /** Adds the habits exported by another app (see [parseHabitExport]). */
+    suspend fun importFromApp(bytes: ByteArray): ImportSummary {
+        val summary = backup.add(parseHabitExport(bytes))
+        reminders.sync()
+        return summary
+    }
 
     /** Replaces the stored data with the one of [sql]. @return number of restored rows. */
     suspend fun restore(sql: String): Int {

@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Toate datele existente vor fi șterse și înlocuite cu datele din copia de rezervă.</string>
     <string name="backup_created">Copie de rezervă creată.</string>
     <string name="backup_restored">Înregistrări restaurate: %1$s</string>
+    <string name="import_from_app">Importă din altă aplicație</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Datele existente sunt păstrate; obiceiurile cu același nume sunt combinate.</string>
+    <string name="import_file">Importă fișierul</string>
+    <string name="import_completed">Obiceiuri importate: %1$s, marcaje de zile: %2$s</string>
+    <string name="import_unsupported_format">Fișierul nu este un export acceptat.</string>
     <string name="data_transfer_failed">Datele nu au putut fi transferate: %1$s</string>
     <string-array name="days_short">
         <item>Lun</item>

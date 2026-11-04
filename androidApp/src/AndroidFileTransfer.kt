@@ -35,12 +35,12 @@ class AndroidFileTransfer(activity: ComponentActivity) : FileTransfer {
         return true
     }
 
-    override suspend fun open(extension: String): String? {
+    override suspend fun open(extensions: List<String>): ByteArray? {
         // Providers do not know the extension's MIME type: any file is offered.
         val uri = pick(openDocument, arrayOf("*/*")) ?: return null
         return withContext(Dispatchers.IO) {
             val stream = resolver.openInputStream(uri) ?: error("Unable to read $uri")
-            stream.use { it.readBytes().decodeToString() }
+            stream.use { it.readBytes() }
         }
     }
 

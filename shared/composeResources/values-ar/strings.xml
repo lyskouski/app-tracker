@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">سيتم حذف جميع البيانات الحالية واستبدالها ببيانات النسخة الاحتياطية.</string>
     <string name="backup_created">تم إنشاء النسخة الاحتياطية.</string>
     <string name="backup_restored">السجلات المستعادة: %1$s</string>
+    <string name="import_from_app">الاستيراد من تطبيق آخر</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). تُحفظ البيانات الحالية؛ وتُدمج العادات التي تحمل الاسم نفسه.</string>
+    <string name="import_file">استيراد ملف</string>
+    <string name="import_completed">العادات المستوردة: %1$s، علامات الأيام: %2$s</string>
+    <string name="import_unsupported_format">هذا الملف ليس ملف تصدير مدعومًا.</string>
     <string name="data_transfer_failed">تعذّر نقل البيانات: %1$s</string>
     <string-array name="days_short">
         <item>إثن</item>

@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Semua data yang ada akan dihapus dan diganti dengan data dari cadangan.</string>
     <string name="backup_created">Cadangan dibuat.</string>
     <string name="backup_restored">Catatan dipulihkan: %1$s</string>
+    <string name="import_from_app">Impor dari aplikasi lain</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Data yang ada tetap disimpan; kebiasaan dengan nama yang sama digabungkan.</string>
+    <string name="import_file">Impor file</string>
+    <string name="import_completed">Kebiasaan diimpor: %1$s, tanda hari: %2$s</string>
+    <string name="import_unsupported_format">File ini bukan ekspor yang didukung.</string>
     <string name="data_transfer_failed">Tidak dapat mentransfer data: %1$s</string>
     <string-array name="days_short">
         <item>Sen</item>

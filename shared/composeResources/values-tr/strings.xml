@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Mevcut tüm veriler silinecek ve yedekteki verilerle değiştirilecek.</string>
     <string name="backup_created">Yedek oluşturuldu.</string>
     <string name="backup_restored">Geri yüklenen kayıtlar: %1$s</string>
+    <string name="import_from_app">Başka bir uygulamadan içe aktar</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Mevcut veriler korunur; aynı adlı alışkanlıklar birleştirilir.</string>
+    <string name="import_file">Dosyayı içe aktar</string>
+    <string name="import_completed">İçe aktarılan alışkanlıklar: %1$s, gün işaretleri: %2$s</string>
+    <string name="import_unsupported_format">Dosya desteklenen bir dışa aktarım değil.</string>
     <string name="data_transfer_failed">Veriler aktarılamadı: %1$s</string>
     <string-array name="days_short">
         <item>Pzt</item>

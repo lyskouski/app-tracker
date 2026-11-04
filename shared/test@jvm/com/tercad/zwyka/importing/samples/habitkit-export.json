@@ -1,0 +1,193 @@
+{
+  "formatVersion": 2,
+  "habits": [
+    {
+      "id": "h-workout",
+      "name": "Workout",
+      "description": "Gym or home \u00e9",
+      "icon": "dumbbell",
+      "color": "green",
+      "archived": false,
+      "orderIndex": 1,
+      "createdAt": "2025-09-22T03:21:07.970697Z",
+      "isInverse": false,
+      "inverseStartDate": null,
+      "inverseSpanBounds": [],
+      "emoji": null
+    },
+    {
+      "id": "h-water",
+      "name": "Water",
+      "description": null,
+      "icon": "activity",
+      "color": "sky",
+      "archived": false,
+      "orderIndex": 0,
+      "createdAt": "2025-09-22T03:21:07.970697Z",
+      "isInverse": false,
+      "inverseStartDate": null,
+      "inverseSpanBounds": [],
+      "emoji": null,
+      "kind": "measure",
+      "unit": "glasses"
+    },
+    {
+      "id": "h-smoking",
+      "name": "Smoking",
+      "description": null,
+      "icon": "cigarette",
+      "color": "red",
+      "archived": false,
+      "orderIndex": 2,
+      "createdAt": "2025-09-22T03:21:07.970697Z",
+      "isInverse": true,
+      "inverseStartDate": "2026-01-01T00:00:00.000Z",
+      "inverseSpanBounds": [],
+      "emoji": null
+    },
+    {
+      "id": "h-pushups",
+      "name": "Pushups",
+      "description": null,
+      "icon": "unknownIcon",
+      "color": "#123abc",
+      "archived": true,
+      "orderIndex": 3,
+      "createdAt": "2025-09-22T03:21:07.970697Z",
+      "isInverse": false,
+      "inverseStartDate": null,
+      "inverseSpanBounds": [],
+      "emoji": null
+    }
+  ],
+  "completions": [
+    {
+      "id": "c1",
+      "date": "2026-10-25T20:00:00.000Z",
+      "habitId": "h-workout",
+      "timezoneOffsetInMinutes": 240,
+      "amountOfCompletions": 1,
+      "note": "felt good"
+    },
+    {
+      "id": "c2",
+      "date": "2026-10-26T22:00:00.000Z",
+      "habitId": "h-workout",
+      "timezoneOffsetInMinutes": -120,
+      "amountOfCompletions": 1,
+      "note": null
+    },
+    {
+      "id": "c3",
+      "date": "2026-10-27T20:00:00.000Z",
+      "habitId": "h-workout",
+      "timezoneOffsetInMinutes": 240,
+      "amountOfCompletions": 0,
+      "note": null
+    },
+    {
+      "id": "c4",
+      "date": "2026-10-28T00:00:00.000Z",
+      "habitId": "h-workout",
+      "timezoneOffsetInMinutes": 0,
+      "amountOfCompletions": 1,
+      "note": null
+    },
+    {
+      "id": "c5",
+      "date": "2026-10-26T00:00:00.000Z",
+      "habitId": "h-water",
+      "timezoneOffsetInMinutes": 0,
+      "amountOfCompletions": 6,
+      "note": null
+    },
+    {
+      "id": "c6",
+      "date": "2026-10-27T00:00:00.000Z",
+      "habitId": "h-water",
+      "timezoneOffsetInMinutes": 0,
+      "amountOfCompletions": 8,
+      "note": null
+    },
+    {
+      "id": "c7",
+      "date": "2026-10-20T00:00:00.000Z",
+      "habitId": "h-smoking",
+      "timezoneOffsetInMinutes": 0,
+      "amountOfCompletions": 1,
+      "note": null
+    },
+    {
+      "id": "c8",
+      "date": "2026-10-26T00:00:00.000Z",
+      "habitId": "h-pushups",
+      "timezoneOffsetInMinutes": 0,
+      "amountOfCompletions": 2,
+      "note": null
+    }
+  ],
+  "intervals": [
+    {
+      "habitId": "h-workout",
+      "startDate": "2025-09-21T18:00:00.000Z",
+      "endDate": null,
+      "type": "none",
+      "requiredNumberOfCompletions": null,
+      "requiredNumberOfCompletionsPerDay": 1,
+      "unitType": "incremental",
+      "streakType": "day",
+      "allowExceedingGoal": false
+    },
+    {
+      "habitId": "h-water",
+      "startDate": "2025-09-21T18:00:00.000Z",
+      "endDate": null,
+      "type": "none",
+      "requiredNumberOfCompletions": null,
+      "requiredNumberOfCompletionsPerDay": 8,
+      "unitType": "incremental",
+      "streakType": "day",
+      "allowExceedingGoal": false
+    },
+    {
+      "habitId": "h-pushups",
+      "startDate": "2025-09-21T18:00:00.000Z",
+      "endDate": "2026-01-01T00:00:00.000Z",
+      "type": "none",
+      "requiredNumberOfCompletions": null,
+      "requiredNumberOfCompletionsPerDay": 2,
+      "unitType": "incremental",
+      "streakType": "day",
+      "allowExceedingGoal": false
+    },
+    {
+      "habitId": "h-pushups",
+      "startDate": "2026-01-01T00:00:00.000Z",
+      "endDate": null,
+      "type": "none",
+      "requiredNumberOfCompletions": null,
+      "requiredNumberOfCompletionsPerDay": 3,
+      "unitType": "incremental",
+      "streakType": "day",
+      "allowExceedingGoal": false
+    }
+  ],
+  "reminders": [
+    {
+      "habitId": "h-workout",
+      "time": "07:30"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Health"
+    }
+  ],
+  "categoryMappings": [
+    {
+      "habitId": "h-workout",
+      "categoryId": "cat-1"
+    }
+  ]
+}

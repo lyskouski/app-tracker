@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">सभी मौजूदा डेटा हटा दिया जाएगा और बैकअप के डेटा से बदल दिया जाएगा।</string>
     <string name="backup_created">बैकअप बनाया गया।</string>
     <string name="backup_restored">पुनर्स्थापित रिकॉर्ड: %1$s</string>
+    <string name="import_from_app">किसी अन्य ऐप से आयात करें</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). मौजूदा डेटा बना रहता है; समान नाम वाली आदतें मिला दी जाती हैं।</string>
+    <string name="import_file">फ़ाइल आयात करें</string>
+    <string name="import_completed">आयात की गई आदतें: %1$s, दिन के निशान: %2$s</string>
+    <string name="import_unsupported_format">यह फ़ाइल समर्थित निर्यात नहीं है।</string>
     <string name="data_transfer_failed">डेटा स्थानांतरित नहीं हो सका: %1$s</string>
     <string-array name="days_short">
         <item>सोम</item>

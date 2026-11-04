@@ -300,6 +300,11 @@ importSetting:
 INSERT OR IGNORE INTO Setting(key, value)
 VALUES (?, ?);
 
+-- A habit of another app; its creation time is kept.
+insertImportedHabit:
+INSERT INTO Habit(title, icon, color, remarks, activeDays, isArchived, targetValue, targetType, isNegative, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CAST(strftime('%s', 'now') AS INTEGER) * 1000);
+
 -- Restoring a backup replaces all stored data: children go first.
 deleteAllGoals:
 DELETE FROM Goal;

@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">ყველა არსებული მონაცემი წაიშლება და ჩანაცვლდება სარეზერვო ასლის მონაცემებით.</string>
     <string name="backup_created">სარეზერვო ასლი შეიქმნა.</string>
     <string name="backup_restored">აღდგენილი ჩანაწერები: %1$s</string>
+    <string name="import_from_app">სხვა აპიდან იმპორტი</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). არსებული მონაცემები შენარჩუნდება; ერთნაირი სახელის ჩვევები გაერთიანდება.</string>
+    <string name="import_file">ფაილის იმპორტი</string>
+    <string name="import_completed">იმპორტირებული ჩვევები: %1$s, დღის ნიშნები: %2$s</string>
+    <string name="import_unsupported_format">ფაილი არ არის მხარდაჭერილი ექსპორტი.</string>
     <string name="data_transfer_failed">მონაცემების გადატანა ვერ მოხერხდა: %1$s</string>
     <string-array name="days_short">
         <item>ორშ</item>

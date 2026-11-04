@@ -18,9 +18,11 @@ class DesktopFileTransfer(private val owner: Frame) : FileTransfer {
         return true
     }
 
-    override suspend fun open(extension: String): String? {
-        val file = choose(FileDialog.LOAD, "*.$extension") { it.endsWith(".$extension") } ?: return null
-        return withContext(Dispatchers.IO) { file.readText() }
+    override suspend fun open(extensions: List<String>): ByteArray? {
+        val pattern = extensions.joinToString(";") { "*.$it" }
+        val file = choose(FileDialog.LOAD, pattern) { name -> extensions.any { name.endsWith(".$it", ignoreCase = true) } }
+            ?: return null
+        return withContext(Dispatchers.IO) { file.readBytes() }
     }
 
     private suspend fun choose(

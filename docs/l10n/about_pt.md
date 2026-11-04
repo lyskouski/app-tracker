@@ -63,6 +63,7 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Pomodoro: 15 min, 30 min, 1 hora, 2 horas ou personalizado, opcionalmente para um hábito
 - Configurações
   - Criação de backup e restauração a partir de um backup (substitui os dados existentes)
+  - Importação de outros apps: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Experiência do usuário
   - Automação: Atalhos da Siri (concluir, somar a um hábito ou pulá-lo; hábitos que faltam hoje) e intents do Android para Tasker, Automate ou `adb`; a tela exibida é atualizada na hora
   - Acessibilidade (WCAG 2.1): todas as ações têm nome para leitores de tela, contraste legível nos dois temas, o texto acompanha o tamanho da fonte do sistema

@@ -126,6 +126,8 @@ one is left behind.
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending)
 - Sync: create a backup, or restore from a backup (replaces the existing data)
+- Import from other apps (keeps the existing data): Loop Habit Tracker (database backup `.db` or CSV `.zip`),
+  HabitKit (`.json`), Habitify (`.csv`), HabitBull (`.csv`)
 - Habits' day state representation: symbols, colored circles
 
 **Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))

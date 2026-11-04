@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">所有現有資料將被刪除，並以備份中的資料取代。</string>
     <string name="backup_created">備份已建立。</string>
     <string name="backup_restored">已還原記錄：%1$s</string>
+    <string name="import_from_app">從其他應用程式匯入</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv)。現有資料將保留；同名習慣將合併。</string>
+    <string name="import_file">匯入檔案</string>
+    <string name="import_completed">已匯入習慣：%1$s，每日標記：%2$s</string>
+    <string name="import_unsupported_format">此檔案不是支援的匯出檔案。</string>
     <string name="data_transfer_failed">無法傳輸資料：%1$s</string>
     <string-array name="days_short">
         <item>週一</item>

@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Усі наявні дані буде видалено й замінено даними з резервної копії.</string>
     <string name="backup_created">Резервну копію створено.</string>
     <string name="backup_restored">Відновлено записів: %1$s</string>
+    <string name="import_from_app">Імпорт з іншого застосунку</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Наявні дані зберігаються; звички з однаковою назвою об’єднуються.</string>
+    <string name="import_file">Імпортувати файл</string>
+    <string name="import_completed">Імпортовано звичок: %1$s, позначок днів: %2$s</string>
+    <string name="import_unsupported_format">Файл не є підтримуваним експортом.</string>
     <string name="data_transfer_failed">Не вдалося перенести дані: %1$s</string>
     <string-array name="days_short">
         <item>Пн</item>

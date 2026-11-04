@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Všechna stávající data budou odstraněna a nahrazena daty ze zálohy.</string>
     <string name="backup_created">Záloha vytvořena.</string>
     <string name="backup_restored">Obnovené záznamy: %1$s</string>
+    <string name="import_from_app">Import z jiné aplikace</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Stávající data zůstanou zachována; návyky se stejným názvem se sloučí.</string>
+    <string name="import_file">Importovat soubor</string>
+    <string name="import_completed">Importované návyky: %1$s, označení dnů: %2$s</string>
+    <string name="import_unsupported_format">Soubor není podporovaný export.</string>
     <string name="data_transfer_failed">Data se nepodařilo přenést: %1$s</string>
     <string-array name="days_short">
         <item>Po</item>

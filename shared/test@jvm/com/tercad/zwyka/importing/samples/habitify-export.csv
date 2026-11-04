@@ -1,0 +1,9 @@
+﻿Habit;Date;Total log;Unit;Status;Habit ID
+Read;2026-05-01;1;times;Completed;-Nabc1
+Read;2026-05-02;0;times;Skipped;-Nabc1
+Read;2026-05-03;0;times;Failed;-Nabc1
+Walk;2026-05-01;5000;steps;Completed;-Nabc2
+Walk;2026-05-02;3200;steps;Failed;-Nabc2
+Walk;2026-05-03;6000;steps;Completed;-Nabc2
+"No sugar; please";2026-05-01;0;times;Succeeded;-Nabc3
+"No sugar; please";2026-05-02;1;times;Failed;-Nabc3

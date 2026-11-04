@@ -63,6 +63,7 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Pomodoro: 15 min, 30 min, 1 uur, 2 uur of eigen duur, optioneel voor een gewoonte
 - Instellingen
   - Back-up maken en herstellen vanuit een back-up (vervangt de bestaande gegevens)
+  - Importeren uit andere apps: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Gebruikerservaring
   - Automatisering: Siri-opdrachten (een gewoonte voltooien, aanvullen of overslaan; gewoonten die vandaag nog open zijn) en Android-intents voor Tasker, Automate of `adb`; het getoonde scherm wordt meteen bijgewerkt
   - Toegankelijkheid (WCAG 2.1): elke actie heeft een naam voor schermlezers, leesbaar contrast in beide thema's, tekst schaalt mee met de systeemlettergrootte

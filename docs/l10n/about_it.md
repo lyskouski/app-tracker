@@ -64,6 +64,7 @@ indietro.
   - Pomodoro: 15 min, 30 min, 1 ora, 2 ore o durata personalizzata, facoltativamente per un’abitudine
 - Impostazioni
   - Creazione di backup e ripristino da un backup (sostituisce i dati esistenti)
+  - Importazione da altre app: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Esperienza utente
   - Automazione: Comandi rapidi di Siri (completare, aggiungere a un’abitudine o saltarla; abitudini rimaste oggi) e intent Android per Tasker, Automate o `adb`; la schermata mostrata si aggiorna subito
   - Accessibilità (WCAG 2.1): ogni azione ha un nome per gli screen reader, contrasto leggibile in entrambi i temi, il testo segue la dimensione del carattere di sistema

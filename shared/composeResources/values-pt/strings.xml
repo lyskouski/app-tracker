@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Todos os dados existentes serão removidos e substituídos pelos dados do backup.</string>
     <string name="backup_created">Backup criado.</string>
     <string name="backup_restored">Registros restaurados: %1$s</string>
+    <string name="import_from_app">Importar de outro app</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Os dados existentes são mantidos; hábitos com o mesmo nome são mesclados.</string>
+    <string name="import_file">Importar arquivo</string>
+    <string name="import_completed">Hábitos importados: %1$s, marcações de dias: %2$s</string>
+    <string name="import_unsupported_format">O arquivo não é uma exportação compatível.</string>
     <string name="data_transfer_failed">Não foi possível transferir os dados: %1$s</string>
     <string-array name="days_short">
         <item>Seg</item>

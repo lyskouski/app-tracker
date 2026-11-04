@@ -4,13 +4,16 @@ import com.tercad.zwyka.core.files.FileTransfer
 import kotlin.coroutines.resume
 import kotlinx.cinterop.BetaInteropApi
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.addressOf
+import kotlinx.cinterop.usePinned
 import kotlinx.coroutines.suspendCancellableCoroutine
+import platform.Foundation.NSData
 import platform.Foundation.NSString
 import platform.Foundation.NSTemporaryDirectory
 import platform.Foundation.NSURL
 import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.create
-import platform.Foundation.stringWithContentsOfURL
+import platform.Foundation.dataWithContentsOfURL
 import platform.Foundation.writeToURL
 import platform.UIKit.UIApplication
 import platform.UIKit.UIDocumentPickerDelegateProtocol
@@ -18,6 +21,7 @@ import platform.UIKit.UIDocumentPickerViewController
 import platform.UIKit.UIViewController
 import platform.UniformTypeIdentifiers.UTTypeData
 import platform.darwin.NSObject
+import platform.posix.memcpy
 
 /*
  * Files through UIDocumentPickerViewController.
@@ -35,11 +39,13 @@ class IosFileTransfer : FileTransfer {
         return pick(UIDocumentPickerViewController(forExportingURLs = listOf(file), asCopy = true)) != null
     }
 
-    override suspend fun open(extension: String): String? {
+    override suspend fun open(extensions: List<String>): ByteArray? {
         val picker = UIDocumentPickerViewController(forOpeningContentTypes = listOf(UTTypeData), asCopy = true)
         val file = pick(picker) ?: return null
-        return NSString.stringWithContentsOfURL(file, encoding = NSUTF8StringEncoding, error = null)
-            ?: error("Unable to read ${file.lastPathComponent}")
+        val data = NSData.dataWithContentsOfURL(file) ?: error("Unable to read ${file.lastPathComponent}")
+        val bytes = ByteArray(data.length.toInt())
+        if (bytes.isNotEmpty()) bytes.usePinned { memcpy(it.addressOf(0), data.bytes, data.length) }
+        return bytes
     }
 
     private suspend fun pick(picker: UIDocumentPickerViewController): NSURL? =

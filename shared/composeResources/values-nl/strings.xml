@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Alle bestaande gegevens worden verwijderd en vervangen door de gegevens uit de back-up.</string>
     <string name="backup_created">Back-up gemaakt.</string>
     <string name="backup_restored">Herstelde records: %1$s</string>
+    <string name="import_from_app">Importeren uit een andere app</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Bestaande gegevens blijven behouden; gewoonten met dezelfde naam worden samengevoegd.</string>
+    <string name="import_file">Bestand importeren</string>
+    <string name="import_completed">Geïmporteerde gewoonten: %1$s, dagmarkeringen: %2$s</string>
+    <string name="import_unsupported_format">Het bestand is geen ondersteunde export.</string>
     <string name="data_transfer_failed">Kan gegevens niet overdragen: %1$s</string>
     <string-array name="days_short">
         <item>Ma</item>

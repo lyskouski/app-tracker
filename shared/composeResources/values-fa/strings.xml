@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">همهٔ داده‌های موجود حذف و با داده‌های نسخهٔ پشتیبان جایگزین می‌شوند.</string>
     <string name="backup_created">نسخهٔ پشتیبان ایجاد شد.</string>
     <string name="backup_restored">رکوردهای بازیابی‌شده: %1$s</string>
+    <string name="import_from_app">وارد کردن از برنامهٔ دیگر</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). داده‌های موجود حفظ می‌شوند؛ عادت‌های هم‌نام ادغام می‌شوند.</string>
+    <string name="import_file">وارد کردن فایل</string>
+    <string name="import_completed">عادت‌های واردشده: %1$s، علامت‌های روز: %2$s</string>
+    <string name="import_unsupported_format">این فایل یک خروجی پشتیبانی‌شده نیست.</string>
     <string name="data_transfer_failed">انتقال داده‌ها ممکن نشد: %1$s</string>
     <string-array name="days_short">
         <item>دوش</item>

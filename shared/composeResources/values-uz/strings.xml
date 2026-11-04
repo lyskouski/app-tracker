@@ -84,6 +84,11 @@
     <string name="restore_backup_warning">Barcha mavjud ma’lumotlar o‘chiriladi va zaxira nusxadagi ma’lumotlar bilan almashtiriladi.</string>
     <string name="backup_created">Zaxira nusxa yaratildi.</string>
     <string name="backup_restored">Tiklangan yozuvlar: %1$s</string>
+    <string name="import_from_app">Boshqa ilovadan import qilish</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Mavjud ma’lumotlar saqlanadi; bir xil nomli odatlar birlashtiriladi.</string>
+    <string name="import_file">Faylni import qilish</string>
+    <string name="import_completed">Import qilingan odatlar: %1$s, kun belgilari: %2$s</string>
+    <string name="import_unsupported_format">Fayl qo‘llab-quvvatlanadigan eksport emas.</string>
     <string name="data_transfer_failed">Ma’lumotlarni ko‘chirib bo‘lmadi: %1$s</string>
     <string-array name="days_short">
         <item>Du</item>
