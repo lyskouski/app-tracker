@@ -62,7 +62,7 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Ekranni yoniq saqlaydi, tadbir boshlanganda tebranadi va tugaganda odat bajarilishini so‘raydi
   - Pomodoro: 15 daq, 30 daq, 1 soat, 2 soat yoki maxsus vaqt, ixtiyoriy ravishda odat uchun
 - Sozlamalar
-  - Ma’lumotlarni Import / Eksport qilish
+  - Zaxira nusxa yaratish va undan tiklash (mavjud ma’lumotlar almashtiriladi)
 - Foydalanuvchi tajribasi
   - Avtomatlashtirish: Siri Shortcuts (odatni bajarish, unga qo‘shish yoki o‘tkazib yuborish; bugun qolgan odatlar) va Tasker, Automate yoki `adb` uchun Android intentlari; ko‘rsatilgan ekran darhol yangilanadi
   - Qulaylik (WCAG 2.1): ekran o‘qish dasturlari uchun har bir amalning nomi, ikkala mavzuda o‘qiladigan kontrast, tizim shrift o‘lchamiga moslashadigan matn

@@ -77,10 +77,13 @@
     <string name="completeness_type">Voltooiingstype</string>
     <string name="completeness_symbols">Symbolen</string>
     <string name="completeness_colors">Kleuren</string>
-    <string name="import_data">Importeren</string>
-    <string name="export_data">Exporteren</string>
-    <string name="data_exported">Gegevens geëxporteerd.</string>
-    <string name="data_imported">Geïmporteerde records: %1$s</string>
+    <string name="sync">Synchronisatie</string>
+    <string name="create_backup">Back-up maken</string>
+    <string name="restore_backup">Herstellen vanuit back-up</string>
+    <string name="restore_backup_confirmation">Herstellen vanuit back-up?</string>
+    <string name="restore_backup_warning">Alle bestaande gegevens worden verwijderd en vervangen door de gegevens uit de back-up.</string>
+    <string name="backup_created">Back-up gemaakt.</string>
+    <string name="backup_restored">Herstelde records: %1$s</string>
     <string name="data_transfer_failed">Kan gegevens niet overdragen: %1$s</string>
     <string-array name="days_short">
         <item>Ma</item>

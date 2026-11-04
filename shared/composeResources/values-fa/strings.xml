@@ -77,10 +77,13 @@
     <string name="completeness_type">نوع تکمیل</string>
     <string name="completeness_symbols">نمادها</string>
     <string name="completeness_colors">رنگ‌ها</string>
-    <string name="import_data">وارد کردن</string>
-    <string name="export_data">خروجی گرفتن</string>
-    <string name="data_exported">داده‌ها صادر شدند.</string>
-    <string name="data_imported">رکوردهای واردشده: %1$s</string>
+    <string name="sync">همگام‌سازی</string>
+    <string name="create_backup">ایجاد نسخهٔ پشتیبان</string>
+    <string name="restore_backup">بازیابی از نسخهٔ پشتیبان</string>
+    <string name="restore_backup_confirmation">از نسخهٔ پشتیبان بازیابی شود؟</string>
+    <string name="restore_backup_warning">همهٔ داده‌های موجود حذف و با داده‌های نسخهٔ پشتیبان جایگزین می‌شوند.</string>
+    <string name="backup_created">نسخهٔ پشتیبان ایجاد شد.</string>
+    <string name="backup_restored">رکوردهای بازیابی‌شده: %1$s</string>
     <string name="data_transfer_failed">انتقال داده‌ها ممکن نشد: %1$s</string>
     <string-array name="days_short">
         <item>دوش</item>

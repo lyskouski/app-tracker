@@ -77,10 +77,13 @@
     <string name="completeness_type">Tipo de cumplimiento</string>
     <string name="completeness_symbols">Símbolos</string>
     <string name="completeness_colors">Colores</string>
-    <string name="import_data">Importar</string>
-    <string name="export_data">Exportar</string>
-    <string name="data_exported">Datos exportados.</string>
-    <string name="data_imported">Registros importados: %1$s</string>
+    <string name="sync">Sincronización</string>
+    <string name="create_backup">Crear copia de seguridad</string>
+    <string name="restore_backup">Restaurar desde copia de seguridad</string>
+    <string name="restore_backup_confirmation">¿Restaurar desde la copia de seguridad?</string>
+    <string name="restore_backup_warning">Todos los datos existentes se eliminarán y se sustituirán por los de la copia de seguridad.</string>
+    <string name="backup_created">Copia de seguridad creada.</string>
+    <string name="backup_restored">Registros restaurados: %1$s</string>
     <string name="data_transfer_failed">No se pudieron transferir los datos: %1$s</string>
     <string-array name="days_short">
         <item>Lun</item>

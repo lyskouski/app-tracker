@@ -105,8 +105,9 @@ interface BackupRepository {
     suspend fun export(): String
 
     /**
-     * Adds the rows of [sql] (as made by [export]); rows with existing keys are skipped.
-     * @return number of added rows.
+     * Replaces all stored data with the rows of [sql] (as made by [export]).
+     * Nothing changes when [sql] is broken or has no rows.
+     * @return number of restored rows.
      */
-    suspend fun import(sql: String): Int
+    suspend fun restore(sql: String): Int
 }

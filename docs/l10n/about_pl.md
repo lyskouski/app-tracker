@@ -62,7 +62,7 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Ekran nie gaśnie; wibracja na początku wydarzenia i pytanie o realizację nawyku po jego zakończeniu
   - Pomodoro: 15 min, 30 min, 1 godzina, 2 godziny lub własny czas, opcjonalnie dla nawyku
 - Ustawienia
-  - Import / Eksport danych
+  - Tworzenie kopii zapasowej i przywracanie z kopii (zastępuje istniejące dane)
 - Doświadczenie użytkownika
   - Automatyzacja: Skróty Siri (wykonanie, dodanie do nawyku lub jego pominięcie; nawyki pozostałe na dziś) oraz intencje Androida dla Tasker, Automate lub `adb`; wyświetlany ekran od razu się odświeża
   - Dostępność (WCAG 2.1): nazwy wszystkich akcji dla czytników ekranu, czytelny kontrast w obu motywach, tekst skaluje się z systemowym rozmiarem czcionki

@@ -18,6 +18,9 @@ class AppSettingsStore(private val service: SettingsService?) {
     /** Set when a language change rebuilds the navigation stack, so the settings page stays open. */
     var reopenSettings = false
 
+    /** As [reopenSettings], for the sync page above it (a restored backup may change the language). */
+    var reopenSync = false
+
     suspend fun load() {
         current = service?.load() ?: AppSettings()
     }

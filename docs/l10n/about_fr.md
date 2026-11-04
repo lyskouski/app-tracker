@@ -63,7 +63,7 @@ de côté.
   - Garde l’écran allumé, vibre au début d’un événement et demande la réalisation de l’habitude à sa fin
   - Pomodoro : 15 min, 30 min, 1 heure, 2 heures ou durée personnalisée, éventuellement pour une habitude
 - Paramètres
-  - Importation / Exportation des données
+  - Création d’une sauvegarde et restauration depuis une sauvegarde (remplace les données existantes)
 - Expérience utilisateur
   - Automatisation : Raccourcis Siri (terminer, compléter ou sauter une habitude ; habitudes restantes du jour) et intents Android pour Tasker, Automate ou `adb` ; l’écran affiché est mis à jour aussitôt
   - Accessibilité (WCAG 2.1) : chaque action est nommée pour les lecteurs d'écran, contraste lisible dans les deux thèmes, le texte suit la taille de police du système

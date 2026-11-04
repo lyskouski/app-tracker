@@ -125,7 +125,7 @@ one is left behind.
 - Start of the week
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending)
-- Import / Export data
+- Sync: create a backup, or restore from a backup (replaces the existing data)
 - Habits' day state representation: symbols, colored circles
 
 **Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))

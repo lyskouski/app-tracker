@@ -77,10 +77,13 @@
     <string name="completeness_type">पूर्णता का प्रकार</string>
     <string name="completeness_symbols">प्रतीक</string>
     <string name="completeness_colors">रंग</string>
-    <string name="import_data">आयात करें</string>
-    <string name="export_data">निर्यात करें</string>
-    <string name="data_exported">डेटा निर्यात किया गया।</string>
-    <string name="data_imported">आयात किए गए रिकॉर्ड: %1$s</string>
+    <string name="sync">सिंक</string>
+    <string name="create_backup">बैकअप बनाएँ</string>
+    <string name="restore_backup">बैकअप से पुनर्स्थापित करें</string>
+    <string name="restore_backup_confirmation">बैकअप से पुनर्स्थापित करें?</string>
+    <string name="restore_backup_warning">सभी मौजूदा डेटा हटा दिया जाएगा और बैकअप के डेटा से बदल दिया जाएगा।</string>
+    <string name="backup_created">बैकअप बनाया गया।</string>
+    <string name="backup_restored">पुनर्स्थापित रिकॉर्ड: %1$s</string>
     <string name="data_transfer_failed">डेटा स्थानांतरित नहीं हो सका: %1$s</string>
     <string-array name="days_short">
         <item>सोम</item>

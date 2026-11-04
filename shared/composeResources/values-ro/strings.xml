@@ -77,10 +77,13 @@
     <string name="completeness_type">Tip de completare</string>
     <string name="completeness_symbols">Simboluri</string>
     <string name="completeness_colors">Culori</string>
-    <string name="import_data">Importă</string>
-    <string name="export_data">Exportă</string>
-    <string name="data_exported">Datele au fost exportate.</string>
-    <string name="data_imported">Înregistrări importate: %1$s</string>
+    <string name="sync">Sincronizare</string>
+    <string name="create_backup">Creează o copie de rezervă</string>
+    <string name="restore_backup">Restaurează din copia de rezervă</string>
+    <string name="restore_backup_confirmation">Restaurezi din copia de rezervă?</string>
+    <string name="restore_backup_warning">Toate datele existente vor fi șterse și înlocuite cu datele din copia de rezervă.</string>
+    <string name="backup_created">Copie de rezervă creată.</string>
+    <string name="backup_restored">Înregistrări restaurate: %1$s</string>
     <string name="data_transfer_failed">Datele nu au putut fi transferate: %1$s</string>
     <string-array name="days_short">
         <item>Lun</item>

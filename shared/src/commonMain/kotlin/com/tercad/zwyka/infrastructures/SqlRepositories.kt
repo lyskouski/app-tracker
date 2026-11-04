@@ -306,16 +306,28 @@ class SqlBackupRepository(private val database: Database) : BackupRepository {
         }
     }.joinToString(separator = "\n", postfix = "\n")
 
-    override suspend fun import(sql: String): Int {
-        // Parsed in full first: a broken file adds nothing.
+    override suspend fun restore(sql: String): Int {
+        // Parsed in full first: a broken or empty file keeps the stored data.
         val inserts = parseSqlDump(sql)
-        var added = 0L
+        require(inserts.isNotEmpty()) { "The backup has no data" }
+        var restored = 0L
         database.transaction {
+            clear()
             inserts.forEach { insert ->
-                added += insert.execute()
+                restored += insert.execute()
             }
         }
-        return added.toInt()
+        return restored.toInt()
+    }
+
+    private suspend fun clear() {
+        queries.deleteAllGoals()
+        queries.deleteAllGoalGroups()
+        queries.deleteAllDayStates()
+        queries.deleteAllHabitTimes()
+        queries.deleteAllIntents()
+        queries.deleteAllHabits()
+        queries.deleteAllSettings()
     }
 
     private suspend fun SqlInsert.execute(): Long = when (table) {

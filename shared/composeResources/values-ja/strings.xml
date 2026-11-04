@@ -77,10 +77,13 @@
     <string name="completeness_type">達成度の表示</string>
     <string name="completeness_symbols">記号</string>
     <string name="completeness_colors">色</string>
-    <string name="import_data">インポート</string>
-    <string name="export_data">エクスポート</string>
-    <string name="data_exported">データをエクスポートしました。</string>
-    <string name="data_imported">インポートしたレコード：%1$s</string>
+    <string name="sync">同期</string>
+    <string name="create_backup">バックアップを作成</string>
+    <string name="restore_backup">バックアップから復元</string>
+    <string name="restore_backup_confirmation">バックアップから復元しますか？</string>
+    <string name="restore_backup_warning">既存のデータはすべて削除され、バックアップのデータに置き換えられます。</string>
+    <string name="backup_created">バックアップを作成しました。</string>
+    <string name="backup_restored">復元したレコード：%1$s</string>
     <string name="data_transfer_failed">データを転送できませんでした：%1$s</string>
     <string-array name="days_short">
         <item>月</item>

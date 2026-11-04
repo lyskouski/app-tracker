@@ -40,7 +40,7 @@ class SqlBackupRepositoryTest {
     }
 
     @Test
-    fun importAddsMissingRowsOnly() = runTest {
+    fun restoreReplacesStoredData() = runTest {
         val source = database()
         val habits = SqlHabitRepository(source)
         val id = habits.insert(HabitDraft("Read", "MenuBook", "#26A69A", "20 pages", 0b11, targetValue = 20.5, targetType = "pages"))
@@ -50,24 +50,38 @@ class SqlBackupRepositoryTest {
         val sql = SqlBackupRepository(source).export()
 
         val target = database()
+        SqlHabitRepository(target).insert(HabitDraft("Local only", null, null, null, 0b1))
         SqlSettingsRepository(target).put("language", "en")
+        SqlSettingsRepository(target).put("themeMode", "dark")
         val targetBackup = SqlBackupRepository(target)
+        val rows = sql.lines().count { it.isNotEmpty() }
 
-        // Seeded habits and day states, and the setting, already exist.
-        assertEquals(4, targetBackup.import(sql))
-        assertEquals(sql, targetBackup.export().replace("'en'", "'de'"))
-        assertEquals(0, targetBackup.import(sql))
+        assertEquals(rows, targetBackup.restore(sql))
+        assertEquals(sql, targetBackup.export())
+        // Restoring again gives the same data.
+        assertEquals(rows, targetBackup.restore(sql))
+        assertEquals(sql, targetBackup.export())
     }
 
     @Test
-    fun brokenFileAddsNothing() = runTest {
+    fun brokenFileKeepsStoredData() = runTest {
         val database = database()
         val backup = SqlBackupRepository(database)
         val before = backup.export()
 
         assertFailsWith<IllegalArgumentException> {
-            backup.import("INSERT IGNORE INTO Setting (key, value) VALUES ('a', 'b');\nINSERT IGNORE INTO Unknown (id) VALUES (1);")
+            backup.restore("INSERT IGNORE INTO Setting (key, value) VALUES ('a', 'b');\nINSERT IGNORE INTO Unknown (id) VALUES (1);")
         }
+        assertEquals(before, backup.export())
+    }
+
+    @Test
+    fun emptyFileKeepsStoredData() = runTest {
+        val database = database()
+        val backup = SqlBackupRepository(database)
+        val before = backup.export()
+
+        assertFailsWith<IllegalArgumentException> { backup.restore("-- nothing\n\n") }
         assertEquals(before, backup.export())
     }
 }

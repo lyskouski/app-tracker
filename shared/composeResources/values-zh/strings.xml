@@ -77,10 +77,13 @@
     <string name="completeness_type">完成度显示</string>
     <string name="completeness_symbols">符号</string>
     <string name="completeness_colors">颜色</string>
-    <string name="import_data">导入</string>
-    <string name="export_data">导出</string>
-    <string name="data_exported">数据已导出。</string>
-    <string name="data_imported">已导入记录：%1$s</string>
+    <string name="sync">同步</string>
+    <string name="create_backup">创建备份</string>
+    <string name="restore_backup">从备份恢复</string>
+    <string name="restore_backup_confirmation">从备份恢复？</string>
+    <string name="restore_backup_warning">所有现有数据将被删除，并替换为备份中的数据。</string>
+    <string name="backup_created">备份已创建。</string>
+    <string name="backup_restored">已恢复记录：%1$s</string>
     <string name="data_transfer_failed">无法传输数据：%1$s</string>
     <string-array name="days_short">
         <item>周一</item>

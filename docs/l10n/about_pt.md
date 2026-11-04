@@ -62,7 +62,7 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Mantém a tela ligada, vibra quando um evento começa e pede a conclusão do hábito quando termina
   - Pomodoro: 15 min, 30 min, 1 hora, 2 horas ou personalizado, opcionalmente para um hábito
 - Configurações
-  - Importação / Exportação de dados
+  - Criação de backup e restauração a partir de um backup (substitui os dados existentes)
 - Experiência do usuário
   - Automação: Atalhos da Siri (concluir, somar a um hábito ou pulá-lo; hábitos que faltam hoje) e intents do Android para Tasker, Automate ou `adb`; a tela exibida é atualizada na hora
   - Acessibilidade (WCAG 2.1): todas as ações têm nome para leitores de tela, contraste legível nos dois temas, o texto acompanha o tamanho da fonte do sistema

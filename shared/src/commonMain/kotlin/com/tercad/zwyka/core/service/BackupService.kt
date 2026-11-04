@@ -9,7 +9,7 @@ import kotlinx.datetime.LocalDate
 const val BACKUP_EXTENSION = "sq"
 
 /*
- * Export of all stored data into a SQL file, and its import.
+ * Backup of all stored data into a SQL file, and the restore from it.
  */
 class BackupService(
     private val backup: BackupRepository,
@@ -19,10 +19,10 @@ class BackupService(
 
     suspend fun export(): String = backup.export()
 
-    /** Adds the data of [sql] to the stored one. @return number of added rows. */
-    suspend fun import(sql: String): Int {
-        val added = backup.import(sql)
+    /** Replaces the stored data with the one of [sql]. @return number of restored rows. */
+    suspend fun restore(sql: String): Int {
+        val restored = backup.restore(sql)
         reminders.sync()
-        return added
+        return restored
     }
 }

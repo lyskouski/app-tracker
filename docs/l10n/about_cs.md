@@ -62,7 +62,7 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Obrazovka nezhasne; vibrace při začátku události a dotaz na plnění návyku po jejím konci
   - Pomodoro: 15 min, 30 min, 1 hodina, 2 hodiny nebo vlastní čas, volitelně pro návyk
 - Nastavení
-  - Import / Export dat
+  - Vytvoření zálohy a obnovení ze zálohy (nahradí stávající data)
 - Uživatelský zážitek
   - Automatizace: Siri Shortcuts (splnit, přičíst k návyku nebo ho přeskočit; návyky zbývající na dnešek) a intenty Androidu pro Tasker, Automate nebo `adb`; zobrazená obrazovka se hned aktualizuje
   - Přístupnost (WCAG 2.1): popisky všech akcí pro čtečky obrazovky, čitelný kontrast v obou motivech, text se přizpůsobuje systémové velikosti písma

@@ -77,10 +77,13 @@
     <string name="completeness_type">Typ wykonania</string>
     <string name="completeness_symbols">Symbole</string>
     <string name="completeness_colors">Kolory</string>
-    <string name="import_data">Import</string>
-    <string name="export_data">Eksport</string>
-    <string name="data_exported">Dane wyeksportowane.</string>
-    <string name="data_imported">Zaimportowane rekordy: %1$s</string>
+    <string name="sync">Synchronizacja</string>
+    <string name="create_backup">Utwórz kopię zapasową</string>
+    <string name="restore_backup">Przywróć z kopii zapasowej</string>
+    <string name="restore_backup_confirmation">Przywrócić z kopii zapasowej?</string>
+    <string name="restore_backup_warning">Wszystkie istniejące dane zostaną usunięte i zastąpione danymi z kopii zapasowej.</string>
+    <string name="backup_created">Kopia zapasowa utworzona.</string>
+    <string name="backup_restored">Przywrócone rekordy: %1$s</string>
     <string name="data_transfer_failed">Nie udało się przenieść danych: %1$s</string>
     <string-array name="days_short">
         <item>Pon</item>

@@ -36,6 +36,7 @@ import com.tercad.zwyka.defines.LocalColorScheme
 import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
+import com.tercad.zwyka.pages.SyncPage
 import com.tercad.zwyka.pages.inMemoryNavigatorSaver
 import com.tercad.zwyka.pages.rememberInMemory
 import com.tercad.zwyka.widgets.ShortcutsHost
@@ -85,10 +86,13 @@ fun App(
             MaterialTheme(colorScheme = colorScheme, shapes = AppShapes) {
                 val screens = remember {
                     val home = HomePage(services, initializeDatabase, settingsStore)
-                    if (settingsStore.reopenSettings) {
-                        listOf(home, SettingsPage(settingsStore, services))
-                    } else {
-                        listOf(home)
+                    buildList {
+                        add(home)
+                        if (settingsStore.reopenSettings) add(SettingsPage(settingsStore, services))
+                        if (settingsStore.reopenSync && services != null) add(SyncPage(settingsStore, services))
+                    }.also {
+                        settingsStore.reopenSettings = false
+                        settingsStore.reopenSync = false
                     }
                 }
                 ShortcutsHost {

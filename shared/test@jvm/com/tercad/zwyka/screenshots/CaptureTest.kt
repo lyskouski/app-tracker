@@ -140,13 +140,9 @@ class CaptureTest {
 
     private suspend fun sampleDatabase(target: ScreenshotTarget): Database {
         val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY, schema = Database.Schema.synchronous())
-        // The schema seeds placeholder data: start from empty tables.
-        listOf("Goal", "GoalGroup", "DayState", "HabitTime", "Habit", "Intent", "Setting").forEach { table ->
-            driver.execute(null, "DELETE FROM $table", 0)
-        }
         val database = Database(driver)
         val services = database.createServices(NoReminderScheduler)
-        services.backup.import(resolveDates(SAMPLE_DATA.readText()))
+        services.backup.restore(resolveDates(SAMPLE_DATA.readText()))
         // Regional variants (zh-TW) have their own translation, other locales use the language only.
         val language = target.languageTag.takeIf { tag -> applicationLanguages.any { it.tag == tag } }
             ?: target.language

@@ -77,10 +77,13 @@
     <string name="completeness_type">Completeness Type</string>
     <string name="completeness_symbols">Symbols</string>
     <string name="completeness_colors">Colors</string>
-    <string name="import_data">Import</string>
-    <string name="export_data">Export</string>
-    <string name="data_exported">Data exported.</string>
-    <string name="data_imported">Imported records: %1$s</string>
+    <string name="sync">Sync</string>
+    <string name="create_backup">Create Backup</string>
+    <string name="restore_backup">Restore from Backup</string>
+    <string name="restore_backup_confirmation">Restore from backup?</string>
+    <string name="restore_backup_warning">All existing data will be removed and replaced with the data of the backup.</string>
+    <string name="backup_created">Backup created.</string>
+    <string name="backup_restored">Restored records: %1$s</string>
     <string name="data_transfer_failed">Unable to transfer data: %1$s</string>
     <string-array name="days_short">
         <item>Mon</item>

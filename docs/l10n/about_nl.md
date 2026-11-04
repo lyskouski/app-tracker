@@ -62,7 +62,7 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Houdt het scherm aan, trilt bij de start van een afspraak en vraagt aan het einde naar de voltooiing van de gewoonte
   - Pomodoro: 15 min, 30 min, 1 uur, 2 uur of eigen duur, optioneel voor een gewoonte
 - Instellingen
-  - Importeren / Exporteren van gegevens
+  - Back-up maken en herstellen vanuit een back-up (vervangt de bestaande gegevens)
 - Gebruikerservaring
   - Automatisering: Siri-opdrachten (een gewoonte voltooien, aanvullen of overslaan; gewoonten die vandaag nog open zijn) en Android-intents voor Tasker, Automate of `adb`; het getoonde scherm wordt meteen bijgewerkt
   - Toegankelijkheid (WCAG 2.1): elke actie heeft een naam voor schermlezers, leesbaar contrast in beide thema's, tekst schaalt mee met de systeemlettergrootte

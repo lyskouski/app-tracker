@@ -77,10 +77,13 @@
     <string name="completeness_type">Tamamlanma türü</string>
     <string name="completeness_symbols">Semboller</string>
     <string name="completeness_colors">Renkler</string>
-    <string name="import_data">İçe aktar</string>
-    <string name="export_data">Dışa aktar</string>
-    <string name="data_exported">Veriler dışa aktarıldı.</string>
-    <string name="data_imported">İçe aktarılan kayıtlar: %1$s</string>
+    <string name="sync">Senkronizasyon</string>
+    <string name="create_backup">Yedek oluştur</string>
+    <string name="restore_backup">Yedekten geri yükle</string>
+    <string name="restore_backup_confirmation">Yedekten geri yüklensin mi?</string>
+    <string name="restore_backup_warning">Mevcut tüm veriler silinecek ve yedekteki verilerle değiştirilecek.</string>
+    <string name="backup_created">Yedek oluşturuldu.</string>
+    <string name="backup_restored">Geri yüklenen kayıtlar: %1$s</string>
     <string name="data_transfer_failed">Veriler aktarılamadı: %1$s</string>
     <string-array name="days_short">
         <item>Pzt</item>

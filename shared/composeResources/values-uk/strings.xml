@@ -77,10 +77,13 @@
     <string name="completeness_type">Тип виконання</string>
     <string name="completeness_symbols">Символи</string>
     <string name="completeness_colors">Кольори</string>
-    <string name="import_data">Імпорт</string>
-    <string name="export_data">Експорт</string>
-    <string name="data_exported">Дані експортовано.</string>
-    <string name="data_imported">Імпортовано записів: %1$s</string>
+    <string name="sync">Синхронізація</string>
+    <string name="create_backup">Створити резервну копію</string>
+    <string name="restore_backup">Відновити з резервної копії</string>
+    <string name="restore_backup_confirmation">Відновити з резервної копії?</string>
+    <string name="restore_backup_warning">Усі наявні дані буде видалено й замінено даними з резервної копії.</string>
+    <string name="backup_created">Резервну копію створено.</string>
+    <string name="backup_restored">Відновлено записів: %1$s</string>
     <string name="data_transfer_failed">Не вдалося перенести дані: %1$s</string>
     <string-array name="days_short">
         <item>Пн</item>

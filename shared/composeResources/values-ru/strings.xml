@@ -77,10 +77,13 @@
     <string name="completeness_type">Тип выполнения</string>
     <string name="completeness_symbols">Символы</string>
     <string name="completeness_colors">Цвета</string>
-    <string name="import_data">Импорт</string>
-    <string name="export_data">Экспорт</string>
-    <string name="data_exported">Данные экспортированы.</string>
-    <string name="data_imported">Импортировано записей: %1$s</string>
+    <string name="sync">Синхронизация</string>
+    <string name="create_backup">Создать резервную копию</string>
+    <string name="restore_backup">Восстановить из резервной копии</string>
+    <string name="restore_backup_confirmation">Восстановить из резервной копии?</string>
+    <string name="restore_backup_warning">Все существующие данные будут удалены и заменены данными из резервной копии.</string>
+    <string name="backup_created">Резервная копия создана.</string>
+    <string name="backup_restored">Восстановлено записей: %1$s</string>
     <string name="data_transfer_failed">Не удалось перенести данные: %1$s</string>
     <string-array name="days_short">
         <item>Пн</item>

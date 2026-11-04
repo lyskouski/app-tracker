@@ -62,7 +62,7 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Mantiene la pantalla encendida, vibra al empezar un evento y pide el cumplimiento del hábito al terminar
   - Pomodoro: 15 min, 30 min, 1 hora, 2 horas o personalizado, opcionalmente para un hábito
 - Ajustes
-  - Importación / Exportación de datos
+  - Creación de copias de seguridad y restauración desde una copia (reemplaza los datos existentes)
 - Experiencia de usuario
   - Automatización: Atajos de Siri (completar, sumar a un hábito u omitirlo; hábitos pendientes de hoy) e intents de Android para Tasker, Automate o `adb`; la pantalla mostrada se actualiza al instante
   - Accesibilidad (WCAG 2.1): todas las acciones tienen nombre para los lectores de pantalla, contraste legible en ambos temas, el texto se adapta al tamaño de fuente del sistema

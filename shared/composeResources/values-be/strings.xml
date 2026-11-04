@@ -77,10 +77,13 @@
     <string name="completeness_type">Тып выканання</string>
     <string name="completeness_symbols">Сімвалы</string>
     <string name="completeness_colors">Колеры</string>
-    <string name="import_data">Імпарт</string>
-    <string name="export_data">Экспарт</string>
-    <string name="data_exported">Даныя экспартаваныя.</string>
-    <string name="data_imported">Імпартавана запісаў: %1$s</string>
+    <string name="sync">Сінхранізацыя</string>
+    <string name="create_backup">Стварыць рэзервовую копію</string>
+    <string name="restore_backup">Аднавіць з рэзервовай копіі</string>
+    <string name="restore_backup_confirmation">Аднавіць з рэзервовай копіі?</string>
+    <string name="restore_backup_warning">Усе існуючыя даныя будуць выдалены і заменены данымі з рэзервовай копіі.</string>
+    <string name="backup_created">Рэзервовая копія створана.</string>
+    <string name="backup_restored">Адноўлена запісаў: %1$s</string>
     <string name="data_transfer_failed">Не ўдалося перанесці даныя: %1$s</string>
     <string-array name="days_short">
         <item>Пн</item>

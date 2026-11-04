@@ -77,10 +77,13 @@
     <string name="completeness_type">نوع الإنجاز</string>
     <string name="completeness_symbols">رموز</string>
     <string name="completeness_colors">ألوان</string>
-    <string name="import_data">استيراد</string>
-    <string name="export_data">تصدير</string>
-    <string name="data_exported">تم تصدير البيانات.</string>
-    <string name="data_imported">السجلات المستوردة: %1$s</string>
+    <string name="sync">المزامنة</string>
+    <string name="create_backup">إنشاء نسخة احتياطية</string>
+    <string name="restore_backup">الاستعادة من نسخة احتياطية</string>
+    <string name="restore_backup_confirmation">الاستعادة من النسخة الاحتياطية؟</string>
+    <string name="restore_backup_warning">سيتم حذف جميع البيانات الحالية واستبدالها ببيانات النسخة الاحتياطية.</string>
+    <string name="backup_created">تم إنشاء النسخة الاحتياطية.</string>
+    <string name="backup_restored">السجلات المستعادة: %1$s</string>
     <string name="data_transfer_failed">تعذّر نقل البيانات: %1$s</string>
     <string-array name="days_short">
         <item>إثن</item>

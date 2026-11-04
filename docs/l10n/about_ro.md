@@ -62,7 +62,7 @@ Aceasta le permite utilizatorilor să își gestioneze obiceiurile fără efort,
   - Menține ecranul aprins, vibrează la începutul unui eveniment și cere îndeplinirea obiceiului la final
   - Pomodoro: 15 min, 30 min, 1 oră, 2 ore sau durată personalizată, opțional pentru un obicei
 - Setări
-  - Import / Export de date
+  - Crearea unei copii de rezervă și restaurarea din ea (înlocuiește datele existente)
 - Experiența utilizatorului
   - Automatizare: Comenzi rapide Siri (finalizarea, adăugarea la un obicei sau sărirea lui; obiceiurile rămase azi) și intenturi Android pentru Tasker, Automate sau `adb`; ecranul afișat se actualizează imediat
   - Accesibilitate (WCAG 2.1): fiecare acțiune are nume pentru cititoarele de ecran, contrast lizibil în ambele teme, textul urmează dimensiunea fontului de sistem

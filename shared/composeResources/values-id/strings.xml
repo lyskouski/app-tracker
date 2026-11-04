@@ -77,10 +77,13 @@
     <string name="completeness_type">Jenis Penyelesaian</string>
     <string name="completeness_symbols">Simbol</string>
     <string name="completeness_colors">Warna</string>
-    <string name="import_data">Impor</string>
-    <string name="export_data">Ekspor</string>
-    <string name="data_exported">Data diekspor.</string>
-    <string name="data_imported">Catatan diimpor: %1$s</string>
+    <string name="sync">Sinkronisasi</string>
+    <string name="create_backup">Buat cadangan</string>
+    <string name="restore_backup">Pulihkan dari cadangan</string>
+    <string name="restore_backup_confirmation">Pulihkan dari cadangan?</string>
+    <string name="restore_backup_warning">Semua data yang ada akan dihapus dan diganti dengan data dari cadangan.</string>
+    <string name="backup_created">Cadangan dibuat.</string>
+    <string name="backup_restored">Catatan dipulihkan: %1$s</string>
     <string name="data_transfer_failed">Tidak dapat mentransfer data: %1$s</string>
     <string-array name="days_short">
         <item>Sen</item>

@@ -77,10 +77,13 @@
     <string name="completeness_type">Erfüllungsart</string>
     <string name="completeness_symbols">Symbole</string>
     <string name="completeness_colors">Farben</string>
-    <string name="import_data">Importieren</string>
-    <string name="export_data">Exportieren</string>
-    <string name="data_exported">Daten exportiert.</string>
-    <string name="data_imported">Importierte Datensätze: %1$s</string>
+    <string name="sync">Synchronisierung</string>
+    <string name="create_backup">Sicherung erstellen</string>
+    <string name="restore_backup">Aus Sicherung wiederherstellen</string>
+    <string name="restore_backup_confirmation">Aus Sicherung wiederherstellen?</string>
+    <string name="restore_backup_warning">Alle vorhandenen Daten werden gelöscht und durch die Daten der Sicherung ersetzt.</string>
+    <string name="backup_created">Sicherung erstellt.</string>
+    <string name="backup_restored">Wiederhergestellte Datensätze: %1$s</string>
     <string name="data_transfer_failed">Datenübertragung fehlgeschlagen: %1$s</string>
     <string-array name="days_short">
         <item>Mo</item>

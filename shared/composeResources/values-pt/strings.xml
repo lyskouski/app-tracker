@@ -77,10 +77,13 @@
     <string name="completeness_type">Tipo de conclusão</string>
     <string name="completeness_symbols">Símbolos</string>
     <string name="completeness_colors">Cores</string>
-    <string name="import_data">Importar</string>
-    <string name="export_data">Exportar</string>
-    <string name="data_exported">Dados exportados.</string>
-    <string name="data_imported">Registros importados: %1$s</string>
+    <string name="sync">Sincronização</string>
+    <string name="create_backup">Criar backup</string>
+    <string name="restore_backup">Restaurar do backup</string>
+    <string name="restore_backup_confirmation">Restaurar do backup?</string>
+    <string name="restore_backup_warning">Todos os dados existentes serão removidos e substituídos pelos dados do backup.</string>
+    <string name="backup_created">Backup criado.</string>
+    <string name="backup_restored">Registros restaurados: %1$s</string>
     <string name="data_transfer_failed">Não foi possível transferir os dados: %1$s</string>
     <string-array name="days_short">
         <item>Seg</item>

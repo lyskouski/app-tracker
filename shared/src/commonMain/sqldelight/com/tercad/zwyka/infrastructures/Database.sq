@@ -300,6 +300,28 @@ importSetting:
 INSERT OR IGNORE INTO Setting(key, value)
 VALUES (?, ?);
 
+-- Restoring a backup replaces all stored data: children go first.
+deleteAllGoals:
+DELETE FROM Goal;
+
+deleteAllGoalGroups:
+DELETE FROM GoalGroup;
+
+deleteAllDayStates:
+DELETE FROM DayState;
+
+deleteAllHabitTimes:
+DELETE FROM HabitTime;
+
+deleteAllIntents:
+DELETE FROM Intent;
+
+deleteAllHabits:
+DELETE FROM Habit;
+
+deleteAllSettings:
+DELETE FROM Setting;
+
 INSERT INTO Habit(id, title, icon, color) VALUES (1, 'Health Care', 'FitnessCenter', '#00897B');
 INSERT INTO Habit(id, title, icon, color) VALUES (2, 'Reading', 'MenuBook', '#EF6C00');
 INSERT INTO Habit(id, title, icon, color) VALUES (3, 'Water', 'LocalDrink', '#1E88E5');

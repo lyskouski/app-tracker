@@ -62,7 +62,7 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Hält den Bildschirm an, vibriert bei Beginn eines Termins und fragt am Ende nach der Erfüllung der Gewohnheit
   - Pomodoro: 15 Min., 30 Min., 1 Stunde, 2 Stunden oder eigene Dauer, optional für eine Gewohnheit
 - Einstellungen
-  - Import / Export von Daten
+  - Erstellen einer Sicherung und Wiederherstellen aus einer Sicherung (ersetzt die vorhandenen Daten)
 - Benutzererlebnis
   - Automatisierung: Siri-Kurzbefehle (eine Gewohnheit erledigen, ergänzen oder überspringen; heute offene Gewohnheiten) und Android-Intents für Tasker, Automate oder `adb`; der angezeigte Bildschirm wird sofort aktualisiert
   - Barrierefreiheit (WCAG 2.1): Bezeichnungen aller Aktionen für Screenreader, gut lesbarer Kontrast in beiden Themes, Text skaliert mit der Systemschriftgröße

@@ -77,10 +77,13 @@
     <string name="completeness_type">Tamamlanma növü</string>
     <string name="completeness_symbols">Simvollar</string>
     <string name="completeness_colors">Rənglər</string>
-    <string name="import_data">İdxal</string>
-    <string name="export_data">İxrac</string>
-    <string name="data_exported">Məlumatlar ixrac edildi.</string>
-    <string name="data_imported">İdxal edilmiş qeydlər: %1$s</string>
+    <string name="sync">Sinxronizasiya</string>
+    <string name="create_backup">Ehtiyat nüsxə yarat</string>
+    <string name="restore_backup">Ehtiyat nüsxədən bərpa et</string>
+    <string name="restore_backup_confirmation">Ehtiyat nüsxədən bərpa edilsin?</string>
+    <string name="restore_backup_warning">Bütün mövcud məlumatlar silinəcək və ehtiyat nüsxədəki məlumatlarla əvəz olunacaq.</string>
+    <string name="backup_created">Ehtiyat nüsxə yaradıldı.</string>
+    <string name="backup_restored">Bərpa edilmiş qeydlər: %1$s</string>
     <string name="data_transfer_failed">Məlumatları ötürmək mümkün olmadı: %1$s</string>
     <string-array name="days_short">
         <item>B.e.</item>

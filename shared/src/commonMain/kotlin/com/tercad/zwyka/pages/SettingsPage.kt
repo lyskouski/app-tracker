@@ -6,19 +6,14 @@ package com.tercad.zwyka.pages
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Icon
+import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -44,36 +39,21 @@ import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.search_languages
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.sort_direction
+import com.tercad.zwyka.resources.sync
 import com.tercad.zwyka.resources.start_of_week
 import com.tercad.zwyka.resources.theme_mode
 import com.tercad.zwyka.state.AppSettingsStore
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.icons.filled.FileDownload
-import androidx.compose.material.icons.filled.FileUpload
-import androidx.compose.material3.OutlinedButton
 import com.tercad.zwyka.core.Services
-import com.tercad.zwyka.core.files.LocalFileTransfer
-import com.tercad.zwyka.core.service.BACKUP_EXTENSION
-import com.tercad.zwyka.core.service.BackupService
-import com.tercad.zwyka.resources.data_exported
-import com.tercad.zwyka.resources.data_imported
-import com.tercad.zwyka.resources.data_transfer_failed
-import com.tercad.zwyka.resources.database_error_unknown
-import com.tercad.zwyka.resources.export_data
-import com.tercad.zwyka.resources.import_data
 import com.tercad.zwyka.widgets.BottomBar
 import com.tercad.zwyka.widgets.BottomBarBackButton
+import com.tercad.zwyka.widgets.BottomBarButton
 import com.tercad.zwyka.widgets.DropdownField
-import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.Heading
-import com.tercad.zwyka.widgets.StatusMessage
 import com.tercad.zwyka.widgets.screenTitle
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringArrayResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -96,6 +76,14 @@ class SettingsPage(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
                     )
+                    services?.let {
+                        BottomBarButton(
+                            icon = Icons.Filled.Sync,
+                            text = stringResource(Res.string.sync),
+                            onClick = { navigator.push(SyncPage(settingsStore, it)) },
+                            modifier = Modifier.align(Alignment.CenterEnd),
+                        )
+                    }
                 }
             },
         ) { contentPadding ->
@@ -200,71 +188,8 @@ class SettingsPage(
                 },
             )
 
-            services?.let { BackupButtons(it.backup, settingsStore) }
         }
         }
     }
 }
 
-@Composable
-private fun BackupButtons(backup: BackupService, settingsStore: AppSettingsStore) {
-    val fileTransfer = LocalFileTransfer.current
-    val scope = rememberCoroutineScope()
-    // Outcome of the last action: a message with its argument.
-    var message by remember { mutableStateOf<Pair<StringResource, String>?>(null) }
-    val unknownError = stringResource(Res.string.database_error_unknown)
-
-    fun transfer(action: suspend () -> Pair<StringResource, String>?) {
-        scope.launch {
-            message = try {
-                action()
-            } catch (error: CancellationException) {
-                throw error
-            } catch (error: Exception) {
-                Res.string.data_transfer_failed to (error.message ?: unknownError)
-            }
-        }
-    }
-
-    message?.let { (text, argument) ->
-        if (text == Res.string.data_transfer_failed) {
-            ErrorMessage(stringResource(text, argument))
-        } else {
-            StatusMessage(stringResource(text, argument))
-        }
-    }
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        OutlinedButton(
-            onClick = {
-                transfer {
-                    val sql = fileTransfer.open(BACKUP_EXTENSION) ?: return@transfer null
-                    val added = backup.import(sql)
-                    // Imported settings may change the language, which rebuilds the navigation.
-                    settingsStore.reopenSettings = true
-                    settingsStore.load()
-                    Res.string.data_imported to added.toString()
-                }
-            },
-            modifier = Modifier.weight(1f),
-        ) {
-            Icon(imageVector = Icons.Filled.FileDownload, contentDescription = null)
-            Text(text = stringResource(Res.string.import_data), modifier = Modifier.padding(start = 8.dp))
-        }
-        OutlinedButton(
-            onClick = {
-                transfer {
-                    val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
-                    val saved = fileTransfer.save(backup.fileName(today), backup.export())
-                    if (saved) Res.string.data_exported to "" else null
-                }
-            },
-            modifier = Modifier.weight(1f),
-        ) {
-            Icon(imageVector = Icons.Filled.FileUpload, contentDescription = null)
-            Text(text = stringResource(Res.string.export_data), modifier = Modifier.padding(start = 8.dp))
-        }
-    }
-}
