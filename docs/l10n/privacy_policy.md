@@ -18,6 +18,7 @@
 - [Nederlands (NL)](./privacy_policy_nl.md)
 - [Polski (PL)](./privacy_policy_pl.md)
 - [Português Brasileiro (PT-BR)](./privacy_policy_pt.md)
+- [Português Europeu (PT-PT)](./privacy_policy_pt_PT.md)
 - [Limba română (RO)](./privacy_policy_ro.md)
 - [Русский (RU)](./privacy_policy_ru.md)
 - [Türkçe (TR)](./privacy_policy_tr.md)

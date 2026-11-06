@@ -118,7 +118,7 @@ one is left behind.
   completion of the selected habit.
 
 **Settings**
-- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, fr_FR, uk_UA, zh_CN, zh_TW,
+- Language: system default, en_US, de_DE, be_BY, pl_PL, pt_BR, pt_PT, fr_FR, uk_UA, zh_CN, zh_TW,
   hi_IN, uz_UZ, fa_IR, ar_SA, az_AZ, ja_JP, es_ES, it_IT, tr_TR, ko_KR, nl_NL, cs_CZ, ro_RO,
   ka_GE, ru_RU, id_ID
 - Theme: system default, light, dark

@@ -62,7 +62,7 @@ class CaptureTest {
         locales = listOf(
             "en_US", "de_DE", "be_BY", "pl_PL", "pt_BR", "fr_FR", "uk_UA", "zh_CN",
             "hi_IN", "uz_UZ", "fa_IR", "ar_SA", "az_AZ", "ja_JP", "es_ES", "it_IT",
-            "tr_TR", "ko_KR", "nl_NL", "cs_CZ", "ro_RO", "ka_GE", "ru_RU", "id_ID", "zh_TW",
+            "tr_TR", "ko_KR", "nl_NL", "cs_CZ", "ro_RO", "ka_GE", "ru_RU", "id_ID", "zh_TW", "pt_PT",
         ),
         onInit = { target -> database = sampleDatabase(target) },
     ) {
@@ -143,7 +143,7 @@ class CaptureTest {
         val database = Database(driver)
         val services = database.createServices(NoReminderScheduler)
         services.backup.restore(resolveDates(SAMPLE_DATA.readText()))
-        // Regional variants (zh-TW) have their own translation, other locales use the language only.
+        // Regional variants (zh-TW, pt-PT) have their own translation, other locales use the language only.
         val language = target.languageTag.takeIf { tag -> applicationLanguages.any { it.tag == tag } }
             ?: target.language
         services.settings.save(services.settings.load().copy(language = language))

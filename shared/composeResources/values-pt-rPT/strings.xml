@@ -1,0 +1,176 @@
+<resources>
+    <string name="app_name">Zwyka</string>
+    <string name="habit_database_unavailable">A base de dados de hábitos não está disponível.</string>
+    <string name="habits_loading">A carregar hábitos...</string>
+    <string name="habits_load_failed">Não foi possível carregar os hábitos: %1$s</string>
+    <string name="database_error_unknown">Erro desconhecido na base de dados</string>
+    <string name="add_habit">Adicionar hábito</string>
+    <string name="add_habit_failed">Não foi possível adicionar o hábito: %1$s</string>
+    <string name="habit_name">Nome do hábito</string>
+    <string name="habit_remarks">Observações</string>
+    <string name="active_days">Dias ativos</string>
+    <string name="archive_habit">Arquivar/desativar hábito</string>
+    <string name="negative_habit">Hábito a evitar</string>
+    <string name="numeric_target">Definir objetivo numérico</string>
+    <string name="target_value">Valor</string>
+    <string name="target_type">Tipo</string>
+    <string name="habit_target">Objetivo: %1$s %2$s</string>
+    <string name="max_streak">Sequência máxima: %1$s</string>
+    <string name="current_streak">Sequência atual: %1$s</string>
+    <string name="timer">Temporizador</string>
+    <string name="timer_now">Agora</string>
+    <string name="timer_free">Tempo livre</string>
+    <string name="timer_left">restante</string>
+    <string name="timer_until_start">até ao início</string>
+    <string name="timer_next_events">Próximos eventos</string>
+    <string name="timer_no_events">Nenhum evento hoje e amanhã</string>
+    <string name="timer_in">dentro de %1$s</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="add_pomodoro">Adicionar temporizador</string>
+    <string name="pomodoro_habit">Hábito (opcional)</string>
+    <string name="pomodoro_no_habit">Sem hábito</string>
+    <string name="pomodoro_minutes">Minutos</string>
+    <string name="start">Iniciar</string>
+    <string name="stop">Parar</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="skip">Saltar</string>
+    <string name="no_icon">Sem ícone</string>
+    <string name="select_icon">Selecionar ícone</string>
+    <string name="search_icons">Pesquisar ícones</string>
+    <string name="back">Voltar</string>
+    <string name="default_color">Predefinição</string>
+    <string name="select_color">Selecionar cor</string>
+    <string name="color_value">Valor hexadecimal da cor (#RRGGBB)</string>
+    <string name="invalid_color">Introduza uma cor hexadecimal válida de seis dígitos.</string>
+    <string name="color_scheme_not_provided">O esquema de cores não foi fornecido.</string>
+    <string name="edit_day_state">Atualizar estado do dia</string>
+    <string name="date">Data</string>
+    <string name="status">Estado</string>
+    <string name="status_start">0% Início</string>
+    <string name="status_25_percent">25%</string>
+    <string name="status_50_percent">50%</string>
+    <string name="status_75_percent">75%</string>
+    <string name="status_100_percent">100%</string>
+    <string name="status_over_100_percent">100+%</string>
+    <string name="day_state_save_failed">Não foi possível atualizar o estado do dia: %1$s</string>
+    <string name="edit_habit">Editar hábito</string>
+    <string name="habit_details">Detalhes do hábito</string>
+    <string name="delete_habit">Eliminar</string>
+    <string name="delete_habit_confirmation">Eliminar hábito?</string>
+    <string name="delete_habit_confirmation_message">Eliminar “%1$s” e todos os estados de dias registados?</string>
+    <string name="delete_day_state_confirmation">Tem a certeza de que pretende eliminar o estado?</string>
+    <string name="habit_update_failed">Não foi possível atualizar o hábito: %1$s</string>
+    <string name="settings">Definições</string>
+    <string name="language">Idioma</string>
+    <string name="language_system">Predefinição do sistema</string>
+    <string name="start_of_week">Início da semana</string>
+    <string name="date_format">Formato da data</string>
+    <string name="habit_order_by">Ordenar hábitos por</string>
+    <string name="sort_direction">Sentido da ordenação</string>
+    <string name="order_created_at">Data de criação</string>
+    <string name="order_updated_at">Data de atualização</string>
+    <string name="order_title">Título</string>
+    <string name="sort_ascending">Crescente</string>
+    <string name="sort_descending">Decrescente</string>
+    <string name="completeness_type">Tipo de conclusão</string>
+    <string name="completeness_symbols">Símbolos</string>
+    <string name="completeness_colors">Cores</string>
+    <string name="sync">Sincronização</string>
+    <string name="create_backup">Criar cópia de segurança</string>
+    <string name="restore_backup">Restaurar a partir da cópia de segurança</string>
+    <string name="restore_backup_confirmation">Restaurar a partir da cópia de segurança?</string>
+    <string name="restore_backup_warning">Todos os dados existentes serão removidos e substituídos pelos dados da cópia de segurança.</string>
+    <string name="backup_created">Cópia de segurança criada.</string>
+    <string name="backup_restored">Registos restaurados: %1$s</string>
+    <string name="import_from_app">Importar de outra aplicação</string>
+    <string name="import_from_app_hint">Loop Habit Tracker (.db, .zip), HabitKit (.json), Habitify (.csv), HabitBull (.csv). Os dados existentes são mantidos; os hábitos com o mesmo nome são combinados.</string>
+    <string name="import_file">Importar ficheiro</string>
+    <string name="import_completed">Hábitos importados: %1$s, marcações de dias: %2$s</string>
+    <string name="import_unsupported_format">O ficheiro não é uma exportação compatível.</string>
+    <string name="data_transfer_failed">Não foi possível transferir os dados: %1$s</string>
+    <string-array name="days_short">
+        <item>Seg</item>
+        <item>Ter</item>
+        <item>Qua</item>
+        <item>Qui</item>
+        <item>Sex</item>
+        <item>Sáb</item>
+        <item>Dom</item>
+    </string-array>
+    <string-array name="months_short">
+        <item>Jan</item>
+        <item>Fev</item>
+        <item>Mar</item>
+        <item>Abr</item>
+        <item>Mai</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Ago</item>
+        <item>Set</item>
+        <item>Out</item>
+        <item>Nov</item>
+        <item>Dez</item>
+    </string-array>
+    <string name="saturday">Sábado</string>
+    <string name="sunday">Domingo</string>
+    <string name="monday">Segunda-feira</string>
+    <string name="search_languages">Pesquisar idiomas</string>
+    <string name="theme_mode">Tema</string>
+    <string name="theme_system">Predefinição do sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="metrics">Métricas</string>
+    <string name="metrics_days">Dias</string>
+    <string name="metrics_completion">Conclusão, %</string>
+    <string name="calendar">Calendário</string>
+    <string name="today">Hoje</string>
+    <string name="previous_day">Dia anterior</string>
+    <string name="next_day">Dia seguinte</string>
+    <string name="previous_month">Mês anterior</string>
+    <string name="next_month">Mês seguinte</string>
+    <string name="add_habit_time">Agendar hábito</string>
+    <string name="edit_habit_time">Editar agendamento</string>
+    <string name="habit">Hábito</string>
+    <string name="interval">Intervalo</string>
+    <string name="interval_15_min">15 min</string>
+    <string name="interval_30_min">30 min</string>
+    <string name="interval_1_hour">1 hora</string>
+    <string name="interval_2_hours">2 horas</string>
+    <string name="interval_custom">Personalizado</string>
+    <string name="time_start">Início (HH:MM)</string>
+    <string name="time_end">Fim (HH:MM)</string>
+    <string name="habit_time_note">Nota</string>
+    <string name="delete">Eliminar</string>
+    <string name="invalid_time_range">A hora de fim deve ser posterior à hora de início</string>
+    <string name="habit_time_save_failed">Não foi possível guardar o agendamento: %1$s</string>
+    <string name="habit_or_intent">Hábito / Intenção</string>
+    <string name="intent_title">Intenção</string>
+    <string name="new_intent">Nova intenção</string>
+    <string name="notify">Notificar</string>
+    <string name="add_to_calendar">Adicionar ao calendário</string>
+    <string name="google_calendar">Google Calendar</string>
+    <string name="apple_calendar">Calendário da Apple</string>
+    <string name="microsoft_calendar">Microsoft Outlook</string>
+    <string name="calendar_export_failed">Não foi possível adicionar ao calendário: %1$s</string>
+    <string name="add_goal">Adicionar objetivo</string>
+    <string name="goal_title">Objetivo</string>
+    <string name="goal_description">Descrição</string>
+    <string name="goal_group">Grupo</string>
+    <string name="choose_goal_group">Escolher grupo</string>
+    <string name="move_up">Mover para cima</string>
+    <string name="goal_save_failed">Não foi possível guardar o objetivo: %1$s</string>
+    <string name="edit_goal">Editar objetivo</string>
+    <string name="delete_goal_group_confirmation">Eliminar grupo?</string>
+    <string name="delete_goal_group_confirmation_message">Eliminar “%1$s” e todos os seus objetivos?</string>
+    <string name="weekly">Semanal</string>
+    <string name="overall">Geral</string>
+    <string name="completed_skipped">Concluídos / Ignorados</string>
+    <string name="every_day">Todos os dias</string>
+    <string name="apply">Aplicar</string>
+    <string name="done">Feito</string>
+    <string name="automation_habit_not_found">Não existe o hábito “%1$s”</string>
+    <string name="automation_left_today">Falta hoje: %1$s</string>
+    <string name="automation_all_done">Todos os hábitos de hoje estão feitos</string>
+</resources>

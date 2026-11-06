@@ -16,6 +16,7 @@
 [Nederlands (NL)](./about_nl.md) |
 [Polski (PL)](./about_pl.md) |
 [Português Brasileiro (PT-BR)](./about_pt.md) |
+[Português Europeu (PT-PT)](./about_pt_PT.md) |
 [Limba română (RO)](./about_ro.md) |
 [Русский (RU)](./about_ru.md) |
 Türkçe (TR) |

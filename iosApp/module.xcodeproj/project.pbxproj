@@ -113,6 +113,7 @@
 				nl,
 				pl,
 				pt,
+				"pt-PT",
 				ro,
 				ru,
 				tr,
