@@ -29,5 +29,6 @@ windows-msix/store
 offline-repository
 linux-flatpak/gradle-sources-*.json
 *.mp4
+*.webm
 *.kdenlive
 desktopApp/*.provisionprofile
