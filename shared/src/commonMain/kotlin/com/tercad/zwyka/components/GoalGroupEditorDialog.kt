@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,6 +31,7 @@ import com.tercad.zwyka.resources.goal_group
 import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.popupShortcuts
 
 /*
@@ -63,7 +63,7 @@ fun GoalGroupEditorDialog(
         title = { Text(stringResource(Res.string.edit_goal_group)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(
+                TextInput(
                     value = title,
                     onValueChange = { title = it },
                     label = { Text(stringResource(Res.string.goal_group)) },

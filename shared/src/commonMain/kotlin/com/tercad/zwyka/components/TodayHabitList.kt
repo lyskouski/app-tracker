@@ -24,7 +24,6 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -76,6 +75,7 @@ import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.GRAPHICS_CONTRAST
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.IconButton
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.actionable
 import com.tercad.zwyka.widgets.readableOn
 
@@ -371,7 +371,7 @@ private fun NumericValueField(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        OutlinedTextField(
+        TextInput(
             value = value,
             onValueChange = { value = it },
             label = { Text(stringResource(Res.string.target_value)) },

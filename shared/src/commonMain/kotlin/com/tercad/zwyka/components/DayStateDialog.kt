@@ -11,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -55,6 +54,7 @@ import com.tercad.zwyka.resources.status
 import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.ChoiceButton
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.crossedOut
 import com.tercad.zwyka.widgets.popupShortcuts
 import org.jetbrains.compose.resources.stringArrayResource
@@ -97,7 +97,7 @@ fun DayStateDialog(
         title = { Text(stringResource(Res.string.edit_day_state)) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                OutlinedTextField(
+                TextInput(
                     value = habit.title,
                     onValueChange = {},
                     readOnly = true,
@@ -117,7 +117,7 @@ fun DayStateDialog(
                     },
                     modifier = Modifier.fillMaxWidth(),
                 )
-                OutlinedTextField(
+                TextInput(
                     value = dateFormat.format(dayState.date, monthNames),
                     onValueChange = {},
                     readOnly = true,
@@ -134,7 +134,7 @@ fun DayStateDialog(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        OutlinedTextField(
+                        TextInput(
                             value = value,
                             onValueChange = { value = it },
                             label = { Text(stringResource(Res.string.target_value)) },

@@ -30,7 +30,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -87,6 +86,7 @@ import com.tercad.zwyka.resources.target_value
 import com.tercad.zwyka.widgets.CheckboxRow
 import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.SwitchRow
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.chosen
 import com.tercad.zwyka.widgets.crossedOut
 import com.tercad.zwyka.widgets.popupShortcuts
@@ -184,7 +184,7 @@ fun HabitEditorDialog(
             when {
                 selectingIcon -> {
                     Column {
-                        OutlinedTextField(
+                        TextInput(
                             value = iconSearch,
                             onValueChange = { iconSearch = it },
                             label = { Text(stringResource(Res.string.search_icons)) },
@@ -236,7 +236,7 @@ fun HabitEditorDialog(
                 }
                 selectingColor -> {
                     Column {
-                        OutlinedTextField(
+                        TextInput(
                             value = colorInput,
                             onValueChange = { colorInput = it },
                             label = { Text(stringResource(Res.string.color_value)) },
@@ -333,7 +333,7 @@ fun HabitEditorDialog(
                 }
                 else -> {
                     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                        OutlinedTextField(
+                        TextInput(
                             value = title,
                             onValueChange = { title = it },
                             label = { Text(stringResource(Res.string.habit_name)) },
@@ -342,7 +342,7 @@ fun HabitEditorDialog(
                             enabled = !isSaving,
                             modifier = Modifier.fillMaxWidth(),
                         )
-                        OutlinedTextField(
+                        TextInput(
                             value = remarks,
                             onValueChange = { remarks = it },
                             label = { Text(stringResource(Res.string.habit_remarks)) },
@@ -374,7 +374,7 @@ fun HabitEditorDialog(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                             ) {
-                                OutlinedTextField(
+                                TextInput(
                                     value = targetValue,
                                     onValueChange = { targetValue = it },
                                     label = { Text(stringResource(Res.string.target_value)) },
@@ -384,7 +384,7 @@ fun HabitEditorDialog(
                                     enabled = !isSaving,
                                     modifier = Modifier.weight(1f),
                                 )
-                                OutlinedTextField(
+                                TextInput(
                                     value = targetType,
                                     onValueChange = { targetType = it },
                                     label = { Text(stringResource(Res.string.target_type)) },

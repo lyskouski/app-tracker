@@ -19,7 +19,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,7 +58,7 @@ fun DropdownField(
     val fieldWidth = with(LocalDensity.current) { fieldWidthPx.toDp() }
     val selected = options.getOrElse(selectedIndex) { "" }
     Box(modifier.fillMaxWidth().onSizeChanged { fieldWidthPx = it.width }) {
-        OutlinedTextField(
+        TextInput(
             value = selected,
             onValueChange = {},
             readOnly = true,
@@ -95,7 +94,7 @@ fun DropdownField(
             modifier = Modifier.width(fieldWidth),
         ) {
             if (searchLabel != null) {
-                OutlinedTextField(
+                TextInput(
                     value = query,
                     onValueChange = { query = it },
                     label = { Text(searchLabel) },

@@ -20,7 +20,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -53,6 +52,7 @@ import com.tercad.zwyka.resources.goal_save_failed
 import com.tercad.zwyka.resources.goal_title
 import com.tercad.zwyka.resources.save
 import com.tercad.zwyka.widgets.ErrorMessage
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.popupShortcuts
 
 /*
@@ -109,7 +109,7 @@ fun GoalEditorDialog(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                OutlinedTextField(
+                TextInput(
                     value = title,
                     onValueChange = { title = it },
                     label = { Text(stringResource(Res.string.goal_title)) },
@@ -118,7 +118,7 @@ fun GoalEditorDialog(
                     enabled = !isSaving,
                     modifier = Modifier.fillMaxWidth(),
                 )
-                OutlinedTextField(
+                TextInput(
                     value = description,
                     onValueChange = { description = it },
                     label = { Text(stringResource(Res.string.goal_description)) },
@@ -128,7 +128,7 @@ fun GoalEditorDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Box(Modifier.fillMaxWidth().onSizeChanged { groupWidthPx = it.width }) {
-                    OutlinedTextField(
+                    TextInput(
                         value = groupTitle,
                         onValueChange = { groupTitle = it },
                         label = { Text(stringResource(Res.string.goal_group)) },

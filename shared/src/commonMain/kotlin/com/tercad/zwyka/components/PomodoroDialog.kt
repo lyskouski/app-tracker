@@ -13,7 +13,6 @@ import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,6 +43,7 @@ import com.tercad.zwyka.resources.pomodoro_no_habit
 import com.tercad.zwyka.resources.start
 import com.tercad.zwyka.widgets.SegmentedSelector
 import com.tercad.zwyka.widgets.SelectButton
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.chosen
 import com.tercad.zwyka.widgets.popupShortcuts
 
@@ -90,7 +90,7 @@ fun PomodoroDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (interval == PomodoroInterval.CUSTOM) {
-                    OutlinedTextField(
+                    TextInput(
                         value = customMinutes,
                         onValueChange = { customMinutes = it },
                         label = { Text(stringResource(Res.string.pomodoro_minutes)) },

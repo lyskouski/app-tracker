@@ -24,7 +24,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -97,6 +96,7 @@ import com.tercad.zwyka.widgets.ErrorMessage
 import com.tercad.zwyka.widgets.SegmentedSelector
 import com.tercad.zwyka.widgets.SelectButton
 import com.tercad.zwyka.widgets.SwitchRow
+import com.tercad.zwyka.widgets.TextInput
 import com.tercad.zwyka.widgets.chosen
 import com.tercad.zwyka.widgets.popupShortcuts
 
@@ -275,7 +275,7 @@ fun HabitTimeDialog(
                     )
                 }
                 if (habitId == null) {
-                    OutlinedTextField(
+                    TextInput(
                         value = intentTitle,
                         onValueChange = { intentTitle = it },
                         label = { Text(stringResource(Res.string.intent_title)) },
@@ -303,7 +303,7 @@ fun HabitTimeDialog(
                 )
 
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedTextField(
+                    TextInput(
                         value = startInput,
                         onValueChange = { startInput = it },
                         label = { Text(stringResource(Res.string.time_start)) },
@@ -312,7 +312,7 @@ fun HabitTimeDialog(
                         enabled = !isSaving,
                         modifier = Modifier.weight(1f),
                     )
-                    OutlinedTextField(
+                    TextInput(
                         value = if (interval == HabitTimeInterval.CUSTOM) {
                             endInput
                         } else {
@@ -348,7 +348,7 @@ fun HabitTimeDialog(
                     enabled = !isSaving,
                 )
 
-                OutlinedTextField(
+                TextInput(
                     value = note,
                     onValueChange = { note = it },
                     label = { Text(stringResource(Res.string.habit_time_note)) },
