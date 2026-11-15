@@ -162,6 +162,7 @@
     <string name="move_up">Nach oben</string>
     <string name="goal_save_failed">Ziel konnte nicht gespeichert werden: %1$s</string>
     <string name="edit_goal">Ziel bearbeiten</string>
+    <string name="edit_goal_group">Zielgruppe bearbeiten</string>
     <string name="delete_goal_group_confirmation">Gruppe löschen?</string>
     <string name="delete_goal_group_confirmation_message">„%1$s“ und alle zugehörigen Ziele löschen?</string>
     <string name="delete_goal_confirmation">Ziel löschen?</string>

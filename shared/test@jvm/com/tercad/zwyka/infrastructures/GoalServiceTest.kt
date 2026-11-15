@@ -92,6 +92,20 @@ class GoalServiceTest {
     }
 
     @Test
+    fun renamesGroupForAllGoals() = runTest {
+        goals.create(1, GoalDraft("a", null, "First"))
+        goals.create(1, GoalDraft("b", null, "First"))
+        val created = goals.create(1, GoalDraft("c", null, "Second"))
+        val first = created.first().group.id
+
+        val renamed = goals.renameGroup(1, first, " Morning ")
+        assertEquals(listOf("Morning" to listOf("a", "b"), "Second" to listOf("c")), renamed.titles())
+
+        val merged = goals.renameGroup(1, first, "second")
+        assertEquals(listOf("Second" to listOf("a", "b", "c")), merged.titles())
+    }
+
+    @Test
     fun deletesGroupWithGoals() = runTest {
         goals.create(1, GoalDraft("a", null, "First"))
         val created = goals.create(1, GoalDraft("b", null, "Second"))

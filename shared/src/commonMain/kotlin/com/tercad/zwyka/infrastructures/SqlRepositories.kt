@@ -122,6 +122,17 @@ class SqlGoalRepository(private val database: Database) : GoalRepository {
         return queries.selectLastGoalGroupId().awaitAsOne().max ?: error("Goal group was not created")
     }
 
+    override suspend fun updateGroupTitle(groupId: Long, title: String) {
+        queries.updateGoalGroupTitle(title, groupId)
+    }
+
+    override suspend fun mergeGroup(fromGroupId: Long, toGroupId: Long) {
+        database.transaction {
+            queries.moveGoalsToGroup(toGroupId, fromGroupId)
+            queries.deleteGoalGroup(fromGroupId)
+        }
+    }
+
     override suspend fun updatePositions(groupIds: List<Long>) {
         database.transaction {
             groupIds.forEachIndexed { position, id ->

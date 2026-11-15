@@ -48,6 +48,7 @@ import com.tercad.zwyka.core.model.formatNumericValue
 import com.tercad.zwyka.core.progress.calculateStreakSummary
 import com.tercad.zwyka.components.GoalEditorDialog
 import com.tercad.zwyka.components.GoalGroupCard
+import com.tercad.zwyka.components.GoalGroupEditorDialog
 import com.tercad.zwyka.components.HabitContributionGraph
 import com.tercad.zwyka.defines.WeekStart
 import com.tercad.zwyka.defines.currentColorScheme
@@ -90,6 +91,7 @@ class DetailedPage(
         var showGoalDialog by remember { mutableStateOf(false) }
         // Goal changed by the dialog; null to create a new one.
         var editingGoal by remember { mutableStateOf<Goal?>(null) }
+        var editingGroup by remember { mutableStateOf<GoalGroup?>(null) }
         var deletingGroup by remember { mutableStateOf<GoalGroup?>(null) }
         var isGoalSaving by remember { mutableStateOf(false) }
         var goalError by remember { mutableStateOf<String?>(null) }
@@ -217,13 +219,17 @@ class DetailedPage(
                             editingGoal = goal
                             showGoalDialog = true
                         },
+                        onEditGroup = {
+                            goalError = null
+                            editingGroup = groupedGoals.group
+                        },
                         onDelete = {
                             goalError = null
                             deletingGroup = groupedGoals.group
                         },
                     )
                 }
-                if (!showGoalDialog) {
+                if (!showGoalDialog && editingGroup == null) {
                     goalError?.let {
                         ErrorMessage(stringResource(Res.string.goal_save_failed, it))
                     }
@@ -254,6 +260,28 @@ class DetailedPage(
                 goalGroup = goals.orEmpty().firstOrNull { it.group.id == goal?.groupId }?.group?.title.orEmpty(),
                 onDelete = goal?.let {
                     { changeGoals(onSuccess = { showGoalDialog = false }) { services.goals.delete(habit.id, it.id) } }
+                },
+            )
+        }
+
+        editingGroup?.let { group ->
+            GoalGroupEditorDialog(
+                group = group,
+                isSaving = isGoalSaving,
+                error = goalError,
+                onDismiss = {
+                    editingGroup = null
+                    goalError = null
+                },
+                onSave = { title ->
+                    changeGoals(onSuccess = { editingGroup = null }) {
+                        services.goals.renameGroup(habit.id, group.id, title)
+                    }
+                },
+                onDelete = {
+                    editingGroup = null
+                    goalError = null
+                    deletingGroup = group
                 },
             )
         }

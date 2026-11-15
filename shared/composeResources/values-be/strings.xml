@@ -162,6 +162,7 @@
     <string name="move_up">Перамясціць вышэй</string>
     <string name="goal_save_failed">Не ўдалося захаваць мэту: %1$s</string>
     <string name="edit_goal">Рэдагаваць мэту</string>
+    <string name="edit_goal_group">Рэдагаваць групу мэт</string>
     <string name="delete_goal_group_confirmation">Выдаліць групу?</string>
     <string name="delete_goal_group_confirmation_message">Выдаліць «%1$s» і ўсе яе мэты?</string>
     <string name="delete_goal_confirmation">Выдаліць мэту?</string>

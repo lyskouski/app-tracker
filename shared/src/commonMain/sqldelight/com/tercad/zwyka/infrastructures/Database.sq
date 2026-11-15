@@ -154,6 +154,16 @@ selectLastGoalGroupId:
 SELECT max(id)
 FROM GoalGroup;
 
+updateGoalGroupTitle:
+UPDATE GoalGroup
+SET title = ?
+WHERE id = ?;
+
+moveGoalsToGroup:
+UPDATE Goal
+SET groupId = ?
+WHERE groupId = ?;
+
 updateGoalGroupPosition:
 UPDATE GoalGroup
 SET position = ?

@@ -162,6 +162,7 @@
     <string name="move_up">ऊपर ले जाएँ</string>
     <string name="goal_save_failed">लक्ष्य सहेजा नहीं जा सका: %1$s</string>
     <string name="edit_goal">लक्ष्य संपादित करें</string>
+    <string name="edit_goal_group">लक्ष्य समूह संपादित करें</string>
     <string name="delete_goal_group_confirmation">समूह हटाएँ?</string>
     <string name="delete_goal_group_confirmation_message">“%1$s” और उसके सभी लक्ष्य हटाएँ?</string>
     <string name="delete_goal_confirmation">लक्ष्य हटाएँ?</string>

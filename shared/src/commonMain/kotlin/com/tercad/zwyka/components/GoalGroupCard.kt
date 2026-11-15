@@ -43,6 +43,7 @@ import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.delete
 import com.tercad.zwyka.resources.edit_goal
+import com.tercad.zwyka.resources.edit_goal_group
 import com.tercad.zwyka.resources.move_up
 import com.tercad.zwyka.widgets.actionable
 
@@ -55,7 +56,8 @@ private val cardShape = RoundedCornerShape(16.dp)
  * │  ✓ 2 Write a paragraph   │
  * │ ( ) Group title          │
  * └──────────────────────────┘
- * A goal toggles its status on click and is edited on long press; a long press elsewhere deletes the group.
+ * A goal toggles its status on click and is edited on long press;
+ * elsewhere a click edits the group and a long press deletes it.
  * A finished group is struck through.
  */
 @Composable
@@ -66,6 +68,7 @@ fun GoalGroupCard(
     onMoveUp: () -> Unit,
     onToggle: (Goal) -> Unit,
     onEdit: (Goal) -> Unit,
+    onEditGroup: () -> Unit,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -78,7 +81,8 @@ fun GoalGroupCard(
             .background(colors.surfaceContainerLow)
             .border(1.dp, colors.outlineVariant, cardShape)
             .actionable(
-                onClick = null,
+                onClick = onEditGroup,
+                onClickLabel = stringResource(Res.string.edit_goal_group),
                 onLongClick = onDelete,
                 onLongClickLabel = stringResource(Res.string.delete),
                 enabled = enabled,

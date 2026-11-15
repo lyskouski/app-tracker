@@ -56,6 +56,11 @@ interface GoalRepository {
     /** @return id of the new group. */
     suspend fun insertGroup(habitId: Long, title: String, position: Int): Long
 
+    suspend fun updateGroupTitle(groupId: Long, title: String)
+
+    /** Moves every goal of [fromGroupId] into [toGroupId] and deletes [fromGroupId]. */
+    suspend fun mergeGroup(fromGroupId: Long, toGroupId: Long)
+
     /** Sets the position of each group to its index in [groupIds]. */
     suspend fun updatePositions(groupIds: List<Long>)
 

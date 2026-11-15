@@ -52,6 +52,24 @@ class GoalService(private val goals: GoalRepository) {
         return getForHabit(habitId)
     }
 
+    /**
+     * Renames the group, so all its goals are shown under the new name;
+     * when another group of the habit already has the name (case-insensitive), the goals are moved into it.
+     *
+     * @return groups of the habit after the change.
+     */
+    suspend fun renameGroup(habitId: Long, groupId: Long, title: String): List<GroupedGoals> {
+        val groupTitle = title.trim()
+        val sameName = goals.getGroups(habitId)
+            .firstOrNull { it.id != groupId && it.title.equals(groupTitle, ignoreCase = true) }
+        if (sameName == null) {
+            goals.updateGroupTitle(groupId, groupTitle)
+        } else {
+            goals.mergeGroup(groupId, sameName.id)
+        }
+        return getForHabit(habitId)
+    }
+
     /** @return groups of the habit after the change. */
     suspend fun deleteGroup(habitId: Long, groupId: Long): List<GroupedGoals> {
         goals.deleteGroup(groupId)
