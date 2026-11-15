@@ -40,11 +40,28 @@ tasks.flatpakGradleGenerator {
     }
 }
 
+// Mac App Store: sqlite-jdbc unpacks its native library to the temp folder at runtime.
+// In the App Sandbox that file is quarantined and Gatekeeper rejects it ("the developer
+// cannot be verified"). The library goes into the app resources instead, it's signed
+// together with the app and loaded from there (main.kt).
+val sqliteNativeLibs by tasks.registering(Sync::class) {
+    val runtimeClasspath = configurations.runtimeClasspath
+    mapOf("aarch64" to "macos-arm64", "x86_64" to "macos-x64").forEach { (arch, dir) ->
+        from({ runtimeClasspath.get().filter { it.name.startsWith("sqlite-jdbc-") }.map(::zipTree) }) {
+            include("org/sqlite/native/Mac/$arch/libsqlitejdbc.dylib")
+            eachFile { path = "$dir/$name" }
+        }
+    }
+    includeEmptyDirs = false
+    into(layout.buildDirectory.dir("appResources"))
+}
+
 compose.desktop {
     application {
         mainClass = "com.tercad.zwyka.MainKt"
 
         nativeDistributions {
+            appResourcesRootDir.set(layout.dir(sqliteNativeLibs.map { it.destinationDir }))
             packageName = "zwyka"
             // Mac App Store installer (:desktopApp:packagePkg); other platforms use createDistributable.
             targetFormats(TargetFormat.Pkg)

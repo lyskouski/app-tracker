@@ -220,6 +220,16 @@ jobs:
             -Pcompose.desktop.mac.signing.keychain="$MAC_KEYCHAIN"
           mv ${{ matrix.build_path }}*.pkg ${{ matrix.build_path }}zwyka_${{ matrix.target }}${{ matrix.asset_extension }}
 
+      # App Review rejects the app when a native library is loaded from outside the signed bundle
+      - name: Verify macOS Signature
+        if: matrix.target == 'macOS'
+        run: |
+          APP=$(find desktopApp/build/compose/binaries/main -name "*.app" -maxdepth 2 | head -1)
+          LIB=$(find "$APP/Contents/app/resources" -name libsqlitejdbc.dylib | head -1)
+          test -n "$LIB" || { echo "::error::libsqlitejdbc.dylib is not bundled in $APP"; exit 1; }
+          codesign --verify --strict --verbose=2 "$LIB"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+
       # Gradle reports only the exit code of jpackage, the reason is in its logs.
       - name: Show jpackage Logs
         if: failure() && matrix.target == 'macOS'

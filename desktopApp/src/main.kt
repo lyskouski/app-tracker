@@ -80,7 +80,11 @@ private object TrayIcon : Painter() {
 }
 
 fun main() {
-    // macOS menu bar: the tray icon is a template image, tinted by the system for light and dark menu bars.
+    // macOS: the native SQLite library is shipped signed in the app resources
+    System.getProperty("compose.application.resources.dir")
+        ?.takeIf { File(it, "libsqlitejdbc.dylib").isFile }
+        ?.let { System.setProperty("org.sqlite.lib.path", it) }
+    // macOS menu bar: the tray icon is a template image
     System.setProperty("apple.awt.enableTemplateImages", "true")
     runApplication()
 }
