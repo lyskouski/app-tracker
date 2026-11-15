@@ -164,6 +164,8 @@
     <string name="edit_goal">Modifica obiettivo</string>
     <string name="delete_goal_group_confirmation">Eliminare il gruppo?</string>
     <string name="delete_goal_group_confirmation_message">Eliminare «%1$s» e tutti i suoi obiettivi?</string>
+    <string name="delete_goal_confirmation">Eliminare l’obiettivo?</string>
+    <string name="delete_goal_confirmation_message">Eliminare «%1$s»?</string>
     <string name="weekly">Settimana</string>
     <string name="overall">Generale</string>
     <string name="completed_skipped">Completate / Saltate</string>

@@ -164,6 +164,8 @@
     <string name="edit_goal">Editează obiectivul</string>
     <string name="delete_goal_group_confirmation">Ștergi grupul?</string>
     <string name="delete_goal_group_confirmation_message">Ștergi „%1$s” și toate obiectivele sale?</string>
+    <string name="delete_goal_confirmation">Ștergi obiectivul?</string>
+    <string name="delete_goal_confirmation_message">Ștergi „%1$s”?</string>
     <string name="weekly">Săptămână</string>
     <string name="overall">General</string>
     <string name="completed_skipped">Finalizate / Omise</string>

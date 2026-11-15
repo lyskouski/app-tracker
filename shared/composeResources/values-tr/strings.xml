@@ -164,6 +164,8 @@
     <string name="edit_goal">Hedefi düzenle</string>
     <string name="delete_goal_group_confirmation">Grup silinsin mi?</string>
     <string name="delete_goal_group_confirmation_message">“%1$s” ve tüm hedefleri silinsin mi?</string>
+    <string name="delete_goal_confirmation">Hedef silinsin mi?</string>
+    <string name="delete_goal_confirmation_message">“%1$s” silinsin mi?</string>
     <string name="weekly">Haftalık</string>
     <string name="overall">Genel</string>
     <string name="completed_skipped">Tamamlanan / Atlanan</string>

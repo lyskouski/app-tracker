@@ -173,6 +173,10 @@ UPDATE Goal
 SET groupId = ?, title = ?, description = ?
 WHERE id = ?;
 
+deleteGoal:
+DELETE FROM Goal
+WHERE id = ?;
+
 deleteGoalsForGroup:
 DELETE FROM Goal
 WHERE groupId = ?;

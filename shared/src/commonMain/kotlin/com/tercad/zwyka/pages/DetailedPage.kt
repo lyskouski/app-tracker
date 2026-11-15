@@ -252,6 +252,9 @@ class DetailedPage(
                 },
                 goal = goal,
                 goalGroup = goals.orEmpty().firstOrNull { it.group.id == goal?.groupId }?.group?.title.orEmpty(),
+                onDelete = goal?.let {
+                    { changeGoals(onSuccess = { showGoalDialog = false }) { services.goals.delete(habit.id, it.id) } }
+                },
             )
         }
 

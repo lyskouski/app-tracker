@@ -65,6 +65,8 @@ interface GoalRepository {
 
     suspend fun update(id: Long, groupId: Long, title: String, description: String?)
 
+    suspend fun delete(id: Long)
+
     /** Deletes the group together with its goals. */
     suspend fun deleteGroup(groupId: Long)
 }

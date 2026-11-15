@@ -164,6 +164,8 @@
     <string name="edit_goal">Editar meta</string>
     <string name="delete_goal_group_confirmation">Excluir grupo?</string>
     <string name="delete_goal_group_confirmation_message">Excluir “%1$s” e todas as suas metas?</string>
+    <string name="delete_goal_confirmation">Excluir meta?</string>
+    <string name="delete_goal_confirmation_message">Excluir “%1$s”?</string>
     <string name="weekly">Semanal</string>
     <string name="overall">Geral</string>
     <string name="completed_skipped">Concluídos / Ignorados</string>

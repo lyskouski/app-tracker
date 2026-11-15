@@ -164,6 +164,8 @@
     <string name="edit_goal">Edit goal</string>
     <string name="delete_goal_group_confirmation">Delete group?</string>
     <string name="delete_goal_group_confirmation_message">Delete “%1$s” and all its goals?</string>
+    <string name="delete_goal_confirmation">Delete goal?</string>
+    <string name="delete_goal_confirmation_message">Delete “%1$s”?</string>
     <string name="weekly">Weekly</string>
     <string name="overall">Overall</string>
     <string name="completed_skipped">Completed / Skipped</string>

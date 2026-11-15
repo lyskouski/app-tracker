@@ -36,9 +36,19 @@ class GoalService(private val goals: GoalRepository) {
         val previousGroupId = goals.getGoals(habitId).first { it.id == goalId }.groupId
         val groupId = resolveGroup(habitId, draft.groupTitle)
         goals.update(goalId, groupId, draft.title.trim(), draft.description?.trim()?.ifEmpty { null })
-        if (goals.getGoals(habitId).none { it.groupId == previousGroupId }) {
-            goals.deleteGroup(previousGroupId)
-        }
+        deleteGroupIfEmpty(habitId, previousGroupId)
+        return getForHabit(habitId)
+    }
+
+    /**
+     * Deletes the goal; a group left without goals is deleted as well.
+     *
+     * @return groups of the habit after the change.
+     */
+    suspend fun delete(habitId: Long, goalId: Long): List<GroupedGoals> {
+        val groupId = goals.getGoals(habitId).first { it.id == goalId }.groupId
+        goals.delete(goalId)
+        deleteGroupIfEmpty(habitId, groupId)
         return getForHabit(habitId)
     }
 
@@ -67,6 +77,12 @@ class GoalService(private val goals: GoalRepository) {
         order[index - 1] = groupId
         goals.updatePositions(order)
         return getForHabit(habitId)
+    }
+
+    private suspend fun deleteGroupIfEmpty(habitId: Long, groupId: Long) {
+        if (goals.getGoals(habitId).none { it.groupId == groupId }) {
+            goals.deleteGroup(groupId)
+        }
     }
 
     /** @return id of the group named [title] (case-insensitive), created as the last one when missing. */

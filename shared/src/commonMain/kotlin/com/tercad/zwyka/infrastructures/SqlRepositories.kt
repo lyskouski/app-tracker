@@ -142,6 +142,10 @@ class SqlGoalRepository(private val database: Database) : GoalRepository {
         queries.updateGoal(groupId, title, description, id)
     }
 
+    override suspend fun delete(id: Long) {
+        queries.deleteGoal(id)
+    }
+
     override suspend fun deleteGroup(groupId: Long) {
         database.transaction {
             queries.deleteGoalsForGroup(groupId)

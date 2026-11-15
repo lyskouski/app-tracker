@@ -80,6 +80,18 @@ class GoalServiceTest {
     }
 
     @Test
+    fun deletesGoalAndDropsEmptiedGroup() = runTest {
+        goals.create(1, GoalDraft("a", null, "First"))
+        goals.create(1, GoalDraft("b", null, "First"))
+        val created = goals.create(1, GoalDraft("c", null, "Second"))
+        val (a, b) = created.first().goals
+
+        assertEquals(listOf("First" to listOf("b"), "Second" to listOf("c")), goals.delete(1, a.id).titles())
+        assertEquals(listOf("Second" to listOf("c")), goals.delete(1, b.id).titles())
+        assertEquals(listOf("Second"), goals.getForHabit(1).map { it.group.title })
+    }
+
+    @Test
     fun deletesGroupWithGoals() = runTest {
         goals.create(1, GoalDraft("a", null, "First"))
         val created = goals.create(1, GoalDraft("b", null, "Second"))

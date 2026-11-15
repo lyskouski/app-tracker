@@ -164,6 +164,8 @@
     <string name="edit_goal">लक्ष्य संपादित करें</string>
     <string name="delete_goal_group_confirmation">समूह हटाएँ?</string>
     <string name="delete_goal_group_confirmation_message">“%1$s” और उसके सभी लक्ष्य हटाएँ?</string>
+    <string name="delete_goal_confirmation">लक्ष्य हटाएँ?</string>
+    <string name="delete_goal_confirmation_message">“%1$s” हटाएँ?</string>
     <string name="weekly">साप्ताहिक</string>
     <string name="overall">समग्र</string>
     <string name="completed_skipped">पूर्ण / छोड़े गए</string>

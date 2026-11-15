@@ -164,6 +164,8 @@
     <string name="edit_goal">Изменить цель</string>
     <string name="delete_goal_group_confirmation">Удалить группу?</string>
     <string name="delete_goal_group_confirmation_message">Удалить «%1$s» и все её цели?</string>
+    <string name="delete_goal_confirmation">Удалить цель?</string>
+    <string name="delete_goal_confirmation_message">Удалить «%1$s»?</string>
     <string name="weekly">Неделя</string>
     <string name="overall">Всё</string>
     <string name="completed_skipped">Выполненные / Пропущенные</string>

@@ -164,6 +164,8 @@
     <string name="edit_goal">Edit tujuan</string>
     <string name="delete_goal_group_confirmation">Hapus grup?</string>
     <string name="delete_goal_group_confirmation_message">Hapus “%1$s” dan semua tujuannya?</string>
+    <string name="delete_goal_confirmation">Hapus tujuan?</string>
+    <string name="delete_goal_confirmation_message">Hapus “%1$s”?</string>
     <string name="weekly">Mingguan</string>
     <string name="overall">Keseluruhan</string>
     <string name="completed_skipped">Selesai / Dilewati</string>
