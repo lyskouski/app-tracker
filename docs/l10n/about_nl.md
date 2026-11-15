@@ -51,8 +51,8 @@ Zo kunnen gebruikers moeiteloos hun gewoontes beheren, terwijl niemand achterbli
   - Dagenreeks: het aantal opeenvolgende gemarkeerde dagen ("—"-dagen onderbreken de reeks niet)
 - Statistieken
   - Dagelijkse voltooiing (%) over de afgelopen 66 dagen
-  - Details van een gewoonte: beschrijving, doel, voltooiing van elke dag in het afgelopen jaar (zoals GitHub-bijdragen), langste en huidige reeks
-  - Doelen van de gewoonte: de knop (+) voegt een doel toe (titel, beschrijving en een nieuwe of bestaande groep); doelen worden op naam gegroepeerd, een tik markeert een doel als behaald, volledig behaalde groepen gaan naar onderen en ↑ verplaatst een groep omhoog; lang drukken op een doel bewerkt het, en lang drukken op een groep verwijdert die met alle doelen (na bevestiging)
+  - Details van een gewoonte: beschrijving, doel, voltooiing van elke dag in het afgelopen jaar (zoals GitHub-bijdragen), langste en huidige reeks; overgeslagen dagen worden met een punt aangegeven
+  - Doelen van de gewoonte: de knop (+) voegt een doel toe (titel, beschrijving en een nieuwe of bestaande groep); doelen worden op naam gegroepeerd, een tik markeert een doel als behaald, volledig behaalde groepen gaan naar onderen en ↑ verplaatst een groep omhoog; lang drukken op een doel bewerkt het, en lang drukken op een groep verwijdert die met alle doelen (na bevestiging); een tik op een groep hernoemt die (de naam van een andere groep voegt ze samen), een doel of groep kan ook vanuit de bewerker worden verwijderd, en een groep zonder doelen wordt verwijderd
 - Planning (Kalender)
   - Plan een gewoonte voor 30 minuten, 1 uur, 2 uur of een eigen tijdsbereik, herhaald op de gekozen dagen van de week,
     met een optionele notitie

@@ -51,8 +51,8 @@ That empowers users to effortlessly manage their habits while ensuring that no o
   - Day Streak: the number of consecutive marked days ("—" days don't break it)
 - Metrics
   - Daily completion (%) over the last 66 days
-  - Habit details: description, target, completion of every day for the last year (like GitHub contributions), max and current streak
-  - Goals of the habit: the (+) button adds a goal (title, description, and a new or existing group); goals are grouped by name, a tap marks a goal as finished, fully finished groups go last, and ↑ moves a group up; a long press on a goal edits it, and a long press on a group deletes it with all its goals (after confirmation)
+  - Habit details: description, target, completion of every day for the last year (like GitHub contributions), max and current streak; skipped days are marked with a dot
+  - Goals of the habit: the (+) button adds a goal (title, description, and a new or existing group); goals are grouped by name, a tap marks a goal as finished, fully finished groups go last, and ↑ moves a group up; a long press on a goal edits it, and a long press on a group deletes it with all its goals (after confirmation); a tap on a group renames it (the name of another group merges them), the editors of a goal and of a group also delete it, and a group left without goals is removed
 - Schedule (Calendar)
   - Schedule a habit for 30 minutes, 1 hour, 2 hours, or a custom time range, repeated on the selected days of the week,
     with an optional note

@@ -51,8 +51,8 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Racha de días: el número de días marcados consecutivos (los días "—" no la interrumpen)
 - Métricas
   - Cumplimiento diario (%) durante los últimos 66 días
-  - Detalles del hábito: descripción, objetivo, cumplimiento de cada día del último año (como las contribuciones de GitHub), racha máxima y actual
-  - Objetivos del hábito: el botón (+) añade un objetivo (título, descripción y un grupo nuevo o existente); los objetivos se agrupan por nombre, un toque marca un objetivo como cumplido, los grupos cumplidos por completo van al final y ↑ sube un grupo; una pulsación larga en un objetivo lo edita y una pulsación larga en un grupo lo elimina con todos sus objetivos (tras confirmar)
+  - Detalles del hábito: descripción, objetivo, cumplimiento de cada día del último año (como las contribuciones de GitHub), racha máxima y actual; los días omitidos se marcan con un punto
+  - Objetivos del hábito: el botón (+) añade un objetivo (título, descripción y un grupo nuevo o existente); los objetivos se agrupan por nombre, un toque marca un objetivo como cumplido, los grupos cumplidos por completo van al final y ↑ sube un grupo; una pulsación larga en un objetivo lo edita y una pulsación larga en un grupo lo elimina con todos sus objetivos (tras confirmar); un toque en un grupo lo renombra (el nombre de otro grupo los fusiona), un objetivo o un grupo también se puede eliminar desde su editor, y un grupo sin objetivos se elimina
 - Horario (Calendario)
   - Programa un hábito para 30 minutos, 1 hora, 2 horas o un intervalo personalizado, repetido los días de la semana
     seleccionados, con una nota opcional

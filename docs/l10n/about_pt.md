@@ -51,8 +51,8 @@ Ele permite que os usuários gerenciem seus hábitos sem esforço, garantindo qu
   - Sequência de dias: o número de dias marcados consecutivos (os dias "—" não a interrompem)
 - Métricas
   - Conclusão diária (%) nos últimos 66 dias
-  - Detalhes do hábito: descrição, meta, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual
-  - Metas do hábito: o botão (+) adiciona uma meta (título, descrição e um grupo novo ou existente); as metas são agrupadas por nome, um toque marca a meta como concluída, grupos totalmente concluídos vão para o final e ↑ move um grupo para cima; um toque longo em uma meta a edita, e um toque longo em um grupo o exclui com todas as suas metas (após confirmação)
+  - Detalhes do hábito: descrição, meta, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual; dias pulados são marcados com um ponto
+  - Metas do hábito: o botão (+) adiciona uma meta (título, descrição e um grupo novo ou existente); as metas são agrupadas por nome, um toque marca a meta como concluída, grupos totalmente concluídos vão para o final e ↑ move um grupo para cima; um toque longo em uma meta a edita, e um toque longo em um grupo o exclui com todas as suas metas (após confirmação); um toque em um grupo o renomeia (o nome de outro grupo os une), uma meta ou um grupo também pode ser excluído no seu editor, e um grupo sem metas é removido
 - Agenda (Calendário)
   - Agende um hábito para 30 minutos, 1 hora, 2 horas ou um intervalo de tempo personalizado, repetido nos dias da
     semana selecionados, com uma nota opcional

@@ -51,8 +51,8 @@ Umožňuje uživatelům snadno spravovat své návyky a zároveň zajišťuje, �
   - Série dnů: počet po sobě jdoucích označených dnů (dny „—“ ji nepřeruší)
 - Statistiky
   - Denní plnění (%) za posledních 66 dnů
-  - Detail návyku: popis, cíl, plnění každého dne za poslední rok (jako příspěvky na GitHubu), nejdelší a aktuální série
-  - Cíle návyku: tlačítko (+) přidá cíl (název, popis a nová nebo existující skupina); cíle se seskupují podle názvu, klepnutí označí cíl jako splněný, zcela splněné skupiny jdou na konec a ↑ posune skupinu nahoru; dlouhé stisknutí cíle jej upraví a dlouhé stisknutí skupiny ji po potvrzení smaže se všemi jejími cíli
+  - Detail návyku: popis, cíl, plnění každého dne za poslední rok (jako příspěvky na GitHubu), nejdelší a aktuální série; vynechané dny jsou označeny tečkou
+  - Cíle návyku: tlačítko (+) přidá cíl (název, popis a nová nebo existující skupina); cíle se seskupují podle názvu, klepnutí označí cíl jako splněný, zcela splněné skupiny jdou na konec a ↑ posune skupinu nahoru; dlouhé stisknutí cíle jej upraví a dlouhé stisknutí skupiny ji po potvrzení smaže se všemi jejími cíli; klepnutí na skupinu ji přejmenuje (název jiné skupiny je sloučí), cíl i skupinu lze smazat také z jejich editoru a skupina bez cílů se odstraní
 - Plán (Kalendář)
   - Naplánování návyku na 30 minut, 1 hodinu, 2 hodiny nebo vlastní časový úsek, opakovaně ve vybrané dny v týdnu,
     s volitelnou poznámkou

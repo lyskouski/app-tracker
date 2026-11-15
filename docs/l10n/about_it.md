@@ -52,8 +52,8 @@ indietro.
   - Serie di giorni: il numero di giorni consecutivi contrassegnati (i giorni "—" non la interrompono)
 - Statistiche
   - Completamento giornaliero (%) negli ultimi 66 giorni
-  - Dettagli dell’abitudine: descrizione, obiettivo, completamento di ogni giorno nell’ultimo anno (come i contributi GitHub), serie massima e attuale
-  - Obiettivi dell’abitudine: il pulsante (+) aggiunge un obiettivo (titolo, descrizione e un gruppo nuovo o esistente); gli obiettivi sono raggruppati per nome, un tocco segna un obiettivo come raggiunto, i gruppi completati vanno in fondo e ↑ sposta un gruppo in su; una pressione prolungata su un obiettivo lo modifica e una pressione prolungata su un gruppo lo elimina con tutti i suoi obiettivi (dopo conferma)
+  - Dettagli dell’abitudine: descrizione, obiettivo, completamento di ogni giorno nell’ultimo anno (come i contributi GitHub), serie massima e attuale; i giorni saltati sono segnati con un punto
+  - Obiettivi dell’abitudine: il pulsante (+) aggiunge un obiettivo (titolo, descrizione e un gruppo nuovo o esistente); gli obiettivi sono raggruppati per nome, un tocco segna un obiettivo come raggiunto, i gruppi completati vanno in fondo e ↑ sposta un gruppo in su; una pressione prolungata su un obiettivo lo modifica e una pressione prolungata su un gruppo lo elimina con tutti i suoi obiettivi (dopo conferma); un tocco su un gruppo lo rinomina (il nome di un altro gruppo li unisce), un obiettivo o un gruppo si può eliminare anche dal suo editor, e un gruppo senza obiettivi viene rimosso
 - Pianificazione (Calendario)
   - Pianifica un’abitudine per 30 minuti, 1 ora, 2 ore o un intervallo di tempo personalizzato, ripetuto nei giorni
     della settimana selezionati, con una nota facoltativa

@@ -51,8 +51,8 @@ Permite que os utilizadores giram os seus hábitos sem esforço, garantindo que 
   - Sequência de dias: o número de dias marcados consecutivos (os dias "—" não a interrompem)
 - Métricas
   - Conclusão diária (%) nos últimos 66 dias
-  - Detalhes do hábito: descrição, objetivo, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual
-  - Objetivos do hábito: o botão (+) adiciona um objetivo (título, descrição e um grupo novo ou existente); os objetivos são agrupados por nome, um toque marca o objetivo como concluído, os grupos totalmente concluídos passam para o fim e ↑ move um grupo para cima; um toque longo num objetivo edita-o, e um toque longo num grupo elimina-o com todos os seus objetivos (após confirmação)
+  - Detalhes do hábito: descrição, objetivo, conclusão de cada dia no último ano (como as contribuições do GitHub), sequência máxima e atual; os dias saltados são marcados com um ponto
+  - Objetivos do hábito: o botão (+) adiciona um objetivo (título, descrição e um grupo novo ou existente); os objetivos são agrupados por nome, um toque marca o objetivo como concluído, os grupos totalmente concluídos passam para o fim e ↑ move um grupo para cima; um toque longo num objetivo edita-o, e um toque longo num grupo elimina-o com todos os seus objetivos (após confirmação); um toque num grupo muda-lhe o nome (o nome de outro grupo junta-os), um objetivo ou um grupo também pode ser eliminado no seu editor, e um grupo sem objetivos é removido
 - Agenda (Calendário)
   - Agende um hábito para 30 minutos, 1 hora, 2 horas ou um intervalo de tempo personalizado, repetido nos dias da
     semana selecionados, com uma nota opcional

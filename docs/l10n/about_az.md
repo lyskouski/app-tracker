@@ -51,8 +51,8 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
   - Günlər seriyası: ardıcıl işarələnmiş günlərin sayı ("—" günləri onu qırmır)
 - Statistika
   - Son 66 gün üzrə gündəlik icra (%)
-  - Vərdişin təfərrüatları: təsvir, hədəf, son ilin hər günü üzrə icra (GitHub töhfələri kimi), ən uzun və cari seriya
-  - Vərdişin məqsədləri: (+) düyməsi məqsəd əlavə edir (başlıq, təsvir, yeni və ya mövcud qrup); məqsədlər ada görə qruplaşdırılır, toxunuş məqsədi bitmiş kimi qeyd edir, tam bitmiş qruplar sona keçir, ↑ qrupu yuxarı qaldırır, məqsədə uzun basmaq onu redaktə edir, qrupa uzun basmaq isə onu bütün məqsədləri ilə birlikdə silir (təsdiqdən sonra)
+  - Vərdişin təfərrüatları: təsvir, hədəf, son ilin hər günü üzrə icra (GitHub töhfələri kimi), ən uzun və cari seriya; buraxılmış günlər nöqtə ilə işarələnir
+  - Vərdişin məqsədləri: (+) düyməsi məqsəd əlavə edir (başlıq, təsvir, yeni və ya mövcud qrup); məqsədlər ada görə qruplaşdırılır, toxunuş məqsədi bitmiş kimi qeyd edir, tam bitmiş qruplar sona keçir, ↑ qrupu yuxarı qaldırır, məqsədə uzun basmaq onu redaktə edir, qrupa uzun basmaq isə onu bütün məqsədləri ilə birlikdə silir (təsdiqdən sonra); qrupa toxunuş onun adını dəyişir (başqa qrupun adı onları birləşdirir), məqsəd və qrup öz redaktə pəncərəsindən də silinir, məqsədsiz qalan qrup isə silinir
 - Cədvəl (Təqvim)
   - Vərdişi 30 dəqiqə, 1 saat, 2 saat və ya fərdi vaxt aralığı üçün planlaşdırmaq, həftənin seçilmiş günlərində
     təkrarlanmaqla, istəyə bağlı qeydlə

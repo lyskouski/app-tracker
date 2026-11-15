@@ -78,7 +78,8 @@ one is left behind.
 - Open by tapping today's progress: a graph of daily completion (%) over the last 66 days.
 - **Habit details** (long press on a habit, or on a habit header of `Overall`): title, remarks, target, completion of every
   day over the last year (days of the week by weeks, like GitHub contributions, colored by the
-  completion), max and current Day Streak calculated over the whole history.
+  completion; skipped days are marked with a dot in the center), max and current Day Streak calculated
+  over the whole history.
 - **Goals** (on the habit details): the `(+)` button in the bottom bar adds a goal with a title,
   a description, and a group (typed, or chosen from the existing groups of the habit). Goals and
   groups belong to their habit only.
@@ -86,6 +87,11 @@ one is left behind.
   again).
   - Long press on a goal to edit its title, description, or group; a group left without goals is
   removed.
+  - The `Delete` button on the bottom-left corner of "Edit goal" deletes the goal, after a confirmation;
+  deleting the last goal of a group removes the group as well.
+  - Tap a group card (outside its goals) to open "Edit goal group" and rename the group for all its
+  goals; renaming it as another group of the habit moves its goals into that group. Its `Delete` button
+  deletes the group with all its goals, after a confirmation.
   - Long press on a group card (outside its goals) to delete the group with all its goals, after
   a confirmation.
   - A group whose goals are all finished is struck through and goes after the active groups.
@@ -126,22 +132,24 @@ one is left behind.
 - Dates format
 - Habits order (by creation date, last update, or title; ascending or descending)
 - Sync: create a backup, or restore from a backup (replaces the existing data)
-- Import from other apps (keeps the existing data): Loop Habit Tracker (database backup `.db` or CSV `.zip`),
-  HabitKit (`.json`), Habitify (`.csv`), HabitBull (`.csv`)
+- Import from other apps (keeps the existing data): Loop Habit Tracker (database backup `.db` or
+  CSV `.zip`), HabitKit (`.json`), Habitify (`.csv`), HabitBull (`.csv`)
 - Habits' day state representation: symbols, colored circles
 
 **Accessibility** ([WCAG 2.1](https://www.w3.org/TR/WCAG21/))
 - Screen readers: every screen announces its title, page titles and sections are headings, and
-  every action is named — including long presses ("Habit details", "Delete", "Edit goal") and the
-  swipes of the `Today` view ("Done", "Skip"). Status marks are read by their meaning ("100%",
-  "Skip") instead of the symbols, and day cells announce the habit, weekday, date, status, and
-  "Today".
+  every action is named — including clicks and long presses ("Habit details", "Delete", "Edit
+  goal", "Edit goal group") and the swipes of the `Today` view ("Done", "Skip"). Status marks
+  are read by their meaning ("100%", "Skip") instead of the symbols, and day cells announce the
+  habit, weekday, date, status, and "Today".
 - Toggles, tabs, status buttons, and goals announce whether they are selected or finished;
   drop-down fields announce their label and the chosen value.
 - Errors and loading states are announced without moving the focus.
 - Keyboard: everything is reachable by `Tab`, with a visible focus; `Menu`, `Shift` + `F10`, or
   `Ctrl` (`Cmd` on macOS) + `Enter` replaces a long press; the `Overall` table scrolls by arrows,
-  `Page Up` / `Page Down`, and `Home` / `End`, while `Tab` goes through its habit headers and the current day only.
+  `Page Up` / `Page Down`, and `Home` / `End`, while `Tab` goes through its habit headers and
+  the current day only; in text fields `Tab` / `Shift` + `Tab` moves the focus to the next /
+  previous element instead of typing a tab.
 - Shortcuts (focused buttons and text fields keep their own keys):
   - `Ctrl` (`Cmd` on macOS) + `N`: the `(+)` button of the screen — a new habit, calendar
     event, goal, or Pomodoro;

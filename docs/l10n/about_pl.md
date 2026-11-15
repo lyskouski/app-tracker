@@ -51,8 +51,8 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Seria dni: liczba kolejnych oznaczonych dni (dni "—" jej nie przerywają)
 - Statystyki
   - Dzienna realizacja (%) w ciągu ostatnich 66 dni
-  - Szczegóły nawyku: opis, cel, realizacja każdego dnia z ostatniego roku (jak wkład na GitHub), najdłuższa i obecna seria
-  - Cele nawyku: przycisk (+) dodaje cel (tytuł, opis oraz nowa lub istniejąca grupa); cele są grupowane według nazwy, dotknięcie oznacza cel jako osiągnięty, w pełni osiągnięte grupy trafiają na koniec, a ↑ przesuwa grupę wyżej; długie naciśnięcie celu pozwala go edytować, a długie naciśnięcie grupy usuwa ją wraz ze wszystkimi celami (po potwierdzeniu)
+  - Szczegóły nawyku: opis, cel, realizacja każdego dnia z ostatniego roku (jak wkład na GitHub), najdłuższa i obecna seria; pominięte dni są oznaczone kropką
+  - Cele nawyku: przycisk (+) dodaje cel (tytuł, opis oraz nowa lub istniejąca grupa); cele są grupowane według nazwy, dotknięcie oznacza cel jako osiągnięty, w pełni osiągnięte grupy trafiają na koniec, a ↑ przesuwa grupę wyżej; długie naciśnięcie celu pozwala go edytować, a długie naciśnięcie grupy usuwa ją wraz ze wszystkimi celami (po potwierdzeniu); dotknięcie grupy pozwala zmienić jej nazwę (nazwa innej grupy łączy je), cel lub grupę można też usunąć z okna edycji, a grupa bez celów jest usuwana
 - Harmonogram (Kalendarz)
   - Zaplanuj nawyk na 30 minut, 1 godzinę, 2 godziny lub własny przedział czasu, powtarzany w wybrane dni tygodnia,
     z opcjonalną notatką

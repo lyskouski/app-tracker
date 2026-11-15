@@ -52,8 +52,8 @@ de côté.
   - Série de jours : le nombre de jours marqués consécutifs (les jours « — » ne l’interrompent pas)
 - Statistiques
   - Réalisation quotidienne (%) sur les 66 derniers jours
-  - Détails de l’habitude : description, objectif, réalisation de chaque jour sur la dernière année (comme les contributions GitHub), séries maximale et actuelle
-  - Objectifs de l’habitude : le bouton (+) ajoute un objectif (titre, description et un groupe nouveau ou existant) ; les objectifs sont regroupés par nom, un appui marque un objectif comme atteint, les groupes entièrement atteints passent en dernier et ↑ fait monter un groupe ; un appui long sur un objectif permet de le modifier, et un appui long sur un groupe le supprime avec tous ses objectifs (après confirmation)
+  - Détails de l’habitude : description, objectif, réalisation de chaque jour sur la dernière année (comme les contributions GitHub), séries maximale et actuelle ; les jours sautés sont marqués d’un point
+  - Objectifs de l’habitude : le bouton (+) ajoute un objectif (titre, description et un groupe nouveau ou existant) ; les objectifs sont regroupés par nom, un appui marque un objectif comme atteint, les groupes entièrement atteints passent en dernier et ↑ fait monter un groupe ; un appui long sur un objectif permet de le modifier, et un appui long sur un groupe le supprime avec tous ses objectifs (après confirmation) ; un appui sur un groupe le renomme (le nom d’un autre groupe les fusionne), un objectif ou un groupe peut aussi être supprimé depuis son éditeur, et un groupe sans objectifs est supprimé
 - Planning (Calendrier)
   - Planifier une habitude pour 30 minutes, 1 heure, 2 heures ou une plage horaire personnalisée, répétée les jours
     de la semaine sélectionnés, avec une note facultative

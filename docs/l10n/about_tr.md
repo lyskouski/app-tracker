@@ -51,8 +51,8 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
   - Gün Serisi: art arda işaretlenen günlerin sayısı ("—" günleri seriyi bozmaz)
 - İstatistikler
   - Son 66 gün için günlük tamamlanma (%)
-  - Alışkanlık ayrıntıları: açıklama, hedef, son bir yılın her günü için tamamlanma (GitHub katkıları gibi), en uzun ve mevcut seri
-  - Alışkanlığın hedefleri: (+) düğmesi bir hedef ekler (başlık, açıklama ve yeni ya da mevcut bir grup); hedefler ada göre gruplanır, dokunma hedefi tamamlandı olarak işaretler, tamamen tamamlanan gruplar sona gider ve ↑ grubu yukarı taşır; bir hedefe uzun basmak onu düzenler, bir gruba uzun basmak ise onu tüm hedefleriyle birlikte siler (onaydan sonra)
+  - Alışkanlık ayrıntıları: açıklama, hedef, son bir yılın her günü için tamamlanma (GitHub katkıları gibi), en uzun ve mevcut seri; atlanan günler bir noktayla işaretlenir
+  - Alışkanlığın hedefleri: (+) düğmesi bir hedef ekler (başlık, açıklama ve yeni ya da mevcut bir grup); hedefler ada göre gruplanır, dokunma hedefi tamamlandı olarak işaretler, tamamen tamamlanan gruplar sona gider ve ↑ grubu yukarı taşır; bir hedefe uzun basmak onu düzenler, bir gruba uzun basmak ise onu tüm hedefleriyle birlikte siler (onaydan sonra); bir gruba dokunmak onu yeniden adlandırır (başka bir grubun adı ikisini birleştirir), hedef ya da grup düzenleyicisinden de silinebilir ve hedefi kalmayan grup kaldırılır
 - Program (Takvim)
   - Bir alışkanlığı 30 dakika, 1 saat, 2 saat veya özel bir zaman aralığı için, haftanın seçilen günlerinde tekrarlanacak
     şekilde ve isteğe bağlı bir notla planlayın

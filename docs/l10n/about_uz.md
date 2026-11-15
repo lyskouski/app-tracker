@@ -51,8 +51,8 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Kunlar seriyasi: ketma-ket belgilangan kunlar soni ("—" kunlari seriyani buzmaydi)
 - Statistika
   - Oxirgi 66 kun davomidagi kunlik bajarilish (%)
-  - Odat tafsilotlari: tavsif, maqsad, oxirgi yilning har bir kuni bo‘yicha bajarilish (GitHub hissalari kabi), eng uzun va joriy ketma-ketlik
-  - Odat maqsadlari: (+) tugmasi maqsad qo‘shadi (sarlavha, tavsif, yangi yoki mavjud guruh); maqsadlar nomi bo‘yicha guruhlanadi, bosish maqsadni bajarilgan deb belgilaydi, to‘liq bajarilgan guruhlar oxiriga o‘tadi, ↑ guruhni yuqoriga ko‘taradi; maqsadni uzoq bosish uni tahrirlaydi, guruhni uzoq bosish esa uni barcha maqsadlari bilan birga o‘chiradi (tasdiqlangandan keyin)
+  - Odat tafsilotlari: tavsif, maqsad, oxirgi yilning har bir kuni bo‘yicha bajarilish (GitHub hissalari kabi), eng uzun va joriy ketma-ketlik; o‘tkazib yuborilgan kunlar nuqta bilan belgilanadi
+  - Odat maqsadlari: (+) tugmasi maqsad qo‘shadi (sarlavha, tavsif, yangi yoki mavjud guruh); maqsadlar nomi bo‘yicha guruhlanadi, bosish maqsadni bajarilgan deb belgilaydi, to‘liq bajarilgan guruhlar oxiriga o‘tadi, ↑ guruhni yuqoriga ko‘taradi; maqsadni uzoq bosish uni tahrirlaydi, guruhni uzoq bosish esa uni barcha maqsadlari bilan birga o‘chiradi (tasdiqlangandan keyin); guruhni bosish uning nomini o‘zgartiradi (boshqa guruh nomi ularni birlashtiradi), maqsad yoki guruhni tahrirlash oynasidan ham o‘chirish mumkin, maqsadsiz qolgan guruh esa o‘chiriladi
 - Jadval (Taqvim)
   - Odatni 30 daqiqa, 1 soat, 2 soat yoki maxsus vaqt oralig‘iga, haftaning tanlangan kunlarida takrorlanadigan qilib
     va ixtiyoriy eslatma bilan rejalashtiring

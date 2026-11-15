@@ -51,8 +51,8 @@ ist. Sie ermöglicht es Nutzern, ihre Gewohnheiten mühelos zu verwalten, und so
   - Tagesserie: die Anzahl aufeinanderfolgender markierter Tage („—“-Tage unterbrechen sie nicht)
 - Kennzahlen
   - Tägliche Erfüllung (%) über die letzten 66 Tage
-  - Gewohnheitsdetails: Beschreibung, Ziel, Erfüllung jedes Tages im letzten Jahr (wie GitHub-Beiträge), längste und aktuelle Serie
-  - Ziele der Gewohnheit: Die Schaltfläche (+) fügt ein Ziel hinzu (Titel, Beschreibung und eine neue oder vorhandene Gruppe); Ziele werden nach Namen gruppiert, ein Tippen markiert ein Ziel als erledigt, vollständig erledigte Gruppen rücken ans Ende, ↑ verschiebt eine Gruppe nach oben; langes Drücken auf ein Ziel bearbeitet es, langes Drücken auf eine Gruppe löscht sie samt allen Zielen (nach Bestätigung)
+  - Gewohnheitsdetails: Beschreibung, Ziel, Erfüllung jedes Tages im letzten Jahr (wie GitHub-Beiträge), längste und aktuelle Serie; übersprungene Tage sind mit einem Punkt markiert
+  - Ziele der Gewohnheit: Die Schaltfläche (+) fügt ein Ziel hinzu (Titel, Beschreibung und eine neue oder vorhandene Gruppe); Ziele werden nach Namen gruppiert, ein Tippen markiert ein Ziel als erledigt, vollständig erledigte Gruppen rücken ans Ende, ↑ verschiebt eine Gruppe nach oben; langes Drücken auf ein Ziel bearbeitet es, langes Drücken auf eine Gruppe löscht sie samt allen Zielen (nach Bestätigung); Tippen auf eine Gruppe benennt sie um (der Name einer anderen Gruppe führt beide zusammen), Ziele und Gruppen lassen sich auch in ihrem Bearbeitungsfenster löschen, und eine Gruppe ohne Ziele wird entfernt
 - Zeitplan (Kalender)
   - Eine Gewohnheit für 30 Minuten, 1 Stunde, 2 Stunden oder einen eigenen Zeitraum planen, wiederholt an den gewählten
     Wochentagen, mit optionaler Notiz

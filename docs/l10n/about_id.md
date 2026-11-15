@@ -53,8 +53,8 @@ tertinggal.
   - Rentetan Hari: jumlah hari berturut-turut yang ditandai (hari "—" tidak memutusnya)
 - Statistik
   - Penyelesaian harian (%) selama 66 hari terakhir
-  - Detail kebiasaan: deskripsi, target, penyelesaian setiap hari selama setahun terakhir (seperti kontribusi GitHub), rentetan terpanjang dan saat ini
-  - Tujuan kebiasaan: tombol (+) menambahkan tujuan (judul, deskripsi, dan grup baru atau yang sudah ada); tujuan dikelompokkan menurut nama, ketukan menandai tujuan selesai, grup yang selesai seluruhnya pindah ke akhir, dan ↑ memindahkan grup ke atas; tekan lama pada tujuan untuk mengeditnya, dan tekan lama pada grup untuk menghapusnya beserta semua tujuannya (setelah konfirmasi)
+  - Detail kebiasaan: deskripsi, target, penyelesaian setiap hari selama setahun terakhir (seperti kontribusi GitHub), rentetan terpanjang dan saat ini; hari yang dilewati ditandai dengan titik
+  - Tujuan kebiasaan: tombol (+) menambahkan tujuan (judul, deskripsi, dan grup baru atau yang sudah ada); tujuan dikelompokkan menurut nama, ketukan menandai tujuan selesai, grup yang selesai seluruhnya pindah ke akhir, dan ↑ memindahkan grup ke atas; tekan lama pada tujuan untuk mengeditnya, dan tekan lama pada grup untuk menghapusnya beserta semua tujuannya (setelah konfirmasi); ketuk grup untuk mengganti namanya (nama grup lain menggabungkan keduanya), tujuan atau grup juga dapat dihapus dari editornya, dan grup tanpa tujuan dihapus
 - Jadwal (Kalender)
   - Jadwalkan kebiasaan selama 30 menit, 1 jam, 2 jam, atau rentang waktu khusus, diulang pada hari-hari yang dipilih
     dalam seminggu, dengan catatan opsional
