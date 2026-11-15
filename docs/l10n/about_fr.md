@@ -67,5 +67,6 @@ de côté.
   - Création d’une sauvegarde et restauration depuis une sauvegarde (remplace les données existantes)
   - Importation depuis d’autres applications : Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Expérience utilisateur
-  - Automatisation : Raccourcis Siri (terminer, compléter ou sauter une habitude ; habitudes restantes du jour) et intents Android pour Tasker, Automate ou `adb` ; l’écran affiché est mis à jour aussitôt
+  - Automatisation (iOS) : Raccourcis Siri (terminer, compléter ou sauter une habitude ; habitudes restantes du jour) ; l’écran affiché est mis à jour aussitôt
+  - Automatisation (Android) : intents pour Tasker, Automate ou `adb` ; l’écran affiché est mis à jour aussitôt
   - Accessibilité (WCAG 2.1) : chaque action est nommée pour les lecteurs d'écran, contraste lisible dans les deux thèmes, le texte suit la taille de police du système

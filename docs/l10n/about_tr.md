@@ -65,5 +65,6 @@ Bu uygulama, kimseyi geride bırakmadan kullanıcıların alışkanlıklarını 
 - Ayarlar
   - Verilerin İçe / Dışa aktarılması
 - Kullanıcı Deneyimi
-  - Otomasyon: Siri Kestirmeleri (bir alışkanlığı tamamlama, ona ekleme veya atlama; bugün kalan alışkanlıklar) ve Tasker, Automate ya da `adb` için Android intent’leri; gösterilen ekran hemen güncellenir
+  - Otomasyon (iOS): Siri Kestirmeleri (bir alışkanlığı tamamlama, ona ekleme veya atlama; bugün kalan alışkanlıklar); gösterilen ekran hemen güncellenir
+  - Otomasyon (Android): Tasker, Automate ya da `adb` için intent’ler; gösterilen ekran hemen güncellenir
   - Erişilebilirlik (WCAG 2.1): ekran okuyucular için her eylemin adı, her iki temada okunabilir kontrast, sistem yazı tipi boyutuyla ölçeklenen metin

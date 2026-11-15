@@ -67,5 +67,6 @@ tertinggal.
 - Pengaturan
   - Impor / Ekspor data
 - Pengalaman Pengguna
-  - Otomatisasi: Pintasan Siri (menyelesaikan, menambah, atau melewati kebiasaan; kebiasaan yang tersisa hari ini) dan intent Android untuk Tasker, Automate, atau `adb`; layar yang ditampilkan langsung diperbarui
+  - Otomatisasi (iOS): Pintasan Siri (menyelesaikan, menambah, atau melewati kebiasaan; kebiasaan yang tersisa hari ini); layar yang ditampilkan langsung diperbarui
+  - Otomatisasi (Android): intent untuk Tasker, Automate, atau `adb`; layar yang ditampilkan langsung diperbarui
   - Aksesibilitas (WCAG 2.1): setiap tindakan diberi nama untuk pembaca layar, kontras yang mudah dibaca di kedua tema, teks mengikuti ukuran font sistem

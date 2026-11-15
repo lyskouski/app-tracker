@@ -66,5 +66,6 @@ U foydalanuvchilarga o‘z odatlarini osongina boshqarish imkonini beradi va hec
   - Zaxira nusxa yaratish va undan tiklash (mavjud ma’lumotlar almashtiriladi)
   - Boshqa ilovalardan import: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Foydalanuvchi tajribasi
-  - Avtomatlashtirish: Siri Shortcuts (odatni bajarish, unga qo‘shish yoki o‘tkazib yuborish; bugun qolgan odatlar) va Tasker, Automate yoki `adb` uchun Android intentlari; ko‘rsatilgan ekran darhol yangilanadi
+  - Avtomatlashtirish (iOS): Siri Shortcuts (odatni bajarish, unga qo‘shish yoki o‘tkazib yuborish; bugun qolgan odatlar); ko‘rsatilgan ekran darhol yangilanadi
+  - Avtomatlashtirish (Android): Tasker, Automate yoki `adb` uchun intentlar; ko‘rsatilgan ekran darhol yangilanadi
   - Qulaylik (WCAG 2.1): ekran o‘qish dasturlari uchun har bir amalning nomi, ikkala mavzuda o‘qiladigan kontrast, tizim shrift o‘lchamiga moslashadigan matn

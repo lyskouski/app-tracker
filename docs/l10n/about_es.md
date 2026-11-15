@@ -66,5 +66,6 @@ Que permita a los usuarios gestionar sus hábitos sin esfuerzo, garantizando que
   - Creación de copias de seguridad y restauración desde una copia (reemplaza los datos existentes)
   - Importación desde otras aplicaciones: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Experiencia de usuario
-  - Automatización: Atajos de Siri (completar, sumar a un hábito u omitirlo; hábitos pendientes de hoy) e intents de Android para Tasker, Automate o `adb`; la pantalla mostrada se actualiza al instante
+  - Automatización (iOS): Atajos de Siri (completar, sumar a un hábito u omitirlo; hábitos pendientes de hoy); la pantalla mostrada se actualiza al instante
+  - Automatización (Android): intents para Tasker, Automate o `adb`; la pantalla mostrada se actualiza al instante
   - Accesibilidad (WCAG 2.1): todas las acciones tienen nombre para los lectores de pantalla, contraste legible en ambos temas, el texto se adapta al tamaño de fuente del sistema

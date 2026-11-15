@@ -65,5 +65,6 @@ O, istifadəçilərə vərdişlərini asanlıqla idarə etməyə imkan verir və
 - Ayarlar
   - Məlumatların idxalı / ixracı
 - İstifadəçi təcrübəsi
-  - Avtomatlaşdırma: Siri Shortcuts (vərdişi tamamlamaq, ona əlavə etmək və ya buraxmaq; bu gün qalan vərdişlər) və Tasker, Automate və ya `adb` üçün Android intent-ləri; göstərilən ekran dərhal yenilənir
+  - Avtomatlaşdırma (iOS): Siri Shortcuts (vərdişi tamamlamaq, ona əlavə etmək və ya buraxmaq; bu gün qalan vərdişlər); göstərilən ekran dərhal yenilənir
+  - Avtomatlaşdırma (Android): Tasker, Automate və ya `adb` üçün intent-lər; göstərilən ekran dərhal yenilənir
   - Əlçatanlıq (WCAG 2.1): ekran oxuyucuları üçün hər əməliyyatın adı, hər iki temada oxunaqlı kontrast, sistem şrift ölçüsünə uyğunlaşan mətn

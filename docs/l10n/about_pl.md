@@ -66,5 +66,6 @@ Pozwala ona użytkownikom bez wysiłku zarządzać swoimi nawykami, dbając o to
   - Tworzenie kopii zapasowej i przywracanie z kopii (zastępuje istniejące dane)
   - Import z innych aplikacji: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Doświadczenie użytkownika
-  - Automatyzacja: Skróty Siri (wykonanie, dodanie do nawyku lub jego pominięcie; nawyki pozostałe na dziś) oraz intencje Androida dla Tasker, Automate lub `adb`; wyświetlany ekran od razu się odświeża
+  - Automatyzacja (iOS): Skróty Siri (wykonanie, dodanie do nawyku lub jego pominięcie; nawyki pozostałe na dziś); wyświetlany ekran od razu się odświeża
+  - Automatyzacja (Android): intencje dla Tasker, Automate lub `adb`; wyświetlany ekran od razu się odświeża
   - Dostępność (WCAG 2.1): nazwy wszystkich akcji dla czytników ekranu, czytelny kontrast w obu motywach, tekst skaluje się z systemowym rozmiarem czcionki

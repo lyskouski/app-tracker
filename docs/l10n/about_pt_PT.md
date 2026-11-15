@@ -66,5 +66,6 @@ Permite que os utilizadores giram os seus hábitos sem esforço, garantindo que 
   - Criação de cópia de segurança e restauro a partir de uma cópia de segurança (substitui os dados existentes)
   - Importação de outras aplicações: Loop Habit Tracker, HabitKit, Habitify, HabitBull
 - Experiência do utilizador
-  - Automação: Atalhos da Siri (concluir, somar a um hábito ou saltá-lo; hábitos que faltam hoje) e intents do Android para Tasker, Automate ou `adb`; o ecrã apresentado é atualizado de imediato
+  - Automação (iOS): Atalhos da Siri (concluir, somar a um hábito ou saltá-lo; hábitos que faltam hoje); o ecrã apresentado é atualizado de imediato
+  - Automação (Android): intents para Tasker, Automate ou `adb`; o ecrã apresentado é atualizado de imediato
   - Acessibilidade (WCAG 2.1): todas as ações têm nome para leitores de ecrã, contraste legível nos dois temas, o texto acompanha o tamanho de letra do sistema
