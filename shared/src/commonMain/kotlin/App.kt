@@ -37,8 +37,8 @@ import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 import com.tercad.zwyka.pages.SyncPage
-import com.tercad.zwyka.pages.inMemoryNavigatorSaver
-import com.tercad.zwyka.pages.rememberInMemory
+import com.tercad.zwyka.state.inMemoryNavigatorSaver
+import com.tercad.zwyka.state.rememberInMemory
 import com.tercad.zwyka.widgets.ShortcutsHost
 
 @OptIn(ExperimentalVoyagerApi::class)
