@@ -79,6 +79,7 @@ fun HabitContributionGraph(
     val colorScheme = currentColorScheme()
     val baseColor = applicationColor(habit.color) ?: colorScheme.primary
     val emptyColor = colorScheme.surfaceVariant
+    val skippedColor = colorScheme.onSurfaceVariant
     val labelStyle = MaterialTheme.typography.labelSmall.copy(
         color = colorScheme.onSurfaceVariant,
         fontSize = 9.sp,
@@ -163,12 +164,21 @@ fun HabitContributionGraph(
                                     emptyColor
                                 else -> baseColor.copy(alpha = markProgress(habit, mark).coerceAtLeast(0.1f))
                             }
+                            val cellTop = top + row * step
                             drawRoundRect(
                                 color = color,
-                                topLeft = Offset(x, top + row * step),
+                                topLeft = Offset(x, cellTop),
                                 size = Size(cell, cell),
                                 cornerRadius = corner,
                             )
+                            // A skipped day is marked by a dot, to differ from a missed one.
+                            if (mark == INACTIVE_MARK) {
+                                drawCircle(
+                                    color = skippedColor,
+                                    radius = cell / 7,
+                                    center = Offset(x + cell / 2, cellTop + cell / 2),
+                                )
+                            }
                         }
                     }
                 }
