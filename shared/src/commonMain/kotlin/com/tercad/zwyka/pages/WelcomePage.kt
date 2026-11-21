@@ -3,6 +3,7 @@
 
 package com.tercad.zwyka.pages
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -21,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -125,27 +128,32 @@ private fun GuideSectionView(section: GuideSection) {
         modifier = Modifier.padding(top = 8.dp),
         style = MaterialTheme.typography.titleMedium,
     )
-    section.actions.forEach { action ->
-        Row(
-            // Read out as one sentence: the gesture and its outcome.
-            modifier = Modifier
-                .fillMaxWidth()
-                .semantics(mergeDescendants = true) {},
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Text(
-                text = action.keys ?: action.gesture?.let { stringResource(it) }.orEmpty(),
-                modifier = Modifier.weight(0.4f),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = currentColorScheme().primary,
-            )
-            Text(
-                text = stringResource(action.description),
-                modifier = Modifier.weight(0.6f),
-                style = MaterialTheme.typography.bodyMedium,
-                color = currentColorScheme().onSurface,
-            )
+    // Rows touch each other, so the stripes of the odd ones read as a table.
+    Column(modifier = Modifier.clip(RoundedCornerShape(8.dp))) {
+        section.actions.forEachIndexed { index, action ->
+            Row(
+                // Read out as one sentence: the gesture and its outcome.
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .then(if (index % 2 == 0) Modifier.background(currentColorScheme().surfaceVariant) else Modifier)
+                    .padding(horizontal = 8.dp, vertical = 6.dp)
+                    .semantics(mergeDescendants = true) {},
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Text(
+                    text = action.keys ?: action.gesture?.let { stringResource(it) }.orEmpty(),
+                    modifier = Modifier.weight(0.4f),
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = currentColorScheme().primary,
+                )
+                Text(
+                    text = stringResource(action.description),
+                    modifier = Modifier.weight(0.6f),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = currentColorScheme().onSurface,
+                )
+            }
         }
     }
 }
