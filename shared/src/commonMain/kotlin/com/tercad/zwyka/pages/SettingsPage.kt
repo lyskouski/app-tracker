@@ -6,6 +6,7 @@ package com.tercad.zwyka.pages
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -13,6 +14,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
@@ -76,12 +80,6 @@ class SettingsPage(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
                     )
-                    BottomBarButton(
-                        icon = Icons.AutoMirrored.Filled.MenuBook,
-                        text = stringResource(Res.string.info),
-                        onClick = { navigator.push(InfoPage(settingsStore)) },
-                        modifier = Modifier.align(Alignment.Center),
-                    )
                     services?.let {
                         BottomBarButton(
                             icon = Icons.Filled.Sync,
@@ -90,6 +88,20 @@ class SettingsPage(
                             modifier = Modifier.align(Alignment.CenterEnd),
                         )
                     }
+                }
+            },
+            floatingActionButtonPosition = FabPosition.Center,
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = { navigator.push(InfoPage(settingsStore)) },
+                    modifier = Modifier.offset(y = 52.dp),
+                    containerColor = currentColorScheme().inversePrimary,
+                    contentColor = currentColorScheme().secondary,
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.MenuBook,
+                        contentDescription = stringResource(Res.string.info),
+                    )
                 }
             },
         ) { contentPadding ->
