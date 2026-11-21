@@ -22,7 +22,8 @@ import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.tercad.zwyka.defines.applicationLanguages
+import com.tercad.zwyka.components.LanguageField
+import com.tercad.zwyka.components.PolicyLinks
 import com.tercad.zwyka.defines.completenessTypeOptions
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
@@ -34,9 +35,7 @@ import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.date_format
 import com.tercad.zwyka.resources.habit_order_by
-import com.tercad.zwyka.resources.language
 import com.tercad.zwyka.resources.months_short
-import com.tercad.zwyka.resources.search_languages
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.sort_direction
 import com.tercad.zwyka.resources.sync
@@ -98,25 +97,7 @@ class SettingsPage(
         ) {
             Heading(stringResource(Res.string.settings))
 
-            val languageLabels = applicationLanguages.map { option ->
-                option.nativeName ?: option.label?.let { stringResource(it) }.orEmpty()
-            }
-            DropdownField(
-                label = stringResource(Res.string.language),
-                options = languageLabels,
-                searchLabel = stringResource(Res.string.search_languages),
-                selectedIndex = applicationLanguages
-                    .indexOfFirst { it.tag == settings.language }
-                    .coerceAtLeast(0),
-                onSelect = { index ->
-                    scope.launch {
-                        settingsStore.reopenSettings = true
-                        settingsStore.update(
-                            settings.copy(language = applicationLanguages[index].tag),
-                        )
-                    }
-                },
-            )
+            LanguageField(settingsStore, onBeforeChange = { settingsStore.reopenSettings = true })
 
             DropdownField(
                 label = stringResource(Res.string.theme_mode),
@@ -187,6 +168,8 @@ class SettingsPage(
                     }
                 },
             )
+
+            PolicyLinks(onGuideClick = { navigator.push(WelcomePage(settingsStore, isFirstRun = false)) })
 
         }
         }

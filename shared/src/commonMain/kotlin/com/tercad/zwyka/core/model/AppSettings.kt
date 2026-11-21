@@ -20,4 +20,6 @@ data class AppSettings(
     val sortDirection: SortDirection = SortDirection.DESC,
     val completenessType: CompletenessType = CompletenessType.SYMBOLS,
     val homeView: HomeView = HomeView.OVERALL,
+    /** The Terms of Use and the Privacy Policy are accepted on the first run, see [com.tercad.zwyka.pages.WelcomePage]. */
+    val isTermsAccepted: Boolean = false,
 )

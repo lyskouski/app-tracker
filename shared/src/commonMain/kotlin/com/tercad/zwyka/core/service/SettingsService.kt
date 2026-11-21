@@ -14,6 +14,7 @@ private const val HABIT_ORDER_BY_KEY = "habit_order_by"
 private const val SORT_DIRECTION_KEY = "sort_direction"
 private const val COMPLETENESS_TYPE_KEY = "completeness_type"
 private const val HOME_VIEW_KEY = "home_view"
+private const val TERMS_ACCEPTED_KEY = "terms_accepted"
 
 /*
  * Maps [AppSettings] to stored key / value pairs.
@@ -33,6 +34,7 @@ class SettingsService(
             sortDirection = values[SORT_DIRECTION_KEY].toEnum(defaults.sortDirection),
             completenessType = values[COMPLETENESS_TYPE_KEY].toEnum(defaults.completenessType),
             homeView = values[HOME_VIEW_KEY].toEnum(defaults.homeView),
+            isTermsAccepted = values[TERMS_ACCEPTED_KEY].toBoolean(),
         )
     }
 
@@ -46,6 +48,7 @@ class SettingsService(
         settings.put(SORT_DIRECTION_KEY, value.sortDirection.name)
         settings.put(COMPLETENESS_TYPE_KEY, value.completenessType.name)
         settings.put(HOME_VIEW_KEY, value.homeView.name)
+        settings.put(TERMS_ACCEPTED_KEY, value.isTermsAccepted.toString())
     }
 }
 

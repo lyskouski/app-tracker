@@ -22,7 +22,13 @@ class AppSettingsStore(private val service: SettingsService?) {
     var reopenSync = false
 
     suspend fun load() {
-        current = service?.load() ?: AppSettings()
+        val loaded = service?.load() ?: AppSettings()
+        // A restored backup of an earlier version has no accepted terms: they stay accepted, not asked again.
+        current = if (current.isTermsAccepted && !loaded.isTermsAccepted) {
+            loaded.copy(isTermsAccepted = true).also { service?.save(it) }
+        } else {
+            loaded
+        }
     }
 
     suspend fun update(settings: AppSettings) {

@@ -37,6 +37,7 @@ import com.tercad.zwyka.defines.ThemeMode
 import com.tercad.zwyka.pages.HomePage
 import com.tercad.zwyka.pages.SettingsPage
 import com.tercad.zwyka.pages.SyncPage
+import com.tercad.zwyka.pages.WelcomePage
 import com.tercad.zwyka.state.inMemoryNavigatorSaver
 import com.tercad.zwyka.state.rememberInMemory
 import com.tercad.zwyka.widgets.ShortcutsHost
@@ -82,9 +83,11 @@ fun App(
         LocalAppLocale provides settingsStore.current.language,
         LocalFileTransfer provides fileTransfer,
     ) {
-        key(settingsStore.current.language) {
+        // Accepted terms replace the welcome page by the home page.
+        key(settingsStore.current.language, settingsStore.current.isTermsAccepted) {
             MaterialTheme(colorScheme = colorScheme, shapes = AppShapes) {
                 val screens = remember {
+                    if (!settingsStore.current.isTermsAccepted) return@remember listOf(WelcomePage(settingsStore))
                     val home = HomePage(services, initializeDatabase, settingsStore)
                     buildList {
                         add(home)
