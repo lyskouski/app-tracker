@@ -183,6 +183,10 @@
     <string name="terms_of_use">Kullanım Koşulları</string>
     <string name="accept_and_continue">Kabul et ve devam et</string>
     <string name="info">Bilgi</string>
+    <string name="releases">Sürümler</string>
+    <string name="roadmap">Yol haritası</string>
+    <string name="discussions">Tartışmalar</string>
+    <string name="request_change">Değişiklik iste</string>
     <string name="usage_guide">Kullanım kılavuzu</string>
     <string name="doc_locale">tr</string>
     <string name="gesture_click">Tıklama</string>

@@ -183,6 +183,10 @@
     <string name="terms_of_use">شرایط استفاده</string>
     <string name="accept_and_continue">پذیرش و ادامه</string>
     <string name="info">اطلاعات</string>
+    <string name="releases">نسخه‌ها</string>
+    <string name="roadmap">نقشه راه</string>
+    <string name="discussions">گفتگوها</string>
+    <string name="request_change">درخواست تغییر</string>
     <string name="usage_guide">راهنمای استفاده</string>
     <string name="doc_locale">fa</string>
     <string name="gesture_click">کلیک</string>

@@ -183,6 +183,10 @@
     <string name="terms_of_use">이용약관</string>
     <string name="accept_and_continue">동의하고 계속</string>
     <string name="info">정보</string>
+    <string name="releases">릴리스</string>
+    <string name="roadmap">로드맵</string>
+    <string name="discussions">토론</string>
+    <string name="request_change">변경 요청</string>
     <string name="usage_guide">사용 가이드</string>
     <string name="doc_locale">ko</string>
     <string name="gesture_click">탭</string>

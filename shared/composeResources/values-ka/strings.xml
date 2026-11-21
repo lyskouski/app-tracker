@@ -183,6 +183,10 @@
     <string name="terms_of_use">გამოყენების პირობები</string>
     <string name="accept_and_continue">დათანხმება და გაგრძელება</string>
     <string name="info">ინფორმაცია</string>
+    <string name="releases">გამოშვებები</string>
+    <string name="roadmap">საგზაო რუკა</string>
+    <string name="discussions">განხილვები</string>
+    <string name="request_change">ცვლილების მოთხოვნა</string>
     <string name="usage_guide">გამოყენების სახელმძღვანელო</string>
     <string name="doc_locale">ka</string>
     <string name="gesture_click">შეხება</string>

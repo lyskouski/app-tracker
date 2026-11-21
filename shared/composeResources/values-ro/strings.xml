@@ -183,6 +183,10 @@
     <string name="terms_of_use">Termeni de utilizare</string>
     <string name="accept_and_continue">Accept și continui</string>
     <string name="info">Informații</string>
+    <string name="releases">Versiuni</string>
+    <string name="roadmap">Plan de dezvoltare</string>
+    <string name="discussions">Discuții</string>
+    <string name="request_change">Solicită o modificare</string>
     <string name="usage_guide">Ghid de utilizare</string>
     <string name="doc_locale">ro</string>
     <string name="gesture_click">Atingere</string>

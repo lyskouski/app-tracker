@@ -183,6 +183,10 @@
     <string name="terms_of_use">Podmínky použití</string>
     <string name="accept_and_continue">Přijmout a pokračovat</string>
     <string name="info">Informace</string>
+    <string name="releases">Vydání</string>
+    <string name="roadmap">Plán vývoje</string>
+    <string name="discussions">Diskuze</string>
+    <string name="request_change">Navrhnout změnu</string>
     <string name="usage_guide">Návod k použití</string>
     <string name="doc_locale">cs</string>
     <string name="gesture_click">Klepnutí</string>

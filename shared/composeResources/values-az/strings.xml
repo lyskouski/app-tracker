@@ -183,6 +183,10 @@
     <string name="terms_of_use">İstifadə Şərtləri</string>
     <string name="accept_and_continue">Qəbul et və davam et</string>
     <string name="info">Məlumat</string>
+    <string name="releases">Buraxılışlar</string>
+    <string name="roadmap">Yol xəritəsi</string>
+    <string name="discussions">Müzakirələr</string>
+    <string name="request_change">Dəyişiklik təklif et</string>
     <string name="usage_guide">İstifadə bələdçisi</string>
     <string name="doc_locale">az</string>
     <string name="gesture_click">Toxunma</string>

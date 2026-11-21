@@ -183,6 +183,10 @@
     <string name="terms_of_use">使用條款</string>
     <string name="accept_and_continue">同意並繼續</string>
     <string name="info">資訊</string>
+    <string name="releases">版本發布</string>
+    <string name="roadmap">路線圖</string>
+    <string name="discussions">討論</string>
+    <string name="request_change">請求變更</string>
     <string name="usage_guide">使用指南</string>
     <string name="doc_locale">zh_TW</string>
     <string name="gesture_click">點按</string>

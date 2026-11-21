@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.filled.Feedback
+import androidx.compose.material.icons.filled.Forum
+import androidx.compose.material.icons.filled.NewReleases
+import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -20,25 +24,23 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.discussions
 import com.tercad.zwyka.resources.doc_locale
 import com.tercad.zwyka.resources.privacy_policy
+import com.tercad.zwyka.resources.releases
+import com.tercad.zwyka.resources.request_change
+import com.tercad.zwyka.resources.roadmap
 import com.tercad.zwyka.resources.terms_of_use
 import com.tercad.zwyka.resources.usage_guide
 
-/** Documents of the repository, by the suffix of the language (`privacy_policy_en.md`). */
-private const val DOCS_URL = "https://github.com/lyskouski/app-tracker/blob/main/docs/l10n"
+private const val REPOSITORY_URL = "https://github.com/lyskouski/app-tracker"
+
+private const val DOCS_URL = "$REPOSITORY_URL/blob/main/docs/l10n"
 
 fun privacyPolicyUrl(docLocale: String): String = "$DOCS_URL/privacy_policy_$docLocale.md"
 
 fun termsOfUseUrl(docLocale: String): String = "$DOCS_URL/terms_of_use_$docLocale.md"
 
-/*
- * [?] Usage guide
- * [↗] Privacy Policy
- * [↗] Terms of Use
- *
- * The documents open in the browser, in the language of the application; the guide is shown with [onGuideClick].
- */
 @Composable
 fun PolicyLinks(
     modifier: Modifier = Modifier,
@@ -55,6 +57,25 @@ fun PolicyLinks(
         }
         LinkButton(Icons.AutoMirrored.Filled.OpenInNew, stringResource(Res.string.terms_of_use)) {
             uriHandler.openUri(termsOfUseUrl(docLocale))
+        }
+    }
+}
+
+@Composable
+fun ProjectLinks(modifier: Modifier = Modifier) {
+    val uriHandler = LocalUriHandler.current
+    Column(modifier = modifier) {
+        LinkButton(Icons.Filled.NewReleases, stringResource(Res.string.releases)) {
+            uriHandler.openUri("$REPOSITORY_URL/releases")
+        }
+        LinkButton(Icons.Filled.Timeline, stringResource(Res.string.roadmap)) {
+            uriHandler.openUri("$REPOSITORY_URL/milestones")
+        }
+        LinkButton(Icons.Filled.Forum, stringResource(Res.string.discussions)) {
+            uriHandler.openUri("$REPOSITORY_URL/discussions")
+        }
+        LinkButton(Icons.Filled.Feedback, stringResource(Res.string.request_change)) {
+            uriHandler.openUri("$REPOSITORY_URL/issues")
         }
     }
 }

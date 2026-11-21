@@ -183,6 +183,10 @@
     <string name="terms_of_use">شروط الاستخدام</string>
     <string name="accept_and_continue">الموافقة والمتابعة</string>
     <string name="info">معلومات</string>
+    <string name="releases">الإصدارات</string>
+    <string name="roadmap">خارطة الطريق</string>
+    <string name="discussions">النقاشات</string>
+    <string name="request_change">طلب تغيير</string>
     <string name="usage_guide">دليل الاستخدام</string>
     <string name="doc_locale">ar</string>
     <string name="gesture_click">نقرة</string>

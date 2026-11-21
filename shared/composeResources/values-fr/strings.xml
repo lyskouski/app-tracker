@@ -183,6 +183,10 @@
     <string name="terms_of_use">Conditions d’utilisation</string>
     <string name="accept_and_continue">Accepter et continuer</string>
     <string name="info">Infos</string>
+    <string name="releases">Versions</string>
+    <string name="roadmap">Feuille de route</string>
+    <string name="discussions">Discussions</string>
+    <string name="request_change">Demander une modification</string>
     <string name="usage_guide">Guide d’utilisation</string>
     <string name="doc_locale">fr</string>
     <string name="gesture_click">Clic</string>

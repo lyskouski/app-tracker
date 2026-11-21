@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,6 +22,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.components.PolicyLinks
+import com.tercad.zwyka.components.ProjectLinks
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.info
@@ -30,15 +32,6 @@ import com.tercad.zwyka.widgets.BottomBarBackButton
 import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.screenTitle
 
-/*
- * Info
- * [?] Usage guide
- * [↗] Privacy Policy
- * [↗] Terms of Use
- * [<- Back]
- *
- * Opened from the settings.
- */
 class InfoPage(
     private val settingsStore: AppSettingsStore,
 ) : Screen {
@@ -70,6 +63,8 @@ class InfoPage(
             ) {
                 Heading(title)
                 PolicyLinks(onGuideClick = { navigator.push(WelcomePage(settingsStore, isFirstRun = false)) })
+                HorizontalDivider()
+                ProjectLinks()
             }
         }
     }

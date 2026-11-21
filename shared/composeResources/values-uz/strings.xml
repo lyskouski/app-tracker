@@ -183,6 +183,10 @@
     <string name="terms_of_use">Foydalanish shartlari</string>
     <string name="accept_and_continue">Qabul qilish va davom etish</string>
     <string name="info">Maʼlumot</string>
+    <string name="releases">Relizlar</string>
+    <string name="roadmap">Yoʻl xaritasi</string>
+    <string name="discussions">Muhokamalar</string>
+    <string name="request_change">Oʻzgartirish soʻrash</string>
     <string name="usage_guide">Foydalanish qo‘llanmasi</string>
     <string name="doc_locale">uz</string>
     <string name="gesture_click">Bosish</string>

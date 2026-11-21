@@ -183,6 +183,10 @@
     <string name="terms_of_use">Terms of Use</string>
     <string name="accept_and_continue">Accept and continue</string>
     <string name="info">Info</string>
+    <string name="releases">Releases</string>
+    <string name="roadmap">Roadmap</string>
+    <string name="discussions">Discussions</string>
+    <string name="request_change">Request Change</string>
     <string name="usage_guide">Usage guide</string>
     <string name="doc_locale">en</string>
     <string name="gesture_click">Click</string>
