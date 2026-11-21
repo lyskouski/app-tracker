@@ -27,6 +27,8 @@ Italiano (IT) |
 
 ---
 
+Zvika: Tracker delle abitudini
+
 Motto: Piccoli passi. Progressi visibili. Abitudini durature.
 
 Parole chiave: pomodoro,promemoria,agenda,calendario,concentrazione,disciplina,benessere,todo,progressi

@@ -27,6 +27,8 @@ Nederlands (NL) |
 
 ---
 
+Zwyka: Gewoontetracker
+
 Motto: Kleine stappen. Zichtbare vooruitgang. Blijvende gewoontes.
 
 Trefwoorden: pomodoro,herinnering,planner,agenda,focus,discipline,zelfzorg,todo,checklist,voortgang,motivatie

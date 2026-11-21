@@ -27,6 +27,8 @@ Bahasa Indonesia (ID) |
 
 ---
 
+Zvika: Pelacak Kebiasaan
+
 Moto: Langkah kecil. Kemajuan nyata. Kebiasaan yang bertahan.
 
 Kata kunci: pomodoro,pengingat,perencana,kalender,fokus,disiplin,selfcare,todo,daftar,kemajuan,motivasi

@@ -27,6 +27,8 @@ Limba română (RO) |
 
 ---
 
+Zvîka: Monitorizarea obiceiurilor
+
 Moto: Pași mici. Progres vizibil. Obiceiuri durabile.
 
 Cuvinte cheie: pomodoro,memento,planificator,calendar,concentrare,disciplină,îngrijire,sarcini,progres,motivație

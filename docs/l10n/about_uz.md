@@ -27,6 +27,8 @@ Oʻzbekcha (UZ) |
 
 ---
 
+Zvika: Odatlar trekeri
+
 Shior: Kichik qadamlar. Koʻrinadigan natija. Barqaror odatlar.
 
 Kalit soʻzlar: pomodoro,eslatma,rejalashtiruvchi,taqvim,diqqat,intizom,parvarish,vazifalar,natija,motivatsiya

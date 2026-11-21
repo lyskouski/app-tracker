@@ -27,6 +27,8 @@ Türkçe (TR) |
 
 ---
 
+Zvıka: Alışkanlık Takipçisi
+
 Slogan: Küçük adımlar. Görünür ilerleme. Kalıcı alışkanlıklar.
 
 Anahtar kelimeler: pomodoro,hatırlatıcı,planlayıcı,takvim,odak,disiplin,özbakım,yapılacaklar,liste,ilerleme,motivasyon

@@ -27,6 +27,8 @@ Español (ES) |
 
 ---
 
+Zvika: Seguimiento de hábitos
+
 Lema: Pequeños pasos. Progreso visible. Hábitos duraderos.
 
 Palabras clave: pomodoro,recordatorio,planificador,calendario,enfoque,disciplina,autocuidado,tareas,progreso

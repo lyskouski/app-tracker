@@ -27,6 +27,8 @@ Português Brasileiro (PT-BR) |
 
 ---
 
+Zvika: Rastreador de hábitos
+
 Lema: Pequenos passos. Progresso visível. Hábitos duradouros.
 
 Palavras-chave: pomodoro,lembrete,planejador,calendário,foco,disciplina,autocuidado,tarefas,checklist,progresso

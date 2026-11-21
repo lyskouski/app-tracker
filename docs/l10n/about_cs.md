@@ -27,6 +27,8 @@
 
 ---
 
+Zvyka: Sledování návyků
+
 Motto: Malé krůčky. Viditelný pokrok. Trvalé návyky.
 
 Klíčová slova: pomodoro,připomínka,plánovač,kalendář,soustředění,disciplína,péče,úkoly,seznam,pokrok,motivace

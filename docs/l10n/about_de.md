@@ -27,6 +27,8 @@ Deutsch (DE) |
 
 ---
 
+Zwyka: Gewohnheitstracker
+
 Motto: Kleine Schritte. Sichtbarer Fortschritt. Bleibende Gewohnheiten.
 
 Schlüsselwörter: pomodoro,erinnerung,planer,kalender,fokus,disziplin,selbstfürsorge,todo,checkliste,fortschritt

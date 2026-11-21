@@ -27,6 +27,8 @@ Français (FR) |
 
 ---
 
+Zvika : Suivi des habitudes
+
 Devise : Petits pas. Progrès visibles. Habitudes durables.
 
 Mots-clés : pomodoro,rappel,planificateur,calendrier,concentration,discipline,bien-être,tâches,progrès

@@ -27,6 +27,8 @@ English (EN-US) |
 
 ---
 
+Zwyka: Habits Tracker
+
 Moto: Small steps. Visible progress. Lasting habits.
 
 Keywords: pomodoro,reminder,planner,calendar,focus,discipline,selfcare,todo,checklist,progress,motivation

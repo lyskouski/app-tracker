@@ -27,6 +27,8 @@ Azərbaycan dili (AZ) |
 
 ---
 
+Zvıka: Vərdiş izləyicisi
+
 Şüar: Kiçik addımlar. Görünən irəliləyiş. Davamlı vərdişlər.
 
 Açar sözlər: pomodoro,xatırlatma,planlayıcı,təqvim,diqqət,intizam,özünəqulluq,tapşırıq,irəliləyiş,motivasiya

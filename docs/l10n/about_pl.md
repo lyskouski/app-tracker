@@ -27,6 +27,8 @@ Polski (PL) |
 
 ---
 
+Zwyka: Tracker nawyków
+
 Motto: Małe kroki. Widoczne postępy. Trwałe nawyki.
 
 Słowa kluczowe: pomodoro,przypomnienie,planer,kalendarz,skupienie,dyscyplina,dbanie,zadania,lista,postęp,motywacja
