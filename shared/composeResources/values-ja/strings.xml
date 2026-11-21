@@ -182,6 +182,7 @@
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="terms_of_use">利用規約</string>
     <string name="accept_and_continue">同意して続行</string>
+    <string name="info">情報</string>
     <string name="usage_guide">使い方ガイド</string>
     <string name="doc_locale">ja</string>
     <string name="gesture_click">タップ</string>

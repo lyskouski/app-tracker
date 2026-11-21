@@ -182,6 +182,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_use">Terms of Use</string>
     <string name="accept_and_continue">Accept and continue</string>
+    <string name="info">Info</string>
     <string name="usage_guide">Usage guide</string>
     <string name="doc_locale">en</string>
     <string name="gesture_click">Click</string>

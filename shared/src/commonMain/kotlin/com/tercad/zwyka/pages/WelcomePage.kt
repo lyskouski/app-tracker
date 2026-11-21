@@ -49,18 +49,8 @@ import com.tercad.zwyka.widgets.Heading
 import com.tercad.zwyka.widgets.screenTitle
 
 /*
- * Welcome to Zwyka
- * [Language          v]
- * By continuing, you accept the Terms of Use and the Privacy Policy.
- * [↗] Privacy Policy
- * [↗] Terms of Use
- * Usage guide
- *   Click        Habit: sets its state for today
- *   ...
- *                                [✓ Accept and continue]
- *
  * Shown on the first run ([isFirstRun]) until the terms are accepted, then the home page is shown (see `App`).
- * Otherwise it is the usage guide opened from the settings, with the "Back" button.
+ * Otherwise it is the usage guide opened from [InfoPage], with the "Back" button.
  */
 class WelcomePage(
     private val settingsStore: AppSettingsStore,
@@ -112,9 +102,7 @@ class WelcomePage(
                     Text(stringResource(Res.string.welcome_intro), color = textColor)
                     LanguageField(settingsStore)
                     Text(stringResource(Res.string.welcome_agreement), color = textColor)
-                }
-                PolicyLinks()
-                if (isFirstRun) {
+                    PolicyLinks()
                     Heading(stringResource(Res.string.usage_guide))
                 }
                 usageGuide.forEach { GuideSectionView(it) }

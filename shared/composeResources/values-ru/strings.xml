@@ -182,6 +182,7 @@
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="terms_of_use">Условия использования</string>
     <string name="accept_and_continue">Принять и продолжить</string>
+    <string name="info">Информация</string>
     <string name="usage_guide">Руководство</string>
     <string name="doc_locale">ru</string>
     <string name="gesture_click">Нажатие</string>

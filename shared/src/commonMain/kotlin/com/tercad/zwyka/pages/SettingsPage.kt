@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.remember
@@ -23,7 +24,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.tercad.zwyka.components.LanguageField
-import com.tercad.zwyka.components.PolicyLinks
 import com.tercad.zwyka.defines.completenessTypeOptions
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.defines.dateFormatOptions
@@ -35,6 +35,7 @@ import com.tercad.zwyka.resources.Res
 import com.tercad.zwyka.resources.completeness_type
 import com.tercad.zwyka.resources.date_format
 import com.tercad.zwyka.resources.habit_order_by
+import com.tercad.zwyka.resources.info
 import com.tercad.zwyka.resources.months_short
 import com.tercad.zwyka.resources.settings
 import com.tercad.zwyka.resources.sort_direction
@@ -74,6 +75,12 @@ class SettingsPage(
                     BottomBarBackButton(
                         onClick = { navigator.pop() },
                         modifier = Modifier.align(Alignment.CenterStart),
+                    )
+                    BottomBarButton(
+                        icon = Icons.AutoMirrored.Filled.MenuBook,
+                        text = stringResource(Res.string.info),
+                        onClick = { navigator.push(InfoPage(settingsStore)) },
+                        modifier = Modifier.align(Alignment.Center),
                     )
                     services?.let {
                         BottomBarButton(
@@ -168,8 +175,6 @@ class SettingsPage(
                     }
                 },
             )
-
-            PolicyLinks(onGuideClick = { navigator.push(WelcomePage(settingsStore, isFirstRun = false)) })
 
         }
         }

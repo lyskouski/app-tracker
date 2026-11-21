@@ -182,6 +182,7 @@
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="terms_of_use">Conditions d’utilisation</string>
     <string name="accept_and_continue">Accepter et continuer</string>
+    <string name="info">Infos</string>
     <string name="usage_guide">Guide d’utilisation</string>
     <string name="doc_locale">fr</string>
     <string name="gesture_click">Clic</string>
