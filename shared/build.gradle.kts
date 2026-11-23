@@ -9,6 +9,38 @@ plugins {
     alias(libs.plugins.flatpak.gradle.generator)
 }
 
+// Set by the release workflow: -PversionName=<tag> -PversionCode=<commits count>; Xcode passes its own build settings.
+val appVersionName = providers.gradleProperty("versionName")
+    .orElse(providers.environmentVariable("MARKETING_VERSION"))
+    .orElse("1.0")
+val appVersionCode = providers.gradleProperty("versionCode")
+    .orElse(providers.environmentVariable("CURRENT_PROJECT_VERSION"))
+    .orElse("1")
+
+val generateAppVersion = tasks.register("generateAppVersion") {
+    description = "Generates AppVersion with the version name and the build number of the application."
+    val name = appVersionName
+    val code = appVersionCode
+    val output = layout.buildDirectory.dir("generated/appVersion/kotlin")
+    inputs.property("name", name)
+    inputs.property("code", code)
+    outputs.dir(output)
+    doLast {
+        val file = output.get().file("com/tercad/zwyka/defines/AppVersion.kt").asFile
+        file.parentFile.mkdirs()
+        file.writeText(
+            """
+            |package com.tercad.zwyka.defines
+            |
+            |object AppVersion {
+            |    const val NAME = "${name.get()}"
+            |    const val BUILD = "${code.get()}"
+            |}
+            |""".trimMargin(),
+        )
+    }
+}
+
 kotlin {
     android {
         namespace = "com.tercad.zwyka.shared"
@@ -29,6 +61,7 @@ kotlin {
 
     sourceSets {
         commonMain {
+            kotlin.srcDir(generateAppVersion)
             dependencies {
                 implementation("org.jetbrains.compose.runtime:runtime:1.11.1")
                 implementation("org.jetbrains.compose.foundation:foundation:1.11.1")

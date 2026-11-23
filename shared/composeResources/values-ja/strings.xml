@@ -183,6 +183,7 @@
     <string name="terms_of_use">利用規約</string>
     <string name="accept_and_continue">同意して続行</string>
     <string name="info">情報</string>
+    <string name="app_version">バージョン %1$s (%2$s)</string>
     <string name="releases">リリース</string>
     <string name="roadmap">ロードマップ</string>
     <string name="discussions">ディスカッション</string>

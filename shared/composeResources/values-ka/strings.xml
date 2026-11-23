@@ -183,6 +183,7 @@
     <string name="terms_of_use">გამოყენების პირობები</string>
     <string name="accept_and_continue">დათანხმება და გაგრძელება</string>
     <string name="info">ინფორმაცია</string>
+    <string name="app_version">ვერსია %1$s (%2$s)</string>
     <string name="releases">გამოშვებები</string>
     <string name="roadmap">საგზაო რუკა</string>
     <string name="discussions">განხილვები</string>

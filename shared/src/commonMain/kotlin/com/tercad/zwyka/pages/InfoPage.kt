@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,8 +25,10 @@ import org.jetbrains.compose.resources.stringResource
 
 import com.tercad.zwyka.components.PolicyLinks
 import com.tercad.zwyka.components.ProjectLinks
+import com.tercad.zwyka.defines.AppVersion
 import com.tercad.zwyka.defines.currentColorScheme
 import com.tercad.zwyka.resources.Res
+import com.tercad.zwyka.resources.app_version
 import com.tercad.zwyka.resources.info
 import com.tercad.zwyka.state.AppSettingsStore
 import com.tercad.zwyka.widgets.BottomBar
@@ -65,6 +69,13 @@ class InfoPage(
                 PolicyLinks(onGuideClick = { navigator.push(WelcomePage(settingsStore, isFirstRun = false)) })
                 HorizontalDivider()
                 ProjectLinks()
+                HorizontalDivider()
+                Text(
+                    text = stringResource(Res.string.app_version, AppVersion.NAME, AppVersion.BUILD),
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = currentColorScheme().onSurfaceVariant,
+                )
             }
         }
     }

@@ -65,7 +65,10 @@ jobs:
 # Web
       - name: Build Web (Kotlin/Wasm) distribution
         if: matrix.target == 'Web'
-        run: ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon
+        run: |
+          ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon \
+            -PversionName=${{ needs.release.outputs.version }} \
+            -PversionCode=${{ needs.release.outputs.build_number }}
 
       - name: Compress Web Package
         if: matrix.target == 'Web'
@@ -99,7 +102,8 @@ jobs:
         if: matrix.target == 'Windows'
         run: |
           ./gradlew :desktopApp:createDistributable --no-daemon `
-            "-PversionName=${{ needs.release.outputs.version }}"
+            "-PversionName=${{ needs.release.outputs.version }}" `
+            "-PversionCode=${{ needs.release.outputs.build_number }}"
 
       - name: Build Windows MSIX
         if: matrix.target == 'Windows'
@@ -301,7 +305,8 @@ jobs:
       - name: Run Linux Build
         run: |
           ./gradlew :desktopApp:createDistributable --no-daemon \
-            -PversionName=${{ needs.release.outputs.version }}
+            -PversionName=${{ needs.release.outputs.version }} \
+            -PversionCode=${{ needs.release.outputs.build_number }}
 
       - name: Compress Linux Package
         run: |

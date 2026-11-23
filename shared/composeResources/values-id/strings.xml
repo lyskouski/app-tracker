@@ -183,6 +183,7 @@
     <string name="terms_of_use">Ketentuan Penggunaan</string>
     <string name="accept_and_continue">Terima dan lanjutkan</string>
     <string name="info">Info</string>
+    <string name="app_version">Versi %1$s (%2$s)</string>
     <string name="releases">Rilis</string>
     <string name="roadmap">Peta jalan</string>
     <string name="discussions">Diskusi</string>

@@ -183,6 +183,7 @@
     <string name="terms_of_use">Termos de Utilização</string>
     <string name="accept_and_continue">Aceitar e continuar</string>
     <string name="info">Informações</string>
+    <string name="app_version">Versão %1$s (%2$s)</string>
     <string name="releases">Versões</string>
     <string name="roadmap">Roteiro</string>
     <string name="discussions">Discussões</string>

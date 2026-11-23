@@ -183,6 +183,7 @@
     <string name="terms_of_use">उपयोग की शर्तें</string>
     <string name="accept_and_continue">स्वीकार करें और जारी रखें</string>
     <string name="info">जानकारी</string>
+    <string name="app_version">संस्करण %1$s (%2$s)</string>
     <string name="releases">रिलीज़</string>
     <string name="roadmap">रोडमैप</string>
     <string name="discussions">चर्चाएँ</string>

@@ -183,6 +183,7 @@
     <string name="terms_of_use">Podmínky použití</string>
     <string name="accept_and_continue">Přijmout a pokračovat</string>
     <string name="info">Informace</string>
+    <string name="app_version">Verze %1$s (%2$s)</string>
     <string name="releases">Vydání</string>
     <string name="roadmap">Plán vývoje</string>
     <string name="discussions">Diskuze</string>

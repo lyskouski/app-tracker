@@ -183,6 +183,7 @@
     <string name="terms_of_use">Termeni de utilizare</string>
     <string name="accept_and_continue">Accept și continui</string>
     <string name="info">Informații</string>
+    <string name="app_version">Versiunea %1$s (%2$s)</string>
     <string name="releases">Versiuni</string>
     <string name="roadmap">Plan de dezvoltare</string>
     <string name="discussions">Discuții</string>

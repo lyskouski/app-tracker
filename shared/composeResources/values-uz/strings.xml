@@ -183,6 +183,7 @@
     <string name="terms_of_use">Foydalanish shartlari</string>
     <string name="accept_and_continue">Qabul qilish va davom etish</string>
     <string name="info">Maʼlumot</string>
+    <string name="app_version">Versiya %1$s (%2$s)</string>
     <string name="releases">Relizlar</string>
     <string name="roadmap">Yoʻl xaritasi</string>
     <string name="discussions">Muhokamalar</string>

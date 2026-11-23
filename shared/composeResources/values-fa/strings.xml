@@ -183,6 +183,7 @@
     <string name="terms_of_use">شرایط استفاده</string>
     <string name="accept_and_continue">پذیرش و ادامه</string>
     <string name="info">اطلاعات</string>
+    <string name="app_version">نسخه %1$s (%2$s)</string>
     <string name="releases">نسخه‌ها</string>
     <string name="roadmap">نقشه راه</string>
     <string name="discussions">گفتگوها</string>
