@@ -6,6 +6,8 @@ package com.tercad.zwyka.state
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.withContext
 
 import com.tercad.zwyka.core.model.AppSettings
 import com.tercad.zwyka.core.service.SettingsService
@@ -22,17 +24,11 @@ class AppSettingsStore(private val service: SettingsService?) {
     var reopenSync = false
 
     suspend fun load() {
-        val loaded = service?.load() ?: AppSettings()
-        // A restored backup of an earlier version has no accepted terms: they stay accepted, not asked again.
-        current = if (current.isTermsAccepted && !loaded.isTermsAccepted) {
-            loaded.copy(isTermsAccepted = true).also { service?.save(it) }
-        } else {
-            loaded
-        }
+        current = service?.load() ?: AppSettings()
     }
 
     suspend fun update(settings: AppSettings) {
         current = settings
-        service?.save(settings)
+        withContext(NonCancellable) { service?.save(settings) }
     }
 }
